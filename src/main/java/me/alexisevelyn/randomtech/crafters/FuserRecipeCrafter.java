@@ -4,6 +4,10 @@ import me.alexisevelyn.randomtech.blockentities.FluidMachineBlockEntityBase;
 import me.alexisevelyn.randomtech.utility.Recipes;
 import me.alexisevelyn.randomtech.utility.recipemanagers.GenericFluidRecipe;
 import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.fluid.Fluid;
+import net.minecraft.fluid.Fluids;
+import reborncore.common.crafting.RebornRecipe;
+import reborncore.common.fluid.FluidValue;
 import reborncore.common.fluid.container.FluidInstance;
 import reborncore.common.recipes.RecipeCrafter;
 import reborncore.common.util.RebornInventory;
@@ -36,14 +40,12 @@ public class FuserRecipeCrafter extends RecipeCrafter {
         if (tank == null)
             return;
 
+        // TODO: Only add fluid once processing is finished
         // TODO: Add check if able to add fluid and adjust tank size accordingly
         if (canFillTank(tank, genericFluidRecipe)) {
-            System.out.println("Can Fill Tank with: " + genericFluidRecipe.getFluidInstance().getFluid().toString() + ": " + genericFluidRecipe.getFluidInstance().getAmount());
-            tank.setFluid(genericFluidRecipe.getFluidInstance().getFluid());
-            tank.setFluidAmount(genericFluidRecipe.getFluidInstance().addAmount(tank.getFluidAmount()).getAmount());
-        } else {
-            // TODO: Why is it not filling processing when specifying the fluid to put in the tank?
-            System.out.println("Failed Fill Tank with: " + genericFluidRecipe.getFluidInstance().getFluid().toString() + ": " + genericFluidRecipe.getFluidInstance().getAmount());
+            System.out.println("Can Fill Tank with: " + genericFluidRecipe.getFluidInstance().getAmount());
+
+            System.out.println("Attempt To Fill Tank: " + attemptAddFluidToTank(tank, genericFluidRecipe.getFluidInstance()));
         }
     }
 
@@ -59,5 +61,22 @@ public class FuserRecipeCrafter extends RecipeCrafter {
 
     public boolean canFillTank(Tank tank, GenericFluidRecipe genericFluidRecipe) {
         return tank.canInsertFluid(null, genericFluidRecipe.getFluidInstance().getFluid(), genericFluidRecipe.getFluidInstance().getAmount());
+    }
+
+    public boolean attemptAddFluidToTank(Tank tank, FluidInstance fluidInstance) {
+        if (tank.getFluid().matchesType(Fluids.EMPTY))
+            tank.setFluid(fluidInstance.getFluid());
+        else if (!tank.getFluid().matchesType(fluidInstance.getFluid()))
+            return false;
+
+        System.out.println("Tank Amount: " + tank.getFluidAmount());
+        FluidValue amount = tank.getFluidAmount().add(fluidInstance.getAmount());
+
+        if (amount.moreThan(tank.getCapacity()))
+            return false;
+
+        tank.setFluidAmount(amount);
+
+        return true;
     }
 }

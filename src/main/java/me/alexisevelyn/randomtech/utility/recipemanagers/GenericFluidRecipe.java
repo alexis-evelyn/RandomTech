@@ -12,6 +12,8 @@ import reborncore.common.crafting.ingredient.RebornIngredient;
 import reborncore.common.fluid.container.FluidInstance;
 import reborncore.common.util.Tank;
 
+import java.util.Objects;
+
 public class GenericFluidRecipe extends RebornFluidRecipe {
     public GenericFluidRecipe(RebornRecipeType<?> type, Identifier name) {
         super(type, name);
@@ -27,7 +29,12 @@ public class GenericFluidRecipe extends RebornFluidRecipe {
 
     @Override
     public boolean canCraft(BlockEntity blockEntity) {
-        return super.canCraft(blockEntity);
+        final FluidInstance tankFluid = Objects.requireNonNull(getTank(blockEntity)).getFluidInstance();
+
+        if (super.canCraft(blockEntity))
+            return true;
+        else
+            return tankFluid.isEmpty();
     }
 
     @Override
