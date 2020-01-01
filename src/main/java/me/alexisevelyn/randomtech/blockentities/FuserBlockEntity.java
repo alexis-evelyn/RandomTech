@@ -8,6 +8,7 @@ import me.alexisevelyn.randomtech.utility.RegistryHelper;
 import me.alexisevelyn.randomtech.utility.recipemanagers.GenericFluidRecipe;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.fluid.Fluids;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundTag;
 import reborncore.api.IToolDrop;
@@ -67,7 +68,7 @@ public class FuserBlockEntity extends FluidMachineBlockEntityBase implements ITo
                 .fluidSlot(fluidOutputSlot, 44, 72)
                 .syncEnergyValue()
                 .syncCrafterValue()
-                .sync(tank)
+//                .sync(tank)
                 .addInventory()
                 .create(this, syncID);
     }
@@ -79,7 +80,14 @@ public class FuserBlockEntity extends FluidMachineBlockEntityBase implements ITo
         if (world == null || world.isClient)
             return;
 
-        crafter.updateEntity();
+        // Reset Stored Fluid Type if Tank is Empty
+        if (tank.getFluidAmount().isEmpty())
+            tank.setFluid(Fluids.EMPTY);
+
+        if (!tank.getFluidAmount().isEmpty())
+            System.out.println("Has Fluid: " + tank.getFluidAmount());
+
+        // crafter.updateEntity();
 
 //        if (inventory.getStack(inputSlot).getItem() != null)
 //            crafter.updateCurrentRecipe();

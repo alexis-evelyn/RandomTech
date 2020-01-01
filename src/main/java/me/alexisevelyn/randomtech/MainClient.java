@@ -69,11 +69,13 @@ public class MainClient implements ClientModInitializer {
 		setupFluidRendering(RegistryHelper.REDSTONE_FLUID, RegistryHelper.REDSTONE_FLUID_FLOWING, new Identifier("randomtech", "redstone"), 0xFFFFFF);
 		setupFluidRendering(RegistryHelper.MAGIC_FLUID, RegistryHelper.MAGIC_FLUID_FLOWING, new Identifier("randomtech", "magic"), 0xFFFFFF);
 		setupFluidRendering(RegistryHelper.EXPERIENCE_FLUID, RegistryHelper.EXPERIENCE_FLUID_FLOWING, new Identifier("randomtech", "experience"), 0xFFFFFF);
+		setupFluidRendering(RegistryHelper.HONEY_FLUID, RegistryHelper.HONEY_FLUID_FLOWING, new Identifier("randomtech", "honey"), 0xFFFFFF);
 
 		// Can use RenderLayer.getTranslucent()
 		BlockRenderLayerMap.INSTANCE.putFluids(RenderLayer.getSolid(), RegistryHelper.REDSTONE_FLUID, RegistryHelper.REDSTONE_FLUID_FLOWING);
 		BlockRenderLayerMap.INSTANCE.putFluids(RenderLayer.getSolid(), RegistryHelper.MAGIC_FLUID, RegistryHelper.MAGIC_FLUID_FLOWING);
 		BlockRenderLayerMap.INSTANCE.putFluids(RenderLayer.getSolid(), RegistryHelper.EXPERIENCE_FLUID, RegistryHelper.EXPERIENCE_FLUID_FLOWING);
+		BlockRenderLayerMap.INSTANCE.putFluids(RenderLayer.getSolid(), RegistryHelper.HONEY_FLUID, RegistryHelper.HONEY_FLUID_FLOWING);
 	}
 
 	// From Tutorial at https://fabricmc.net/wiki/tutorial:fluids

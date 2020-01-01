@@ -8,9 +8,11 @@ import me.alexisevelyn.randomtech.blocks.VirtualTile;
 import me.alexisevelyn.randomtech.blocks.glass.*;
 import me.alexisevelyn.randomtech.entities.mob.WizardEntity;
 import me.alexisevelyn.randomtech.fluids.ExperienceFluid;
+import me.alexisevelyn.randomtech.fluids.HoneyFluid;
 import me.alexisevelyn.randomtech.fluids.MagicFluid;
 import me.alexisevelyn.randomtech.fluids.RedstoneFluid;
 import me.alexisevelyn.randomtech.fluids.blocks.ExperienceFluidBlock;
+import me.alexisevelyn.randomtech.fluids.blocks.HoneyFluidBlock;
 import me.alexisevelyn.randomtech.fluids.blocks.MagicFluidBlock;
 import me.alexisevelyn.randomtech.fluids.blocks.RedstoneFluidBlock;
 import me.alexisevelyn.randomtech.guis.FuserGui;
@@ -91,6 +93,10 @@ public class RegistryHelper {
     public static final FlowableFluid REDSTONE_FLUID = new RedstoneFluid.Still();
     public static final FlowableFluid REDSTONE_FLUID_FLOWING = new RedstoneFluid.Flowing();
     public static final FluidBlock REDSTONE_FLUID_BLOCK = new RedstoneFluidBlock(REDSTONE_FLUID){};
+
+    public static final FlowableFluid HONEY_FLUID = new HoneyFluid.Still();
+    public static final FlowableFluid HONEY_FLUID_FLOWING = new HoneyFluid.Flowing();
+    public static final FluidBlock HONEY_FLUID_BLOCK = new HoneyFluidBlock(HONEY_FLUID){};
 
     // Armor Materials
     public static final ArmorMaterial REDSTONE_ARMOR_MATERIAL = new RedstoneArmorMaterial();
@@ -229,16 +235,19 @@ public class RegistryHelper {
         Registry.register(Registry.FLUID, new Identifier(Main.MODID, "liquid_experience_flowing"), EXPERIENCE_FLUID_FLOWING);
         Registry.register(Registry.FLUID, new Identifier(Main.MODID, "liquid_magic_flowing"), MAGIC_FLUID_FLOWING);
         Registry.register(Registry.FLUID, new Identifier(Main.MODID, "liquid_redstone_flowing"), REDSTONE_FLUID_FLOWING);
+        Registry.register(Registry.FLUID, new Identifier(Main.MODID, "liquid_honey_flowing"), HONEY_FLUID_FLOWING);
 
         // Register Fluids Still
         Registry.register(Registry.FLUID, new Identifier(Main.MODID, "liquid_experience"), EXPERIENCE_FLUID);
         Registry.register(Registry.FLUID, new Identifier(Main.MODID, "liquid_magic"), MAGIC_FLUID);
         Registry.register(Registry.FLUID, new Identifier(Main.MODID, "liquid_redstone"), REDSTONE_FLUID);
+        Registry.register(Registry.FLUID, new Identifier(Main.MODID, "liquid_honey"), HONEY_FLUID);
 
         // Register Fluids Blocks
         Registry.register(Registry.BLOCK, new Identifier(Main.MODID, "liquid_experience"), EXPERIENCE_FLUID_BLOCK);
         Registry.register(Registry.BLOCK, new Identifier(Main.MODID, "liquid_magic"), MAGIC_FLUID_BLOCK);
         Registry.register(Registry.BLOCK, new Identifier(Main.MODID, "liquid_redstone"), REDSTONE_FLUID_BLOCK);
+        Registry.register(Registry.BLOCK, new Identifier(Main.MODID, "liquid_honey"), HONEY_FLUID_BLOCK);
     }
 
     protected void registerFuel() {

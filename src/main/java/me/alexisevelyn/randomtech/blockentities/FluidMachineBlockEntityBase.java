@@ -8,8 +8,6 @@ import reborncore.common.fluid.container.FluidInstance;
 import reborncore.common.util.Tank;
 
 public class FluidMachineBlockEntityBase extends BasePowerAcceptorBlockEntity {
-    FluidValue maxFluidCapacity = FluidValue.BUCKET;
-
     protected Tank tank;
 
     public FluidMachineBlockEntityBase(BlockEntityType<?> blockEntityType) {
