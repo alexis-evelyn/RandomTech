@@ -19,13 +19,13 @@ public class HoneyFluidBlock extends BaseFluidBlock {
 
     protected HoneyFluidBlock(FlowableFluid fluid) {
         super(fluid, FabricBlockSettings
-                .copy(Blocks.WATER)
+                .copy(Blocks.LAVA)
                 .lightLevel(getLightLevel()));
     }
 
     public static ToIntFunction<BlockState> getLightLevel() {
         return (state) -> {
-            return getLightLevel(state.get(LEVEL));
+            return 0;
         };
     }
 

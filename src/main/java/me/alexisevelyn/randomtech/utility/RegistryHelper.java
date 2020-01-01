@@ -105,6 +105,7 @@ public class RegistryHelper {
     public static final Item EXPERIENCE_BUCKET = new BucketItem(EXPERIENCE_FLUID, new Item.Settings().recipeRemainder(Items.BUCKET).maxCount(1));
     public static final Item MAGIC_BUCKET = new BucketItem(MAGIC_FLUID, new Item.Settings().recipeRemainder(Items.BUCKET).maxCount(1));
     public static final Item REDSTONE_BUCKET = new BucketItem(REDSTONE_FLUID, new Item.Settings().recipeRemainder(Items.BUCKET).maxCount(1));
+    public static final Item HONEY_BUCKET = new BucketItem(HONEY_FLUID, new Item.Settings().recipeRemainder(Items.BUCKET).maxCount(1));
 
     // Gui Handlers - Needs to be run on both client and server for gui open screen to work
     public static final TeleporterGuiHandler<TeleporterGui> teleporterGuiHandler = new TeleporterGuiHandler<>();
@@ -198,6 +199,7 @@ public class RegistryHelper {
         Registry.register(Registry.ITEM, new Identifier(Main.MODID, "experience_bucket"), EXPERIENCE_BUCKET);
         Registry.register(Registry.ITEM, new Identifier(Main.MODID, "magic_bucket"), MAGIC_BUCKET);
         Registry.register(Registry.ITEM, new Identifier(Main.MODID, "redstone_bucket"), REDSTONE_BUCKET);
+        Registry.register(Registry.ITEM, new Identifier(Main.MODID, "honey_bucket"), HONEY_BUCKET);
     }
 
     protected void registerArmor() {

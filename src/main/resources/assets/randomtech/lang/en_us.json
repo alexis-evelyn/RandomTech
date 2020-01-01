@@ -35,10 +35,12 @@
   "fluid.randomtech.liquid_experience": "Liquid Experience",
   "fluid.randomtech.liquid_magic": "Liquid Magic",
   "fluid.randomtech.liquid_redstone": "Liquid Redstone",
+  "fluid.randomtech.liquid_honey": "Liquid Honey",
 
   "item.randomtech.experience_bucket": "Liquid Experience",
   "item.randomtech.magic_bucket": "Bucket O' Magic",
   "item.randomtech.redstone_bucket": "Liquid Redstone",
+  "item.randomtech.honey_bucket": "Liquid Honey",
 
   "entity.randomtech.wizard": "Wizard",
 

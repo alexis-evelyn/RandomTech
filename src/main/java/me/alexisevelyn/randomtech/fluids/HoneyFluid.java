@@ -17,27 +17,27 @@ public abstract class HoneyFluid extends BaseFluid {
     @Override
     @Environment(EnvType.CLIENT)
     public ParticleEffect getParticle() {
-        return ParticleTypes.DRIPPING_LAVA;
+        return ParticleTypes.DRIPPING_HONEY;
     }
 
     @Override
     public Fluid getFlowing() {
-        return RegistryHelper.REDSTONE_FLUID_FLOWING;
+        return RegistryHelper.HONEY_FLUID_FLOWING;
     }
 
     @Override
     public Fluid getStill() {
-        return RegistryHelper.REDSTONE_FLUID;
+        return RegistryHelper.HONEY_FLUID;
     }
 
     @Override
     public Item getBucketItem() {
-        return RegistryHelper.REDSTONE_BUCKET;
+        return RegistryHelper.HONEY_BUCKET;
     }
 
     @Override
     protected BlockState toBlockState(FluidState state) {
-        return RegistryHelper.REDSTONE_FLUID_BLOCK.getDefaultState().with(Properties.LEVEL_15, BaseFluid.calculateLevel(state));
+        return RegistryHelper.HONEY_FLUID_BLOCK.getDefaultState().with(Properties.LEVEL_15, BaseFluid.calculateLevel(state));
     }
 
     @Override
