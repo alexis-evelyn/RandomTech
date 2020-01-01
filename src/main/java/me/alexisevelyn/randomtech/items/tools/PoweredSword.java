@@ -11,6 +11,7 @@ import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.*;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.ActionResult;
@@ -19,7 +20,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 public class PoweredSword extends SwordItem {
-    private final EntityAttributeModifier brokenAttackAttribute = new EntityAttributeModifier(ATTACK_SPEED_MODIFIER_ID, "Weapon modifier", 0, EntityAttributeModifier.Operation.MULTIPLY_TOTAL);
+    private final EntityAttributeModifier brokenAttackAttribute = new EntityAttributeModifier(ATTACK_SPEED_MODIFIER_ID, "Broken Weapon Modifier", 0, EntityAttributeModifier.Operation.MULTIPLY_TOTAL);
 
     public PoweredSword(ToolMaterial material, int attackDamage, float attackSpeed, Settings settings) {
         super(material, attackDamage, attackSpeed, settings);
@@ -51,21 +52,29 @@ public class PoweredSword extends SwordItem {
         EquipmentSlot equipmentSlot = EquipmentSlot.MAINHAND;
 
         if (isUsable(stack) && hasBrokenAttribute(stack, equipmentSlot)) {
-            // TODO: Replace modifier with original modifier
-            // stack.getAttributeModifiers(EquipmentSlot.fromTypeIndex(equipmentSlot.getType(), slot)).remove(EntityAttributes.GENERIC_ATTACK_DAMAGE, brokenAttackAttribute);
+            removeBrokenAttribute(stack, equipmentSlot);
 
             return;
         }
 
         if (!isUsable(stack) && !hasBrokenAttribute(stack, equipmentSlot)) {
-            System.out.println("Set Broken!!!");
-
             stack.addAttributeModifier(
                     EntityAttributes.GENERIC_ATTACK_DAMAGE,
                     brokenAttackAttribute,
                     equipmentSlot
             );
         }
+    }
+
+    private void removeBrokenAttribute(ItemStack stack, EquipmentSlot equipmentSlot) {
+        CompoundTag nbtTags = stack.getOrCreateTag();
+
+        if (!nbtTags.contains("AttributeModifiers", 9))
+            return;
+
+        // This works, but removes all AttributeModifiers.
+        // I would prefer restoring the old attribute modifiers if it exists.
+        nbtTags.remove("AttributeModifiers");
     }
 
     private boolean hasBrokenAttribute(ItemStack stack, EquipmentSlot equipmentSlot) {
