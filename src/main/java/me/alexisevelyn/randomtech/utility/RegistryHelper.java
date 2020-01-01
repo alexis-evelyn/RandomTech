@@ -25,7 +25,7 @@ import me.alexisevelyn.randomtech.items.TeleporterControlItem;
 import me.alexisevelyn.randomtech.items.armor.ArmorBase;
 import me.alexisevelyn.randomtech.items.books.Manual;
 import me.alexisevelyn.randomtech.items.ingots.RedstoneIngot;
-import me.alexisevelyn.randomtech.items.tools.*;
+import me.alexisevelyn.randomtech.items.tools.powered.*;
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;

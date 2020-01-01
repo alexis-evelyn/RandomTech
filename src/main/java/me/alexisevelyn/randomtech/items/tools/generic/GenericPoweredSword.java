@@ -1,4 +1,4 @@
-package me.alexisevelyn.randomtech.items.tools;
+package me.alexisevelyn.randomtech.items.tools.generic;
 
 import me.alexisevelyn.randomtech.toolmaterials.PoweredToolMaterial;
 import net.fabricmc.api.EnvType;
@@ -19,18 +19,18 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class PoweredSword extends SwordItem {
+public class GenericPoweredSword extends SwordItem {
     private final EntityAttributeModifier brokenAttackAttribute = new EntityAttributeModifier(ATTACK_SPEED_MODIFIER_ID, "Broken Weapon Modifier", 0, EntityAttributeModifier.Operation.MULTIPLY_TOTAL);
 
-    public PoweredSword(ToolMaterial material, int attackDamage, float attackSpeed, Settings settings) {
+    public GenericPoweredSword(ToolMaterial material, int attackDamage, float attackSpeed, Settings settings) {
         super(material, attackDamage, attackSpeed, settings);
     }
 
-    public PoweredSword(ToolMaterial material) {
+    public GenericPoweredSword(ToolMaterial material) {
         super(material, -1, -2.2F, new Settings().group(ItemGroup.TOOLS));
     }
 
-    public PoweredSword(Settings settings) {
+    public GenericPoweredSword(Settings settings) {
         super(new PoweredToolMaterial(), -1, -2.2F, settings);
     }
 
@@ -48,6 +48,7 @@ public class PoweredSword extends SwordItem {
         return 1.0F;
     }
 
+    @SuppressWarnings("DuplicatedCode") // I know. I've had to purposely duplicate the code to allow retrieving attributes of the correct type of tool.
     private void changeModifiers(ItemStack stack) {
         EquipmentSlot equipmentSlot = EquipmentSlot.MAINHAND;
 
@@ -135,7 +136,7 @@ public class PoweredSword extends SwordItem {
         if (isUsable(context.getStack()))
             return super.useOnBlock(context);
 
-        return ActionResult.FAIL;
+        return ActionResult.PASS;
     }
 
     // For Right Clicking Entities
@@ -144,7 +145,7 @@ public class PoweredSword extends SwordItem {
         if (isUsable(stack))
             return super.useOnEntity(stack, user, entity, hand);
 
-        return ActionResult.FAIL;
+        return ActionResult.PASS;
     }
 
     @Override
