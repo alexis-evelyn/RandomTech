@@ -1,155 +1,76 @@
 package me.alexisevelyn.randomtech.items.tools.generic;
 
-import me.alexisevelyn.randomtech.toolmaterials.PoweredToolMaterial;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
+import com.google.common.collect.ImmutableMap;
+import com.google.common.collect.ImmutableSet;
+import com.google.common.collect.Maps;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EquipmentSlot;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.attribute.EntityAttributeModifier;
-import net.minecraft.entity.attribute.EntityAttributes;
+import net.minecraft.block.Blocks;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.*;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.text.Text;
-import net.minecraft.text.TranslatableText;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemUsageContext;
+import net.minecraft.item.ToolMaterial;
+import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.ActionResult;
-import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
+import team.reborn.energy.EnergyTier;
 
-public class GenericPoweredHoe extends HoeItem {
-    private final EntityAttributeModifier brokenAttackAttribute = new EntityAttributeModifier(ATTACK_SPEED_MODIFIER_ID, "Broken Weapon Modifier", 0, EntityAttributeModifier.Operation.MULTIPLY_TOTAL);
+import java.util.Map;
+import java.util.Set;
 
-    public GenericPoweredHoe(ToolMaterial material, int attackDamage, float attackSpeed, Settings settings) {
-        super(material, attackDamage, attackSpeed, settings);
+public class GenericPoweredHoe extends GenericPoweredTool {
+    private static final Set<Block> EFFECTIVE_BLOCKS;
+    protected static final Map<Block, BlockState> TILLED_BLOCKS;
+
+    public GenericPoweredHoe(ToolMaterial material, int energyCapacity, EnergyTier tier, int cost, float poweredSpeed, float unpoweredSpeed, Item referenceTool, Settings settings) {
+        super(material, energyCapacity, tier, cost, poweredSpeed, unpoweredSpeed, referenceTool, EFFECTIVE_BLOCKS, settings);
     }
 
-    public GenericPoweredHoe(ToolMaterial material) {
-        super(material, -1, -2.2F, new Settings().group(ItemGroup.TOOLS));
-    }
-
-    public GenericPoweredHoe(Settings settings) {
-        super(new PoweredToolMaterial(), -1, -2.2F, settings);
-    }
-
-    @Override
-    @Environment(EnvType.CLIENT)
-    public Text getName() {
-        return new TranslatableText(this.getTranslationKey());
-    }
-
-    @Override
-    public float getMiningSpeedMultiplier(ItemStack stack, BlockState state) {
-        if (isUsable(stack))
-            return super.getMiningSpeedMultiplier(stack, state);
-
-        return 1.0F;
-    }
-
-    @SuppressWarnings("DuplicatedCode") // I know. I've had to purposely duplicate the code to allow retrieving attributes of the correct type of tool.
-    private void changeModifiers(ItemStack stack) {
-        EquipmentSlot equipmentSlot = EquipmentSlot.MAINHAND;
-
-        if (isUsable(stack) && hasBrokenAttribute(stack, equipmentSlot)) {
-            removeBrokenAttribute(stack, equipmentSlot);
-
-            return;
-        }
-
-        if (!isUsable(stack) && !hasBrokenAttribute(stack, equipmentSlot)) {
-            stack.addAttributeModifier(
-                    EntityAttributes.GENERIC_ATTACK_DAMAGE,
-                    brokenAttackAttribute,
-                    equipmentSlot
-            );
-        }
-    }
-
-    private void removeBrokenAttribute(ItemStack stack, EquipmentSlot equipmentSlot) {
-        CompoundTag nbtTags = stack.getOrCreateTag();
-
-        if (!nbtTags.contains("AttributeModifiers", 9))
-            return;
-
-        // This works, but removes all AttributeModifiers.
-        // I would prefer restoring the old attribute modifiers if it exists.
-        nbtTags.remove("AttributeModifiers");
-    }
-
-    private boolean hasBrokenAttribute(ItemStack stack, EquipmentSlot equipmentSlot) {
-        return stack.getAttributeModifiers(equipmentSlot).containsEntry(EntityAttributes.GENERIC_ATTACK_DAMAGE, brokenAttackAttribute);
-    }
-
-    public boolean isUsable(ItemStack stack) {
-        return stack.getDamage() < stack.getMaxDamage() - 1;
-    }
-
-    @Override
-    public void inventoryTick(ItemStack stack, World world, Entity entity, int slot, boolean selected) {
-        super.inventoryTick(stack, world, entity, slot, selected);
-
-        // Updates if this item is usable
-        changeModifiers(stack);
-    }
-
-    // Used by mobs to determine if they prefer a weapon over another one.
-    // It does not actually modify the attack damage of an item.
-    @Override
-    public float getAttackDamage() {
-        return super.getAttackDamage();
-    }
-
-    // Can be used to allow/prevent player from mining with tool
-    @Override
-    public boolean canMine(BlockState state, World world, BlockPos pos, PlayerEntity miner) {
-        if (isUsable(miner.getMainHandStack()))
-            return super.canMine(state, world, pos, miner);
-
-        return false;
-    }
-
-    // For Attacking
-    @Override
-    public boolean postHit(ItemStack stack, LivingEntity target, LivingEntity attacker) {
-        if (isUsable(stack))
-            return super.postHit(stack, target, attacker);
-
-        // For Item Stats
-        return false;
-    }
-
-    // For Mining
-    @Override
-    public boolean postMine(ItemStack stack, World world, BlockState state, BlockPos pos, LivingEntity miner) {
-        if (isUsable(stack))
-            return super.postMine(stack, world, state, pos, miner);
-
-        // For Item Stats
-        return false;
-    }
-
-    // For Right Clicking Blocks (e.g. Tilling Dirt/Grass)
-    @Override
     public ActionResult useOnBlock(ItemUsageContext context) {
-        if (isUsable(context.getStack()))
-            return super.useOnBlock(context);
+        World world = context.getWorld();
+        BlockPos blockPos = context.getBlockPos();
 
-        return ActionResult.FAIL;
+        if (context.getSide() != Direction.DOWN && world.getBlockState(blockPos.up()).isAir()) {
+            BlockState blockState = TILLED_BLOCKS.get(world.getBlockState(blockPos).getBlock());
+
+            if (blockState != null) {
+                PlayerEntity playerEntity = context.getPlayer();
+                world.playSound(playerEntity, blockPos, SoundEvents.ITEM_HOE_TILL, SoundCategory.BLOCKS, 1.0F, 1.0F);
+
+                if (!world.isClient) {
+                    world.setBlockState(blockPos, blockState, 11);
+                }
+
+                return ActionResult.success(world.isClient);
+            }
+        }
+
+        return super.useOnBlock(context);
     }
 
-    // For Right Clicking Entities
-    @Override
-    public ActionResult useOnEntity(ItemStack stack, PlayerEntity user, LivingEntity entity, Hand hand) {
-        if (isUsable(stack))
-            return super.useOnEntity(stack, user, entity, hand);
+    static {
+        // I would just reference the HoeItem's Effective Blocks and Tilled Blocks, but Mojang has those variables marked private.
+        EFFECTIVE_BLOCKS = ImmutableSet.of(Blocks.NETHER_WART_BLOCK,
+                Blocks.WARPED_WART_BLOCK,
+                Blocks.HAY_BLOCK,
+                Blocks.DRIED_KELP_BLOCK,
+                Blocks.TARGET,
+                Blocks.SHROOMLIGHT,
+                Blocks.SPONGE,
+                Blocks.WET_SPONGE,
+                Blocks.JUNGLE_LEAVES,
+                Blocks.OAK_LEAVES,
+                Blocks.SPRUCE_LEAVES,
+                Blocks.DARK_OAK_LEAVES,
+                Blocks.ACACIA_LEAVES,
+                Blocks.BIRCH_LEAVES);
 
-        return ActionResult.PASS;
-    }
-
-    @Override
-    public boolean isFireproof() {
-        return super.isFireproof();
+        TILLED_BLOCKS = Maps.newHashMap(ImmutableMap.of(Blocks.GRASS_BLOCK, Blocks.FARMLAND.getDefaultState(),
+                Blocks.GRASS_PATH, Blocks.FARMLAND.getDefaultState(),
+                Blocks.DIRT, Blocks.FARMLAND.getDefaultState(),
+                Blocks.COARSE_DIRT, Blocks.DIRT.getDefaultState()));
     }
 }

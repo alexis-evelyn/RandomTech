@@ -1,155 +1,51 @@
 package me.alexisevelyn.randomtech.items.tools.generic;
 
-import me.alexisevelyn.randomtech.toolmaterials.PoweredToolMaterial;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
+import com.google.common.collect.Sets;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EquipmentSlot;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.attribute.EntityAttributeModifier;
-import net.minecraft.entity.attribute.EntityAttributes;
+import net.minecraft.block.Blocks;
+import net.minecraft.block.Material;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.*;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.text.Text;
-import net.minecraft.text.TranslatableText;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.Hand;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.SwordItem;
+import net.minecraft.item.ToolMaterial;
+import net.minecraft.tag.BlockTags;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import team.reborn.energy.EnergyTier;
 
-public class GenericPoweredSword extends SwordItem {
-    private final EntityAttributeModifier brokenAttackAttribute = new EntityAttributeModifier(ATTACK_SPEED_MODIFIER_ID, "Broken Weapon Modifier", 0, EntityAttributeModifier.Operation.MULTIPLY_TOTAL);
+import java.util.Set;
 
-    public GenericPoweredSword(ToolMaterial material, int attackDamage, float attackSpeed, Settings settings) {
-        super(material, attackDamage, attackSpeed, settings);
+public class GenericPoweredSword extends GenericPoweredTool {
+    private static final Set<Block> EFFECTIVE_BLOCKS;
+
+    public GenericPoweredSword(ToolMaterial material, int energyCapacity, EnergyTier tier, int cost, float poweredSpeed, float unpoweredSpeed, Item referenceTool, Settings settings) {
+        super(material, energyCapacity, tier, cost, poweredSpeed, unpoweredSpeed, referenceTool, EFFECTIVE_BLOCKS, settings);
     }
 
-    public GenericPoweredSword(ToolMaterial material) {
-        super(material, -1, -2.2F, new Settings().group(ItemGroup.TOOLS));
-    }
-
-    public GenericPoweredSword(Settings settings) {
-        super(new PoweredToolMaterial(), -1, -2.2F, settings);
-    }
-
-    @Override
-    @Environment(EnvType.CLIENT)
-    public Text getName() {
-        return new TranslatableText(this.getTranslationKey());
-    }
-
-    @Override
-    public float getMiningSpeedMultiplier(ItemStack stack, BlockState state) {
-        if (isUsable(stack))
-            return super.getMiningSpeedMultiplier(stack, state);
-
-        return 1.0F;
-    }
-
-    @SuppressWarnings("DuplicatedCode") // I know. I've had to purposely duplicate the code to allow retrieving attributes of the correct type of tool.
-    private void changeModifiers(ItemStack stack) {
-        EquipmentSlot equipmentSlot = EquipmentSlot.MAINHAND;
-
-        if (isUsable(stack) && hasBrokenAttribute(stack, equipmentSlot)) {
-            removeBrokenAttribute(stack, equipmentSlot);
-
-            return;
-        }
-
-        if (!isUsable(stack) && !hasBrokenAttribute(stack, equipmentSlot)) {
-            stack.addAttributeModifier(
-                    EntityAttributes.GENERIC_ATTACK_DAMAGE,
-                    brokenAttackAttribute,
-                    equipmentSlot
-            );
-        }
-    }
-
-    private void removeBrokenAttribute(ItemStack stack, EquipmentSlot equipmentSlot) {
-        CompoundTag nbtTags = stack.getOrCreateTag();
-
-        if (!nbtTags.contains("AttributeModifiers", 9))
-            return;
-
-        // This works, but removes all AttributeModifiers.
-        // I would prefer restoring the old attribute modifiers if it exists.
-        nbtTags.remove("AttributeModifiers");
-    }
-
-    private boolean hasBrokenAttribute(ItemStack stack, EquipmentSlot equipmentSlot) {
-        return stack.getAttributeModifiers(equipmentSlot).containsEntry(EntityAttributes.GENERIC_ATTACK_DAMAGE, brokenAttackAttribute);
-    }
-
-    public boolean isUsable(ItemStack stack) {
-        return stack.getDamage() < stack.getMaxDamage() - 1;
-    }
-
-    @Override
-    public void inventoryTick(ItemStack stack, World world, Entity entity, int slot, boolean selected) {
-        super.inventoryTick(stack, world, entity, slot, selected);
-
-        // Updates if this item is usable
-        changeModifiers(stack);
-    }
-
-    // Used by mobs to determine if they prefer a weapon over another one.
-    // It does not actually modify the attack damage of an item.
-    @Override
-    public float getAttackDamage() {
-        return super.getAttackDamage();
-    }
-
-    // Can be used to allow/prevent player from mining with tool
-    @Override
     public boolean canMine(BlockState state, World world, BlockPos pos, PlayerEntity miner) {
-        if (isUsable(miner.getMainHandStack()))
-            return super.canMine(state, world, pos, miner);
+        if (miner.isCreative())
+            return false;
 
-        return false;
+        return super.canMine(state, world, pos, miner);
     }
 
-    // For Attacking
-    @Override
-    public boolean postHit(ItemStack stack, LivingEntity target, LivingEntity attacker) {
-        if (isUsable(stack))
-            return super.postHit(stack, target, attacker);
-
-        // For Item Stats
-        return false;
+    public float getMiningSpeedMultiplier(ItemStack stack, BlockState state) {
+        if (state.isOf(Blocks.COBWEB)) {
+            return 15.0F;
+        } else {
+            Material material = state.getMaterial();
+            return material != Material.PLANT && material != Material.REPLACEABLE_PLANT && material != Material.UNUSED_PLANT && !state.isIn(BlockTags.LEAVES) && material != Material.GOURD ? 1.0F : 1.5F;
+        }
     }
 
-    // For Mining
-    @Override
-    public boolean postMine(ItemStack stack, World world, BlockState state, BlockPos pos, LivingEntity miner) {
-        if (isUsable(stack))
-            return super.postMine(stack, world, state, pos, miner);
-
-        // For Item Stats
-        return false;
+    public boolean isEffectiveOn(BlockState state) {
+        return EFFECTIVE_BLOCKS.contains(state.getBlock());
     }
 
-    // For Right Clicking Blocks
-    @Override
-    public ActionResult useOnBlock(ItemUsageContext context) {
-        if (isUsable(context.getStack()))
-            return super.useOnBlock(context);
-
-        return ActionResult.PASS;
-    }
-
-    // For Right Clicking Entities
-    @Override
-    public ActionResult useOnEntity(ItemStack stack, PlayerEntity user, LivingEntity entity, Hand hand) {
-        if (isUsable(stack))
-            return super.useOnEntity(stack, user, entity, hand);
-
-        return ActionResult.PASS;
-    }
-
-    @Override
-    public boolean isFireproof() {
-        return super.isFireproof();
+    static {
+        // There is no static reference for SwordItem as their is only one block that a sword is effective on in vanilla.
+        EFFECTIVE_BLOCKS = Sets.newHashSet(Blocks.COBWEB);
     }
 }

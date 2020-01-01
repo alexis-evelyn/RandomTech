@@ -1,14 +1,14 @@
 package me.alexisevelyn.randomtech.toolmaterials;
 
-import me.alexisevelyn.randomtech.utility.RegistryHelper;
 import net.minecraft.item.ToolMaterial;
 import net.minecraft.item.ToolMaterials;
 import net.minecraft.recipe.Ingredient;
+import org.jetbrains.annotations.Nullable;
 
 public class PoweredToolMaterial implements ToolMaterial {
     @Override
     public int getDurability() {
-        return 1337;
+        return -1;
     }
 
     @Override
@@ -18,7 +18,7 @@ public class PoweredToolMaterial implements ToolMaterial {
 
     @Override
     public float getAttackDamage() {
-        return 1337;
+        return 1;
     }
 
     @Override
@@ -31,8 +31,10 @@ public class PoweredToolMaterial implements ToolMaterial {
         return 30;
     }
 
+    @Nullable
     @Override
     public Ingredient getRepairIngredient() {
-        return Ingredient.ofItems(RegistryHelper.REDSTONE_INGOT);
+        // Ingredient.ofItems(RegistryHelper.REDSTONE_INGOT)
+        return null;
     }
 }

@@ -1,155 +1,82 @@
 package me.alexisevelyn.randomtech.items.tools.generic;
 
-import me.alexisevelyn.randomtech.toolmaterials.PoweredToolMaterial;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
+import com.google.common.collect.ImmutableMap;
+import com.google.common.collect.Sets;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EquipmentSlot;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.attribute.EntityAttributeModifier;
-import net.minecraft.entity.attribute.EntityAttributes;
+import net.minecraft.block.Blocks;
+import net.minecraft.block.PillarBlock;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.*;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.text.Text;
-import net.minecraft.text.TranslatableText;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemUsageContext;
+import net.minecraft.item.ToolMaterial;
+import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.ActionResult;
-import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import team.reborn.energy.EnergyTier;
 
-public class GenericPoweredAxe extends AxeItem {
-    private final EntityAttributeModifier brokenAttackAttribute = new EntityAttributeModifier(ATTACK_SPEED_MODIFIER_ID, "Broken Weapon Modifier", 0, EntityAttributeModifier.Operation.MULTIPLY_TOTAL);
+import java.util.Set;
 
-    public GenericPoweredAxe(ToolMaterial material, int attackDamage, float attackSpeed, Settings settings) {
-        super(material, attackDamage, attackSpeed, settings);
+public class GenericPoweredAxe extends GenericPoweredTool {
+    private static final Set<Block> EFFECTIVE_BLOCKS;
+    protected static final ImmutableMap<Block, Block> STRIPPED_BLOCKS;
+
+    public GenericPoweredAxe(ToolMaterial material, int energyCapacity, EnergyTier tier, int cost, float poweredSpeed, float unpoweredSpeed, Item referenceTool, Settings settings) {
+        super(material, energyCapacity, tier, cost, poweredSpeed, unpoweredSpeed, referenceTool, EFFECTIVE_BLOCKS, settings);
     }
 
-    public GenericPoweredAxe(ToolMaterial material) {
-        super(material, -1, -2.2F, new Settings().group(ItemGroup.TOOLS));
-    }
-
-    public GenericPoweredAxe(Settings settings) {
-        super(new PoweredToolMaterial(), -1, -2.2F, settings);
-    }
-
-    @Override
-    @Environment(EnvType.CLIENT)
-    public Text getName() {
-        return new TranslatableText(this.getTranslationKey());
-    }
-
-    @Override
-    public float getMiningSpeedMultiplier(ItemStack stack, BlockState state) {
-        if (isUsable(stack))
-            return super.getMiningSpeedMultiplier(stack, state);
-
-        return 1.0F;
-    }
-
-    @SuppressWarnings("DuplicatedCode") // I know. I've had to purposely duplicate the code to allow retrieving attributes of the correct type of tool.
-    private void changeModifiers(ItemStack stack) {
-        EquipmentSlot equipmentSlot = EquipmentSlot.MAINHAND;
-
-        if (isUsable(stack) && hasBrokenAttribute(stack, equipmentSlot)) {
-            removeBrokenAttribute(stack, equipmentSlot);
-
-            return;
-        }
-
-        if (!isUsable(stack) && !hasBrokenAttribute(stack, equipmentSlot)) {
-            stack.addAttributeModifier(
-                    EntityAttributes.GENERIC_ATTACK_DAMAGE,
-                    brokenAttackAttribute,
-                    equipmentSlot
-            );
-        }
-    }
-
-    private void removeBrokenAttribute(ItemStack stack, EquipmentSlot equipmentSlot) {
-        CompoundTag nbtTags = stack.getOrCreateTag();
-
-        if (!nbtTags.contains("AttributeModifiers", 9))
-            return;
-
-        // This works, but removes all AttributeModifiers.
-        // I would prefer restoring the old attribute modifiers if it exists.
-        nbtTags.remove("AttributeModifiers");
-    }
-
-    private boolean hasBrokenAttribute(ItemStack stack, EquipmentSlot equipmentSlot) {
-        return stack.getAttributeModifiers(equipmentSlot).containsEntry(EntityAttributes.GENERIC_ATTACK_DAMAGE, brokenAttackAttribute);
-    }
-
-    public boolean isUsable(ItemStack stack) {
-        return stack.getDamage() < stack.getMaxDamage() - 1;
-    }
-
-    @Override
-    public void inventoryTick(ItemStack stack, World world, Entity entity, int slot, boolean selected) {
-        super.inventoryTick(stack, world, entity, slot, selected);
-
-        // Updates if this item is usable
-        changeModifiers(stack);
-    }
-
-    // Used by mobs to determine if they prefer a weapon over another one.
-    // It does not actually modify the attack damage of an item.
-    @Override
-    public float getAttackDamage() {
-        return super.getAttackDamage();
-    }
-
-    // Can be used to allow/prevent player from mining with tool
-    @Override
-    public boolean canMine(BlockState state, World world, BlockPos pos, PlayerEntity miner) {
-        if (isUsable(miner.getMainHandStack()))
-            return super.canMine(state, world, pos, miner);
-
-        return false;
-    }
-
-    // For Attacking
-    @Override
-    public boolean postHit(ItemStack stack, LivingEntity target, LivingEntity attacker) {
-        if (isUsable(stack))
-            return super.postHit(stack, target, attacker);
-
-        // For Item Stats
-        return false;
-    }
-
-    // For Mining
-    @Override
-    public boolean postMine(ItemStack stack, World world, BlockState state, BlockPos pos, LivingEntity miner) {
-        if (isUsable(stack))
-            return super.postMine(stack, world, state, pos, miner);
-
-        // For Item Stats
-        return false;
-    }
-
-    // For Right Clicking Blocks (e.g. Stripping Logs)
     @Override
     public ActionResult useOnBlock(ItemUsageContext context) {
-        if (isUsable(context.getStack()))
-            return super.useOnBlock(context);
+        World world = context.getWorld();
+        BlockPos blockPos = context.getBlockPos();
+        BlockState blockState = world.getBlockState(blockPos);
+        Block block = STRIPPED_BLOCKS.get(blockState.getBlock());
 
-        return ActionResult.FAIL;
+        if (block != null) {
+            PlayerEntity playerEntity = context.getPlayer();
+            world.playSound(playerEntity, blockPos, SoundEvents.ITEM_AXE_STRIP, SoundCategory.BLOCKS, 1.0F, 1.0F);
+
+            if (!world.isClient) {
+                world.setBlockState(blockPos, block.getDefaultState().with(PillarBlock.AXIS, blockState.get(PillarBlock.AXIS)), 11);
+            }
+
+            return ActionResult.success(world.isClient);
+        }
+
+        return super.useOnBlock(context);
     }
 
-    // For Right Clicking Entities
-    @Override
-    public ActionResult useOnEntity(ItemStack stack, PlayerEntity user, LivingEntity entity, Hand hand) {
-        if (isUsable(stack))
-            return super.useOnEntity(stack, user, entity, hand);
+    static {
+        // I would just reference the AxeItem's Effective Blocks and Stripped Blocks, but Mojang has those variables marked private.
+        EFFECTIVE_BLOCKS = Sets.newHashSet(Blocks.LADDER,
+                Blocks.SCAFFOLDING,
+                Blocks.OAK_BUTTON,
+                Blocks.SPRUCE_BUTTON,
+                Blocks.BIRCH_BUTTON,
+                Blocks.JUNGLE_BUTTON,
+                Blocks.DARK_OAK_BUTTON,
+                Blocks.ACACIA_BUTTON,
+                Blocks.CRIMSON_BUTTON,
+                Blocks.WARPED_BUTTON);
 
-        return ActionResult.PASS;
-    }
-
-    @Override
-    public boolean isFireproof() {
-        return super.isFireproof();
+        STRIPPED_BLOCKS = new ImmutableMap.Builder<Block, Block>()
+                .put(Blocks.OAK_WOOD, Blocks.STRIPPED_OAK_WOOD)
+                .put(Blocks.OAK_LOG, Blocks.STRIPPED_OAK_LOG)
+                .put(Blocks.DARK_OAK_WOOD, Blocks.STRIPPED_DARK_OAK_WOOD)
+                .put(Blocks.DARK_OAK_LOG, Blocks.STRIPPED_DARK_OAK_LOG)
+                .put(Blocks.ACACIA_WOOD, Blocks.STRIPPED_ACACIA_WOOD)
+                .put(Blocks.ACACIA_LOG, Blocks.STRIPPED_ACACIA_LOG)
+                .put(Blocks.BIRCH_WOOD, Blocks.STRIPPED_BIRCH_WOOD)
+                .put(Blocks.BIRCH_LOG, Blocks.STRIPPED_BIRCH_LOG)
+                .put(Blocks.JUNGLE_WOOD, Blocks.STRIPPED_JUNGLE_WOOD)
+                .put(Blocks.JUNGLE_LOG, Blocks.STRIPPED_JUNGLE_LOG)
+                .put(Blocks.SPRUCE_WOOD, Blocks.STRIPPED_SPRUCE_WOOD)
+                .put(Blocks.SPRUCE_LOG, Blocks.STRIPPED_SPRUCE_LOG)
+                .put(Blocks.WARPED_STEM, Blocks.STRIPPED_WARPED_STEM)
+                .put(Blocks.WARPED_HYPHAE, Blocks.STRIPPED_WARPED_HYPHAE)
+                .put(Blocks.CRIMSON_STEM, Blocks.STRIPPED_CRIMSON_STEM)
+                .put(Blocks.CRIMSON_HYPHAE, Blocks.STRIPPED_CRIMSON_HYPHAE).build();
     }
 }
