@@ -32,10 +32,10 @@
   "block.randomtech.teleporter": "Teleporter",
   "block.randomtech.fuser": "Fuser",
 
-  "fluid.randomtech.liquid_experience": "Liquid Experience",
-  "fluid.randomtech.liquid_magic": "Liquid Magic",
-  "fluid.randomtech.liquid_redstone": "Liquid Redstone",
-  "fluid.randomtech.liquid_honey": "Liquid Honey",
+  "fluid.randomtech.experience": "Experience",
+  "fluid.randomtech.magic": "Magic",
+  "fluid.randomtech.redstone": "Redstone",
+  "fluid.randomtech.honey": "Honey",
 
   "item.randomtech.experience_bucket": "Liquid Experience",
   "item.randomtech.magic_bucket": "Bucket O' Magic",
@@ -43,8 +43,10 @@
   "item.randomtech.honey_bucket": "Liquid Honey",
 
   "entity.randomtech.wizard": "Wizard",
+  "entity.randomtech.cloud_demon": "Ghastly Demon",
 
   "item.randomtech.wizard_spawn_egg": "Wizard Spawn Egg",
+  "item.randomtech.cloud_demon_spawn_egg": "Demon Spawn Egg",
 
   "tooltip.waila.energy": "Energy: %s/%s",
   "tooltip.waila.redstone_signal_strength": "Redstone Signals: %s",

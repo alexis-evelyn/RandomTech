@@ -1,5 +1,6 @@
 package me.alexisevelyn.randomtech;
 
+import me.alexisevelyn.randomtech.entities.renderers.CloudDemonRenderer;
 import me.alexisevelyn.randomtech.entities.renderers.WizardRenderer;
 import me.alexisevelyn.randomtech.modmenu.screens.MainScreen;
 import me.alexisevelyn.randomtech.utility.RegistryHelper;
@@ -49,6 +50,10 @@ public class MainClient implements ClientModInitializer {
 	private void entitySetup() {
 		EntityRendererRegistry.INSTANCE.register(RegistryHelper.WIZARD, (dispatcher, context) -> {
 			return new WizardRenderer(dispatcher);
+		});
+
+		EntityRendererRegistry.INSTANCE.register(RegistryHelper.CLOUD_DEMON, (dispatcher, context) -> {
+			return new CloudDemonRenderer(dispatcher);
 		});
 	}
 

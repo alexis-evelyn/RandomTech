@@ -7,16 +7,12 @@ import me.alexisevelyn.randomtech.utility.BlockEntities;
 import me.alexisevelyn.randomtech.utility.RegistryHelper;
 import me.alexisevelyn.randomtech.utility.recipemanagers.GenericFluidRecipe;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.EmptyFluid;
-import net.minecraft.fluid.Fluid;
 import net.minecraft.fluid.Fluids;
-import net.minecraft.item.BucketItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.util.registry.Registry;
 import reborncore.api.IToolDrop;
 import reborncore.api.blockentity.InventoryProvider;
 import reborncore.api.recipe.IRecipeCrafterProvider;
@@ -24,15 +20,11 @@ import reborncore.client.screen.BuiltScreenHandlerProvider;
 import reborncore.client.screen.builder.BuiltScreenHandler;
 import reborncore.client.screen.builder.ScreenHandlerBuilder;
 import reborncore.common.crafting.RebornRecipe;
-import reborncore.common.crafting.ingredient.FluidIngredient;
 import reborncore.common.fluid.FluidValue;
 import reborncore.common.fluid.container.ItemFluidInfo;
 import reborncore.common.recipes.RecipeCrafter;
 import reborncore.common.util.RebornInventory;
 import reborncore.common.util.Tank;
-
-import java.util.List;
-import java.util.stream.Collectors;
 
 public class FuserBlockEntity extends FluidMachineBlockEntityBase implements IToolDrop, InventoryProvider, BuiltScreenHandlerProvider, IRecipeCrafterProvider {
     // Fluid Values

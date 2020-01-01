@@ -6,6 +6,7 @@ import me.alexisevelyn.randomtech.blocks.FuserBlock;
 import me.alexisevelyn.randomtech.blocks.TeleporterBlock;
 import me.alexisevelyn.randomtech.blocks.VirtualTile;
 import me.alexisevelyn.randomtech.blocks.glass.*;
+import me.alexisevelyn.randomtech.entities.mob.CloudDemonEntity;
 import me.alexisevelyn.randomtech.entities.mob.WizardEntity;
 import me.alexisevelyn.randomtech.fluids.ExperienceFluid;
 import me.alexisevelyn.randomtech.fluids.HoneyFluid;
@@ -61,7 +62,7 @@ public class RegistryHelper {
     public static final Block FUSER = new FuserBlock();
 
     // Item Groups
-    public static ItemGroup MACHINERY_GROUP = FabricItemGroupBuilder.build(
+    public static final ItemGroup MACHINERY_GROUP = FabricItemGroupBuilder.build(
             new Identifier(Main.MODID, "machinery_group"),
             () -> new ItemStack(TELEPORTER));
 
@@ -116,15 +117,24 @@ public class RegistryHelper {
             .dimensions(EntityDimensions.fixed(0.75f, 0.75f))
             .build();
 
+    public static final EntityType<CloudDemonEntity> CLOUD_DEMON = FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, ((EntityType.EntityFactory<CloudDemonEntity>) CloudDemonEntity::new))
+            .dimensions(EntityDimensions.fixed(0.75f, 0.75f))
+            .build();
+
     // Spawn Eggs
     public static final SpawnEggItem WIZARD_SPAWN_EGG = new SpawnEggItem(WIZARD, Color.BLUE.getRGB(), Color.RED.getRGB(), new Item.Settings().group(ItemGroup.MISC));
+    public static final SpawnEggItem CLOUD_DEMON_SPAWN_EGG = new SpawnEggItem(CLOUD_DEMON, Color.BLACK.getRGB(), Color.DARK_GRAY.getRGB(), new Item.Settings().group(ItemGroup.MISC));
 
     // Force Load BlockEntities.java Early On
     // This is important to make sure that BlockEntities are loaded before a world is loaded
+    // Yes, I know about the warning of instantiating a utility class. That's intentional for the reason stated above.
+    @SuppressWarnings({"InstantiationOfUtilityClass", "unused"})
     public static final BlockEntities blockEntities = new BlockEntities();
 
     // Force Load Recipes.java Early On
     // This is important to make sure that recipes are loaded before a world is loaded
+    // Yes, I know about the warning of instantiating a utility class. That's intentional for the reason stated above.
+    @SuppressWarnings({"InstantiationOfUtilityClass", "unused"})
     public static final Recipes customRecipes = new Recipes();
     
     public void register() {
@@ -168,7 +178,7 @@ public class RegistryHelper {
 
         Registry.register(Registry.BLOCK, new Identifier(Main.MODID, "powered_glass"), POWERED_GLASS);
 
-        Registry.register(Registry.BLOCK, new Identifier(Main.MODID, "virtual_tile"), VIRTUAL_TILE);
+        Registry.register(Registry.BLOCK, new Identifier(Main.MODID, "green_virtual_tile"), VIRTUAL_TILE);
     }
 
     protected void registerMachines() {
@@ -223,7 +233,7 @@ public class RegistryHelper {
 
         Registry.register(Registry.ITEM, new Identifier(Main.MODID, "powered_glass"), new BlockItem(POWERED_GLASS, new Item.Settings().group(ItemGroup.DECORATIONS)));
 
-        Registry.register(Registry.ITEM, new Identifier(Main.MODID, "virtual_tile"), new BlockItem(VIRTUAL_TILE, new Item.Settings().group(ItemGroup.DECORATIONS)));
+        Registry.register(Registry.ITEM, new Identifier(Main.MODID, "green_virtual_tile"), new BlockItem(VIRTUAL_TILE, new Item.Settings().group(ItemGroup.DECORATIONS)));
     }
 
     protected void registerMachineItemBlocks() {
@@ -234,22 +244,22 @@ public class RegistryHelper {
 
     protected void registerFluids() {
         // Register Fluids Flowing
-        Registry.register(Registry.FLUID, new Identifier(Main.MODID, "liquid_experience_flowing"), EXPERIENCE_FLUID_FLOWING);
-        Registry.register(Registry.FLUID, new Identifier(Main.MODID, "liquid_magic_flowing"), MAGIC_FLUID_FLOWING);
-        Registry.register(Registry.FLUID, new Identifier(Main.MODID, "liquid_redstone_flowing"), REDSTONE_FLUID_FLOWING);
-        Registry.register(Registry.FLUID, new Identifier(Main.MODID, "liquid_honey_flowing"), HONEY_FLUID_FLOWING);
+        Registry.register(Registry.FLUID, new Identifier(Main.MODID, "experience_flowing"), EXPERIENCE_FLUID_FLOWING);
+        Registry.register(Registry.FLUID, new Identifier(Main.MODID, "magic_flowing"), MAGIC_FLUID_FLOWING);
+        Registry.register(Registry.FLUID, new Identifier(Main.MODID, "redstone_flowing"), REDSTONE_FLUID_FLOWING);
+        Registry.register(Registry.FLUID, new Identifier(Main.MODID, "honey_flowing"), HONEY_FLUID_FLOWING);
 
         // Register Fluids Still
-        Registry.register(Registry.FLUID, new Identifier(Main.MODID, "liquid_experience"), EXPERIENCE_FLUID);
-        Registry.register(Registry.FLUID, new Identifier(Main.MODID, "liquid_magic"), MAGIC_FLUID);
-        Registry.register(Registry.FLUID, new Identifier(Main.MODID, "liquid_redstone"), REDSTONE_FLUID);
-        Registry.register(Registry.FLUID, new Identifier(Main.MODID, "liquid_honey"), HONEY_FLUID);
+        Registry.register(Registry.FLUID, new Identifier(Main.MODID, "experience"), EXPERIENCE_FLUID);
+        Registry.register(Registry.FLUID, new Identifier(Main.MODID, "magic"), MAGIC_FLUID);
+        Registry.register(Registry.FLUID, new Identifier(Main.MODID, "redstone"), REDSTONE_FLUID);
+        Registry.register(Registry.FLUID, new Identifier(Main.MODID, "honey"), HONEY_FLUID);
 
         // Register Fluids Blocks
-        Registry.register(Registry.BLOCK, new Identifier(Main.MODID, "liquid_experience"), EXPERIENCE_FLUID_BLOCK);
-        Registry.register(Registry.BLOCK, new Identifier(Main.MODID, "liquid_magic"), MAGIC_FLUID_BLOCK);
-        Registry.register(Registry.BLOCK, new Identifier(Main.MODID, "liquid_redstone"), REDSTONE_FLUID_BLOCK);
-        Registry.register(Registry.BLOCK, new Identifier(Main.MODID, "liquid_honey"), HONEY_FLUID_BLOCK);
+        Registry.register(Registry.BLOCK, new Identifier(Main.MODID, "experience"), EXPERIENCE_FLUID_BLOCK);
+        Registry.register(Registry.BLOCK, new Identifier(Main.MODID, "magic"), MAGIC_FLUID_BLOCK);
+        Registry.register(Registry.BLOCK, new Identifier(Main.MODID, "redstone"), REDSTONE_FLUID_BLOCK);
+        Registry.register(Registry.BLOCK, new Identifier(Main.MODID, "honey"), HONEY_FLUID_BLOCK);
     }
 
     protected void registerFuel() {
@@ -260,13 +270,16 @@ public class RegistryHelper {
     protected void registerEntities() {
         // Entity Types
         Registry.register(Registry.ENTITY_TYPE, new Identifier(Main.MODID, "wizard"), WIZARD);
+        Registry.register(Registry.ENTITY_TYPE, new Identifier(Main.MODID, "cloud_demon"), CLOUD_DEMON);
 
         // Default Entity Attributes
         FabricDefaultAttributeRegistry.register(WIZARD, WizardEntity.createMobAttributes());
+        FabricDefaultAttributeRegistry.register(CLOUD_DEMON, CloudDemonEntity.createHostileAttributes());
     }
 
     protected void registerSpawnEggs() {
         // Spawn Eggs
         Registry.register(Registry.ITEM, new Identifier(Main.MODID, "wizard_spawn_egg"), WIZARD_SPAWN_EGG);
+        Registry.register(Registry.ITEM, new Identifier(Main.MODID, "cloud_demon_spawn_egg"), CLOUD_DEMON_SPAWN_EGG);
     }
 }
