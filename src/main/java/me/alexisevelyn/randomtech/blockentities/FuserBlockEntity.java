@@ -37,7 +37,7 @@ import java.util.stream.Collectors;
 public class FuserBlockEntity extends FluidMachineBlockEntityBase implements IToolDrop, InventoryProvider, BuiltScreenHandlerProvider, IRecipeCrafterProvider {
     // Fluid Values
     // JsonElement buckets = new Gson().toJsonTree(5 * 1000);
-    JsonObject buckets = new JsonParser().parse("{'buckets': 5}").getAsJsonObject();
+    JsonObject buckets = new JsonParser().parse("{'buckets': 500}").getAsJsonObject();
 
     FluidValue maxFluidCapacity = FluidValue.parseFluidValue(buckets);
 

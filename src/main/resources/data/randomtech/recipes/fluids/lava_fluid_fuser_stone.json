@@ -1,0 +1,20 @@
+{
+  "type": "randomtech:fuser",
+  "power": 3,
+  "time": 200,
+  "ingredients": [
+    {
+      "item": "minecraft:stone"
+    }
+  ],
+  "results": [
+    {
+      "item": "minecraft:stone_button",
+      "count": 1
+    }
+  ],
+  "tank": {
+    "fluid": "minecraft:lava",
+    "amount": 100
+  }
+}

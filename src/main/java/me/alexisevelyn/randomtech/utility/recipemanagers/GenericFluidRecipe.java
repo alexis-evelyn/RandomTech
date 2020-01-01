@@ -42,9 +42,6 @@ public class GenericFluidRecipe extends RebornFluidRecipe {
 
         final FluidInstance tankFluid = tank.getFluidInstance();
 
-        if (tankFluid.isEmpty())
-            return true;
-
         // To Not Waste Energy on Last "Possible" Craft
         return tank.getFreeSpace().equalOrMoreThan(getFluidInstance().getAmount());
     }

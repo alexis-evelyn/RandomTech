@@ -1,0 +1,19 @@
+{
+  "type": "randomtech:fuser",
+  "power": 3,
+  "time": 30,
+  "ingredients": [
+    {
+      "item": "minecraft:ice"
+    }
+  ],
+  "results": [
+    {
+      "item": "minecraft:snowball"
+    }
+  ],
+  "tank": {
+    "fluid": "minecraft:water",
+    "amount": 1000
+  }
+}

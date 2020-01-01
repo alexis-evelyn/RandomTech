@@ -66,22 +66,4 @@ public class FuserRecipeCrafter extends RecipeCrafter {
     public boolean canFillTank(Tank tank, GenericFluidRecipe genericFluidRecipe) {
         return tank.canInsertFluid(null, genericFluidRecipe.getFluidInstance().getFluid(), genericFluidRecipe.getFluidInstance().getAmount());
     }
-
-    private boolean attemptAddFluidToTank(Tank tank, FluidInstance fluidInstance) {
-        if (tank.getFluid() instanceof EmptyFluid)
-            tank.setFluid(fluidInstance.getFluid());
-        else if (!tank.getFluid().matchesType(fluidInstance.getFluid()))
-            return false;
-
-//        System.out.println("Tank Amount: " + tank.getFluidAmount());
-        FluidValue amount = tank.getFluidAmount().add(fluidInstance.getAmount());
-//        System.out.println("After Tank Amount: " + amount);
-
-        if (amount.moreThan(tank.getFreeSpace()))
-            return false;
-
-        tank.setFluidAmount(amount);
-
-        return true;
-    }
 }
