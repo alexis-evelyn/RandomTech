@@ -24,34 +24,19 @@ import net.minecraft.world.World;
 
 public class PoweredSword extends SwordItem {
     private boolean isUsable = true;
-    private final ImmutableMultimap.Builder<EntityAttribute, EntityAttributeModifier> builder = ImmutableMultimap.builder();
-    private final Multimap<EntityAttribute, EntityAttributeModifier> brokenToolAttributes;
+
+    private final EntityAttributeModifier brokenAttackAttribute = new EntityAttributeModifier(ATTACK_SPEED_MODIFIER_ID, "Weapon modifier", (double) 0, EntityAttributeModifier.Operation.MULTIPLY_TOTAL);
 
     public PoweredSword(ToolMaterial material, int attackDamage, float attackSpeed, Settings settings) {
         super(material, attackDamage, attackSpeed, settings);
-
-        // This is to cut down on processing cost. This is performed once per item instead of every time an ImmutableMultimap is called
-        builder.put(EntityAttributes.GENERIC_ATTACK_DAMAGE, new EntityAttributeModifier(ATTACK_DAMAGE_MODIFIER_ID, "Weapon modifier", (double) 0, EntityAttributeModifier.Operation.ADDITION));
-        builder.put(EntityAttributes.GENERIC_ATTACK_SPEED, new EntityAttributeModifier(ATTACK_SPEED_MODIFIER_ID, "Weapon modifier", (double) 0, EntityAttributeModifier.Operation.ADDITION));
-        brokenToolAttributes = builder.build();
     }
 
     public PoweredSword(ToolMaterial material) {
         super(material, -1, -2.2F, new Settings().group(ItemGroup.TOOLS));
-
-        // This is to cut down on processing cost. This is performed once per item instead of every time an ImmutableMultimap is called
-        builder.put(EntityAttributes.GENERIC_ATTACK_DAMAGE, new EntityAttributeModifier(ATTACK_DAMAGE_MODIFIER_ID, "Weapon modifier", (double) 0, EntityAttributeModifier.Operation.ADDITION));
-        builder.put(EntityAttributes.GENERIC_ATTACK_SPEED, new EntityAttributeModifier(ATTACK_SPEED_MODIFIER_ID, "Weapon modifier", (double) 0, EntityAttributeModifier.Operation.ADDITION));
-        brokenToolAttributes = builder.build();
     }
 
     public PoweredSword(Settings settings) {
         super(new PoweredToolMaterial(), -1, -2.2F, settings);
-
-        // This is to cut down on processing cost. This is performed once per item instead of every time an ImmutableMultimap is called
-        builder.put(EntityAttributes.GENERIC_ATTACK_DAMAGE, new EntityAttributeModifier(ATTACK_DAMAGE_MODIFIER_ID, "Weapon modifier", (double) 0, EntityAttributeModifier.Operation.ADDITION));
-        builder.put(EntityAttributes.GENERIC_ATTACK_SPEED, new EntityAttributeModifier(ATTACK_SPEED_MODIFIER_ID, "Weapon modifier", (double) 0, EntityAttributeModifier.Operation.ADDITION));
-        brokenToolAttributes = builder.build();
     }
 
     @Override
@@ -62,17 +47,29 @@ public class PoweredSword extends SwordItem {
 
     @Override
     public float getMiningSpeedMultiplier(ItemStack stack, BlockState state) {
-        if (isUsable(stack))
+        if (this.isUsable)
             return super.getMiningSpeedMultiplier(stack, state);
 
         return 1.0F;
     }
 
-    public boolean isUsable(ItemStack stack) {
+    public boolean isUsable(ItemStack stack, int slot) {
         if (stack.getDamage() < stack.getMaxDamage() - 1) {
             this.isUsable = true;
+
+            // stack.getAttributeModifiers(EquipmentSlot.fromTypeIndex(EquipmentSlot.Type.HAND, slot)).remove(EntityAttributes.GENERIC_ATTACK_DAMAGE, brokenAttackAttribute);
+
             return true;
         }
+
+        // This seems to solve the problem.
+        // TODO: Make sure this works and fix durability to stack level
+        // TODO: Clean up code too
+        stack.addAttributeModifier(
+                EntityAttributes.GENERIC_ATTACK_DAMAGE,
+                brokenAttackAttribute,
+                EquipmentSlot.fromTypeIndex(EquipmentSlot.Type.HAND, slot) // Causes crashes
+        );
 
         this.isUsable = false;
         return false;
@@ -83,7 +80,9 @@ public class PoweredSword extends SwordItem {
         super.inventoryTick(stack, world, entity, slot, selected);
 
         // TODO: This doesn't take effect until the player switches to a different item and back. Figure out why.
-        isUsable(stack); // Force update if this item is usable
+        // TODO: Find replacement for this method as this affects all of the same type of item.
+        // Force update if this item is usable
+        isUsable(stack, slot);
     }
 
     // Used by mobs to determine if they prefer a weapon over another one.
@@ -93,20 +92,19 @@ public class PoweredSword extends SwordItem {
         return super.getAttackDamage();
     }
 
-    @Override
-    public Multimap<EntityAttribute, EntityAttributeModifier> getAttributeModifiers(EquipmentSlot slot) {
-        if (this.isUsable)
-            return super.getAttributeModifiers(slot);
-
-        // The slot check is so that the modifiers only work if the sword is in the main hand.
-        // TODO: Make sure this works
-        return slot == EquipmentSlot.MAINHAND ? this.brokenToolAttributes : super.getAttributeModifiers(slot);
-    }
+//    @Override
+//    public Multimap<EntityAttribute, EntityAttributeModifier> getAttributeModifiers(EquipmentSlot slot) {
+//        if (this.isUsable)
+//            return super.getAttributeModifiers(slot);
+//
+//        // The slot check is so that the modifiers only work if the sword is in the main hand.
+//        return slot == EquipmentSlot.MAINHAND ? this.brokenToolAttributes : super.getAttributeModifiers(slot);
+//    }
 
     // Can be used to allow/prevent player from mining with tool
     @Override
     public boolean canMine(BlockState state, World world, BlockPos pos, PlayerEntity miner) {
-        if (isUsable(miner.getMainHandStack()))
+        if (this.isUsable)
             return super.canMine(state, world, pos, miner);
 
         return false;
@@ -115,7 +113,7 @@ public class PoweredSword extends SwordItem {
     // For Attacking
     @Override
     public boolean postHit(ItemStack stack, LivingEntity target, LivingEntity attacker) {
-        if (isUsable(stack))
+        if (this.isUsable)
             return super.postHit(stack, target, attacker);
 
         // For Item Stats
@@ -125,7 +123,7 @@ public class PoweredSword extends SwordItem {
     // For Mining
     @Override
     public boolean postMine(ItemStack stack, World world, BlockState state, BlockPos pos, LivingEntity miner) {
-        if (isUsable(stack))
+        if (this.isUsable)
             return super.postMine(stack, world, state, pos, miner);
 
         // For Item Stats
@@ -135,7 +133,7 @@ public class PoweredSword extends SwordItem {
     // For Right Clicking Blocks
     @Override
     public ActionResult useOnBlock(ItemUsageContext context) {
-        if (isUsable(context.getStack()))
+        if (this.isUsable)
             return super.useOnBlock(context);
 
         return ActionResult.FAIL;
@@ -144,7 +142,7 @@ public class PoweredSword extends SwordItem {
     // For Right Clicking Entities
     @Override
     public ActionResult useOnEntity(ItemStack stack, PlayerEntity user, LivingEntity entity, Hand hand) {
-        if (isUsable(stack))
+        if (this.isUsable)
             return super.useOnEntity(stack, user, entity, hand);
 
         return ActionResult.FAIL;
