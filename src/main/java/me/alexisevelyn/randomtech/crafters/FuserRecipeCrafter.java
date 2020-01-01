@@ -42,7 +42,7 @@ public class FuserRecipeCrafter extends RecipeCrafter {
 
         // TODO: Only add fluid once processing is finished
         // TODO: Add check if able to add fluid and adjust tank size accordingly
-        if (canFillTank(tank, genericFluidRecipe)) {
+        if (currentTickTime >= currentNeededTicks && canFillTank(tank, genericFluidRecipe)) {
             System.out.println("Can Fill Tank with: " + genericFluidRecipe.getFluidInstance().getAmount());
 
             System.out.println("Attempt To Fill Tank: " + attemptAddFluidToTank(tank, genericFluidRecipe.getFluidInstance()));
