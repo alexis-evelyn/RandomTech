@@ -6,5 +6,9 @@ pluginManagement {
             url = 'https://maven.fabricmc.net/'
         }
         gradlePluginPortal()
+        maven {
+            name = "Modmuss50"
+            url = "https://maven.modmuss50.me/"
+        }
     }
 }
