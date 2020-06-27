@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "id": "me.alexisevelyn.randomtech",
+  "id": "alexisrandomtech",
   "version": "${version}",
 
   "name": "Alexis' Random Tech",
@@ -14,7 +14,7 @@
   },
 
   "license": "CC0-1.0",
-  "icon": "assets/icons/icon.png",
+  "icon": "assets/randomtech/icon.png",
 
   "environment": "*",
   "entrypoints": {
