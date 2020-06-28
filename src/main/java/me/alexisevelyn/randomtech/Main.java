@@ -3,6 +3,7 @@ package me.alexisevelyn.randomtech;
 import me.alexisevelyn.randomtech.blocks.FirstBlock;
 import me.alexisevelyn.randomtech.items.EdiblePower;
 import me.alexisevelyn.randomtech.items.FirstItem;
+import me.alexisevelyn.randomtech.items.PickaxeBase;
 import net.fabricmc.api.ModInitializer;
 
 import net.fabricmc.fabric.api.registry.FuelRegistry;
@@ -15,10 +16,13 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
 public class Main implements ModInitializer {
+	public static final String MODID = "randomtech";
 
 	// Items
 	public static final Item FIRST_ITEM = new FirstItem(new Item.Settings().group(ItemGroup.MISC));
 	public static final Item EDIBLE_POWER = new EdiblePower(new Item.Settings().group(ItemGroup.FOOD).food(Foods.EDIBLE_POWER));
+
+	public static final Item PICKAXE_BASE = new PickaxeBase(new Item.Settings().group(ItemGroup.TOOLS));
 
 	// Blocks
 	public static final Block FIRST_BLOCK = new FirstBlock();
@@ -32,14 +36,16 @@ public class Main implements ModInitializer {
 		//System.out.println("Hello Fabric world!");
 
 		// Blocks
-		Registry.register(Registry.BLOCK, new Identifier("randomtech", "first_block"), FIRST_BLOCK);
+		Registry.register(Registry.BLOCK, new Identifier(MODID, "first_block"), FIRST_BLOCK);
 
 		// Items
-		Registry.register(Registry.ITEM, new Identifier("randomtech", "first_item"), FIRST_ITEM);
-		Registry.register(Registry.ITEM, new Identifier("randomtech", "edible_power"), EDIBLE_POWER);
+		Registry.register(Registry.ITEM, new Identifier(MODID, "first_item"), FIRST_ITEM);
+		Registry.register(Registry.ITEM, new Identifier(MODID, "edible_power"), EDIBLE_POWER);
+
+		Registry.register(Registry.ITEM, new Identifier(MODID, "pickaxe_base"), PICKAXE_BASE);
 
 		// ItemBlocks
-		Registry.register(Registry.ITEM, new Identifier("randomtech", "first_block"), new BlockItem(FIRST_BLOCK, new Item.Settings().group(ItemGroup.MISC)));
+		Registry.register(Registry.ITEM, new Identifier(MODID, "first_block"), new BlockItem(FIRST_BLOCK, new Item.Settings().group(ItemGroup.MISC)));
 
 		// Register Fuel
 		FuelRegistry.INSTANCE.add(EDIBLE_POWER, 20*3);

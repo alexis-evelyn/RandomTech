@@ -10,5 +10,9 @@ pluginManagement {
             name = "Modmuss50"
             url = "https://maven.modmuss50.me/"
         }
+        maven {
+            name = "Fabric Repo"
+            url = "https://maven.fabricmc.net/"
+        }
     }
 }

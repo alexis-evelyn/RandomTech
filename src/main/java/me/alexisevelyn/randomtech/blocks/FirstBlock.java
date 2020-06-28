@@ -37,7 +37,8 @@ public class FirstBlock extends BlockMachineBase {
 
     @Override
     public int getComparatorOutput(BlockState state, World world, BlockPos pos) {
-        return PowerAcceptorBlockEntity.calculateComparatorOutputFromEnergy(world.getBlockEntity(pos));
+        return 7;
+        //return PowerAcceptorBlockEntity.calculateComparatorOutputFromEnergy(world.getBlockEntity(pos));
     }
 
     // Left here as reference code
