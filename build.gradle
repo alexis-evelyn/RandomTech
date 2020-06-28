@@ -44,8 +44,6 @@ dependencies {
 	// Roughly Enough Items
 	modRuntime "me.shedaniel:RoughlyEnoughItems:${project.rei_version}"
 
-	// TODO: Figure out why modRuntime is not taking effect!!!
-
 	// PSA: Some older mods, compiled on Loom 0.2.1, might have outdated Maven POMs.
 	// You may need to force-disable transitiveness on them.
 }
