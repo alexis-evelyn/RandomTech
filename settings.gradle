@@ -11,8 +11,8 @@ pluginManagement {
             url = "https://maven.modmuss50.me/"
         }
         maven {
-            name = "Fabric Repo"
-            url = "https://maven.fabricmc.net/"
+            name = "Hywla"
+            url = "https://maven.tehnut.info/"
         }
     }
 }

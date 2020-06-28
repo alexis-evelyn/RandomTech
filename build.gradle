@@ -31,6 +31,9 @@ dependencies {
 	// Mod Menu
 	modRuntime "io.github.prospector:modmenu:${project.mod_menu_version}"
 
+	// Hywla - Currently Cannot Resolve
+	// modRuntime "mcp.mobius.waila:Hwyla:${project.hywla_version}"
+
 	// PSA: Some older mods, compiled on Loom 0.2.1, might have outdated Maven POMs.
 	// You may need to force-disable transitiveness on them.
 }
