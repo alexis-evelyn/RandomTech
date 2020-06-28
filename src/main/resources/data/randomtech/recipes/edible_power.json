@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient": {
+    "item": "randomtech:edible_power"
+  },
+  "result": "randomtech:first_item",
+  "experience": 1.0,
+  "cookingtime": 100
+}
