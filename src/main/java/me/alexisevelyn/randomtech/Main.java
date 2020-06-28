@@ -1,15 +1,18 @@
 package me.alexisevelyn.randomtech;
 
+import me.alexisevelyn.randomtech.armormaterials.FirstArmorMaterial;
 import me.alexisevelyn.randomtech.blocks.FirstBlock;
 import me.alexisevelyn.randomtech.items.EdiblePower;
 import me.alexisevelyn.randomtech.items.FirstItem;
-import me.alexisevelyn.randomtech.items.PickaxeBase;
+import me.alexisevelyn.randomtech.items.armor.BaseArmor;
+import me.alexisevelyn.randomtech.items.tools.PickaxeBase;
 import net.fabricmc.api.ModInitializer;
 
 import net.fabricmc.fabric.api.registry.FuelRegistry;
 import net.minecraft.block.Block;
+import net.minecraft.entity.EquipmentSlot;
+import net.minecraft.item.ArmorMaterial;
 import net.minecraft.item.BlockItem;
-import net.minecraft.item.FoodComponent;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.util.Identifier;
@@ -27,6 +30,9 @@ public class Main implements ModInitializer {
 	// Blocks
 	public static final Block FIRST_BLOCK = new FirstBlock();
 
+	// Armor Materials
+	public static final ArmorMaterial FIRST_ARMOR_MATERIAL = new FirstArmorMaterial();
+
 	@Override
 	public void onInitialize() {
 		// This code runs as soon as Minecraft is in a mod-load-ready state.
@@ -43,6 +49,11 @@ public class Main implements ModInitializer {
 		Registry.register(Registry.ITEM, new Identifier(MODID, "edible_power"), EDIBLE_POWER);
 
 		Registry.register(Registry.ITEM, new Identifier(MODID, "pickaxe_base"), PICKAXE_BASE);
+
+		Registry.register(Registry.ITEM, new Identifier(MODID, "first_helmet"), new BaseArmor(FIRST_ARMOR_MATERIAL, EquipmentSlot.HEAD));
+		Registry.register(Registry.ITEM, new Identifier(MODID, "first_chestplate"), new BaseArmor(FIRST_ARMOR_MATERIAL, EquipmentSlot.CHEST));
+		Registry.register(Registry.ITEM, new Identifier(MODID, "first_leggings"), new BaseArmor(FIRST_ARMOR_MATERIAL, EquipmentSlot.LEGS));
+		Registry.register(Registry.ITEM, new Identifier(MODID, "first_boots"), new BaseArmor(FIRST_ARMOR_MATERIAL, EquipmentSlot.FEET));
 
 		// ItemBlocks
 		Registry.register(Registry.ITEM, new Identifier(MODID, "first_block"), new BlockItem(FIRST_BLOCK, new Item.Settings().group(ItemGroup.MISC)));

@@ -1,4 +1,4 @@
-package me.alexisevelyn.randomtech.items;
+package me.alexisevelyn.randomtech.items.tools;
 
 import me.alexisevelyn.randomtech.toolmaterials.FirstToolMaterial;
 import net.minecraft.item.Item;
