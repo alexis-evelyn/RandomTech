@@ -33,5 +33,12 @@
   },
   "suggests": {
     "flamingo": "*"
+  },
+
+  "custom": {
+    "waila:plugins": {
+      "id": "randomtech:waila",
+      "initializer": "me.alexisevelyn.randomtech.waila.machines.WailaRegistry"
+    }
   }
 }

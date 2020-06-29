@@ -43,7 +43,7 @@ dependencies {
 	modRuntime "io.github.prospector:modmenu:${project.mod_menu_version}"
 
 	// Hywla
-	modRuntime "mcp.mobius.waila:Hwyla:${project.hywla_version}"
+	modApi "mcp.mobius.waila:Hwyla:${project.hywla_version}"
 
 	// Roughly Enough Items
 	modRuntime "me.shedaniel:RoughlyEnoughItems:${project.rei_version}"

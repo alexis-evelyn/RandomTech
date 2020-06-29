@@ -8,18 +8,25 @@ import me.alexisevelyn.randomtech.items.armor.ArmorBase;
 import me.alexisevelyn.randomtech.items.tools.*;
 import net.fabricmc.api.ModInitializer;
 
+import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
 import net.fabricmc.fabric.api.registry.FuelRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EquipmentSlot;
-import net.minecraft.item.ArmorMaterial;
-import net.minecraft.item.BlockItem;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemGroup;
+import net.minecraft.item.*;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
+import reborncore.RebornRegistry;
 
 public class Main implements ModInitializer {
 	public static final String MODID = "randomtech";
+
+	// Blocks
+	public static final Block FIRST_BLOCK = new FirstBlock();
+
+	// Item Groups
+	public static ItemGroup MACHINERY_GROUP = FabricItemGroupBuilder.build(
+			new Identifier("random_tech", "machinery_group"),
+			() -> new ItemStack(FIRST_BLOCK));
 
 	// Items
 	public static final Item FIRST_ITEM = new FirstItem(new Item.Settings().group(ItemGroup.MISC));
@@ -31,9 +38,6 @@ public class Main implements ModInitializer {
 	public static final Item AXE_BASE = new AxeBase(new Item.Settings().group(ItemGroup.TOOLS));
 	public static final Item SHOVEL_BASE = new ShovelBase(new Item.Settings().group(ItemGroup.TOOLS));
 	public static final Item HOE_BASE = new HoeBase(new Item.Settings().group(ItemGroup.TOOLS));
-
-	// Blocks
-	public static final Block FIRST_BLOCK = new FirstBlock();
 
 	// Armor Materials
 	public static final ArmorMaterial FIRST_ARMOR_MATERIAL = new FirstArmorMaterial();
@@ -65,7 +69,7 @@ public class Main implements ModInitializer {
 		Registry.register(Registry.ITEM, new Identifier(MODID, "first_boots"), new ArmorBase(FIRST_ARMOR_MATERIAL, EquipmentSlot.FEET));
 
 		// ItemBlocks
-		Registry.register(Registry.ITEM, new Identifier(MODID, "first_block"), new BlockItem(FIRST_BLOCK, new Item.Settings().group(ItemGroup.MISC)));
+		Registry.register(Registry.ITEM, new Identifier(MODID, "first_block"), new BlockItem(FIRST_BLOCK, new Item.Settings().group(MACHINERY_GROUP)));
 
 		// Register Fuel
 		FuelRegistry.INSTANCE.add(EDIBLE_POWER, 20*10); // 20*3 = 0.3 Items According to REI

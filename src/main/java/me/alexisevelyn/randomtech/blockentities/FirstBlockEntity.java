@@ -1,5 +1,6 @@
 package me.alexisevelyn.randomtech.blockentities;
 
+import me.alexisevelyn.randomtech.BlockEntities;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
@@ -17,7 +18,7 @@ public class FirstBlockEntity extends PowerAcceptorBlockEntity implements IToolD
     int state = 0;
 
     public FirstBlockEntity() {
-        super(null);
+        super(BlockEntities.FIRST_BLOCK);
     }
 
     public FirstBlockEntity(BlockEntityType<?> blockEntityType) {
@@ -26,7 +27,7 @@ public class FirstBlockEntity extends PowerAcceptorBlockEntity implements IToolD
 
     @Override
     public double getBaseMaxPower() {
-        return 0;
+        return 1000;
     }
 
     @Override
@@ -36,7 +37,7 @@ public class FirstBlockEntity extends PowerAcceptorBlockEntity implements IToolD
 
     @Override
     public double getBaseMaxInput() {
-        return 0;
+        return 100;
     }
 
     @Override
@@ -94,5 +95,10 @@ public class FirstBlockEntity extends PowerAcceptorBlockEntity implements IToolD
                 .blockEntity(this).syncEnergyValue()
                 .sync(this::getState, this::setState)
                 .addInventory().create(this, i);
+    }
+
+    @Override
+    public void tick() {
+        // Nothing For Now!!!
     }
 }

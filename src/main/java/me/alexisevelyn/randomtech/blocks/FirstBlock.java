@@ -1,15 +1,11 @@
 package me.alexisevelyn.randomtech.blocks;
 
-import me.alexisevelyn.randomtech.GuiType;
 import me.alexisevelyn.randomtech.Materials;
 import me.alexisevelyn.randomtech.blockentities.FirstBlockEntity;
-import me.alexisevelyn.randomtech.guis.FirstGui;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.fabricmc.fabric.api.tool.attribute.v1.FabricToolTags;
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.block.entity.ChestBlockEntity;
 import net.minecraft.item.ToolMaterials;
 import net.minecraft.sound.BlockSoundGroup;
 
@@ -21,7 +17,6 @@ import reborncore.common.blocks.BlockMachineBase;
 import reborncore.common.powerSystem.PowerAcceptorBlockEntity;
 
 public class FirstBlock extends BlockMachineBase {
-
     public FirstBlock() {
         super(FabricBlockSettings
                 .of(Materials.FirstMaterial)
@@ -33,9 +28,7 @@ public class FirstBlock extends BlockMachineBase {
 
     @Override
     public BlockEntity createBlockEntity(BlockView worldIn) {
-        //return new ChestBlockEntity();
-
-        return null;
+        return new FirstBlockEntity();
     }
 
     @Override
@@ -52,13 +45,6 @@ public class FirstBlock extends BlockMachineBase {
 
     @Override
     public int getComparatorOutput(BlockState state, World world, BlockPos pos) {
-        return 7;
-        //return PowerAcceptorBlockEntity.calculateComparatorOutputFromEnergy(world.getBlockEntity(pos));
+        return PowerAcceptorBlockEntity.calculateComparatorOutputFromEnergy(world.getBlockEntity(pos));
     }
-
-    // Left here as reference code
-    // Suggested Constructor
-//    public FirstBlock(Settings settings) {
-//        super(settings);
-//    }
 }
