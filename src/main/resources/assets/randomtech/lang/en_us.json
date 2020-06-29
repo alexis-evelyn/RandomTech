@@ -1,7 +1,13 @@
 {
   "item.randomtech.first_item": "First Item",
   "item.randomtech.edible_power": "Edible Power",
+
+
+  "item.randomtech.sword_base": "Sword Base",
   "item.randomtech.pickaxe_base": "Pickaxe Base",
+  "item.randomtech.axe_base": "Axe Base",
+  "item.randomtech.shovel_base": "Shovel Base",
+  "item.randomtech.hoe_base": "Hoe Base",
 
 
   "item.randomtech.first_helmet": "First Helmet",
