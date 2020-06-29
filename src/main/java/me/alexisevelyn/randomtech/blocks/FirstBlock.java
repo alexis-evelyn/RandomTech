@@ -1,14 +1,20 @@
 package me.alexisevelyn.randomtech.blocks;
 
+import me.alexisevelyn.randomtech.GuiType;
 import me.alexisevelyn.randomtech.Materials;
+import me.alexisevelyn.randomtech.blockentities.FirstBlockEntity;
+import me.alexisevelyn.randomtech.guis.FirstGui;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.fabricmc.fabric.api.tool.attribute.v1.FabricToolTags;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.block.entity.ChestBlockEntity;
 import net.minecraft.item.ToolMaterials;
 import net.minecraft.sound.BlockSoundGroup;
 
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import reborncore.api.blockentity.IMachineGuiHandler;
 import reborncore.common.blocks.BlockMachineBase;
@@ -26,7 +32,16 @@ public class FirstBlock extends BlockMachineBase {
     }
 
     @Override
+    public BlockEntity createBlockEntity(BlockView worldIn) {
+        //return new ChestBlockEntity();
+
+        return null;
+    }
+
+    @Override
     public IMachineGuiHandler getGui() {
+        //return GuiType.FIRST_GUI;
+
         return null;
     }
 
