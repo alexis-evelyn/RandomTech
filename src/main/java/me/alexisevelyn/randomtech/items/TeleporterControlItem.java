@@ -9,9 +9,9 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.world.World;
 
-public class FirstItem extends Item {
+public class TeleporterControlItem extends Item {
 
-    public FirstItem(Settings settings) {
+    public TeleporterControlItem(Settings settings) {
         super(settings);
     }
 

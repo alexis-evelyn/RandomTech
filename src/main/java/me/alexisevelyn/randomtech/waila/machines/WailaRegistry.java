@@ -3,10 +3,8 @@ package me.alexisevelyn.randomtech.waila.machines;
 import mcp.mobius.waila.api.IRegistrar;
 import mcp.mobius.waila.api.IWailaPlugin;
 import mcp.mobius.waila.api.TooltipPosition;
-import mcp.mobius.waila.overlay.tooltiprenderers.TooltipRendererProgressBar;
-import mcp.mobius.waila.overlay.tooltiprenderers.TooltipRendererSpacer;
 import mcp.mobius.waila.overlay.tooltiprenderers.TooltipRendererStack;
-import me.alexisevelyn.randomtech.blocks.FirstBlock;
+import me.alexisevelyn.randomtech.blocks.TeleporterBlock;
 import net.minecraft.util.Identifier;
 
 public class WailaRegistry implements IWailaPlugin {
@@ -22,7 +20,7 @@ public class WailaRegistry implements IWailaPlugin {
         // ToolTip Rendering
         iRegistrar.registerTooltipRenderer(RENDER_POWER, new TooltipRendererStack());
 
-        iRegistrar.registerComponentProvider(Machines.INSTANCE, TooltipPosition.BODY, FirstBlock.class);
-        iRegistrar.registerBlockDataProvider(Machines.INSTANCE, FirstBlock.class);
+        iRegistrar.registerComponentProvider(Machines.INSTANCE, TooltipPosition.BODY, TeleporterBlock.class);
+        iRegistrar.registerBlockDataProvider(Machines.INSTANCE, TeleporterBlock.class);
     }
 }

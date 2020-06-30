@@ -1,7 +1,7 @@
 package me.alexisevelyn.randomtech.blocks;
 
 import me.alexisevelyn.randomtech.Materials;
-import me.alexisevelyn.randomtech.blockentities.FirstBlockEntity;
+import me.alexisevelyn.randomtech.blockentities.TeleporterBlockEntity;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.fabricmc.fabric.api.tool.attribute.v1.FabricToolTags;
 import net.minecraft.block.BlockState;
@@ -16,10 +16,8 @@ import reborncore.api.blockentity.IMachineGuiHandler;
 import reborncore.common.blocks.BlockMachineBase;
 import reborncore.common.powerSystem.PowerAcceptorBlockEntity;
 
-import java.util.Random;
-
-public class FirstBlock extends BlockMachineBase {
-    public FirstBlock() {
+public class TeleporterBlock extends BlockMachineBase {
+    public TeleporterBlock() {
         super(FabricBlockSettings
                 .of(Materials.FirstMaterial)
                 .breakByHand(false).requiresTool()
@@ -30,7 +28,7 @@ public class FirstBlock extends BlockMachineBase {
 
     @Override
     public BlockEntity createBlockEntity(BlockView worldIn) {
-        return new FirstBlockEntity();
+        return new TeleporterBlockEntity();
     }
 
     @Override
@@ -51,13 +49,13 @@ public class FirstBlock extends BlockMachineBase {
     }
 
     public double getPower(BlockState state, World world, BlockPos pos) {
-        FirstBlockEntity firstBlockEntity = (FirstBlockEntity) world.getBlockEntity(pos);
+        TeleporterBlockEntity teleporterBlockEntity = (TeleporterBlockEntity) world.getBlockEntity(pos);
 
-        if (firstBlockEntity == null) {
+        if (teleporterBlockEntity == null) {
             return -1.0;
         }
 
         // TODO: Fix Me!!! This does not reflect power loss from when machines take power from this block!!!
-        return firstBlockEntity.getEnergy();
+        return teleporterBlockEntity.getEnergy();
     }
 }

@@ -1,9 +1,9 @@
 package me.alexisevelyn.randomtech;
 
 import me.alexisevelyn.randomtech.armormaterials.FirstArmorMaterial;
-import me.alexisevelyn.randomtech.blocks.FirstBlock;
+import me.alexisevelyn.randomtech.blocks.TeleporterBlock;
 import me.alexisevelyn.randomtech.items.EdiblePower;
-import me.alexisevelyn.randomtech.items.FirstItem;
+import me.alexisevelyn.randomtech.items.TeleporterControlItem;
 import me.alexisevelyn.randomtech.items.armor.ArmorBase;
 import me.alexisevelyn.randomtech.items.tools.*;
 import net.fabricmc.api.ModInitializer;
@@ -15,21 +15,20 @@ import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.*;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
-import reborncore.RebornRegistry;
 
 public class Main implements ModInitializer {
 	public static final String MODID = "randomtech";
 
 	// Blocks
-	public static final Block FIRST_BLOCK = new FirstBlock();
+	public static final Block TELEPORTER = new TeleporterBlock();
 
 	// Item Groups
 	public static ItemGroup MACHINERY_GROUP = FabricItemGroupBuilder.build(
 			new Identifier("random_tech", "machinery_group"),
-			() -> new ItemStack(FIRST_BLOCK));
+			() -> new ItemStack(TELEPORTER));
 
 	// Items
-	public static final Item FIRST_ITEM = new FirstItem(new Item.Settings().group(ItemGroup.MISC));
+	public static final Item TELEPORTER_CONTROL = new TeleporterControlItem(new Item.Settings().group(MACHINERY_GROUP).maxCount(1)); // Max Count Sets Stack Size
 	public static final Item EDIBLE_POWER = new EdiblePower(new Item.Settings().group(ItemGroup.FOOD).food(Foods.EDIBLE_POWER));
 
 	// Tools
@@ -49,10 +48,10 @@ public class Main implements ModInitializer {
 		// Proceed with mild caution.
 
 		// Blocks
-		Registry.register(Registry.BLOCK, new Identifier(MODID, "first_block"), FIRST_BLOCK);
+		Registry.register(Registry.BLOCK, new Identifier(MODID, "teleporter"), TELEPORTER);
 
 		// Items
-		Registry.register(Registry.ITEM, new Identifier(MODID, "first_item"), FIRST_ITEM);
+		Registry.register(Registry.ITEM, new Identifier(MODID, "teleporter_control"), TELEPORTER_CONTROL);
 		Registry.register(Registry.ITEM, new Identifier(MODID, "edible_power"), EDIBLE_POWER);
 
 		// Tools
@@ -69,7 +68,7 @@ public class Main implements ModInitializer {
 		Registry.register(Registry.ITEM, new Identifier(MODID, "first_boots"), new ArmorBase(FIRST_ARMOR_MATERIAL, EquipmentSlot.FEET));
 
 		// ItemBlocks
-		Registry.register(Registry.ITEM, new Identifier(MODID, "first_block"), new BlockItem(FIRST_BLOCK, new Item.Settings().group(MACHINERY_GROUP)));
+		Registry.register(Registry.ITEM, new Identifier(MODID, "teleporter"), new BlockItem(TELEPORTER, new Item.Settings().group(MACHINERY_GROUP)));
 
 		// Register Fuel
 		FuelRegistry.INSTANCE.add(EDIBLE_POWER, 20*10); // 20*3 = 0.3 Items According to REI

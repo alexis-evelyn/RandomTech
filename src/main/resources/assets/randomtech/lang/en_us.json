@@ -1,5 +1,5 @@
 {
-  "item.randomtech.first_item": "First Item",
+  "item.randomtech.teleporter_control": "Teleporter Linker",
   "item.randomtech.edible_power": "Edible Power",
 
 
@@ -15,7 +15,7 @@
   "item.randomtech.first_leggings": "First Leggings",
   "item.randomtech.first_boots": "First Boots",
 
-  "block.randomtech.first_block": "First Block",
+  "block.randomtech.teleporter": "Teleporter",
 
   "tooltip.waila.energy": "Energy: %s"
 }

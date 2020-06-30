@@ -16,14 +16,14 @@ import reborncore.common.powerSystem.PowerAcceptorBlockEntity;
 
 import java.util.Set;
 
-public class FirstBlockEntity extends PowerAcceptorBlockEntity implements IToolDrop, BuiltScreenHandlerProvider {
+public class TeleporterBlockEntity extends PowerAcceptorBlockEntity implements IToolDrop, BuiltScreenHandlerProvider {
     int state = 0;
 
-    public FirstBlockEntity() {
-        super(BlockEntities.FIRST_BLOCK);
+    public TeleporterBlockEntity() {
+        super(BlockEntities.TELEPORTER);
     }
 
-    public FirstBlockEntity(BlockEntityType<?> blockEntityType) {
+    public TeleporterBlockEntity(BlockEntityType<?> blockEntityType) {
         super(blockEntityType);
     }
 

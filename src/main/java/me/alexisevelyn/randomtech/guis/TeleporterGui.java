@@ -1,24 +1,22 @@
 package me.alexisevelyn.randomtech.guis;
 
-import me.alexisevelyn.randomtech.blockentities.FirstBlockEntity;
+import me.alexisevelyn.randomtech.blockentities.TeleporterBlockEntity;
 import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.block.entity.ChestBlockEntity;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.text.LiteralText;
-import net.minecraft.text.TranslatableText;
 import reborncore.client.gui.builder.GuiBase;
 import reborncore.client.screen.builder.BuiltScreenHandler;
 
-public class FirstGui extends GuiBase<BuiltScreenHandler> {
-    FirstBlockEntity blockEntity;
+public class TeleporterGui extends GuiBase<BuiltScreenHandler> {
+    TeleporterBlockEntity blockEntity;
 
-    public FirstGui(PlayerEntity player, FirstBlockEntity blockEntity, BuiltScreenHandler screenHandler) {
+    public TeleporterGui(PlayerEntity player, TeleporterBlockEntity blockEntity, BuiltScreenHandler screenHandler) {
         super(player, blockEntity, screenHandler);
         this.blockEntity = blockEntity;
     }
 
-    public <T extends BlockEntity> FirstGui(int i, PlayerEntity playerEntity, FirstBlockEntity blockEntity) {
+    public <T extends BlockEntity> TeleporterGui(int i, PlayerEntity playerEntity, TeleporterBlockEntity blockEntity) {
         super(playerEntity, blockEntity, blockEntity.createScreenHandler(i, playerEntity));
         this.blockEntity = blockEntity;
     }

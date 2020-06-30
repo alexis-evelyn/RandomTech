@@ -3,7 +3,7 @@
   "ingredient": {
     "item": "randomtech:edible_power"
   },
-  "result": "randomtech:first_item",
+  "result": "randomtech:teleporter_control",
   "experience": 1.0,
   "cookingtime": 100
 }

@@ -33,6 +33,6 @@ public class FirstToolMaterial implements ToolMaterial {
 
     @Override
     public Ingredient getRepairIngredient() {
-        return Ingredient.ofItems(Main.FIRST_ITEM);
+        return Ingredient.ofItems(Main.EDIBLE_POWER);
     }
 }
