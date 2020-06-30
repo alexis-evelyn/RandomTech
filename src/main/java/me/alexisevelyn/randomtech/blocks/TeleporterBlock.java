@@ -55,7 +55,6 @@ public class TeleporterBlock extends BlockMachineBase {
             return -1.0;
         }
 
-        // TODO: Fix Me!!! This does not automatically update when power level is changed from expected level!!!
         return teleporterBlockEntity.getEnergy();
     }
 
