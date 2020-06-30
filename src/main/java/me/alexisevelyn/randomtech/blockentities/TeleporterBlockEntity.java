@@ -92,11 +92,11 @@ public class TeleporterBlockEntity extends PowerAcceptorBlockEntity implements I
     }
 
     @Override
-    public BuiltScreenHandler createScreenHandler(int i, PlayerEntity playerEntity) {
+    public BuiltScreenHandler createScreenHandler(int syncID, PlayerEntity playerEntity) {
         return new ScreenHandlerBuilder("teleporter_gui").player(playerEntity.inventory).inventory().hotbar().addInventory()
                 .blockEntity(this).syncEnergyValue()
                 .sync(this::getState, this::setState)
-                .addInventory().create(this, i);
+                .addInventory().create(this, syncID);
     }
 
     @Override

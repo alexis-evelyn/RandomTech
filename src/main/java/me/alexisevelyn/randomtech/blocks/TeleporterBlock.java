@@ -2,6 +2,7 @@ package me.alexisevelyn.randomtech.blocks;
 
 import me.alexisevelyn.randomtech.Materials;
 import me.alexisevelyn.randomtech.blockentities.TeleporterBlockEntity;
+import me.alexisevelyn.randomtech.guis.TeleporterGuiHandler;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.fabricmc.fabric.api.tool.attribute.v1.FabricToolTags;
 import net.minecraft.block.BlockState;
@@ -33,9 +34,7 @@ public class TeleporterBlock extends BlockMachineBase {
 
     @Override
     public IMachineGuiHandler getGui() {
-        //return GuiType.FIRST_GUI;
-
-        return null;
+        return new TeleporterGuiHandler();
     }
 
     @Override
