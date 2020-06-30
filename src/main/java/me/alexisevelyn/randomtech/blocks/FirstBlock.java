@@ -16,6 +16,8 @@ import reborncore.api.blockentity.IMachineGuiHandler;
 import reborncore.common.blocks.BlockMachineBase;
 import reborncore.common.powerSystem.PowerAcceptorBlockEntity;
 
+import java.util.Random;
+
 public class FirstBlock extends BlockMachineBase {
     public FirstBlock() {
         super(FabricBlockSettings
@@ -46,5 +48,16 @@ public class FirstBlock extends BlockMachineBase {
     @Override
     public int getComparatorOutput(BlockState state, World world, BlockPos pos) {
         return PowerAcceptorBlockEntity.calculateComparatorOutputFromEnergy(world.getBlockEntity(pos));
+    }
+
+    public double getPower(BlockState state, World world, BlockPos pos) {
+        FirstBlockEntity firstBlockEntity = (FirstBlockEntity) world.getBlockEntity(pos);
+
+        if (firstBlockEntity == null) {
+            return -1.0;
+        }
+
+        // TODO: Fix Me!!! This does not reflect power loss from when machines take power from this block!!!
+        return firstBlockEntity.getEnergy();
     }
 }

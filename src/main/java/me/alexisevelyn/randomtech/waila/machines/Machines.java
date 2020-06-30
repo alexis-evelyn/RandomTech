@@ -15,6 +15,7 @@ import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.world.World;
 import reborncore.common.powerSystem.PowerAcceptorBlockEntity;
+import reborncore.common.powerSystem.PowerSystem;
 
 import java.util.List;
 
@@ -42,12 +43,13 @@ public class Machines implements IComponentProvider, IServerDataProvider<BlockEn
         if (!config.get(WailaRegistry.CONFIG_DISPLAY_POWER)) {
             if (accessor.getBlock() == Main.FIRST_BLOCK) {
                 FirstBlock firstBlock = (FirstBlock) accessor.getBlock();
-                FirstBlockEntity firstBlockEntity = (FirstBlockEntity) accessor.getBlockEntity();
+
+                double energy = firstBlock.getPower(accessor.getBlockState(), accessor.getWorld(), accessor.getPosition());
 
                 // Doesn't get the entity associated with the block, only the registered block entity
-                TranslatableText energy = new TranslatableText("tooltip.waila.energy", firstBlockEntity.getEnergy());
+                TranslatableText energyLine = new TranslatableText("tooltip.waila.energy", PowerSystem.getLocaliszedPower(energy));
 
-                tooltip.add(energy);
+                tooltip.add(energyLine);
             }
         }
     }
