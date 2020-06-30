@@ -17,5 +17,5 @@
 
   "block.randomtech.teleporter": "Teleporter",
 
-  "tooltip.waila.energy": "Energy: %s"
+  "tooltip.waila.energy": "Energy: %s/%s"
 }

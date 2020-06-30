@@ -55,7 +55,17 @@ public class TeleporterBlock extends BlockMachineBase {
             return -1.0;
         }
 
-        // TODO: Fix Me!!! This does not reflect power loss from when machines take power from this block!!!
+        // TODO: Fix Me!!! This does not automatically update when power level is changed from expected level!!!
         return teleporterBlockEntity.getEnergy();
+    }
+
+    public double getMaxPower(BlockState state, World world, BlockPos pos) {
+        TeleporterBlockEntity teleporterBlockEntity = (TeleporterBlockEntity) world.getBlockEntity(pos);
+
+        if (teleporterBlockEntity == null) {
+            return -1.0;
+        }
+
+        return teleporterBlockEntity.getBaseMaxPower();
     }
 }

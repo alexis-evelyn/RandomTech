@@ -115,6 +115,8 @@ public class TeleporterBlockEntity extends PowerAcceptorBlockEntity implements I
 //            world.setBlockState(pos, world.getBlockState(pos).with(BlockMachineBase.ACTIVE, false));
 //        }
 
+
+
         addEnergy(1.0);
     }
 
