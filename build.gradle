@@ -40,13 +40,16 @@ dependencies {
 	modRuntime "TechReborn:TechReborn-${project.tech_reborn_version}"
 
 	// Mod Menu
-	modRuntime "io.github.prospector:modmenu:${project.mod_menu_version}"
+	modApi "io.github.prospector:modmenu:${project.mod_menu_version}"
+
+	// AutoConfig for Use With Mod Menu
+	modCompile "me.sargunvohra.mcmods:autoconfig1u:${project.autoconf_version}"
 
 	// Hywla
 	modApi "mcp.mobius.waila:Hwyla:${project.hywla_version}"
 
 	// Roughly Enough Items
-	modRuntime "me.shedaniel:RoughlyEnoughItems:${project.rei_version}"
+	modApi "me.shedaniel:RoughlyEnoughItems:${project.rei_version}"
 
 	// AppleSkin
 	modRuntime "com.github.squeek502:AppleSkin:${project.appleskin_version}"

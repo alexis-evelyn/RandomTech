@@ -6,6 +6,9 @@ import me.alexisevelyn.randomtech.items.EdiblePower;
 import me.alexisevelyn.randomtech.items.TeleporterControlItem;
 import me.alexisevelyn.randomtech.items.armor.ArmorBase;
 import me.alexisevelyn.randomtech.items.tools.*;
+import me.alexisevelyn.randomtech.modmenu.screens.MainScreen;
+import me.sargunvohra.mcmods.autoconfig1u.AutoConfig;
+import me.sargunvohra.mcmods.autoconfig1u.serializer.GsonConfigSerializer;
 import net.fabricmc.api.ModInitializer;
 
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
@@ -72,5 +75,8 @@ public class Main implements ModInitializer {
 
 		// Register Fuel
 		FuelRegistry.INSTANCE.add(EDIBLE_POWER, 20*10); // 20*3 = 0.3 Items According to REI
+
+		// Register Configuration Screen for Mod Menu
+		AutoConfig.register(MainScreen.class, GsonConfigSerializer::new);
 	}
 }

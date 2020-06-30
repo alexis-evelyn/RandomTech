@@ -17,5 +17,12 @@
 
   "block.randomtech.teleporter": "Teleporter",
 
-  "tooltip.waila.energy": "Energy: %s/%s"
+  "tooltip.waila.energy": "Energy: %s/%s",
+
+  "text.autoconfig.randomtech.title": "Nothing Here Yet!!!",
+  "text.autoconfig.randomtech.option.toggleA": "Useless Option A!!!",
+  "text.autoconfig.randomtech.option.toggleB": "Useless Option B!!!",
+  "text.autoconfig.randomtech.option.stuff": "Moar Stuff!!!",
+  "text.autoconfig.randomtech.option.stuff.a": "Useless Option A!!!",
+  "text.autoconfig.randomtech.option.stuff.b": "Useless Option B!!!"
 }

@@ -20,6 +20,12 @@
   "entrypoints": {
     "main": [
       "me.alexisevelyn.randomtech.Main"
+    ],
+    "modmenu": [
+      "me.alexisevelyn.randomtech.modmenu.ModMenu"
+    ],
+    "rei_plugins": [
+      "me.alexisevelyn.randomtech.rei.plugin.REIPlugin"
     ]
   },
   "mixins": [
