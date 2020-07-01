@@ -21,6 +21,9 @@
     "main": [
       "me.alexisevelyn.randomtech.Main"
     ],
+    "client": [
+      "me.alexisevelyn.randomtech.MainClient"
+    ],
     "modmenu": [
       "me.alexisevelyn.randomtech.modmenu.ModMenu"
     ],

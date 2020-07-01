@@ -2,6 +2,7 @@ package me.alexisevelyn.randomtech.blocks;
 
 import me.alexisevelyn.randomtech.Materials;
 import me.alexisevelyn.randomtech.blockentities.TeleporterBlockEntity;
+import me.alexisevelyn.randomtech.guis.TeleporterGui;
 import me.alexisevelyn.randomtech.guis.TeleporterGuiHandler;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.fabricmc.fabric.api.tool.attribute.v1.FabricToolTags;
@@ -18,6 +19,8 @@ import reborncore.common.blocks.BlockMachineBase;
 import reborncore.common.powerSystem.PowerAcceptorBlockEntity;
 
 public class TeleporterBlock extends BlockMachineBase {
+    TeleporterGuiHandler<TeleporterGui> teleporterGuiHandler = new TeleporterGuiHandler<>();
+
     public TeleporterBlock() {
         super(FabricBlockSettings
                 .of(Materials.FirstMaterial)
@@ -34,7 +37,7 @@ public class TeleporterBlock extends BlockMachineBase {
 
     @Override
     public IMachineGuiHandler getGui() {
-        return new TeleporterGuiHandler();
+        return teleporterGuiHandler;
     }
 
     @Override
