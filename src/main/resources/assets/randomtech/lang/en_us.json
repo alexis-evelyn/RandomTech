@@ -1,5 +1,5 @@
 {
-  "itemGroup.random_tech.machinery_group": "RandomTech",
+  "itemGroup.randomtech.machinery_group": "Random Tech",
 
   "item.randomtech.teleporter_control": "Teleporter Linker",
   "item.randomtech.edible_power": "Edible Power",

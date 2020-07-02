@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "id": "alexisrandomtech",
+  "id": "randomtech",
   "version": "${version}",
 
   "name": "Alexis' Random Tech",
@@ -24,6 +24,9 @@
     "client": [
       "me.alexisevelyn.randomtech.MainClient"
     ],
+    "server": [
+      "me.alexisevelyn.randomtech.MainServer"
+    ],
     "modmenu": [
       "me.alexisevelyn.randomtech.modmenu.ModMenu"
     ],
@@ -32,7 +35,7 @@
     ]
   },
   "mixins": [
-    "modid.mixins.json"
+    "mixins.json"
   ],
 
   "depends": {

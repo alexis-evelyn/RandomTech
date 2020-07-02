@@ -19,6 +19,7 @@ import net.minecraft.item.*;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
+// This runs on both the server and the client
 public class Main implements ModInitializer {
 	public static final String MODID = "randomtech";
 
@@ -27,7 +28,7 @@ public class Main implements ModInitializer {
 
 	// Item Groups
 	public static ItemGroup MACHINERY_GROUP = FabricItemGroupBuilder.build(
-			new Identifier("random_tech", "machinery_group"),
+			new Identifier(MODID, "machinery_group"),
 			() -> new ItemStack(TELEPORTER));
 
 	// Items
