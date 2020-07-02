@@ -1,6 +1,7 @@
 package me.alexisevelyn.randomtech.guis;
 
 import me.alexisevelyn.randomtech.blockentities.TeleporterBlockEntity;
+import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.text.LiteralText;
@@ -9,6 +10,11 @@ import reborncore.client.screen.builder.BuiltScreenHandler;
 
 public class TeleporterGui extends GuiBase<BuiltScreenHandler> {
     TeleporterBlockEntity blockEntity;
+
+    public TeleporterGui(int syncID, PlayerEntity player, TeleporterBlockEntity blockEntity) {
+        super(player, blockEntity, blockEntity.createScreenHandler(syncID, player));
+        this.blockEntity = blockEntity;
+    }
 
     public TeleporterGui(PlayerEntity player, TeleporterBlockEntity blockEntity, BuiltScreenHandler screenHandler) {
         super(player, blockEntity, screenHandler);
