@@ -3,40 +3,54 @@ package me.alexisevelyn.randomtech.blockentities;
 import me.alexisevelyn.randomtech.BlockEntities;
 import me.alexisevelyn.randomtech.Main;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.inventory.Inventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.util.math.Direction;
 import reborncore.api.IToolDrop;
 import reborncore.api.blockentity.IUpgrade;
+import reborncore.api.blockentity.InventoryProvider;
 import reborncore.client.screen.BuiltScreenHandlerProvider;
 import reborncore.client.screen.builder.BuiltScreenHandler;
 import reborncore.client.screen.builder.ScreenHandlerBuilder;
 import reborncore.common.powerSystem.PowerAcceptorBlockEntity;
+import reborncore.common.util.RebornInventory;
 
 import java.util.Set;
 
-public class TeleporterBlockEntity extends PowerAcceptorBlockEntity implements IToolDrop, BuiltScreenHandlerProvider {
+// TODO: Make it possible to put item in inventory without the use of a hopper!!!
+
+public class TeleporterBlockEntity extends PowerAcceptorBlockEntity implements IToolDrop, InventoryProvider, BuiltScreenHandlerProvider {
     int state = 0;
+    double energyAddend = -100.0;
+    double maxPower = 10000;
+    double maxInput = 10000;
+    RebornInventory<TeleporterBlockEntity> inventory;
+
+    int inputSlot = 0;
 
     public TeleporterBlockEntity() {
         super(BlockEntities.TELEPORTER);
+        this.inventory = new RebornInventory<>(1, "TeleporterBlockEntity", 64, this);
     }
 
     @Override
     public double getBaseMaxPower() {
-        return 10000;
+        return maxPower;
     }
 
     @Override
     public double getBaseMaxOutput() {
-        return 100;
+        return 0;
     }
 
     @Override
     public double getBaseMaxInput() {
-        return 0;
+        return maxInput;
     }
 
+    // Used for TR's Wrench
     @Override
     public ItemStack getToolDrop(PlayerEntity playerEntity) {
         return new ItemStack(Main.TELEPORTER);
@@ -59,7 +73,7 @@ public class TeleporterBlockEntity extends PowerAcceptorBlockEntity implements I
 
     @Override
     public int count(Item item) {
-        return 0;
+        return super.count(item);
     }
 
     @Override
@@ -89,9 +103,12 @@ public class TeleporterBlockEntity extends PowerAcceptorBlockEntity implements I
     @Override
     public BuiltScreenHandler createScreenHandler(int syncID, PlayerEntity playerEntity) {
         return new ScreenHandlerBuilder("teleporter_gui").player(playerEntity.inventory).inventory().hotbar().addInventory()
-                .blockEntity(this).syncEnergyValue()
+                .blockEntity(this)
+                .slot(inputSlot, 8, 72)
+                .syncEnergyValue()
                 .sync(this::getState, this::setState)
-                .addInventory().create(this, syncID);
+                .addInventory()
+                .create(this, syncID);
     }
 
     @Override
@@ -102,30 +119,33 @@ public class TeleporterBlockEntity extends PowerAcceptorBlockEntity implements I
             return;
         }
 
-        if (world.isClient) {
-            return;
-        }
-
 //        if (world.getTime() % 20 == 0) {
 //            world.setBlockState(pos, world.getBlockState(pos).with(BlockMachineBase.ACTIVE, false));
 //        }
 
-        addEnergy(1.0);
+        //addEnergy(energyAddend);
+
+        // TODO: Try to only sync when Hywla is looking at block to add performance improvement
         syncWithAll(); // Syncs Energy Changes With Client
     }
 
     @Override
     public boolean canAcceptEnergy(final Direction direction) {
-        return false;
+        return true;
     }
 
     @Override
     public boolean canProvideEnergy(final Direction direction) {
-        return true;
+        return false;
     }
 
     @Override
     public void onLoad() {
         super.onLoad();
+    }
+
+    @Override
+    public Inventory getInventory() {
+        return inventory;
     }
 }

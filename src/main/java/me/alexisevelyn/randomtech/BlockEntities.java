@@ -18,7 +18,8 @@ public class BlockEntities {
     public static final BlockEntityType<TeleporterBlockEntity> TELEPORTER = register(TeleporterBlockEntity::new, "teleporter_block_entity", Main.TELEPORTER);
 
     public static <T extends BlockEntity> BlockEntityType<T> register(Supplier<T> supplier, String name, Block... blocks) {
-        Validate.isTrue(blocks.length > 0, "no blocks for blockEntity entity type!");
+        Validate.isTrue(blocks.length > 0, "Add a block to your Block Entity: " + supplier.get().getClass().getName());
+
         return register(new Identifier(Main.MODID, name).toString(), BlockEntityType.Builder.create(supplier, blocks));
     }
 

@@ -5,7 +5,6 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.text.LiteralText;
 import reborncore.client.gui.builder.GuiBase;
 import reborncore.client.screen.builder.BuiltScreenHandler;
 
@@ -22,6 +21,8 @@ public class TeleporterGui extends GuiBase<BuiltScreenHandler> {
     protected void drawBackground(MatrixStack matrixStack, float lastFrameDuration, int mouseX, int mouseY) {
         super.drawBackground(matrixStack, lastFrameDuration, mouseX, mouseY);
         final GuiBase.Layer layer = GuiBase.Layer.BACKGROUND;
+
+        drawSlot(matrixStack, 8, 72, layer);
     }
 
     @Override
@@ -29,8 +30,8 @@ public class TeleporterGui extends GuiBase<BuiltScreenHandler> {
         super.drawForeground(matrixStack, mouseX, mouseY);
         final GuiBase.Layer layer = GuiBase.Layer.FOREGROUND;
 
-        builder.drawMultiEnergyBar(matrixStack, this, 156, 19, (int) blockEntity.getEnergy(), (int) blockEntity.getMaxPower(), mouseX, mouseY, 0, layer);
+        builder.drawMultiEnergyBar(matrixStack, this, 9, 19, (int) blockEntity.getEnergy(), (int) blockEntity.getMaxPower(), mouseX, mouseY, 0, layer);
 
-        builder.drawText(matrixStack, this, new LiteralText("Generating: " + blockEntity.getPowerChange() + " E/t"), 10, 30, 0);
+        //builder.drawText(matrixStack, this, new LiteralText("Generating: " + blockEntity.getPowerChange() + " E/t"), 10, 30, Color.BLUE.getColor());
     }
 }
