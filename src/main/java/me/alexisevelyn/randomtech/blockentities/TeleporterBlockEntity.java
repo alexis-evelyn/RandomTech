@@ -1,7 +1,7 @@
 package me.alexisevelyn.randomtech.blockentities;
 
 import me.alexisevelyn.randomtech.BlockEntities;
-import net.minecraft.block.entity.BlockEntityType;
+import me.alexisevelyn.randomtech.Main;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -11,7 +11,6 @@ import reborncore.api.blockentity.IUpgrade;
 import reborncore.client.screen.BuiltScreenHandlerProvider;
 import reborncore.client.screen.builder.BuiltScreenHandler;
 import reborncore.client.screen.builder.ScreenHandlerBuilder;
-import reborncore.common.blocks.BlockMachineBase;
 import reborncore.common.powerSystem.PowerAcceptorBlockEntity;
 
 import java.util.Set;
@@ -21,10 +20,6 @@ public class TeleporterBlockEntity extends PowerAcceptorBlockEntity implements I
 
     public TeleporterBlockEntity() {
         super(BlockEntities.TELEPORTER);
-    }
-
-    public TeleporterBlockEntity(BlockEntityType<?> blockEntityType) {
-        super(blockEntityType);
     }
 
     @Override
@@ -44,7 +39,7 @@ public class TeleporterBlockEntity extends PowerAcceptorBlockEntity implements I
 
     @Override
     public ItemStack getToolDrop(PlayerEntity playerEntity) {
-        return null;
+        return new ItemStack(Main.TELEPORTER);
     }
 
     @Override

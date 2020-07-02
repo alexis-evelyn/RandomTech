@@ -74,8 +74,6 @@ public class TeleporterGuiHandler<TeleporterGui> implements IMachineGuiHandler {
 
                     BuiltScreenHandler screenHandler = teleporterBlockEntity.createScreenHandler(syncID, player);
 
-                    //screenHandlerType.create(syncID, inv);
-                    // Screen not registered for screen handler randomtech:teleporter_gui_handler!
                     screenHandler.setType(screenHandlerType);
 
                     return screenHandler;
