@@ -76,8 +76,5 @@ public class Main implements ModInitializer {
 
 		// Register Fuel
 		FuelRegistry.INSTANCE.add(EDIBLE_POWER, 20*10); // 20*3 = 0.3 Items According to REI
-
-		// Register Configuration Screen for Mod Menu
-		AutoConfig.register(MainScreen.class, GsonConfigSerializer::new);
 	}
 }

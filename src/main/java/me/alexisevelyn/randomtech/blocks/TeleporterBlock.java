@@ -1,16 +1,14 @@
 package me.alexisevelyn.randomtech.blocks;
 
+import me.alexisevelyn.randomtech.MainClient;
 import me.alexisevelyn.randomtech.Materials;
 import me.alexisevelyn.randomtech.blockentities.TeleporterBlockEntity;
-import me.alexisevelyn.randomtech.guis.TeleporterGui;
-import me.alexisevelyn.randomtech.guis.TeleporterGuiHandler;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.fabricmc.fabric.api.tool.attribute.v1.FabricToolTags;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.item.ToolMaterials;
 import net.minecraft.sound.BlockSoundGroup;
-
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
@@ -19,8 +17,6 @@ import reborncore.common.blocks.BlockMachineBase;
 import reborncore.common.powerSystem.PowerAcceptorBlockEntity;
 
 public class TeleporterBlock extends BlockMachineBase {
-    TeleporterGuiHandler<TeleporterGui> teleporterGuiHandler = new TeleporterGuiHandler<>();
-
     public TeleporterBlock() {
         super(FabricBlockSettings
                 .of(Materials.FirstMaterial)
@@ -37,7 +33,7 @@ public class TeleporterBlock extends BlockMachineBase {
 
     @Override
     public IMachineGuiHandler getGui() {
-        return teleporterGuiHandler;
+        return MainClient.teleporterGuiHandler;
     }
 
     @Override

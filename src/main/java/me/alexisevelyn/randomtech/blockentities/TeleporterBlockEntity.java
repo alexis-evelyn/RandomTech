@@ -6,7 +6,6 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
 import net.minecraft.util.math.Direction;
 import reborncore.api.IToolDrop;
 import reborncore.api.blockentity.IUpgrade;
@@ -19,7 +18,7 @@ import reborncore.common.util.RebornInventory;
 
 import java.util.Set;
 
-// TODO: Make it possible to put item in inventory without the use of a hopper!!!
+// TODO: Figure out how to get the teleporter to remember its power and itemstack between server and client restarts.
 
 public class TeleporterBlockEntity extends PowerAcceptorBlockEntity implements IToolDrop, InventoryProvider, BuiltScreenHandlerProvider {
     int state = 0;
@@ -29,6 +28,8 @@ public class TeleporterBlockEntity extends PowerAcceptorBlockEntity implements I
     RebornInventory<TeleporterBlockEntity> inventory;
 
     int inputSlot = 0;
+
+    ItemStack itemStack;
 
     public TeleporterBlockEntity() {
         super(BlockEntities.TELEPORTER);
@@ -58,7 +59,7 @@ public class TeleporterBlockEntity extends PowerAcceptorBlockEntity implements I
 
     @Override
     public int getMaxCountPerStack() {
-        return 0;
+        return 1;
     }
 
     @Override
@@ -102,7 +103,11 @@ public class TeleporterBlockEntity extends PowerAcceptorBlockEntity implements I
 
     @Override
     public BuiltScreenHandler createScreenHandler(int syncID, PlayerEntity playerEntity) {
-        return new ScreenHandlerBuilder("teleporter_gui").player(playerEntity.inventory).inventory().hotbar().addInventory()
+        return new ScreenHandlerBuilder("teleporter_gui")
+                .player(playerEntity.inventory)
+                .inventory()
+                .hotbar()
+                .addInventory()
                 .blockEntity(this)
                 .slot(inputSlot, 8, 72)
                 .syncEnergyValue()
