@@ -1,23 +1,20 @@
 package me.alexisevelyn.randomtech.guis;
 
 import me.alexisevelyn.randomtech.blockentities.TeleporterBlockEntity;
-import net.minecraft.block.entity.BlockEntity;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.text.LiteralText;
 import reborncore.client.gui.builder.GuiBase;
 import reborncore.client.screen.builder.BuiltScreenHandler;
 
+@Environment(EnvType.CLIENT)
 public class TeleporterGui extends GuiBase<BuiltScreenHandler> {
     TeleporterBlockEntity blockEntity;
 
     public TeleporterGui(int syncID, PlayerEntity player, TeleporterBlockEntity blockEntity) {
         super(player, blockEntity, blockEntity.createScreenHandler(syncID, player));
-        this.blockEntity = blockEntity;
-    }
-
-    public TeleporterGui(PlayerEntity player, TeleporterBlockEntity blockEntity, BuiltScreenHandler screenHandler) {
-        super(player, blockEntity, screenHandler);
         this.blockEntity = blockEntity;
     }
 
@@ -32,8 +29,8 @@ public class TeleporterGui extends GuiBase<BuiltScreenHandler> {
         super.drawForeground(matrixStack, mouseX, mouseY);
         final GuiBase.Layer layer = GuiBase.Layer.FOREGROUND;
 
-        builder.drawMultiEnergyBar(matrixStack, this, 156, 19, 10, 20, mouseX, mouseY, 0, layer);
+        builder.drawMultiEnergyBar(matrixStack, this, 156, 19, (int) blockEntity.getEnergy(), (int) blockEntity.getMaxPower(), mouseX, mouseY, 0, layer);
 
-        builder.drawText(matrixStack, this, new LiteralText("Generating: " + 0 + " E/t"), 10, 30, 0);
+        builder.drawText(matrixStack, this, new LiteralText("Generating: " + blockEntity.getPowerChange() + " E/t"), 10, 30, 0);
     }
 }
