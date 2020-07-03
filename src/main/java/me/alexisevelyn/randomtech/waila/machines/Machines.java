@@ -10,6 +10,7 @@ import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.world.World;
+import reborncore.common.blockentity.MachineBaseBlockEntity;
 import reborncore.common.powerSystem.PowerSystem;
 
 import java.util.List;
@@ -19,7 +20,11 @@ public class Machines implements IComponentProvider, IServerDataProvider<BlockEn
 
     @Override
     public void appendServerData(CompoundTag compoundTag, ServerPlayerEntity serverPlayerEntity, World world, BlockEntity blockEntity) {
-
+        // Only Sync Energy Data When Player is Looking at Block With Hywla Active
+        // It is slow compared to running it in RebornCore's tick function, but it'll save network data.
+        if (blockEntity instanceof MachineBaseBlockEntity) {
+            ((MachineBaseBlockEntity) blockEntity).syncWithAll();
+        }
     }
 
     @Override

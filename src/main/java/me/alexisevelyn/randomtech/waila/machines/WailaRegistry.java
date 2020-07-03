@@ -8,14 +8,14 @@ import me.alexisevelyn.randomtech.blocks.TeleporterBlock;
 import net.minecraft.util.Identifier;
 
 public class WailaRegistry implements IWailaPlugin {
-    static final Identifier RENDER_POWER = new Identifier("power_level");
+    static final Identifier RENDER_POWER = new Identifier("randomtech", "power_level");
 
-    static final Identifier CONFIG_DISPLAY_POWER = new Identifier("display_power");
+    static final Identifier CONFIG_DISPLAY_POWER = new Identifier("randomtech", "display_power");
 
     @Override
     public void register(IRegistrar iRegistrar) {
         // WAILA Configuration
-        iRegistrar.addConfig(CONFIG_DISPLAY_POWER, true);
+        iRegistrar.addSyncedConfig(CONFIG_DISPLAY_POWER, true);
 
         // ToolTip Rendering
         iRegistrar.registerTooltipRenderer(RENDER_POWER, new TooltipRendererStack());

@@ -8,8 +8,6 @@ import net.minecraft.inventory.Inventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.IntArrayTag;
-import net.minecraft.nbt.StringTag;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.registry.Registry;
@@ -127,6 +125,15 @@ public class TeleporterBlockEntity extends PowerAcceptorBlockEntity implements I
             return;
         }
 
+        if (world.getTime() % 20 == 0) {
+            //world.setBlockState(pos, world.getBlockState(pos).with(BlockMachineBase.ACTIVE, false));
+            //addEnergy(energyAddend);
+
+            updateTeleportLocation();
+        }
+    }
+
+    private void updateTeleportLocation() {
         // WARNING!!! This Below Code Has VERY LITTLE ERROR CHECKING
         // -------------------------------------------------
         // This checks for TechReborn's Frequency Transmitter and Outputs the Destination of the Transmitter
@@ -153,15 +160,6 @@ public class TeleporterBlockEntity extends PowerAcceptorBlockEntity implements I
             System.out.println("Position Z: " + pos[2]);
         }
         // -------------------------------------------------
-
-//        if (world.getTime() % 20 == 0) {
-//            world.setBlockState(pos, world.getBlockState(pos).with(BlockMachineBase.ACTIVE, false));
-//        }
-
-        //addEnergy(energyAddend);
-
-        // TODO: Try to only sync when Hywla is looking at block to add performance improvement
-        syncWithAll(); // Syncs Energy Changes With Client
     }
 
     @Override
