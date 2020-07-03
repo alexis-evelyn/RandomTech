@@ -50,6 +50,9 @@ public class Main implements ModInitializer {
 	// Gui Handlers - Needs to be run on both client and server for gui open screen to work
 	public static final TeleporterGuiHandler<TeleporterGui> teleporterGuiHandler = new TeleporterGuiHandler<>();
 
+	// Force Load BlockEntities.java Early On
+	public static final BlockEntities blockEntities = new BlockEntities();
+
 	@Override
 	public void onInitialize() {
 		// Client and Server Side!!!

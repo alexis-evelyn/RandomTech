@@ -2,10 +2,12 @@ package me.alexisevelyn.randomtech.blockentities;
 
 import me.alexisevelyn.randomtech.BlockEntities;
 import me.alexisevelyn.randomtech.Main;
+import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.util.math.Direction;
 import reborncore.api.IToolDrop;
 import reborncore.api.blockentity.IUpgrade;
@@ -33,7 +35,7 @@ public class TeleporterBlockEntity extends PowerAcceptorBlockEntity implements I
 
     public TeleporterBlockEntity() {
         super(BlockEntities.TELEPORTER);
-        this.inventory = new RebornInventory<>(1, "TeleporterBlockEntity", 64, this);
+        this.inventory = new RebornInventory<>(1, "TeleporterBlockEntity", 1, this);
     }
 
     @Override
@@ -59,7 +61,7 @@ public class TeleporterBlockEntity extends PowerAcceptorBlockEntity implements I
 
     @Override
     public int getMaxCountPerStack() {
-        return 1;
+        return inventory.getMaxCountPerStack();
     }
 
     @Override
@@ -74,12 +76,12 @@ public class TeleporterBlockEntity extends PowerAcceptorBlockEntity implements I
 
     @Override
     public int count(Item item) {
-        return super.count(item);
+        return inventory.count(item);
     }
 
     @Override
     public boolean containsAny(Set<Item> items) {
-        return false;
+        return inventory.containsAny(items);
     }
 
     @Override
@@ -152,5 +154,17 @@ public class TeleporterBlockEntity extends PowerAcceptorBlockEntity implements I
     @Override
     public Inventory getInventory() {
         return inventory;
+    }
+
+    @Override
+    public void fromTag(BlockState blockState, CompoundTag compoundTag) {
+        super.fromTag(blockState, compoundTag);
+    }
+
+    @Override
+    public CompoundTag toTag(CompoundTag compoundTag) {
+        super.toTag(compoundTag);
+
+        return compoundTag;
     }
 }
