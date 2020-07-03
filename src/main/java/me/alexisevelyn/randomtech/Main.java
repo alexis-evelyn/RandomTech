@@ -51,6 +51,7 @@ public class Main implements ModInitializer {
 	public static final TeleporterGuiHandler<TeleporterGui> teleporterGuiHandler = new TeleporterGuiHandler<>();
 
 	// Force Load BlockEntities.java Early On
+	// This is important to make sure that BlockEntities are loaded before a world is loaded
 	public static final BlockEntities blockEntities = new BlockEntities();
 
 	@Override

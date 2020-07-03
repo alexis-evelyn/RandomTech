@@ -20,8 +20,6 @@ import reborncore.common.util.RebornInventory;
 
 import java.util.Set;
 
-// TODO: Figure out how to get the teleporter to remember its power and itemstack between server and client restarts.
-
 public class TeleporterBlockEntity extends PowerAcceptorBlockEntity implements IToolDrop, InventoryProvider, BuiltScreenHandlerProvider {
     int state = 0;
     double energyAddend = -100.0;
