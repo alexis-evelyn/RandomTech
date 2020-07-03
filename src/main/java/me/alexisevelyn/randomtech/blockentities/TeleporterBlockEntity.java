@@ -8,7 +8,11 @@ import net.minecraft.inventory.Inventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.IntArrayTag;
+import net.minecraft.nbt.StringTag;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Direction;
+import net.minecraft.util.registry.Registry;
 import reborncore.api.IToolDrop;
 import reborncore.api.blockentity.IUpgrade;
 import reborncore.api.blockentity.InventoryProvider;
@@ -18,6 +22,7 @@ import reborncore.client.screen.builder.ScreenHandlerBuilder;
 import reborncore.common.powerSystem.PowerAcceptorBlockEntity;
 import reborncore.common.util.RebornInventory;
 
+import java.util.Optional;
 import java.util.Set;
 
 public class TeleporterBlockEntity extends PowerAcceptorBlockEntity implements IToolDrop, InventoryProvider, BuiltScreenHandlerProvider {
@@ -28,8 +33,6 @@ public class TeleporterBlockEntity extends PowerAcceptorBlockEntity implements I
     RebornInventory<TeleporterBlockEntity> inventory;
 
     int inputSlot = 0;
-
-    ItemStack itemStack;
 
     public TeleporterBlockEntity() {
         super(BlockEntities.TELEPORTER);
@@ -123,6 +126,33 @@ public class TeleporterBlockEntity extends PowerAcceptorBlockEntity implements I
         if (world == null){
             return;
         }
+
+        // WARNING!!! This Below Code Has VERY LITTLE ERROR CHECKING
+        // -------------------------------------------------
+        // This checks for TechReborn's Frequency Transmitter and Outputs the Destination of the Transmitter
+        // techreborn:frequency_transmitter
+        Identifier frequencyTransmitterIdentifier = new Identifier("techreborn", "frequency_transmitter");
+        Optional<Item> frequencyTransmitter = Registry.ITEM.getOrEmpty(frequencyTransmitterIdentifier);
+        ItemStack inputItem = inventory.getStack(inputSlot);
+
+        // TODO: Clean Up Code and Functionify It. Also Add Error Checking For Tags!!!
+        if (frequencyTransmitter.isPresent() && inputItem.getItem().equals(frequencyTransmitter.get())) {
+            // {"tag": {"pos": {"pos": ["I", 9, 55, 12], "dimension": "minecraft:overworld"}}}
+            CompoundTag itemTag = inputItem.getTag();
+
+            CompoundTag root = itemTag.getCompound("pos");
+
+            int[] pos = root.getIntArray("pos");
+            String dimension = root.getString("dimension");
+
+            System.out.println("Teleporter Destination");
+            System.out.println("Dimension: " + dimension);
+
+            System.out.println("Position X: " + pos[0]);
+            System.out.println("Position Y: " + pos[1]);
+            System.out.println("Position Z: " + pos[2]);
+        }
+        // -------------------------------------------------
 
 //        if (world.getTime() % 20 == 0) {
 //            world.setBlockState(pos, world.getBlockState(pos).with(BlockMachineBase.ACTIVE, false));
