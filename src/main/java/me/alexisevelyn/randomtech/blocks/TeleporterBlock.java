@@ -1,6 +1,6 @@
 package me.alexisevelyn.randomtech.blocks;
 
-import me.alexisevelyn.randomtech.MainClient;
+import me.alexisevelyn.randomtech.Main;
 import me.alexisevelyn.randomtech.Materials;
 import me.alexisevelyn.randomtech.blockentities.TeleporterBlockEntity;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
@@ -33,7 +33,7 @@ public class TeleporterBlock extends BlockMachineBase {
 
     @Override
     public IMachineGuiHandler getGui() {
-        return MainClient.teleporterGuiHandler;
+        return Main.teleporterGuiHandler;
     }
 
     @Override

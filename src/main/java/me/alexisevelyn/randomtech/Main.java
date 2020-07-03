@@ -2,6 +2,8 @@ package me.alexisevelyn.randomtech;
 
 import me.alexisevelyn.randomtech.armormaterials.FirstArmorMaterial;
 import me.alexisevelyn.randomtech.blocks.TeleporterBlock;
+import me.alexisevelyn.randomtech.guis.TeleporterGui;
+import me.alexisevelyn.randomtech.guis.TeleporterGuiHandler;
 import me.alexisevelyn.randomtech.items.EdiblePower;
 import me.alexisevelyn.randomtech.items.TeleporterControlItem;
 import me.alexisevelyn.randomtech.items.armor.ArmorBase;
@@ -45,8 +47,13 @@ public class Main implements ModInitializer {
 	// Armor Materials
 	public static final ArmorMaterial FIRST_ARMOR_MATERIAL = new FirstArmorMaterial();
 
+	// Gui Handlers - Needs to be run on both client and server for gui open screen to work
+	public static final TeleporterGuiHandler<TeleporterGui> teleporterGuiHandler = new TeleporterGuiHandler<>();
+
 	@Override
 	public void onInitialize() {
+		// Client and Server Side!!!
+
 		// This code runs as soon as Minecraft is in a mod-load-ready state.
 		// However, some things (like resources) may still be uninitialized.
 		// Proceed with mild caution.

@@ -3,9 +3,11 @@ package me.alexisevelyn.randomtech.guis;
 import me.alexisevelyn.randomtech.GuiFactory;
 import me.alexisevelyn.randomtech.ScreenHandlerFactory;
 import me.alexisevelyn.randomtech.blockentities.TeleporterBlockEntity;
+import net.fabricmc.api.EnvType;
 import net.fabricmc.fabric.api.client.screenhandler.v1.ScreenRegistry;
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory;
 import net.fabricmc.fabric.api.screenhandler.v1.ScreenHandlerRegistry;
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.gui.screen.ingame.HandledScreen;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
@@ -19,7 +21,6 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
-import reborncore.RebornCore;
 import reborncore.api.blockentity.IMachineGuiHandler;
 import reborncore.client.screen.builder.BuiltScreenHandler;
 
@@ -31,7 +32,10 @@ public class TeleporterGuiHandler<TeleporterGui> implements IMachineGuiHandler {
         screenHandlerType = ScreenHandlerRegistry.registerExtended(new Identifier("randomtech", "teleporter_gui_handler"), screenHandlerFactory);
 
         // Register GuiFactory with Fabric
-        RebornCore.clientOnly(() -> () -> ScreenRegistry.register(screenHandlerType, getGuiFactory()));
+        if(FabricLoader.getInstance().getEnvironmentType() == EnvType.CLIENT) {
+            // System.out.println("TeleportGuiHandler - init - Client Side");
+            ScreenRegistry.register(screenHandlerType, getGuiFactory());
+        }
     }
 
     @SuppressWarnings("unchecked") // The Unchecked Casts are in fact correctly casted. There's no way to properly check it afaik.
@@ -49,7 +53,7 @@ public class TeleporterGuiHandler<TeleporterGui> implements IMachineGuiHandler {
         player.openHandledScreen(new ExtendedScreenHandlerFactory() {
             @Override
             public void writeScreenOpeningData(ServerPlayerEntity serverPlayerEntity, PacketByteBuf packetByteBuf) {
-                //System.out.println("TeleportGuiHandler - writeScreenOpeningData - Server Side");
+                // System.out.println("TeleportGuiHandler - writeScreenOpeningData - Server Side");
                 packetByteBuf.writeBlockPos(pos);
             }
 
@@ -61,7 +65,7 @@ public class TeleporterGuiHandler<TeleporterGui> implements IMachineGuiHandler {
             @Nullable
             @Override
             public ScreenHandler createMenu(int syncID, PlayerInventory inv, PlayerEntity player) {
-                //System.out.println("TeleportGuiHandler - createMenu - Server Side - Sync ID: " + syncID);
+                // System.out.println("TeleportGuiHandler - createMenu - Server Side - Sync ID: " + syncID);
 
                 final TeleporterBlockEntity teleporterBlockEntity = (TeleporterBlockEntity) player.getEntityWorld().getBlockEntity(pos);
 
