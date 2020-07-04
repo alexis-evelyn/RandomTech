@@ -39,8 +39,9 @@ public class Machines implements IComponentProvider, IServerDataProvider<BlockEn
 
     @Override
     public void appendBody(List<Text> tooltip, IDataAccessor accessor, IPluginConfig config) {
-        // TODO: Figure out how to save config on init
-        if (!config.get(WailaRegistry.CONFIG_DISPLAY_POWER)) {
+        boolean configDisplayPower = config.get(WailaRegistry.CONFIG_DISPLAY_POWER, true);
+
+        if (configDisplayPower) {
             if (accessor.getBlock() == Main.TELEPORTER) {
                 TeleporterBlock teleporterBlock = (TeleporterBlock) accessor.getBlock();
 
