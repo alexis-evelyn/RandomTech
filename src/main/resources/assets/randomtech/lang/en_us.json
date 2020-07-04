@@ -23,6 +23,8 @@
 
   "tooltip.waila.energy": "Energy: %s/%s",
 
+  "message.randomtech.teleporter_energy_fail": "This teleporter needs at least %s and only has %s",
+
   "config.waila.plugin_randomtech": "Alexis' Random Tech",
   "config.waila.plugin_randomtech.display_power": "Display Energy Level",
 

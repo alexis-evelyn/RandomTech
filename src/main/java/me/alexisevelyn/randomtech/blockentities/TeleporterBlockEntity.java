@@ -6,7 +6,6 @@ import net.fabricmc.fabric.api.dimension.v1.EntityPlacer;
 import net.fabricmc.fabric.api.dimension.v1.FabricDimensions;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.pattern.BlockPattern;
-import net.minecraft.client.util.math.Vector3d;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.Inventory;
@@ -14,6 +13,9 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.sound.SoundEvents;
+import net.minecraft.text.Text;
+import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Vec3d;
@@ -26,6 +28,7 @@ import reborncore.client.screen.BuiltScreenHandlerProvider;
 import reborncore.client.screen.builder.BuiltScreenHandler;
 import reborncore.client.screen.builder.ScreenHandlerBuilder;
 import reborncore.common.powerSystem.PowerAcceptorBlockEntity;
+import reborncore.common.powerSystem.PowerSystem;
 import reborncore.common.util.RebornInventory;
 
 import java.util.Optional;
@@ -36,7 +39,7 @@ public class TeleporterBlockEntity extends PowerAcceptorBlockEntity implements I
     int state = 0;
 
     // Energy Values
-    double energyAddend = -100.0;
+    double energyAddend = -1000.0;
     double maxPower = 10000;
     double maxInput = 10000;
 
@@ -148,8 +151,10 @@ public class TeleporterBlockEntity extends PowerAcceptorBlockEntity implements I
 
         PlayerEntity playerEntity = world.getClosestPlayer(getPos().getX(), getPos().getY(), getPos().getZ(), 2, false);
 
-        if (isPlayerReadyToTeleport(playerEntity))
+        if (isPlayerReadyToTeleport(playerEntity) && hasEnoughEnergy())
             teleportPlayer(playerEntity);
+        else if (isPlayerReadyToTeleport(playerEntity) && !hasEnoughEnergy())
+            alertNotEnoughEnergy(playerEntity);
     }
 
     private void teleportPlayer(PlayerEntity playerEntity) {
@@ -193,8 +198,11 @@ public class TeleporterBlockEntity extends PowerAcceptorBlockEntity implements I
                 }
             };
 
+            // TODO: Figure out how to cancel the end credits screen and the nether portal travel sound!!!
             // This is only deprecated because it's experimental.
             FabricDimensions.teleport(playerEntity, newWorld, entityPlacer);
+
+            addEnergy(energyAddend); // Take out the energy from use of the teleporter
         }
     }
 
@@ -211,6 +219,21 @@ public class TeleporterBlockEntity extends PowerAcceptorBlockEntity implements I
 
     public boolean isPlayerReadyToTeleport(PlayerEntity playerEntity) {
         return playerEntity != null && playerEntity.isInSneakingPose() && playerEntity.getBlockPos().equals(this.pos.add(0, 1, 0));
+    }
+
+    private void alertNotEnoughEnergy(PlayerEntity playerEntity) {
+        if (playerEntity == null)
+            return;
+
+        Text message = new TranslatableText("message.randomtech.teleporter_energy_fail",
+                PowerSystem.getLocaliszedPower(-1 * energyAddend),
+                PowerSystem.getLocaliszedPower(getEnergy()));
+
+        playerEntity.sendMessage(message, true);
+    }
+
+    public boolean hasEnoughEnergy() {
+        return getEnergy() >= (-1 * energyAddend);
     }
 
     @Override
