@@ -1,5 +1,6 @@
 package me.alexisevelyn.randomtech.blockentities;
 
+import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import me.alexisevelyn.randomtech.BlockEntities;
 import me.alexisevelyn.randomtech.Main;
 import net.fabricmc.fabric.api.dimension.v1.EntityPlacer;
@@ -12,6 +13,9 @@ import net.minecraft.inventory.Inventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.server.command.ServerCommandSource;
+import net.minecraft.server.command.TeleportCommand;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.text.Text;
@@ -198,11 +202,15 @@ public class TeleporterBlockEntity extends PowerAcceptorBlockEntity implements I
                 }
             };
 
-            // TODO: Figure out how to cancel the end credits screen and the nether portal travel sound!!!
-            // This is only deprecated because it's experimental.
-            FabricDimensions.teleport(playerEntity, newWorld, entityPlacer);
+           try {
+                ServerPlayerEntity serverPlayerEntity = (ServerPlayerEntity) playerEntity;
 
-            addEnergy(energyAddend); // Take out the energy from use of the teleporter
+                serverPlayerEntity.teleport(newWorld, (double) pos[0], (double) pos[1], (double) pos[2], serverPlayerEntity.getHeadYaw(), serverPlayerEntity.getPitch(20));
+                addEnergy(energyAddend); // Take out the energy from use of the teleporter
+            } catch (Exception exception) {
+                System.out.println("Teleport Exception: ");
+                exception.printStackTrace();
+            }
         }
     }
 
