@@ -1,28 +1,21 @@
 package me.alexisevelyn.randomtech.blockentities;
 
-import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import me.alexisevelyn.randomtech.BlockEntities;
 import me.alexisevelyn.randomtech.Main;
-import net.fabricmc.fabric.api.dimension.v1.EntityPlacer;
-import net.fabricmc.fabric.api.dimension.v1.FabricDimensions;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.pattern.BlockPattern;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.server.command.ServerCommandSource;
-import net.minecraft.server.command.TeleportCommand;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
-import net.minecraft.sound.SoundEvents;
+import net.minecraft.text.LiteralText;
 import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
+import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Direction;
-import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.util.registry.RegistryKey;
 import reborncore.api.IToolDrop;
@@ -155,7 +148,7 @@ public class TeleporterBlockEntity extends PowerAcceptorBlockEntity implements I
 
         PlayerEntity playerEntity = world.getClosestPlayer(getPos().getX(), getPos().getY(), getPos().getZ(), 2, false);
 
-        if (isPlayerReadyToTeleport(playerEntity) && hasEnoughEnergy())
+        if (isPlayerReadyToTeleport(playerEntity))
             teleportPlayer(playerEntity);
     }
 
@@ -164,7 +157,6 @@ public class TeleporterBlockEntity extends PowerAcceptorBlockEntity implements I
 
         if (isTRFrequencyTransmitter(inputItem) || isTeleporterItem(inputItem)) {
             // Send Alert if Not Enough Energy
-            // TODO: Figure out why not calling alert!!!
             if (!hasEnoughEnergy()) {
                 alertNotEnoughEnergy(playerEntity);
                 return;
@@ -201,7 +193,7 @@ public class TeleporterBlockEntity extends PowerAcceptorBlockEntity implements I
            try {
                 ServerPlayerEntity serverPlayerEntity = (ServerPlayerEntity) playerEntity;
 
-                serverPlayerEntity.teleport(newWorld, (double) pos[0], (double) pos[1], (double) pos[2], serverPlayerEntity.getHeadYaw(), serverPlayerEntity.getPitch(20));
+                serverPlayerEntity.teleport(newWorld, pos[0], pos[1], pos[2], serverPlayerEntity.getHeadYaw(), serverPlayerEntity.getPitch(20));
                 addEnergy(energyAddend); // Take out the energy from use of the teleporter
             } catch (Exception exception) {
                 System.out.println("Teleport Exception: ");
@@ -230,8 +222,11 @@ public class TeleporterBlockEntity extends PowerAcceptorBlockEntity implements I
             return;
 
         Text message = new TranslatableText("message.randomtech.teleporter_energy_fail",
-                PowerSystem.getLocaliszedPower(-1 * energyAddend),
-                PowerSystem.getLocaliszedPower(getEnergy()));
+                new LiteralText(PowerSystem.getLocaliszedPower(-1 * energyAddend))
+                        .formatted(Formatting.DARK_GREEN, Formatting.BOLD),
+                new LiteralText(PowerSystem.getLocaliszedPower(getEnergy()))
+                        .formatted(Formatting.DARK_RED, Formatting.BOLD))
+                .formatted(Formatting.GOLD, Formatting.BOLD);
 
         playerEntity.sendMessage(message, true);
     }

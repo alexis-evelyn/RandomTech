@@ -23,7 +23,11 @@
 
   "tooltip.waila.energy": "Energy: %s/%s",
 
-  "message.randomtech.teleporter_energy_fail": "§6§lThis teleporter needs at least %s land only has %s",
+  "message.randomtech.teleporter_energy_fail": "This teleporter needs at least %s land only has %s",
+
+  "message.randomtech.teleporter_control_saved": "Saved position (%s, %s, %s) in world %s",
+  "message.randomtech.teleporter_control_tooltip_coordinates": "Saved Position: (%s, %s, %s)",
+  "message.randomtech.teleporter_control_tooltip_dimension": "Saved World: %s",
 
   "config.waila.plugin_randomtech": "Alexis' Random Tech",
   "config.waila.plugin_randomtech.display_power": "Display Energy Level",
