@@ -157,14 +157,16 @@ public class TeleporterBlockEntity extends PowerAcceptorBlockEntity implements I
 
         if (isPlayerReadyToTeleport(playerEntity) && hasEnoughEnergy())
             teleportPlayer(playerEntity);
-        else if (isPlayerReadyToTeleport(playerEntity) && !hasEnoughEnergy())
-            alertNotEnoughEnergy(playerEntity);
     }
 
     private void teleportPlayer(PlayerEntity playerEntity) {
         ItemStack inputItem = inventory.getStack(inputSlot);
 
         if (isTRFrequencyTransmitter(inputItem) || isTeleporterItem(inputItem)) {
+            // Send Alert if Not Enough Energy
+            if (!hasEnoughEnergy())
+                alertNotEnoughEnergy(playerEntity);
+
             // {"tag": {"pos": {"pos": ["I", 9, 55, 12], "dimension": "minecraft:overworld"}}}
             CompoundTag itemTag = inputItem.getTag();
 
@@ -192,15 +194,6 @@ public class TeleporterBlockEntity extends PowerAcceptorBlockEntity implements I
 
                 return;
             }
-
-            // The teleport methods by default place the vanilla portal associated with that dimension. Nether - Nether Portal. Overworld - Nether Portal. End - End Portal?
-            // This solves that problem by overriding the vanilla entity placement logic.
-            EntityPlacer entityPlacer = new EntityPlacer() {
-                @Override
-                public BlockPattern.TeleportTarget placeEntity(Entity teleported, ServerWorld destination, Direction portalDir, double horizontalOffset, double verticalOffset) {
-                    return new BlockPattern.TeleportTarget(new Vec3d(pos[0], pos[1], pos[2]), teleported.getVelocity(), (int) teleported.getHeadYaw());
-                }
-            };
 
            try {
                 ServerPlayerEntity serverPlayerEntity = (ServerPlayerEntity) playerEntity;
