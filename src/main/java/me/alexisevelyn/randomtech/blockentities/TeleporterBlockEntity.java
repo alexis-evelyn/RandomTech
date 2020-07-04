@@ -3,6 +3,7 @@ package me.alexisevelyn.randomtech.blockentities;
 import me.alexisevelyn.randomtech.BlockEntities;
 import me.alexisevelyn.randomtech.Main;
 import net.minecraft.block.BlockState;
+import net.minecraft.client.util.math.Vector3f;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.item.Item;
@@ -11,6 +12,7 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.registry.Registry;
+import net.minecraft.world.World;
 import reborncore.api.IToolDrop;
 import reborncore.api.blockentity.IUpgrade;
 import reborncore.api.blockentity.InventoryProvider;
@@ -20,6 +22,7 @@ import reborncore.client.screen.builder.ScreenHandlerBuilder;
 import reborncore.common.powerSystem.PowerAcceptorBlockEntity;
 import reborncore.common.util.RebornInventory;
 
+import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 
@@ -29,6 +32,9 @@ public class TeleporterBlockEntity extends PowerAcceptorBlockEntity implements I
     double maxPower = 10000;
     double maxInput = 10000;
     RebornInventory<TeleporterBlockEntity> inventory;
+
+    World dimension;
+    Vector3f coordinates = new Vector3f();
 
     int inputSlot = 0;
 
@@ -125,12 +131,12 @@ public class TeleporterBlockEntity extends PowerAcceptorBlockEntity implements I
             return;
         }
 
-        if (world.getTime() % 20 == 0) {
+        //if (world.getTime() % 20 == 0) {
             //world.setBlockState(pos, world.getBlockState(pos).with(BlockMachineBase.ACTIVE, false));
             //addEnergy(energyAddend);
 
             updateTeleportLocation();
-        }
+        //}
     }
 
     private void updateTeleportLocation() {
@@ -151,13 +157,23 @@ public class TeleporterBlockEntity extends PowerAcceptorBlockEntity implements I
 
             int[] pos = root.getIntArray("pos");
             String dimension = root.getString("dimension");
+            // dimension
 
-            System.out.println("Teleporter Destination");
-            System.out.println("Dimension: " + dimension);
+            PlayerEntity playerEntity = Objects.requireNonNull(getWorld()).getClosestPlayer(getPos().getX(), getPos().getY(), getPos().getZ(), 2, false);
+            coordinates.set(pos[0], pos[1], pos[2]);
 
-            System.out.println("Position X: " + pos[0]);
-            System.out.println("Position Y: " + pos[1]);
-            System.out.println("Position Z: " + pos[2]);
+            if (playerEntity != null && playerEntity.isInSneakingPose() && playerEntity.getBlockPos().equals(this.pos.add(0, 1, 0))) {
+                //System.out.println("Detected: " + playerEntity.getDisplayName().toString());
+
+                playerEntity.teleport(coordinates.getX(), coordinates.getY(), coordinates.getZ());
+            }
+
+//            System.out.println("Teleporter Destination");
+//            System.out.println("Dimension: " + dimension);
+//
+//            System.out.println("Position X: " + pos[0]);
+//            System.out.println("Position Y: " + pos[1]);
+//            System.out.println("Position Z: " + pos[2]);
         }
         // -------------------------------------------------
     }
