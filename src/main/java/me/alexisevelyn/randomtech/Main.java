@@ -2,6 +2,7 @@ package me.alexisevelyn.randomtech;
 
 import me.alexisevelyn.randomtech.armormaterials.FirstArmorMaterial;
 import me.alexisevelyn.randomtech.blocks.TeleporterBlock;
+import me.alexisevelyn.randomtech.fluids.Experience;
 import me.alexisevelyn.randomtech.guis.TeleporterGui;
 import me.alexisevelyn.randomtech.guis.TeleporterGuiHandler;
 import me.alexisevelyn.randomtech.items.EdiblePower;
@@ -14,9 +15,14 @@ import me.sargunvohra.mcmods.autoconfig1u.serializer.GsonConfigSerializer;
 import net.fabricmc.api.ModInitializer;
 
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
+import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.fabricmc.fabric.api.registry.FuelRegistry;
 import net.minecraft.block.Block;
+import net.minecraft.block.Blocks;
+import net.minecraft.block.FluidBlock;
 import net.minecraft.entity.EquipmentSlot;
+import net.minecraft.fluid.FlowableFluid;
+import net.minecraft.fluid.Fluid;
 import net.minecraft.item.*;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
@@ -43,6 +49,10 @@ public class Main implements ModInitializer {
 	public static final Item AXE_BASE = new AxeBase(new Item.Settings().group(ItemGroup.TOOLS));
 	public static final Item SHOVEL_BASE = new ShovelBase(new Item.Settings().group(ItemGroup.TOOLS));
 	public static final Item HOE_BASE = new HoeBase(new Item.Settings().group(ItemGroup.TOOLS));
+
+	// Fluids
+	//public static final FlowableFluid EXPERIENCE_FLUID = new Experience();
+	//public static final FluidBlock EXPERIENCE_FLUID_BLOCK = new FluidBlock(EXPERIENCE_FLUID, FabricBlockSettings.copy(Blocks.WATER)){};
 
 	// Armor Materials
 	public static final ArmorMaterial FIRST_ARMOR_MATERIAL = new FirstArmorMaterial();
@@ -84,6 +94,10 @@ public class Main implements ModInitializer {
 
 		// ItemBlocks
 		Registry.register(Registry.ITEM, new Identifier(MODID, "teleporter"), new BlockItem(TELEPORTER, new Item.Settings().group(MACHINERY_GROUP)));
+
+		// Register Fluids
+//		Registry.register(Registry.FLUID, new Identifier(MODID, "experience"), EXPERIENCE_FLUID);
+//		Registry.register(Registry.BLOCK, new Identifier(MODID, "experience"), EXPERIENCE_FLUID_BLOCK);
 
 		// Register Fuel
 		FuelRegistry.INSTANCE.add(EDIBLE_POWER, 20*10); // 20*3 = 0.3 Items According to REI

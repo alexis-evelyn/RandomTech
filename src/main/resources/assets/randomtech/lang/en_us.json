@@ -19,6 +19,8 @@
 
   "block.randomtech.teleporter": "Teleporter",
 
+  "fluid.randomtech.experience": "Liquid Experience",
+
   "tooltip.waila.energy": "Energy: %s/%s",
 
   "config.waila.plugin_randomtech": "Alexis' Random Tech",
