@@ -164,8 +164,11 @@ public class TeleporterBlockEntity extends PowerAcceptorBlockEntity implements I
 
         if (isTRFrequencyTransmitter(inputItem) || isTeleporterItem(inputItem)) {
             // Send Alert if Not Enough Energy
-            if (!hasEnoughEnergy())
+            // TODO: Figure out why not calling alert!!!
+            if (!hasEnoughEnergy()) {
                 alertNotEnoughEnergy(playerEntity);
+                return;
+            }
 
             // {"tag": {"pos": {"pos": ["I", 9, 55, 12], "dimension": "minecraft:overworld"}}}
             CompoundTag itemTag = inputItem.getTag();
