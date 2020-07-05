@@ -5,6 +5,9 @@ import me.alexisevelyn.randomtech.blocks.TeleporterBlock;
 import me.alexisevelyn.randomtech.fluids.ExperienceFluid;
 import me.alexisevelyn.randomtech.fluids.MagicFluid;
 import me.alexisevelyn.randomtech.fluids.RedstoneFluid;
+import me.alexisevelyn.randomtech.fluids.blocks.ExperienceFluidBlock;
+import me.alexisevelyn.randomtech.fluids.blocks.MagicFluidBlock;
+import me.alexisevelyn.randomtech.fluids.blocks.RedstoneFluidBlock;
 import me.alexisevelyn.randomtech.guis.TeleporterGui;
 import me.alexisevelyn.randomtech.guis.TeleporterGuiHandler;
 import me.alexisevelyn.randomtech.items.EdiblePower;
@@ -57,15 +60,15 @@ public class Main implements ModInitializer {
 	// Fluids
 	public static final FlowableFluid EXPERIENCE_FLUID = Registry.register(Registry.FLUID, new Identifier(MODID, "liquid_experience"), new ExperienceFluid.Still());
 	public static final FlowableFluid EXPERIENCE_FLUID_FLOWING = Registry.register(Registry.FLUID, new Identifier(MODID, "liquid_experience_flowing"), new ExperienceFluid.Flowing());
-	public static final FluidBlock EXPERIENCE_FLUID_BLOCK = new FluidBlock(EXPERIENCE_FLUID, FabricBlockSettings.copy(Blocks.WATER)){};
+	public static final FluidBlock EXPERIENCE_FLUID_BLOCK = new ExperienceFluidBlock(EXPERIENCE_FLUID, FabricBlockSettings.copy(Blocks.WATER)){};
 
 	public static final FlowableFluid MAGIC_FLUID = Registry.register(Registry.FLUID, new Identifier(MODID, "liquid_magic"), new MagicFluid.Still());
 	public static final FlowableFluid MAGIC_FLUID_FLOWING = Registry.register(Registry.FLUID, new Identifier(MODID, "liquid_magic_flowing"), new MagicFluid.Flowing());
-	public static final FluidBlock MAGIC_FLUID_BLOCK = new FluidBlock(MAGIC_FLUID, FabricBlockSettings.copy(Blocks.WATER)){};
+	public static final FluidBlock MAGIC_FLUID_BLOCK = new MagicFluidBlock(MAGIC_FLUID, FabricBlockSettings.copy(Blocks.WATER)){};
 
 	public static final FlowableFluid REDSTONE_FLUID = Registry.register(Registry.FLUID, new Identifier(MODID, "liquid_redstone"), new RedstoneFluid.Still());
 	public static final FlowableFluid REDSTONE_FLUID_FLOWING = Registry.register(Registry.FLUID, new Identifier(MODID, "liquid_redstone_flowing"), new RedstoneFluid.Flowing());
-	public static final FluidBlock REDSTONE_FLUID_BLOCK = new FluidBlock(REDSTONE_FLUID, FabricBlockSettings.copy(Blocks.WATER)){};
+	public static final FluidBlock REDSTONE_FLUID_BLOCK = new RedstoneFluidBlock(REDSTONE_FLUID, FabricBlockSettings.copy(Blocks.WATER)){};
 
 	// Armor Materials
 	public static final ArmorMaterial REDSTONE_ARMOR_MATERIAL = new RedstoneArmorMaterial();
