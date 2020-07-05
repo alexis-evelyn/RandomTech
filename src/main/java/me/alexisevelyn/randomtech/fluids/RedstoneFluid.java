@@ -1,15 +1,25 @@
 package me.alexisevelyn.randomtech.fluids;
 
 import me.alexisevelyn.randomtech.Main;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.block.BlockState;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.item.Item;
+import net.minecraft.particle.ParticleEffect;
+import net.minecraft.particle.ParticleTypes;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.Properties;
 import net.minecraft.world.WorldView;
 
 public abstract class RedstoneFluid extends BaseFluid {
+    @Override
+    @Environment(EnvType.CLIENT)
+    public ParticleEffect getParticle() {
+        return ParticleTypes.DRIPPING_OBSIDIAN_TEAR;
+    }
+
     @Override
     public Fluid getFlowing() {
         return Main.REDSTONE_FLUID_FLOWING;

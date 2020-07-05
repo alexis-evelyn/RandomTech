@@ -12,8 +12,12 @@ public class BaseFluidBlock extends FluidBlock {
         super(fluid, settings);
     }
 
+    // TODO: Add proper entity push physics
     @Override
     public void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity) {
-        super.onEntityCollision(state, world, pos, entity);
+        //super.onEntityCollision(state, world, pos, entity);
+
+        // Test Movement for Pushing Entities
+        // entity.addVelocity(0, 10, 0);
     }
 }

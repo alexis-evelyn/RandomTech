@@ -13,7 +13,6 @@ public class RedstoneFluidBlock extends BaseFluidBlock {
 
     @Override
     public void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity) {
-        // Test Movement for Pushing Entities
-        entity.addVelocity(0, 10, 0);
+        super.onEntityCollision(state, world, pos, entity);
     }
 }

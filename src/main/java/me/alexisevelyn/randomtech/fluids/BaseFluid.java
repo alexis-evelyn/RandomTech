@@ -1,11 +1,14 @@
 package me.alexisevelyn.randomtech.fluids;
 
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.fluid.FlowableFluid;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.fluid.FluidState;
+import net.minecraft.particle.ParticleEffect;
 import net.minecraft.tag.FluidTags;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
@@ -19,6 +22,15 @@ import java.util.Map;
 import java.util.Random;
 
 public abstract class BaseFluid extends FlowableFluid {
+    /**
+     * @return a dripping particle effect. Requires a dripping particle to be visible?
+     */
+    @Override
+    @Environment(EnvType.CLIENT)
+    public ParticleEffect getParticle() {
+        return super.getParticle();
+    }
+
     /**
      * @return is the given fluid an instance of this fluid?
      */
