@@ -17,10 +17,10 @@ import net.minecraft.world.WorldView;
 
 // Gonna Also Create Liquid Magic Based on the Magical Properties of Lapis (A Purified Form, An Extract If You Want)
 // TODO: Figure out how to create fluids
-public class Experience extends FlowableFluid {
+public class MagicFluid extends FlowableFluid {
     @Override
     public Item getBucketItem() {
-        return Items.DIAMOND;
+        return Main.MAGIC_BUCKET;
     }
 
     @Override

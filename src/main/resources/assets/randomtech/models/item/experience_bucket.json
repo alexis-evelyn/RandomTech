@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "randomtech:item/powered_chestplate"
+    "layer0": "randomtech:item/experience_bucket"
   }
 }

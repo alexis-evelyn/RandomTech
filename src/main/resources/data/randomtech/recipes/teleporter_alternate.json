@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#i#",
+    "iri",
+    "#i#"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:ender_pearl"
+    },
+    "i": {
+      "item": "minecraft:iron_ingot"
+    },
+    "r": {
+      "item": "randomtech:redstone_ingot"
+    }
+  },
+  "result": {
+    "item": "randomtech:teleporter",
+    "count": 1
+  }
+}

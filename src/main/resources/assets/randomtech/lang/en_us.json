@@ -13,14 +13,20 @@
   "item.randomtech.powered_hoe": "Powered Hoe",
 
 
-  "item.randomtech.powered_helmet": "Redstone Helmet",
-  "item.randomtech.powered_chestplate": "Redstone Chestplate",
-  "item.randomtech.powered_leggings": "Redstone Leggings",
-  "item.randomtech.powered_boots": "Redstone Boots",
+  "item.randomtech.powered_helmet": "Powered Helmet",
+  "item.randomtech.powered_chestplate": "Powered Chestplate",
+  "item.randomtech.powered_leggings": "Powered Leggings",
+  "item.randomtech.powered_boots": "Powered Boots",
 
   "block.randomtech.teleporter": "Teleporter",
 
-  "fluid.randomtech.experience": "Liquid Experience",
+  "fluid.randomtech.liquid_experience": "Liquid Experience",
+  "fluid.randomtech.liquid_magic": "Liquid Magic",
+  "fluid.randomtech.liquid_redstone": "Liquid Redstone",
+
+  "item.randomtech.experience_bucket": "Liquid Experience",
+  "item.randomtech.magic_bucket": "Bucket O' Magic",
+  "item.randomtech.redstone_bucket": "Liquid Redstone",
 
   "tooltip.waila.energy": "Energy: %s/%s",
 
