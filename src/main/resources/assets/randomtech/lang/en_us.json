@@ -3,19 +3,20 @@
 
   "item.randomtech.teleporter_control": "Teleporter Linker",
   "item.randomtech.edible_power": "Edible Power",
+  "item.randomtech.redstone_ingot": "Redstone Ingot",
 
 
-  "item.randomtech.sword_base": "Sword Base",
-  "item.randomtech.pickaxe_base": "Pickaxe Base",
-  "item.randomtech.axe_base": "Axe Base",
-  "item.randomtech.shovel_base": "Shovel Base",
-  "item.randomtech.hoe_base": "Hoe Base",
+  "item.randomtech.powered_sword": "Powered Sword",
+  "item.randomtech.powered_pickaxe": "Powered Pickaxe",
+  "item.randomtech.powered_axe": "Powered Axe",
+  "item.randomtech.powered_shovel": "Powered Shovel",
+  "item.randomtech.powered_hoe": "Powered Hoe",
 
 
-  "item.randomtech.first_helmet": "First Helmet",
-  "item.randomtech.first_chestplate": "First Chestplate",
-  "item.randomtech.first_leggings": "First Leggings",
-  "item.randomtech.first_boots": "First Boots",
+  "item.randomtech.powered_helmet": "Redstone Helmet",
+  "item.randomtech.powered_chestplate": "Redstone Chestplate",
+  "item.randomtech.powered_leggings": "Redstone Leggings",
+  "item.randomtech.powered_boots": "Redstone Boots",
 
   "block.randomtech.teleporter": "Teleporter",
 
@@ -23,7 +24,7 @@
 
   "tooltip.waila.energy": "Energy: %s/%s",
 
-  "message.randomtech.teleporter_energy_fail": "This teleporter needs at least %s land only has %s",
+  "message.randomtech.teleporter_energy_fail": "This teleporter needs at least %s and only has %s",
 
   "message.randomtech.teleporter_control_saved": "Saved position (%s, %s, %s) in world %s",
   "message.randomtech.teleporter_control_tooltip_coordinates": "Saved Position: (%s, %s, %s)",

@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:smithing",
+  "base": {
+    "item": "minecraft:diamond_helmet"
+  },
+  "addition": {
+    "item": "randomtech:redstone_ingot"
+  },
+  "result": {
+    "item": "randomtech:powered_helmet"
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient": {
+    "item": "minecraft:redstone_block"
+  },
+  "result": "randomtech:redstone_ingot",
+  "experience": 1.0,
+  "cookingtime": 600
+}
