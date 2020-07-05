@@ -9,9 +9,14 @@ import net.minecraft.fluid.FluidState;
 import net.minecraft.tag.FluidTags;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.BlockView;
+import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 import net.minecraft.world.WorldView;
+
+import java.util.Map;
+import java.util.Random;
 
 public abstract class BaseFluid extends FlowableFluid {
     /**
@@ -77,5 +82,25 @@ public abstract class BaseFluid extends FlowableFluid {
 
     protected static int calculateLevel(FluidState state) {
         return state.isStill() ? 0 : 8 - Math.min(state.getLevel(), 8) + (state.get(FALLING) ? 8 : 0);
+    }
+
+    @Override
+    public void onRandomTick(World world, BlockPos pos, FluidState state, Random random) {
+        super.onRandomTick(world, pos, state, random);
+    }
+
+    @Override
+    public Vec3d getVelocity(BlockView world, BlockPos pos, FluidState state) {
+        return super.getVelocity(world, pos, state);
+    }
+
+    @Override
+    protected Map<Direction, FluidState> getSpread(WorldView world, BlockPos pos, BlockState state) {
+        return super.getSpread(world, pos, state);
+    }
+
+    @Override
+    public void onScheduledTick(World world, BlockPos pos, FluidState state) {
+        super.onScheduledTick(world, pos, state);
     }
 }
