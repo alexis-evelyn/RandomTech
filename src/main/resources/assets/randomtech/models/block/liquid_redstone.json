@@ -1,6 +1,6 @@
 {
     "textures": {
-        "particle": "block/redstone_still"
+        "particle": "randomtech:block/redstone_still"
     }
 }
 

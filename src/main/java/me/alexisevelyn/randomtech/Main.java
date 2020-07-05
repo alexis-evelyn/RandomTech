@@ -2,6 +2,9 @@ package me.alexisevelyn.randomtech;
 
 import me.alexisevelyn.randomtech.armormaterials.RedstoneArmorMaterial;
 import me.alexisevelyn.randomtech.blocks.TeleporterBlock;
+import me.alexisevelyn.randomtech.fluids.ExperienceFluid;
+import me.alexisevelyn.randomtech.fluids.MagicFluid;
+import me.alexisevelyn.randomtech.fluids.RedstoneFluid;
 import me.alexisevelyn.randomtech.guis.TeleporterGui;
 import me.alexisevelyn.randomtech.guis.TeleporterGuiHandler;
 import me.alexisevelyn.randomtech.items.EdiblePower;
@@ -13,11 +16,14 @@ import me.alexisevelyn.randomtech.items.buckets.RedstoneBucket;
 import me.alexisevelyn.randomtech.items.ingots.RedstoneIngot;
 import me.alexisevelyn.randomtech.items.tools.*;
 import net.fabricmc.api.ModInitializer;
-
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
+import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.fabricmc.fabric.api.registry.FuelRegistry;
 import net.minecraft.block.Block;
+import net.minecraft.block.Blocks;
+import net.minecraft.block.FluidBlock;
 import net.minecraft.entity.EquipmentSlot;
+import net.minecraft.fluid.FlowableFluid;
 import net.minecraft.item.*;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
@@ -41,11 +47,6 @@ public class Main implements ModInitializer {
 	// Ingots
 	public static final Item REDSTONE_INGOT = new RedstoneIngot(new Item.Settings().group(ItemGroup.MISC));
 
-	// Buckets
-	public static final Item EXPERIENCE_BUCKET = new ExperienceBucket(new Item.Settings().group(ItemGroup.MISC));
-	public static final Item MAGIC_BUCKET = new MagicBucket(new Item.Settings().group(ItemGroup.MISC));
-	public static final Item REDSTONE_BUCKET = new RedstoneBucket(new Item.Settings().group(ItemGroup.MISC));
-
 	// Tools
 	public static final Item POWERED_SWORD = new PoweredSword(new Item.Settings().group(ItemGroup.TOOLS));
 	public static final Item POWERED_PICKAXE = new PoweredPickaxe(new Item.Settings().group(ItemGroup.TOOLS));
@@ -54,17 +55,25 @@ public class Main implements ModInitializer {
 	public static final Item POWERED_HOE = new PoweredHoe(new Item.Settings().group(ItemGroup.TOOLS));
 
 	// Fluids
-//	public static final FlowableFluid EXPERIENCE_FLUID = new ExperienceFluid();
-//	public static final FluidBlock EXPERIENCE_FLUID_BLOCK = new FluidBlock(EXPERIENCE_FLUID, FabricBlockSettings.copy(Blocks.WATER)){};
-//
-//	public static final FlowableFluid MAGIC_FLUID = new MagicFluid();
-//	public static final FluidBlock MAGIC_FLUID_BLOCK = new FluidBlock(MAGIC_FLUID, FabricBlockSettings.copy(Blocks.WATER)){};
-//
-//	public static final FlowableFluid REDSTONE_FLUID = new RedstoneFluid();
-//	public static final FluidBlock REDSTONE_FLUID_BLOCK = new FluidBlock(REDSTONE_FLUID, FabricBlockSettings.copy(Blocks.WATER)){};
+	public static final FlowableFluid EXPERIENCE_FLUID = Registry.register(Registry.FLUID, new Identifier(MODID, "liquid_experience"), new ExperienceFluid.Still());
+	public static final FlowableFluid EXPERIENCE_FLUID_FLOWING = Registry.register(Registry.FLUID, new Identifier(MODID, "liquid_experience_flowing"), new ExperienceFluid.Flowing());
+	public static final FluidBlock EXPERIENCE_FLUID_BLOCK = new FluidBlock(EXPERIENCE_FLUID, FabricBlockSettings.copy(Blocks.WATER)){};
+
+	public static final FlowableFluid MAGIC_FLUID = Registry.register(Registry.FLUID, new Identifier(MODID, "liquid_magic"), new MagicFluid.Still());
+	public static final FlowableFluid MAGIC_FLUID_FLOWING = Registry.register(Registry.FLUID, new Identifier(MODID, "liquid_magic_flowing"), new MagicFluid.Flowing());
+	public static final FluidBlock MAGIC_FLUID_BLOCK = new FluidBlock(MAGIC_FLUID, FabricBlockSettings.copy(Blocks.WATER)){};
+
+	public static final FlowableFluid REDSTONE_FLUID = Registry.register(Registry.FLUID, new Identifier(MODID, "liquid_redstone"), new RedstoneFluid.Still());
+	public static final FlowableFluid REDSTONE_FLUID_FLOWING = Registry.register(Registry.FLUID, new Identifier(MODID, "liquid_redstone_flowing"), new RedstoneFluid.Flowing());
+	public static final FluidBlock REDSTONE_FLUID_BLOCK = new FluidBlock(REDSTONE_FLUID, FabricBlockSettings.copy(Blocks.WATER)){};
 
 	// Armor Materials
 	public static final ArmorMaterial REDSTONE_ARMOR_MATERIAL = new RedstoneArmorMaterial();
+
+	// Buckets
+	public static final Item EXPERIENCE_BUCKET = Registry.register(Registry.ITEM, new Identifier(MODID, "experience_bucket"), new BucketItem(EXPERIENCE_FLUID, new Item.Settings().recipeRemainder(Items.BUCKET).maxCount(1)));
+	public static final Item MAGIC_BUCKET = Registry.register(Registry.ITEM, new Identifier(MODID, "magic_bucket"), new BucketItem(MAGIC_FLUID, new Item.Settings().recipeRemainder(Items.BUCKET).maxCount(1)));
+	public static final Item REDSTONE_BUCKET = Registry.register(Registry.ITEM, new Identifier(MODID, "redstone_bucket"), new BucketItem(REDSTONE_FLUID, new Item.Settings().recipeRemainder(Items.BUCKET).maxCount(1)));
 
 	// Gui Handlers - Needs to be run on both client and server for gui open screen to work
 	public static final TeleporterGuiHandler<TeleporterGui> teleporterGuiHandler = new TeleporterGuiHandler<>();
@@ -89,11 +98,6 @@ public class Main implements ModInitializer {
 		Registry.register(Registry.ITEM, new Identifier(MODID, "edible_power"), EDIBLE_POWER);
 		Registry.register(Registry.ITEM, new Identifier(MODID, "redstone_ingot"), REDSTONE_INGOT);
 
-		// Buckets
-		Registry.register(Registry.ITEM, new Identifier(MODID, "experience_bucket"), EXPERIENCE_BUCKET);
-		Registry.register(Registry.ITEM, new Identifier(MODID, "magic_bucket"), MAGIC_BUCKET);
-		Registry.register(Registry.ITEM, new Identifier(MODID, "redstone_bucket"), REDSTONE_BUCKET);
-
 		// Tools
 		Registry.register(Registry.ITEM, new Identifier(MODID, "powered_sword"), POWERED_SWORD);
 		Registry.register(Registry.ITEM, new Identifier(MODID, "powered_pickaxe"), POWERED_PICKAXE);
@@ -111,14 +115,9 @@ public class Main implements ModInitializer {
 		Registry.register(Registry.ITEM, new Identifier(MODID, "teleporter"), new BlockItem(TELEPORTER, new Item.Settings().group(MACHINERY_GROUP)));
 
 		// Register Fluids
-//		Registry.register(Registry.FLUID, new Identifier(MODID, "liquid_experience"), EXPERIENCE_FLUID);
-//		Registry.register(Registry.BLOCK, new Identifier(MODID, "liquid_experience"), EXPERIENCE_FLUID_BLOCK);
-//
-//		Registry.register(Registry.FLUID, new Identifier(MODID, "liquid_magic"), MAGIC_FLUID);
-//		Registry.register(Registry.BLOCK, new Identifier(MODID, "liquid_magic"), MAGIC_FLUID_BLOCK);
-//
-//		Registry.register(Registry.FLUID, new Identifier(MODID, "liquid_redstone"), REDSTONE_FLUID);
-//		Registry.register(Registry.BLOCK, new Identifier(MODID, "liquid_redstone"), REDSTONE_FLUID_BLOCK);
+		Registry.register(Registry.BLOCK, new Identifier(MODID, "liquid_experience"), EXPERIENCE_FLUID_BLOCK);
+		Registry.register(Registry.BLOCK, new Identifier(MODID, "liquid_magic"), MAGIC_FLUID_BLOCK);
+		Registry.register(Registry.BLOCK, new Identifier(MODID, "liquid_redstone"), REDSTONE_FLUID_BLOCK);
 
 		// Register Fuel
 		FuelRegistry.INSTANCE.add(EDIBLE_POWER, 20*10); // 20*3 = 0.3 Items According to REI

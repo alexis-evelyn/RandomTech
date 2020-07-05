@@ -1,0 +1,12 @@
+{
+  "replace": false,
+  "values":
+  [
+    "randomtech:liquid_redstone",
+    "randomtech:liquid_redstone_flowing",
+    "randomtech:liquid_experience",
+    "randomtech:liquid_experience_flowing",
+    "randomtech:liquid_magic",
+    "randomtech:liquid_magic_flowing"
+  ]
+}
