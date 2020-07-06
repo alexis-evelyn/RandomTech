@@ -1,6 +1,6 @@
 {
     "textures": {
-        "particle": "randomtech:block/magic_still"
+        "particle": "randomtech:block/liquids/magic/magic_still"
     }
 }
 

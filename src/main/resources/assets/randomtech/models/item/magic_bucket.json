@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "randomtech:item/magic_bucket"
+    "layer0": "randomtech:item/buckets/magic_bucket"
   }
 }

@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "randomtech:item/powered_boots"
+    "layer0": "randomtech:item/armor/powered_boots"
   }
 }

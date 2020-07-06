@@ -23,7 +23,7 @@ public class FuserBlock extends BlockMachineBase {
                 .of(Materials.FirstMaterial)
                 .breakByHand(false).requiresTool()
                 .breakByTool(FabricToolTags.PICKAXES, ToolMaterials.IRON.getMiningLevel())
-                .sounds(BlockSoundGroup.NETHERITE)
+                .sounds(BlockSoundGroup.SAND)
                 .strength(2.0F, 0.2F));
     }
 

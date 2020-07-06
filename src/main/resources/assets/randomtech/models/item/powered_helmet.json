@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "randomtech:item/powered_helmet"
+    "layer0": "randomtech:item/armor/powered_helmet"
   }
 }

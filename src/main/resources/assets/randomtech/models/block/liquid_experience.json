@@ -1,6 +1,6 @@
 {
     "textures": {
-        "particle": "randomtech:block/experience_still"
+        "particle": "randomtech:block/liquids/experience/experience_still"
     }
 }
 

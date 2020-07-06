@@ -20,7 +20,6 @@ import reborncore.common.util.RebornInventory;
 
 import java.util.Set;
 
-// TODO: Figure out why Minecraft is not finding the block texture!!!
 public class FuserBlockEntity extends PowerAcceptorBlockEntity implements IToolDrop, InventoryProvider, BuiltScreenHandlerProvider {
     // Does Nothing
     int state = 0;

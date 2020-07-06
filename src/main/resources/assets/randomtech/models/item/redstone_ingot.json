@@ -1,6 +1,6 @@
 {
   "parent": "item/handheld",
   "textures": {
-    "layer0": "randomtech:item/redstone_ingot"
+    "layer0": "randomtech:item/ingots/redstone_ingot"
   }
 }
