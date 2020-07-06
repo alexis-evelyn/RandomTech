@@ -17,7 +17,7 @@ public abstract class RedstoneFluid extends BaseFluid {
     @Override
     @Environment(EnvType.CLIENT)
     public ParticleEffect getParticle() {
-        return ParticleTypes.DRIPPING_OBSIDIAN_TEAR;
+        return ParticleTypes.DRIPPING_LAVA;
     }
 
     @Override
@@ -43,6 +43,11 @@ public abstract class RedstoneFluid extends BaseFluid {
     @Override
     protected int getFlowSpeed(WorldView world) {
         return 4;
+    }
+
+    @Override
+    public int getTickRate(WorldView worldView) {
+        return 20;
     }
 
     public static class Still extends RedstoneFluid {
