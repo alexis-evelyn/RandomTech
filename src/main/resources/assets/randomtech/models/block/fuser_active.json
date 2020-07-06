@@ -1,8 +1,9 @@
 {
   "parent": "minecraft:block/orientable",
   "textures": {
-    "top": "randomtech:block/fuser/fuser_top",
+    "top": "randomtech:block/fuser/fuser_side",
     "front": "randomtech:block/fuser/fuser_front_active",
-    "side": "randomtech:block/fuser/fuser_side"
+    "side": "randomtech:block/fuser/fuser_side",
+    "bottom": "randomtech:block/fuser/fuser_side"
   }
 }

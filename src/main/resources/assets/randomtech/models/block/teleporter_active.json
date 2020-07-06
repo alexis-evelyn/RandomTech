@@ -2,7 +2,8 @@
   "parent": "minecraft:block/orientable",
   "textures": {
     "top": "randomtech:block/teleporter/teleporter_top_active",
-    "front": "randomtech:block/teleporter/teleporter_front",
-    "side": "randomtech:block/teleporter/teleporter_side"
+    "front": "randomtech:block/teleporter/teleporter_side",
+    "side": "randomtech:block/teleporter/teleporter_side",
+    "bottom": "randomtech:block/teleporter/teleporter_side"
   }
 }

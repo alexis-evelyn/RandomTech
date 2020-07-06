@@ -1,6 +1,8 @@
 package me.alexisevelyn.randomtech.fluids.blocks;
 
+import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.block.FluidBlock;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
@@ -10,12 +12,22 @@ import net.minecraft.fluid.FlowableFluid;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
+import java.util.function.ToIntFunction;
+
 public class ExperienceFluidBlock extends BaseFluidBlock {
     int luck_level = 3;
     int glow_level = 1;
 
-    protected ExperienceFluidBlock(FlowableFluid fluid, Settings settings) {
-        super(fluid, settings);
+    protected ExperienceFluidBlock(FlowableFluid fluid) {
+        super(fluid, FabricBlockSettings
+                .copy(Blocks.WATER)
+                .lightLevel(getLightLevel()));
+    }
+
+    public static ToIntFunction<BlockState> getLightLevel() {
+        return (state) -> {
+            return 15;
+        };
     }
 
     @Override

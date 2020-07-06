@@ -24,6 +24,7 @@ import reborncore.api.blockentity.InventoryProvider;
 import reborncore.client.screen.BuiltScreenHandlerProvider;
 import reborncore.client.screen.builder.BuiltScreenHandler;
 import reborncore.client.screen.builder.ScreenHandlerBuilder;
+import reborncore.common.blocks.BlockMachineBase;
 import reborncore.common.powerSystem.PowerAcceptorBlockEntity;
 import reborncore.common.powerSystem.PowerSystem;
 import reborncore.common.util.RebornInventory;
@@ -141,10 +142,8 @@ public class TeleporterBlockEntity extends PowerAcceptorBlockEntity implements I
             return;
         }
 
-        //if (world.getTime() % 20 == 0) {
-            //world.setBlockState(pos, world.getBlockState(pos).with(BlockMachineBase.ACTIVE, false));
-            //addEnergy(energyAddend);
-        //}
+        if (world.getTime() % 20 == 0)
+            updateEnergyModelState();
 
         PlayerEntity playerEntity = world.getClosestPlayer(getPos().getX(), getPos().getY(), getPos().getZ(), 2, false);
 
@@ -153,14 +152,14 @@ public class TeleporterBlockEntity extends PowerAcceptorBlockEntity implements I
     }
 
     private void teleportPlayer(PlayerEntity playerEntity) {
-        ItemStack inputItem = inventory.getStack(inputSlot);
-
-        if (isTRFrequencyTransmitter(inputItem) || isTeleporterItem(inputItem)) {
+        if (hasValidTeleporterItem()) {
             // Send Alert if Not Enough Energy
             if (!hasEnoughEnergy()) {
                 alertNotEnoughEnergy(playerEntity);
                 return;
             }
+
+            ItemStack inputItem = inventory.getStack(inputSlot);
 
             // {"tag": {"pos": {"pos": ["I", 9, 55, 12], "dimension": "minecraft:overworld"}}}
             CompoundTag itemTag = inputItem.getTag();
@@ -233,6 +232,23 @@ public class TeleporterBlockEntity extends PowerAcceptorBlockEntity implements I
 
     public boolean hasEnoughEnergy() {
         return getEnergy() >= (-1 * energyAddend);
+    }
+
+    public boolean hasValidTeleporterItem() {
+        ItemStack inputItem = inventory.getStack(inputSlot);
+
+        return isTRFrequencyTransmitter(inputItem) || isTeleporterItem(inputItem);
+    }
+
+    // Used to Update Visible Texture of Block
+    public void updateEnergyModelState() {
+        if (world == null)
+            return;
+
+        if (hasEnoughEnergy() && hasValidTeleporterItem())
+            world.setBlockState(pos, world.getBlockState(pos).with(BlockMachineBase.ACTIVE, true));
+        else
+            world.setBlockState(pos, world.getBlockState(pos).with(BlockMachineBase.ACTIVE, false));
     }
 
     @Override
