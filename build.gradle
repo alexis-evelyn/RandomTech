@@ -12,12 +12,16 @@ group = project.maven_group
 
 repositories {
 	maven {
-		name = "Hywla"
-		url = "https://maven.tehnut.info/"
+		name = "Patchouli"
+		url = "https://maven.blamejared.com"
 	}
 	maven {
 		name = "Github Repos"
 		url = "https://jitpack.io/"
+	}
+	maven {
+		name = "Hywla"
+		url = "https://maven.tehnut.info/"
 	}
 }
 
@@ -53,6 +57,9 @@ dependencies {
 
 	// AppleSkin
 	modRuntime "com.github.squeek502:AppleSkin:${project.appleskin_version}"
+
+	// Patchouli API
+	modApi "vazkii.patchouli:Patchouli:${project.patchouli_version}"
 
 	// PSA: Some older mods, compiled on Loom 0.2.1, might have outdated Maven POMs.
 	// You may need to force-disable transitiveness on them.
