@@ -1,6 +1,7 @@
 package me.alexisevelyn.randomtech;
 
 import me.alexisevelyn.randomtech.armormaterials.RedstoneArmorMaterial;
+import me.alexisevelyn.randomtech.blocks.FuserBlock;
 import me.alexisevelyn.randomtech.blocks.TeleporterBlock;
 import me.alexisevelyn.randomtech.fluids.ExperienceFluid;
 import me.alexisevelyn.randomtech.fluids.MagicFluid;
@@ -8,6 +9,8 @@ import me.alexisevelyn.randomtech.fluids.RedstoneFluid;
 import me.alexisevelyn.randomtech.fluids.blocks.ExperienceFluidBlock;
 import me.alexisevelyn.randomtech.fluids.blocks.MagicFluidBlock;
 import me.alexisevelyn.randomtech.fluids.blocks.RedstoneFluidBlock;
+import me.alexisevelyn.randomtech.guis.FuserGui;
+import me.alexisevelyn.randomtech.guis.FuserGuiHandler;
 import me.alexisevelyn.randomtech.guis.TeleporterGui;
 import me.alexisevelyn.randomtech.guis.TeleporterGuiHandler;
 import me.alexisevelyn.randomtech.items.EdiblePower;
@@ -37,6 +40,7 @@ public class Main implements ModInitializer {
 
 	// Blocks
 	public static final Block TELEPORTER = new TeleporterBlock();
+	public static final Block FUSER = new FuserBlock();
 
 	// Item Groups
 	public static ItemGroup MACHINERY_GROUP = FabricItemGroupBuilder.build(
@@ -80,6 +84,7 @@ public class Main implements ModInitializer {
 
 	// Gui Handlers - Needs to be run on both client and server for gui open screen to work
 	public static final TeleporterGuiHandler<TeleporterGui> teleporterGuiHandler = new TeleporterGuiHandler<>();
+	public static final FuserGuiHandler<FuserGui> fuserGuiHandler = new FuserGuiHandler<>();
 
 	// Force Load BlockEntities.java Early On
 	// This is important to make sure that BlockEntities are loaded before a world is loaded
@@ -95,6 +100,7 @@ public class Main implements ModInitializer {
 
 		// Blocks
 		Registry.register(Registry.BLOCK, new Identifier(MODID, "teleporter"), TELEPORTER);
+		Registry.register(Registry.BLOCK, new Identifier(MODID, "fuser"), FUSER);
 
 		// Items
 		Registry.register(Registry.ITEM, new Identifier(MODID, "teleporter_control"), TELEPORTER_CONTROL);
@@ -116,6 +122,7 @@ public class Main implements ModInitializer {
 
 		// ItemBlocks
 		Registry.register(Registry.ITEM, new Identifier(MODID, "teleporter"), new BlockItem(TELEPORTER, new Item.Settings().group(MACHINERY_GROUP)));
+		Registry.register(Registry.ITEM, new Identifier(MODID, "fuser"), new BlockItem(FUSER, new Item.Settings().group(MACHINERY_GROUP)));
 
 		// Register Fluids
 		Registry.register(Registry.BLOCK, new Identifier(MODID, "liquid_experience"), EXPERIENCE_FLUID_BLOCK);
