@@ -1,5 +1,6 @@
 package me.alexisevelyn.randomtech.fluids.blocks;
 
+import me.alexisevelyn.randomtech.fluids.RedstoneFluid;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -25,7 +26,7 @@ public class RedstoneFluidBlock extends BaseFluidBlock {
 
     public static ToIntFunction<BlockState> getLightLevel() {
         return (state) -> {
-            return 15;
+            return getLightLevel(state.get(LEVEL));
         };
     }
 

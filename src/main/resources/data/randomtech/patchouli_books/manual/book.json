@@ -16,7 +16,7 @@
   "creative_tab": "machinery_group",
   "pause_game": true,
   "show_toasts": true,
-  "use_blocky_font": true,
+  "use_blocky_font": false,
   "dont_generate_book": true,
   "custom_book_item": "randomtech:manual"
 }

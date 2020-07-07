@@ -1,6 +1,8 @@
 {
   "itemGroup.randomtech.machinery_group": "Random Tech",
 
+  "item.randomtech.manual": "Manual",
+
   "item.randomtech.teleporter_control": "Teleporter Linker",
   "item.randomtech.edible_power": "Edible Power",
   "item.randomtech.redstone_ingot": "Redstone Ingot",
@@ -47,9 +49,14 @@
   "text.autoconfig.randomtech.option.stuff.a": "Useless Option A!!!",
   "text.autoconfig.randomtech.option.stuff.b": "Useless Option B!!!",
 
-  "item.randomtech.manual": "Manual",
   "patchouli.manual.name": "Random Tech Manual",
   "patchouli.manual.landing_text": "If you want a refund of the materials, please cheat them in for now!!!",
   "patchouli.manual.subtitle": "Nothing Here Yet!!!",
-  "patchouli.install.fail": "Patchouli is not installed. Cannot open %s"
+  "patchouli.install.fail": "Patchouli is not installed. Cannot open %s",
+
+  "patchouli.manual.chapter.machines.name": "Machines",
+  "patchouli.manual.chapter.machines.description": "Nothing Here Yet!!!",
+
+  "patchouli.manual.chapter.getting_started.name": "Getting Started",
+  "patchouli.manual.chapter.getting_started.description": "Nothing Here Yet!!!"
 }

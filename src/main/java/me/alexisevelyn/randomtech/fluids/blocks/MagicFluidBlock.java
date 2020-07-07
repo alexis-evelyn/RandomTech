@@ -26,7 +26,7 @@ public class MagicFluidBlock extends BaseFluidBlock {
 
     public static ToIntFunction<BlockState> getLightLevel() {
         return (state) -> {
-            return 15;
+            return getLightLevel(state.get(LEVEL));
         };
     }
 

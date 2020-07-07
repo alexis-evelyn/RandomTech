@@ -3,6 +3,7 @@ package me.alexisevelyn.randomtech.blockentities;
 import me.alexisevelyn.randomtech.BlockEntities;
 import me.alexisevelyn.randomtech.Main;
 import me.alexisevelyn.randomtech.RegistryHelper;
+import me.alexisevelyn.randomtech.blocks.TeleporterBlock;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.Inventory;
@@ -11,6 +12,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.state.property.BooleanProperty;
+import net.minecraft.state.property.IntProperty;
 import net.minecraft.text.LiteralText;
 import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
@@ -250,6 +253,34 @@ public class TeleporterBlockEntity extends PowerAcceptorBlockEntity implements I
             world.setBlockState(pos, world.getBlockState(pos).with(BlockMachineBase.ACTIVE, true));
         else
             world.setBlockState(pos, world.getBlockState(pos).with(BlockMachineBase.ACTIVE, false));
+
+        // This exists solely to have dynamic light levels based on Teleporter Energy Stored
+        world.setBlockState(pos, world.getBlockState(pos).with(TeleporterBlock.ENERGY, getEnergyState()));
+    }
+
+    // Convert Current Energy Level to Level Within (Not Exclusive) Range 0 - 15
+    public int getEnergyState() {
+        int minLevel = 0;
+        int maxLevel = 15;
+
+        // Formula Pulled From: https://stackoverflow.com/a/929107/6828099
+        double energyRange = (getMaxPower() - getMinPower());
+        double stateRange = maxLevel - minLevel;
+        int energyState;
+
+        if (energyRange == 0)
+            energyState = 0;
+        else
+        {
+            energyState = (int) ((((getEnergy() - getMinPower()) * stateRange) / energyRange) + minLevel);
+        }
+
+        return energyState;
+    }
+
+    // Future Proofing
+    public int getMinPower() {
+        return 0;
     }
 
     @Override
