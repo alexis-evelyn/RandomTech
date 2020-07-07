@@ -1,10 +1,10 @@
 {
-  "name": "Random Tech Manual",
-  "landing_text": "If you want a refund of the materials, please cheat them in for now!!!",
+  "name": "patchouli.manual.name",
+  "landing_text": "patchouli.manual.landing_text",
+  "i18n": true,
   "version": 0,
-  "subtitle": "Nothing Here Yet!!!",
-  "book_texture": "patchouli:textures/gui/book_red.png",
-  "model": "patchouli:book_red",
+  "subtitle": "patchouli.manual.subtitle",
+  "book_texture": "patchouli:textures/gui/book_purple.png",
   "text_color": "000000",
   "header_color": "333333",
   "nameplate_color": "FFDD00",
@@ -13,8 +13,10 @@
   "progress_bar_color": "FFFF55",
   "progress_bar_background": "DDDDDD",
   "show_progress": true,
-  "creative_tab": "misc",
+  "creative_tab": "machinery_group",
   "pause_game": true,
   "show_toasts": true,
-  "use_blocky_font": false
+  "use_blocky_font": true,
+  "dont_generate_book": true,
+  "custom_book_item": "randomtech:manual"
 }

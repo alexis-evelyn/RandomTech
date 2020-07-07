@@ -45,5 +45,11 @@
   "text.autoconfig.randomtech.option.toggleB": "Useless Option B!!!",
   "text.autoconfig.randomtech.option.stuff": "Moar Stuff!!!",
   "text.autoconfig.randomtech.option.stuff.a": "Useless Option A!!!",
-  "text.autoconfig.randomtech.option.stuff.b": "Useless Option B!!!"
+  "text.autoconfig.randomtech.option.stuff.b": "Useless Option B!!!",
+
+  "item.randomtech.manual": "Manual",
+  "patchouli.manual.name": "Random Tech Manual",
+  "patchouli.manual.landing_text": "If you want a refund of the materials, please cheat them in for now!!!",
+  "patchouli.manual.subtitle": "Nothing Here Yet!!!",
+  "patchouli.install.fail": "Patchouli is not installed. Cannot open %s"
 }

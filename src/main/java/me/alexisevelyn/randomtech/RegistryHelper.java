@@ -16,6 +16,7 @@ import me.alexisevelyn.randomtech.guis.TeleporterGuiHandler;
 import me.alexisevelyn.randomtech.items.EdiblePower;
 import me.alexisevelyn.randomtech.items.TeleporterControlItem;
 import me.alexisevelyn.randomtech.items.armor.ArmorBase;
+import me.alexisevelyn.randomtech.items.books.Manual;
 import me.alexisevelyn.randomtech.items.ingots.RedstoneIngot;
 import me.alexisevelyn.randomtech.items.tools.*;
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
@@ -39,6 +40,8 @@ public class RegistryHelper {
             () -> new ItemStack(TELEPORTER));
 
     // Items
+    public static final Item MANUAL = new Manual(new Item.Settings().group(MACHINERY_GROUP));
+
     public static final Item TELEPORTER_CONTROL = new TeleporterControlItem(new Item.Settings().group(MACHINERY_GROUP).maxCount(1)); // Max Count Sets Stack Size
     public static final Item EDIBLE_POWER = new EdiblePower(new Item.Settings().group(ItemGroup.FOOD).food(Foods.EDIBLE_POWER));
 
@@ -87,6 +90,8 @@ public class RegistryHelper {
         Registry.register(Registry.BLOCK, new Identifier(Main.MODID, "fuser"), FUSER);
 
         // Items
+        Registry.register(Registry.ITEM, new Identifier(Main.MODID, Manual.itemID), MANUAL);
+
         Registry.register(Registry.ITEM, new Identifier(Main.MODID, "teleporter_control"), TELEPORTER_CONTROL);
         Registry.register(Registry.ITEM, new Identifier(Main.MODID, "edible_power"), EDIBLE_POWER);
         Registry.register(Registry.ITEM, new Identifier(Main.MODID, "redstone_ingot"), REDSTONE_INGOT);
