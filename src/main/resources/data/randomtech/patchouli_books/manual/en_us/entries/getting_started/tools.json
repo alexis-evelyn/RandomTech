@@ -1,0 +1,26 @@
+{
+  "name": "Powered Tools",
+  "icon": "randomtech:powered_pickaxe",
+  "category": "getting_started",
+  "sortnum": 2,
+  "pages": [
+    {
+      "type": "text",
+      "text": "Powered tools can be obtained by upgrading diamond tools in the smithing table with a redstone ingot. They are more powerful than even netherite tools, but require power."
+    },
+    {
+      "type": "smithing",
+      "recipe": "randomtech:powered_sword",
+      "recipe2": "randomtech:powered_pickaxe"
+    },
+    {
+      "type": "smithing",
+      "recipe": "randomtech:powered_axe",
+      "recipe2": "randomtech:powered_shovel"
+    },
+    {
+      "type": "smithing",
+      "recipe": "randomtech:powered_hoe"
+    }
+  ]
+}

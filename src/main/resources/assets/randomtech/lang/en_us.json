@@ -52,11 +52,5 @@
   "patchouli.manual.name": "Random Tech Manual",
   "patchouli.manual.landing_text": "If you want a refund of the materials, please cheat them in for now!!!",
   "patchouli.manual.subtitle": "Nothing Here Yet!!!",
-  "patchouli.install.fail": "Patchouli is not installed. Cannot open %s",
-
-  "patchouli.manual.chapter.machines.name": "Machines",
-  "patchouli.manual.chapter.machines.description": "Nothing Here Yet!!!",
-
-  "patchouli.manual.chapter.getting_started.name": "Getting Started",
-  "patchouli.manual.chapter.getting_started.description": "Nothing Here Yet!!!"
+  "patchouli.install.fail": "Patchouli is not installed. Cannot open %s"
 }

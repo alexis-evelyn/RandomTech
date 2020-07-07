@@ -1,0 +1,22 @@
+{
+  "name": "Powered Armor",
+  "icon": "randomtech:powered_helmet",
+  "category": "getting_started",
+  "sortnum": 3,
+  "pages": [
+    {
+      "type": "text",
+      "text": "Powered armor can be obtained by upgrading diamond armor in the smithing table with a redstone ingot. They are more powerful than even netherite armor, but require power."
+    },
+    {
+      "type": "smithing",
+      "recipe": "randomtech:powered_helmet",
+      "recipe2": "randomtech:powered_chestplate"
+    },
+    {
+      "type": "smithing",
+      "recipe": "randomtech:powered_leggings",
+      "recipe2": "randomtech:powered_boots"
+    }
+  ]
+}

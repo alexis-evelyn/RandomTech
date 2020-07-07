@@ -1,0 +1,17 @@
+{
+  "name": "Redstone Ingot",
+  "icon": "randomtech:redstone_ingot",
+  "category": "getting_started",
+  "sortnum": 1,
+  "pages": [
+    {
+      "type": "text",
+      "text": "This redstone ingot will be the basis on how you start using this mod. You should already know how to make a redstone ingot, but if you didn't craft this manual, here's the recipe."
+    },
+    {
+      "type": "smelting",
+      "recipe": "randomtech:redstone_ingot_furnace",
+      "text": "This can be produced in either a furnace or a blast furnace. Modded furnaces should work too."
+    }
+  ]
+}
