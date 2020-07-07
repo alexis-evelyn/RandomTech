@@ -13,9 +13,5 @@ public class Main implements ModInitializer {
 		// Client and Server Side!!!
 
 		registryHelper.register();
-
-
-
-		// vazkii.patchouli.api.PatchouliAPI;
 	}
 }

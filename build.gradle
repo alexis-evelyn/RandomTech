@@ -59,7 +59,21 @@ dependencies {
 	modRuntime "com.github.squeek502:AppleSkin:${project.appleskin_version}"
 
 	// Patchouli API
-	modApi "vazkii.patchouli:Patchouli:${project.patchouli_version}"
+	// modApi "vazkii.patchouli:Patchouli:${project.patchouli_version}" - 1.16-37
+	modApi "vazkii.patchouli:Patchouli_1.16-fabric:${project.patchouli_version}"
+
+	// Used to speed Minecraft up in dev environment. Breaks compatibility with old worlds
+	modRuntime "com.github.SuperCoder7979:databreaker:${project.databreaker_version}"
+
+	// Improves Performance of FPS and Rendering Engine
+	// Currently breaks fluid rendering - See https://github.com/jellysquid3/sodium-fabric/issues/5
+	// modRuntime "com.github.jellysquid3:sodium-fabric:${project.sodium_version}"
+
+	// General Purpose Performance Improvement
+	modRuntime "com.github.jellysquid3:lithium-fabric:${project.lithium_version}"
+
+	// Improves performance of lighting engine
+	modRuntime "com.github.jellysquid3:phosphor-fabric:${project.phosphor_version}"
 
 	// PSA: Some older mods, compiled on Loom 0.2.1, might have outdated Maven POMs.
 	// You may need to force-disable transitiveness on them.

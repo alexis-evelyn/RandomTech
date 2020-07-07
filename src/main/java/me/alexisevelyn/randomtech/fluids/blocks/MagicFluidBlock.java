@@ -38,7 +38,10 @@ public class MagicFluidBlock extends BaseFluidBlock {
             LivingEntity livingEntity = (LivingEntity) entity;
 
             livingEntity.addStatusEffect(new StatusEffectInstance(StatusEffects.LEVITATION, 20 * 2 * levitation_level, levitation_level - 1));
-            livingEntity.addStatusEffect(new StatusEffectInstance(StatusEffects.NIGHT_VISION, 20 * 4 * night_vision_level, night_vision_level - 1));
+
+            // When repeatedly applying Night Vision, the sky flashes rapidly. To prevent potential seizures, we will only apply Night Vision once it runs out.
+            if (!livingEntity.hasStatusEffect(StatusEffects.NIGHT_VISION))
+                livingEntity.addStatusEffect(new StatusEffectInstance(StatusEffects.NIGHT_VISION, 20 * 2 * night_vision_level, night_vision_level - 1));
         }
     }
 }
