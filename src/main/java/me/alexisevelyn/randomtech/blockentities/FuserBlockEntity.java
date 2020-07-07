@@ -2,6 +2,7 @@ package me.alexisevelyn.randomtech.blockentities;
 
 import me.alexisevelyn.randomtech.BlockEntities;
 import me.alexisevelyn.randomtech.Main;
+import me.alexisevelyn.randomtech.RegistryHelper;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.Inventory;
@@ -56,7 +57,7 @@ public class FuserBlockEntity extends PowerAcceptorBlockEntity implements IToolD
     // Used for TR's Wrench
     @Override
     public ItemStack getToolDrop(PlayerEntity playerEntity) {
-        return new ItemStack(Main.FUSER);
+        return new ItemStack(RegistryHelper.FUSER);
     }
 
     @Override

@@ -1,5 +1,6 @@
 package me.alexisevelyn.randomtech.rei.plugin.recipedisplays;
 
+import me.alexisevelyn.randomtech.Main;
 import me.shedaniel.rei.api.EntryStack;
 import me.shedaniel.rei.api.RecipeDisplay;
 import net.minecraft.util.Identifier;
@@ -25,7 +26,7 @@ public class FirstRecipeDisplay implements RecipeDisplay {
 
     @Override
     public Identifier getRecipeCategory() {
-        return new Identifier("random_tech", "first_recipe_display");
+        return new Identifier(Main.MODID, "first_recipe_display");
     }
 
     @Override

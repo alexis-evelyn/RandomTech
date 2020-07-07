@@ -2,6 +2,7 @@ package me.alexisevelyn.randomtech.waila.machines;
 
 import mcp.mobius.waila.api.*;
 import me.alexisevelyn.randomtech.Main;
+import me.alexisevelyn.randomtech.RegistryHelper;
 import me.alexisevelyn.randomtech.blocks.TeleporterBlock;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.item.ItemStack;
@@ -42,7 +43,7 @@ public class Machines implements IComponentProvider, IServerDataProvider<BlockEn
         boolean configDisplayPower = config.get(WailaRegistry.CONFIG_DISPLAY_POWER, true);
 
         if (configDisplayPower) {
-            if (accessor.getBlock() == Main.TELEPORTER) {
+            if (accessor.getBlock() == RegistryHelper.TELEPORTER) {
                 TeleporterBlock teleporterBlock = (TeleporterBlock) accessor.getBlock();
 
                 double energy = teleporterBlock.getPower(accessor.getBlockState(), accessor.getWorld(), accessor.getPosition());

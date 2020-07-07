@@ -1,6 +1,7 @@
 package me.alexisevelyn.randomtech.toolmaterials;
 
 import me.alexisevelyn.randomtech.Main;
+import me.alexisevelyn.randomtech.RegistryHelper;
 import net.minecraft.item.ToolMaterial;
 import net.minecraft.item.ToolMaterials;
 import net.minecraft.recipe.Ingredient;
@@ -33,6 +34,6 @@ public class FirstToolMaterial implements ToolMaterial {
 
     @Override
     public Ingredient getRepairIngredient() {
-        return Ingredient.ofItems(Main.EDIBLE_POWER);
+        return Ingredient.ofItems(RegistryHelper.REDSTONE_INGOT);
     }
 }

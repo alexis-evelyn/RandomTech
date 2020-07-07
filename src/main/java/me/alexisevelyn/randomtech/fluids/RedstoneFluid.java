@@ -1,6 +1,7 @@
 package me.alexisevelyn.randomtech.fluids;
 
 import me.alexisevelyn.randomtech.Main;
+import me.alexisevelyn.randomtech.RegistryHelper;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.block.BlockState;
@@ -22,22 +23,22 @@ public abstract class RedstoneFluid extends BaseFluid {
 
     @Override
     public Fluid getFlowing() {
-        return Main.REDSTONE_FLUID_FLOWING;
+        return RegistryHelper.REDSTONE_FLUID_FLOWING;
     }
 
     @Override
     public Fluid getStill() {
-        return Main.REDSTONE_FLUID;
+        return RegistryHelper.REDSTONE_FLUID;
     }
 
     @Override
     public Item getBucketItem() {
-        return Main.REDSTONE_BUCKET;
+        return RegistryHelper.REDSTONE_BUCKET;
     }
 
     @Override
     protected BlockState toBlockState(FluidState state) {
-        return Main.REDSTONE_FLUID_BLOCK.getDefaultState().with(Properties.LEVEL_15, BaseFluid.calculateLevel(state));
+        return RegistryHelper.REDSTONE_FLUID_BLOCK.getDefaultState().with(Properties.LEVEL_15, BaseFluid.calculateLevel(state));
     }
 
     @Override

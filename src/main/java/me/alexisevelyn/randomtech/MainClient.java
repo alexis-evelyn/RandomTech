@@ -34,14 +34,14 @@ public class MainClient implements ClientModInitializer {
 		AutoConfig.register(MainScreen.class, GsonConfigSerializer::new);
 
 		// Color is the HTML Color Code Formatted as 0xHTML-Color-Code. For example, #4CC248 becomes 0x4CC248
-		setupFluidRendering(Main.REDSTONE_FLUID, Main.REDSTONE_FLUID_FLOWING, new Identifier("randomtech", "redstone"), 0xFFFFFF);
-		setupFluidRendering(Main.MAGIC_FLUID, Main.MAGIC_FLUID_FLOWING, new Identifier("randomtech", "magic"), 0xFFFFFF);
-		setupFluidRendering(Main.EXPERIENCE_FLUID, Main.EXPERIENCE_FLUID_FLOWING, new Identifier("randomtech", "experience"), 0xFFFFFF);
+		setupFluidRendering(RegistryHelper.REDSTONE_FLUID, RegistryHelper.REDSTONE_FLUID_FLOWING, new Identifier("randomtech", "redstone"), 0xFFFFFF);
+		setupFluidRendering(RegistryHelper.MAGIC_FLUID, RegistryHelper.MAGIC_FLUID_FLOWING, new Identifier("randomtech", "magic"), 0xFFFFFF);
+		setupFluidRendering(RegistryHelper.EXPERIENCE_FLUID, RegistryHelper.EXPERIENCE_FLUID_FLOWING, new Identifier("randomtech", "experience"), 0xFFFFFF);
 
 		// Can use RenderLayer.getTranslucent()
-		BlockRenderLayerMap.INSTANCE.putFluids(RenderLayer.getSolid(), Main.REDSTONE_FLUID, Main.REDSTONE_FLUID_FLOWING);
-		BlockRenderLayerMap.INSTANCE.putFluids(RenderLayer.getSolid(), Main.MAGIC_FLUID, Main.MAGIC_FLUID_FLOWING);
-		BlockRenderLayerMap.INSTANCE.putFluids(RenderLayer.getSolid(), Main.EXPERIENCE_FLUID, Main.EXPERIENCE_FLUID_FLOWING);
+		BlockRenderLayerMap.INSTANCE.putFluids(RenderLayer.getSolid(), RegistryHelper.REDSTONE_FLUID, RegistryHelper.REDSTONE_FLUID_FLOWING);
+		BlockRenderLayerMap.INSTANCE.putFluids(RenderLayer.getSolid(), RegistryHelper.MAGIC_FLUID, RegistryHelper.MAGIC_FLUID_FLOWING);
+		BlockRenderLayerMap.INSTANCE.putFluids(RenderLayer.getSolid(), RegistryHelper.EXPERIENCE_FLUID, RegistryHelper.EXPERIENCE_FLUID_FLOWING);
 	}
 
 	// From Tutorial at https://fabricmc.net/wiki/tutorial:fluids

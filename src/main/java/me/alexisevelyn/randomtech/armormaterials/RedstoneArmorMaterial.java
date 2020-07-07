@@ -1,6 +1,7 @@
 package me.alexisevelyn.randomtech.armormaterials;
 
 import me.alexisevelyn.randomtech.Main;
+import me.alexisevelyn.randomtech.RegistryHelper;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.ArmorMaterial;
 import net.minecraft.recipe.Ingredient;
@@ -33,7 +34,7 @@ public class RedstoneArmorMaterial implements ArmorMaterial {
 
     @Override
     public Ingredient getRepairIngredient() {
-        return Ingredient.ofItems(Main.EDIBLE_POWER);
+        return Ingredient.ofItems(RegistryHelper.REDSTONE_INGOT);
     }
 
     // Used for Finding Armor Models

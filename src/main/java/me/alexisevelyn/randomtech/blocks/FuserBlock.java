@@ -2,6 +2,7 @@ package me.alexisevelyn.randomtech.blocks;
 
 import me.alexisevelyn.randomtech.Main;
 import me.alexisevelyn.randomtech.Materials;
+import me.alexisevelyn.randomtech.RegistryHelper;
 import me.alexisevelyn.randomtech.blockentities.FuserBlockEntity;
 import me.alexisevelyn.randomtech.blockentities.TeleporterBlockEntity;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
@@ -34,7 +35,7 @@ public class FuserBlock extends BlockMachineBase {
 
     @Override
     public IMachineGuiHandler getGui() {
-        return Main.fuserGuiHandler;
+        return RegistryHelper.fuserGuiHandler;
     }
 
     @Override

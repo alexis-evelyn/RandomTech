@@ -1,5 +1,6 @@
 package me.alexisevelyn.randomtech.rei.plugin;
 
+import me.alexisevelyn.randomtech.Main;
 import me.alexisevelyn.randomtech.rei.plugin.recipedisplays.FirstRecipeDisplay;
 import me.shedaniel.rei.api.DisplayHelper;
 import me.shedaniel.rei.api.EntryRegistry;
@@ -17,7 +18,7 @@ public class REIPlugin implements REIPluginV0 {
 
     @Override
     public Identifier getPluginIdentifier() {
-        return new Identifier("random_tech", "rei_plugin");
+        return new Identifier(Main.MODID, "rei_plugin");
     }
 
     @Override

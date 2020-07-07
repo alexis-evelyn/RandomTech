@@ -1,6 +1,7 @@
 package me.alexisevelyn.randomtech.fluids;
 
 import me.alexisevelyn.randomtech.Main;
+import me.alexisevelyn.randomtech.RegistryHelper;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.block.BlockState;
@@ -22,22 +23,22 @@ public abstract class ExperienceFluid extends BaseFluid {
 
     @Override
     public Fluid getFlowing() {
-        return Main.EXPERIENCE_FLUID_FLOWING;
+        return RegistryHelper.EXPERIENCE_FLUID_FLOWING;
     }
 
     @Override
     public Fluid getStill() {
-        return Main.EXPERIENCE_FLUID;
+        return RegistryHelper.EXPERIENCE_FLUID;
     }
 
     @Override
     public Item getBucketItem() {
-        return Main.EXPERIENCE_BUCKET;
+        return RegistryHelper.EXPERIENCE_BUCKET;
     }
 
     @Override
     protected BlockState toBlockState(FluidState state) {
-        return Main.EXPERIENCE_FLUID_BLOCK.getDefaultState().with(Properties.LEVEL_15, BaseFluid.calculateLevel(state));
+        return RegistryHelper.EXPERIENCE_FLUID_BLOCK.getDefaultState().with(Properties.LEVEL_15, BaseFluid.calculateLevel(state));
     }
 
     @Override

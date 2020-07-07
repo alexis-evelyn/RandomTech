@@ -2,6 +2,7 @@ package me.alexisevelyn.randomtech.blockentities;
 
 import me.alexisevelyn.randomtech.BlockEntities;
 import me.alexisevelyn.randomtech.Main;
+import me.alexisevelyn.randomtech.RegistryHelper;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.Inventory;
@@ -72,7 +73,7 @@ public class TeleporterBlockEntity extends PowerAcceptorBlockEntity implements I
     // Used for TR's Wrench
     @Override
     public ItemStack getToolDrop(PlayerEntity playerEntity) {
-        return new ItemStack(Main.TELEPORTER);
+        return new ItemStack(RegistryHelper.TELEPORTER);
     }
 
     @Override
@@ -209,7 +210,7 @@ public class TeleporterBlockEntity extends PowerAcceptorBlockEntity implements I
 
     // This checks for my Teleporter Control Item (used if TechReborn is not installed)
     public boolean isTeleporterItem(ItemStack item) {
-        return item.getItem().equals(Main.TELEPORTER_CONTROL);
+        return item.getItem().equals(RegistryHelper.TELEPORTER_CONTROL);
     }
 
     public boolean isPlayerReadyToTeleport(PlayerEntity playerEntity) {

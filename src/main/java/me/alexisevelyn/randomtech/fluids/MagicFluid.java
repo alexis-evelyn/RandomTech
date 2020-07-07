@@ -1,6 +1,7 @@
 package me.alexisevelyn.randomtech.fluids;
 
 import me.alexisevelyn.randomtech.Main;
+import me.alexisevelyn.randomtech.RegistryHelper;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.block.BlockState;
@@ -23,22 +24,22 @@ public abstract class MagicFluid extends BaseFluid {
 
     @Override
     public Fluid getFlowing() {
-        return Main.MAGIC_FLUID_FLOWING;
+        return RegistryHelper.MAGIC_FLUID_FLOWING;
     }
 
     @Override
     public Fluid getStill() {
-        return Main.MAGIC_FLUID;
+        return RegistryHelper.MAGIC_FLUID;
     }
 
     @Override
     public Item getBucketItem() {
-        return Main.MAGIC_BUCKET;
+        return RegistryHelper.MAGIC_BUCKET;
     }
 
     @Override
     protected BlockState toBlockState(FluidState state) {
-        return Main.MAGIC_FLUID_BLOCK.getDefaultState().with(Properties.LEVEL_15, BaseFluid.calculateLevel(state));
+        return RegistryHelper.MAGIC_FLUID_BLOCK.getDefaultState().with(Properties.LEVEL_15, BaseFluid.calculateLevel(state));
     }
 
     @Override
