@@ -1,0 +1,14 @@
+{
+  "type": "randomtech:fuser",
+  "power": 100,
+  "time": 50,
+  "ingredients": [
+    {
+      "item": "minecraft:lapis_lazuli"
+    }
+  ],
+  "result": {
+    "fluid": "randomtech:liquid_magic",
+    "millibuckets": 100
+  }
+}

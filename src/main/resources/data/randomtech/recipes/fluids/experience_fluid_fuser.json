@@ -1,0 +1,14 @@
+{
+  "type": "randomtech:fuser",
+  "power": 100,
+  "time": 50,
+  "ingredients": [
+    {
+      "item": "randomtech:redstone_ingot"
+    }
+  ],
+  "result": {
+    "fluid": "randomtech:liquid_redstone",
+    "millibuckets": 1000
+  }
+}

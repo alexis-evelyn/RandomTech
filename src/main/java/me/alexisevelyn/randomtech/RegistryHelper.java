@@ -83,6 +83,7 @@ public class RegistryHelper {
     // Force Load BlockEntities.java Early On
     // This is important to make sure that BlockEntities are loaded before a world is loaded
     public static final BlockEntities blockEntities = new BlockEntities();
+    public static final Recipes customRecipes = new Recipes();
     
     protected void register() {
         // Blocks

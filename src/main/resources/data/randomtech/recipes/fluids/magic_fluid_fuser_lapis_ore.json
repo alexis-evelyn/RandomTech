@@ -1,0 +1,14 @@
+{
+  "type": "randomtech:fuser",
+  "power": 100,
+  "time": 100,
+  "ingredients": [
+    {
+      "item": "minecraft:lapis_ore"
+    }
+  ],
+  "result": {
+    "fluid": "randomtech:liquid_magic",
+    "millibuckets": 1000
+  }
+}

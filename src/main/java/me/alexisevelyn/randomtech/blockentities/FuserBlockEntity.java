@@ -4,33 +4,44 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import me.alexisevelyn.randomtech.BlockEntities;
 import me.alexisevelyn.randomtech.RegistryHelper;
+import me.alexisevelyn.randomtech.crafters.FuserRecipeCrafter;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundTag;
 import reborncore.api.IToolDrop;
 import reborncore.api.blockentity.InventoryProvider;
+import reborncore.api.recipe.IRecipeCrafterProvider;
 import reborncore.client.screen.BuiltScreenHandlerProvider;
 import reborncore.client.screen.builder.BuiltScreenHandler;
 import reborncore.client.screen.builder.ScreenHandlerBuilder;
+import reborncore.common.crafting.RebornRecipe;
 import reborncore.common.fluid.FluidValue;
+import reborncore.common.recipes.RecipeCrafter;
 import reborncore.common.util.RebornInventory;
 import reborncore.common.util.Tank;
 
-public class FuserBlockEntity extends FluidMachineBlockEntityBase implements IToolDrop, InventoryProvider, BuiltScreenHandlerProvider {
+public class FuserBlockEntity extends FluidMachineBlockEntityBase implements IToolDrop, InventoryProvider, BuiltScreenHandlerProvider, IRecipeCrafterProvider {
     // Fluid Values
     // JsonElement buckets = new Gson().toJsonTree(5 * 1000);
     JsonObject buckets = new JsonParser().parse("{'buckets': 5}").getAsJsonObject();
 
     FluidValue maxFluidCapacity = FluidValue.parseFluidValue(buckets);
+
+    FuserRecipeCrafter crafter;
+
     // Slots
-    int inputSlot = 0;
+    int[] inputSlots = { 0 };
+
+    int inputSlot = inputSlots[0];
     int outputSlot = 1;
 
     public FuserBlockEntity() {
         super(BlockEntities.FUSER);
         this.inventory = new RebornInventory<>(2, "FuserBlockEntity", 64, this);
         this.tank = new Tank("TankStorage", maxFluidCapacity, this);
+
+        crafter = new FuserRecipeCrafter(this, inventory, inputSlots);
     }
 
     // Used for TR's Wrench
@@ -50,6 +61,7 @@ public class FuserBlockEntity extends FluidMachineBlockEntityBase implements ITo
                 .fluidSlot(inputSlot, 8, 72)
                 .outputSlot(outputSlot, 26, 72)
                 .syncEnergyValue()
+                .syncCrafterValue()
                 .sync(tank)
                 .addInventory()
                 .create(this, syncID);
@@ -85,5 +97,25 @@ public class FuserBlockEntity extends FluidMachineBlockEntityBase implements ITo
         tank.write(compoundTag);
 
         return compoundTag;
+    }
+
+    @Override
+    public RecipeCrafter getRecipeCrafter() {
+        return crafter;
+    }
+
+    @Override
+    public boolean canCraft(RebornRecipe rebornRecipe) {
+        return true;
+    }
+
+    @Override
+    public boolean isStackValid(int slotID, ItemStack stack) {
+        return true;
+    }
+
+    @Override
+    public int[] getInputSlots() {
+        return inputSlots;
     }
 }
