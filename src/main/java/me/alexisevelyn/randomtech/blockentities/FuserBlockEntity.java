@@ -3,8 +3,11 @@ package me.alexisevelyn.randomtech.blockentities;
 import me.alexisevelyn.randomtech.BlockEntities;
 import me.alexisevelyn.randomtech.Main;
 import me.alexisevelyn.randomtech.RegistryHelper;
+import me.alexisevelyn.randomtech.fluids.RedstoneFluid;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.fluid.Fluid;
+import net.minecraft.fluid.Fluids;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -16,8 +19,11 @@ import reborncore.api.blockentity.InventoryProvider;
 import reborncore.client.screen.BuiltScreenHandlerProvider;
 import reborncore.client.screen.builder.BuiltScreenHandler;
 import reborncore.client.screen.builder.ScreenHandlerBuilder;
+import reborncore.common.fluid.FluidValue;
+import reborncore.common.fluid.container.FluidInstance;
 import reborncore.common.powerSystem.PowerAcceptorBlockEntity;
 import reborncore.common.util.RebornInventory;
+import reborncore.common.util.Tank;
 
 import java.util.Set;
 
@@ -30,13 +36,53 @@ public class FuserBlockEntity extends PowerAcceptorBlockEntity implements IToolD
     double maxPower = 10000;
     double maxInput = 10000;
 
+    // Fluid Values
+    FluidValue maxFluidCapacity = FluidValue.BUCKET;
+
     // Inventory Slot Markers
+    protected Tank tank;
     RebornInventory<FuserBlockEntity> inventory;
+
+    // Slots
     int inputSlot = 0;
+    int outputSlot = 1;
 
     public FuserBlockEntity() {
         super(BlockEntities.FUSER);
-        this.inventory = new RebornInventory<>(1, "FuserBlockEntity", 1, this);
+        this.inventory = new RebornInventory<>(2, "FuserBlockEntity", 64, this);
+        this.tank = new Tank("TankStorage", maxFluidCapacity, this);
+
+//        tank.setFluid(Fluids.WATER);
+//        tank.setFluidAmount(FluidValue.INFINITE);
+
+        tank.setFluid(RegistryHelper.REDSTONE_FLUID);
+        tank.setFluidAmount(FluidValue.BUCKET);
+    }
+
+    public FluidValue getMaxFluidLevel() {
+        return tank.getCapacity();
+    }
+
+    public FluidValue getFluidLevel() {
+        // tank.getFluidAmount();
+        return tank.getFluidInstance().getAmount();
+    }
+
+    @Override
+    public Tank getTank() {
+        return tank;
+    }
+
+    public FluidInstance getFluid() {
+        return tank.getFluidInstance();
+    }
+
+    public Fluid getFluidType() {
+        return tank.getFluid();
+    }
+
+    public void setFluid(Tank tank) {
+        this.tank.setFluid(tank.getFluid());
     }
 
     @Override
@@ -112,9 +158,11 @@ public class FuserBlockEntity extends PowerAcceptorBlockEntity implements IToolD
                 .hotbar()
                 .addInventory()
                 .blockEntity(this)
-                .slot(inputSlot, 8, 72)
+                .fluidSlot(inputSlot, 8, 72)
+                .outputSlot(outputSlot, 26, 72)
                 .syncEnergyValue()
                 .sync(this::getState, this::setState)
+                .sync(tank)
                 .addInventory()
                 .create(this, syncID);
     }

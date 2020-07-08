@@ -4,7 +4,7 @@ import me.alexisevelyn.randomtech.Main;
 import me.alexisevelyn.randomtech.Materials;
 import me.alexisevelyn.randomtech.RegistryHelper;
 import me.alexisevelyn.randomtech.blockentities.FuserBlockEntity;
-import me.alexisevelyn.randomtech.blockentities.TeleporterBlockEntity;
+import me.alexisevelyn.randomtech.blockentities.FuserBlockEntity;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.fabricmc.fabric.api.tool.attribute.v1.FabricToolTags;
 import net.minecraft.block.BlockState;
@@ -14,8 +14,10 @@ import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
+import org.jetbrains.annotations.Nullable;
 import reborncore.api.blockentity.IMachineGuiHandler;
 import reborncore.common.blocks.BlockMachineBase;
+import reborncore.common.fluid.FluidValue;
 import reborncore.common.powerSystem.PowerAcceptorBlockEntity;
 
 public class FuserBlock extends BlockMachineBase {
@@ -24,7 +26,7 @@ public class FuserBlock extends BlockMachineBase {
                 .of(Materials.FirstMaterial)
                 .breakByHand(false).requiresTool()
                 .breakByTool(FabricToolTags.PICKAXES, ToolMaterials.IRON.getMiningLevel())
-                .sounds(BlockSoundGroup.SAND)
+                .sounds(BlockSoundGroup.NETHERITE)
                 .strength(2.0F, 0.2F));
     }
 
@@ -48,23 +50,45 @@ public class FuserBlock extends BlockMachineBase {
         return PowerAcceptorBlockEntity.calculateComparatorOutputFromEnergy(world.getBlockEntity(pos));
     }
 
-    public double getPower(BlockState state, World world, BlockPos pos) {
-        TeleporterBlockEntity teleporterBlockEntity = (TeleporterBlockEntity) world.getBlockEntity(pos);
+    @Nullable
+    public FluidValue getFluidLevel(BlockState state, World world, BlockPos pos) {
+        FuserBlockEntity fuserBlockEntity = (FuserBlockEntity) world.getBlockEntity(pos);
 
-        if (teleporterBlockEntity == null) {
+        if (fuserBlockEntity == null) {
+            return null;
+        }
+
+        return fuserBlockEntity.getFluidLevel();
+    }
+
+    @Nullable
+    public FluidValue getMaxFluidLevel(BlockState state, World world, BlockPos pos) {
+        FuserBlockEntity fuserBlockEntity = (FuserBlockEntity) world.getBlockEntity(pos);
+
+        if (fuserBlockEntity == null) {
+            return null;
+        }
+
+        return fuserBlockEntity.getMaxFluidLevel();
+    }
+
+    public double getPower(BlockState state, World world, BlockPos pos) {
+        FuserBlockEntity fuserBlockEntity = (FuserBlockEntity) world.getBlockEntity(pos);
+
+        if (fuserBlockEntity == null) {
             return -1.0;
         }
 
-        return teleporterBlockEntity.getEnergy();
+        return fuserBlockEntity.getEnergy();
     }
 
     public double getMaxPower(BlockState state, World world, BlockPos pos) {
-        TeleporterBlockEntity teleporterBlockEntity = (TeleporterBlockEntity) world.getBlockEntity(pos);
+        FuserBlockEntity fuserBlockEntity = (FuserBlockEntity) world.getBlockEntity(pos);
 
-        if (teleporterBlockEntity == null) {
+        if (fuserBlockEntity == null) {
             return -1.0;
         }
 
-        return teleporterBlockEntity.getBaseMaxPower();
+        return fuserBlockEntity.getBaseMaxPower();
     }
 }
