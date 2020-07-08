@@ -34,6 +34,12 @@ public class RedstoneFluidBlock extends BaseFluidBlock {
     public void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity) {
         super.onEntityCollision(state, world, pos, entity);
 
+        // TODO: Set Shader if Player Head in Liquid
+
+        // TODO: Get level fluid is at and determine if head is under liquid
+        // TODO: Also properly lower entity air. The player starts with 300 seconds of Air
+        entity.setAir(entity.getAir() - 1);
+
         if (entity instanceof LivingEntity) {
             LivingEntity livingEntity = (LivingEntity) entity;
 

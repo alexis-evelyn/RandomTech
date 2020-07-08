@@ -24,10 +24,6 @@ public class BaseFluidBlock extends FluidBlock {
     public void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity) {
         //super.onEntityCollision(state, world, pos, entity);
 
-        // TODO: Get level fluid is at and determine if head is under liquid
-        // TODO: Also properly lower entity air. The player starts with 300 seconds of Air
-        entity.setAir(entity.getAir() - 1);
-
         // Test Movement for Pushing Entities
         // entity.addVelocity(0, 10, 0);
     }
