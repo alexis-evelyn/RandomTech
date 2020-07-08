@@ -7,6 +7,7 @@ import me.alexisevelyn.randomtech.RegistryHelper;
 import me.alexisevelyn.randomtech.fluids.RedstoneFluid;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.fluid.EmptyFluid;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.inventory.Inventory;
@@ -82,8 +83,20 @@ public class FuserBlockEntity extends PowerAcceptorBlockEntity implements IToolD
         return tank.getFluid();
     }
 
-    public void setFluid(Tank tank) {
-        this.tank.setFluid(tank.getFluid());
+    public void setFluidAmount(FluidValue fluidAmount) {
+        tank.getFluidInstance().setAmount(fluidAmount);
+    }
+
+    public void setFluid(Fluid fluid) {
+        tank.setFluid(fluid);
+    }
+
+    public boolean isEmpty() {
+        return tank.isEmpty();
+    }
+
+    public boolean hasFluid() {
+        return !(tank.getFluid() instanceof EmptyFluid);
     }
 
     @Override
@@ -176,14 +189,13 @@ public class FuserBlockEntity extends PowerAcceptorBlockEntity implements IToolD
             return;
         }
 
-        if (tank.isEmpty()) {
-            tank.setFluid(RegistryHelper.MAGIC_FLUID);
-
-            // TODO: Figure out why fluid level is not setting
-            tank.setFluidAmount(FluidValue.BUCKET);
+        if (!hasFluid()) {
+            setFluid(RegistryHelper.MAGIC_FLUID);
         }
 
-        syncWithAll();
+        if (isEmpty()) {
+            setFluidAmount(FluidValue.BUCKET);
+        }
     }
 
     public boolean hasEnoughEnergy() {
