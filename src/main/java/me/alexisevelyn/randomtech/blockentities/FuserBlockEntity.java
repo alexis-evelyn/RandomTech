@@ -1,5 +1,6 @@
 package me.alexisevelyn.randomtech.blockentities;
 
+import com.google.gson.*;
 import me.alexisevelyn.randomtech.BlockEntities;
 import me.alexisevelyn.randomtech.Main;
 import me.alexisevelyn.randomtech.RegistryHelper;
@@ -37,7 +38,10 @@ public class FuserBlockEntity extends PowerAcceptorBlockEntity implements IToolD
     double maxInput = 10000;
 
     // Fluid Values
-    FluidValue maxFluidCapacity = FluidValue.BUCKET;
+    // JsonElement buckets = new Gson().toJsonTree(5 * 1000);
+    JsonObject buckets = new JsonParser().parse("{'buckets': 5}").getAsJsonObject();
+
+    FluidValue maxFluidCapacity = FluidValue.parseFluidValue(buckets);
 
     // Inventory Slot Markers
     protected Tank tank;
@@ -54,9 +58,6 @@ public class FuserBlockEntity extends PowerAcceptorBlockEntity implements IToolD
 
 //        tank.setFluid(Fluids.WATER);
 //        tank.setFluidAmount(FluidValue.INFINITE);
-
-        tank.setFluid(RegistryHelper.REDSTONE_FLUID);
-        tank.setFluidAmount(FluidValue.BUCKET);
     }
 
     public FluidValue getMaxFluidLevel() {
@@ -171,9 +172,18 @@ public class FuserBlockEntity extends PowerAcceptorBlockEntity implements IToolD
     public void tick() {
         super.tick();
 
-        if (world == null){
+        if (world == null || world.isClient) {
             return;
         }
+
+        if (tank.isEmpty()) {
+            tank.setFluid(RegistryHelper.MAGIC_FLUID);
+
+            // TODO: Figure out why fluid level is not setting
+            tank.setFluidAmount(FluidValue.BUCKET);
+        }
+
+        syncWithAll();
     }
 
     public boolean hasEnoughEnergy() {
@@ -203,11 +213,14 @@ public class FuserBlockEntity extends PowerAcceptorBlockEntity implements IToolD
     @Override
     public void fromTag(BlockState blockState, CompoundTag compoundTag) {
         super.fromTag(blockState, compoundTag);
+
+        tank.read(compoundTag);
     }
 
     @Override
     public CompoundTag toTag(CompoundTag compoundTag) {
         super.toTag(compoundTag);
+        tank.write(compoundTag);
 
         return compoundTag;
     }
