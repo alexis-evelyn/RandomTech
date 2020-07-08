@@ -36,21 +36,12 @@ import reborncore.common.util.RebornInventory;
 import java.util.Optional;
 import java.util.Set;
 
-public class TeleporterBlockEntity extends PowerAcceptorBlockEntity implements IToolDrop, InventoryProvider, BuiltScreenHandlerProvider {
-    // Does Nothing
-    int state = 0;
-
-    // Energy Values
-    double energyAddend = -1000.0;
-    double maxPower = 10000;
-    double maxInput = 10000;
-
+public class TeleporterBlockEntity extends BasePowerAcceptorBlockEntity implements IToolDrop, InventoryProvider, BuiltScreenHandlerProvider {
     // TechReborn's Frequency Transmitter
     Identifier frequencyTransmitterIdentifier = new Identifier("techreborn", "frequency_transmitter");
     Optional<Item> frequencyTransmitter = Registry.ITEM.getOrEmpty(frequencyTransmitterIdentifier);
 
     // Inventory Slot Markers
-    RebornInventory<TeleporterBlockEntity> inventory;
     int inputSlot = 0;
 
     public TeleporterBlockEntity() {
@@ -58,69 +49,10 @@ public class TeleporterBlockEntity extends PowerAcceptorBlockEntity implements I
         this.inventory = new RebornInventory<>(1, "TeleporterBlockEntity", 1, this);
     }
 
-    @Override
-    public double getBaseMaxPower() {
-        return maxPower;
-    }
-
-    @Override
-    public double getBaseMaxOutput() {
-        return 0;
-    }
-
-    @Override
-    public double getBaseMaxInput() {
-        return maxInput;
-    }
-
     // Used for TR's Wrench
     @Override
     public ItemStack getToolDrop(PlayerEntity playerEntity) {
         return new ItemStack(RegistryHelper.TELEPORTER);
-    }
-
-    @Override
-    public int getMaxCountPerStack() {
-        return inventory.getMaxCountPerStack();
-    }
-
-    @Override
-    public void onOpen(PlayerEntity player) {
-
-    }
-
-    @Override
-    public void onClose(PlayerEntity player) {
-
-    }
-
-    @Override
-    public int count(Item item) {
-        return inventory.count(item);
-    }
-
-    @Override
-    public boolean containsAny(Set<Item> items) {
-        return inventory.containsAny(items);
-    }
-
-    @Override
-    public boolean canBeUpgraded() {
-        return false;
-    }
-
-    @Override
-    public boolean isUpgradeValid(IUpgrade upgrade, ItemStack stack) {
-        return false;
-    }
-
-    // Setters and getters for the GUI to sync
-    private void setState(int state) {
-        this.state = state;
-    }
-
-    public int getState() {
-        return this.state;
     }
 
     @Override
@@ -133,7 +65,6 @@ public class TeleporterBlockEntity extends PowerAcceptorBlockEntity implements I
                 .blockEntity(this)
                 .slot(inputSlot, 8, 72)
                 .syncEnergyValue()
-                .sync(this::getState, this::setState)
                 .addInventory()
                 .create(this, syncID);
     }
@@ -234,10 +165,6 @@ public class TeleporterBlockEntity extends PowerAcceptorBlockEntity implements I
         playerEntity.sendMessage(message, true);
     }
 
-    public boolean hasEnoughEnergy() {
-        return getEnergy() >= (-1 * energyAddend);
-    }
-
     public boolean hasValidTeleporterItem() {
         ItemStack inputItem = inventory.getStack(inputSlot);
 
@@ -276,42 +203,5 @@ public class TeleporterBlockEntity extends PowerAcceptorBlockEntity implements I
         }
 
         return energyState;
-    }
-
-    // Future Proofing
-    public int getMinPower() {
-        return 0;
-    }
-
-    @Override
-    public boolean canAcceptEnergy(final Direction direction) {
-        return true;
-    }
-
-    @Override
-    public boolean canProvideEnergy(final Direction direction) {
-        return false;
-    }
-
-    @Override
-    public void onLoad() {
-        super.onLoad();
-    }
-
-    @Override
-    public Inventory getInventory() {
-        return inventory;
-    }
-
-    @Override
-    public void fromTag(BlockState blockState, CompoundTag compoundTag) {
-        super.fromTag(blockState, compoundTag);
-    }
-
-    @Override
-    public CompoundTag toTag(CompoundTag compoundTag) {
-        super.toTag(compoundTag);
-
-        return compoundTag;
     }
 }

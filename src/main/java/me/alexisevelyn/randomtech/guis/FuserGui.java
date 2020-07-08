@@ -30,7 +30,6 @@ public class FuserGui extends GuiBase<BuiltScreenHandler> {
         drawSlot(matrixStack, 26, 72, layer);
     }
 
-    // TODO: Figure out why drawFluid doesn't display anything and why blockEntity.getFluidLevel() is returning 0.
     @Override
     protected void drawForeground(MatrixStack matrixStack, int mouseX, int mouseY) {
         super.drawForeground(matrixStack, mouseX, mouseY);
