@@ -1,20 +1,21 @@
 plugins {
 	id 'fabric-loom' version '0.4-SNAPSHOT'
 	id 'maven-publish'
+	id "com.wynprice.cursemaven" version "2.1.5"
 }
 
 sourceCompatibility = JavaVersion.VERSION_1_8
 targetCompatibility = JavaVersion.VERSION_1_8
 
 archivesBaseName = project.archives_base_name
-version = project.mod_version
+version = "${project.mod_version}-SNAPSHOT"
 group = project.maven_group
 
+configurations {
+	deployerJars
+}
+
 repositories {
-	maven {
-		name = "Hywla"
-		url = "https://maven.tehnut.info/"
-	}
 	maven {
 		name = "Patchouli"
 		url = "https://maven.blamejared.com/"
@@ -22,10 +23,29 @@ repositories {
 	maven {
 		name = "Github Repos"
 		url = "https://jitpack.io/"
+
+		// This exists to force Gradle to ignore bad versioning information from commit based builds on JitPack
+		metadataSources {
+			artifact() //Look directly for artifact
+		}
 	}
+//	maven {
+//		name = "Spinnery"
+//		url = "https://dl.bintray.com/spinnery/Spinnery"
+//	}
+//	maven {
+//		name = "BuildCraft"
+//		url = "https://mod-buildcraft.com/maven"
+//	}
+//	maven {
+//		name = "Hywla"
+//		url = "https://maven.tehnut.info/"
+//	}
 }
 
 dependencies {
+	deployerJars "io.packagecloud.maven.wagon:maven-packagecloud-wagon:0.0.6"
+
 	//to change the versions see the gradle.properties file
 	minecraft "com.mojang:minecraft:${project.minecraft_version}"
 	mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
@@ -50,7 +70,12 @@ dependencies {
 	modCompile "me.sargunvohra.mcmods:autoconfig1u:${project.autoconf_version}"
 
 	// Hywla
-	modApi "mcp.mobius.waila:Hwyla:${project.hywla_version}"
+	// The TehNut Maven Repo Slows Down Gradle Way Too Much
+	// I am currently building from my own repo as Jitpack
+	// failed to build Hwyla the first time due to OOM Exception
+	// and Jitpack doesn't rebuild builds unless you own the repo.
+	// modApi "mcp.mobius.waila:Hwyla:${project.hywla_version}"
+	modApi "com.github.alexis-evelyn:HWYLA:${project.hywla_github_version}"
 
 	// Roughly Enough Items
 	modApi "me.shedaniel:RoughlyEnoughItems:${project.rei_version}"
@@ -74,6 +99,15 @@ dependencies {
 
 	// Improves performance of lighting engine
 	modRuntime "com.github.jellysquid3:phosphor-fabric:${project.phosphor_version}"
+
+	// Dependencies of Astromine
+	// modRuntime "com.github.vini2003:spinnery:${project.spinnery_version}"
+	// modRuntime "alexiil.mc.lib:libblockattributes-core:${project.libblockattributes_core_version}"
+	// modRuntime "alexiil.mc.lib:libblockattributes-fluids:${project.libblockattributes_fluids_version}"
+
+	// Astromine Mod - A new tech mod. Going to investigate if I want to support it
+	// Sadly, this breaks my mod from loading for some reason
+	// modRuntime "com.github.Chainmail-Studios:Astromine:${project.astromine_version}"
 
 	// PSA: Some older mods, compiled on Loom 0.2.1, might have outdated Maven POMs.
 	// You may need to force-disable transitiveness on them.
@@ -131,3 +165,12 @@ publishing {
 		// mavenLocal()
 	}
 }
+
+//uploadArchives {
+//	repositories.mavenDeployer {
+//		configuration = configurations.deployerJars
+//		repository(url: "packagecloud+https://packagecloud.io/AlexisEvelyn/RandomTech") {
+//			authentication(password: MAVEN_API_KEY)
+//		}
+//	}
+//}
