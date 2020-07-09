@@ -33,10 +33,6 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
 public class RegistryHelper {
-    // Force Load Recipes.java Early On
-    // This is important to make sure that recipes are loaded before a world is loaded
-    public static final Recipes customRecipes = new Recipes();
-
     // Blocks
     public static final Block CLEAR_GLASS = new ClearGlass();
     public static final Block VIRTUAL_TILE = new VirtualTile();
@@ -94,6 +90,10 @@ public class RegistryHelper {
     // Force Load BlockEntities.java Early On
     // This is important to make sure that BlockEntities are loaded before a world is loaded
     public static final BlockEntities blockEntities = new BlockEntities();
+
+    // Force Load Recipes.java Early On
+    // This is important to make sure that recipes are loaded before a world is loaded
+    public static final Recipes customRecipes = new Recipes();
     
     public void register() {
         // Blocks
