@@ -1,6 +1,7 @@
 package me.alexisevelyn.randomtech;
 
 import me.alexisevelyn.randomtech.armormaterials.RedstoneArmorMaterial;
+import me.alexisevelyn.randomtech.blocks.ClearGlass;
 import me.alexisevelyn.randomtech.blocks.FuserBlock;
 import me.alexisevelyn.randomtech.blocks.TeleporterBlock;
 import me.alexisevelyn.randomtech.fluids.ExperienceFluid;
@@ -30,7 +31,14 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
 public class RegistryHelper {
+    // Force Load Recipes.java Early On
+    // This is important to make sure that recipes are loaded before a world is loaded
+    public static final Recipes customRecipes = new Recipes();
+
     // Blocks
+    public static final Block CLEAR_GLASS = new ClearGlass();
+
+    // Machines
     public static final Block TELEPORTER = new TeleporterBlock();
     public static final Block FUSER = new FuserBlock();
 
@@ -83,10 +91,12 @@ public class RegistryHelper {
     // Force Load BlockEntities.java Early On
     // This is important to make sure that BlockEntities are loaded before a world is loaded
     public static final BlockEntities blockEntities = new BlockEntities();
-    public static final Recipes customRecipes = new Recipes();
     
     protected void register() {
         // Blocks
+        Registry.register(Registry.BLOCK, new Identifier(Main.MODID, "clear_glass"), CLEAR_GLASS);
+
+        // Machines
         Registry.register(Registry.BLOCK, new Identifier(Main.MODID, "teleporter"), TELEPORTER);
         Registry.register(Registry.BLOCK, new Identifier(Main.MODID, "fuser"), FUSER);
 
@@ -111,6 +121,9 @@ public class RegistryHelper {
         Registry.register(Registry.ITEM, new Identifier(Main.MODID, "powered_boots"), new ArmorBase(REDSTONE_ARMOR_MATERIAL, EquipmentSlot.FEET));
 
         // ItemBlocks
+        Registry.register(Registry.ITEM, new Identifier(Main.MODID, "clear_glass"), new BlockItem(CLEAR_GLASS, new Item.Settings().group(ItemGroup.DECORATIONS)));
+
+        // ItemBlocks Machines
         Registry.register(Registry.ITEM, new Identifier(Main.MODID, "teleporter"), new BlockItem(TELEPORTER, new Item.Settings().group(MACHINERY_GROUP)));
         Registry.register(Registry.ITEM, new Identifier(Main.MODID, "fuser"), new BlockItem(FUSER, new Item.Settings().group(MACHINERY_GROUP)));
 

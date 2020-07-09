@@ -25,7 +25,7 @@ public class TeleporterBlock extends PowerAcceptorBlock {
 
     public TeleporterBlock() {
         super(FabricBlockSettings
-                .of(Materials.FirstMaterial)
+                .of(Materials.MACHINE_MATERIAL)
                 .breakByHand(false).requiresTool()
                 .breakByTool(FabricToolTags.PICKAXES, ToolMaterials.IRON.getMiningLevel())
                 .sounds(BlockSoundGroup.NETHERITE)
