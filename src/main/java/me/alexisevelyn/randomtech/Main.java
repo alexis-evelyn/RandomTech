@@ -1,5 +1,6 @@
 package me.alexisevelyn.randomtech;
 
+import me.alexisevelyn.randomtech.utility.RegistryHelper;
 import net.fabricmc.api.ModInitializer;
 
 // This runs on both the server and the client

@@ -2,8 +2,8 @@ package me.alexisevelyn.randomtech.blockentities;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import me.alexisevelyn.randomtech.BlockEntities;
-import me.alexisevelyn.randomtech.RegistryHelper;
+import me.alexisevelyn.randomtech.utility.BlockEntities;
+import me.alexisevelyn.randomtech.utility.RegistryHelper;
 import me.alexisevelyn.randomtech.crafters.FuserRecipeCrafter;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
@@ -11,14 +11,10 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundTag;
 import reborncore.api.IToolDrop;
 import reborncore.api.blockentity.InventoryProvider;
-import reborncore.api.recipe.IRecipeCrafterProvider;
 import reborncore.client.screen.BuiltScreenHandlerProvider;
 import reborncore.client.screen.builder.BuiltScreenHandler;
 import reborncore.client.screen.builder.ScreenHandlerBuilder;
-import reborncore.common.crafting.RebornFluidRecipe;
-import reborncore.common.crafting.RebornRecipe;
 import reborncore.common.fluid.FluidValue;
-import reborncore.common.recipes.RecipeCrafter;
 import reborncore.common.util.RebornInventory;
 import reborncore.common.util.Tank;
 

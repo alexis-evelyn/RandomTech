@@ -1,9 +1,8 @@
 package me.alexisevelyn.randomtech.crafters;
 
-import me.alexisevelyn.randomtech.Recipes;
+import me.alexisevelyn.randomtech.utility.Recipes;
 import net.minecraft.block.entity.BlockEntity;
 import reborncore.common.crafting.RebornRecipe;
-import reborncore.common.crafting.RebornRecipeType;
 import reborncore.common.recipes.RecipeCrafter;
 import reborncore.common.util.RebornInventory;
 

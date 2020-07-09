@@ -1,4 +1,4 @@
-package me.alexisevelyn.randomtech;
+package me.alexisevelyn.randomtech.utility;
 
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;

@@ -1,9 +1,11 @@
-package me.alexisevelyn.randomtech;
+package me.alexisevelyn.randomtech.utility;
 
+import me.alexisevelyn.randomtech.Main;
 import me.alexisevelyn.randomtech.armormaterials.RedstoneArmorMaterial;
 import me.alexisevelyn.randomtech.blocks.ClearGlass;
 import me.alexisevelyn.randomtech.blocks.FuserBlock;
 import me.alexisevelyn.randomtech.blocks.TeleporterBlock;
+import me.alexisevelyn.randomtech.blocks.VirtualTile;
 import me.alexisevelyn.randomtech.fluids.ExperienceFluid;
 import me.alexisevelyn.randomtech.fluids.MagicFluid;
 import me.alexisevelyn.randomtech.fluids.RedstoneFluid;
@@ -37,6 +39,7 @@ public class RegistryHelper {
 
     // Blocks
     public static final Block CLEAR_GLASS = new ClearGlass();
+    public static final Block VIRTUAL_TILE = new VirtualTile();
 
     // Machines
     public static final Block TELEPORTER = new TeleporterBlock();
@@ -92,9 +95,10 @@ public class RegistryHelper {
     // This is important to make sure that BlockEntities are loaded before a world is loaded
     public static final BlockEntities blockEntities = new BlockEntities();
     
-    protected void register() {
+    public void register() {
         // Blocks
         Registry.register(Registry.BLOCK, new Identifier(Main.MODID, "clear_glass"), CLEAR_GLASS);
+        Registry.register(Registry.BLOCK, new Identifier(Main.MODID, "virtual_tile"), VIRTUAL_TILE);
 
         // Machines
         Registry.register(Registry.BLOCK, new Identifier(Main.MODID, "teleporter"), TELEPORTER);
@@ -122,6 +126,7 @@ public class RegistryHelper {
 
         // ItemBlocks
         Registry.register(Registry.ITEM, new Identifier(Main.MODID, "clear_glass"), new BlockItem(CLEAR_GLASS, new Item.Settings().group(ItemGroup.DECORATIONS)));
+        Registry.register(Registry.ITEM, new Identifier(Main.MODID, "virtual_tile"), new BlockItem(VIRTUAL_TILE, new Item.Settings().group(ItemGroup.DECORATIONS)));
 
         // ItemBlocks Machines
         Registry.register(Registry.ITEM, new Identifier(Main.MODID, "teleporter"), new BlockItem(TELEPORTER, new Item.Settings().group(MACHINERY_GROUP)));

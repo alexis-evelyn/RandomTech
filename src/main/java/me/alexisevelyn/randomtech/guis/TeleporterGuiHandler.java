@@ -1,7 +1,7 @@
 package me.alexisevelyn.randomtech.guis;
 
-import me.alexisevelyn.randomtech.GuiFactory;
-import me.alexisevelyn.randomtech.ScreenHandlerFactory;
+import me.alexisevelyn.randomtech.utility.GuiFactory;
+import me.alexisevelyn.randomtech.utility.ScreenHandlerFactory;
 import me.alexisevelyn.randomtech.blockentities.TeleporterBlockEntity;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.fabric.api.client.screenhandler.v1.ScreenRegistry;

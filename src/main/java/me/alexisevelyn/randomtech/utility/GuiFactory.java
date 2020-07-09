@@ -1,4 +1,4 @@
-package me.alexisevelyn.randomtech;
+package me.alexisevelyn.randomtech.utility;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;

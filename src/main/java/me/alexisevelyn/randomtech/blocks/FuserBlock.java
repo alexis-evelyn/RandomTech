@@ -1,20 +1,15 @@
 package me.alexisevelyn.randomtech.blocks;
 
-import me.alexisevelyn.randomtech.Materials;
-import me.alexisevelyn.randomtech.RegistryHelper;
+import me.alexisevelyn.randomtech.utility.Materials;
+import me.alexisevelyn.randomtech.utility.RegistryHelper;
 import me.alexisevelyn.randomtech.blockentities.FuserBlockEntity;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.fabricmc.fabric.api.tool.attribute.v1.FabricToolTags;
-import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.item.ToolMaterials;
 import net.minecraft.sound.BlockSoundGroup;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.BlockView;
-import net.minecraft.world.World;
-import org.jetbrains.annotations.Nullable;
 import reborncore.api.blockentity.IMachineGuiHandler;
-import reborncore.common.fluid.FluidValue;
 
 public class FuserBlock extends FluidMachineBase {
     public FuserBlock() {

@@ -1,8 +1,7 @@
 package me.alexisevelyn.randomtech.waila.machines;
 
 import mcp.mobius.waila.api.*;
-import me.alexisevelyn.randomtech.Main;
-import me.alexisevelyn.randomtech.RegistryHelper;
+import me.alexisevelyn.randomtech.utility.RegistryHelper;
 import me.alexisevelyn.randomtech.blocks.TeleporterBlock;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.item.ItemStack;

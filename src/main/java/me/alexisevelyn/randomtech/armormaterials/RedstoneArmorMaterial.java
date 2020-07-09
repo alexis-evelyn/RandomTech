@@ -1,7 +1,6 @@
 package me.alexisevelyn.randomtech.armormaterials;
 
-import me.alexisevelyn.randomtech.Main;
-import me.alexisevelyn.randomtech.RegistryHelper;
+import me.alexisevelyn.randomtech.utility.RegistryHelper;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.ArmorMaterial;
 import net.minecraft.recipe.Ingredient;

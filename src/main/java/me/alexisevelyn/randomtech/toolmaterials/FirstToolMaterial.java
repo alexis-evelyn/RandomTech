@@ -1,7 +1,6 @@
 package me.alexisevelyn.randomtech.toolmaterials;
 
-import me.alexisevelyn.randomtech.Main;
-import me.alexisevelyn.randomtech.RegistryHelper;
+import me.alexisevelyn.randomtech.utility.RegistryHelper;
 import net.minecraft.item.ToolMaterial;
 import net.minecraft.item.ToolMaterials;
 import net.minecraft.recipe.Ingredient;

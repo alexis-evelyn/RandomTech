@@ -1,6 +1,7 @@
 package me.alexisevelyn.randomtech;
 
 import me.alexisevelyn.randomtech.modmenu.screens.MainScreen;
+import me.alexisevelyn.randomtech.utility.RegistryHelper;
 import me.sargunvohra.mcmods.autoconfig1u.AutoConfig;
 import me.sargunvohra.mcmods.autoconfig1u.serializer.GsonConfigSerializer;
 import net.fabricmc.api.ClientModInitializer;

@@ -1,5 +1,6 @@
-package me.alexisevelyn.randomtech;
+package me.alexisevelyn.randomtech.utility;
 
+import me.alexisevelyn.randomtech.Main;
 import me.alexisevelyn.randomtech.blockentities.FuserBlockEntity;
 import me.alexisevelyn.randomtech.blockentities.TeleporterBlockEntity;
 import net.minecraft.block.Block;
