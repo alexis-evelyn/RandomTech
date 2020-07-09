@@ -34,6 +34,19 @@ public class MainClient implements ClientModInitializer {
 		// Register Configuration Screen for Mod Menu
 		AutoConfig.register(MainScreen.class, GsonConfigSerializer::new);
 
+		// Blocks
+		blockSetup();
+
+		// Fluids
+		fluidSetup();
+	}
+
+	private void blockSetup() {
+		// Makes Glass Translucent
+		BlockRenderLayerMap.INSTANCE.putBlock(RegistryHelper.CLEAR_GLASS, RenderLayer.getCutout());
+	}
+
+	private void fluidSetup() {
 		// Color is the HTML Color Code Formatted as 0xHTML-Color-Code. For example, #4CC248 becomes 0x4CC248
 		setupFluidRendering(RegistryHelper.REDSTONE_FLUID, RegistryHelper.REDSTONE_FLUID_FLOWING, new Identifier("randomtech", "redstone"), 0xFFFFFF);
 		setupFluidRendering(RegistryHelper.MAGIC_FLUID, RegistryHelper.MAGIC_FLUID_FLOWING, new Identifier("randomtech", "magic"), 0xFFFFFF);
@@ -46,7 +59,7 @@ public class MainClient implements ClientModInitializer {
 	}
 
 	// From Tutorial at https://fabricmc.net/wiki/tutorial:fluids
-	public static void setupFluidRendering(final Fluid still, final Fluid flowing, final Identifier textureFluidId, final int color) {
+	private static void setupFluidRendering(final Fluid still, final Fluid flowing, final Identifier textureFluidId, final int color) {
 		final Identifier stillSpriteId = new Identifier(textureFluidId.getNamespace(), "block/liquids/" + textureFluidId.getPath() + "/" + textureFluidId.getPath() + "_still");
 		final Identifier flowingSpriteId = new Identifier(textureFluidId.getNamespace(), "block/liquids/" + textureFluidId.getPath() + "/" + textureFluidId.getPath() + "_flow");
 

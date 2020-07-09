@@ -4,10 +4,7 @@ import me.alexisevelyn.randomtech.utility.GenericBlockHelper;
 import me.alexisevelyn.randomtech.utility.Materials;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.AbstractGlassBlock;
-import net.minecraft.block.BlockState;
 import net.minecraft.sound.BlockSoundGroup;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.BlockView;
 
 // AbstractGlassBlock and ConnectingBlock
 public class ClearGlass extends AbstractGlassBlock {
