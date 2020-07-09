@@ -9,6 +9,7 @@ import reborncore.common.util.RebornInventory;
 
 import java.util.List;
 
+// https://github.com/TechReborn/RebornCore/blob/1.16/src/main/java/reborncore/common/crafting/RebornFluidRecipe.java
 public class FuserRecipeCrafter extends RecipeCrafter {
     /**
      * @param blockEntity Block Entity having this crafter

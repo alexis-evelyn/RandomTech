@@ -15,13 +15,14 @@ import reborncore.api.recipe.IRecipeCrafterProvider;
 import reborncore.client.screen.BuiltScreenHandlerProvider;
 import reborncore.client.screen.builder.BuiltScreenHandler;
 import reborncore.client.screen.builder.ScreenHandlerBuilder;
+import reborncore.common.crafting.RebornFluidRecipe;
 import reborncore.common.crafting.RebornRecipe;
 import reborncore.common.fluid.FluidValue;
 import reborncore.common.recipes.RecipeCrafter;
 import reborncore.common.util.RebornInventory;
 import reborncore.common.util.Tank;
 
-public class FuserBlockEntity extends FluidMachineBlockEntityBase implements IToolDrop, InventoryProvider, BuiltScreenHandlerProvider, IRecipeCrafterProvider {
+public class FuserBlockEntity extends FluidMachineBlockEntityBase implements IToolDrop, InventoryProvider, BuiltScreenHandlerProvider {
     // Fluid Values
     // JsonElement buckets = new Gson().toJsonTree(5 * 1000);
     JsonObject buckets = new JsonParser().parse("{'buckets': 5}").getAsJsonObject();
@@ -97,25 +98,5 @@ public class FuserBlockEntity extends FluidMachineBlockEntityBase implements ITo
         tank.write(compoundTag);
 
         return compoundTag;
-    }
-
-    @Override
-    public RecipeCrafter getRecipeCrafter() {
-        return crafter;
-    }
-
-    @Override
-    public boolean canCraft(RebornRecipe rebornRecipe) {
-        return true;
-    }
-
-    @Override
-    public boolean isStackValid(int slotID, ItemStack stack) {
-        return true;
-    }
-
-    @Override
-    public int[] getInputSlots() {
-        return inputSlots;
     }
 }

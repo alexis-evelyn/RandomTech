@@ -7,8 +7,10 @@
       "item": "minecraft:lapis_block"
     }
   ],
-  "result": {
-    "fluid": "randomtech:liquid_magic",
-    "millibuckets": 500
-  }
+  "results": [
+    {
+      "fluid": "randomtech:liquid_magic",
+      "millibuckets": 500
+    }
+  ]
 }

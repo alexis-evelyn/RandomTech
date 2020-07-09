@@ -7,8 +7,10 @@
       "item": "minecraft:lapis_lazuli"
     }
   ],
-  "result": {
-    "fluid": "randomtech:liquid_magic",
-    "millibuckets": 100
-  }
+  "results": [
+    {
+      "fluid": "randomtech:liquid_magic",
+      "millibuckets": 100
+    }
+  ]
 }
