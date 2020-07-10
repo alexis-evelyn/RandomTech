@@ -10,6 +10,7 @@ import net.minecraft.sound.BlockSoundGroup;
 // TODO: Fix rendering issue on edges of glass - This shows up on every glass block from my mod, but not vanilla (artifacts?)
 // TODO: Allow connecting different types of glass together
 // TODO: Fix xray ability caused by dark glass
+// TODO: Investigate if these suggestions help: https://discordapp.com/channels/507304429255393322/721100785936760876/731144592644374538
 public class DarkIntangibleGlass extends AbstractGlassBlock {
     public DarkIntangibleGlass() {
         super(FabricBlockSettings
