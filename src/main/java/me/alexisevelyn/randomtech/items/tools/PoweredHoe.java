@@ -1,9 +1,8 @@
 package me.alexisevelyn.randomtech.items.tools;
 
-import me.alexisevelyn.randomtech.toolmaterials.FirstToolMaterial;
+import me.alexisevelyn.randomtech.toolmaterials.PoweredToolMaterial;
 import net.minecraft.item.HoeItem;
 import net.minecraft.item.ItemGroup;
-import net.minecraft.item.PickaxeItem;
 import net.minecraft.item.ToolMaterial;
 
 public class PoweredHoe extends HoeItem {
@@ -17,6 +16,6 @@ public class PoweredHoe extends HoeItem {
     }
 
     public PoweredHoe(Settings settings) {
-        super(new FirstToolMaterial(), -1, -2.2F, settings);
+        super(new PoweredToolMaterial(), -1, -2.2F, settings);
     }
 }

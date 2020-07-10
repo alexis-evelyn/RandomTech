@@ -44,6 +44,9 @@ public class MainClient implements ClientModInitializer {
 	private void blockSetup() {
 		// Makes Glass Translucent
 		BlockRenderLayerMap.INSTANCE.putBlock(RegistryHelper.CLEAR_GLASS, RenderLayer.getCutout());
+		BlockRenderLayerMap.INSTANCE.putBlock(RegistryHelper.DARK_GLASS, RenderLayer.getTranslucent());
+		BlockRenderLayerMap.INSTANCE.putBlock(RegistryHelper.INTANGIBLE_GLASS, RenderLayer.getCutout());
+		BlockRenderLayerMap.INSTANCE.putBlock(RegistryHelper.DARK_INTANGIBLE_GLASS, RenderLayer.getTranslucent());
 	}
 
 	private void fluidSetup() {

@@ -1,7 +1,6 @@
 package me.alexisevelyn.randomtech.items.tools;
 
-import me.alexisevelyn.randomtech.toolmaterials.FirstToolMaterial;
-import net.minecraft.item.AxeItem;
+import me.alexisevelyn.randomtech.toolmaterials.PoweredToolMaterial;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ShovelItem;
 import net.minecraft.item.ToolMaterial;
@@ -17,6 +16,6 @@ public class PoweredShovel extends ShovelItem {
     }
 
     public PoweredShovel(Settings settings) {
-        super(new FirstToolMaterial(), -1, -2.2F, settings);
+        super(new PoweredToolMaterial(), -1, -2.2F, settings);
     }
 }

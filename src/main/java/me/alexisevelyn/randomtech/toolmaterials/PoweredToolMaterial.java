@@ -5,7 +5,7 @@ import net.minecraft.item.ToolMaterial;
 import net.minecraft.item.ToolMaterials;
 import net.minecraft.recipe.Ingredient;
 
-public class FirstToolMaterial implements ToolMaterial {
+public class PoweredToolMaterial implements ToolMaterial {
     @Override
     public int getDurability() {
         return 1337;

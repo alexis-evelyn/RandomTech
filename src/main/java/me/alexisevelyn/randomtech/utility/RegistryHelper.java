@@ -2,10 +2,13 @@ package me.alexisevelyn.randomtech.utility;
 
 import me.alexisevelyn.randomtech.Main;
 import me.alexisevelyn.randomtech.armormaterials.RedstoneArmorMaterial;
-import me.alexisevelyn.randomtech.blocks.ClearGlass;
+import me.alexisevelyn.randomtech.blocks.glass.ClearGlass;
 import me.alexisevelyn.randomtech.blocks.FuserBlock;
 import me.alexisevelyn.randomtech.blocks.TeleporterBlock;
 import me.alexisevelyn.randomtech.blocks.VirtualTile;
+import me.alexisevelyn.randomtech.blocks.glass.DarkGlass;
+import me.alexisevelyn.randomtech.blocks.glass.DarkIntangibleGlass;
+import me.alexisevelyn.randomtech.blocks.glass.IntangibleGlass;
 import me.alexisevelyn.randomtech.fluids.ExperienceFluid;
 import me.alexisevelyn.randomtech.fluids.MagicFluid;
 import me.alexisevelyn.randomtech.fluids.RedstoneFluid;
@@ -35,6 +38,9 @@ import net.minecraft.util.registry.Registry;
 public class RegistryHelper {
     // Blocks
     public static final Block CLEAR_GLASS = new ClearGlass();
+    public static final Block DARK_GLASS = new DarkGlass();
+    public static final Block INTANGIBLE_GLASS = new IntangibleGlass();
+    public static final Block DARK_INTANGIBLE_GLASS = new DarkIntangibleGlass();
     public static final Block VIRTUAL_TILE = new VirtualTile();
 
     // Machines
@@ -98,6 +104,9 @@ public class RegistryHelper {
     public void register() {
         // Blocks
         Registry.register(Registry.BLOCK, new Identifier(Main.MODID, "clear_glass"), CLEAR_GLASS);
+        Registry.register(Registry.BLOCK, new Identifier(Main.MODID, "dark_glass"), DARK_GLASS);
+        Registry.register(Registry.BLOCK, new Identifier(Main.MODID, "intangible_glass"), INTANGIBLE_GLASS);
+        Registry.register(Registry.BLOCK, new Identifier(Main.MODID, "dark_intangible_glass"), DARK_INTANGIBLE_GLASS);
         Registry.register(Registry.BLOCK, new Identifier(Main.MODID, "virtual_tile"), VIRTUAL_TILE);
 
         // Machines
@@ -126,6 +135,9 @@ public class RegistryHelper {
 
         // ItemBlocks
         Registry.register(Registry.ITEM, new Identifier(Main.MODID, "clear_glass"), new BlockItem(CLEAR_GLASS, new Item.Settings().group(ItemGroup.DECORATIONS)));
+        Registry.register(Registry.ITEM, new Identifier(Main.MODID, "dark_glass"), new BlockItem(DARK_GLASS, new Item.Settings().group(ItemGroup.DECORATIONS)));
+        Registry.register(Registry.ITEM, new Identifier(Main.MODID, "intangible_glass"), new BlockItem(INTANGIBLE_GLASS, new Item.Settings().group(ItemGroup.DECORATIONS)));
+        Registry.register(Registry.ITEM, new Identifier(Main.MODID, "dark_intangible_glass"), new BlockItem(DARK_INTANGIBLE_GLASS, new Item.Settings().group(ItemGroup.DECORATIONS)));
         Registry.register(Registry.ITEM, new Identifier(Main.MODID, "virtual_tile"), new BlockItem(VIRTUAL_TILE, new Item.Settings().group(ItemGroup.DECORATIONS)));
 
         // ItemBlocks Machines
