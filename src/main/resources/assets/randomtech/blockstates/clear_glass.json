@@ -1,7 +1,756 @@
 {
   "variants": {
-    "": {
-      "model": "randomtech:block/clear_glass"
+    "facing=east,connected=0": {
+      "model": "randomtech:block/clear_glass/east-west/0",
+      "uvlock": true
+    },
+    "facing=east,connected=1": {
+      "model": "randomtech:block/clear_glass/east-west/1",
+      "uvlock": true
+    },
+    "facing=east,connected=2": {
+      "model": "randomtech:block/clear_glass/east-west/2",
+      "uvlock": true
+    },
+    "facing=east,connected=3": {
+      "model": "randomtech:block/clear_glass/east-west/3",
+      "uvlock": true
+    },
+    "facing=east,connected=4": {
+      "model": "randomtech:block/clear_glass/east-west/4",
+      "uvlock": true
+    },
+    "facing=east,connected=5": {
+      "model": "randomtech:block/clear_glass/east-west/5",
+      "uvlock": true
+    },
+    "facing=east,connected=6": {
+      "model": "randomtech:block/clear_glass/east-west/6",
+      "uvlock": true
+    },
+    "facing=east,connected=7": {
+      "model": "randomtech:block/clear_glass/east-west/7",
+      "uvlock": true
+    },
+    "facing=east,connected=8": {
+      "model": "randomtech:block/clear_glass/east-west/8",
+      "uvlock": true
+    },
+    "facing=east,connected=9": {
+      "model": "randomtech:block/clear_glass/east-west/9",
+      "uvlock": true
+    },
+    "facing=east,connected=10": {
+      "model": "randomtech:block/clear_glass/east-west/10",
+      "uvlock": true
+    },
+    "facing=east,connected=11": {
+      "model": "randomtech:block/clear_glass/east-west/11",
+      "uvlock": true
+    },
+    "facing=east,connected=12": {
+      "model": "randomtech:block/clear_glass/east-west/12",
+      "uvlock": true
+    },
+    "facing=east,connected=13": {
+      "model": "randomtech:block/clear_glass/east-west/13",
+      "uvlock": true
+    },
+    "facing=east,connected=14": {
+      "model": "randomtech:block/clear_glass/east-west/14",
+      "uvlock": true
+    },
+    "facing=east,connected=15": {
+      "model": "randomtech:block/clear_glass/east-west/15",
+      "uvlock": true
+    },
+    "facing=east,connected=16": {
+      "model": "randomtech:block/clear_glass/east-west/16",
+      "uvlock": true
+    },
+    "facing=east,connected=17": {
+      "model": "randomtech:block/clear_glass/east-west/17",
+      "uvlock": true
+    },
+    "facing=east,connected=18": {
+      "model": "randomtech:block/clear_glass/east-west/18",
+      "uvlock": true
+    },
+    "facing=east,connected=19": {
+      "model": "randomtech:block/clear_glass/east-west/19",
+      "uvlock": true
+    },
+    "facing=east,connected=20": {
+      "model": "randomtech:block/clear_glass/east-west/20",
+      "uvlock": true
+    },
+    "facing=east,connected=21": {
+      "model": "randomtech:block/clear_glass/east-west/21",
+      "uvlock": true
+    },
+    "facing=east,connected=22": {
+      "model": "randomtech:block/clear_glass/east-west/22",
+      "uvlock": true
+    },
+    "facing=east,connected=23": {
+      "model": "randomtech:block/clear_glass/east-west/23",
+      "uvlock": true
+    },
+    "facing=east,connected=24": {
+      "model": "randomtech:block/clear_glass/east-west/24",
+      "uvlock": true
+    },
+    "facing=east,connected=25": {
+      "model": "randomtech:block/clear_glass/east-west/25",
+      "uvlock": true
+    },
+    "facing=east,connected=26": {
+      "model": "randomtech:block/clear_glass/east-west/26",
+      "uvlock": true
+    },
+    "facing=east,connected=27": {
+      "model": "randomtech:block/clear_glass/east-west/27",
+      "uvlock": true
+    },
+    "facing=east,connected=28": {
+      "model": "randomtech:block/clear_glass/east-west/28",
+      "uvlock": true
+    },
+    "facing=east,connected=29": {
+      "model": "randomtech:block/clear_glass/east-west/29",
+      "uvlock": true
+    },
+    "facing=east,connected=30": {
+      "model": "randomtech:block/clear_glass/east-west/30",
+      "uvlock": true
+    },
+    "facing=east,connected=31": {
+      "model": "randomtech:block/clear_glass/east-west/31",
+      "uvlock": true
+    },
+    "facing=east,connected=32": {
+      "model": "randomtech:block/clear_glass/east-west/32",
+      "uvlock": true
+    },
+    "facing=east,connected=33": {
+      "model": "randomtech:block/clear_glass/east-west/33",
+      "uvlock": true
+    },
+    "facing=east,connected=34": {
+      "model": "randomtech:block/clear_glass/east-west/34",
+      "uvlock": true
+    },
+    "facing=east,connected=35": {
+      "model": "randomtech:block/clear_glass/east-west/35",
+      "uvlock": true
+    },
+    "facing=east,connected=36": {
+      "model": "randomtech:block/clear_glass/east-west/36",
+      "uvlock": true
+    },
+    "facing=east,connected=37": {
+      "model": "randomtech:block/clear_glass/east-west/37",
+      "uvlock": true
+    },
+    "facing=east,connected=38": {
+      "model": "randomtech:block/clear_glass/east-west/38",
+      "uvlock": true
+    },
+    "facing=east,connected=39": {
+      "model": "randomtech:block/clear_glass/east-west/39",
+      "uvlock": true
+    },
+    "facing=east,connected=40": {
+      "model": "randomtech:block/clear_glass/east-west/40",
+      "uvlock": true
+    },
+    "facing=east,connected=41": {
+      "model": "randomtech:block/clear_glass/east-west/41",
+      "uvlock": true
+    },
+    "facing=east,connected=42": {
+      "model": "randomtech:block/clear_glass/east-west/42",
+      "uvlock": true
+    },
+    "facing=east,connected=43": {
+      "model": "randomtech:block/clear_glass/east-west/43",
+      "uvlock": true
+    },
+    "facing=east,connected=44": {
+      "model": "randomtech:block/clear_glass/east-west/44",
+      "uvlock": true
+    },
+    "facing=east,connected=45": {
+      "model": "randomtech:block/clear_glass/east-west/45",
+      "uvlock": true
+    },
+    "facing=east,connected=46": {
+      "model": "randomtech:block/clear_glass/east-west/46",
+      "uvlock": true
+    },
+    "facing=west,connected=0": {
+      "model": "randomtech:block/clear_glass/east-west/0",
+      "uvlock": true
+    },
+    "facing=west,connected=1": {
+      "model": "randomtech:block/clear_glass/east-west/1",
+      "uvlock": true
+    },
+    "facing=west,connected=2": {
+      "model": "randomtech:block/clear_glass/east-west/2",
+      "uvlock": true
+    },
+    "facing=west,connected=3": {
+      "model": "randomtech:block/clear_glass/east-west/3",
+      "uvlock": true
+    },
+    "facing=west,connected=4": {
+      "model": "randomtech:block/clear_glass/east-west/4",
+      "uvlock": true
+    },
+    "facing=west,connected=5": {
+      "model": "randomtech:block/clear_glass/east-west/5",
+      "uvlock": true
+    },
+    "facing=west,connected=6": {
+      "model": "randomtech:block/clear_glass/east-west/6",
+      "uvlock": true
+    },
+    "facing=west,connected=7": {
+      "model": "randomtech:block/clear_glass/east-west/7",
+      "uvlock": true
+    },
+    "facing=west,connected=8": {
+      "model": "randomtech:block/clear_glass/east-west/8",
+      "uvlock": true
+    },
+    "facing=west,connected=9": {
+      "model": "randomtech:block/clear_glass/east-west/9",
+      "uvlock": true
+    },
+    "facing=west,connected=10": {
+      "model": "randomtech:block/clear_glass/east-west/10",
+      "uvlock": true
+    },
+    "facing=west,connected=11": {
+      "model": "randomtech:block/clear_glass/east-west/11",
+      "uvlock": true
+    },
+    "facing=west,connected=12": {
+      "model": "randomtech:block/clear_glass/east-west/12",
+      "uvlock": true
+    },
+    "facing=west,connected=13": {
+      "model": "randomtech:block/clear_glass/east-west/13",
+      "uvlock": true
+    },
+    "facing=west,connected=14": {
+      "model": "randomtech:block/clear_glass/east-west/14",
+      "uvlock": true
+    },
+    "facing=west,connected=15": {
+      "model": "randomtech:block/clear_glass/east-west/15",
+      "uvlock": true
+    },
+    "facing=west,connected=16": {
+      "model": "randomtech:block/clear_glass/east-west/16",
+      "uvlock": true
+    },
+    "facing=west,connected=17": {
+      "model": "randomtech:block/clear_glass/east-west/17",
+      "uvlock": true
+    },
+    "facing=west,connected=18": {
+      "model": "randomtech:block/clear_glass/east-west/18",
+      "uvlock": true
+    },
+    "facing=west,connected=19": {
+      "model": "randomtech:block/clear_glass/east-west/19",
+      "uvlock": true
+    },
+    "facing=west,connected=20": {
+      "model": "randomtech:block/clear_glass/east-west/20",
+      "uvlock": true
+    },
+    "facing=west,connected=21": {
+      "model": "randomtech:block/clear_glass/east-west/21",
+      "uvlock": true
+    },
+    "facing=west,connected=22": {
+      "model": "randomtech:block/clear_glass/east-west/22",
+      "uvlock": true
+    },
+    "facing=west,connected=23": {
+      "model": "randomtech:block/clear_glass/east-west/23",
+      "uvlock": true
+    },
+    "facing=west,connected=24": {
+      "model": "randomtech:block/clear_glass/east-west/24",
+      "uvlock": true
+    },
+    "facing=west,connected=25": {
+      "model": "randomtech:block/clear_glass/east-west/25",
+      "uvlock": true
+    },
+    "facing=west,connected=26": {
+      "model": "randomtech:block/clear_glass/east-west/26",
+      "uvlock": true
+    },
+    "facing=west,connected=27": {
+      "model": "randomtech:block/clear_glass/east-west/27",
+      "uvlock": true
+    },
+    "facing=west,connected=28": {
+      "model": "randomtech:block/clear_glass/east-west/28",
+      "uvlock": true
+    },
+    "facing=west,connected=29": {
+      "model": "randomtech:block/clear_glass/east-west/29",
+      "uvlock": true
+    },
+    "facing=west,connected=30": {
+      "model": "randomtech:block/clear_glass/east-west/30",
+      "uvlock": true
+    },
+    "facing=west,connected=31": {
+      "model": "randomtech:block/clear_glass/east-west/31",
+      "uvlock": true
+    },
+    "facing=west,connected=32": {
+      "model": "randomtech:block/clear_glass/east-west/32",
+      "uvlock": true
+    },
+    "facing=west,connected=33": {
+      "model": "randomtech:block/clear_glass/east-west/33",
+      "uvlock": true
+    },
+    "facing=west,connected=34": {
+      "model": "randomtech:block/clear_glass/east-west/34",
+      "uvlock": true
+    },
+    "facing=west,connected=35": {
+      "model": "randomtech:block/clear_glass/east-west/35",
+      "uvlock": true
+    },
+    "facing=west,connected=36": {
+      "model": "randomtech:block/clear_glass/east-west/36",
+      "uvlock": true
+    },
+    "facing=west,connected=37": {
+      "model": "randomtech:block/clear_glass/east-west/37",
+      "uvlock": true
+    },
+    "facing=west,connected=38": {
+      "model": "randomtech:block/clear_glass/east-west/38",
+      "uvlock": true
+    },
+    "facing=west,connected=39": {
+      "model": "randomtech:block/clear_glass/east-west/39",
+      "uvlock": true
+    },
+    "facing=west,connected=40": {
+      "model": "randomtech:block/clear_glass/east-west/40",
+      "uvlock": true
+    },
+    "facing=west,connected=41": {
+      "model": "randomtech:block/clear_glass/east-west/41",
+      "uvlock": true
+    },
+    "facing=west,connected=42": {
+      "model": "randomtech:block/clear_glass/east-west/42",
+      "uvlock": true
+    },
+    "facing=west,connected=43": {
+      "model": "randomtech:block/clear_glass/east-west/43",
+      "uvlock": true
+    },
+    "facing=west,connected=44": {
+      "model": "randomtech:block/clear_glass/east-west/44",
+      "uvlock": true
+    },
+    "facing=west,connected=45": {
+      "model": "randomtech:block/clear_glass/east-west/45",
+      "uvlock": true
+    },
+    "facing=west,connected=46": {
+      "model": "randomtech:block/clear_glass/east-west/46",
+      "uvlock": true
+    },
+    "facing=north,connected=0": {
+      "model": "randomtech:block/clear_glass/north-south/0",
+      "uvlock": true
+    },
+    "facing=north,connected=1": {
+      "model": "randomtech:block/clear_glass/north-south/1",
+      "uvlock": true
+    },
+    "facing=north,connected=2": {
+      "model": "randomtech:block/clear_glass/north-south/2",
+      "uvlock": true
+    },
+    "facing=north,connected=3": {
+      "model": "randomtech:block/clear_glass/north-south/3",
+      "uvlock": true
+    },
+    "facing=north,connected=4": {
+      "model": "randomtech:block/clear_glass/north-south/4",
+      "uvlock": true
+    },
+    "facing=north,connected=5": {
+      "model": "randomtech:block/clear_glass/north-south/5",
+      "uvlock": true
+    },
+    "facing=north,connected=6": {
+      "model": "randomtech:block/clear_glass/north-south/6",
+      "uvlock": true
+    },
+    "facing=north,connected=7": {
+      "model": "randomtech:block/clear_glass/north-south/7",
+      "uvlock": true
+    },
+    "facing=north,connected=8": {
+      "model": "randomtech:block/clear_glass/north-south/8",
+      "uvlock": true
+    },
+    "facing=north,connected=9": {
+      "model": "randomtech:block/clear_glass/north-south/9",
+      "uvlock": true
+    },
+    "facing=north,connected=10": {
+      "model": "randomtech:block/clear_glass/north-south/10",
+      "uvlock": true
+    },
+    "facing=north,connected=11": {
+      "model": "randomtech:block/clear_glass/north-south/11",
+      "uvlock": true
+    },
+    "facing=north,connected=12": {
+      "model": "randomtech:block/clear_glass/north-south/12",
+      "uvlock": true
+    },
+    "facing=north,connected=13": {
+      "model": "randomtech:block/clear_glass/north-south/13",
+      "uvlock": true
+    },
+    "facing=north,connected=14": {
+      "model": "randomtech:block/clear_glass/north-south/14",
+      "uvlock": true
+    },
+    "facing=north,connected=15": {
+      "model": "randomtech:block/clear_glass/north-south/15",
+      "uvlock": true
+    },
+    "facing=north,connected=16": {
+      "model": "randomtech:block/clear_glass/north-south/16",
+      "uvlock": true
+    },
+    "facing=north,connected=17": {
+      "model": "randomtech:block/clear_glass/north-south/17",
+      "uvlock": true
+    },
+    "facing=north,connected=18": {
+      "model": "randomtech:block/clear_glass/north-south/18",
+      "uvlock": true
+    },
+    "facing=north,connected=19": {
+      "model": "randomtech:block/clear_glass/north-south/19",
+      "uvlock": true
+    },
+    "facing=north,connected=20": {
+      "model": "randomtech:block/clear_glass/north-south/20",
+      "uvlock": true
+    },
+    "facing=north,connected=21": {
+      "model": "randomtech:block/clear_glass/north-south/21",
+      "uvlock": true
+    },
+    "facing=north,connected=22": {
+      "model": "randomtech:block/clear_glass/north-south/22",
+      "uvlock": true
+    },
+    "facing=north,connected=23": {
+      "model": "randomtech:block/clear_glass/north-south/23",
+      "uvlock": true
+    },
+    "facing=north,connected=24": {
+      "model": "randomtech:block/clear_glass/north-south/24",
+      "uvlock": true
+    },
+    "facing=north,connected=25": {
+      "model": "randomtech:block/clear_glass/north-south/25",
+      "uvlock": true
+    },
+    "facing=north,connected=26": {
+      "model": "randomtech:block/clear_glass/north-south/26",
+      "uvlock": true
+    },
+    "facing=north,connected=27": {
+      "model": "randomtech:block/clear_glass/north-south/27",
+      "uvlock": true
+    },
+    "facing=north,connected=28": {
+      "model": "randomtech:block/clear_glass/north-south/28",
+      "uvlock": true
+    },
+    "facing=north,connected=29": {
+      "model": "randomtech:block/clear_glass/north-south/29",
+      "uvlock": true
+    },
+    "facing=north,connected=30": {
+      "model": "randomtech:block/clear_glass/north-south/30",
+      "uvlock": true
+    },
+    "facing=north,connected=31": {
+      "model": "randomtech:block/clear_glass/north-south/31",
+      "uvlock": true
+    },
+    "facing=north,connected=32": {
+      "model": "randomtech:block/clear_glass/north-south/32",
+      "uvlock": true
+    },
+    "facing=north,connected=33": {
+      "model": "randomtech:block/clear_glass/north-south/33",
+      "uvlock": true
+    },
+    "facing=north,connected=34": {
+      "model": "randomtech:block/clear_glass/north-south/34",
+      "uvlock": true
+    },
+    "facing=north,connected=35": {
+      "model": "randomtech:block/clear_glass/north-south/35",
+      "uvlock": true
+    },
+    "facing=north,connected=36": {
+      "model": "randomtech:block/clear_glass/north-south/36",
+      "uvlock": true
+    },
+    "facing=north,connected=37": {
+      "model": "randomtech:block/clear_glass/north-south/37",
+      "uvlock": true
+    },
+    "facing=north,connected=38": {
+      "model": "randomtech:block/clear_glass/north-south/38",
+      "uvlock": true
+    },
+    "facing=north,connected=39": {
+      "model": "randomtech:block/clear_glass/north-south/39",
+      "uvlock": true
+    },
+    "facing=north,connected=40": {
+      "model": "randomtech:block/clear_glass/north-south/40",
+      "uvlock": true
+    },
+    "facing=north,connected=41": {
+      "model": "randomtech:block/clear_glass/north-south/41",
+      "uvlock": true
+    },
+    "facing=north,connected=42": {
+      "model": "randomtech:block/clear_glass/north-south/42",
+      "uvlock": true
+    },
+    "facing=north,connected=43": {
+      "model": "randomtech:block/clear_glass/north-south/43",
+      "uvlock": true
+    },
+    "facing=north,connected=44": {
+      "model": "randomtech:block/clear_glass/north-south/44",
+      "uvlock": true
+    },
+    "facing=north,connected=45": {
+      "model": "randomtech:block/clear_glass/north-south/45",
+      "uvlock": true
+    },
+    "facing=north,connected=46": {
+      "model": "randomtech:block/clear_glass/north-south/46",
+      "uvlock": true
+    },
+    "facing=south,connected=0": {
+      "model": "randomtech:block/clear_glass/north-south/0",
+      "uvlock": true
+    },
+    "facing=south,connected=1": {
+      "model": "randomtech:block/clear_glass/north-south/1",
+      "uvlock": true
+    },
+    "facing=south,connected=2": {
+      "model": "randomtech:block/clear_glass/north-south/2",
+      "uvlock": true
+    },
+    "facing=south,connected=3": {
+      "model": "randomtech:block/clear_glass/north-south/3",
+      "uvlock": true
+    },
+    "facing=south,connected=4": {
+      "model": "randomtech:block/clear_glass/north-south/4",
+      "uvlock": true
+    },
+    "facing=south,connected=5": {
+      "model": "randomtech:block/clear_glass/north-south/5",
+      "uvlock": true
+    },
+    "facing=south,connected=6": {
+      "model": "randomtech:block/clear_glass/north-south/6",
+      "uvlock": true
+    },
+    "facing=south,connected=7": {
+      "model": "randomtech:block/clear_glass/north-south/7",
+      "uvlock": true
+    },
+    "facing=south,connected=8": {
+      "model": "randomtech:block/clear_glass/north-south/8",
+      "uvlock": true
+    },
+    "facing=south,connected=9": {
+      "model": "randomtech:block/clear_glass/north-south/9",
+      "uvlock": true
+    },
+    "facing=south,connected=10": {
+      "model": "randomtech:block/clear_glass/north-south/10",
+      "uvlock": true
+    },
+    "facing=south,connected=11": {
+      "model": "randomtech:block/clear_glass/north-south/11",
+      "uvlock": true
+    },
+    "facing=south,connected=12": {
+      "model": "randomtech:block/clear_glass/north-south/12",
+      "uvlock": true
+    },
+    "facing=south,connected=13": {
+      "model": "randomtech:block/clear_glass/north-south/13",
+      "uvlock": true
+    },
+    "facing=south,connected=14": {
+      "model": "randomtech:block/clear_glass/north-south/14",
+      "uvlock": true
+    },
+    "facing=south,connected=15": {
+      "model": "randomtech:block/clear_glass/north-south/15",
+      "uvlock": true
+    },
+    "facing=south,connected=16": {
+      "model": "randomtech:block/clear_glass/north-south/16",
+      "uvlock": true
+    },
+    "facing=south,connected=17": {
+      "model": "randomtech:block/clear_glass/north-south/17",
+      "uvlock": true
+    },
+    "facing=south,connected=18": {
+      "model": "randomtech:block/clear_glass/north-south/18",
+      "uvlock": true
+    },
+    "facing=south,connected=19": {
+      "model": "randomtech:block/clear_glass/north-south/19",
+      "uvlock": true
+    },
+    "facing=south,connected=20": {
+      "model": "randomtech:block/clear_glass/north-south/20",
+      "uvlock": true
+    },
+    "facing=south,connected=21": {
+      "model": "randomtech:block/clear_glass/north-south/21",
+      "uvlock": true
+    },
+    "facing=south,connected=22": {
+      "model": "randomtech:block/clear_glass/north-south/22",
+      "uvlock": true
+    },
+    "facing=south,connected=23": {
+      "model": "randomtech:block/clear_glass/north-south/23",
+      "uvlock": true
+    },
+    "facing=south,connected=24": {
+      "model": "randomtech:block/clear_glass/north-south/24",
+      "uvlock": true
+    },
+    "facing=south,connected=25": {
+      "model": "randomtech:block/clear_glass/north-south/25",
+      "uvlock": true
+    },
+    "facing=south,connected=26": {
+      "model": "randomtech:block/clear_glass/north-south/26",
+      "uvlock": true
+    },
+    "facing=south,connected=27": {
+      "model": "randomtech:block/clear_glass/north-south/27",
+      "uvlock": true
+    },
+    "facing=south,connected=28": {
+      "model": "randomtech:block/clear_glass/north-south/28",
+      "uvlock": true
+    },
+    "facing=south,connected=29": {
+      "model": "randomtech:block/clear_glass/north-south/29",
+      "uvlock": true
+    },
+    "facing=south,connected=30": {
+      "model": "randomtech:block/clear_glass/north-south/30",
+      "uvlock": true
+    },
+    "facing=south,connected=31": {
+      "model": "randomtech:block/clear_glass/north-south/31",
+      "uvlock": true
+    },
+    "facing=south,connected=32": {
+      "model": "randomtech:block/clear_glass/north-south/32",
+      "uvlock": true
+    },
+    "facing=south,connected=33": {
+      "model": "randomtech:block/clear_glass/north-south/33",
+      "uvlock": true
+    },
+    "facing=south,connected=34": {
+      "model": "randomtech:block/clear_glass/north-south/34",
+      "uvlock": true
+    },
+    "facing=south,connected=35": {
+      "model": "randomtech:block/clear_glass/north-south/35",
+      "uvlock": true
+    },
+    "facing=south,connected=36": {
+      "model": "randomtech:block/clear_glass/north-south/36",
+      "uvlock": true
+    },
+    "facing=south,connected=37": {
+      "model": "randomtech:block/clear_glass/north-south/37",
+      "uvlock": true
+    },
+    "facing=south,connected=38": {
+      "model": "randomtech:block/clear_glass/north-south/38",
+      "uvlock": true
+    },
+    "facing=south,connected=39": {
+      "model": "randomtech:block/clear_glass/north-south/39",
+      "uvlock": true
+    },
+    "facing=south,connected=40": {
+      "model": "randomtech:block/clear_glass/north-south/40",
+      "uvlock": true
+    },
+    "facing=south,connected=41": {
+      "model": "randomtech:block/clear_glass/north-south/41",
+      "uvlock": true
+    },
+    "facing=south,connected=42": {
+      "model": "randomtech:block/clear_glass/north-south/42",
+      "uvlock": true
+    },
+    "facing=south,connected=43": {
+      "model": "randomtech:block/clear_glass/north-south/43",
+      "uvlock": true
+    },
+    "facing=south,connected=44": {
+      "model": "randomtech:block/clear_glass/north-south/44",
+      "uvlock": true
+    },
+    "facing=south,connected=45": {
+      "model": "randomtech:block/clear_glass/north-south/45",
+      "uvlock": true
+    },
+    "facing=south,connected=46": {
+      "model": "randomtech:block/clear_glass/north-south/46",
+      "uvlock": true
     }
   }
 }

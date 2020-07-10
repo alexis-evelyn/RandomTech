@@ -109,6 +109,11 @@ dependencies {
 	// Sadly, this breaks my mod from loading for some reason
 	// modRuntime "com.github.Chainmail-Studios:Astromine:${project.astromine_version}"
 
+	// modImplementation "com.github.Nuclearfarts:connected-block-textures:${project.connected_block_textures_version}"
+
+	// Permission Granted From: https://discordapp.com/channels/507304429255393322/507982478276034570/730955439390326894
+	// include "com.github.Nuclearfarts:connected-block-textures:${project.connected_block_textures_version}"
+
 	// PSA: Some older mods, compiled on Loom 0.2.1, might have outdated Maven POMs.
 	// You may need to force-disable transitiveness on them.
 }
