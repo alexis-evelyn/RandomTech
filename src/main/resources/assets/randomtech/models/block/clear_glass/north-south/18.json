@@ -1,6 +1,0 @@
-{
-  "parent": "minecraft:block/cube_all",
-  "textures": {
-    "all": "randomtech:block/glass/clear_glass/connected/18"
-  }
-}

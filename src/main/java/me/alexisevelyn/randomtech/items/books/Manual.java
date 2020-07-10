@@ -24,12 +24,12 @@ public class Manual extends Item {
 
     @Override
     public TypedActionResult<ItemStack> use(World world, PlayerEntity playerEntity, Hand hand) {
-        PatchouliAPI.IPatchouliAPI bookAPI = PatchouliAPI.instance;
-
         if (!isPatchouliInstalled()) {
             alertFailedOpen(playerEntity);
             return new TypedActionResult<>(ActionResult.FAIL, playerEntity.getStackInHand(hand));
         }
+
+        PatchouliAPI.IPatchouliAPI bookAPI = PatchouliAPI.instance;
 
         // This method is called both by client and server.
         // This will crash if not preventing client from calling openBookGUI(...)
