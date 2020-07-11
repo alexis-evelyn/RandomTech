@@ -1,0 +1,14 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "me.alexisevelyn.randomtech.mixin",
+  "compatibilityLevel": "JAVA_8",
+  "mixins": [
+    "AllowDarkGlass"
+  ],
+  "client": [
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
