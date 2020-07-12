@@ -2,6 +2,7 @@ package me.alexisevelyn.randomtech.utility;
 
 import me.alexisevelyn.randomtech.Main;
 import me.alexisevelyn.randomtech.blockentities.FuserBlockEntity;
+import me.alexisevelyn.randomtech.blockentities.IntangibleDarkGlassBlockEntity;
 import me.alexisevelyn.randomtech.blockentities.TeleporterBlockEntity;
 import net.minecraft.block.Block;
 import net.minecraft.block.entity.BlockEntity;
@@ -19,6 +20,7 @@ public class BlockEntities {
 
     public static final BlockEntityType<TeleporterBlockEntity> TELEPORTER = register(TeleporterBlockEntity::new, "teleporter_block_entity", RegistryHelper.TELEPORTER);
     public static final BlockEntityType<FuserBlockEntity> FUSER = register(FuserBlockEntity::new, "fuser_block_entity", RegistryHelper.FUSER);
+    public static final BlockEntityType<IntangibleDarkGlassBlockEntity> INTANGIBLE_DARK_GLASS = register(IntangibleDarkGlassBlockEntity::new, "intangible_dark_glass_block_entity", RegistryHelper.DARK_INTANGIBLE_GLASS);
 
     public static <T extends BlockEntity> BlockEntityType<T> register(Supplier<T> supplier, String name, Block... blocks) {
         Validate.isTrue(blocks.length > 0, "Add a block to your Block Entity: " + supplier.get().getClass().getName());
