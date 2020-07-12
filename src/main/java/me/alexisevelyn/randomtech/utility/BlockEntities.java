@@ -1,9 +1,9 @@
 package me.alexisevelyn.randomtech.utility;
 
 import me.alexisevelyn.randomtech.Main;
-import me.alexisevelyn.randomtech.blockentities.FuserBlockEntity;
-import me.alexisevelyn.randomtech.blockentities.IntangibleDarkGlassBlockEntity;
-import me.alexisevelyn.randomtech.blockentities.TeleporterBlockEntity;
+import me.alexisevelyn.randomtech.blockentities.*;
+import me.alexisevelyn.randomtech.blocks.glass.InverseDarkIntangibleGlass;
+import me.alexisevelyn.randomtech.blocks.glass.InverseIntangibleGlass;
 import net.minecraft.block.Block;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityType;
@@ -20,7 +20,11 @@ public class BlockEntities {
 
     public static final BlockEntityType<TeleporterBlockEntity> TELEPORTER = register(TeleporterBlockEntity::new, "teleporter_block_entity", RegistryHelper.TELEPORTER);
     public static final BlockEntityType<FuserBlockEntity> FUSER = register(FuserBlockEntity::new, "fuser_block_entity", RegistryHelper.FUSER);
+
     public static final BlockEntityType<IntangibleDarkGlassBlockEntity> INTANGIBLE_DARK_GLASS = register(IntangibleDarkGlassBlockEntity::new, "intangible_dark_glass_block_entity", RegistryHelper.DARK_INTANGIBLE_GLASS);
+    public static final BlockEntityType<IntangibleGlassBlockEntity> INTANGIBLE_GLASS = register(IntangibleGlassBlockEntity::new, "intangible_glass_block_entity", RegistryHelper.INTANGIBLE_GLASS);
+    public static final BlockEntityType<InverseIntangibleDarkGlassBlockEntity> INVERSE_INTANGIBLE_DARK_GLASS = register(InverseIntangibleDarkGlassBlockEntity::new, "inverse_intangible_dark_glass_block_entity", RegistryHelper.INVERSE_DARK_INTANGIBLE_GLASS);
+    public static final BlockEntityType<InverseIntangibleGlassBlockEntity> INVERSE_INTANGIBLE_GLASS = register(InverseIntangibleGlassBlockEntity::new, "inverse_intangible_glass_block_entity", RegistryHelper.INVERSE_INTANGIBLE_GLASS);
 
     public static <T extends BlockEntity> BlockEntityType<T> register(Supplier<T> supplier, String name, Block... blocks) {
         Validate.isTrue(blocks.length > 0, "Add a block to your Block Entity: " + supplier.get().getClass().getName());

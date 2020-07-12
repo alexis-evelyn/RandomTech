@@ -1,6 +1,7 @@
 package me.alexisevelyn.randomtech.blocks.glass;
 
 import me.alexisevelyn.randomtech.blockentities.IntangibleDarkGlassBlockEntity;
+import me.alexisevelyn.randomtech.blockentities.InverseIntangibleDarkGlassBlockEntity;
 import me.alexisevelyn.randomtech.utility.GenericBlockHelper;
 import me.alexisevelyn.randomtech.utility.Materials;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
@@ -16,8 +17,8 @@ import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 
-public class DarkIntangibleGlass extends AbstractGlassBlock implements BlockEntityProvider {
-    public DarkIntangibleGlass() {
+public class InverseDarkIntangibleGlass extends AbstractGlassBlock implements BlockEntityProvider {
+    public InverseDarkIntangibleGlass() {
         super(FabricBlockSettings
                 .of(Materials.DARK_GLASS_MATERIAL)
                 .sounds(BlockSoundGroup.GLASS)
@@ -50,16 +51,16 @@ public class DarkIntangibleGlass extends AbstractGlassBlock implements BlockEnti
     // Allows to specify the collision shape of the block. Can be used to block certain entities from going through.
     @Override
     public VoxelShape getCollisionShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
-        IntangibleDarkGlassBlockEntity intangibleDarkGlassBlockEntity = ((IntangibleDarkGlassBlockEntity) world.getBlockEntity(pos));
+        InverseIntangibleDarkGlassBlockEntity inverseIntangibleDarkGlassBlockEntity = ((InverseIntangibleDarkGlassBlockEntity) world.getBlockEntity(pos));
 
-        if (intangibleDarkGlassBlockEntity == null)
+        if (inverseIntangibleDarkGlassBlockEntity == null)
             return state.getOutlineShape(world, pos);
 
-        return intangibleDarkGlassBlockEntity.getCollisionShape(state, world, pos, context);
+        return inverseIntangibleDarkGlassBlockEntity.getCollisionShape(state, world, pos, context);
     }
 
     @Override
     public BlockEntity createBlockEntity(BlockView worldIn) {
-        return new IntangibleDarkGlassBlockEntity();
+        return new InverseIntangibleDarkGlassBlockEntity();
     }
 }

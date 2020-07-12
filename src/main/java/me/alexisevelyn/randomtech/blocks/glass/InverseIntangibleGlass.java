@@ -1,6 +1,6 @@
 package me.alexisevelyn.randomtech.blocks.glass;
 
-import me.alexisevelyn.randomtech.blockentities.IntangibleGlassBlockEntity;
+import me.alexisevelyn.randomtech.blockentities.InverseIntangibleGlassBlockEntity;
 import me.alexisevelyn.randomtech.utility.GenericBlockHelper;
 import me.alexisevelyn.randomtech.utility.Materials;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
@@ -14,8 +14,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
 
-public class IntangibleGlass extends AbstractGlassBlock implements BlockEntityProvider {
-    public IntangibleGlass() {
+public class InverseIntangibleGlass extends AbstractGlassBlock implements BlockEntityProvider {
+    public InverseIntangibleGlass() {
         super(FabricBlockSettings
                 .of(Materials.GLASS_MATERIAL)
                 .sounds(BlockSoundGroup.GLASS)
@@ -30,16 +30,16 @@ public class IntangibleGlass extends AbstractGlassBlock implements BlockEntityPr
     // Allows to specify the collision shape of the block. Can be used to block certain entities from going through.
     @Override
     public VoxelShape getCollisionShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
-        IntangibleGlassBlockEntity intangibleGlassBlockEntity = ((IntangibleGlassBlockEntity) world.getBlockEntity(pos));
+        InverseIntangibleGlassBlockEntity inverseIntangibleGlassBlockEntity = ((InverseIntangibleGlassBlockEntity) world.getBlockEntity(pos));
 
-        if (intangibleGlassBlockEntity == null)
+        if (inverseIntangibleGlassBlockEntity == null)
             return state.getOutlineShape(world, pos);
 
-        return intangibleGlassBlockEntity.getCollisionShape(state, world, pos, context);
+        return inverseIntangibleGlassBlockEntity.getCollisionShape(state, world, pos, context);
     }
 
     @Override
     public BlockEntity createBlockEntity(BlockView worldIn) {
-        return new IntangibleGlassBlockEntity();
+        return new InverseIntangibleGlassBlockEntity();
     }
 }

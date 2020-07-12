@@ -25,6 +25,8 @@
   "block.randomtech.dark_glass": "Dark Glass",
   "block.randomtech.intangible_glass": "Intangible Glass",
   "block.randomtech.dark_intangible_glass": "Dark Intangible Glass",
+  "block.randomtech.inverse_intangible_glass": "Inverse Intangible Glass",
+  "block.randomtech.inverse_dark_intangible_glass": "Inverse Dark Intangible Glass",
 
   "block.randomtech.teleporter": "Teleporter",
   "block.randomtech.fuser": "Fuser",
