@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "powered=false": {
+      "model": "randomtech:block/powered_glass"
+    },
+    "powered=true": {
+      "model": "randomtech:block/powered_glass_powered"
+    }
+  }
+}

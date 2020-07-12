@@ -42,6 +42,8 @@ public class RegistryHelper {
     public static final Block INVERSE_INTANGIBLE_GLASS = new InverseIntangibleGlass();
     public static final Block INVERSE_DARK_INTANGIBLE_GLASS = new InverseDarkIntangibleGlass();
 
+    public static final Block POWERED_GLASS = new PoweredGlass();
+
     public static final Block VIRTUAL_TILE = new VirtualTile();
 
     // Machines
@@ -113,6 +115,8 @@ public class RegistryHelper {
         Registry.register(Registry.BLOCK, new Identifier(Main.MODID, "inverse_intangible_glass"), INVERSE_INTANGIBLE_GLASS);
         Registry.register(Registry.BLOCK, new Identifier(Main.MODID, "inverse_dark_intangible_glass"), INVERSE_DARK_INTANGIBLE_GLASS);
 
+        Registry.register(Registry.BLOCK, new Identifier(Main.MODID, "powered_glass"), POWERED_GLASS);
+
         Registry.register(Registry.BLOCK, new Identifier(Main.MODID, "virtual_tile"), VIRTUAL_TILE);
 
         // Machines
@@ -148,6 +152,8 @@ public class RegistryHelper {
 
         Registry.register(Registry.ITEM, new Identifier(Main.MODID, "inverse_intangible_glass"), new BlockItem(INVERSE_INTANGIBLE_GLASS, new Item.Settings().group(ItemGroup.DECORATIONS)));
         Registry.register(Registry.ITEM, new Identifier(Main.MODID, "inverse_dark_intangible_glass"), new BlockItem(INVERSE_DARK_INTANGIBLE_GLASS, new Item.Settings().group(ItemGroup.DECORATIONS)));
+
+        Registry.register(Registry.ITEM, new Identifier(Main.MODID, "powered_glass"), new BlockItem(POWERED_GLASS, new Item.Settings().group(ItemGroup.DECORATIONS)));
 
         Registry.register(Registry.ITEM, new Identifier(Main.MODID, "virtual_tile"), new BlockItem(VIRTUAL_TILE, new Item.Settings().group(ItemGroup.DECORATIONS)));
 
