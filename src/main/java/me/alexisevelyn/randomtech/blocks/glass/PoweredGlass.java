@@ -24,8 +24,8 @@ public class PoweredGlass extends BasePoweredGlass {
     @Override
     public int getOpacity(BlockState state, BlockView world, BlockPos pos) {
         if (state.get(POWER) > 0)
-            return 15;
+            return 0;
 
-        return 0;
+        return 15;
     }
 }
