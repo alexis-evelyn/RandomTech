@@ -40,8 +40,10 @@
   "item.randomtech.magic_bucket": "Bucket O' Magic",
   "item.randomtech.redstone_bucket": "Liquid Redstone",
 
+  "entity.randomtech.wizard": "Wizard",
+
   "tooltip.waila.energy": "Energy: %s/%s",
-  "tooltip.waila.redstone_signal_strength": "Redstone Signal: %s",
+  "tooltip.waila.redstone_signal_strength": "Redstone Signals: %s",
 
   "message.randomtech.teleporter_energy_fail": "This teleporter needs at least %s and only has %s",
 

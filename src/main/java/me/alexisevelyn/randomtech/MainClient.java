@@ -1,5 +1,6 @@
 package me.alexisevelyn.randomtech;
 
+import me.alexisevelyn.randomtech.entities.renderers.WizardRenderer;
 import me.alexisevelyn.randomtech.modmenu.screens.MainScreen;
 import me.alexisevelyn.randomtech.utility.RegistryHelper;
 import me.sargunvohra.mcmods.autoconfig1u.AutoConfig;
@@ -8,6 +9,7 @@ import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.render.fluid.v1.FluidRenderHandler;
 import net.fabricmc.fabric.api.client.render.fluid.v1.FluidRenderHandlerRegistry;
+import net.fabricmc.fabric.api.client.rendereregistry.v1.EntityRendererRegistry;
 import net.fabricmc.fabric.api.event.client.ClientSpriteRegistryCallback;
 import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
 import net.fabricmc.fabric.api.resource.SimpleSynchronousResourceReloadListener;
@@ -39,6 +41,15 @@ public class MainClient implements ClientModInitializer {
 
 		// Fluids
 		fluidSetup();
+
+		// Entities
+		entitySetup();
+	}
+
+	private void entitySetup() {
+		EntityRendererRegistry.INSTANCE.register(RegistryHelper.WIZARD, (dispatcher, context) -> {
+			return new WizardRenderer(dispatcher);
+		});
 	}
 
 	private void blockSetup() {

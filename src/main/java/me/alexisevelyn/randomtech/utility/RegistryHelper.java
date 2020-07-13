@@ -6,6 +6,7 @@ import me.alexisevelyn.randomtech.blocks.glass.*;
 import me.alexisevelyn.randomtech.blocks.FuserBlock;
 import me.alexisevelyn.randomtech.blocks.TeleporterBlock;
 import me.alexisevelyn.randomtech.blocks.VirtualTile;
+import me.alexisevelyn.randomtech.entities.mob.WizardEntity;
 import me.alexisevelyn.randomtech.fluids.ExperienceFluid;
 import me.alexisevelyn.randomtech.fluids.MagicFluid;
 import me.alexisevelyn.randomtech.fluids.RedstoneFluid;
@@ -23,10 +24,13 @@ import me.alexisevelyn.randomtech.items.books.Manual;
 import me.alexisevelyn.randomtech.items.ingots.RedstoneIngot;
 import me.alexisevelyn.randomtech.items.tools.*;
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
+import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
+import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
 import net.fabricmc.fabric.api.registry.FuelRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.FluidBlock;
-import net.minecraft.entity.EquipmentSlot;
+import net.minecraft.entity.*;
+import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.fluid.FlowableFluid;
 import net.minecraft.item.*;
 import net.minecraft.util.Identifier;
@@ -96,6 +100,13 @@ public class RegistryHelper {
     public static final TeleporterGuiHandler<TeleporterGui> teleporterGuiHandler = new TeleporterGuiHandler<>();
     public static final FuserGuiHandler<FuserGui> fuserGuiHandler = new FuserGuiHandler<>();
 
+    // Entities
+    public static final EntityType<WizardEntity> WIZARD = Registry.register(Registry.ENTITY_TYPE, new Identifier(Main.MODID, "wizard"),
+            FabricEntityTypeBuilder.create(SpawnGroup.CREATURE, ((EntityType.EntityFactory<WizardEntity>) WizardEntity::new))
+                    .dimensions(EntityDimensions.fixed(0.75f, 0.75f))
+                    .build()
+    );
+
     // Force Load BlockEntities.java Early On
     // This is important to make sure that BlockEntities are loaded before a world is loaded
     public static final BlockEntities blockEntities = new BlockEntities();
@@ -105,6 +116,30 @@ public class RegistryHelper {
     public static final Recipes customRecipes = new Recipes();
     
     public void register() {
+        // Blocks
+        registerGeneralBlocks();
+        registerMachines();
+
+        // Items
+        registerGeneralItems();
+        registerTools();
+        registerArmor();
+
+        // Item Blocks
+        registerGeneralItemBlocks();
+        registerMachineItemBlocks();
+
+        // Fluids
+        registerFluids();
+
+        // Fuel
+        registerFuel();
+
+        // Entities
+        registerEntities();
+    }
+
+    protected void registerGeneralBlocks() {
         // Blocks
         Registry.register(Registry.BLOCK, new Identifier(Main.MODID, "clear_glass"), CLEAR_GLASS);
         Registry.register(Registry.BLOCK, new Identifier(Main.MODID, "dark_glass"), DARK_GLASS);
@@ -118,31 +153,41 @@ public class RegistryHelper {
         Registry.register(Registry.BLOCK, new Identifier(Main.MODID, "powered_glass"), POWERED_GLASS);
 
         Registry.register(Registry.BLOCK, new Identifier(Main.MODID, "virtual_tile"), VIRTUAL_TILE);
+    }
 
+    protected void registerMachines() {
         // Machines
         Registry.register(Registry.BLOCK, new Identifier(Main.MODID, "teleporter"), TELEPORTER);
         Registry.register(Registry.BLOCK, new Identifier(Main.MODID, "fuser"), FUSER);
+    }
 
+    protected void registerGeneralItems() {
         // Items
         Registry.register(Registry.ITEM, new Identifier(Main.MODID, Manual.itemID), MANUAL);
 
         Registry.register(Registry.ITEM, new Identifier(Main.MODID, "teleporter_control"), TELEPORTER_CONTROL);
         Registry.register(Registry.ITEM, new Identifier(Main.MODID, "edible_power"), EDIBLE_POWER);
         Registry.register(Registry.ITEM, new Identifier(Main.MODID, "redstone_ingot"), REDSTONE_INGOT);
+    }
 
+    protected void registerTools() {
         // Tools
         Registry.register(Registry.ITEM, new Identifier(Main.MODID, "powered_sword"), POWERED_SWORD);
         Registry.register(Registry.ITEM, new Identifier(Main.MODID, "powered_pickaxe"), POWERED_PICKAXE);
         Registry.register(Registry.ITEM, new Identifier(Main.MODID, "powered_axe"), POWERED_AXE);
         Registry.register(Registry.ITEM, new Identifier(Main.MODID, "powered_shovel"), POWERED_SHOVEL);
         Registry.register(Registry.ITEM, new Identifier(Main.MODID, "powered_hoe"), POWERED_HOE);
+    }
 
+    protected void registerArmor() {
         // Armor
         Registry.register(Registry.ITEM, new Identifier(Main.MODID, "powered_helmet"), new ArmorBase(REDSTONE_ARMOR_MATERIAL, EquipmentSlot.HEAD));
         Registry.register(Registry.ITEM, new Identifier(Main.MODID, "powered_chestplate"), new ArmorBase(REDSTONE_ARMOR_MATERIAL, EquipmentSlot.CHEST));
         Registry.register(Registry.ITEM, new Identifier(Main.MODID, "powered_leggings"), new ArmorBase(REDSTONE_ARMOR_MATERIAL, EquipmentSlot.LEGS));
         Registry.register(Registry.ITEM, new Identifier(Main.MODID, "powered_boots"), new ArmorBase(REDSTONE_ARMOR_MATERIAL, EquipmentSlot.FEET));
+    }
 
+    protected void registerGeneralItemBlocks() {
         // ItemBlocks
         Registry.register(Registry.ITEM, new Identifier(Main.MODID, "clear_glass"), new BlockItem(CLEAR_GLASS, new Item.Settings().group(ItemGroup.DECORATIONS)));
         Registry.register(Registry.ITEM, new Identifier(Main.MODID, "dark_glass"), new BlockItem(DARK_GLASS, new Item.Settings().group(ItemGroup.DECORATIONS)));
@@ -156,18 +201,29 @@ public class RegistryHelper {
         Registry.register(Registry.ITEM, new Identifier(Main.MODID, "powered_glass"), new BlockItem(POWERED_GLASS, new Item.Settings().group(ItemGroup.DECORATIONS)));
 
         Registry.register(Registry.ITEM, new Identifier(Main.MODID, "virtual_tile"), new BlockItem(VIRTUAL_TILE, new Item.Settings().group(ItemGroup.DECORATIONS)));
+    }
 
+    protected void registerMachineItemBlocks() {
         // ItemBlocks Machines
         Registry.register(Registry.ITEM, new Identifier(Main.MODID, "teleporter"), new BlockItem(TELEPORTER, new Item.Settings().group(MACHINERY_GROUP)));
         Registry.register(Registry.ITEM, new Identifier(Main.MODID, "fuser"), new BlockItem(FUSER, new Item.Settings().group(MACHINERY_GROUP)));
+    }
 
+    protected void registerFluids() {
         // Register Fluids
         Registry.register(Registry.BLOCK, new Identifier(Main.MODID, "liquid_experience"), EXPERIENCE_FLUID_BLOCK);
         Registry.register(Registry.BLOCK, new Identifier(Main.MODID, "liquid_magic"), MAGIC_FLUID_BLOCK);
         Registry.register(Registry.BLOCK, new Identifier(Main.MODID, "liquid_redstone"), REDSTONE_FLUID_BLOCK);
+    }
 
+    protected void registerFuel() {
         // Register Fuel
         FuelRegistry.INSTANCE.add(EDIBLE_POWER, 20*10); // 20*3 = 0.3 Items According to REI
     }
-    
+
+    protected void registerEntities() {
+        // Registry.register(Registry.ENTITY_TYPE, new Identifier(Main.MODID, "wizard"), WIZARD);
+
+        FabricDefaultAttributeRegistry.register(WIZARD, WizardEntity.createMobAttributes());
+    }
 }
