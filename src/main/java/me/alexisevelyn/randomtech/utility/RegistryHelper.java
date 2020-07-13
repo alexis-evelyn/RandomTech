@@ -2,10 +2,10 @@ package me.alexisevelyn.randomtech.utility;
 
 import me.alexisevelyn.randomtech.Main;
 import me.alexisevelyn.randomtech.armormaterials.RedstoneArmorMaterial;
-import me.alexisevelyn.randomtech.blocks.glass.*;
 import me.alexisevelyn.randomtech.blocks.FuserBlock;
 import me.alexisevelyn.randomtech.blocks.TeleporterBlock;
 import me.alexisevelyn.randomtech.blocks.VirtualTile;
+import me.alexisevelyn.randomtech.blocks.glass.*;
 import me.alexisevelyn.randomtech.entities.mob.WizardEntity;
 import me.alexisevelyn.randomtech.fluids.ExperienceFluid;
 import me.alexisevelyn.randomtech.fluids.MagicFluid;
@@ -29,12 +29,16 @@ import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
 import net.fabricmc.fabric.api.registry.FuelRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.FluidBlock;
-import net.minecraft.entity.*;
-import net.minecraft.entity.mob.MobEntity;
+import net.minecraft.entity.EntityDimensions;
+import net.minecraft.entity.EntityType;
+import net.minecraft.entity.EquipmentSlot;
+import net.minecraft.entity.SpawnGroup;
 import net.minecraft.fluid.FlowableFluid;
 import net.minecraft.item.*;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
+
+import java.awt.*;
 
 public class RegistryHelper {
     // Blocks
@@ -76,36 +80,37 @@ public class RegistryHelper {
     public static final Item POWERED_HOE = new PoweredHoe(new Item.Settings().group(ItemGroup.TOOLS));
 
     // Fluids
-    public static final FlowableFluid EXPERIENCE_FLUID = Registry.register(Registry.FLUID, new Identifier(Main.MODID, "liquid_experience"), new ExperienceFluid.Still());
-    public static final FlowableFluid EXPERIENCE_FLUID_FLOWING = Registry.register(Registry.FLUID, new Identifier(Main.MODID, "liquid_experience_flowing"), new ExperienceFluid.Flowing());
+    public static final FlowableFluid EXPERIENCE_FLUID = new ExperienceFluid.Still();
+    public static final FlowableFluid EXPERIENCE_FLUID_FLOWING = new ExperienceFluid.Flowing();
     public static final FluidBlock EXPERIENCE_FLUID_BLOCK = new ExperienceFluidBlock(EXPERIENCE_FLUID){};
 
-    public static final FlowableFluid MAGIC_FLUID = Registry.register(Registry.FLUID, new Identifier(Main.MODID, "liquid_magic"), new MagicFluid.Still());
-    public static final FlowableFluid MAGIC_FLUID_FLOWING = Registry.register(Registry.FLUID, new Identifier(Main.MODID, "liquid_magic_flowing"), new MagicFluid.Flowing());
+    public static final FlowableFluid MAGIC_FLUID = new MagicFluid.Still();
+    public static final FlowableFluid MAGIC_FLUID_FLOWING = new MagicFluid.Flowing();
     public static final FluidBlock MAGIC_FLUID_BLOCK = new MagicFluidBlock(MAGIC_FLUID){};
 
-    public static final FlowableFluid REDSTONE_FLUID = Registry.register(Registry.FLUID, new Identifier(Main.MODID, "liquid_redstone"), new RedstoneFluid.Still());
-    public static final FlowableFluid REDSTONE_FLUID_FLOWING = Registry.register(Registry.FLUID, new Identifier(Main.MODID, "liquid_redstone_flowing"), new RedstoneFluid.Flowing());
+    public static final FlowableFluid REDSTONE_FLUID = new RedstoneFluid.Still();
+    public static final FlowableFluid REDSTONE_FLUID_FLOWING = new RedstoneFluid.Flowing();
     public static final FluidBlock REDSTONE_FLUID_BLOCK = new RedstoneFluidBlock(REDSTONE_FLUID){};
 
     // Armor Materials
     public static final ArmorMaterial REDSTONE_ARMOR_MATERIAL = new RedstoneArmorMaterial();
 
     // Buckets
-    public static final Item EXPERIENCE_BUCKET = Registry.register(Registry.ITEM, new Identifier(Main.MODID, "experience_bucket"), new BucketItem(EXPERIENCE_FLUID, new Item.Settings().recipeRemainder(Items.BUCKET).maxCount(1)));
-    public static final Item MAGIC_BUCKET = Registry.register(Registry.ITEM, new Identifier(Main.MODID, "magic_bucket"), new BucketItem(MAGIC_FLUID, new Item.Settings().recipeRemainder(Items.BUCKET).maxCount(1)));
-    public static final Item REDSTONE_BUCKET = Registry.register(Registry.ITEM, new Identifier(Main.MODID, "redstone_bucket"), new BucketItem(REDSTONE_FLUID, new Item.Settings().recipeRemainder(Items.BUCKET).maxCount(1)));
+    public static final Item EXPERIENCE_BUCKET = new BucketItem(EXPERIENCE_FLUID, new Item.Settings().recipeRemainder(Items.BUCKET).maxCount(1));
+    public static final Item MAGIC_BUCKET = new BucketItem(MAGIC_FLUID, new Item.Settings().recipeRemainder(Items.BUCKET).maxCount(1));
+    public static final Item REDSTONE_BUCKET = new BucketItem(REDSTONE_FLUID, new Item.Settings().recipeRemainder(Items.BUCKET).maxCount(1));
 
     // Gui Handlers - Needs to be run on both client and server for gui open screen to work
     public static final TeleporterGuiHandler<TeleporterGui> teleporterGuiHandler = new TeleporterGuiHandler<>();
     public static final FuserGuiHandler<FuserGui> fuserGuiHandler = new FuserGuiHandler<>();
 
     // Entities
-    public static final EntityType<WizardEntity> WIZARD = Registry.register(Registry.ENTITY_TYPE, new Identifier(Main.MODID, "wizard"),
-            FabricEntityTypeBuilder.create(SpawnGroup.CREATURE, ((EntityType.EntityFactory<WizardEntity>) WizardEntity::new))
-                    .dimensions(EntityDimensions.fixed(0.75f, 0.75f))
-                    .build()
-    );
+    public static final EntityType<WizardEntity> WIZARD = FabricEntityTypeBuilder.create(SpawnGroup.CREATURE, ((EntityType.EntityFactory<WizardEntity>) WizardEntity::new))
+            .dimensions(EntityDimensions.fixed(0.75f, 0.75f))
+            .build();
+
+    // Spawn Eggs
+    public static final SpawnEggItem WIZARD_SPAWN_EGG = new SpawnEggItem(WIZARD, Color.BLUE.getRGB(), Color.RED.getRGB(), new Item.Settings().group(ItemGroup.MISC));
 
     // Force Load BlockEntities.java Early On
     // This is important to make sure that BlockEntities are loaded before a world is loaded
@@ -123,6 +128,7 @@ public class RegistryHelper {
         // Items
         registerGeneralItems();
         registerTools();
+        registerBuckets();
         registerArmor();
 
         // Item Blocks
@@ -137,6 +143,9 @@ public class RegistryHelper {
 
         // Entities
         registerEntities();
+
+        // Spawn Eggs
+        registerSpawnEggs();
     }
 
     protected void registerGeneralBlocks() {
@@ -179,6 +188,12 @@ public class RegistryHelper {
         Registry.register(Registry.ITEM, new Identifier(Main.MODID, "powered_hoe"), POWERED_HOE);
     }
 
+    protected void registerBuckets() {
+        Registry.register(Registry.ITEM, new Identifier(Main.MODID, "experience_bucket"), EXPERIENCE_BUCKET);
+        Registry.register(Registry.ITEM, new Identifier(Main.MODID, "magic_bucket"), MAGIC_BUCKET);
+        Registry.register(Registry.ITEM, new Identifier(Main.MODID, "redstone_bucket"), REDSTONE_BUCKET);
+    }
+
     protected void registerArmor() {
         // Armor
         Registry.register(Registry.ITEM, new Identifier(Main.MODID, "powered_helmet"), new ArmorBase(REDSTONE_ARMOR_MATERIAL, EquipmentSlot.HEAD));
@@ -210,7 +225,17 @@ public class RegistryHelper {
     }
 
     protected void registerFluids() {
-        // Register Fluids
+        // Register Fluids Flowing
+        Registry.register(Registry.FLUID, new Identifier(Main.MODID, "liquid_experience_flowing"), EXPERIENCE_FLUID_FLOWING);
+        Registry.register(Registry.FLUID, new Identifier(Main.MODID, "liquid_magic_flowing"), MAGIC_FLUID_FLOWING);
+        Registry.register(Registry.FLUID, new Identifier(Main.MODID, "liquid_redstone_flowing"), REDSTONE_FLUID_FLOWING);
+
+        // Register Fluids Still
+        Registry.register(Registry.FLUID, new Identifier(Main.MODID, "liquid_experience"), EXPERIENCE_FLUID);
+        Registry.register(Registry.FLUID, new Identifier(Main.MODID, "liquid_magic"), MAGIC_FLUID);
+        Registry.register(Registry.FLUID, new Identifier(Main.MODID, "liquid_redstone"), REDSTONE_FLUID);
+
+        // Register Fluids Blocks
         Registry.register(Registry.BLOCK, new Identifier(Main.MODID, "liquid_experience"), EXPERIENCE_FLUID_BLOCK);
         Registry.register(Registry.BLOCK, new Identifier(Main.MODID, "liquid_magic"), MAGIC_FLUID_BLOCK);
         Registry.register(Registry.BLOCK, new Identifier(Main.MODID, "liquid_redstone"), REDSTONE_FLUID_BLOCK);
@@ -222,8 +247,15 @@ public class RegistryHelper {
     }
 
     protected void registerEntities() {
-        // Registry.register(Registry.ENTITY_TYPE, new Identifier(Main.MODID, "wizard"), WIZARD);
+        // Entity Types
+        Registry.register(Registry.ENTITY_TYPE, new Identifier(Main.MODID, "wizard"), WIZARD);
 
+        // Default Entity Attributes
         FabricDefaultAttributeRegistry.register(WIZARD, WizardEntity.createMobAttributes());
+    }
+
+    protected void registerSpawnEggs() {
+        // Spawn Eggs
+        Registry.register(Registry.ITEM, new Identifier(Main.MODID, "wizard_spawn_egg"), WIZARD_SPAWN_EGG);
     }
 }

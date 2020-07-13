@@ -42,6 +42,8 @@
 
   "entity.randomtech.wizard": "Wizard",
 
+  "item.randomtech.wizard_spawn_egg": "Wizard Spawn Egg",
+
   "tooltip.waila.energy": "Energy: %s/%s",
   "tooltip.waila.redstone_signal_strength": "Redstone Signals: %s",
 
