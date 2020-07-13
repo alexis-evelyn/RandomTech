@@ -3,6 +3,7 @@ package me.alexisevelyn.randomtech.waila.machines;
 import mcp.mobius.waila.api.*;
 import me.alexisevelyn.randomtech.utility.RegistryHelper;
 import me.alexisevelyn.randomtech.blocks.TeleporterBlock;
+import me.alexisevelyn.randomtech.waila.WailaRegistry;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundTag;
@@ -16,7 +17,7 @@ import reborncore.common.powerSystem.PowerSystem;
 import java.util.List;
 
 public class Machines implements IComponentProvider, IServerDataProvider<BlockEntity> {
-    static final Machines INSTANCE = new Machines();
+    public static final Machines INSTANCE = new Machines();
 
     @Override
     public void appendServerData(CompoundTag compoundTag, ServerPlayerEntity serverPlayerEntity, World world, BlockEntity blockEntity) {

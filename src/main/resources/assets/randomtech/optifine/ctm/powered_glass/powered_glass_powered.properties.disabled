@@ -1,0 +1,9 @@
+# TODO: Figure out how to match based on textures since blockstate matching is not implemented yet
+
+matchBlocks=randomtech:powered_glass
+connect=block
+method=ctm_compact
+tiles=$CBT_SPECIAL_DYNAMIC_GLASS
+weight=0
+cbt_special_glass_background=E6000000
+cbt_special_glass_texture=randomtech:textures/block/glass/powered_glass_powered.png
