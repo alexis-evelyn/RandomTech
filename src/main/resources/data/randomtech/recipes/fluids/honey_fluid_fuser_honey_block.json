@@ -1,0 +1,19 @@
+{
+  "type": "randomtech:fuser",
+  "power": 10,
+  "time": 50,
+  "ingredients": [
+    {
+      "item": "minecraft:honey_block"
+    }
+  ],
+  "results": [
+    {
+      "item": "minecraft:dirt"
+    }
+  ],
+  "tank": {
+    "fluid": "randomtech:liquid_honey",
+    "amount": 1000
+  }
+}

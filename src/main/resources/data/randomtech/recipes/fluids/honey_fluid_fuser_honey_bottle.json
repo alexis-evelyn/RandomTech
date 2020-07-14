@@ -1,0 +1,19 @@
+{
+  "type": "randomtech:fuser",
+  "power": 1,
+  "time": 10,
+  "ingredients": [
+    {
+      "item": "minecraft:honey_bottle"
+    }
+  ],
+  "results": [
+    {
+      "item": "minecraft:diorite"
+    }
+  ],
+  "tank": {
+    "fluid": "randomtech:liquid_honey",
+    "amount": 250
+  }
+}
