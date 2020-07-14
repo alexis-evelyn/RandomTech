@@ -11,7 +11,7 @@
     {
       "fluid": "randomtech:liquid_magic",
       "value": 1000,
-      "item": "minecraft:dirt"
+      "item": "minecraft:andesite"
     }
   ]
 }

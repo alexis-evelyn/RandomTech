@@ -11,7 +11,7 @@
     {
       "fluid": "randomtech:liquid_magic",
       "value": 500,
-      "item": "minecraft:dirt"
+      "item": "minecraft:grass_block"
     }
   ]
 }

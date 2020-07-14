@@ -38,9 +38,11 @@ public class FuserBlockEntity extends FluidMachineBlockEntityBase implements ITo
     int inputSlot = inputSlots[0];
     int outputSlot = outputSlots[0];
 
+    int fluidOutputSlot = 2;
+
     public FuserBlockEntity() {
         super(BlockEntities.FUSER);
-        this.inventory = new RebornInventory<>(2, "FuserBlockEntity", 64, this);
+        this.inventory = new RebornInventory<>(3, "FuserBlockEntity", 64, this);
         this.tank = new Tank("TankStorage", maxFluidCapacity, this);
 
         crafter = new FuserRecipeCrafter(this, inventory, inputSlots, outputSlots);
@@ -60,8 +62,9 @@ public class FuserBlockEntity extends FluidMachineBlockEntityBase implements ITo
                 .hotbar()
                 .addInventory()
                 .blockEntity(this)
-                .fluidSlot(inputSlot, 8, 72)
+                .slot(inputSlot, 8, 72)
                 .outputSlot(outputSlot, 26, 72)
+                .fluidSlot(fluidOutputSlot, 44, 72)
                 .syncEnergyValue()
                 .syncCrafterValue()
                 .sync(tank)
