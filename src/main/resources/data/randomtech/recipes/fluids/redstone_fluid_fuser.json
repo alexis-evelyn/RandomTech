@@ -9,9 +9,11 @@
   ],
   "results": [
     {
-      "fluid": "randomtech:liquid_redstone",
-      "value": 1000,
       "item": "minecraft:redstone"
     }
-  ]
+  ],
+  "tank": {
+    "fluid": "randomtech:liquid_redstone",
+    "amount": 1000
+  }
 }

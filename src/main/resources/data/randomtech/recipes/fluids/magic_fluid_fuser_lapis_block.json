@@ -9,9 +9,11 @@
   ],
   "results": [
     {
-      "fluid": "randomtech:liquid_magic",
-      "value": 500,
       "item": "minecraft:grass_block"
     }
-  ]
+  ],
+  "tank": {
+    "fluid": "randomtech:liquid_magic",
+    "amount": 500
+  }
 }

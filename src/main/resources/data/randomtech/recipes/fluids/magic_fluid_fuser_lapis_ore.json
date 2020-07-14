@@ -9,9 +9,11 @@
   ],
   "results": [
     {
-      "fluid": "randomtech:liquid_magic",
-      "value": 1000,
       "item": "minecraft:andesite"
     }
-  ]
+  ],
+  "tank": {
+    "fluid": "randomtech:liquid_magic",
+    "amount": 1000
+  }
 }

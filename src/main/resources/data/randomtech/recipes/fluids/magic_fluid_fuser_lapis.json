@@ -9,9 +9,11 @@
   ],
   "results": [
     {
-      "fluid": "randomtech:liquid_magic",
-      "value": 100,
       "item": "minecraft:stone"
     }
-  ]
+  ],
+  "tank": {
+    "fluid": "randomtech:liquid_magic",
+    "amount": 100
+  }
 }
