@@ -10,7 +10,8 @@
   "results": [
     {
       "fluid": "randomtech:liquid_redstone",
-      "millibuckets": 1000
+      "value": 1000,
+      "item": "minecraft:dirt"
     }
   ]
 }

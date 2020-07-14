@@ -10,7 +10,8 @@
   "results": [
     {
       "fluid": "randomtech:liquid_magic",
-      "millibuckets": 500
+      "value": 500,
+      "item": "minecraft:dirt"
     }
   ]
 }

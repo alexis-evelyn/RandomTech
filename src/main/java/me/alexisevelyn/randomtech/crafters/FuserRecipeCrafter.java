@@ -1,7 +1,9 @@
 package me.alexisevelyn.randomtech.crafters;
 
 import me.alexisevelyn.randomtech.utility.Recipes;
+import me.alexisevelyn.randomtech.utility.recipemanagers.GenericFluidRecipe;
 import net.minecraft.block.entity.BlockEntity;
+import reborncore.common.crafting.RebornFluidRecipe;
 import reborncore.common.crafting.RebornRecipe;
 import reborncore.common.recipes.RecipeCrafter;
 import reborncore.common.util.RebornInventory;
@@ -15,13 +17,13 @@ public class FuserRecipeCrafter extends RecipeCrafter {
      * @param inventory Inventory from parent blockEntity
      * @param inputSlots Slot IDs for input
      */
-    public FuserRecipeCrafter(BlockEntity blockEntity, RebornInventory<?> inventory, int[] inputSlots) {
-        super(Recipes.LIQUID_FUSER, blockEntity, 1, 0, inventory, inputSlots, null);
+    public FuserRecipeCrafter(BlockEntity blockEntity, RebornInventory<?> inventory, int[] inputSlots, int[] outputSlots) {
+        super(Recipes.LIQUID_FUSER, blockEntity, inputSlots.length, outputSlots.length, inventory, inputSlots, outputSlots);
     }
 
     @Override
     public void updateCurrentRecipe() {
-        List<RebornRecipe> recipeList = Recipes.LIQUID_FUSER.getRecipes(blockEntity.getWorld());
+        List<GenericFluidRecipe> recipeList = Recipes.LIQUID_FUSER.getRecipes(blockEntity.getWorld());
 
         if(recipeList.isEmpty() || blockEntity.getWorld() == null) {
             setCurrentRecipe(null);

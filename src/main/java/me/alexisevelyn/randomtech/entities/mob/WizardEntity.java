@@ -8,6 +8,7 @@ import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.mob.PathAwareEntity;
+import net.minecraft.entity.passive.PigEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.sound.SoundEvent;
@@ -30,9 +31,11 @@ public class WizardEntity extends PathAwareEntity {
     protected void initGoals() {
         this.goalSelector.add(1, new SwimGoal(this));
 
-        this.goalSelector.add(2, new WanderAroundFarGoal(this, 0.8D));
-        this.goalSelector.add(3, new LookAtEntityGoal(this, PlayerEntity.class, 8.0F));
-        this.goalSelector.add(3, new LookAroundGoal(this));
+        this.goalSelector.add(2, new MeleeAttackGoal(this, 1.0D, false));
+
+        this.goalSelector.add(3, new WanderAroundFarGoal(this, 0.8D));
+        this.goalSelector.add(4, new LookAtEntityGoal(this, PlayerEntity.class, 8.0F));
+        this.goalSelector.add(4, new LookAroundGoal(this));
 
         this.targetSelector.add(1, new FollowTargetGoal<>(this, PlayerEntity.class, true));
     }
@@ -78,6 +81,9 @@ public class WizardEntity extends PathAwareEntity {
 
     @Override
     public boolean tryAttack(Entity target) {
+        if (target instanceof PigEntity)
+            return true;
+
         return false;
     }
 

@@ -4,13 +4,14 @@
   "time": 50,
   "ingredients": [
     {
-      "item": "randomtech:redstone_ingot"
+      "item": "minecraft:experience_bottle"
     }
   ],
   "results": [
     {
-      "fluid": "randomtech:liquid_redstone",
-      "millibuckets": 1000
+      "fluid": "randomtech:liquid_experience",
+      "value": 1000,
+      "item": "minecraft:dirt"
     }
   ]
 }
