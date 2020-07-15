@@ -2,6 +2,7 @@ package me.alexisevelyn.randomtech.utility.recipemanagers;
 
 import me.alexisevelyn.randomtech.blockentities.FluidMachineBlockEntityBase;
 import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.fluid.EmptyFluid;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.collection.DefaultedList;
@@ -9,6 +10,7 @@ import org.jetbrains.annotations.Nullable;
 import reborncore.common.crafting.RebornFluidRecipe;
 import reborncore.common.crafting.RebornRecipeType;
 import reborncore.common.crafting.ingredient.RebornIngredient;
+import reborncore.common.fluid.FluidValue;
 import reborncore.common.fluid.container.FluidInstance;
 import reborncore.common.util.Tank;
 
@@ -39,7 +41,27 @@ public class GenericFluidRecipe extends RebornFluidRecipe {
 
     @Override
     public boolean onCraft(BlockEntity blockEntity) {
-        return super.onCraft(blockEntity);
+        // Super Is responsible for removing fluid.
+        // So I'm not calling super
+
+        final Tank tank = getTank(blockEntity);
+
+        if (tank == null)
+            return false;
+
+        final FluidInstance recipeFluid = getFluidInstance();
+        final FluidInstance tankFluid = tank.getFluidInstance();
+
+        if (tankFluid.getFluid() instanceof EmptyFluid)
+            tankFluid.setFluid(recipeFluid.getFluid());
+
+        if (tankFluid.getFluid().equals(recipeFluid.getFluid())) {
+            if (tank.getFreeSpace().equalOrMoreThan(recipeFluid.getAmount())) {
+                tankFluid.addAmount(recipeFluid.getAmount());
+                return true;
+            }
+        }
+        return false;
     }
 
     @Nullable

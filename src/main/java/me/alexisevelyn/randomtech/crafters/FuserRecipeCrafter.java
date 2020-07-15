@@ -16,6 +16,9 @@ import reborncore.common.util.Tank;
 
 // https://github.com/TechReborn/RebornCore/blob/1.16/src/main/java/reborncore/common/crafting/RebornFluidRecipe.java
 public class FuserRecipeCrafter extends RecipeCrafter {
+    Tank tank;
+    GenericFluidRecipe genericFluidRecipe;
+
     /**
      * @param blockEntity Block Entity having this crafter
      * @param inventory   Inventory from parent blockEntity
@@ -29,25 +32,10 @@ public class FuserRecipeCrafter extends RecipeCrafter {
     public void updateEntity() {
         super.updateEntity();
 
-        if (!(blockEntity instanceof FluidMachineBlockEntityBase))
-            return;
-
-        if (!(currentRecipe instanceof GenericFluidRecipe))
-            return;
-
-        Tank tank = ((FluidMachineBlockEntityBase) blockEntity).getTank();
-        GenericFluidRecipe genericFluidRecipe = (GenericFluidRecipe) currentRecipe;
-
-        if (tank == null)
-            return;
-
-        // TODO: Only add fluid once processing is finished
-        // TODO: Add check if able to add fluid and adjust tank size accordingly
-        if (currentTickTime >= currentNeededTicks && canFillTank(tank, genericFluidRecipe)) {
-            System.out.println("Can Fill Tank with: " + genericFluidRecipe.getFluidInstance().getAmount());
-
-            System.out.println("Attempt To Fill Tank: " + attemptAddFluidToTank(tank, genericFluidRecipe.getFluidInstance()));
-        }
+//        if (currentTickTime >= currentNeededTicks && canCraftAgain()) {
+////            System.out.println("Can Fill Tank with: " + genericFluidRecipe.getFluidInstance().getAmount());
+//            System.out.println("Attempt To Fill Tank: " + attemptAddFluidToTank(tank, genericFluidRecipe.getFluidInstance()));
+//        }
     }
 
     @Override
@@ -57,22 +45,37 @@ public class FuserRecipeCrafter extends RecipeCrafter {
 
     @Override
     public boolean canCraftAgain() {
-        return super.canCraftAgain();
+        if (!super.canCraftAgain())
+            return false;
+
+        if (!(blockEntity instanceof FluidMachineBlockEntityBase))
+            return false;
+
+        if (!(currentRecipe instanceof GenericFluidRecipe))
+            return false;
+
+        tank = ((FluidMachineBlockEntityBase) blockEntity).getTank();
+        genericFluidRecipe = (GenericFluidRecipe) currentRecipe;
+
+        if (tank == null)
+            return false;
+
+        return canFillTank(tank, genericFluidRecipe);
     }
 
     public boolean canFillTank(Tank tank, GenericFluidRecipe genericFluidRecipe) {
         return tank.canInsertFluid(null, genericFluidRecipe.getFluidInstance().getFluid(), genericFluidRecipe.getFluidInstance().getAmount());
     }
 
-    public boolean attemptAddFluidToTank(Tank tank, FluidInstance fluidInstance) {
+    private boolean attemptAddFluidToTank(Tank tank, FluidInstance fluidInstance) {
         if (tank.getFluid() instanceof EmptyFluid)
             tank.setFluid(fluidInstance.getFluid());
         else if (!tank.getFluid().matchesType(fluidInstance.getFluid()))
             return false;
 
-        System.out.println("Tank Amount: " + tank.getFluidAmount());
+//        System.out.println("Tank Amount: " + tank.getFluidAmount());
         FluidValue amount = tank.getFluidAmount().add(fluidInstance.getAmount());
-        System.out.println("After Tank Amount: " + amount);
+//        System.out.println("After Tank Amount: " + amount);
 
         if (amount.moreThan(tank.getFreeSpace()))
             return false;
