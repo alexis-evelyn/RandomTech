@@ -31,12 +31,22 @@ public class GenericFluidRecipe extends RebornFluidRecipe {
 
     @Override
     public boolean canCraft(BlockEntity blockEntity) {
-        final FluidInstance tankFluid = Objects.requireNonNull(getTank(blockEntity)).getFluidInstance();
+        // Super wrongly checks if tank's current fluid level
+        // is more than or equal to recipe fluid when it
+        // should be checking the tank's free space instead
 
-        if (super.canCraft(blockEntity))
+        final Tank tank = getTank(blockEntity);
+
+        if (tank == null)
+            return false;
+
+        final FluidInstance tankFluid = tank.getFluidInstance();
+
+        if (tankFluid.isEmpty())
             return true;
-        else
-            return tankFluid.isEmpty();
+
+        // To Not Waste Energy on Last "Possible" Craft
+        return tank.getFreeSpace().equalOrMoreThan(getFluidInstance().getAmount());
     }
 
     @Override
