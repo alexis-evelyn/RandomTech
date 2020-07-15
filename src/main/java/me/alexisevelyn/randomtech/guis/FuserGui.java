@@ -28,6 +28,8 @@ public class FuserGui extends GuiBase<BuiltScreenHandler> {
 
         drawSlot(matrixStack, 8, 72, layer);
         drawSlot(matrixStack, 26, 72, layer);
+        drawSlot(matrixStack, 44, 72, layer);
+        drawSlot(matrixStack, 62, 72, layer);
     }
 
     @Override
