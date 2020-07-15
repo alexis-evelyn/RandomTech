@@ -1,6 +1,6 @@
 {
   "type": "randomtech:fuser",
-  "power": 100,
+  "power": 2,
   "time": 50,
   "ingredients": [
     {
@@ -9,7 +9,7 @@
   ],
   "results": [
     {
-      "item": "minecraft:cobblestone"
+      "item": "minecraft:glass_bottle"
     }
   ],
   "tank": {

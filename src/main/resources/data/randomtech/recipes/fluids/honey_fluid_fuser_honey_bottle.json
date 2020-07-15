@@ -1,6 +1,6 @@
 {
   "type": "randomtech:fuser",
-  "power": 1,
+  "power": 10,
   "time": 10,
   "ingredients": [
     {
@@ -9,7 +9,7 @@
   ],
   "results": [
     {
-      "item": "minecraft:diorite"
+      "item": "minecraft:honeycomb"
     }
   ],
   "tank": {

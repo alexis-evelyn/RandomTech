@@ -1,6 +1,6 @@
 {
   "type": "randomtech:fuser",
-  "power": 100,
+  "power": 10,
   "time": 100,
   "ingredients": [
     {
@@ -9,7 +9,7 @@
   ],
   "results": [
     {
-      "item": "minecraft:andesite"
+      "item": "minecraft:lapis_lazuli"
     }
   ],
   "tank": {

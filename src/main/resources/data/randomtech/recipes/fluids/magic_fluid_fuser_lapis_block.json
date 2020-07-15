@@ -1,6 +1,6 @@
 {
   "type": "randomtech:fuser",
-  "power": 50,
+  "power": 5,
   "time": 90,
   "ingredients": [
     {
@@ -9,7 +9,7 @@
   ],
   "results": [
     {
-      "item": "minecraft:grass_block"
+      "item": "minecraft:lapis_lazuli"
     }
   ],
   "tank": {

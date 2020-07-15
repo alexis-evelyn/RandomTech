@@ -1,6 +1,6 @@
 {
   "type": "randomtech:fuser",
-  "power": 100,
+  "power": 3,
   "time": 300,
   "ingredients": [
     {
