@@ -2,14 +2,9 @@ package me.alexisevelyn.randomtech.items.tools.generic;
 
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Sets;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.PillarBlock;
+import net.minecraft.block.*;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemUsageContext;
-import net.minecraft.item.ToolMaterial;
+import net.minecraft.item.*;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.ActionResult;
@@ -20,11 +15,19 @@ import team.reborn.energy.EnergyTier;
 import java.util.Set;
 
 public class GenericPoweredAxe extends GenericPoweredTool {
+    private static final Set<Material> NATURAL_EFFECTIVE_MATERIALS;
     private static final Set<Block> EFFECTIVE_BLOCKS;
     protected static final ImmutableMap<Block, Block> STRIPPED_BLOCKS;
 
     public GenericPoweredAxe(ToolMaterial material, int energyCapacity, EnergyTier tier, int cost, float poweredSpeed, float unpoweredSpeed, Item referenceTool, Settings settings) {
         super(material, energyCapacity, tier, cost, poweredSpeed, unpoweredSpeed, referenceTool, EFFECTIVE_BLOCKS, settings);
+    }
+
+    @Override
+    public float getMiningSpeedMultiplier(ItemStack stack, BlockState state) {
+        Material material = state.getMaterial();
+
+        return NATURAL_EFFECTIVE_MATERIALS.contains(material) ? this.miningSpeed : super.getMiningSpeedMultiplier(stack, state);
     }
 
     @Override
@@ -50,6 +53,13 @@ public class GenericPoweredAxe extends GenericPoweredTool {
 
     static {
         // I would just reference the AxeItem's Effective Blocks and Stripped Blocks, but Mojang has those variables marked private.
+        NATURAL_EFFECTIVE_MATERIALS = Sets.newHashSet(Material.WOOD,
+                Material.NETHER_WOOD,
+                Material.PLANT,
+                Material.REPLACEABLE_PLANT,
+                Material.BAMBOO,
+                Material.GOURD);
+
         EFFECTIVE_BLOCKS = Sets.newHashSet(Blocks.LADDER,
                 Blocks.SCAFFOLDING,
                 Blocks.OAK_BUTTON,

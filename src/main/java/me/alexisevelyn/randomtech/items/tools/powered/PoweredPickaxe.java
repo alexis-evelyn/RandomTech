@@ -7,6 +7,6 @@ import team.reborn.energy.EnergyTier;
 
 public class PoweredPickaxe extends GenericPoweredPickaxe {
     public PoweredPickaxe(Settings settings) {
-        super(new PoweredToolMaterial(), 1337, EnergyTier.HIGH, 1, 1, 0, Items.IRON_PICKAXE, settings);
+        super(new PoweredToolMaterial(), 1337, EnergyTier.HIGH, 1, 20, 0, Items.IRON_PICKAXE, settings);
     }
 }

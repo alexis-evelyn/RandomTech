@@ -7,6 +7,6 @@ import team.reborn.energy.EnergyTier;
 
 public class PoweredSword extends GenericPoweredSword {
     public PoweredSword(Settings settings) {
-        super(new PoweredToolMaterial(), 1337, EnergyTier.HIGH, 1, 1, 0, Items.IRON_SWORD, settings);
+        super(new PoweredToolMaterial(), 1337, EnergyTier.HIGH, 1, 20, 0, Items.IRON_SWORD, settings);
     }
 }

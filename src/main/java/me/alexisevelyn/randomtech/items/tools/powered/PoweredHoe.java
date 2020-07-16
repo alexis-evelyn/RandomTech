@@ -7,6 +7,6 @@ import team.reborn.energy.EnergyTier;
 
 public class PoweredHoe extends GenericPoweredHoe {
     public PoweredHoe(Settings settings) {
-        super(new PoweredToolMaterial(), 1337, EnergyTier.HIGH, 1, 1, 0, Items.IRON_HOE, settings);
+        super(new PoweredToolMaterial(), 1337, EnergyTier.HIGH, 1, 20, 0, Items.IRON_HOE, settings);
     }
 }
