@@ -33,6 +33,10 @@ public class GenericPoweredHoe extends GenericPoweredTool {
         World world = context.getWorld();
         BlockPos blockPos = context.getBlockPos();
 
+        // If Failed to be Usable, Then Fail Action
+        if (!allowActionResult(super.useOnBlock(context)))
+            return super.useOnBlock(context);
+
         if (context.getSide() != Direction.DOWN && world.getBlockState(blockPos.up()).isAir()) {
             BlockState blockState = TILLED_BLOCKS.get(world.getBlockState(blockPos).getBlock());
 
@@ -48,7 +52,7 @@ public class GenericPoweredHoe extends GenericPoweredTool {
             }
         }
 
-        return super.useOnBlock(context);
+        return ActionResult.PASS;
     }
 
     static {

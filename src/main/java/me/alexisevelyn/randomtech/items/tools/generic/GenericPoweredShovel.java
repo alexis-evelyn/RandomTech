@@ -35,6 +35,10 @@ public class GenericPoweredShovel extends GenericPoweredTool {
         BlockPos blockPos = context.getBlockPos();
         BlockState blockState = world.getBlockState(blockPos);
 
+        // If Failed to be Usable, Then Fail Action
+        if (!allowActionResult(super.useOnBlock(context)))
+            return super.useOnBlock(context);
+
         // Don't Perform Actions From the Bottom Side of A Block
         if (context.getSide() == Direction.DOWN) {
             return super.useOnBlock(context);

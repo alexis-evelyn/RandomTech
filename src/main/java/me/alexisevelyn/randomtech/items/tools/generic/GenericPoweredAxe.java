@@ -37,7 +37,7 @@ public class GenericPoweredAxe extends GenericPoweredTool {
         BlockState blockState = world.getBlockState(blockPos);
         Block block = STRIPPED_BLOCKS.get(blockState.getBlock());
 
-        if (block != null) {
+        if (allowActionResult(super.useOnBlock(context)) && block != null) {
             PlayerEntity playerEntity = context.getPlayer();
             world.playSound(playerEntity, blockPos, SoundEvents.ITEM_AXE_STRIP, SoundCategory.BLOCKS, 1.0F, 1.0F);
 
@@ -48,7 +48,7 @@ public class GenericPoweredAxe extends GenericPoweredTool {
             return ActionResult.success(world.isClient);
         }
 
-        return super.useOnBlock(context);
+        return ActionResult.PASS;
     }
 
     static {

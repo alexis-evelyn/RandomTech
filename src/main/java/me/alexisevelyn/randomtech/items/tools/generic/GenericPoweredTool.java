@@ -30,6 +30,8 @@ import team.reborn.energy.EnergyTier;
 import java.util.Random;
 import java.util.Set;
 
+// TODO: Make sure durability usage is correct.
+
 public class GenericPoweredTool extends MiningToolItem implements EnergyHolder, ItemDurabilityExtensions {
     private final EntityAttributeModifier brokenAttackAttribute = new EntityAttributeModifier(ATTACK_SPEED_MODIFIER_ID, "Broken Weapon Modifier", 0, EntityAttributeModifier.Operation.MULTIPLY_TOTAL);
 
@@ -59,6 +61,13 @@ public class GenericPoweredTool extends MiningToolItem implements EnergyHolder, 
     @Override
     public boolean isEffectiveOn(BlockState state) {
         return referenceTool.isEffectiveOn(state);
+    }
+
+    public boolean canMine(BlockState state, World world, BlockPos pos, PlayerEntity miner) {
+        if (!super.canMine(state, world, pos, miner))
+            return false;
+
+        return isUsable(miner.getMainHandStack());
     }
 
     @Override
@@ -174,7 +183,7 @@ public class GenericPoweredTool extends MiningToolItem implements EnergyHolder, 
         if (isUsable(context.getStack()))
             return super.useOnBlock(context);
 
-        return ActionResult.PASS;
+        return ActionResult.FAIL;
     }
 
     // For Right Clicking Entities
@@ -183,7 +192,7 @@ public class GenericPoweredTool extends MiningToolItem implements EnergyHolder, 
         if (isUsable(stack))
             return super.useOnEntity(stack, user, entity, hand);
 
-        return ActionResult.PASS;
+        return ActionResult.FAIL;
     }
 
     @Override
@@ -214,5 +223,9 @@ public class GenericPoweredTool extends MiningToolItem implements EnergyHolder, 
     @Override
     public int getDurabilityColor(ItemStack stack) {
         return PowerSystem.getDisplayPower().colour;
+    }
+
+    public boolean allowActionResult(ActionResult actionResult) {
+        return actionResult.isAccepted() || actionResult == ActionResult.PASS;
     }
 }
