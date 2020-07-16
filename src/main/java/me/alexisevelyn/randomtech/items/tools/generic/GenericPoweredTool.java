@@ -30,8 +30,6 @@ import team.reborn.energy.EnergyTier;
 import java.util.Random;
 import java.util.Set;
 
-// TODO: Make sure durability usage is correct.
-
 public class GenericPoweredTool extends MiningToolItem implements EnergyHolder, ItemDurabilityExtensions {
     private final EntityAttributeModifier brokenAttackAttribute = new EntityAttributeModifier(ATTACK_SPEED_MODIFIER_ID, "Broken Weapon Modifier", 0, EntityAttributeModifier.Operation.MULTIPLY_TOTAL);
 
@@ -151,7 +149,7 @@ public class GenericPoweredTool extends MiningToolItem implements EnergyHolder, 
             if (isEffectiveOn(state))
                 Energy.of(stack).use(cost);
             else
-                Energy.of(stack).use(cost*2);
+                Energy.of(stack).use(cost+1);
 
             return super.postMine(stack, world, state, pos, miner);
         }

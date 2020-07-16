@@ -22,6 +22,8 @@ import team.reborn.energy.EnergyTier;
 import java.util.Map;
 import java.util.Set;
 
+// TODO: Makes sure only one durability is used per effective block and two if not effective block
+// TODO: Make sure right click action consumes one durability
 public class GenericPoweredShovel extends GenericPoweredTool {
     private static final Set<Block> EFFECTIVE_BLOCKS;
     protected static final Map<Block, BlockState> PATH_STATES;
@@ -36,13 +38,12 @@ public class GenericPoweredShovel extends GenericPoweredTool {
         BlockState blockState = world.getBlockState(blockPos);
 
         // If Failed to be Usable, Then Fail Action
-        if (!allowActionResult(super.useOnBlock(context)))
+        if (!isUsable(context.getStack()))
             return super.useOnBlock(context);
 
         // Don't Perform Actions From the Bottom Side of A Block
-        if (context.getSide() == Direction.DOWN) {
+        if (context.getSide() == Direction.DOWN)
             return super.useOnBlock(context);
-        }
 
         PlayerEntity playerEntity = context.getPlayer();
         BlockState currentPathState = PATH_STATES.get(blockState.getBlock());

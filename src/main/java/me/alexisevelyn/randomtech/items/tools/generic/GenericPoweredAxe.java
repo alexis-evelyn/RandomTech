@@ -14,6 +14,8 @@ import team.reborn.energy.EnergyTier;
 
 import java.util.Set;
 
+// TODO: Makes sure only one durability is used per effective block and two if not effective block
+// TODO: Make sure right click action consumes one durability
 public class GenericPoweredAxe extends GenericPoweredTool {
     private static final Set<Material> NATURAL_EFFECTIVE_MATERIALS;
     private static final Set<Block> EFFECTIVE_BLOCKS;
@@ -37,7 +39,7 @@ public class GenericPoweredAxe extends GenericPoweredTool {
         BlockState blockState = world.getBlockState(blockPos);
         Block block = STRIPPED_BLOCKS.get(blockState.getBlock());
 
-        if (allowActionResult(super.useOnBlock(context)) && block != null) {
+        if (isUsable(context.getStack()) && block != null) {
             PlayerEntity playerEntity = context.getPlayer();
             world.playSound(playerEntity, blockPos, SoundEvents.ITEM_AXE_STRIP, SoundCategory.BLOCKS, 1.0F, 1.0F);
 
@@ -48,7 +50,7 @@ public class GenericPoweredAxe extends GenericPoweredTool {
             return ActionResult.success(world.isClient);
         }
 
-        return ActionResult.PASS;
+        return super.useOnBlock(context);
     }
 
     static {

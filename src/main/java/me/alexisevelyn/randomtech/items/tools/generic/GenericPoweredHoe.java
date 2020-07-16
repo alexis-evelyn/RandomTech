@@ -21,6 +21,8 @@ import team.reborn.energy.EnergyTier;
 import java.util.Map;
 import java.util.Set;
 
+// TODO: Makes sure only one durability is used per effective block and two if not effective block
+// TODO: Make sure right click action consumes one durability
 public class GenericPoweredHoe extends GenericPoweredTool {
     private static final Set<Block> EFFECTIVE_BLOCKS;
     protected static final Map<Block, BlockState> TILLED_BLOCKS;
@@ -34,8 +36,8 @@ public class GenericPoweredHoe extends GenericPoweredTool {
         BlockPos blockPos = context.getBlockPos();
 
         // If Failed to be Usable, Then Fail Action
-        if (!allowActionResult(super.useOnBlock(context)))
-            return super.useOnBlock(context);
+        if (!isUsable(context.getStack()))
+            return ActionResult.FAIL;
 
         if (context.getSide() != Direction.DOWN && world.getBlockState(blockPos.up()).isAir()) {
             BlockState blockState = TILLED_BLOCKS.get(world.getBlockState(blockPos).getBlock());
@@ -52,7 +54,7 @@ public class GenericPoweredHoe extends GenericPoweredTool {
             }
         }
 
-        return ActionResult.PASS;
+        return super.useOnBlock(context);
     }
 
     static {
