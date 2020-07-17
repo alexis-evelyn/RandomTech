@@ -36,18 +36,18 @@ public class GenericPoweredTool extends MiningToolItem implements EnergyHolder, 
     public final int maxCharge;
     public final int cost;
     public final float poweredSpeed;
-    public final Item referenceTool;
     public final EnergyTier tier;
+    public final Set<Block> effectiveBlocks;
 
-    public GenericPoweredTool(ToolMaterial material, int energyCapacity, EnergyTier tier, int cost, float poweredSpeed, float unpoweredSpeed, Item referenceTool, Set<Block> effectiveBlocks, Settings settings) {
-        super((int) material.getAttackDamage(), unpoweredSpeed, material, effectiveBlocks, settings.maxCount(1).maxDamage(material.getDurability()));
+    public GenericPoweredTool(ToolMaterial material, int energyCapacity, EnergyTier tier, int cost, float poweredSpeed, float unpoweredSpeed, float attackDamage, Set<Block> effectiveBlocks, Settings settings) {
+        super(attackDamage, unpoweredSpeed, material, effectiveBlocks, settings.maxCount(1).maxDamage(material.getDurability()));
 
         this.maxCharge = energyCapacity;
         this.tier = tier;
 
         this.cost = cost;
         this.poweredSpeed = poweredSpeed;
-        this.referenceTool = referenceTool;
+        this.effectiveBlocks = effectiveBlocks;
     }
 
     @Override
@@ -58,7 +58,7 @@ public class GenericPoweredTool extends MiningToolItem implements EnergyHolder, 
 
     @Override
     public boolean isEffectiveOn(BlockState state) {
-        return referenceTool.isEffectiveOn(state);
+        return effectiveBlocks.contains(state.getBlock());
     }
 
     public boolean canMine(BlockState state, World world, BlockPos pos, PlayerEntity miner) {

@@ -10,19 +10,19 @@ import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import team.reborn.energy.Energy;
 import team.reborn.energy.EnergyTier;
 
 import java.util.Set;
 
-// TODO: Makes sure only one durability is used per effective block and two if not effective block
-// TODO: Make sure right click action consumes one durability
 public class GenericPoweredAxe extends GenericPoweredTool {
     private static final Set<Material> NATURAL_EFFECTIVE_MATERIALS;
     private static final Set<Block> EFFECTIVE_BLOCKS;
     protected static final ImmutableMap<Block, Block> STRIPPED_BLOCKS;
+    private static final float attackDamage = 5.0F;
 
-    public GenericPoweredAxe(ToolMaterial material, int energyCapacity, EnergyTier tier, int cost, float poweredSpeed, float unpoweredSpeed, Item referenceTool, Settings settings) {
-        super(material, energyCapacity, tier, cost, poweredSpeed, unpoweredSpeed, referenceTool, EFFECTIVE_BLOCKS, settings);
+    public GenericPoweredAxe(ToolMaterial material, int energyCapacity, EnergyTier tier, int cost, float poweredSpeed, float unpoweredSpeed, Settings settings) {
+        super(material, energyCapacity, tier, cost, poweredSpeed, unpoweredSpeed, attackDamage, EFFECTIVE_BLOCKS, settings);
     }
 
     @Override
@@ -47,10 +47,20 @@ public class GenericPoweredAxe extends GenericPoweredTool {
                 world.setBlockState(blockPos, block.getDefaultState().with(PillarBlock.AXIS, blockState.get(PillarBlock.AXIS)), 11);
             }
 
+            Energy.of(context.getStack()).use(cost); // To Make Sure Item Uses Durability
             return ActionResult.success(world.isClient);
         }
 
         return super.useOnBlock(context);
+    }
+
+    @Override
+    public boolean isEffectiveOn(BlockState state) {
+        if (super.isEffectiveOn(state))
+            return true;
+
+        // If not one of the explicitly stated effective blocks, then check the Material Type
+        return NATURAL_EFFECTIVE_MATERIALS.contains(state.getMaterial());
     }
 
     static {

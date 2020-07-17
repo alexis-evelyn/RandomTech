@@ -1,7 +1,6 @@
-package me.alexisevelyn.randomtech.toolmaterials;
+package me.alexisevelyn.randomtech.toolmaterials.poweredtools;
 
 import net.minecraft.item.ToolMaterial;
-import net.minecraft.item.ToolMaterials;
 import net.minecraft.recipe.Ingredient;
 import org.jetbrains.annotations.Nullable;
 
@@ -9,28 +8,29 @@ public class PoweredToolMaterial implements ToolMaterial {
     @Override
     public int getDurability() {
         return -1;
-    }
+    } // Durability is Ignored as This is Energy Based
 
     @Override
     public float getMiningSpeedMultiplier() {
-        return 5.0F;
-    }
+        return 15.0F;
+    } // Gold is 12
 
     @Override
     public float getAttackDamage() {
-        return 1;
-    }
+        return 5.0F;
+    } // Netherite is 4
 
     @Override
     public int getMiningLevel() {
-        return ToolMaterials.NETHERITE.getMiningLevel();
-    }
+        return 5;
+    } // Netherite is 4
 
     @Override
     public int getEnchantability() {
         return 30;
-    }
+    } // Gold is 22. Netherite and Wood is 15. Diamond is 10
 
+    // Repair Ingredient is Ignored As We Want To Use Energy To Repair These Tools
     @Nullable
     @Override
     public Ingredient getRepairIngredient() {

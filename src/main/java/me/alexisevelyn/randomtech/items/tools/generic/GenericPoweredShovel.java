@@ -17,19 +17,19 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
+import team.reborn.energy.Energy;
 import team.reborn.energy.EnergyTier;
 
 import java.util.Map;
 import java.util.Set;
 
-// TODO: Makes sure only one durability is used per effective block and two if not effective block
-// TODO: Make sure right click action consumes one durability
 public class GenericPoweredShovel extends GenericPoweredTool {
     private static final Set<Block> EFFECTIVE_BLOCKS;
     protected static final Map<Block, BlockState> PATH_STATES;
+    private static final float attackDamage = 1.5F;
 
-    public GenericPoweredShovel(ToolMaterial material, int energyCapacity, EnergyTier tier, int cost, float poweredSpeed, float unpoweredSpeed, Item referenceTool, Settings settings) {
-        super(material, energyCapacity, tier, cost, poweredSpeed, unpoweredSpeed, referenceTool, EFFECTIVE_BLOCKS, settings);
+    public GenericPoweredShovel(ToolMaterial material, int energyCapacity, EnergyTier tier, int cost, float poweredSpeed, float unpoweredSpeed, Settings settings) {
+        super(material, energyCapacity, tier, cost, poweredSpeed, unpoweredSpeed, attackDamage, EFFECTIVE_BLOCKS, settings);
     }
 
     public ActionResult useOnBlock(ItemUsageContext context) {
@@ -65,6 +65,7 @@ public class GenericPoweredShovel extends GenericPoweredTool {
             if (!world.isClient)
                 world.setBlockState(blockPos, workingBlockState, 11);
 
+            Energy.of(context.getStack()).use(cost); // To Make Sure Item Uses Durability
             return ActionResult.success(world.isClient);
         }
 

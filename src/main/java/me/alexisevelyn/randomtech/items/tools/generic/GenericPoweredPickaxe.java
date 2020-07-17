@@ -14,9 +14,10 @@ import java.util.Set;
 
 public class GenericPoweredPickaxe extends GenericPoweredTool {
     private static final Set<Block> EFFECTIVE_BLOCKS;
+    private static final float attackDamage = 1;
 
-    public GenericPoweredPickaxe(ToolMaterial material, int energyCapacity, EnergyTier tier, int cost, float poweredSpeed, float unpoweredSpeed, Item referenceTool, Settings settings) {
-        super(material, energyCapacity, tier, cost, poweredSpeed, unpoweredSpeed, referenceTool, EFFECTIVE_BLOCKS, settings);
+    public GenericPoweredPickaxe(ToolMaterial material, int energyCapacity, EnergyTier tier, int cost, float poweredSpeed, float unpoweredSpeed, Settings settings) {
+        super(material, energyCapacity, tier, cost, poweredSpeed, unpoweredSpeed, attackDamage, EFFECTIVE_BLOCKS, settings);
     }
 
     public boolean isEffectiveOn(BlockState state) {
