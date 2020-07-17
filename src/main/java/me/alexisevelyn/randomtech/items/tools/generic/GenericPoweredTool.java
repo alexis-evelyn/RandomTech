@@ -61,6 +61,7 @@ public class GenericPoweredTool extends MiningToolItem implements EnergyHolder, 
         return effectiveBlocks.contains(state.getBlock());
     }
 
+    @Override
     public boolean canMine(BlockState state, World world, BlockPos pos, PlayerEntity miner) {
         if (!super.canMine(state, world, pos, miner))
             return false;

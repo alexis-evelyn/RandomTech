@@ -23,6 +23,7 @@ public class GenericPoweredSword extends GenericPoweredTool {
         super(material, energyCapacity, tier, cost, poweredSpeed, unpoweredSpeed, attackDamage, EFFECTIVE_BLOCKS, settings);
     }
 
+    @Override
     public boolean canMine(BlockState state, World world, BlockPos pos, PlayerEntity miner) {
         if (miner.isCreative())
             return false;
@@ -30,6 +31,7 @@ public class GenericPoweredSword extends GenericPoweredTool {
         return super.canMine(state, world, pos, miner);
     }
 
+    @Override
     public float getMiningSpeedMultiplier(ItemStack stack, BlockState state) {
         if (state.isOf(Blocks.COBWEB)) {
             return 15.0F;
@@ -39,6 +41,7 @@ public class GenericPoweredSword extends GenericPoweredTool {
         }
     }
 
+    @Override
     public boolean isEffectiveOn(BlockState state) {
         return EFFECTIVE_BLOCKS.contains(state.getBlock());
     }

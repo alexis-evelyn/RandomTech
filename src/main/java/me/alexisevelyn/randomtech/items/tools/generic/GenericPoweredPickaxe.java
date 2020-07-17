@@ -20,6 +20,7 @@ public class GenericPoweredPickaxe extends GenericPoweredTool {
         super(material, energyCapacity, tier, cost, poweredSpeed, unpoweredSpeed, attackDamage, EFFECTIVE_BLOCKS, settings);
     }
 
+    @Override
     public boolean isEffectiveOn(BlockState state) {
         int i = this.getMaterial().getMiningLevel();
 
@@ -39,6 +40,7 @@ public class GenericPoweredPickaxe extends GenericPoweredTool {
         }
     }
 
+    @Override
     public float getMiningSpeedMultiplier(ItemStack stack, BlockState state) {
         Material material = state.getMaterial();
         return material != Material.METAL && material != Material.REPAIR_STATION && material != Material.STONE ? super.getMiningSpeedMultiplier(stack, state) : this.miningSpeed;
