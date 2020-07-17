@@ -2,8 +2,8 @@ package me.alexisevelyn.randomtech.blocks.ores;
 
 import net.minecraft.block.Block;
 
-public class ColbaltOre extends Block {
-    public ColbaltOre(Settings settings) {
+public class CobaltOre extends Block {
+    public CobaltOre(Settings settings) {
         super(settings);
     }
 }

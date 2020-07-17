@@ -2,8 +2,8 @@ package me.alexisevelyn.randomtech.items.dusts;
 
 import net.minecraft.item.Item;
 
-public class ColbaltDust extends Item {
-    public ColbaltDust(Settings settings) {
+public class CobaltDust extends Item {
+    public CobaltDust(Settings settings) {
         super(settings);
     }
 }
