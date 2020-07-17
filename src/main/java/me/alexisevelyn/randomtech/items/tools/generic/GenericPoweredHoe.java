@@ -3,6 +3,7 @@ package me.alexisevelyn.randomtech.items.tools.generic;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Maps;
+import org.jetbrains.annotations.Nullable;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -25,6 +26,10 @@ public class GenericPoweredHoe extends GenericPoweredTool {
     private static final Set<Block> EFFECTIVE_BLOCKS;
     protected static final Map<Block, BlockState> TILLED_BLOCKS;
     private static final float attackDamage = -4.0F;
+
+    public GenericPoweredHoe(ToolMaterial material, int energyCapacity, EnergyTier tier, int cost, float poweredSpeed, float unpoweredSpeed, Settings settings, @Nullable String dischargedTranslationKey) {
+        super(material, energyCapacity, tier, cost, poweredSpeed, unpoweredSpeed, attackDamage, EFFECTIVE_BLOCKS, settings, dischargedTranslationKey);
+    }
 
     public GenericPoweredHoe(ToolMaterial material, int energyCapacity, EnergyTier tier, int cost, float poweredSpeed, float unpoweredSpeed, Settings settings) {
         super(material, energyCapacity, tier, cost, poweredSpeed, unpoweredSpeed, attackDamage, EFFECTIVE_BLOCKS, settings);

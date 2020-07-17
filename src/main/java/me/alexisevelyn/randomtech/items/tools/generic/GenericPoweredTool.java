@@ -1,5 +1,6 @@
 package me.alexisevelyn.randomtech.items.tools.generic;
 
+import me.alexisevelyn.randomtech.utility.ItemManager;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.block.Block;
@@ -18,9 +19,10 @@ import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
+import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import reborncore.common.powerSystem.PowerSystem;
+import org.jetbrains.annotations.Nullable;
 import reborncore.common.util.ItemDurabilityExtensions;
 import reborncore.common.util.ItemUtils;
 import team.reborn.energy.Energy;
@@ -38,8 +40,13 @@ public class GenericPoweredTool extends MiningToolItem implements EnergyHolder, 
     public final float poweredSpeed;
     public final EnergyTier tier;
     public final Set<Block> effectiveBlocks;
+    private final String dischargedTranslationKey;
 
     public GenericPoweredTool(ToolMaterial material, int energyCapacity, EnergyTier tier, int cost, float poweredSpeed, float unpoweredSpeed, float attackDamage, Set<Block> effectiveBlocks, Settings settings) {
+        this(material, energyCapacity, tier, cost, poweredSpeed, unpoweredSpeed, attackDamage, effectiveBlocks, settings, null);
+    }
+
+    public GenericPoweredTool(ToolMaterial material, int energyCapacity, EnergyTier tier, int cost, float poweredSpeed, float unpoweredSpeed, float attackDamage, Set<Block> effectiveBlocks, Settings settings, @Nullable String dischargedTranslationKey) {
         super(attackDamage, unpoweredSpeed, material, effectiveBlocks, settings.maxCount(1).maxDamage(material.getDurability()));
 
         this.maxCharge = energyCapacity;
@@ -48,12 +55,21 @@ public class GenericPoweredTool extends MiningToolItem implements EnergyHolder, 
         this.cost = cost;
         this.poweredSpeed = poweredSpeed;
         this.effectiveBlocks = effectiveBlocks;
+        this.dischargedTranslationKey = dischargedTranslationKey;
     }
 
     @Override
     @Environment(EnvType.CLIENT)
-    public Text getName() {
-        return new TranslatableText(this.getTranslationKey());
+    public Text getName(ItemStack stack) {
+        return new TranslatableText(this.getTranslationKey(stack));
+    }
+
+    @Override
+    public String getTranslationKey(ItemStack stack) {
+        if (isUsable(stack) || this.dischargedTranslationKey == null)
+            return super.getTranslationKey(stack);
+
+        return this.dischargedTranslationKey;
     }
 
     @Override
@@ -111,7 +127,7 @@ public class GenericPoweredTool extends MiningToolItem implements EnergyHolder, 
     }
 
     public boolean isUsable(ItemStack stack) {
-        return Energy.of(stack).getEnergy() >= cost;
+        return Energy.of(stack).getEnergy() >= this.cost;
     }
 
     @Override
@@ -206,7 +222,7 @@ public class GenericPoweredTool extends MiningToolItem implements EnergyHolder, 
 
     @Override
     public EnergyTier getTier() {
-        return tier;
+        return this.tier;
     }
 
     @Override
@@ -216,15 +232,39 @@ public class GenericPoweredTool extends MiningToolItem implements EnergyHolder, 
 
     @Override
     public boolean showDurability(ItemStack stack) {
-        return true;
+        if (!(stack.getItem() instanceof GenericPoweredTool))
+            return true;
+
+        double currentEnergy = Energy.of(stack).getEnergy();
+        double maxEnergy = Energy.of(stack).getMaxStored();
+
+        return currentEnergy < maxEnergy;
     }
 
     @Override
     public int getDurabilityColor(ItemStack stack) {
-        return PowerSystem.getDisplayPower().colour;
+        // Red - PowerSystem.getDisplayPower().colour;
+        // Darker Red - PowerSystem.getDisplayPower().altColour;
+        // Blue - 0xFF0014A2
+        // Green - 0xFF006700
+
+        return 0xFF0014A2;
     }
 
+    // I may or may not use this in the future, so I'm just marking it to not be used by 3rd parties for now.
+    @Deprecated
     public boolean allowActionResult(ActionResult actionResult) {
         return actionResult.isAccepted() || actionResult == ActionResult.PASS;
+    }
+
+    @Environment(EnvType.CLIENT)
+    @Override
+    public void appendStacks(ItemGroup group, DefaultedList<ItemStack> itemList) {
+        // Can be used to add multiple versions of items (e.g. a charged and discharged variant of each tool)
+        if (!isIn(group)) {
+            return;
+        }
+
+        ItemManager.initPoweredItems(this, itemList);
     }
 }

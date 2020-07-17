@@ -2,6 +2,7 @@ package me.alexisevelyn.randomtech.items.tools.generic;
 
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Sets;
+import org.jetbrains.annotations.Nullable;
 import net.minecraft.block.*;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.*;
@@ -20,6 +21,10 @@ public class GenericPoweredAxe extends GenericPoweredTool {
     private static final Set<Block> EFFECTIVE_BLOCKS;
     protected static final ImmutableMap<Block, Block> STRIPPED_BLOCKS;
     private static final float attackDamage = 5.0F;
+
+    public GenericPoweredAxe(ToolMaterial material, int energyCapacity, EnergyTier tier, int cost, float poweredSpeed, float unpoweredSpeed, Settings settings, @Nullable String dischargedTranslationKey) {
+        super(material, energyCapacity, tier, cost, poweredSpeed, unpoweredSpeed, attackDamage, EFFECTIVE_BLOCKS, settings, dischargedTranslationKey);
+    }
 
     public GenericPoweredAxe(ToolMaterial material, int energyCapacity, EnergyTier tier, int cost, float poweredSpeed, float unpoweredSpeed, Settings settings) {
         super(material, energyCapacity, tier, cost, poweredSpeed, unpoweredSpeed, attackDamage, EFFECTIVE_BLOCKS, settings);

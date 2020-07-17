@@ -14,20 +14,31 @@
   "item.randomtech.powered_shovel": "Powered Shovel",
   "item.randomtech.powered_hoe": "Powered Hoe",
 
+  "item.randomtech.unpowered_sword": "Discharged Sword",
+  "item.randomtech.unpowered_pickaxe": "Discharged Pickaxe",
+  "item.randomtech.unpowered_axe": "Discharged Axe",
+  "item.randomtech.unpowered_shovel": "Discharged Shovel",
+  "item.randomtech.unpowered_hoe": "Discharged Hoe",
 
   "item.randomtech.powered_helmet": "Powered Helmet",
   "item.randomtech.powered_chestplate": "Powered Chestplate",
   "item.randomtech.powered_leggings": "Powered Leggings",
   "item.randomtech.powered_boots": "Powered Boots",
 
+  "item.randomtech.unpowered_helmet": "Discharged Helmet",
+  "item.randomtech.unpowered_chestplate": "Discharged Chestplate",
+  "item.randomtech.unpowered_leggings": "Discharged Leggings",
+  "item.randomtech.unpowered_boots": "Discharged Boots",
+
   "block.randomtech.clear_glass": "Clear Glass",
-  "block.randomtech.virtual_tile": "Virtual Tile",
   "block.randomtech.dark_glass": "Dark Glass",
   "block.randomtech.intangible_glass": "Intangible Glass",
   "block.randomtech.dark_intangible_glass": "Dark Intangible Glass",
   "block.randomtech.inverse_intangible_glass": "Inverse Intangible Glass",
   "block.randomtech.inverse_dark_intangible_glass": "Inverse Dark Intangible Glass",
   "block.randomtech.powered_glass": "Powered Glass",
+
+  "block.randomtech.green_virtual_tile": "Green Virtual Tile",
 
   "block.randomtech.teleporter": "Teleporter",
   "block.randomtech.fuser": "Fuser",

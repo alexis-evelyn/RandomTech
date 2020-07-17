@@ -1,7 +1,7 @@
 {
   "type": "minecraft:smithing",
   "base": {
-    "item": "minecraft:diamond_hoe"
+    "item": "minecraft:netherite_hoe"
   },
   "addition": {
     "item": "randomtech:redstone_ingot"

@@ -5,7 +5,9 @@ import me.alexisevelyn.randomtech.toolmaterials.poweredtools.PoweredToolMaterial
 import team.reborn.energy.EnergyTier;
 
 public class PoweredShovel extends GenericPoweredShovel {
+    private static final String dischargedTranslationKey = "item.randomtech.unpowered_shovel";
+
     public PoweredShovel(Settings settings) {
-        super(new PoweredToolMaterial(), 1337, EnergyTier.HIGH, 1, 20, -3.0F, settings);
+        super(new PoweredToolMaterial(), 1337, EnergyTier.HIGH, 1, 20, -3.0F, settings, dischargedTranslationKey);
     }
 }

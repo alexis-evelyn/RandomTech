@@ -1,7 +1,7 @@
 {
   "type": "minecraft:smithing",
   "base": {
-    "item": "minecraft:diamond_shovel"
+    "item": "minecraft:netherite_shovel"
   },
   "addition": {
     "item": "randomtech:redstone_ingot"
