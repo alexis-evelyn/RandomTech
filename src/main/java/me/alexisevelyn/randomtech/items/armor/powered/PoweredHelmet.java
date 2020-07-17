@@ -16,4 +16,9 @@ public class PoweredHelmet extends GenericPoweredArmor {
     public PoweredHelmet(ArmorMaterial material, EquipmentSlot slot, Settings settings) {
         super(material, slot, energyCapacity, energyTier, cost, settings, dischargedTranslationKey);
     }
+
+    @Override
+    public boolean isFireproof() {
+        return true;
+    }
 }

@@ -10,4 +10,9 @@ public class PoweredPickaxe extends GenericPoweredPickaxe {
     public PoweredPickaxe(Settings settings) {
         super(new PoweredToolMaterial(), 1337, EnergyTier.HIGH, 1, 20, -2.8F, settings, dischargedTranslationKey);
     }
+
+    @Override
+    public boolean isFireproof() {
+        return true;
+    }
 }

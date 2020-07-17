@@ -1,12 +1,14 @@
 package me.alexisevelyn.randomtech.items.armor.generic;
 
 import com.google.common.collect.Multimap;
+import me.alexisevelyn.randomtech.api.armor.energy.EnergyHelper;
 import me.alexisevelyn.randomtech.utility.ItemManager;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.attribute.EntityAttribute;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
+import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ArmorItem;
 import net.minecraft.item.ArmorMaterial;
@@ -23,11 +25,12 @@ import reborncore.api.items.ItemStackModifiers;
 import reborncore.common.util.ItemDurabilityExtensions;
 import reborncore.common.util.ItemUtils;
 import team.reborn.energy.Energy;
+import team.reborn.energy.EnergyHandler;
 import team.reborn.energy.EnergyHolder;
 import team.reborn.energy.EnergyTier;
 
 // TODO: Make enchants useless if item is broken.
-public class GenericPoweredArmor extends ArmorItem implements ItemDurabilityExtensions, ItemStackModifiers, ArmorTickable, ArmorRemoveHandler, ArmorFovHandler, EnergyHolder {
+public class GenericPoweredArmor extends ArmorItem implements EnergyHelper, ItemDurabilityExtensions, ItemStackModifiers, ArmorTickable, ArmorRemoveHandler, ArmorFovHandler, EnergyHolder {
     private final int maxCharge;
     private final int cost;
 
@@ -154,5 +157,32 @@ public class GenericPoweredArmor extends ArmorItem implements ItemDurabilityExte
         }
 
         ItemManager.initPoweredItems(this, itemList);
+    }
+
+    // Armor Protection Level
+    @Override
+    public int getProtection() {
+        return super.getProtection();
+    }
+
+    // Armor Toughness Level
+    @Override
+    public float method_26353() {
+        return super.method_26353();
+    }
+
+    @Override
+    public void addDamage(ItemStack stack, DamageSource damageSource, float damage) {
+        if (!(stack.getItem() instanceof GenericPoweredArmor))
+            return;
+
+        double convertedDamage = damage;
+        EnergyHandler currentEnergy = Energy.of(stack);
+
+        // If more than max amount of energy, just set to rest of energy level
+        if (convertedDamage > currentEnergy.getEnergy())
+            convertedDamage = currentEnergy.getEnergy();
+
+        currentEnergy.use(convertedDamage);
     }
 }

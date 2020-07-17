@@ -35,7 +35,8 @@
     ]
   },
   "mixins": [
-    "example-mixin.json"
+    "example-mixin.json",
+    "energy-helper-mixin.json"
   ],
 
   "depends": {
