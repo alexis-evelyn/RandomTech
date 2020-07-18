@@ -1,9 +1,9 @@
 package me.alexisevelyn.randomtech.fluids.blocks;
 
+import me.alexisevelyn.randomtech.api.blocks.fluids.BaseFluidBlock;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
-import net.minecraft.block.FluidBlock;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffectInstance;

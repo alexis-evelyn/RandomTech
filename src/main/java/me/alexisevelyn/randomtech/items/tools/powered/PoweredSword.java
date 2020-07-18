@@ -1,6 +1,6 @@
 package me.alexisevelyn.randomtech.items.tools.powered;
 
-import me.alexisevelyn.randomtech.items.tools.generic.GenericPoweredSword;
+import me.alexisevelyn.randomtech.api.items.tools.generic.GenericPoweredSword;
 import me.alexisevelyn.randomtech.toolmaterials.poweredtools.PoweredToolMaterial;
 import team.reborn.energy.EnergyTier;
 

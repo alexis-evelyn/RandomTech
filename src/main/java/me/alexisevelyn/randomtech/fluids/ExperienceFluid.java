@@ -1,5 +1,6 @@
 package me.alexisevelyn.randomtech.fluids;
 
+import me.alexisevelyn.randomtech.api.fluids.BaseFluid;
 import me.alexisevelyn.randomtech.utility.RegistryHelper;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;

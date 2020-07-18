@@ -1,6 +1,6 @@
 package me.alexisevelyn.randomtech.blocks;
 
-import me.alexisevelyn.randomtech.utility.GenericBlockHelper;
+import me.alexisevelyn.randomtech.api.utilities.GenericBlockHelper;
 import me.alexisevelyn.randomtech.utility.Materials;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.fabricmc.fabric.api.tool.attribute.v1.FabricToolTags;

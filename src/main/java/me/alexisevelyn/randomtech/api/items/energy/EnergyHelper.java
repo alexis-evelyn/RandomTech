@@ -1,4 +1,4 @@
-package me.alexisevelyn.randomtech.api.armor.energy;
+package me.alexisevelyn.randomtech.api.items.energy;
 
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.player.PlayerEntity;

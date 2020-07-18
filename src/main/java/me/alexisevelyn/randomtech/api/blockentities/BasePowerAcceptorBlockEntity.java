@@ -1,4 +1,4 @@
-package me.alexisevelyn.randomtech.blockentities;
+package me.alexisevelyn.randomtech.api.blockentities;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntityType;
@@ -32,7 +32,7 @@ public class BasePowerAcceptorBlockEntity extends PowerAcceptorBlockEntity imple
     boolean canAcceptEnergy = true;
     boolean canProvideEnergy = false;
 
-    RebornInventory<?> inventory;
+    public RebornInventory<?> inventory;
 
     public BasePowerAcceptorBlockEntity(BlockEntityType<?> blockEntityType) {
         super(blockEntityType);
@@ -161,5 +161,9 @@ public class BasePowerAcceptorBlockEntity extends PowerAcceptorBlockEntity imple
         super.toTag(compoundTag);
 
         return compoundTag;
+    }
+
+    public double getEnergyAddend() {
+        return this.energyAddend;
     }
 }

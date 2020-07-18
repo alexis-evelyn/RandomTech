@@ -1,15 +1,9 @@
 package me.alexisevelyn.randomtech.crafters;
 
-import me.alexisevelyn.randomtech.blockentities.FluidMachineBlockEntityBase;
+import me.alexisevelyn.randomtech.api.blockentities.FluidMachineBlockEntityBase;
 import me.alexisevelyn.randomtech.utility.Recipes;
-import me.alexisevelyn.randomtech.utility.recipemanagers.GenericFluidRecipe;
+import me.alexisevelyn.randomtech.api.utilities.recipemanagers.GenericFluidRecipe;
 import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.fluid.EmptyFluid;
-import net.minecraft.fluid.Fluid;
-import net.minecraft.fluid.Fluids;
-import reborncore.common.crafting.RebornRecipe;
-import reborncore.common.fluid.FluidValue;
-import reborncore.common.fluid.container.FluidInstance;
 import reborncore.common.recipes.RecipeCrafter;
 import reborncore.common.util.RebornInventory;
 import reborncore.common.util.Tank;

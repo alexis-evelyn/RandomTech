@@ -1,4 +1,4 @@
-package me.alexisevelyn.randomtech.items.tools.generic;
+package me.alexisevelyn.randomtech.api.items.tools.generic;
 
 import com.google.common.collect.Sets;
 import org.jetbrains.annotations.Nullable;

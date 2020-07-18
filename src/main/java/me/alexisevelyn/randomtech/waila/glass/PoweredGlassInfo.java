@@ -3,7 +3,6 @@ package me.alexisevelyn.randomtech.waila.glass;
 import mcp.mobius.waila.api.IComponentProvider;
 import mcp.mobius.waila.api.IDataAccessor;
 import mcp.mobius.waila.api.IPluginConfig;
-import me.alexisevelyn.randomtech.blocks.glass.BasePoweredGlass;
 import me.alexisevelyn.randomtech.blocks.glass.PoweredGlass;
 import me.alexisevelyn.randomtech.utility.RegistryHelper;
 import me.alexisevelyn.randomtech.waila.WailaRegistry;

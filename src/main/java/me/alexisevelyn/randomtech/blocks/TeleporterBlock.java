@@ -1,5 +1,6 @@
 package me.alexisevelyn.randomtech.blocks;
 
+import me.alexisevelyn.randomtech.api.blocks.machines.PowerAcceptorBlock;
 import me.alexisevelyn.randomtech.utility.Materials;
 import me.alexisevelyn.randomtech.utility.RegistryHelper;
 import me.alexisevelyn.randomtech.blockentities.TeleporterBlockEntity;

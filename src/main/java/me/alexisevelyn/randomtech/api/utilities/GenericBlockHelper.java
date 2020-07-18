@@ -1,4 +1,4 @@
-package me.alexisevelyn.randomtech.utility;
+package me.alexisevelyn.randomtech.api.utilities;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.EntityType;

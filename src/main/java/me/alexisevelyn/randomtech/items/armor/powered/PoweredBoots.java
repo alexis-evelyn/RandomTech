@@ -1,6 +1,6 @@
 package me.alexisevelyn.randomtech.items.armor.powered;
 
-import me.alexisevelyn.randomtech.items.armor.generic.GenericPoweredArmor;
+import me.alexisevelyn.randomtech.api.items.armor.generic.GenericPoweredArmor;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.ArmorMaterial;
 import team.reborn.energy.EnergyTier;

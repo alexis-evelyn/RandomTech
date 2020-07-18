@@ -1,4 +1,4 @@
-package me.alexisevelyn.randomtech.blocks.glass;
+package me.alexisevelyn.randomtech.api.blocks.glass;
 
 import net.minecraft.block.AbstractGlassBlock;
 import net.minecraft.block.Block;

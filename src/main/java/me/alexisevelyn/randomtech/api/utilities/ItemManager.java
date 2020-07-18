@@ -1,4 +1,4 @@
-package me.alexisevelyn.randomtech.utility;
+package me.alexisevelyn.randomtech.api.utilities;
 
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;

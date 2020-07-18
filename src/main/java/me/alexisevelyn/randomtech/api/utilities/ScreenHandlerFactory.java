@@ -1,4 +1,4 @@
-package me.alexisevelyn.randomtech.utility;
+package me.alexisevelyn.randomtech.api.utilities;
 
 import net.fabricmc.fabric.api.screenhandler.v1.ScreenHandlerRegistry;
 import net.minecraft.block.entity.BlockEntity;

@@ -2,10 +2,11 @@ package me.alexisevelyn.randomtech.blockentities;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import me.alexisevelyn.randomtech.api.blockentities.FluidMachineBlockEntityBase;
 import me.alexisevelyn.randomtech.crafters.FuserRecipeCrafter;
 import me.alexisevelyn.randomtech.utility.BlockEntities;
 import me.alexisevelyn.randomtech.utility.RegistryHelper;
-import me.alexisevelyn.randomtech.utility.recipemanagers.GenericFluidRecipe;
+import me.alexisevelyn.randomtech.api.utilities.recipemanagers.GenericFluidRecipe;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.EmptyFluid;

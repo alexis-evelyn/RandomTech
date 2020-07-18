@@ -1,5 +1,6 @@
 package me.alexisevelyn.randomtech.blockentities;
 
+import me.alexisevelyn.randomtech.api.blockentities.BasePowerAcceptorBlockEntity;
 import me.alexisevelyn.randomtech.utility.BlockEntities;
 import me.alexisevelyn.randomtech.utility.RegistryHelper;
 import me.alexisevelyn.randomtech.blocks.TeleporterBlock;
@@ -119,7 +120,7 @@ public class TeleporterBlockEntity extends BasePowerAcceptorBlockEntity implemen
                 ServerPlayerEntity serverPlayerEntity = (ServerPlayerEntity) playerEntity;
 
                 serverPlayerEntity.teleport(newWorld, pos[0], pos[1], pos[2], serverPlayerEntity.getHeadYaw(), serverPlayerEntity.getPitch(20));
-                addEnergy(energyAddend); // Take out the energy from use of the teleporter
+                addEnergy(getEnergyAddend()); // Take out the energy from use of the teleporter
             } catch (Exception exception) {
                 System.out.println("Teleport Exception: ");
                 exception.printStackTrace();
@@ -147,7 +148,7 @@ public class TeleporterBlockEntity extends BasePowerAcceptorBlockEntity implemen
             return;
 
         Text message = new TranslatableText("message.randomtech.teleporter_energy_fail",
-                new LiteralText(PowerSystem.getLocaliszedPower(-1 * energyAddend))
+                new LiteralText(PowerSystem.getLocaliszedPower(-1 * getEnergyAddend()))
                         .formatted(Formatting.DARK_GREEN, Formatting.BOLD),
                 new LiteralText(PowerSystem.getLocaliszedPower(getEnergy()))
                         .formatted(Formatting.DARK_RED, Formatting.BOLD))

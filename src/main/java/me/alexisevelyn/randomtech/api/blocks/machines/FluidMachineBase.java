@@ -1,6 +1,6 @@
-package me.alexisevelyn.randomtech.blocks;
+package me.alexisevelyn.randomtech.api.blocks.machines;
 
-import me.alexisevelyn.randomtech.blockentities.FluidMachineBlockEntityBase;
+import me.alexisevelyn.randomtech.api.blockentities.FluidMachineBlockEntityBase;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
@@ -9,11 +9,11 @@ import org.jetbrains.annotations.Nullable;
 import reborncore.common.fluid.FluidValue;
 
 public class FluidMachineBase extends PowerAcceptorBlock {
-    FluidMachineBase(AbstractBlock.Settings settings) {
+    public FluidMachineBase(AbstractBlock.Settings settings) {
         super(settings);
     }
 
-    FluidMachineBase(AbstractBlock.Settings settings, boolean customStates) {
+    public FluidMachineBase(AbstractBlock.Settings settings, boolean customStates) {
         super(settings, customStates);
     }
 

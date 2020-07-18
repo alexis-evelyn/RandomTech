@@ -1,7 +1,7 @@
 package me.alexisevelyn.randomtech.blocks.glass;
 
 import me.alexisevelyn.randomtech.blockentities.IntangibleGlassBlockEntity;
-import me.alexisevelyn.randomtech.utility.GenericBlockHelper;
+import me.alexisevelyn.randomtech.api.utilities.GenericBlockHelper;
 import me.alexisevelyn.randomtech.utility.Materials;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.AbstractGlassBlock;

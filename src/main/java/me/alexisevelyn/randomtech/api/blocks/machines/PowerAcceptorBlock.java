@@ -1,4 +1,4 @@
-package me.alexisevelyn.randomtech.blocks;
+package me.alexisevelyn.randomtech.api.blocks.machines;
 
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.BlockState;
@@ -10,13 +10,13 @@ import reborncore.common.blocks.BlockMachineBase;
 import reborncore.common.powerSystem.PowerAcceptorBlockEntity;
 
 public class PowerAcceptorBlock extends BlockMachineBase {
-    boolean hasComparatorOutput = true;
+    private boolean hasComparatorOutput = true;
 
-    PowerAcceptorBlock(AbstractBlock.Settings settings) {
+    public PowerAcceptorBlock(AbstractBlock.Settings settings) {
         super(settings, false);
     }
 
-    PowerAcceptorBlock(AbstractBlock.Settings settings, boolean customStates) {
+    public PowerAcceptorBlock(AbstractBlock.Settings settings, boolean customStates) {
         super(settings, customStates);
     }
 

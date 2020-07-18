@@ -1,6 +1,6 @@
-package me.alexisevelyn.randomtech.items.tools.generic;
+package me.alexisevelyn.randomtech.api.items.tools.generic;
 
-import me.alexisevelyn.randomtech.utility.ItemManager;
+import me.alexisevelyn.randomtech.api.utilities.ItemManager;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.block.Block;
@@ -187,9 +187,10 @@ public class GenericPoweredTool extends MiningToolItem implements EnergyHolder, 
         return false;
     }
 
+    // TODO: Fix armor to only allow enchants meant for armor. This will require a mixin.
     @Override
     public boolean isEnchantable(ItemStack stack) {
-        return true;
+        return false;
     }
 
     // For Right Clicking Blocks
