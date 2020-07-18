@@ -209,6 +209,7 @@ public class RegistryHelper {
     }
 
     protected void registerBuckets() {
+        // Buckets
         Registry.register(Registry.ITEM, new Identifier(Main.MODID, "experience_bucket"), EXPERIENCE_BUCKET);
         Registry.register(Registry.ITEM, new Identifier(Main.MODID, "magic_bucket"), MAGIC_BUCKET);
         Registry.register(Registry.ITEM, new Identifier(Main.MODID, "redstone_bucket"), REDSTONE_BUCKET);
@@ -246,19 +247,19 @@ public class RegistryHelper {
     }
 
     protected void registerFluids() {
-        // Register Fluids Flowing
+        // Flowing Fluids
         Registry.register(Registry.FLUID, new Identifier(Main.MODID, "experience_flowing"), EXPERIENCE_FLUID_FLOWING);
         Registry.register(Registry.FLUID, new Identifier(Main.MODID, "magic_flowing"), MAGIC_FLUID_FLOWING);
         Registry.register(Registry.FLUID, new Identifier(Main.MODID, "redstone_flowing"), REDSTONE_FLUID_FLOWING);
         Registry.register(Registry.FLUID, new Identifier(Main.MODID, "honey_flowing"), HONEY_FLUID_FLOWING);
 
-        // Register Fluids Still
+        // Still Fluids
         Registry.register(Registry.FLUID, new Identifier(Main.MODID, "experience"), EXPERIENCE_FLUID);
         Registry.register(Registry.FLUID, new Identifier(Main.MODID, "magic"), MAGIC_FLUID);
         Registry.register(Registry.FLUID, new Identifier(Main.MODID, "redstone"), REDSTONE_FLUID);
         Registry.register(Registry.FLUID, new Identifier(Main.MODID, "honey"), HONEY_FLUID);
 
-        // Register Fluids Blocks
+        // Fluid Blocks
         Registry.register(Registry.BLOCK, new Identifier(Main.MODID, "experience"), EXPERIENCE_FLUID_BLOCK);
         Registry.register(Registry.BLOCK, new Identifier(Main.MODID, "magic"), MAGIC_FLUID_BLOCK);
         Registry.register(Registry.BLOCK, new Identifier(Main.MODID, "redstone"), REDSTONE_FLUID_BLOCK);
@@ -266,7 +267,7 @@ public class RegistryHelper {
     }
 
     protected void registerFuel() {
-        // Register Fuel
+        // Fuel
         FuelRegistry.INSTANCE.add(EDIBLE_POWER, 20*10); // 20*3 = 0.3 Items According to REI
     }
 

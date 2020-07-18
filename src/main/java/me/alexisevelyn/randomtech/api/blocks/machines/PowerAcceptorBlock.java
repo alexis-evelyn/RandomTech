@@ -10,8 +10,6 @@ import reborncore.common.blocks.BlockMachineBase;
 import reborncore.common.powerSystem.PowerAcceptorBlockEntity;
 
 public class PowerAcceptorBlock extends BlockMachineBase {
-    private boolean hasComparatorOutput = true;
-
     public PowerAcceptorBlock(AbstractBlock.Settings settings) {
         super(settings, false);
     }
@@ -28,7 +26,7 @@ public class PowerAcceptorBlock extends BlockMachineBase {
 
     @Override
     public boolean hasComparatorOutput(BlockState state) {
-        return hasComparatorOutput;
+        return true;
     }
 
     @Override

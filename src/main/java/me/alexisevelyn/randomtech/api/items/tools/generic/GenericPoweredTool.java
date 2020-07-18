@@ -24,11 +24,9 @@ import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
-import reborncore.common.powerSystem.PowerSystem;
 import reborncore.common.util.ItemDurabilityExtensions;
 import reborncore.common.util.ItemUtils;
 import team.reborn.energy.Energy;
-import team.reborn.energy.EnergyHandler;
 import team.reborn.energy.EnergyHolder;
 import team.reborn.energy.EnergyTier;
 
