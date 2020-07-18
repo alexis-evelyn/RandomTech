@@ -37,7 +37,8 @@
   "mixins": [
     "mixins/example-mixin.json",
     "mixins/energy-helper-mixin.json",
-    "mixins/enchant-helper-mixin.json"
+    "mixins/enchant-helper-mixin.json",
+    "mixins/smithing-recipe-nbt-modifier-mixin.json"
   ],
 
   "depends": {

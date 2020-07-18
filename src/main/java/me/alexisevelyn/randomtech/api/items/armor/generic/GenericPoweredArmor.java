@@ -14,13 +14,12 @@ import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ArmorItem;
-import net.minecraft.item.ArmorMaterial;
-import net.minecraft.item.ItemGroup;
-import net.minecraft.item.ItemStack;
+import net.minecraft.item.*;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.collection.DefaultedList;
+import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 import reborncore.api.items.ArmorFovHandler;
 import reborncore.api.items.ArmorRemoveHandler;
@@ -224,5 +223,9 @@ public class GenericPoweredArmor extends ArmorItem implements EnergyHelper, Item
             return;
 
         currentEnergy.use(convertedDamage);
+    }
+
+    public ItemStack onCraft(ItemStack oldStack, ItemStack newStack, CompoundTag tag) {
+        return ItemManager.convertStackToEnergyItemStack(oldStack, newStack, tag);
     }
 }

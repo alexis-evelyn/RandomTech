@@ -26,6 +26,7 @@ import org.jetbrains.annotations.Nullable;
 import reborncore.common.util.ItemDurabilityExtensions;
 import reborncore.common.util.ItemUtils;
 import team.reborn.energy.Energy;
+import team.reborn.energy.EnergyHandler;
 import team.reborn.energy.EnergyHolder;
 import team.reborn.energy.EnergyTier;
 
@@ -267,5 +268,9 @@ public class GenericPoweredTool extends MiningToolItem implements EnergyHolder, 
         }
 
         ItemManager.initPoweredItems(this, itemList);
+    }
+
+    public ItemStack onCraft(ItemStack oldStack, ItemStack newStack, CompoundTag tag) {
+        return ItemManager.convertStackToEnergyItemStack(oldStack, newStack, tag);
     }
 }
