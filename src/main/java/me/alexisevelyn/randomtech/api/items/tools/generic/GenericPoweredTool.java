@@ -5,6 +5,7 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.client.item.TooltipContext;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.Entity;
@@ -23,6 +24,7 @@ import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
+import reborncore.common.powerSystem.PowerSystem;
 import reborncore.common.util.ItemDurabilityExtensions;
 import reborncore.common.util.ItemUtils;
 import team.reborn.energy.Energy;
@@ -30,6 +32,7 @@ import team.reborn.energy.EnergyHandler;
 import team.reborn.energy.EnergyHolder;
 import team.reborn.energy.EnergyTier;
 
+import java.util.List;
 import java.util.Random;
 import java.util.Set;
 
@@ -272,5 +275,13 @@ public class GenericPoweredTool extends MiningToolItem implements EnergyHolder, 
 
     public ItemStack onCraft(ItemStack oldStack, ItemStack newStack, CompoundTag tag) {
         return ItemManager.convertStackToEnergyItemStack(oldStack, newStack, tag);
+    }
+
+    @Environment(EnvType.CLIENT)
+    @Override
+    public void appendTooltip(ItemStack stack, @Nullable World worldIn, List<Text> tooltip, TooltipContext flagIn) {
+        if (flagIn.isAdvanced()) {
+            ItemManager.powerLevelTooltip(stack, tooltip);
+        }
     }
 }

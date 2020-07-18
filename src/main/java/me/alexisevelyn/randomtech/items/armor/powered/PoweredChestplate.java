@@ -6,9 +6,7 @@ import net.minecraft.item.ArmorMaterial;
 import team.reborn.energy.EnergyTier;
 
 public class PoweredChestplate extends GenericPoweredArmor {
-    // TODO: Change tool and armor durability
-
-    private static final int energyCapacity = 1337;
+    private static final int energyCapacity = 712;
     private static final EnergyTier energyTier = EnergyTier.HIGH;
     private static final int cost = 1;
     private static final String dischargedTranslationKey = "item.randomtech.unpowered_chestplate";

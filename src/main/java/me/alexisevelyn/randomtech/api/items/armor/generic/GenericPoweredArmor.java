@@ -5,6 +5,7 @@ import me.alexisevelyn.randomtech.api.items.energy.EnergyHelper;
 import me.alexisevelyn.randomtech.api.utilities.ItemManager;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.minecraft.client.item.TooltipContext;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.enchantment.UnbreakingEnchantment;
@@ -16,15 +17,19 @@ import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.*;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.text.LiteralText;
 import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
+import net.minecraft.util.Formatting;
 import net.minecraft.util.collection.DefaultedList;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 import reborncore.api.items.ArmorFovHandler;
 import reborncore.api.items.ArmorRemoveHandler;
 import reborncore.api.items.ArmorTickable;
 import reborncore.api.items.ItemStackModifiers;
+import reborncore.common.powerSystem.PowerSystem;
 import reborncore.common.util.ItemDurabilityExtensions;
 import reborncore.common.util.ItemUtils;
 import team.reborn.energy.Energy;
@@ -32,6 +37,7 @@ import team.reborn.energy.EnergyHandler;
 import team.reborn.energy.EnergyHolder;
 import team.reborn.energy.EnergyTier;
 
+import java.util.List;
 import java.util.UUID;
 
 // TODO: Make enchants useless if item is broken.
@@ -227,5 +233,13 @@ public class GenericPoweredArmor extends ArmorItem implements EnergyHelper, Item
 
     public ItemStack onCraft(ItemStack oldStack, ItemStack newStack, CompoundTag tag) {
         return ItemManager.convertStackToEnergyItemStack(oldStack, newStack, tag);
+    }
+
+    @Environment(EnvType.CLIENT)
+    @Override
+    public void appendTooltip(ItemStack stack, @Nullable World worldIn, List<Text> tooltip, TooltipContext flagIn) {
+        if (flagIn.isAdvanced()) {
+            ItemManager.powerLevelTooltip(stack, tooltip);
+        }
     }
 }
