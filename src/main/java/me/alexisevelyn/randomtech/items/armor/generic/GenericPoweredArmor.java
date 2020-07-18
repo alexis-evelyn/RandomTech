@@ -5,9 +5,13 @@ import me.alexisevelyn.randomtech.api.armor.energy.EnergyHelper;
 import me.alexisevelyn.randomtech.utility.ItemManager;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.minecraft.enchantment.EnchantmentHelper;
+import net.minecraft.enchantment.Enchantments;
+import net.minecraft.enchantment.UnbreakingEnchantment;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.attribute.EntityAttribute;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
+import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ArmorItem;
@@ -29,6 +33,8 @@ import team.reborn.energy.EnergyHandler;
 import team.reborn.energy.EnergyHolder;
 import team.reborn.energy.EnergyTier;
 
+import java.util.UUID;
+
 // TODO: Make enchants useless if item is broken.
 public class GenericPoweredArmor extends ArmorItem implements EnergyHelper, ItemDurabilityExtensions, ItemStackModifiers, ArmorTickable, ArmorRemoveHandler, ArmorFovHandler, EnergyHolder {
     private final int maxCharge;
@@ -36,6 +42,14 @@ public class GenericPoweredArmor extends ArmorItem implements EnergyHelper, Item
 
     private final EnergyTier tier;
     private final String dischargedTranslationKey;
+
+    // TODO: Figure out how these UUIDs were determined. Mojang has hardcoded UUIDs too.
+    public static final UUID[] MODIFIERS = new UUID[]{
+            UUID.fromString("845DB27C-C624-495F-8C9F-6020A9A58B6B"),
+            UUID.fromString("D8499B04-0E66-4726-AB29-64469D734E0D"),
+            UUID.fromString("9F3D476D-C118-4544-8365-64846904B48E"),
+            UUID.fromString("2AD3F246-FEE1-4E67-B886-69FD380BB150")
+    };
 
     public GenericPoweredArmor(ArmorMaterial material, EquipmentSlot slot, int energyCapacity, EnergyTier tier, int cost, Settings settings) {
         this(material, slot, energyCapacity, tier, cost, settings, null);
@@ -98,8 +112,24 @@ public class GenericPoweredArmor extends ArmorItem implements EnergyHelper, Item
     }
 
     @Override
-    public void getAttributeModifiers(EquipmentSlot slot, ItemStack stack, Multimap<EntityAttribute, EntityAttributeModifier> builder) {
+    public void getAttributeModifiers(EquipmentSlot equipmentSlot, ItemStack stack, Multimap<EntityAttribute, EntityAttributeModifier> builder) {
         // Modify Armor Attributes Dynamically
+
+        builder.removeAll(EntityAttributes.GENERIC_MOVEMENT_SPEED);
+        builder.removeAll(EntityAttributes.GENERIC_ARMOR); // Remove preset armor just so we can dynamically choose to break the protection if the battery dies.
+        builder.removeAll(EntityAttributes.GENERIC_ARMOR_TOUGHNESS);
+
+//        if (this.slot == EquipmentSlot.LEGS && equipmentSlot == EquipmentSlot.LEGS) {
+//            if (isUsable(stack)) {
+//                builder.put(EntityAttributes.GENERIC_MOVEMENT_SPEED, new EntityAttributeModifier(MODIFIERS[equipmentSlot.getEntitySlotId()], "Movement Speed", 0.15, EntityAttributeModifier.Operation.ADDITION));
+//            }
+//        }
+
+        if (equipmentSlot == this.slot && isUsable(stack)) {
+            builder.put(EntityAttributes.GENERIC_ARMOR, new EntityAttributeModifier(MODIFIERS[slot.getEntitySlotId()], "Armor modifier", getMaterial().getProtectionAmount(equipmentSlot), EntityAttributeModifier.Operation.ADDITION));
+            builder.put(EntityAttributes.GENERIC_ARMOR_TOUGHNESS, new EntityAttributeModifier(MODIFIERS[slot.getEntitySlotId()], "Armor Toughness modifier", getMaterial().getToughness(), EntityAttributeModifier.Operation.ADDITION));
+            builder.put(EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE, new EntityAttributeModifier(MODIFIERS[slot.getEntitySlotId()], "Knockback modifier", getMaterial().getKnockbackResistance(), EntityAttributeModifier.Operation.ADDITION));
+        }
     }
 
     @Override
@@ -172,7 +202,7 @@ public class GenericPoweredArmor extends ArmorItem implements EnergyHelper, Item
     }
 
     @Override
-    public void addDamage(ItemStack stack, DamageSource damageSource, float damage) {
+    public void addDamage(ItemStack stack, PlayerEntity playerEntity, DamageSource damageSource, float damage) {
         if (!(stack.getItem() instanceof GenericPoweredArmor))
             return;
 
@@ -182,6 +212,15 @@ public class GenericPoweredArmor extends ArmorItem implements EnergyHelper, Item
         // If more than max amount of energy, just set to rest of energy level
         if (convertedDamage > currentEnergy.getEnergy())
             convertedDamage = currentEnergy.getEnergy();
+
+
+        // Adds support for Unbreaking Enchants
+        // This seems to occur more rarely than vanilla armor. I'm not sure if that's true though.
+        int unbreakingLevel = EnchantmentHelper.getLevel(Enchantments.UNBREAKING, stack);
+        boolean shouldPreventDamage = UnbreakingEnchantment.shouldPreventDamage(stack, unbreakingLevel, playerEntity.getRandom());
+
+        if (shouldPreventDamage)
+            return;
 
         currentEnergy.use(convertedDamage);
     }

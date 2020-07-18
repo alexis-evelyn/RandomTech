@@ -1,7 +1,7 @@
 package me.alexisevelyn.randomtech.utility;
 
 import me.alexisevelyn.randomtech.Main;
-import me.alexisevelyn.randomtech.armormaterials.RedstoneArmorMaterial;
+import me.alexisevelyn.randomtech.armormaterials.PoweredArmorMaterial;
 import me.alexisevelyn.randomtech.blocks.FuserBlock;
 import me.alexisevelyn.randomtech.blocks.TeleporterBlock;
 import me.alexisevelyn.randomtech.blocks.VirtualTile;
@@ -103,7 +103,7 @@ public class RegistryHelper {
     public static final FluidBlock HONEY_FLUID_BLOCK = new HoneyFluidBlock(HONEY_FLUID){};
 
     // Armor Materials
-    public static final ArmorMaterial REDSTONE_ARMOR_MATERIAL = new RedstoneArmorMaterial();
+    public static final ArmorMaterial POWERED_ARMOR_MATERIAL = new PoweredArmorMaterial();
 
     // Buckets
     public static final Item EXPERIENCE_BUCKET = new BucketItem(EXPERIENCE_FLUID, new Item.Settings().recipeRemainder(Items.BUCKET).maxCount(1));
@@ -217,10 +217,10 @@ public class RegistryHelper {
 
     protected void registerArmor() {
         // Armor
-        Registry.register(Registry.ITEM, new Identifier(Main.MODID, "powered_helmet"), new PoweredHelmet(REDSTONE_ARMOR_MATERIAL, EquipmentSlot.HEAD, new Item.Settings().group(ItemGroup.COMBAT)));
-        Registry.register(Registry.ITEM, new Identifier(Main.MODID, "powered_chestplate"), new PoweredChestplate(REDSTONE_ARMOR_MATERIAL, EquipmentSlot.CHEST, new Item.Settings().group(ItemGroup.COMBAT)));
-        Registry.register(Registry.ITEM, new Identifier(Main.MODID, "powered_leggings"), new PoweredLeggings(REDSTONE_ARMOR_MATERIAL, EquipmentSlot.LEGS, new Item.Settings().group(ItemGroup.COMBAT)));
-        Registry.register(Registry.ITEM, new Identifier(Main.MODID, "powered_boots"), new PoweredBoots(REDSTONE_ARMOR_MATERIAL, EquipmentSlot.FEET, new Item.Settings().group(ItemGroup.COMBAT)));
+        Registry.register(Registry.ITEM, new Identifier(Main.MODID, "powered_helmet"), new PoweredHelmet(POWERED_ARMOR_MATERIAL, EquipmentSlot.HEAD, new Item.Settings().group(ItemGroup.COMBAT)));
+        Registry.register(Registry.ITEM, new Identifier(Main.MODID, "powered_chestplate"), new PoweredChestplate(POWERED_ARMOR_MATERIAL, EquipmentSlot.CHEST, new Item.Settings().group(ItemGroup.COMBAT)));
+        Registry.register(Registry.ITEM, new Identifier(Main.MODID, "powered_leggings"), new PoweredLeggings(POWERED_ARMOR_MATERIAL, EquipmentSlot.LEGS, new Item.Settings().group(ItemGroup.COMBAT)));
+        Registry.register(Registry.ITEM, new Identifier(Main.MODID, "powered_boots"), new PoweredBoots(POWERED_ARMOR_MATERIAL, EquipmentSlot.FEET, new Item.Settings().group(ItemGroup.COMBAT)));
     }
 
     protected void registerGeneralItemBlocks() {
