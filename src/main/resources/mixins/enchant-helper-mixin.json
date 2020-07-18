@@ -1,0 +1,14 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "me.alexisevelyn.randomtech.mixin",
+  "compatibilityLevel": "JAVA_8",
+  "mixins": [
+    "EnchantHelperMixin"
+  ],
+  "client": [
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

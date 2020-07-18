@@ -187,10 +187,10 @@ public class GenericPoweredTool extends MiningToolItem implements EnergyHolder, 
         return false;
     }
 
-    // TODO: Fix armor to only allow enchants meant for armor. This will require a mixin.
+    // This only applies to the enchantment table, not anvils?
     @Override
     public boolean isEnchantable(ItemStack stack) {
-        return false;
+        return true;
     }
 
     // For Right Clicking Blocks

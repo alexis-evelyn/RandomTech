@@ -36,7 +36,6 @@ import team.reborn.energy.EnergyTier;
 import java.util.UUID;
 
 // TODO: Make enchants useless if item is broken.
-// net.minecraft.enchantment.EnchantmentTarget
 public class GenericPoweredArmor extends ArmorItem implements EnergyHelper, ItemDurabilityExtensions, ItemStackModifiers, ArmorTickable, ArmorRemoveHandler, ArmorFovHandler, EnergyHolder {
     private final int maxCharge;
     private final int cost;
@@ -169,10 +168,10 @@ public class GenericPoweredArmor extends ArmorItem implements EnergyHelper, Item
         return 0xFF0014A2;
     }
 
-    // TODO: Fix armor to only allow enchants meant for armor. This will require a mixin.
+    // This only applies to the enchantment table, not anvils?
     @Override
     public boolean isEnchantable(ItemStack stack) {
-        return false;
+        return true;
     }
 
     @Override
