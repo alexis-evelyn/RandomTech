@@ -81,7 +81,8 @@ public class REIPlugin implements REIPluginV0 {
     }
 
     private void registerFuser(RecipeHelper recipeHelper) {
-        // RebornCore has the fluids marked as EmptyFluid even though it parses the recipes.
+        // Note to self, if your fluids are not showing up, check the identifier in the recipe json files.
+
         recipeHelper.registerRecipes(FUSER, GenericFluidRecipe.class, FuserRecipeDisplay::new);
     }
 }

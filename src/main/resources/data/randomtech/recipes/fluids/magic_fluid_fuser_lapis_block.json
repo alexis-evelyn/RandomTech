@@ -13,7 +13,7 @@
     }
   ],
   "tank": {
-    "fluid": "randomtech:liquid_magic",
+    "fluid": "randomtech:magic",
     "amount": 500
   }
 }

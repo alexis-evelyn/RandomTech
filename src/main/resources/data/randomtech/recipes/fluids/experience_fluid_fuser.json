@@ -13,7 +13,7 @@
     }
   ],
   "tank": {
-    "fluid": "randomtech:liquid_experience",
+    "fluid": "randomtech:experience",
     "amount": 1000
   }
 }

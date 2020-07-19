@@ -1,6 +1,5 @@
 package me.alexisevelyn.randomtech.api.blockentities;
 
-import me.alexisevelyn.randomtech.api.blockentities.BasePowerAcceptorBlockEntity;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.fluid.EmptyFluid;
 import net.minecraft.fluid.Fluid;

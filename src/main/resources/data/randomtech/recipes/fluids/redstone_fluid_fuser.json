@@ -13,7 +13,7 @@
     }
   ],
   "tank": {
-    "fluid": "randomtech:liquid_redstone",
+    "fluid": "randomtech:redstone",
     "amount": 1000
   }
 }

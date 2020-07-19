@@ -13,7 +13,7 @@
     }
   ],
   "tank": {
-    "fluid": "randomtech:liquid_honey",
+    "fluid": "randomtech:honey",
     "amount": 250
   }
 }
