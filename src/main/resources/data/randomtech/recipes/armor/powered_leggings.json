@@ -4,7 +4,7 @@
     "item": "minecraft:netherite_leggings"
   },
   "addition": {
-    "item": "randomtech:redstone_ingot"
+    "tag": "c:redstone_ingots"
   },
   "result": {
     "item": "randomtech:powered_leggings"

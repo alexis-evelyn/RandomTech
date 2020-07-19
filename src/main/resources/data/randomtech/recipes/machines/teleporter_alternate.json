@@ -1,5 +1,6 @@
 {
   "type": "minecraft:crafting_shaped",
+  "group": "rtteleporter",
   "pattern": [
     "#i#",
     "iri",
@@ -10,10 +11,10 @@
       "item": "minecraft:ender_pearl"
     },
     "i": {
-      "item": "minecraft:iron_ingot"
+      "tag": "c:iron_ingots"
     },
     "r": {
-      "item": "randomtech:redstone_ingot"
+      "tag": "c:redstone_ingots"
     }
   },
   "result": {

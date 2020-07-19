@@ -4,7 +4,7 @@
     "item": "minecraft:netherite_hoe"
   },
   "addition": {
-    "item": "randomtech:redstone_ingot"
+    "tag": "c:redstone_ingots"
   },
   "result": {
     "item": "randomtech:powered_hoe"

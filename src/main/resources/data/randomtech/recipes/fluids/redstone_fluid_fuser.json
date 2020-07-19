@@ -4,7 +4,7 @@
   "time": 300,
   "ingredients": [
     {
-      "item": "randomtech:redstone_ingot"
+      "tag": "c:redstone_ingots"
     }
   ],
   "results": [

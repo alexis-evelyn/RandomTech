@@ -62,7 +62,7 @@ dependencies {
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
 	// Reborn Core
-	modImplementation "RebornCore:RebornCore-${project.reborn_core_version}:+"
+	modImplementation "RebornCore:RebornCore-${project.reborn_core_version}"
 
 	// Reborn's Energy API
 	modApi "teamreborn:energy:${project.reborn_energy_version}"
