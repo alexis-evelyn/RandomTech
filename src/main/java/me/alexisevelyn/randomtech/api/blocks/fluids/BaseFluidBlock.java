@@ -5,7 +5,9 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.FluidBlock;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.FlowableFluid;
+import net.minecraft.text.LiteralText;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
@@ -26,6 +28,19 @@ public class BaseFluidBlock extends FluidBlock {
 
         // Test Movement for Pushing Entities
         // entity.addVelocity(0, 10, 0);
+
+        if (!(entity instanceof PlayerEntity))
+            return;
+
+        PlayerEntity playerEntity = (PlayerEntity) entity;
+
+        if (isEyeInFluid(playerEntity, pos))
+            playerEntity.sendMessage(new LiteralText("Is In Fluid"), true); // TODO: Use to apply shaders to each individual fluid.
+    }
+
+    public boolean isEyeInFluid(PlayerEntity playerEntity, BlockPos blockPos) {
+        // This activates the same as water would. Can be used to determine if needing to apply shaders.
+        return (int) playerEntity.getEyeY() == blockPos.getY() && playerEntity.getBlockPos().getZ() == blockPos.getZ() && playerEntity.getBlockPos().getX() == blockPos.getX();
     }
 
     public static int getLightLevel(@Nullable Integer currentFluidLevel) {
