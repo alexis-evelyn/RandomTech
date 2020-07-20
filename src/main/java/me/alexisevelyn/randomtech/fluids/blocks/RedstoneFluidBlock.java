@@ -38,7 +38,8 @@ public class RedstoneFluidBlock extends BaseFluidBlock {
 
         // TODO: Get level fluid is at and determine if head is under liquid
         // TODO: Also properly lower entity air. The player starts with 300 seconds of Air
-        entity.setAir(entity.getAir() - 1);
+        // entity.setAir(entity.getAir() - 1);
+        // entity.getEyeHeight(entity.getPose());
 
         if (entity instanceof LivingEntity) {
             LivingEntity livingEntity = (LivingEntity) entity;

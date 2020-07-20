@@ -7,6 +7,8 @@
     "randomtech:experience",
     "randomtech:experience_flowing",
     "randomtech:magic",
-    "randomtech:magic_flowing"
+    "randomtech:magic_flowing",
+    "randomtech:honey",
+    "randomtech:honey_flowing"
   ]
 }

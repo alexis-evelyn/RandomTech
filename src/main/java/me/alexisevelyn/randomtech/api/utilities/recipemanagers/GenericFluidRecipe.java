@@ -28,9 +28,9 @@ public class GenericFluidRecipe extends RebornFluidRecipe {
 
     @Override
     public boolean canCraft(BlockEntity blockEntity) {
-        // Super wrongly checks if tank's current fluid level
-        // is more than or equal to recipe fluid when it
-        // should be checking the tank's free space instead
+        // Super checks if tank's current fluid level
+        // is more than or equal to recipe fluid when I
+        // need it to be checking the tank's free space instead
 
         final Tank tank = getTank(blockEntity);
 

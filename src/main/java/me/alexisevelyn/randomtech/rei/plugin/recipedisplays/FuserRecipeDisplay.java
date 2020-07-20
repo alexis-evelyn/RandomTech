@@ -24,7 +24,7 @@ public class FuserRecipeDisplay implements RecipeDisplay {
         // TODO: Make sure to setup category manager correctly to display all outputs.
 
         this.ingredient = EntryStack.create(genericFluidRecipe.getRebornIngredients().get(0).getPreview().getMatchingStacksClient()[0]);
-        this.fluid = EntryStack.create(genericFluidRecipe.getFluidInstance().isEmptyFluid() ? RegistryHelper.REDSTONE_FLUID : genericFluidRecipe.getFluidInstance().getFluid());
+        this.fluid = EntryStack.create(genericFluidRecipe.getFluidInstance().getFluid());
         this.byproduct = EntryStack.create(genericFluidRecipe.getOutputs().get(0));
     }
 
