@@ -2,6 +2,7 @@ package me.alexisevelyn.randomtech.api.items.tools.generic;
 
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Sets;
+import me.alexisevelyn.randomtech.api.utilities.ItemManager;
 import org.jetbrains.annotations.Nullable;
 import net.minecraft.block.*;
 import net.minecraft.entity.player.PlayerEntity;
@@ -52,7 +53,7 @@ public class GenericPoweredAxe extends GenericPoweredTool {
                 world.setBlockState(blockPos, block.getDefaultState().with(PillarBlock.AXIS, blockState.get(PillarBlock.AXIS)), 11);
             }
 
-            Energy.of(context.getStack()).use(cost); // To Make Sure Item Uses Durability
+            ItemManager.useEnergy(playerEntity, context.getStack(), cost); // To Make Sure Item Uses Durability
             return ActionResult.success(world.isClient);
         }
 

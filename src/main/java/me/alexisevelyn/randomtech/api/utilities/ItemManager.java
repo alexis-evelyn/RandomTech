@@ -4,6 +4,8 @@ import me.alexisevelyn.randomtech.api.items.armor.generic.GenericPoweredArmor;
 import me.alexisevelyn.randomtech.api.items.tools.generic.GenericPoweredTool;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundTag;
@@ -70,5 +72,24 @@ public class ItemManager {
         // Could use item.durability
         Text energy = new TranslatableText("text.randomtech.power_level", PowerSystem.getLocaliszedPowerNoSuffix(currentEnergy), PowerSystem.getLocaliszedPower(maxEnergy));
         tooltip.add(energy);
+    }
+
+    // This method exists to allow energy to not be used if the player is in Creative mode
+    public static void useEnergy(LivingEntity livingEntity, ItemStack stack, int cost) {
+        if (livingEntity instanceof PlayerEntity) {
+            PlayerEntity playerEntity = (PlayerEntity) livingEntity;
+
+            if (playerEntity.isCreative())
+                return;
+        }
+
+        // If more than max amount of energy, just set to rest of energy level
+        EnergyHandler currentEnergy = Energy.of(stack);
+        if (cost > currentEnergy.getEnergy()) {
+            Energy.of(stack).use(currentEnergy.getEnergy());
+            return;
+        }
+
+        Energy.of(stack).use(cost);
     }
 }

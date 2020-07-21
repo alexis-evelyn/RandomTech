@@ -3,6 +3,7 @@ package me.alexisevelyn.randomtech.api.items.tools.generic;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
+import me.alexisevelyn.randomtech.api.utilities.ItemManager;
 import org.jetbrains.annotations.Nullable;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -70,7 +71,7 @@ public class GenericPoweredShovel extends GenericPoweredTool {
             if (!world.isClient)
                 world.setBlockState(blockPos, workingBlockState, 11);
 
-            Energy.of(context.getStack()).use(cost); // To Make Sure Item Uses Durability
+            ItemManager.useEnergy(playerEntity, context.getStack(), cost); // To Make Sure Item Uses Durability
             return ActionResult.success(world.isClient);
         }
 

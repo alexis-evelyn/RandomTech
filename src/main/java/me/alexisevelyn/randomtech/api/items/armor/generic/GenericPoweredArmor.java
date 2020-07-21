@@ -10,6 +10,7 @@ import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.enchantment.UnbreakingEnchantment;
 import net.minecraft.entity.EquipmentSlot;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.attribute.EntityAttribute;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.attribute.EntityAttributes;
@@ -211,14 +212,6 @@ public class GenericPoweredArmor extends ArmorItem implements EnergyHelper, Item
         if (!(stack.getItem() instanceof GenericPoweredArmor))
             return;
 
-        double convertedDamage = damage;
-        EnergyHandler currentEnergy = Energy.of(stack);
-
-        // If more than max amount of energy, just set to rest of energy level
-        if (convertedDamage > currentEnergy.getEnergy())
-            convertedDamage = currentEnergy.getEnergy();
-
-
         // Adds support for Unbreaking Enchants
         // This seems to occur more rarely than vanilla armor. I'm not sure if that's true though.
         int unbreakingLevel = EnchantmentHelper.getLevel(Enchantments.UNBREAKING, stack);
@@ -227,7 +220,7 @@ public class GenericPoweredArmor extends ArmorItem implements EnergyHelper, Item
         if (shouldPreventDamage)
             return;
 
-        currentEnergy.use(convertedDamage);
+        ItemManager.useEnergy(playerEntity, stack, cost);
     }
 
     public ItemStack onCraft(ItemStack oldStack, ItemStack newStack, CompoundTag tag) {

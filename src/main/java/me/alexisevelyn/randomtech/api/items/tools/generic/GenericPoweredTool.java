@@ -27,6 +27,7 @@ import org.jetbrains.annotations.Nullable;
 import reborncore.common.util.ItemDurabilityExtensions;
 import reborncore.common.util.ItemUtils;
 import team.reborn.energy.Energy;
+import team.reborn.energy.EnergyHandler;
 import team.reborn.energy.EnergyHolder;
 import team.reborn.energy.EnergyTier;
 
@@ -152,7 +153,7 @@ public class GenericPoweredTool extends MiningToolItem implements EnergyHolder, 
     public boolean postHit(ItemStack stack, LivingEntity target, LivingEntity attacker) {
         Random rand = new Random();
         if (isUsable(stack) && rand.nextInt(EnchantmentHelper.getLevel(Enchantments.UNBREAKING, stack) + 1) == 0) {
-            Energy.of(stack).use(cost);
+            ItemManager.useEnergy(attacker, stack, cost);
             return super.postHit(stack, target, attacker);
         }
 
@@ -166,9 +167,9 @@ public class GenericPoweredTool extends MiningToolItem implements EnergyHolder, 
         Random rand = new Random();
         if (isUsable(stack) && (state.getHardness(world, pos) != 0.0F) && rand.nextInt(EnchantmentHelper.getLevel(Enchantments.UNBREAKING, stack) + 1) == 0) {
             if (isEffectiveOn(state))
-                Energy.of(stack).use(cost);
+                ItemManager.useEnergy(miner, stack, cost);
             else
-                Energy.of(stack).use(cost+1);
+                ItemManager.useEnergy(miner, stack, cost+1);
 
             return super.postMine(stack, world, state, pos, miner);
         }

@@ -25,17 +25,6 @@ public class BaseFluidBlock extends FluidBlock {
     @Override
     public void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity) {
         //super.onEntityCollision(state, world, pos, entity);
-
-        // Test Movement for Pushing Entities
-        // entity.addVelocity(0, 10, 0);
-
-        if (!(entity instanceof PlayerEntity))
-            return;
-
-        PlayerEntity playerEntity = (PlayerEntity) entity;
-
-        if (isEyeInFluid(playerEntity, pos))
-            playerEntity.sendMessage(new LiteralText("Is In Fluid"), true); // TODO: Use to apply shaders to each individual fluid.
     }
 
     public boolean isEyeInFluid(PlayerEntity playerEntity, BlockPos blockPos) {

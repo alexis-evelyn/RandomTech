@@ -6,7 +6,9 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.FlowableFluid;
+import net.minecraft.text.LiteralText;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
@@ -32,17 +34,18 @@ public class CobaltFluidBlock extends BaseFluidBlock {
     public void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity) {
         super.onEntityCollision(state, world, pos, entity);
 
-        // TODO: Set Shader if Player Head in Liquid
-
-        // TODO: Get level fluid is at and determine if head is under liquid
-        // TODO: Also properly lower entity air. The player starts with 300 seconds of Air
-        // entity.setAir(entity.getAir() - 1);
-
         if (entity instanceof LivingEntity) {
             LivingEntity livingEntity = (LivingEntity) entity;
 
 //            livingEntity.addStatusEffect(new StatusEffectInstance(StatusEffects.SPEED, 20 * 2 * swiftness_level, swiftness_level - 1));
 //            livingEntity.addStatusEffect(new StatusEffectInstance(StatusEffects.NAUSEA, 20 * 2 * nausea_level, nausea_level - 1));
+        }
+
+        if (entity instanceof PlayerEntity) {
+            PlayerEntity playerEntity = (PlayerEntity) entity;
+
+            if (isEyeInFluid(playerEntity, pos))
+                return; // TODO: Apply shader to player
         }
     }
 }

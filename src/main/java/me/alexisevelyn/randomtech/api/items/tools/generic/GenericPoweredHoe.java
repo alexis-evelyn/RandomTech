@@ -3,6 +3,7 @@ package me.alexisevelyn.randomtech.api.items.tools.generic;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Maps;
+import me.alexisevelyn.randomtech.api.utilities.ItemManager;
 import org.jetbrains.annotations.Nullable;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -55,7 +56,7 @@ public class GenericPoweredHoe extends GenericPoweredTool {
                     world.setBlockState(blockPos, blockState, 11);
                 }
 
-                Energy.of(context.getStack()).use(cost); // To Make Sure Item Uses Durability
+                ItemManager.useEnergy(playerEntity, context.getStack(), cost); // To Make Sure Item Uses Durability
                 return ActionResult.success(world.isClient);
             }
         }
