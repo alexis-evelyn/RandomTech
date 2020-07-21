@@ -1,7 +1,5 @@
 package me.alexisevelyn.randomtech.api.utilities;
 
-import me.alexisevelyn.randomtech.api.items.armor.generic.GenericPoweredArmor;
-import me.alexisevelyn.randomtech.api.items.tools.generic.GenericPoweredTool;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.entity.LivingEntity;
@@ -24,6 +22,11 @@ public class ItemManager {
         // Can be used to add multiple versions of items (e.g. a charged and discharged variant of each armor piece)
         ItemStack uncharged = new ItemStack(item);
         ItemStack charged = new ItemStack(item);
+
+        CompoundTag tag = uncharged.getTag();
+
+        if (tag != null)
+            tag.putInt("CustomModelData", 1337); // Sets the model to show as dead in the creative inventory and REI
 
         Energy.of(charged).set(Energy.of(charged).getMaxStored());
 
@@ -51,7 +54,11 @@ public class ItemManager {
 
         if (!(oldStack.getItem() instanceof EnergyHolder))
             // Keep Durability of Armor and Tools as Charge By Default When First Crafted
-            Energy.of(newStack).set(ItemManager.calculateCurrentPowerForConversion(oldStack, newStack));
+            Energy.of(newStack).set(calculateCurrentPowerForConversion(oldStack, newStack));
+
+        // Sets item model to discharged state if crafted while dead
+//        if (Energy.of(newStack).getEnergy() == 0)
+//            setDischargedModelData(newStack, false);
 
         return newStack;
     }
@@ -91,5 +98,23 @@ public class ItemManager {
         }
 
         Energy.of(stack).use(cost);
+    }
+
+    public static void setDischargedModelData(ItemStack stack, boolean isUsable) {
+        CompoundTag tag = stack.getTag();
+
+        if (tag == null)
+            return;
+
+        // This returns 0 if the tag does not exist.
+        int modelData = tag.getInt("CustomModelData");
+
+        if (isUsable && modelData != 0) {
+            // This removes the custom model data tag if it exists and the item is usable
+            tag.remove("CustomModelData");
+        } else if (!isUsable && modelData == 0) {
+            // This puts a custom model data tag on the item so I can have the resource pack display a different texture if the tool is dead.
+            tag.putInt("CustomModelData", 1337);
+        }
     }
 }

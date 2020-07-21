@@ -1,6 +1,9 @@
 package me.alexisevelyn.randomtech.utility;
 
+import dev.onyxstudios.cca.api.v3.component.item.ItemComponentFactoryRegistry;
+import dev.onyxstudios.cca.api.v3.component.item.ItemComponentInitializer;
 import me.alexisevelyn.randomtech.Main;
+import me.alexisevelyn.randomtech.api.items.tools.generic.GenericPoweredTool;
 import me.alexisevelyn.randomtech.armormaterials.PoweredArmorMaterial;
 import me.alexisevelyn.randomtech.blocks.FuserBlock;
 import me.alexisevelyn.randomtech.blocks.TeleporterBlock;

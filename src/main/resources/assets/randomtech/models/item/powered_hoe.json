@@ -2,5 +2,8 @@
   "parent": "item/handheld",
   "textures": {
     "layer0": "randomtech:item/tools/powered_hoe"
-  }
+  },
+  "overrides": [
+    {"predicate": {"custom_model_data": 1337}, "model": "randomtech:item/discharged_hoe"}
+  ]
 }

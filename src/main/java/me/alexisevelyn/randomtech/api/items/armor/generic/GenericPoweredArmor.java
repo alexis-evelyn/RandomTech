@@ -9,8 +9,8 @@ import net.minecraft.client.item.TooltipContext;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.enchantment.UnbreakingEnchantment;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EquipmentSlot;
-import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.attribute.EntityAttribute;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.attribute.EntityAttributes;
@@ -33,7 +33,6 @@ import reborncore.api.items.ItemStackModifiers;
 import reborncore.common.util.ItemDurabilityExtensions;
 import reborncore.common.util.ItemUtils;
 import team.reborn.energy.Energy;
-import team.reborn.energy.EnergyHandler;
 import team.reborn.energy.EnergyHolder;
 import team.reborn.energy.EnergyTier;
 
@@ -103,8 +102,13 @@ public class GenericPoweredArmor extends ArmorItem implements EnergyHelper, Item
     }
 
     @Override
+    public void inventoryTick(ItemStack stack, World world, Entity entity, int slot, boolean selected) {
+        super.inventoryTick(stack, world, entity, slot, selected);
+    }
+
+    @Override
     public void tickArmor(ItemStack stack, PlayerEntity playerEntity) {
-        // Actions to perform every tick
+        // Actions to perform every tick (only when armor is worn?)
 
         switch (this.slot) {
             case HEAD: break;
@@ -230,8 +234,7 @@ public class GenericPoweredArmor extends ArmorItem implements EnergyHelper, Item
     @Environment(EnvType.CLIENT)
     @Override
     public void appendTooltip(ItemStack stack, @Nullable World worldIn, List<Text> tooltip, TooltipContext flagIn) {
-        if (flagIn.isAdvanced()) {
+        if (flagIn.isAdvanced())
             ItemManager.powerLevelTooltip(stack, tooltip);
-        }
     }
 }

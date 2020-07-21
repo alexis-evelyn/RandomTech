@@ -32,6 +32,11 @@ repositories {
 		name = "CurseMaven"
 		url = "https://www.cursemaven.com"
 	}
+	maven {
+		name = "Ladysnake Libs"
+		url = 'https://dl.bintray.com/ladysnake/libs'
+	}
+
 //	maven {
 //		name = "Spinnery"
 //		url = "https://dl.bintray.com/spinnery/Spinnery"
@@ -132,6 +137,13 @@ dependencies {
 //	include "com.github.Nuclearfarts:connected-block-textures:${project.connected_block_textures_version}"
 
 	// include "com.github.Nuclearfarts:connected-block-textures:${project.connected_block_textures_version}"
+
+	// Used to allow customizing data of items and other things
+	//modApi "io.github.onyxstudios.Cardinal-Components-API:Cardinal-Components-API:${project.cardinal_components_version}"
+	modApi "io.github.onyxstudios.Cardinal-Components-API:cardinal-components-base:${project.cardinal_components_version}"
+	modApi "io.github.onyxstudios.Cardinal-Components-API:cardinal-components-item:${project.cardinal_components_version}"
+	include "io.github.onyxstudios.Cardinal-Components-API:cardinal-components-item:${project.cardinal_components_version}"
+	include "io.github.onyxstudios.Cardinal-Components-API:cardinal-components-base:${project.cardinal_components_version}"
 
 	// PSA: Some older mods, compiled on Loom 0.2.1, might have outdated Maven POMs.
 	// You may need to force-disable transitiveness on them.

@@ -1,6 +1,8 @@
 package me.alexisevelyn.randomtech.api.items.tools.generic;
 
+import com.google.common.collect.Multimap;
 import me.alexisevelyn.randomtech.api.utilities.ItemManager;
+import nerdhub.cardinal.components.api.event.ItemComponentCallback;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.block.Block;
@@ -11,6 +13,7 @@ import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.attribute.EntityAttribute;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.player.PlayerEntity;
@@ -24,26 +27,30 @@ import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
+import reborncore.api.items.ItemStackModifiers;
 import reborncore.common.util.ItemDurabilityExtensions;
 import reborncore.common.util.ItemUtils;
 import team.reborn.energy.Energy;
-import team.reborn.energy.EnergyHandler;
 import team.reborn.energy.EnergyHolder;
 import team.reborn.energy.EnergyTier;
 
 import java.util.List;
 import java.util.Random;
 import java.util.Set;
+import java.util.UUID;
 
-public class GenericPoweredTool extends MiningToolItem implements EnergyHolder, ItemDurabilityExtensions {
-    private final EntityAttributeModifier brokenAttackAttribute = new EntityAttributeModifier(ATTACK_SPEED_MODIFIER_ID, "Broken Weapon Modifier", 0, EntityAttributeModifier.Operation.MULTIPLY_TOTAL);
-
+public class GenericPoweredTool extends MiningToolItem implements EnergyHolder, ItemDurabilityExtensions, ItemStackModifiers {
     public final int maxCharge;
     public final int cost;
     public final float poweredSpeed;
+    public final float unpoweredSpeed;
     public final EnergyTier tier;
     public final Set<Block> effectiveBlocks;
     private final String dischargedTranslationKey;
+
+    // Pulled From: net.minecraft.item.Item
+    public static final UUID ATTACK_DAMAGE_UUID = UUID.fromString("CB3F55D3-645C-4F38-A497-9C13A33DB5CF");
+    public static final UUID ATTACK_SPEED_UUID = UUID.fromString("FA233E1C-4180-4865-B01B-BCCE9785ACA3");
 
     public GenericPoweredTool(ToolMaterial material, int energyCapacity, EnergyTier tier, int cost, float poweredSpeed, float unpoweredSpeed, float attackDamage, Set<Block> effectiveBlocks, Settings settings) {
         this(material, energyCapacity, tier, cost, poweredSpeed, unpoweredSpeed, attackDamage, effectiveBlocks, settings, null);
@@ -56,6 +63,7 @@ public class GenericPoweredTool extends MiningToolItem implements EnergyHolder, 
         this.tier = tier;
 
         this.cost = cost;
+        this.unpoweredSpeed = unpoweredSpeed;
         this.poweredSpeed = poweredSpeed;
         this.effectiveBlocks = effectiveBlocks;
         this.dischargedTranslationKey = dischargedTranslationKey;
@@ -96,37 +104,15 @@ public class GenericPoweredTool extends MiningToolItem implements EnergyHolder, 
         return super.getMiningSpeedMultiplier(stack, state);
     }
 
-    private void changeModifiers(ItemStack stack) {
-        EquipmentSlot equipmentSlot = EquipmentSlot.MAINHAND;
+    @Override
+    public void getAttributeModifiers(EquipmentSlot equipmentSlot, ItemStack stack, Multimap<EntityAttribute, EntityAttributeModifier> builder) {
+        // Modify Tool Attributes Dynamically
 
-        if (isUsable(stack) && hasBrokenAttribute(stack, equipmentSlot)) {
-            removeBrokenAttribute(stack, equipmentSlot);
-
-            return;
+        // The attribute modifiers are automatically added back when they aren't actively being taken away
+        if (!isUsable(stack) && equipmentSlot == EquipmentSlot.MAINHAND) {
+            builder.removeAll(EntityAttributes.GENERIC_ATTACK_DAMAGE);
+            builder.removeAll(EntityAttributes.GENERIC_ATTACK_SPEED);
         }
-
-        if (!isUsable(stack) && !hasBrokenAttribute(stack, equipmentSlot)) {
-            stack.addAttributeModifier(
-                    EntityAttributes.GENERIC_ATTACK_DAMAGE,
-                    brokenAttackAttribute,
-                    equipmentSlot
-            );
-        }
-    }
-
-    private void removeBrokenAttribute(ItemStack stack, EquipmentSlot equipmentSlot) {
-        CompoundTag nbtTags = stack.getOrCreateTag();
-
-        if (!nbtTags.contains("AttributeModifiers", 9))
-            return;
-
-        // This works, but removes all AttributeModifiers.
-        // I would prefer restoring the old attribute modifiers if it exists.
-        nbtTags.remove("AttributeModifiers");
-    }
-
-    private boolean hasBrokenAttribute(ItemStack stack, EquipmentSlot equipmentSlot) {
-        return stack.getAttributeModifiers(equipmentSlot).containsEntry(EntityAttributes.GENERIC_ATTACK_DAMAGE, brokenAttackAttribute);
     }
 
     public boolean isUsable(ItemStack stack) {
@@ -136,16 +122,17 @@ public class GenericPoweredTool extends MiningToolItem implements EnergyHolder, 
     @Override
     public void inventoryTick(ItemStack stack, World world, Entity entity, int slot, boolean selected) {
         super.inventoryTick(stack, world, entity, slot, selected);
-
-        // Updates if this item is usable
-        changeModifiers(stack);
     }
 
     // Used by mobs to determine if they prefer a weapon over another one.
-    // It does not actually modify the attack damage of an item.
+    // It does not actually modify the attack damage of an item (for vanilla purposes)?
     @Override
     public float getAttackDamage() {
         return super.getAttackDamage();
+    }
+
+    public float getAttackSpeed() {
+        return this.unpoweredSpeed;
     }
 
     // For Attacking
@@ -279,8 +266,7 @@ public class GenericPoweredTool extends MiningToolItem implements EnergyHolder, 
     @Environment(EnvType.CLIENT)
     @Override
     public void appendTooltip(ItemStack stack, @Nullable World worldIn, List<Text> tooltip, TooltipContext flagIn) {
-        if (flagIn.isAdvanced()) {
+        if (flagIn.isAdvanced())
             ItemManager.powerLevelTooltip(stack, tooltip);
-        }
     }
 }

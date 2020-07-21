@@ -2,5 +2,8 @@
   "parent": "minecraft:item/generated",
   "textures": {
     "layer0": "randomtech:item/armor/powered_chestplate"
-  }
+  },
+  "overrides": [
+    {"predicate": {"custom_model_data": 1337}, "model": "randomtech:item/discharged_chestplate"}
+  ]
 }
