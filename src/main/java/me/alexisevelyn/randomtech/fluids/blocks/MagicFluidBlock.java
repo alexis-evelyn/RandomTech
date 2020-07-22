@@ -20,16 +20,10 @@ public class MagicFluidBlock extends BaseFluidBlock {
     int levitation_level = 1;
     int night_vision_level = 1;
 
-    protected MagicFluidBlock(FlowableFluid fluid) {
+    public MagicFluidBlock(FlowableFluid fluid) {
         super(fluid, FabricBlockSettings
                 .copy(Blocks.WATER)
                 .lightLevel(getLightLevel()));
-    }
-
-    public static ToIntFunction<BlockState> getLightLevel() {
-        return (state) -> {
-            return getLightLevel(state.get(LEVEL));
-        };
     }
 
     @Override

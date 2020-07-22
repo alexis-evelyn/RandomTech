@@ -20,16 +20,10 @@ public class RedstoneFluidBlock extends BaseFluidBlock {
     int swiftness_level = 3;
     int nausea_level = 2;
 
-    protected RedstoneFluidBlock(FlowableFluid fluid) {
+    public RedstoneFluidBlock(FlowableFluid fluid) {
         super(fluid, FabricBlockSettings
                 .copy(Blocks.WATER)
                 .lightLevel(getLightLevel()));
-    }
-
-    public static ToIntFunction<BlockState> getLightLevel() {
-        return (state) -> {
-            return getLightLevel(state.get(LEVEL));
-        };
     }
 
     @Override

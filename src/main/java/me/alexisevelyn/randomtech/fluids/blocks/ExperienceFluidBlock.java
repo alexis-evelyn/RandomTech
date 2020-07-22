@@ -20,16 +20,10 @@ public class ExperienceFluidBlock extends BaseFluidBlock {
     int luck_level = 3;
     int glow_level = 1;
 
-    protected ExperienceFluidBlock(FlowableFluid fluid) {
+    public ExperienceFluidBlock(FlowableFluid fluid) {
         super(fluid, FabricBlockSettings
                 .copy(Blocks.WATER)
                 .lightLevel(getLightLevel()));
-    }
-
-    public static ToIntFunction<BlockState> getLightLevel() {
-        return (state) -> {
-            return getLightLevel(state.get(LEVEL));
-        };
     }
 
     @Override

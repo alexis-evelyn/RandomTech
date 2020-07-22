@@ -20,16 +20,10 @@ public class HoneyFluidBlock extends BaseFluidBlock {
     int slowness_level = 3;
     int slow_falling_level = 2;
 
-    protected HoneyFluidBlock(FlowableFluid fluid) {
+    public HoneyFluidBlock(FlowableFluid fluid) {
         super(fluid, FabricBlockSettings
                 .copy(Blocks.LAVA)
-                .lightLevel(getLightLevel()));
-    }
-
-    public static ToIntFunction<BlockState> getLightLevel() {
-        return (state) -> {
-            return 0;
-        };
+                .lightLevel(getZeroLightLevel()));
     }
 
     @Override

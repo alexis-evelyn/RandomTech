@@ -13,6 +13,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.function.ToIntFunction;
+
 public class BaseFluidBlock extends FluidBlock {
     protected BaseFluidBlock(FlowableFluid fluid, Settings settings) {
         super(fluid, settings);
@@ -42,17 +44,13 @@ public class BaseFluidBlock extends FluidBlock {
         }
     }
 
-    public void applyEffects(LivingEntity livingEntity) {
+    // These exist solely to override from other fluids.
+    // I may eventually turn this into an interface
+    public void applyEffects(LivingEntity livingEntity) { }
 
-    }
+    public void applyShader(PlayerEntity playerEntity) { }
 
-    public void applyShader(PlayerEntity playerEntity) {
-
-    }
-
-    public void removeShader(PlayerEntity playerEntity) {
-
-    }
+    public void removeShader(PlayerEntity playerEntity) { }
 
     public boolean isEyeInFluid(PlayerEntity playerEntity, BlockPos blockPos) {
         // This activates the same as water would. Can be used to determine if needing to apply shaders.
@@ -75,5 +73,13 @@ public class BaseFluidBlock extends FluidBlock {
         // exact inverse of the light level than what is expected when basing it off of fluid levels.
         // This is not a problem with the formula above. I'm not sure why it does that though.
         return (-1 * currentLightLevel) + 15;
+    }
+
+    public static ToIntFunction<BlockState> getLightLevel() {
+        return (state) -> getLightLevel(state.get(LEVEL));
+    }
+
+    public static ToIntFunction<BlockState> getZeroLightLevel() {
+        return (state) -> 0;
     }
 }

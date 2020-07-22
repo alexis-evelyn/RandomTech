@@ -17,19 +17,10 @@ import net.minecraft.world.World;
 import java.util.function.ToIntFunction;
 
 public class CobaltFluidBlock extends BaseFluidBlock {
-    int swiftness_level = 3;
-    int nausea_level = 2;
-
-    protected CobaltFluidBlock(FlowableFluid fluid) {
+    public CobaltFluidBlock(FlowableFluid fluid) {
         super(fluid, FabricBlockSettings
                 .copy(Blocks.LAVA)
-                .lightLevel(getLightLevel()));
-    }
-
-    public static ToIntFunction<BlockState> getLightLevel() {
-        return (state) -> {
-            return 0;
-        };
+                .lightLevel(getZeroLightLevel()));
     }
 
     @Override
