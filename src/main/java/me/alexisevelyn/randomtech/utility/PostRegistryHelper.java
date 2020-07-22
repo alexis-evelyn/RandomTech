@@ -16,7 +16,7 @@ public class PostRegistryHelper {
 
     public void postRegister() {
         // Register All Powered Tools and Armor With Callback
-        Registry.ITEM.stream().forEach( item -> {
+        Registry.ITEM.stream().forEach(item -> {
             if (item instanceof GenericPoweredTool || item instanceof GenericPoweredArmor) {
                 ItemComponentCallback.event(item).register((stack, components) -> components.put(BROKEN_ITEM_COMPONENT, new BrokenItemComponent(stack)));
             }

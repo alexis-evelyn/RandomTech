@@ -67,6 +67,9 @@ public class MainClient implements ClientModInitializer {
 		BlockRenderLayerMap.INSTANCE.putBlock(RegistryHelper.INVERSE_INTANGIBLE_GLASS, RenderLayer.getCutout());
 
 		BlockRenderLayerMap.INSTANCE.putBlock(RegistryHelper.POWERED_GLASS, RenderLayer.getTranslucent());
+
+		// Cobalt Wiring
+		BlockRenderLayerMap.INSTANCE.putBlock(RegistryHelper.COBALT_DUST, RenderLayer.getTranslucent());
 	}
 
 	private void fluidSetup() {
