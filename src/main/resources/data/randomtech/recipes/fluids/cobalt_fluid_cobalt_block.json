@@ -1,20 +1,21 @@
 {
+  "_comment": "For some reason, Reborn Core or Minecraft refuses to read the tag c:cobalt_blocks even though the tag works fine",
   "type": "randomtech:fuser",
   "power": 3,
   "time": 300,
   "ingredients": [
     {
-      "tag": "c:cobalt_blocks"
+      "item": "randomtech:cobalt_block"
     }
   ],
   "results": [
     {
       "item": "randomtech:cobalt_dust",
-      "count": 3
+      "count": 1
     }
   ],
   "tank": {
     "fluid": "randomtech:cobalt",
-    "amount": 9000
+    "amount": 1000
   }
 }

@@ -7,7 +7,8 @@
   "item.randomtech.edible_power": "Edible Power",
   "item.randomtech.redstone_ingot": "Redstone Ingot",
   "item.randomtech.cobalt_ingot": "Cobalt Ingot",
-
+  "item.randomtech.death_ingot": "Death Ingot",
+  "item.randomtech.cobalt_dust": "Cobalt Dust",
 
   "item.randomtech.powered_sword": "Powered Sword",
   "item.randomtech.powered_pickaxe": "Powered Pickaxe",
@@ -47,6 +48,7 @@
   "block.randomtech.cobalt_block": "Block of Cobalt",
 
   "block.randomtech.cobalt_ore": "Cobalt Ore",
+  "block.randomtech.cobalt_wire": "Cobalt Wire",
 
   "fluid.randomtech.experience": "Experience",
   "fluid.randomtech.magic": "Magic",

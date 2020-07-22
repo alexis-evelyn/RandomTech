@@ -4,19 +4,21 @@ import me.alexisevelyn.randomtech.utility.PostRegistryHelper;
 import me.alexisevelyn.randomtech.utility.RegistryHelper;
 import net.fabricmc.api.ModInitializer;
 
-/* TODO:
+/* TODO: Ordered by importance and logical steps
  *
- * Fix Cobalt Recipes
- * Add Cobalt Dust
- * Fix Fuser to not run when containing nothing
  * Fix Cobalt ore and Cobalt block to respect Mining Level
- * Fix output recipes for lava production
+ * Fix texture for Cobalt Wire
+ *
  * Make it possible to not output item in some recipes in Fuser
+ * Fix Cobalt Recipes (to be balanced)
+ * Fix output recipes for lava production
+ *
  * Fix REI Recipes to show output item if exists
  * Work on Fuser Gui
  * Work on entities
+ *
+ * Fix cobalt wire to not connect to Redstone wire
  * Consider how to obtain Death Ingot
- * Create texture for Cobalt dust and Death Ingot
  */
 
 // This runs on both the server and the client

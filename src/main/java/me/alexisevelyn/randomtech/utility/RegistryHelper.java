@@ -5,6 +5,7 @@ import me.alexisevelyn.randomtech.armormaterials.PoweredArmorMaterial;
 import me.alexisevelyn.randomtech.blocks.FuserBlock;
 import me.alexisevelyn.randomtech.blocks.TeleporterBlock;
 import me.alexisevelyn.randomtech.blocks.VirtualTile;
+import me.alexisevelyn.randomtech.blocks.dusts.CobaltDust;
 import me.alexisevelyn.randomtech.blocks.glass.*;
 import me.alexisevelyn.randomtech.blocks.metals.CobaltBlock;
 import me.alexisevelyn.randomtech.blocks.ores.CobaltOre;
@@ -24,6 +25,7 @@ import me.alexisevelyn.randomtech.items.armor.powered.PoweredHelmet;
 import me.alexisevelyn.randomtech.items.armor.powered.PoweredLeggings;
 import me.alexisevelyn.randomtech.items.books.Manual;
 import me.alexisevelyn.randomtech.items.ingots.CobaltIngot;
+import me.alexisevelyn.randomtech.items.ingots.DeathIngot;
 import me.alexisevelyn.randomtech.items.ingots.RedstoneIngot;
 import me.alexisevelyn.randomtech.items.tools.powered.*;
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
@@ -57,6 +59,8 @@ public class RegistryHelper {
 
     public static final Block VIRTUAL_TILE = new VirtualTile();
 
+    public static final Block COBALT_DUST = new CobaltDust();
+
     // Metals
     public static final Block COBALT_BLOCK = new CobaltBlock();
 
@@ -81,6 +85,7 @@ public class RegistryHelper {
     // Ingots
     public static final Item REDSTONE_INGOT = new RedstoneIngot(new Item.Settings().group(ItemGroup.MISC));
     public static final Item COBALT_INGOT = new CobaltIngot(new Item.Settings().group(ItemGroup.MISC));
+    public static final Item DEATH_INGOT = new DeathIngot(new Item.Settings().group(ItemGroup.MISC));
 
     // Tools
     public static final Item POWERED_SWORD = new PoweredSword(new Item.Settings().group(ItemGroup.TOOLS));
@@ -195,6 +200,8 @@ public class RegistryHelper {
         Registry.register(Registry.BLOCK, new Identifier(Main.MODID, "green_virtual_tile"), VIRTUAL_TILE);
 
         Registry.register(Registry.BLOCK, new Identifier(Main.MODID, "cobalt_block"), COBALT_BLOCK);
+
+        Registry.register(Registry.BLOCK, new Identifier(Main.MODID, "cobalt_wire"), COBALT_DUST);
     }
 
     protected void registerOreBlocks() {
@@ -217,6 +224,7 @@ public class RegistryHelper {
         // Ingots
         Registry.register(Registry.ITEM, new Identifier(Main.MODID, "redstone_ingot"), REDSTONE_INGOT);
         Registry.register(Registry.ITEM, new Identifier(Main.MODID, "cobalt_ingot"), COBALT_INGOT);
+        Registry.register(Registry.ITEM, new Identifier(Main.MODID, "death_ingot"), DEATH_INGOT);
     }
 
     protected void registerTools() {
@@ -262,6 +270,8 @@ public class RegistryHelper {
 
         // Metals
         Registry.register(Registry.ITEM, new Identifier(Main.MODID, "cobalt_block"), new BlockItem(COBALT_BLOCK, new Item.Settings().group(ItemGroup.DECORATIONS)));
+
+        Registry.register(Registry.ITEM, new Identifier(Main.MODID, "cobalt_dust"), new BlockItem(COBALT_DUST, new Item.Settings().group(ItemGroup.REDSTONE)));
     }
 
     protected void registerOreItemBlocks() {

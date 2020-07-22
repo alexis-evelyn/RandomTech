@@ -1,7 +1,7 @@
 {
   "type": "randomtech:fuser",
   "power": 3,
-  "time": 300,
+  "time": 50,
   "ingredients": [
     {
       "tag": "c:cobalt_ingots"
@@ -15,6 +15,6 @@
   ],
   "tank": {
     "fluid": "randomtech:cobalt",
-    "amount": 1000
+    "amount": 110
   }
 }
