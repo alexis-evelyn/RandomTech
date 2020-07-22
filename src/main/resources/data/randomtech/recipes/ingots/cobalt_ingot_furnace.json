@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient": {
+    "item": "randomtech:cobalt_ore"
+  },
+  "result": "randomtech:cobalt_ingot",
+  "experience": 1.0,
+  "cookingtime": 150
+}

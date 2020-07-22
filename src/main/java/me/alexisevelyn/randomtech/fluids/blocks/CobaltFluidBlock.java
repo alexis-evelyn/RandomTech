@@ -20,12 +20,12 @@ public class CobaltFluidBlock extends BaseFluidBlock {
     public CobaltFluidBlock(FlowableFluid fluid) {
         super(fluid, FabricBlockSettings
                 .copy(Blocks.LAVA)
-                .lightLevel(getZeroLightLevel()));
+                .lightLevel(getLightLevel()));
     }
 
     @Override
     public void applyEffects(LivingEntity livingEntity) {
-
+        livingEntity.setFireTicks(20);
     }
 
     @Override

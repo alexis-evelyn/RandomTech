@@ -1,24 +1,17 @@
 package me.alexisevelyn.randomtech.utility;
 
-import dev.onyxstudios.cca.api.v3.component.item.ItemComponentFactoryRegistry;
-import dev.onyxstudios.cca.api.v3.component.item.ItemComponentInitializer;
 import me.alexisevelyn.randomtech.Main;
-import me.alexisevelyn.randomtech.api.items.tools.generic.GenericPoweredTool;
 import me.alexisevelyn.randomtech.armormaterials.PoweredArmorMaterial;
 import me.alexisevelyn.randomtech.blocks.FuserBlock;
 import me.alexisevelyn.randomtech.blocks.TeleporterBlock;
 import me.alexisevelyn.randomtech.blocks.VirtualTile;
 import me.alexisevelyn.randomtech.blocks.glass.*;
+import me.alexisevelyn.randomtech.blocks.metals.CobaltBlock;
+import me.alexisevelyn.randomtech.blocks.ores.CobaltOre;
 import me.alexisevelyn.randomtech.entities.mob.CloudDemonEntity;
 import me.alexisevelyn.randomtech.entities.mob.WizardEntity;
-import me.alexisevelyn.randomtech.fluids.ExperienceFluid;
-import me.alexisevelyn.randomtech.fluids.HoneyFluid;
-import me.alexisevelyn.randomtech.fluids.MagicFluid;
-import me.alexisevelyn.randomtech.fluids.RedstoneFluid;
-import me.alexisevelyn.randomtech.fluids.blocks.ExperienceFluidBlock;
-import me.alexisevelyn.randomtech.fluids.blocks.HoneyFluidBlock;
-import me.alexisevelyn.randomtech.fluids.blocks.MagicFluidBlock;
-import me.alexisevelyn.randomtech.fluids.blocks.RedstoneFluidBlock;
+import me.alexisevelyn.randomtech.fluids.*;
+import me.alexisevelyn.randomtech.fluids.blocks.*;
 import me.alexisevelyn.randomtech.guis.FuserGui;
 import me.alexisevelyn.randomtech.guis.FuserGuiHandler;
 import me.alexisevelyn.randomtech.guis.TeleporterGui;
@@ -30,6 +23,7 @@ import me.alexisevelyn.randomtech.items.armor.powered.PoweredChestplate;
 import me.alexisevelyn.randomtech.items.armor.powered.PoweredHelmet;
 import me.alexisevelyn.randomtech.items.armor.powered.PoweredLeggings;
 import me.alexisevelyn.randomtech.items.books.Manual;
+import me.alexisevelyn.randomtech.items.ingots.CobaltIngot;
 import me.alexisevelyn.randomtech.items.ingots.RedstoneIngot;
 import me.alexisevelyn.randomtech.items.tools.powered.*;
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
@@ -63,6 +57,12 @@ public class RegistryHelper {
 
     public static final Block VIRTUAL_TILE = new VirtualTile();
 
+    // Metals
+    public static final Block COBALT_BLOCK = new CobaltBlock();
+
+    // Ores
+    public static final Block COBALT_ORE = new CobaltOre();
+
     // Machines
     public static final Block TELEPORTER = new TeleporterBlock();
     public static final Block FUSER = new FuserBlock();
@@ -80,6 +80,7 @@ public class RegistryHelper {
 
     // Ingots
     public static final Item REDSTONE_INGOT = new RedstoneIngot(new Item.Settings().group(ItemGroup.MISC));
+    public static final Item COBALT_INGOT = new CobaltIngot(new Item.Settings().group(ItemGroup.MISC));
 
     // Tools
     public static final Item POWERED_SWORD = new PoweredSword(new Item.Settings().group(ItemGroup.TOOLS));
@@ -105,6 +106,10 @@ public class RegistryHelper {
     public static final FlowableFluid HONEY_FLUID_FLOWING = new HoneyFluid.Flowing();
     public static final FluidBlock HONEY_FLUID_BLOCK = new HoneyFluidBlock(HONEY_FLUID){};
 
+    public static final FlowableFluid COBALT_FLUID = new CobaltFluid.Still();
+    public static final FlowableFluid COBALT_FLUID_FLOWING = new CobaltFluid.Flowing();
+    public static final FluidBlock COBALT_FLUID_BLOCK = new CobaltFluidBlock(COBALT_FLUID){};
+
     // Armor Materials
     public static final ArmorMaterial POWERED_ARMOR_MATERIAL = new PoweredArmorMaterial();
 
@@ -113,6 +118,7 @@ public class RegistryHelper {
     public static final Item MAGIC_BUCKET = new BucketItem(MAGIC_FLUID, new Item.Settings().recipeRemainder(Items.BUCKET).maxCount(1));
     public static final Item REDSTONE_BUCKET = new BucketItem(REDSTONE_FLUID, new Item.Settings().recipeRemainder(Items.BUCKET).maxCount(1));
     public static final Item HONEY_BUCKET = new BucketItem(HONEY_FLUID, new Item.Settings().recipeRemainder(Items.BUCKET).maxCount(1));
+    public static final Item COBALT_BUCKET = new BucketItem(COBALT_FLUID, new Item.Settings().recipeRemainder(Items.BUCKET).maxCount(1));
 
     // Gui Handlers - Needs to be run on both client and server for gui open screen to work
     public static final TeleporterGuiHandler<TeleporterGui> teleporterGuiHandler = new TeleporterGuiHandler<>();
@@ -146,6 +152,7 @@ public class RegistryHelper {
     public void register() {
         // Blocks
         registerGeneralBlocks();
+        registerOreBlocks();
         registerMachines();
 
         // Items
@@ -156,6 +163,7 @@ public class RegistryHelper {
 
         // Item Blocks
         registerGeneralItemBlocks();
+        registerOreItemBlocks();
         registerMachineItemBlocks();
 
         // Fluids
@@ -185,6 +193,12 @@ public class RegistryHelper {
         Registry.register(Registry.BLOCK, new Identifier(Main.MODID, "powered_glass"), POWERED_GLASS);
 
         Registry.register(Registry.BLOCK, new Identifier(Main.MODID, "green_virtual_tile"), VIRTUAL_TILE);
+
+        Registry.register(Registry.BLOCK, new Identifier(Main.MODID, "cobalt_block"), COBALT_BLOCK);
+    }
+
+    protected void registerOreBlocks() {
+        Registry.register(Registry.BLOCK, new Identifier(Main.MODID, "cobalt_ore"), COBALT_ORE);
     }
 
     protected void registerMachines() {
@@ -199,7 +213,10 @@ public class RegistryHelper {
 
         Registry.register(Registry.ITEM, new Identifier(Main.MODID, "teleporter_control"), TELEPORTER_CONTROL);
         Registry.register(Registry.ITEM, new Identifier(Main.MODID, "edible_power"), EDIBLE_POWER);
+
+        // Ingots
         Registry.register(Registry.ITEM, new Identifier(Main.MODID, "redstone_ingot"), REDSTONE_INGOT);
+        Registry.register(Registry.ITEM, new Identifier(Main.MODID, "cobalt_ingot"), COBALT_INGOT);
     }
 
     protected void registerTools() {
@@ -217,6 +234,7 @@ public class RegistryHelper {
         Registry.register(Registry.ITEM, new Identifier(Main.MODID, "magic_bucket"), MAGIC_BUCKET);
         Registry.register(Registry.ITEM, new Identifier(Main.MODID, "redstone_bucket"), REDSTONE_BUCKET);
         Registry.register(Registry.ITEM, new Identifier(Main.MODID, "honey_bucket"), HONEY_BUCKET);
+        Registry.register(Registry.ITEM, new Identifier(Main.MODID, "cobalt_bucket"), COBALT_BUCKET);
     }
 
     protected void registerArmor() {
@@ -241,6 +259,13 @@ public class RegistryHelper {
         Registry.register(Registry.ITEM, new Identifier(Main.MODID, "powered_glass"), new BlockItem(POWERED_GLASS, new Item.Settings().group(ItemGroup.DECORATIONS)));
 
         Registry.register(Registry.ITEM, new Identifier(Main.MODID, "green_virtual_tile"), new BlockItem(VIRTUAL_TILE, new Item.Settings().group(ItemGroup.DECORATIONS)));
+
+        // Metals
+        Registry.register(Registry.ITEM, new Identifier(Main.MODID, "cobalt_block"), new BlockItem(COBALT_BLOCK, new Item.Settings().group(ItemGroup.DECORATIONS)));
+    }
+
+    protected void registerOreItemBlocks() {
+        Registry.register(Registry.ITEM, new Identifier(Main.MODID, "cobalt_ore"), new BlockItem(COBALT_ORE, new Item.Settings().group(ItemGroup.MATERIALS)));
     }
 
     protected void registerMachineItemBlocks() {
@@ -255,18 +280,21 @@ public class RegistryHelper {
         Registry.register(Registry.FLUID, new Identifier(Main.MODID, "magic_flowing"), MAGIC_FLUID_FLOWING);
         Registry.register(Registry.FLUID, new Identifier(Main.MODID, "redstone_flowing"), REDSTONE_FLUID_FLOWING);
         Registry.register(Registry.FLUID, new Identifier(Main.MODID, "honey_flowing"), HONEY_FLUID_FLOWING);
+        Registry.register(Registry.FLUID, new Identifier(Main.MODID, "cobalt_flowing"), COBALT_FLUID_FLOWING);
 
         // Still Fluids
         Registry.register(Registry.FLUID, new Identifier(Main.MODID, "experience"), EXPERIENCE_FLUID);
         Registry.register(Registry.FLUID, new Identifier(Main.MODID, "magic"), MAGIC_FLUID);
         Registry.register(Registry.FLUID, new Identifier(Main.MODID, "redstone"), REDSTONE_FLUID);
         Registry.register(Registry.FLUID, new Identifier(Main.MODID, "honey"), HONEY_FLUID);
+        Registry.register(Registry.FLUID, new Identifier(Main.MODID, "cobalt"), COBALT_FLUID);
 
         // Fluid Blocks
         Registry.register(Registry.BLOCK, new Identifier(Main.MODID, "experience"), EXPERIENCE_FLUID_BLOCK);
         Registry.register(Registry.BLOCK, new Identifier(Main.MODID, "magic"), MAGIC_FLUID_BLOCK);
         Registry.register(Registry.BLOCK, new Identifier(Main.MODID, "redstone"), REDSTONE_FLUID_BLOCK);
         Registry.register(Registry.BLOCK, new Identifier(Main.MODID, "honey"), HONEY_FLUID_BLOCK);
+        Registry.register(Registry.BLOCK, new Identifier(Main.MODID, "cobalt"), COBALT_FLUID_BLOCK);
     }
 
     protected void registerFuel() {

@@ -6,6 +6,7 @@
   "item.randomtech.teleporter_control": "Teleporter Linker",
   "item.randomtech.edible_power": "Edible Power",
   "item.randomtech.redstone_ingot": "Redstone Ingot",
+  "item.randomtech.cobalt_ingot": "Cobalt Ingot",
 
 
   "item.randomtech.powered_sword": "Powered Sword",
@@ -43,15 +44,21 @@
   "block.randomtech.teleporter": "Teleporter",
   "block.randomtech.fuser": "Fuser",
 
+  "block.randomtech.cobalt_block": "Block of Cobalt",
+
+  "block.randomtech.cobalt_ore": "Cobalt Ore",
+
   "fluid.randomtech.experience": "Experience",
   "fluid.randomtech.magic": "Magic",
   "fluid.randomtech.redstone": "Redstone",
   "fluid.randomtech.honey": "Honey",
+  "fluid.randomtech.cobalt": "Molten Cobalt",
 
-  "item.randomtech.experience_bucket": "Liquid Experience",
+  "item.randomtech.experience_bucket": "Bucket O' Experience",
   "item.randomtech.magic_bucket": "Bucket O' Magic",
-  "item.randomtech.redstone_bucket": "Liquid Redstone",
-  "item.randomtech.honey_bucket": "Liquid Honey",
+  "item.randomtech.redstone_bucket": "Bucket O' Redstone",
+  "item.randomtech.honey_bucket": "Bucket O' Honey",
+  "item.randomtech.cobalt_bucket": "Bucket O' Cobalt",
 
   "entity.randomtech.wizard": "Wizard",
   "entity.randomtech.cloud_demon": "Ghastly Demon",

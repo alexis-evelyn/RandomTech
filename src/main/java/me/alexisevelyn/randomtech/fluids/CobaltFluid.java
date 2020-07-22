@@ -23,22 +23,22 @@ public abstract class CobaltFluid extends BaseFluid {
 
     @Override
     public Fluid getFlowing() {
-        return RegistryHelper.REDSTONE_FLUID_FLOWING;
+        return RegistryHelper.COBALT_FLUID_FLOWING;
     }
 
     @Override
     public Fluid getStill() {
-        return RegistryHelper.REDSTONE_FLUID;
+        return RegistryHelper.COBALT_FLUID;
     }
 
     @Override
     public Item getBucketItem() {
-        return RegistryHelper.REDSTONE_BUCKET;
+        return RegistryHelper.COBALT_BUCKET;
     }
 
     @Override
     protected BlockState toBlockState(FluidState state) {
-        return RegistryHelper.REDSTONE_FLUID_BLOCK.getDefaultState().with(Properties.LEVEL_15, BaseFluid.calculateLevel(state));
+        return RegistryHelper.COBALT_FLUID_BLOCK.getDefaultState().with(Properties.LEVEL_15, BaseFluid.calculateLevel(state));
     }
 
     @Override

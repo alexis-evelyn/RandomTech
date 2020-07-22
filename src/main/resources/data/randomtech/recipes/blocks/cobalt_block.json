@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "randomtech:cobalt_ingot"
+    }
+  },
+  "result": {
+    "item": "randomtech:cobalt_block",
+    "count": 1
+  }
+}

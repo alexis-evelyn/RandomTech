@@ -1,4 +1,4 @@
-package me.alexisevelyn.randomtech.blocks.ores;
+package me.alexisevelyn.randomtech.blocks.metals;
 
 import me.alexisevelyn.randomtech.api.utilities.GenericBlockHelper;
 import me.alexisevelyn.randomtech.api.utilities.MiningLevel;
@@ -9,18 +9,17 @@ import net.minecraft.block.Block;
 import net.minecraft.sound.BlockSoundGroup;
 
 // TODO: Fix this so that mining level is respected
-public class CobaltOre extends Block {
-    public CobaltOre() {
+public class CobaltBlock extends Block {
+    public CobaltBlock() {
         super(FabricBlockSettings
                 .of(Materials.METAL_ORE_MATERIAL)
-                .sounds(BlockSoundGroup.STONE)
+                .sounds(BlockSoundGroup.METAL)
                 .breakByTool(FabricToolTags.PICKAXES, MiningLevel.POWERED.getValue())
                 .requiresTool()
                 .allowsSpawning(GenericBlockHelper::always)
                 .solidBlock(GenericBlockHelper::always)
                 .suffocates(GenericBlockHelper::always)
                 .blockVision(GenericBlockHelper::always)
-                .strength(10.0F, 11.0F));
+                .strength(3.0F, 3.0F));
     }
 }
-

@@ -9,4 +9,6 @@ public final class Materials {
     public static final Material GLASS_MATERIAL = Material.GLASS;
     public static final Material TILE_MATERIAL = Material.STONE;
     public static final Material DARK_GLASS_MATERIAL = new FabricMaterialBuilder(MaterialColor.BLACK).build();
+
+    public static final Material METAL_ORE_MATERIAL = Material.METAL;
 }

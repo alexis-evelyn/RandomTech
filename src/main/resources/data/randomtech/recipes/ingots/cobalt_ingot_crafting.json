@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "randomtech:cobalt_block"
+    }
+  ],
+  "result": {
+    "item": "randomtech:cobalt_ingot",
+    "count": 9
+  }
+}

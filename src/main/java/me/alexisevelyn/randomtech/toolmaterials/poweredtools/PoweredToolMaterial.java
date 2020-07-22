@@ -1,5 +1,6 @@
 package me.alexisevelyn.randomtech.toolmaterials.poweredtools;
 
+import me.alexisevelyn.randomtech.api.utilities.MiningLevel;
 import net.minecraft.item.ToolMaterial;
 import net.minecraft.recipe.Ingredient;
 import org.jetbrains.annotations.Nullable;
@@ -22,7 +23,7 @@ public class PoweredToolMaterial implements ToolMaterial {
 
     @Override
     public int getMiningLevel() {
-        return 5;
+        return MiningLevel.POWERED.getValue();
     } // Netherite is 4
 
     @Override
