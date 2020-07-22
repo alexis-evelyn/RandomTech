@@ -5,6 +5,7 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.FluidBlock;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.FlowableFluid;
 import net.minecraft.text.LiteralText;
@@ -21,10 +22,36 @@ public class BaseFluidBlock extends FluidBlock {
         super(fluid, FabricBlockSettings.copy(Blocks.WATER));
     }
 
-    // TODO: Add proper entity push physics
     @Override
     public void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity) {
         //super.onEntityCollision(state, world, pos, entity);
+
+        if (entity instanceof LivingEntity) {
+            LivingEntity livingEntity = (LivingEntity) entity;
+
+            applyEffects(livingEntity);
+        }
+
+        if (entity instanceof PlayerEntity) {
+            PlayerEntity playerEntity = (PlayerEntity) entity;
+
+            if (isEyeInFluid(playerEntity, pos))
+                applyShader(playerEntity);
+            else
+                removeShader(playerEntity);
+        }
+    }
+
+    public void applyEffects(LivingEntity livingEntity) {
+
+    }
+
+    public void applyShader(PlayerEntity playerEntity) {
+
+    }
+
+    public void removeShader(PlayerEntity playerEntity) {
+
     }
 
     public boolean isEyeInFluid(PlayerEntity playerEntity, BlockPos blockPos) {

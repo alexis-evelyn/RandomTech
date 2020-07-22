@@ -33,23 +33,18 @@ public class ExperienceFluidBlock extends BaseFluidBlock {
     }
 
     @Override
-    public void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity) {
-        super.onEntityCollision(state, world, pos, entity);
+    public void applyEffects(LivingEntity livingEntity) {
+        livingEntity.addStatusEffect(new StatusEffectInstance(StatusEffects.LUCK, 20 * 2 * luck_level, luck_level - 1));
+        livingEntity.addStatusEffect(new StatusEffectInstance(StatusEffects.GLOWING, 20 * 2 * glow_level, glow_level - 1));
+    }
 
-        // TODO: Set Shader if Player Head in Liquid
+    @Override
+    public void applyShader(PlayerEntity playerEntity) {
 
-        if (entity instanceof LivingEntity) {
-            LivingEntity livingEntity = (LivingEntity) entity;
+    }
 
-            livingEntity.addStatusEffect(new StatusEffectInstance(StatusEffects.LUCK, 20 * 2 * luck_level, luck_level - 1));
-            livingEntity.addStatusEffect(new StatusEffectInstance(StatusEffects.GLOWING, 20 * 2 * glow_level, glow_level - 1));
-        }
+    @Override
+    public void removeShader(PlayerEntity playerEntity) {
 
-        if (entity instanceof PlayerEntity) {
-            PlayerEntity playerEntity = (PlayerEntity) entity;
-
-            if (isEyeInFluid(playerEntity, pos))
-                return; // TODO: Apply shader to player
-        }
     }
 }

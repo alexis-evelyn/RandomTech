@@ -11,6 +11,14 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundTag;
 import org.jetbrains.annotations.NotNull;
 
+/*
+ Note to developers. Until I figure out how to register the items based on my Generic Tools/Armor,
+  you'll have to register your item with this component
+  if you want to have custom model data when the item is broken.
+
+ You can use my post registry class for an example on how to register with this component
+  as that's where I registered my items with this component.
+ */
 public class BrokenItemComponent implements CopyableComponent<BrokenItemComponent> {
     private final int brokenModelData = 1337;
     private final int fixedModelData = 9001;
@@ -29,7 +37,6 @@ public class BrokenItemComponent implements CopyableComponent<BrokenItemComponen
         this.customModelData = getStackModelData(itemStack);
     }
 
-    // This causes the item to have data repeatedly added to it making the item unusable for breaking blocks
     @Override
     public @NotNull CompoundTag toTag(CompoundTag compoundTag) {
         // compoundTag.putInt("CustomModelData", this.customModelData);
