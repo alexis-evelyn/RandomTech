@@ -1,33 +1,99 @@
 package me.alexisevelyn.randomtech.api.utilities.cardinalcomponents;
 
+import me.alexisevelyn.randomtech.api.items.armor.generic.GenericPoweredArmor;
+import me.alexisevelyn.randomtech.api.items.tools.generic.GenericPoweredTool;
 import me.alexisevelyn.randomtech.utility.PostRegistryHelper;
 import nerdhub.cardinal.components.api.ComponentType;
+import nerdhub.cardinal.components.api.component.Component;
 import nerdhub.cardinal.components.api.component.extension.CopyableComponent;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundTag;
 import org.jetbrains.annotations.NotNull;
 
 public class BrokenItemComponent implements CopyableComponent<BrokenItemComponent> {
+    private final int brokenModelData = 1337;
+    private final int fixedModelData = 9001;
+
     private int customModelData = 1337;
+    private final ItemStack itemStack;
+
+    public BrokenItemComponent(ItemStack itemStack) {
+        this.itemStack = itemStack;
+    }
 
     @Override
     public void fromTag(CompoundTag compoundTag) {
-        if (compoundTag.getInt("CustomModelData") == 1337)
-            this.customModelData = compoundTag.getInt("CustomModelData");
+        // this.customModelData = compoundTag.getInt("CustomModelData");
+
+        this.customModelData = getStackModelData(itemStack);
     }
 
     // This causes the item to have data repeatedly added to it making the item unusable for breaking blocks
     @Override
     public @NotNull CompoundTag toTag(CompoundTag compoundTag) {
-        if (compoundTag.getInt("CustomModelData") != 0)
-            return compoundTag;
+        // compoundTag.putInt("CustomModelData", this.customModelData);
 
-        compoundTag.putInt("CustomModelData", this.customModelData);
-
+        setIfStackBroken(itemStack);
         return compoundTag;
     }
 
-    @Override
     public @NotNull ComponentType<?> getComponentType() {
         return PostRegistryHelper.BROKEN_ITEM_COMPONENT;
+    }
+
+    @Override
+    public boolean isComponentEqual(Component other) {
+        return isStackModelDataSet(itemStack);
+    }
+
+    public boolean isStackModelDataSet(ItemStack itemStack) {
+        return customModelData == getStackModelData(itemStack);
+    }
+
+    public int getStackModelData(ItemStack itemStack) {
+        CompoundTag tag = itemStack.getTag();
+        if (tag == null)
+            return 0;
+
+        return tag.getInt("CustomModelData");
+    }
+
+    public void setStackModelData(ItemStack itemStack, int modelData) {
+        CompoundTag tag = itemStack.getTag();
+        if (tag == null)
+            return;
+
+        tag.putInt("CustomModelData", modelData);
+    }
+
+    public void removeStackModelData(ItemStack itemStack) {
+        CompoundTag tag = itemStack.getTag();
+        if (tag == null)
+            return;
+
+        tag.remove("CustomModelData");
+    }
+
+    public void setIfStackBroken(ItemStack itemStack) {
+        Item item = itemStack.getItem();
+
+        if (item instanceof GenericPoweredTool) {
+            GenericPoweredTool tool = (GenericPoweredTool) item;
+
+            if (tool.isUsable(itemStack))
+                removeStackModelData(itemStack);
+            else
+                setStackModelData(itemStack, brokenModelData);
+        }
+
+        if (item instanceof GenericPoweredArmor) {
+            GenericPoweredArmor armor = (GenericPoweredArmor) item;
+
+            if (armor.isUsable(itemStack))
+                removeStackModelData(itemStack);
+            else
+                setStackModelData(itemStack, brokenModelData);
+        }
     }
 }
