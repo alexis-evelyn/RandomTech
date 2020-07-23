@@ -74,6 +74,19 @@ public class GenericPoweredArmor extends ArmorItem implements EnergyHelper, Item
         return new TranslatableText(this.getTranslationKey(stack));
     }
 
+
+    public @Nullable String getSecondaryArmorTexture(ItemStack itemStack) {
+        if (!(itemStack.getItem() instanceof GenericPoweredArmor))
+            return null;
+
+        GenericPoweredArmor genericPoweredArmor = (GenericPoweredArmor) itemStack.getItem();
+
+        if (!genericPoweredArmor.isUsable(itemStack))
+            return "discharged";
+
+        return null;
+    }
+
     @Override
     public String getTranslationKey(ItemStack stack) {
         if (isUsable(stack) || this.dischargedTranslationKey == null)
