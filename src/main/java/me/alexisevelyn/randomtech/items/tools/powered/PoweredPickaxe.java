@@ -1,15 +1,17 @@
 package me.alexisevelyn.randomtech.items.tools.powered;
 
 import me.alexisevelyn.randomtech.api.items.tools.generic.GenericPoweredPickaxe;
+import me.alexisevelyn.randomtech.api.utilities.MiningManager;
 import me.alexisevelyn.randomtech.toolmaterials.poweredtools.PoweredToolMaterial;
-import me.alexisevelyn.randomtech.utility.RegistryHelper;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUsageContext;
-import net.minecraft.text.LiteralText;
+import net.minecraft.text.MutableText;
+import net.minecraft.text.Text;
+import net.minecraft.text.TranslatableText;
 import net.minecraft.util.ActionResult;
+import net.minecraft.util.Formatting;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import team.reborn.energy.EnergyTier;
@@ -36,20 +38,19 @@ public class PoweredPickaxe extends GenericPoweredPickaxe {
         BlockState blockState = world.getBlockState(blockPos);
 
         if (playerEntity != null) {
-            playerEntity.sendMessage(new LiteralText("Effective Tool: " + playerEntity.isUsingEffectiveTool(blockState)), true);
+            boolean canMine = MiningManager.canMine(playerEntity, blockState, world, blockPos);
+
+            MutableText canMineVariable = new TranslatableText(canMine ? "text.randomtech.true" : "text.randomtech.false");
+
+            // Color red or green depending on if can mine. Green is true, red is false.
+            canMineVariable = canMine ? canMineVariable.formatted(Formatting.DARK_GREEN, Formatting.BOLD) : canMineVariable.formatted(Formatting.DARK_RED, Formatting.BOLD);
+
+            Text canMineMessage = new TranslatableText("text.randomtech.can_mine", canMineVariable)
+                    .formatted(Formatting.GOLD, Formatting.BOLD);
+
+            playerEntity.sendMessage(canMineMessage, true);
         }
 
         return super.useOnBlock(context);
-    }
-
-    @Override
-    public boolean isEffectiveOn(BlockState state) {
-        int i = this.getMaterial().getMiningLevel();
-
-        // TODO: Figure out how to generalize Mining Level
-        if (state.isOf(RegistryHelper.COBALT_BLOCK) || state.isOf(RegistryHelper.COBALT_ORE))
-            return true;
-
-        return super.isEffectiveOn(state);
     }
 }

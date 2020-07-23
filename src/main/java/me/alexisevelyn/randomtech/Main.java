@@ -6,7 +6,6 @@ import net.fabricmc.api.ModInitializer;
 
 /* TODO: Ordered by importance and logical steps
  *
- * Fix Cobalt ore and Cobalt block to respect Mining Level
  * Fix texture for Cobalt Wire
  *
  * Make it possible to not output item in some recipes in Fuser

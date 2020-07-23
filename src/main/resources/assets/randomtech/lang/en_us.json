@@ -91,6 +91,10 @@
 
   "text.randomtech.power_level": "Energy: %s / %s",
 
+  "text.randomtech.can_mine": "Can Mine: %s",
+  "text.randomtech.true": "Yes",
+  "text.randomtech.false": "No",
+
   "text.rei.category.fuser": "Fuser",
 
   "patchouli.manual.name": "Random Tech Manual",
