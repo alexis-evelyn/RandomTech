@@ -31,14 +31,9 @@ public class PoweredPickaxe extends GenericPoweredPickaxe {
     @Override
     public ActionResult useOnBlock(ItemUsageContext context) {
         PlayerEntity playerEntity = context.getPlayer();
-        ItemStack itemStack = context.getStack();
-
-        World world = context.getWorld();
-        BlockPos blockPos = context.getBlockPos();
-        BlockState blockState = world.getBlockState(blockPos);
 
         if (playerEntity != null) {
-            boolean canMine = MiningManager.canMine(playerEntity, blockState, world, blockPos);
+            boolean canMine = MiningManager.canMine(context);
 
             MutableText canMineVariable = new TranslatableText(canMine ? "text.randomtech.true" : "text.randomtech.false");
 
