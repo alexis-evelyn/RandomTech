@@ -3,17 +3,13 @@ package me.alexisevelyn.randomtech.items.tools.powered;
 import me.alexisevelyn.randomtech.api.items.tools.generic.GenericPoweredPickaxe;
 import me.alexisevelyn.randomtech.api.utilities.MiningManager;
 import me.alexisevelyn.randomtech.toolmaterials.poweredtools.PoweredToolMaterial;
-import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUsageContext;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Formatting;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
 import team.reborn.energy.EnergyTier;
 
 public class PoweredPickaxe extends GenericPoweredPickaxe {

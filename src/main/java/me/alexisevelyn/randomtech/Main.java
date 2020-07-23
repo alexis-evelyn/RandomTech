@@ -18,6 +18,12 @@ import net.fabricmc.api.ModInitializer;
  *
  * Fix cobalt wire to not connect to Redstone wire
  * Consider how to obtain Death Ingot
+ *
+ * Create mixin for dynamic armor texture based on ItemStack properties
+ * - net.minecraft.client.render.entity.feature.ArmorFeatureRenderer#getArmorTexture(ArmorItem, boolean, @Nullable String)
+ * - net.minecraft.client.render.entity.feature.ArmorFeatureRenderer#renderArmor(MatrixStack, VertexConsumerProvider, T livingEntity, EquipmentSlot, int, A bipedEntityModel)
+ * * Most likely, we'll have to inject at head of renderArmor and check if it's an instance of GenericPoweredArmor.
+ * *  That's the last method that has the ability to get an item stack for the armor.
  */
 
 // This runs on both the server and the client

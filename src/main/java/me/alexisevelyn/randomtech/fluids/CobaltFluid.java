@@ -47,8 +47,13 @@ public abstract class CobaltFluid extends BaseFluid {
     }
 
     @Override
+    public int getLevelDecreasePerBlock(WorldView world) {
+        return world.getDimension().isUltrawarm() ? 1 : 2;
+    }
+
+    @Override
     public int getTickRate(WorldView worldView) {
-        return 20;
+        return worldView.getDimension().isUltrawarm() ? 20 : 40;
     }
 
     public static class Still extends CobaltFluid {

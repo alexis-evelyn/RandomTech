@@ -6,6 +6,7 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
@@ -24,8 +25,15 @@ public class CobaltFluidBlock extends BaseFluidBlock {
     }
 
     @Override
+    public void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity) {
+        if (!entity.isFireImmune()) {
+            entity.setFireTicks(entity.getFireTicks() + 20);
+            entity.damage(DamageSource.LAVA, 4.0F); // TODO: Create custom damage source - Base it off of lava, but replace with Molten Cobalt
+        }
+    }
+
+    @Override
     public void applyEffects(LivingEntity livingEntity) {
-        livingEntity.setFireTicks(20);
     }
 
     @Override
