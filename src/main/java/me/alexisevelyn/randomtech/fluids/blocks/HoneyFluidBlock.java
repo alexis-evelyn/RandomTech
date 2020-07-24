@@ -26,18 +26,15 @@ public class HoneyFluidBlock extends BaseFluidBlock {
                 .lightLevel(getZeroLightLevel()));
     }
 
-    @Override
     public void applyEffects(LivingEntity livingEntity) {
         livingEntity.addStatusEffect(new StatusEffectInstance(StatusEffects.SLOWNESS, 20 * 2 * slowness_level, slowness_level - 1));
         livingEntity.addStatusEffect(new StatusEffectInstance(StatusEffects.SLOW_FALLING, 20 * 2 * slow_falling_level, slow_falling_level - 1));
     }
 
-    @Override
     public void applyShader(PlayerEntity playerEntity) {
 
     }
 
-    @Override
     public void removeShader(PlayerEntity playerEntity) {
 
     }

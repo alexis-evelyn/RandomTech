@@ -32,16 +32,14 @@ public class CobaltFluidBlock extends BaseFluidBlock {
         }
     }
 
-    @Override
     public void applyEffects(LivingEntity livingEntity) {
+
     }
 
-    @Override
     public void applyShader(PlayerEntity playerEntity) {
 
     }
 
-    @Override
     public void removeShader(PlayerEntity playerEntity) {
 
     }

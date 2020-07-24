@@ -21,7 +21,7 @@ import reborncore.common.util.RebornInventory;
 
 import java.util.Set;
 
-public class BasePowerAcceptorBlockEntity extends PowerAcceptorBlockEntity implements IToolDrop, InventoryProvider, BuiltScreenHandlerProvider {
+public abstract class BasePowerAcceptorBlockEntity extends PowerAcceptorBlockEntity implements IToolDrop, InventoryProvider, BuiltScreenHandlerProvider {
     // Energy Values
     double energyAddend = -1000.0;
     double maxPower = 10000;

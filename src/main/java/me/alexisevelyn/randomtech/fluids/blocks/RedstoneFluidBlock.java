@@ -26,18 +26,15 @@ public class RedstoneFluidBlock extends BaseFluidBlock {
                 .lightLevel(getLightLevel()));
     }
 
-    @Override
     public void applyEffects(LivingEntity livingEntity) {
         livingEntity.addStatusEffect(new StatusEffectInstance(StatusEffects.SPEED, 20 * 2 * swiftness_level, swiftness_level - 1));
         livingEntity.addStatusEffect(new StatusEffectInstance(StatusEffects.NAUSEA, 20 * 2 * nausea_level, nausea_level - 1));
     }
 
-    @Override
     public void applyShader(PlayerEntity playerEntity) {
 
     }
 
-    @Override
     public void removeShader(PlayerEntity playerEntity) {
 
     }

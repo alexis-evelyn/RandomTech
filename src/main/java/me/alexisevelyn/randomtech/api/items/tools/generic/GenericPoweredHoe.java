@@ -23,7 +23,7 @@ import team.reborn.energy.EnergyTier;
 import java.util.Map;
 import java.util.Set;
 
-public class GenericPoweredHoe extends GenericPoweredTool {
+public abstract class GenericPoweredHoe extends GenericPoweredTool {
     private static final Set<Block> EFFECTIVE_BLOCKS;
     protected static final Map<Block, BlockState> TILLED_BLOCKS;
     private static final float attackDamage = -4.0F;

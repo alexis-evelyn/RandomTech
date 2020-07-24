@@ -9,7 +9,7 @@ import reborncore.api.blockentity.IMachineGuiHandler;
 import reborncore.common.blocks.BlockMachineBase;
 import reborncore.common.powerSystem.PowerAcceptorBlockEntity;
 
-public class PowerAcceptorBlock extends BlockMachineBase {
+public abstract class PowerAcceptorBlock extends BlockMachineBase {
     public PowerAcceptorBlock(AbstractBlock.Settings settings) {
         super(settings, false);
     }

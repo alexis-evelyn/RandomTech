@@ -14,7 +14,7 @@ import net.minecraft.world.World;
 
 import java.util.HashMap;
 
-public class BasePoweredGlass extends AbstractGlassBlock {
+public abstract class BasePoweredGlass extends AbstractGlassBlock {
     public static final IntProperty POWER = IntProperty.of("power", 0, 15);
 
     public static final HashMap<Direction, BooleanProperty> directionBooleanFinder = new HashMap<>();

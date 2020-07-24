@@ -17,7 +17,7 @@ import team.reborn.energy.EnergyTier;
 
 import java.util.Set;
 
-public class GenericPoweredAxe extends GenericPoweredTool {
+public abstract class GenericPoweredAxe extends GenericPoweredTool {
     private static final Set<Material> NATURAL_EFFECTIVE_MATERIALS;
     private static final Set<Block> EFFECTIVE_BLOCKS;
     protected static final ImmutableMap<Block, Block> STRIPPED_BLOCKS;

@@ -15,12 +15,12 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.function.ToIntFunction;
 
-public class BaseFluidBlock extends FluidBlock {
-    protected BaseFluidBlock(FlowableFluid fluid, Settings settings) {
+public abstract class BaseFluidBlock extends FluidBlock {
+    public BaseFluidBlock(FlowableFluid fluid, Settings settings) {
         super(fluid, settings);
     }
 
-    protected BaseFluidBlock(FlowableFluid fluid) {
+    public BaseFluidBlock(FlowableFluid fluid) {
         super(fluid, FabricBlockSettings.copy(Blocks.WATER));
     }
 
@@ -46,11 +46,11 @@ public class BaseFluidBlock extends FluidBlock {
 
     // These exist solely to override from other fluids.
     // I may eventually turn this into an interface
-    public void applyEffects(LivingEntity livingEntity) { }
+    protected abstract void applyEffects(LivingEntity livingEntity);
 
-    public void applyShader(PlayerEntity playerEntity) { }
+    protected abstract void applyShader(PlayerEntity playerEntity);
 
-    public void removeShader(PlayerEntity playerEntity) { }
+    protected abstract void removeShader(PlayerEntity playerEntity);
 
     public boolean isEyeInFluid(PlayerEntity playerEntity, BlockPos blockPos) {
         // This activates the same as water would. Can be used to determine if needing to apply shaders.

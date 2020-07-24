@@ -26,18 +26,15 @@ public class ExperienceFluidBlock extends BaseFluidBlock {
                 .lightLevel(getLightLevel()));
     }
 
-    @Override
     public void applyEffects(LivingEntity livingEntity) {
         livingEntity.addStatusEffect(new StatusEffectInstance(StatusEffects.LUCK, 20 * 2 * luck_level, luck_level - 1));
         livingEntity.addStatusEffect(new StatusEffectInstance(StatusEffects.GLOWING, 20 * 2 * glow_level, glow_level - 1));
     }
 
-    @Override
     public void applyShader(PlayerEntity playerEntity) {
 
     }
 
-    @Override
     public void removeShader(PlayerEntity playerEntity) {
 
     }

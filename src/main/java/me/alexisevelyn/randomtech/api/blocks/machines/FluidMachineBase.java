@@ -8,7 +8,7 @@ import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 import reborncore.common.fluid.FluidValue;
 
-public class FluidMachineBase extends PowerAcceptorBlock {
+public abstract class FluidMachineBase extends PowerAcceptorBlock {
     public FluidMachineBase(AbstractBlock.Settings settings) {
         super(settings);
     }

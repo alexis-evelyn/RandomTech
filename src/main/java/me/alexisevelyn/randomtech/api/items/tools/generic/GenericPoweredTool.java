@@ -39,7 +39,7 @@ import java.util.Random;
 import java.util.Set;
 import java.util.UUID;
 
-public class GenericPoweredTool extends MiningToolItem implements EnergyHolder, ItemDurabilityExtensions, ItemStackModifiers {
+public abstract class GenericPoweredTool extends MiningToolItem implements EnergyHolder, ItemDurabilityExtensions, ItemStackModifiers {
     public final int maxCharge;
     public final int cost;
     public final float poweredSpeed;

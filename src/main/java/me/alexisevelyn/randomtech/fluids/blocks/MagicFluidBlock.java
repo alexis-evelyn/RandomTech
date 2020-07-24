@@ -26,7 +26,6 @@ public class MagicFluidBlock extends BaseFluidBlock {
                 .lightLevel(getLightLevel()));
     }
 
-    @Override
     public void applyEffects(LivingEntity livingEntity) {
         livingEntity.addStatusEffect(new StatusEffectInstance(StatusEffects.LEVITATION, 20 * 2 * levitation_level, levitation_level - 1));
 
@@ -35,12 +34,10 @@ public class MagicFluidBlock extends BaseFluidBlock {
             livingEntity.addStatusEffect(new StatusEffectInstance(StatusEffects.NIGHT_VISION, 20 * 2 * night_vision_level, night_vision_level - 1));
     }
 
-    @Override
     public void applyShader(PlayerEntity playerEntity) {
 
     }
 
-    @Override
     public void removeShader(PlayerEntity playerEntity) {
 
     }

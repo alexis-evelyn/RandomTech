@@ -7,7 +7,7 @@ import reborncore.common.fluid.FluidValue;
 import reborncore.common.fluid.container.FluidInstance;
 import reborncore.common.util.Tank;
 
-public class FluidMachineBlockEntityBase extends BasePowerAcceptorBlockEntity {
+public abstract class FluidMachineBlockEntityBase extends BasePowerAcceptorBlockEntity {
     protected Tank tank;
 
     public FluidMachineBlockEntityBase(BlockEntityType<?> blockEntityType) {

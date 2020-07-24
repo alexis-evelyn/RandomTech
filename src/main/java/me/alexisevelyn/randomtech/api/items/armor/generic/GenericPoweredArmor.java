@@ -40,7 +40,7 @@ import java.util.List;
 import java.util.UUID;
 
 // TODO: Make enchants useless if item is broken.
-public class GenericPoweredArmor extends ArmorItem implements EnergyHelper, ItemDurabilityExtensions, ItemStackModifiers, ArmorTickable, ArmorRemoveHandler, ArmorFovHandler, EnergyHolder {
+public abstract class GenericPoweredArmor extends ArmorItem implements EnergyHelper, ItemDurabilityExtensions, ItemStackModifiers, ArmorTickable, ArmorRemoveHandler, ArmorFovHandler, EnergyHolder {
     private final int maxCharge;
     private final int cost;
 

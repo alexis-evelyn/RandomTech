@@ -1,9 +1,6 @@
 package me.alexisevelyn.randomtech.api.utilities;
 
-import me.alexisevelyn.randomtech.api.items.armor.generic.GenericPoweredArmor;
 import me.alexisevelyn.randomtech.api.items.tools.generic.GenericPoweredTool;
-import me.alexisevelyn.randomtech.toolmaterials.poweredtools.PoweredToolMaterial;
-import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;

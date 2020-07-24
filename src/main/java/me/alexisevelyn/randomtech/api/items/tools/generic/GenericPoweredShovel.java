@@ -24,7 +24,7 @@ import team.reborn.energy.EnergyTier;
 import java.util.Map;
 import java.util.Set;
 
-public class GenericPoweredShovel extends GenericPoweredTool {
+public abstract class GenericPoweredShovel extends GenericPoweredTool {
     private static final Set<Block> EFFECTIVE_BLOCKS;
     protected static final Map<Block, BlockState> PATH_STATES;
     private static final float attackDamage = 1.5F;

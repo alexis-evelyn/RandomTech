@@ -1,6 +1,7 @@
 package me.alexisevelyn.randomtech;
 
 import me.alexisevelyn.randomtech.utility.PostRegistryHelper;
+import me.alexisevelyn.randomtech.utility.PreRegistryHelper;
 import me.alexisevelyn.randomtech.utility.RegistryHelper;
 import net.fabricmc.api.ModInitializer;
 
@@ -20,6 +21,7 @@ import net.fabricmc.api.ModInitializer;
 public class Main implements ModInitializer {
 	public static final String MODID = "randomtech";
 
+	protected PreRegistryHelper preRegistryHelper = new PreRegistryHelper();
 	protected PostRegistryHelper postRegistryHelper = new PostRegistryHelper();
 	protected RegistryHelper registryHelper = new RegistryHelper();
 
@@ -27,6 +29,7 @@ public class Main implements ModInitializer {
 	public void onInitialize() {
 		// Client and Server Side!!!
 
+		preRegistryHelper.preRegister();
 		registryHelper.register();
 		postRegistryHelper.postRegister();
 	}

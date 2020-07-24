@@ -12,7 +12,7 @@ import team.reborn.energy.EnergyTier;
 
 import java.util.Set;
 
-public class GenericPoweredPickaxe extends GenericPoweredTool {
+public abstract class GenericPoweredPickaxe extends GenericPoweredTool {
     private static final Set<Block> EFFECTIVE_BLOCKS;
     private static final float attackDamage = 1;
 

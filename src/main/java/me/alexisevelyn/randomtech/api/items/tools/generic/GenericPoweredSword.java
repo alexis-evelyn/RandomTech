@@ -16,7 +16,7 @@ import team.reborn.energy.EnergyTier;
 
 import java.util.Set;
 
-public class GenericPoweredSword extends GenericPoweredTool {
+public abstract class GenericPoweredSword extends GenericPoweredTool {
     private static final Set<Block> EFFECTIVE_BLOCKS;
     private static final float attackDamage = 3;
 
