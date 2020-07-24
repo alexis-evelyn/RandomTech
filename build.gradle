@@ -36,11 +36,10 @@ repositories {
 		name = "Ladysnake Libs"
 		url = 'https://dl.bintray.com/ladysnake/libs'
 	}
-
-//	maven {
-//		name = "Spinnery"
-//		url = "https://dl.bintray.com/spinnery/Spinnery"
-//	}
+	maven {
+		name = "Spinnery"
+		url = "https://dl.bintray.com/spinnery/Spinnery"
+	}
 //	maven {
 //		name = "BuildCraft"
 //		url = "https://mod-buildcraft.com/maven"
@@ -113,21 +112,8 @@ dependencies {
 	// Improves performance of lighting engine
 	modRuntime "com.github.jellysquid3:phosphor-fabric:${project.phosphor_version}"
 
-	// Dependencies of Astromine
-	// modRuntime "com.github.vini2003:spinnery:${project.spinnery_version}"
-	// modRuntime "alexiil.mc.lib:libblockattributes-core:${project.libblockattributes_core_version}"
-	// modRuntime "alexiil.mc.lib:libblockattributes-fluids:${project.libblockattributes_fluids_version}"
-
-	// Astromine Mod - A new tech mod. Going to investigate if I want to support it
-	// Sadly, this breaks my mod from loading for some reason
-	// modRuntime "com.github.Chainmail-Studios:Astromine:${project.astromine_version}"
-
 	// TODO: Get Online Repo For Connected Block Textures. Jitpack is refusing to cooperate
 	// Permission Granted From: https://discordapp.com/channels/507304429255393322/507982478276034570/730955439390326894
-	// CurseMaven does not currently escape urls properly to download CBT. ¯\_(ツ)_/¯
-//	modCompile "curse.maven:connected-block-textures:${project.connected_block_textures_curseforge_version}"
-//	include "curse.maven:connected-block-textures:${project.connected_block_textures_curseforge_version}"
-
 	// Note For Others: Here's the commit for my copy of Connected Block Textures - https://github.com/alexis-evelyn/connected-block-textures/tree/82790f74652e450e000b493d351bc74a92411361
 	modCompile "io.github.nuclearfarts:connected-block-textures:${project.connected_block_textures_local_version}"
 	include "io.github.nuclearfarts:connected-block-textures:${project.connected_block_textures_local_version}"
@@ -136,14 +122,29 @@ dependencies {
 //	modCompile "com.github.Nuclearfarts:connected-block-textures:${project.connected_block_textures_version}"
 //	include "com.github.Nuclearfarts:connected-block-textures:${project.connected_block_textures_version}"
 
-	// include "com.github.Nuclearfarts:connected-block-textures:${project.connected_block_textures_version}"
-
 	// Used to allow customizing data of items and other things
-	//modApi "io.github.onyxstudios.Cardinal-Components-API:Cardinal-Components-API:${project.cardinal_components_version}"
 	modApi "io.github.onyxstudios.Cardinal-Components-API:cardinal-components-base:${project.cardinal_components_version}"
 	modApi "io.github.onyxstudios.Cardinal-Components-API:cardinal-components-item:${project.cardinal_components_version}"
 	include "io.github.onyxstudios.Cardinal-Components-API:cardinal-components-item:${project.cardinal_components_version}"
 	include "io.github.onyxstudios.Cardinal-Components-API:cardinal-components-base:${project.cardinal_components_version}"
+
+	// Dependencies of Astromine
+	modRuntime "io.github.onyxstudios.Cardinal-Components-API:cardinal-components-block:${project.cardinal_components_version}"
+	modRuntime "io.github.onyxstudios.Cardinal-Components-API:cardinal-components-chunk:${project.cardinal_components_version}"
+	modRuntime "io.github.onyxstudios.Cardinal-Components-API:cardinal-components-entity:${project.cardinal_components_version}"
+	modRuntime "io.github.onyxstudios.Cardinal-Components-API:cardinal-components-level:${project.cardinal_components_version}"
+	modRuntime "io.github.onyxstudios.Cardinal-Components-API:cardinal-components-world:${project.cardinal_components_version}"
+	modRuntime "io.github.onyxstudios.Cardinal-Components-API:cardinal-components-util:${project.cardinal_components_version}"
+	modRuntime "com.github.vini2003:spinnery:${project.spinnery_version}"
+	modRuntime "com.github.Draylar:LibStructure:${project.libstructure_version}"
+	modRuntime "com.terraformersmc:shapes:${project.shapes_version}"
+
+	/* Astromine Mod - A new tech mod.
+	 * Going to investigate if I need to add special support for it.
+	 * This mod uses RebornCore and LBA.
+	 * LBA should be compatible with RebornCore, so if it is, I won't need to add custom support.
+	 */
+	modRuntime "com.github.Chainmail-Studios:Astromine:${project.astromine_version}"
 
 	// PSA: Some older mods, compiled on Loom 0.2.1, might have outdated Maven POMs.
 	// You may need to force-disable transitiveness on them.

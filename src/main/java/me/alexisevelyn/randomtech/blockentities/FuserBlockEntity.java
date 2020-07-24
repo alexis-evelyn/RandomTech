@@ -3,10 +3,10 @@ package me.alexisevelyn.randomtech.blockentities;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import me.alexisevelyn.randomtech.api.blockentities.FluidMachineBlockEntityBase;
+import me.alexisevelyn.randomtech.api.utilities.recipemanagers.GenericFluidRecipe;
 import me.alexisevelyn.randomtech.crafters.FuserRecipeCrafter;
 import me.alexisevelyn.randomtech.utility.BlockEntities;
 import me.alexisevelyn.randomtech.utility.RegistryHelper;
-import me.alexisevelyn.randomtech.api.utilities.recipemanagers.GenericFluidRecipe;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.EmptyFluid;
@@ -190,4 +190,10 @@ public class FuserBlockEntity extends FluidMachineBlockEntityBase implements ITo
     public int[] getInputSlots() {
         return inputSlots;
     }
+
+    // Astromine is not stable and NetworkMember (interface) is being rewritten every update, so hold off on supporting Astromine cables.
+//    @Override
+//    public @NotNull Map<NetworkType, Collection<NetworkMemberType>> getMemberProperties() {
+//        return ofTypes(AstromineNetworkTypes.FLUID, REQUESTER_PROVIDER, AstromineNetworkTypes.ENERGY, REQUESTER);
+//    }
 }

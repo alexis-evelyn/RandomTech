@@ -13,6 +13,7 @@ import net.fabricmc.api.ModInitializer;
  * Fix cobalt wire to not connect to Redstone wire
  *
  * Consider how to obtain Death Ingot
+ * Move api to separate jar so people can implement it without needing my mod to be installed.
  */
 
 // This runs on both the server and the client
