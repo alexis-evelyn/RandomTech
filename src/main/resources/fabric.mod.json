@@ -39,7 +39,8 @@
     "mixins/energy-helper-mixin.json",
     "mixins/enchant-helper-mixin.json",
     "mixins/smithing-recipe-nbt-modifier-mixin.json",
-    "mixins/dynamic-armor-texture-mixin.json"
+    "mixins/dynamic-armor-texture-mixin.json",
+    "mixins/cobalt-wiring-mixin.json"
   ],
 
   "depends": {
