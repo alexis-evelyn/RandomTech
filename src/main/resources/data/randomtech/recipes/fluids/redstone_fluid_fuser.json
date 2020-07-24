@@ -8,9 +8,6 @@
     }
   ],
   "results": [
-    {
-      "item": "minecraft:redstone"
-    }
   ],
   "tank": {
     "fluid": "randomtech:redstone",

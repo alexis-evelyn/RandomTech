@@ -6,6 +6,10 @@ import me.sargunvohra.mcmods.autoconfig1u.annotation.ConfigEntry;
 
 @Config(name = "randomtech")
 public class MainScreen implements ConfigData {
+    // Experimental Settings
+    // Debug Level
+    // Procedural Generation (World Seed Based) - https://www.youtube.com/watch?v=CS5DQVSp058&ab_channel=JayExci
+
     boolean toggleA = true;
     boolean toggleB = false;
 

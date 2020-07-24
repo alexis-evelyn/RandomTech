@@ -8,10 +8,6 @@
     }
   ],
   "results": [
-    {
-      "item": "minecraft:stone_button",
-      "count": 1
-    }
   ],
   "tank": {
     "fluid": "minecraft:lava",

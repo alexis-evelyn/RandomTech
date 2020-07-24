@@ -8,9 +8,6 @@
     }
   ],
   "results": [
-    {
-      "item": "minecraft:honeycomb"
-    }
   ],
   "tank": {
     "fluid": "randomtech:honey",
