@@ -5,7 +5,7 @@ import me.alexisevelyn.randomtech.armormaterials.PoweredArmorMaterial;
 import me.alexisevelyn.randomtech.blocks.FuserBlock;
 import me.alexisevelyn.randomtech.blocks.TeleporterBlock;
 import me.alexisevelyn.randomtech.blocks.VirtualTile;
-import me.alexisevelyn.randomtech.blocks.dusts.CobaltDust;
+import me.alexisevelyn.randomtech.blocks.dusts.CobaltWire;
 import me.alexisevelyn.randomtech.blocks.glass.*;
 import me.alexisevelyn.randomtech.blocks.metals.CobaltBlock;
 import me.alexisevelyn.randomtech.blocks.ores.CobaltOre;
@@ -32,8 +32,6 @@ import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
 import net.fabricmc.fabric.api.registry.FuelRegistry;
-import net.fabricmc.fabric.api.tag.TagRegistry;
-import net.fabricmc.fabric.api.tool.attribute.v1.FabricToolTags;
 import net.minecraft.block.Block;
 import net.minecraft.block.FluidBlock;
 import net.minecraft.entity.EntityDimensions;
@@ -61,7 +59,7 @@ public class RegistryHelper {
 
     public static final Block VIRTUAL_TILE = new VirtualTile();
 
-    public static final Block COBALT_DUST = new CobaltDust();
+    public static final Block COBALT_WIRE = new CobaltWire();
 
     // Metals
     public static final Block COBALT_BLOCK = new CobaltBlock();
@@ -203,7 +201,7 @@ public class RegistryHelper {
 
         Registry.register(Registry.BLOCK, new Identifier(Main.MODID, "cobalt_block"), COBALT_BLOCK);
 
-        Registry.register(Registry.BLOCK, new Identifier(Main.MODID, "cobalt_wire"), COBALT_DUST);
+        Registry.register(Registry.BLOCK, new Identifier(Main.MODID, "cobalt_wire"), COBALT_WIRE);
     }
 
     protected void registerOreBlocks() {
@@ -273,7 +271,7 @@ public class RegistryHelper {
         // Metals
         Registry.register(Registry.ITEM, new Identifier(Main.MODID, "cobalt_block"), new BlockItem(COBALT_BLOCK, new Item.Settings().group(ItemGroup.DECORATIONS)));
 
-        Registry.register(Registry.ITEM, new Identifier(Main.MODID, "cobalt_dust"), new BlockItem(COBALT_DUST, new Item.Settings().group(ItemGroup.REDSTONE)));
+        Registry.register(Registry.ITEM, new Identifier(Main.MODID, "cobalt_dust"), new BlockItem(COBALT_WIRE, new Item.Settings().group(ItemGroup.REDSTONE)));
     }
 
     protected void registerOreItemBlocks() {

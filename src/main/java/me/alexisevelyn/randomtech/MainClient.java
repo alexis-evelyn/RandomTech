@@ -1,5 +1,6 @@
 package me.alexisevelyn.randomtech;
 
+import me.alexisevelyn.randomtech.blocks.dusts.CobaltWire;
 import me.alexisevelyn.randomtech.entities.renderers.CloudDemonRenderer;
 import me.alexisevelyn.randomtech.entities.renderers.WizardRenderer;
 import me.alexisevelyn.randomtech.modmenu.screens.MainScreen;
@@ -15,9 +16,7 @@ import net.fabricmc.fabric.api.client.rendering.v1.ColorProviderRegistry;
 import net.fabricmc.fabric.api.event.client.ClientSpriteRegistryCallback;
 import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
 import net.fabricmc.fabric.api.resource.SimpleSynchronousResourceReloadListener;
-import net.minecraft.block.BlockState;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.color.block.BlockColorProvider;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.texture.Sprite;
 import net.minecraft.client.texture.SpriteAtlasTexture;
@@ -29,13 +28,10 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.BlockRenderView;
-import reborncore.common.util.Color;
 
 import java.util.function.Function;
 
 public class MainClient implements ClientModInitializer {
-	private final BlockColorProvider cobaltWireColor = (state, world, pos, tintIndex) -> Color.BLUE.getColor();
-
 	@Override
 	public void onInitializeClient() {
 		// Client Side Only!!!
@@ -75,9 +71,9 @@ public class MainClient implements ClientModInitializer {
 		BlockRenderLayerMap.INSTANCE.putBlock(RegistryHelper.POWERED_GLASS, RenderLayer.getTranslucent());
 
 		// Cobalt Wiring
-		BlockRenderLayerMap.INSTANCE.putBlock(RegistryHelper.COBALT_DUST, RenderLayer.getTranslucent());
+		BlockRenderLayerMap.INSTANCE.putBlock(RegistryHelper.COBALT_WIRE, RenderLayer.getTranslucent());
 
-		ColorProviderRegistry.BLOCK.register(this.cobaltWireColor, RegistryHelper.COBALT_DUST);
+		ColorProviderRegistry.BLOCK.register(CobaltWire::getWireColor, RegistryHelper.COBALT_WIRE);
 	}
 
 	private void fluidSetup() {
