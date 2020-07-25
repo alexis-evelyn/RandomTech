@@ -2,20 +2,14 @@ package me.alexisevelyn.randomtech.rei.plugin.recipedisplays;
 
 import me.alexisevelyn.randomtech.api.utilities.recipemanagers.GenericFluidRecipe;
 import me.alexisevelyn.randomtech.rei.plugin.REIPlugin;
-import me.alexisevelyn.randomtech.utility.RegistryHelper;
 import me.shedaniel.rei.api.EntryStack;
 import me.shedaniel.rei.api.RecipeDisplay;
-import net.minecraft.fluid.Fluids;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-import net.minecraft.recipe.Recipe;
 import net.minecraft.util.Identifier;
 import org.jetbrains.annotations.Nullable;
-import reborncore.common.crafting.RecipeManager;
 import reborncore.common.crafting.ingredient.RebornIngredient;
 import reborncore.common.fluid.container.FluidInstance;
 
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;

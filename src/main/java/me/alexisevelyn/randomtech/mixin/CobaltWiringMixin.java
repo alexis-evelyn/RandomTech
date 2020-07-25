@@ -1,6 +1,6 @@
 package me.alexisevelyn.randomtech.mixin;
 
-import me.alexisevelyn.randomtech.utility.RegistryHelper;
+import me.alexisevelyn.randomtech.utility.registryhelpers.main.RegistryHelper;
 import net.minecraft.block.*;
 import net.minecraft.block.enums.WireConnection;
 import net.minecraft.item.ItemPlacementContext;

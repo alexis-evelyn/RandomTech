@@ -2,7 +2,7 @@ package me.alexisevelyn.randomtech.blockentities;
 
 import me.alexisevelyn.randomtech.api.blockentities.BasePowerAcceptorBlockEntity;
 import me.alexisevelyn.randomtech.utility.BlockEntities;
-import me.alexisevelyn.randomtech.utility.RegistryHelper;
+import me.alexisevelyn.randomtech.utility.registryhelpers.main.RegistryHelper;
 import me.alexisevelyn.randomtech.blocks.TeleporterBlock;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;

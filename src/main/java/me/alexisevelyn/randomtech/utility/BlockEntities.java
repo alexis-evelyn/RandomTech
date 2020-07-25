@@ -2,8 +2,7 @@ package me.alexisevelyn.randomtech.utility;
 
 import me.alexisevelyn.randomtech.Main;
 import me.alexisevelyn.randomtech.blockentities.*;
-import me.alexisevelyn.randomtech.blocks.glass.InverseDarkIntangibleGlass;
-import me.alexisevelyn.randomtech.blocks.glass.InverseIntangibleGlass;
+import me.alexisevelyn.randomtech.utility.registryhelpers.main.RegistryHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityType;

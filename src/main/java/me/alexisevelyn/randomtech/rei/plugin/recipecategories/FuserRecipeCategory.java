@@ -3,7 +3,7 @@ package me.alexisevelyn.randomtech.rei.plugin.recipecategories;
 import com.google.common.collect.Lists;
 import me.alexisevelyn.randomtech.rei.plugin.REIPlugin;
 import me.alexisevelyn.randomtech.rei.plugin.recipedisplays.FuserRecipeDisplay;
-import me.alexisevelyn.randomtech.utility.RegistryHelper;
+import me.alexisevelyn.randomtech.utility.registryhelpers.main.RegistryHelper;
 import me.shedaniel.math.Point;
 import me.shedaniel.math.Rectangle;
 import me.shedaniel.rei.api.EntryStack;
@@ -11,7 +11,6 @@ import me.shedaniel.rei.api.RecipeCategory;
 import me.shedaniel.rei.api.widgets.Widgets;
 import me.shedaniel.rei.gui.widget.Widget;
 import net.minecraft.client.resource.language.I18n;
-import net.minecraft.recipe.Ingredient;
 import net.minecraft.util.Identifier;
 
 import java.util.List;

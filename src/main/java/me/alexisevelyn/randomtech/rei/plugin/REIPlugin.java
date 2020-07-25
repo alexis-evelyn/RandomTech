@@ -5,26 +5,13 @@ import me.alexisevelyn.randomtech.api.utilities.recipemanagers.GenericFluidRecip
 import me.alexisevelyn.randomtech.rei.plugin.recipecategories.FuserRecipeCategory;
 import me.alexisevelyn.randomtech.rei.plugin.recipedisplays.FuserRecipeDisplay;
 import me.alexisevelyn.randomtech.utility.Recipes;
-import me.alexisevelyn.randomtech.utility.RegistryHelper;
+import me.alexisevelyn.randomtech.utility.registryhelpers.main.RegistryHelper;
 import me.shedaniel.rei.api.*;
 import me.shedaniel.rei.api.plugins.REIPluginV0;
-import me.shedaniel.rei.plugin.crafting.DefaultShapedDisplay;
-import me.shedaniel.rei.plugin.stripping.DefaultStrippingDisplay;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.fabricmc.loom.util.FabricApiExtension;
-import net.minecraft.item.Items;
-import net.minecraft.recipe.Recipe;
-import net.minecraft.recipe.ShapedRecipe;
-import net.minecraft.recipe.ShapelessRecipe;
 import net.minecraft.util.Identifier;
-import reborncore.common.crafting.RebornRecipe;
-import reborncore.common.crafting.RebornRecipeType;
 import reborncore.common.crafting.RecipeManager;
-
-import java.util.List;
-import java.util.function.Function;
-import java.util.function.Predicate;
 
 @Environment(EnvType.CLIENT)
 public class REIPlugin implements REIPluginV0 {

@@ -1,17 +1,14 @@
 package me.alexisevelyn.randomtech;
 
-import me.alexisevelyn.randomtech.utility.PostRegistryHelper;
-import me.alexisevelyn.randomtech.utility.PreRegistryHelper;
-import me.alexisevelyn.randomtech.utility.RegistryHelper;
+import me.alexisevelyn.randomtech.utility.registryhelpers.main.PostRegistryHelper;
+import me.alexisevelyn.randomtech.utility.registryhelpers.main.PreRegistryHelper;
+import me.alexisevelyn.randomtech.utility.registryhelpers.main.RegistryHelper;
 import net.fabricmc.api.ModInitializer;
 
 /* TODO: Ordered by importance and logical steps
  *
  * Work on Fuser Gui
  * Work on entities
- *
- * Fix texture for Cobalt Wire
- * Fix cobalt wire to not connect to Redstone wire
  *
  * Consider how to obtain Death Ingot
  * Move api to separate jar so people can implement it without needing my mod to be installed.

@@ -2,7 +2,7 @@ package me.alexisevelyn.randomtech.blocks;
 
 import me.alexisevelyn.randomtech.api.blocks.machines.FluidMachineBase;
 import me.alexisevelyn.randomtech.utility.Materials;
-import me.alexisevelyn.randomtech.utility.RegistryHelper;
+import me.alexisevelyn.randomtech.utility.registryhelpers.main.RegistryHelper;
 import me.alexisevelyn.randomtech.blockentities.FuserBlockEntity;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.fabricmc.fabric.api.tool.attribute.v1.FabricToolTags;

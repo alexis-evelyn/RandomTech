@@ -1,7 +1,7 @@
 package me.alexisevelyn.randomtech.fluids;
 
 import me.alexisevelyn.randomtech.api.fluids.BaseFluid;
-import me.alexisevelyn.randomtech.utility.RegistryHelper;
+import me.alexisevelyn.randomtech.utility.registryhelpers.main.RegistryHelper;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.block.BlockState;

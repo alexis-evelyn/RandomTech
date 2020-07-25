@@ -1,4 +1,4 @@
-package me.alexisevelyn.randomtech.utility;
+package me.alexisevelyn.randomtech.utility.registryhelpers.main;
 
 import me.alexisevelyn.randomtech.Main;
 import me.alexisevelyn.randomtech.api.items.armor.generic.GenericPoweredArmor;

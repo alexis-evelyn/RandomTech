@@ -2,7 +2,7 @@ package me.alexisevelyn.randomtech.api.utilities.cardinalcomponents;
 
 import me.alexisevelyn.randomtech.api.items.armor.generic.GenericPoweredArmor;
 import me.alexisevelyn.randomtech.api.items.tools.generic.GenericPoweredTool;
-import me.alexisevelyn.randomtech.utility.PostRegistryHelper;
+import me.alexisevelyn.randomtech.utility.registryhelpers.main.PostRegistryHelper;
 import nerdhub.cardinal.components.api.ComponentType;
 import nerdhub.cardinal.components.api.component.Component;
 import nerdhub.cardinal.components.api.component.extension.CopyableComponent;
