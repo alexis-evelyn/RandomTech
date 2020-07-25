@@ -1,6 +1,9 @@
 {
   "itemGroup.randomtech.machinery_group": "Random Tech",
 
+  "randomtech:keybinds": "Alexis' Random Tech",
+  "randomtech:powered_helmet_zoom": "Powered Helmet Zoom",
+
   "item.randomtech.manual": "Manual",
 
   "item.randomtech.teleporter_control": "Teleporter Linker",

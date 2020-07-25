@@ -12,6 +12,8 @@ import me.alexisevelyn.randomtech.utility.registryhelpers.main.RegistryHelper;
 import me.sargunvohra.mcmods.autoconfig1u.AutoConfig;
 import me.sargunvohra.mcmods.autoconfig1u.serializer.GsonConfigSerializer;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
+import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
+import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.fabricmc.fabric.api.client.render.fluid.v1.FluidRenderHandler;
 import net.fabricmc.fabric.api.client.render.fluid.v1.FluidRenderHandlerRegistry;
 import net.fabricmc.fabric.api.client.rendereregistry.v1.EntityRendererRegistry;
@@ -20,9 +22,11 @@ import net.fabricmc.fabric.api.event.client.ClientSpriteRegistryCallback;
 import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
 import net.fabricmc.fabric.api.resource.SimpleSynchronousResourceReloadListener;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.options.KeyBinding;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.texture.Sprite;
 import net.minecraft.client.texture.SpriteAtlasTexture;
+import net.minecraft.client.util.InputUtil;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.resource.ResourceManager;
@@ -31,6 +35,7 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.BlockRenderView;
+import org.lwjgl.glfw.GLFW;
 
 import java.util.function.Function;
 
@@ -39,6 +44,15 @@ public class ClientRegistryHelper {
             .manage(new Identifier(Main.MODID, "shaders/post/grayscale.json"));
 
     private static final boolean grayscaleEnabled = false;  // can be disabled whenever you want
+
+    // TODO: Figure out why keybind keeps resetting
+    // To provide zoom capability when wearing powered helmet.
+    public static KeyBinding poweredHelmetZoom = new KeyBinding(
+            new Identifier(Main.MODID, "powered_helmet_zoom").toString(), // The translation key of the keybinding's name
+            InputUtil.Type.KEYSYM, // The type of the keybinding, KEYSYM for keyboard, MOUSE for mouse.
+            GLFW.GLFW_KEY_C, // The keycode of the key
+            new Identifier(Main.MODID, "keybinds").toString() // The translation key of the keybinding's category.
+    );
 
     public void register() {
         // Register Configuration Screen for Mod Menu
@@ -52,6 +66,9 @@ public class ClientRegistryHelper {
 
         // Entities
         entitySetup();
+
+        // Keybinds
+        keybindSetup();
 
         // Shader Setup
         shaderSetup();
@@ -148,6 +165,10 @@ public class ClientRegistryHelper {
 
         FluidRenderHandlerRegistry.INSTANCE.register(still, renderHandler);
         FluidRenderHandlerRegistry.INSTANCE.register(flowing, renderHandler);
+    }
+
+    private void keybindSetup() {
+        KeyBindingHelper.registerKeyBinding(poweredHelmetZoom);
     }
 
     private void shaderSetup() {
