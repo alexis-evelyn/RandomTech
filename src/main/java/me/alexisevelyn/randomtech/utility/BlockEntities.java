@@ -15,8 +15,6 @@ import java.util.List;
 import java.util.function.Supplier;
 
 public class BlockEntities {
-    private static List<BlockEntityType<?>> TYPES = new ArrayList<>();
-
     public static final BlockEntityType<TeleporterBlockEntity> TELEPORTER = register(TeleporterBlockEntity::new, "teleporter_block_entity", RegistryHelper.TELEPORTER);
     public static final BlockEntityType<FuserBlockEntity> FUSER = register(FuserBlockEntity::new, "fuser_block_entity", RegistryHelper.FUSER);
 
@@ -35,7 +33,6 @@ public class BlockEntities {
         BlockEntityType<T> blockEntityType = builder.build(null);
         Registry.register(Registry.BLOCK_ENTITY_TYPE, new Identifier(id), blockEntityType);
 
-        BlockEntities.TYPES.add(blockEntityType);
         return blockEntityType;
     }
 }

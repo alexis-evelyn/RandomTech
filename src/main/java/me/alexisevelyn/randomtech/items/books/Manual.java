@@ -13,10 +13,10 @@ import net.minecraft.world.World;
 import vazkii.patchouli.api.PatchouliAPI;
 
 public class Manual extends Item {
-    public static String itemID = "manual";
+    public static final String itemID = "manual";
 
-    Identifier bookIdentifier = new Identifier(Main.MODID, itemID);
-    Identifier patchouliGuidebookIdentifier = new Identifier("patchouli", "guide_book");
+    final Identifier bookIdentifier = new Identifier(Main.MODID, itemID);
+    final Identifier patchouliGuidebookIdentifier = new Identifier("patchouli", "guide_book");
 
     public Manual(Settings settings) {
         super(settings);

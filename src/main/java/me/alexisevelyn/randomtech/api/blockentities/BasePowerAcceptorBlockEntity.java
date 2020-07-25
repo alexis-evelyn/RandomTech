@@ -7,8 +7,6 @@ import net.minecraft.inventory.Inventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.screen.ScreenHandler;
-import net.minecraft.screen.ScreenHandlerListener;
 import net.minecraft.util.math.Direction;
 import org.jetbrains.annotations.Nullable;
 import reborncore.api.IToolDrop;
@@ -23,14 +21,14 @@ import java.util.Set;
 
 public abstract class BasePowerAcceptorBlockEntity extends PowerAcceptorBlockEntity implements IToolDrop, InventoryProvider, BuiltScreenHandlerProvider {
     // Energy Values
-    double energyAddend = -1000.0;
-    double maxPower = 10000;
-    double maxInput = 10000;
+    @SuppressWarnings("CanBeFinal") double energyAddend = -1000.0;
+    @SuppressWarnings("CanBeFinal") double maxPower = 10000;
+    @SuppressWarnings("CanBeFinal") double maxInput = 10000;
 
-    double maxOutput = 0;
+    @SuppressWarnings("CanBeFinal") double maxOutput = 0;
 
-    boolean canAcceptEnergy = true;
-    boolean canProvideEnergy = false;
+    @SuppressWarnings("CanBeFinal") boolean canAcceptEnergy = true;
+    @SuppressWarnings("CanBeFinal") boolean canProvideEnergy = false;
 
     public RebornInventory<?> inventory;
 
@@ -73,7 +71,7 @@ public abstract class BasePowerAcceptorBlockEntity extends PowerAcceptorBlockEnt
     /**
      * Returns the number of times the specified item occurs in this inventory across all stored stacks.
      *
-     * @param item
+     * @param item Item to check for
      */
     @Override
     public int count(Item item) {
@@ -83,7 +81,7 @@ public abstract class BasePowerAcceptorBlockEntity extends PowerAcceptorBlockEnt
     /**
      * Determines whether this inventory contains any of the given candidate items.
      *
-     * @param items
+     * @param items Items to check for
      */
     @Override
     public boolean containsAny(Set<Item> items) {
@@ -121,9 +119,8 @@ public abstract class BasePowerAcceptorBlockEntity extends PowerAcceptorBlockEnt
     }
 
     // Future Proofing
-    public int getMinPower() {
-        return 0;
-    }
+    @SuppressWarnings("SameReturnValue")
+    public abstract int getMinPower();
 
     @Override
     public boolean canAcceptEnergy(final Direction direction) {

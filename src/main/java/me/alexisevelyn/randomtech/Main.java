@@ -18,9 +18,9 @@ import net.fabricmc.api.ModInitializer;
 public class Main implements ModInitializer {
 	public static final String MODID = "randomtech";
 
-	protected PreRegistryHelper preRegistryHelper = new PreRegistryHelper();
-	protected PostRegistryHelper postRegistryHelper = new PostRegistryHelper();
-	protected RegistryHelper registryHelper = new RegistryHelper();
+	final protected PreRegistryHelper preRegistryHelper = new PreRegistryHelper();
+	final protected PostRegistryHelper postRegistryHelper = new PostRegistryHelper();
+	final protected RegistryHelper registryHelper = new RegistryHelper();
 
 	@Override
 	public void onInitialize() {

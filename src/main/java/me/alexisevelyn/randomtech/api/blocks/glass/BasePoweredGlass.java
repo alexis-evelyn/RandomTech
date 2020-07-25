@@ -5,7 +5,6 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
-import net.minecraft.state.property.DirectionProperty;
 import net.minecraft.state.property.IntProperty;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
@@ -16,8 +15,6 @@ import java.util.HashMap;
 
 public abstract class BasePoweredGlass extends AbstractGlassBlock {
     public static final IntProperty POWER = IntProperty.of("power", 0, 15);
-
-    public static final HashMap<Direction, BooleanProperty> directionBooleanFinder = new HashMap<>();
 
     public BasePoweredGlass(Settings settings) {
         super(settings);

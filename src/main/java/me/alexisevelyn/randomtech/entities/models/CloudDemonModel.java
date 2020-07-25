@@ -1,7 +1,6 @@
 package me.alexisevelyn.randomtech.entities.models;
 
 import me.alexisevelyn.randomtech.entities.mob.CloudDemonEntity;
-import me.alexisevelyn.randomtech.entities.mob.WizardEntity;
 import net.minecraft.client.model.ModelPart;
 import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.entity.model.EntityModel;

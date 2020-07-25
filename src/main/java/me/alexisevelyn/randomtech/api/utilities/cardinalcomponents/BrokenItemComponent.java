@@ -20,9 +20,6 @@ import org.jetbrains.annotations.NotNull;
   as that's where I registered my items with this component.
  */
 public class BrokenItemComponent implements CopyableComponent<BrokenItemComponent> {
-    private final int brokenModelData = 1337;
-    private final int fixedModelData = 9001;
-
     private int customModelData = 1337;
     private final ItemStack itemStack;
 
@@ -85,6 +82,7 @@ public class BrokenItemComponent implements CopyableComponent<BrokenItemComponen
     public void setIfStackBroken(ItemStack itemStack) {
         Item item = itemStack.getItem();
 
+        int brokenModelData = 1337;
         if (item instanceof GenericPoweredTool) {
             GenericPoweredTool tool = (GenericPoweredTool) item;
 

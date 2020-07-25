@@ -7,7 +7,6 @@ import net.minecraft.datafixer.NbtOps;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.sound.SoundEvents;
 import net.minecraft.text.LiteralText;
 import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
@@ -20,7 +19,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 import reborncore.common.chunkloading.ChunkLoaderManager;
-import reborncore.common.powerSystem.PowerSystem;
 
 import java.util.List;
 import java.util.Optional;

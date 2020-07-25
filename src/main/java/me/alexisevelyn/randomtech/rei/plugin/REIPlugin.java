@@ -15,7 +15,7 @@ import reborncore.common.crafting.RecipeManager;
 
 @Environment(EnvType.CLIENT)
 public class REIPlugin implements REIPluginV0 {
-    public static Identifier FUSER = new Identifier(Main.MODID, "fuser_category");
+    public static final Identifier FUSER = new Identifier(Main.MODID, "fuser_category");
 
 //    @Override
 //    public int getPriority() {

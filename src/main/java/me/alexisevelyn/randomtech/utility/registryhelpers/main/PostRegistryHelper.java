@@ -12,8 +12,8 @@ import net.fabricmc.fabric.api.network.PacketContext;
 import net.fabricmc.fabric.api.network.ServerSidePacketRegistry;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.PacketByteBuf;
-import net.minecraft.text.LiteralText;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
@@ -38,8 +38,10 @@ public class PostRegistryHelper {
                 switch (key) {
                     case PreRegistryHelper.zoom:
                         zoomPressed(packetContext, attachedData);
+                        break;
                     case PreRegistryHelper.unzoom:
                         zoomReleased(packetContext, attachedData);
+                        break;
                 }
             });
         });
@@ -51,12 +53,13 @@ public class PostRegistryHelper {
         if (helmetStack == null || !(helmetStack.getItem() instanceof PoweredHelmet))
             return;
 
-        PoweredHelmet helmet = (PoweredHelmet) helmetStack.getItem();
+        CompoundTag rootTag = helmetStack.getTag();
 
-        // Set Zooming
-        // helmet.setPlayerZooming(true);
+        if (rootTag == null)
+            return;
 
-        packetContext.getPlayer().sendMessage(new LiteralText("Zoom Pressed"), true);
+        if (rootTag.getInt("zoom") == 0)
+            rootTag.putInt("zoom", 1);
     }
 
     public void zoomReleased(PacketContext packetContext, PacketByteBuf attachedData) {
@@ -65,11 +68,12 @@ public class PostRegistryHelper {
         if (helmetStack == null || !(helmetStack.getItem() instanceof PoweredHelmet))
             return;
 
-        PoweredHelmet helmet = (PoweredHelmet) helmetStack.getItem();
+        CompoundTag rootTag = helmetStack.getTag();
 
-        // Set Zooming
-        // helmet.setPlayerZooming(false);
+        if (rootTag == null)
+            return;
 
-        packetContext.getPlayer().sendMessage(new LiteralText("Zoom Released"), true);
+        if (rootTag.getInt("zoom") > 0)
+            rootTag.remove("zoom");
     }
 }

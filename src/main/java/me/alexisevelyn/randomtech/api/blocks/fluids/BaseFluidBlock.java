@@ -1,14 +1,11 @@
 package me.alexisevelyn.randomtech.api.blocks.fluids;
 
-import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
 import net.minecraft.block.FluidBlock;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.FlowableFluid;
-import net.minecraft.text.LiteralText;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
@@ -18,10 +15,6 @@ import java.util.function.ToIntFunction;
 public abstract class BaseFluidBlock extends FluidBlock {
     public BaseFluidBlock(FlowableFluid fluid, Settings settings) {
         super(fluid, settings);
-    }
-
-    public BaseFluidBlock(FlowableFluid fluid) {
-        super(fluid, FabricBlockSettings.copy(Blocks.WATER));
     }
 
     @Override
@@ -46,11 +39,11 @@ public abstract class BaseFluidBlock extends FluidBlock {
 
     // These exist solely to override from other fluids.
     // I may eventually turn this into an interface
-    protected abstract void applyEffects(LivingEntity livingEntity);
+    protected abstract void applyEffects(@SuppressWarnings("unused") LivingEntity livingEntity);
 
-    protected abstract void applyShader(PlayerEntity playerEntity);
+    protected abstract void applyShader(@SuppressWarnings("unused") PlayerEntity playerEntity);
 
-    protected abstract void removeShader(PlayerEntity playerEntity);
+    protected abstract void removeShader(@SuppressWarnings("unused") PlayerEntity playerEntity);
 
     public boolean isEyeInFluid(PlayerEntity playerEntity, BlockPos blockPos) {
         // This activates the same as water would. Can be used to determine if needing to apply shaders.

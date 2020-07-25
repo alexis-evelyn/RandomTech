@@ -30,11 +30,11 @@ import java.util.Optional;
 
 public class TeleporterBlockEntity extends BasePowerAcceptorBlockEntity implements IToolDrop, InventoryProvider, BuiltScreenHandlerProvider {
     // TechReborn's Frequency Transmitter
-    Identifier frequencyTransmitterIdentifier = new Identifier("techreborn", "frequency_transmitter");
-    Optional<Item> frequencyTransmitter = Registry.ITEM.getOrEmpty(frequencyTransmitterIdentifier);
+    final Identifier frequencyTransmitterIdentifier = new Identifier("techreborn", "frequency_transmitter");
+    final Optional<Item> frequencyTransmitter = Registry.ITEM.getOrEmpty(frequencyTransmitterIdentifier);
 
     // Inventory Slot Markers
-    int inputSlot = 0;
+    final int inputSlot = 0;
 
     public TeleporterBlockEntity() {
         super(BlockEntities.TELEPORTER);
@@ -45,6 +45,11 @@ public class TeleporterBlockEntity extends BasePowerAcceptorBlockEntity implemen
     @Override
     public ItemStack getToolDrop(PlayerEntity playerEntity) {
         return new ItemStack(RegistryHelper.TELEPORTER);
+    }
+
+    @Override
+    public int getMinPower() {
+        return 0;
     }
 
     @Override

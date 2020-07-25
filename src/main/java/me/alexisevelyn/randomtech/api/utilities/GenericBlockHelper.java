@@ -18,10 +18,12 @@ public class GenericBlockHelper {
 
     // No Entity
 
+    @SuppressWarnings("SameReturnValue")
     public static boolean always(BlockState blockState, BlockView blockView, BlockPos blockPos) {
         return true;
     }
 
+    @SuppressWarnings("SameReturnValue")
     public static boolean never(BlockState blockState, BlockView blockView, BlockPos blockPos) {
         return false;
     }

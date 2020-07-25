@@ -28,7 +28,7 @@ public abstract class CobaltWiringMixin extends Block {
 	}
 
 	@Shadow protected abstract boolean canRunOnTop(BlockView world, BlockPos pos, BlockState floor);
-	@Shadow protected abstract BlockState method_27843(BlockView blockView, BlockState blockState, BlockPos blockPos);
+	// @Shadow protected abstract BlockState method_27843(BlockView blockView, BlockState blockState, BlockPos blockPos);
 
 	@Shadow @Final private BlockState dotShape;
 

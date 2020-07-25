@@ -80,10 +80,7 @@ public class CloudDemonEntity extends HostileEntity {
 
     @Override
     public boolean tryAttack(Entity target) {
-        if (target instanceof PigEntity)
-            return true;
-
-        return false;
+        return target instanceof PigEntity;
     }
 
     @Override

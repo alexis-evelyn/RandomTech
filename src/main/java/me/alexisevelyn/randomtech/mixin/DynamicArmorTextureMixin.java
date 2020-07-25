@@ -29,7 +29,7 @@ public abstract class DynamicArmorTextureMixin<T extends LivingEntity, M extends
 
 	@Shadow protected abstract boolean usesSecondLayer(EquipmentSlot equipmentSlot);
 	@Shadow protected abstract void setVisible(BipedEntityModel<?> bipedModel, EquipmentSlot slot);
-	@Shadow protected abstract void renderArmorParts(MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int i, ArmorItem armorItem, boolean bl, BipedEntityModel<?> bipedEntityModel, boolean bl2, float f, float g, float h, @Nullable String string);
+	@SuppressWarnings("SameParameterValue") @Shadow protected abstract void renderArmorParts(MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int i, ArmorItem armorItem, boolean bl, BipedEntityModel<?> bipedEntityModel, boolean bl2, float f, float g, float h, @Nullable String string);
 	// @Shadow public abstract M getContextModel();
 
 	@Inject(at = @At("INVOKE"), method = "renderArmor(Lnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumerProvider;Lnet/minecraft/entity/LivingEntity;Lnet/minecraft/entity/EquipmentSlot;ILnet/minecraft/client/render/entity/model/BipedEntityModel;)V", cancellable = true)

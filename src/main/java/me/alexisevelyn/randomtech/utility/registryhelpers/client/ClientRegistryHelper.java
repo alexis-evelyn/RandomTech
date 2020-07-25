@@ -12,7 +12,6 @@ import me.alexisevelyn.randomtech.utility.registryhelpers.main.RegistryHelper;
 import me.sargunvohra.mcmods.autoconfig1u.AutoConfig;
 import me.sargunvohra.mcmods.autoconfig1u.serializer.GsonConfigSerializer;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
-import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.fabricmc.fabric.api.client.render.fluid.v1.FluidRenderHandler;
 import net.fabricmc.fabric.api.client.render.fluid.v1.FluidRenderHandlerRegistry;
@@ -47,7 +46,7 @@ public class ClientRegistryHelper {
 
     // TODO: Figure out why keybind keeps resetting
     // To provide zoom capability when wearing powered helmet.
-    public static KeyBinding poweredHelmetZoom = new KeyBinding(
+    public static final KeyBinding poweredHelmetZoom = new KeyBinding(
             new Identifier(Main.MODID, "powered_helmet_zoom").toString(), // The translation key of the keybinding's name
             InputUtil.Type.KEYSYM, // The type of the keybinding, KEYSYM for keyboard, MOUSE for mouse.
             GLFW.GLFW_KEY_C, // The keycode of the key
@@ -75,13 +74,9 @@ public class ClientRegistryHelper {
     }
 
     private void entitySetup() {
-        EntityRendererRegistry.INSTANCE.register(RegistryHelper.WIZARD, (dispatcher, context) -> {
-            return new WizardRenderer(dispatcher);
-        });
+        EntityRendererRegistry.INSTANCE.register(RegistryHelper.WIZARD, (dispatcher, context) -> new WizardRenderer(dispatcher));
 
-        EntityRendererRegistry.INSTANCE.register(RegistryHelper.CLOUD_DEMON, (dispatcher, context) -> {
-            return new CloudDemonRenderer(dispatcher);
-        });
+        EntityRendererRegistry.INSTANCE.register(RegistryHelper.CLOUD_DEMON, (dispatcher, context) -> new CloudDemonRenderer(dispatcher));
     }
 
     private void blockSetup() {
@@ -103,11 +98,11 @@ public class ClientRegistryHelper {
 
     private void fluidSetup() {
         // Color is the HTML Color Code Formatted as 0xHTML-Color-Code. For example, #4CC248 becomes 0x4CC248
-        setupFluidRendering(RegistryHelper.REDSTONE_FLUID, RegistryHelper.REDSTONE_FLUID_FLOWING, new Identifier(Main.MODID, "redstone"), 0xFFFFFF);
-        setupFluidRendering(RegistryHelper.MAGIC_FLUID, RegistryHelper.MAGIC_FLUID_FLOWING, new Identifier(Main.MODID, "magic"), 0xFFFFFF);
-        setupFluidRendering(RegistryHelper.EXPERIENCE_FLUID, RegistryHelper.EXPERIENCE_FLUID_FLOWING, new Identifier(Main.MODID, "experience"), 0xFFFFFF);
-        setupFluidRendering(RegistryHelper.HONEY_FLUID, RegistryHelper.HONEY_FLUID_FLOWING, new Identifier(Main.MODID, "honey"), 0xFFFFFF);
-        setupFluidRendering(RegistryHelper.COBALT_FLUID, RegistryHelper.COBALT_FLUID_FLOWING, new Identifier(Main.MODID, "cobalt"), 0xFFFFFF);
+        setupFluidRendering(RegistryHelper.REDSTONE_FLUID, RegistryHelper.REDSTONE_FLUID_FLOWING, new Identifier(Main.MODID, "redstone"));
+        setupFluidRendering(RegistryHelper.MAGIC_FLUID, RegistryHelper.MAGIC_FLUID_FLOWING, new Identifier(Main.MODID, "magic"));
+        setupFluidRendering(RegistryHelper.EXPERIENCE_FLUID, RegistryHelper.EXPERIENCE_FLUID_FLOWING, new Identifier(Main.MODID, "experience"));
+        setupFluidRendering(RegistryHelper.HONEY_FLUID, RegistryHelper.HONEY_FLUID_FLOWING, new Identifier(Main.MODID, "honey"));
+        setupFluidRendering(RegistryHelper.COBALT_FLUID, RegistryHelper.COBALT_FLUID_FLOWING, new Identifier(Main.MODID, "cobalt"));
 
         // Can use RenderLayer.getTranslucent()
         BlockRenderLayerMap.INSTANCE.putFluids(RenderLayer.getSolid(), RegistryHelper.REDSTONE_FLUID, RegistryHelper.REDSTONE_FLUID_FLOWING);
@@ -118,7 +113,12 @@ public class ClientRegistryHelper {
     }
 
     // From Tutorial at https://fabricmc.net/wiki/tutorial:fluids
-    private static void setupFluidRendering(final Fluid still, final Fluid flowing, final Identifier textureFluidId, final int color) {
+    private static void setupFluidRendering(final Fluid still, final Fluid flowing, final Identifier textureFluidId) {
+        setupFluidRendering(still, flowing, textureFluidId, 0xFFFFFF);
+    }
+
+    // From Tutorial at https://fabricmc.net/wiki/tutorial:fluids
+    private static void setupFluidRendering(final Fluid still, final Fluid flowing, final Identifier textureFluidId, @SuppressWarnings("SameParameterValue") final int color) {
         final Identifier stillSpriteId = new Identifier(textureFluidId.getNamespace(), "block/liquids/" + textureFluidId.getPath() + "/" + textureFluidId.getPath() + "_still");
         final Identifier flowingSpriteId = new Identifier(textureFluidId.getNamespace(), "block/liquids/" + textureFluidId.getPath() + "/" + textureFluidId.getPath() + "_flow");
 

@@ -2,7 +2,6 @@ package me.alexisevelyn.randomtech.api.items.tools.generic;
 
 import com.google.common.collect.Multimap;
 import me.alexisevelyn.randomtech.api.utilities.ItemManager;
-import nerdhub.cardinal.components.api.event.ItemComponentCallback;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.block.Block;
@@ -243,10 +242,10 @@ public abstract class GenericPoweredTool extends MiningToolItem implements Energ
     }
 
     // I may or may not use this in the future, so I'm just marking it to not be used by 3rd parties for now.
-    @Deprecated
-    public boolean allowActionResult(ActionResult actionResult) {
-        return actionResult.isAccepted() || actionResult == ActionResult.PASS;
-    }
+//    @Deprecated
+//    public boolean allowActionResult(ActionResult actionResult) {
+//        return actionResult.isAccepted() || actionResult == ActionResult.PASS;
+//    }
 
     @Environment(EnvType.CLIENT)
     @Override

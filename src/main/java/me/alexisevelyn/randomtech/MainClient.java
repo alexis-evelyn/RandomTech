@@ -6,9 +6,9 @@ import me.alexisevelyn.randomtech.utility.registryhelpers.client.ClientRegistryH
 import net.fabricmc.api.ClientModInitializer;
 
 public class MainClient implements ClientModInitializer {
-	protected ClientPreRegistryHelper clientPreRegistryHelper = new ClientPreRegistryHelper();
-	protected ClientPostRegistryHelper clientPostRegistryHelper = new ClientPostRegistryHelper();
-	protected ClientRegistryHelper clientRegistryHelper = new ClientRegistryHelper();
+	final protected ClientPreRegistryHelper clientPreRegistryHelper = new ClientPreRegistryHelper();
+	final protected ClientPostRegistryHelper clientPostRegistryHelper = new ClientPostRegistryHelper();
+	final protected ClientRegistryHelper clientRegistryHelper = new ClientRegistryHelper();
 
 	@Override
 	public void onInitializeClient() {

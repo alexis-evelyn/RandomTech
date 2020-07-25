@@ -99,22 +99,4 @@ public class ItemManager {
 
         Energy.of(stack).use(cost);
     }
-
-    public static void setDischargedModelData(ItemStack stack, boolean isUsable) {
-        CompoundTag tag = stack.getTag();
-
-        if (tag == null)
-            return;
-
-        // This returns 0 if the tag does not exist.
-        int modelData = tag.getInt("CustomModelData");
-
-        if (isUsable && modelData != 0) {
-            // This removes the custom model data tag if it exists and the item is usable
-            tag.remove("CustomModelData");
-        } else if (!isUsable && modelData == 0) {
-            // This puts a custom model data tag on the item so I can have the resource pack display a different texture if the tool is dead.
-            tag.putInt("CustomModelData", 1337);
-        }
-    }
 }

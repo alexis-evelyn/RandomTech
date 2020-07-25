@@ -2,23 +2,16 @@ package me.alexisevelyn.randomtech.fluids.blocks;
 
 import me.alexisevelyn.randomtech.api.blocks.fluids.BaseFluidBlock;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
-import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.FlowableFluid;
-import net.minecraft.text.LiteralText;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
-
-import java.util.function.ToIntFunction;
 
 public class RedstoneFluidBlock extends BaseFluidBlock {
-    int swiftness_level = 3;
-    int nausea_level = 2;
+    final int swiftness_level = 3;
+    final int nausea_level = 2;
 
     public RedstoneFluidBlock(FlowableFluid fluid) {
         super(fluid, FabricBlockSettings

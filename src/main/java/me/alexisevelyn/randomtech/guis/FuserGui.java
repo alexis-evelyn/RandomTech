@@ -1,7 +1,6 @@
 package me.alexisevelyn.randomtech.guis;
 
 import me.alexisevelyn.randomtech.blockentities.FuserBlockEntity;
-import me.alexisevelyn.randomtech.blockentities.TeleporterBlockEntity;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.util.math.MatrixStack;
@@ -14,7 +13,7 @@ import reborncore.common.util.Color;
 
 @Environment(EnvType.CLIENT)
 public class FuserGui extends GuiBase<BuiltScreenHandler> {
-    FuserBlockEntity blockEntity;
+    final FuserBlockEntity blockEntity;
 
     public FuserGui(int syncID, PlayerEntity player, FuserBlockEntity blockEntity) {
         super(player, blockEntity, blockEntity.createScreenHandler(syncID, player));

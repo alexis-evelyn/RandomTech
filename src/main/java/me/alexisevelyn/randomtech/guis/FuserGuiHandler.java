@@ -76,6 +76,9 @@ public class FuserGuiHandler<FuserGui> implements IMachineGuiHandler {
 
                 BuiltScreenHandler screenHandler = fuserBlockEntity.createScreenHandler(syncID, player);
 
+                if (screenHandler == null)
+                    return null;
+
                 screenHandler.setType(screenHandlerType);
 
                 return screenHandler;

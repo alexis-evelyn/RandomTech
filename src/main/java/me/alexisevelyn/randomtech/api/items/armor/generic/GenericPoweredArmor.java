@@ -123,14 +123,14 @@ public abstract class GenericPoweredArmor extends ArmorItem implements EnergyHel
     public void tickArmor(ItemStack stack, PlayerEntity playerEntity) {
         // Actions to perform every tick (only when armor is worn?)
 
-        switch (this.slot) {
-            case HEAD: break;
-            case CHEST: break;
-            case LEGS: break;
-            case FEET: break;
-            case MAINHAND: break;
-            case OFFHAND: break;
-        }
+//        switch (this.slot) {
+//            case HEAD: break;
+//            case CHEST: break;
+//            case LEGS: break;
+//            case FEET: break;
+//            case MAINHAND: break;
+//            case OFFHAND: break;
+//        }
     }
 
     @Override

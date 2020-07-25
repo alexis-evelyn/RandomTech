@@ -10,7 +10,7 @@ import reborncore.client.screen.builder.BuiltScreenHandler;
 
 @Environment(EnvType.CLIENT)
 public class TeleporterGui extends GuiBase<BuiltScreenHandler> {
-    TeleporterBlockEntity blockEntity;
+    final TeleporterBlockEntity blockEntity;
 
     public TeleporterGui(int syncID, PlayerEntity player, TeleporterBlockEntity blockEntity) {
         super(player, blockEntity, blockEntity.createScreenHandler(syncID, player));

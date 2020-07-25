@@ -30,21 +30,21 @@ import reborncore.common.util.Tank;
 public class FuserBlockEntity extends FluidMachineBlockEntityBase implements IToolDrop, InventoryProvider, BuiltScreenHandlerProvider, IRecipeCrafterProvider {
     // Fluid Values
     // JsonElement buckets = new Gson().toJsonTree(5 * 1000);
-    JsonObject buckets = new JsonParser().parse("{'buckets': 5}").getAsJsonObject();
+    final JsonObject buckets = new JsonParser().parse("{'buckets': 5}").getAsJsonObject();
 
-    FluidValue maxFluidCapacity = FluidValue.parseFluidValue(buckets);
+    @SuppressWarnings("CanBeFinal") FluidValue maxFluidCapacity = FluidValue.parseFluidValue(buckets);
 
-    FuserRecipeCrafter crafter;
+    final FuserRecipeCrafter crafter;
 
     // Slots
-    int[] inputSlots = { 0 };
-    int[] outputSlots = { 1 };
+    final int[] inputSlots = { 0 };
+    final int[] outputSlots = { 1 };
 
-    int inputSlot = inputSlots[0];
-    int outputSlot = outputSlots[0];
+    final int inputSlot = inputSlots[0];
+    final int outputSlot = outputSlots[0];
 
-    int fluidInputSlot = 2;
-    int fluidOutputSlot = 3;
+    final int fluidInputSlot = 2;
+    final int fluidOutputSlot = 3;
 
     public FuserBlockEntity() {
         super(BlockEntities.FUSER);
@@ -58,6 +58,11 @@ public class FuserBlockEntity extends FluidMachineBlockEntityBase implements ITo
     @Override
     public ItemStack getToolDrop(PlayerEntity playerEntity) {
         return new ItemStack(RegistryHelper.FUSER);
+    }
+
+    @Override
+    public int getMinPower() {
+        return 0;
     }
 
     @Override

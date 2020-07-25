@@ -12,7 +12,6 @@ import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import team.reborn.energy.Energy;
 import team.reborn.energy.EnergyTier;
 
 import java.util.Set;
