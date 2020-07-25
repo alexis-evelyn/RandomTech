@@ -12,6 +12,7 @@ import net.minecraft.world.BlockRenderView;
 import java.util.function.ToIntFunction;
 
 // This seems like a cool idea for a bluestone dust like what Mumbo joked about one time
+// Video for reference: https://www.youtube.com/watch?v=9qO7325uDl4&ab_channel=MumboJumbo
 public class CobaltWire extends RedstoneWireBlock {
     // static Color blue = new Color(0, 0, 255);
     static final Vector3f[] wireColor;
