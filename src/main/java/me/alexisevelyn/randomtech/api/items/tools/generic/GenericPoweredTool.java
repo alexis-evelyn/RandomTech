@@ -36,7 +36,6 @@ import team.reborn.energy.EnergyTier;
 import java.util.List;
 import java.util.Random;
 import java.util.Set;
-import java.util.UUID;
 
 public abstract class GenericPoweredTool extends MiningToolItem implements EnergyHolder, ItemDurabilityExtensions, ItemStackModifiers {
     public final int maxCharge;
@@ -50,10 +49,6 @@ public abstract class GenericPoweredTool extends MiningToolItem implements Energ
     // Pulled From: net.minecraft.item.Item
 //    public static final UUID ATTACK_DAMAGE_UUID = UUID.fromString("CB3F55D3-645C-4F38-A497-9C13A33DB5CF");
 //    public static final UUID ATTACK_SPEED_UUID = UUID.fromString("FA233E1C-4180-4865-B01B-BCCE9785ACA3");
-
-    public GenericPoweredTool(ToolMaterial material, int energyCapacity, EnergyTier tier, int cost, float poweredSpeed, float unpoweredSpeed, float attackDamage, Set<Block> effectiveBlocks, Settings settings) {
-        this(material, energyCapacity, tier, cost, poweredSpeed, unpoweredSpeed, attackDamage, effectiveBlocks, settings, null);
-    }
 
     public GenericPoweredTool(ToolMaterial material, int energyCapacity, EnergyTier tier, int cost, float poweredSpeed, float unpoweredSpeed, float attackDamage, Set<Block> effectiveBlocks, Settings settings, @Nullable String dischargedTranslationKey) {
         super(attackDamage, unpoweredSpeed, material, effectiveBlocks, settings.maxCount(1).maxDamage(material.getDurability()));

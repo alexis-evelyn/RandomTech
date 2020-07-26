@@ -13,6 +13,7 @@ public enum MiningLevel {
 
     private final int miningLevel;
 
+    @SuppressWarnings("unused")
     MiningLevel(int id) {
         this.miningLevel = id;
     }

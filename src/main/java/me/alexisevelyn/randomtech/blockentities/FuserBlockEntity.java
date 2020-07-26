@@ -60,6 +60,7 @@ public class FuserBlockEntity extends FluidMachineBlockEntityBase implements ITo
         return new ItemStack(RegistryHelper.FUSER);
     }
 
+    @SuppressWarnings("unused")
     @Override
     public int getMinPower() {
         return 0;

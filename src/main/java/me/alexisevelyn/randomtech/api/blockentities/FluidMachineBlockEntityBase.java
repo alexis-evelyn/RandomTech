@@ -42,6 +42,7 @@ public abstract class FluidMachineBlockEntityBase extends BasePowerAcceptorBlock
         tank.getFluidInstance().setAmount(fluidAmount);
     }
 
+    @SuppressWarnings("unused")
     public void setFluid(Fluid fluid) {
         tank.setFluid(fluid);
     }
