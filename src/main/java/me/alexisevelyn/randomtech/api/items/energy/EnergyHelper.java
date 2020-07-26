@@ -5,5 +5,5 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 
 public interface EnergyHelper {
-    void addDamage(ItemStack stack, PlayerEntity playerEntity, DamageSource damageSource, float damage);
+    void addDamage(ItemStack stack, PlayerEntity playerEntity, @SuppressWarnings("unused") DamageSource damageSource, @SuppressWarnings("unused") float damage);
 }

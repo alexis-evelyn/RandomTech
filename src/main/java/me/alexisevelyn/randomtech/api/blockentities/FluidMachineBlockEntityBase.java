@@ -32,10 +32,12 @@ public abstract class FluidMachineBlockEntityBase extends BasePowerAcceptorBlock
         return tank.getFluidInstance();
     }
 
+    @SuppressWarnings("unused")
     public Fluid getFluidType() {
         return tank.getFluid();
     }
 
+    @SuppressWarnings("unused")
     public void setFluidAmount(FluidValue fluidAmount) {
         tank.getFluidInstance().setAmount(fluidAmount);
     }
@@ -48,6 +50,7 @@ public abstract class FluidMachineBlockEntityBase extends BasePowerAcceptorBlock
         return tank.isEmpty();
     }
 
+    @SuppressWarnings("unused")
     public boolean hasFluid() {
         return !(tank.getFluid() instanceof EmptyFluid);
     }

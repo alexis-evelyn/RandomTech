@@ -41,9 +41,9 @@ public abstract class BaseFluidBlock extends FluidBlock {
     // I may eventually turn this into an interface
     protected abstract void applyEffects(@SuppressWarnings("unused") LivingEntity livingEntity);
 
-    protected abstract void applyShader(@SuppressWarnings("unused") PlayerEntity playerEntity);
+    @SuppressWarnings("EmptyMethod") protected abstract void applyShader(@SuppressWarnings("unused") PlayerEntity playerEntity);
 
-    protected abstract void removeShader(@SuppressWarnings("unused") PlayerEntity playerEntity);
+    @SuppressWarnings("EmptyMethod") protected abstract void removeShader(@SuppressWarnings("unused") PlayerEntity playerEntity);
 
     public boolean isEyeInFluid(PlayerEntity playerEntity, BlockPos blockPos) {
         // This activates the same as water would. Can be used to determine if needing to apply shaders.

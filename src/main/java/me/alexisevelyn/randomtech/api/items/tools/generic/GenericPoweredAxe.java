@@ -26,10 +26,6 @@ public abstract class GenericPoweredAxe extends GenericPoweredTool {
         super(material, energyCapacity, tier, cost, poweredSpeed, unpoweredSpeed, attackDamage, EFFECTIVE_BLOCKS, settings, dischargedTranslationKey);
     }
 
-    public GenericPoweredAxe(ToolMaterial material, int energyCapacity, EnergyTier tier, int cost, float poweredSpeed, float unpoweredSpeed, Settings settings) {
-        super(material, energyCapacity, tier, cost, poweredSpeed, unpoweredSpeed, attackDamage, EFFECTIVE_BLOCKS, settings);
-    }
-
     @Override
     public float getMiningSpeedMultiplier(ItemStack stack, BlockState state) {
         Material material = state.getMaterial();

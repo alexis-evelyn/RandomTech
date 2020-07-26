@@ -34,7 +34,7 @@ public abstract class PowerAcceptorBlock extends BlockMachineBase {
         return PowerAcceptorBlockEntity.calculateComparatorOutputFromEnergy(world.getBlockEntity(pos));
     }
 
-    public double getPower(BlockState state, World world, BlockPos pos) {
+    public double getPower(World world, BlockPos pos) {
         PowerAcceptorBlockEntity powerAcceptorBlockEntity = (PowerAcceptorBlockEntity) world.getBlockEntity(pos);
 
         if (powerAcceptorBlockEntity == null) {
@@ -44,7 +44,7 @@ public abstract class PowerAcceptorBlock extends BlockMachineBase {
         return powerAcceptorBlockEntity.getEnergy();
     }
 
-    public double getMaxPower(BlockState state, World world, BlockPos pos) {
+    public double getMaxPower(World world, BlockPos pos) {
         PowerAcceptorBlockEntity powerAcceptorBlockEntity = (PowerAcceptorBlockEntity) world.getBlockEntity(pos);
 
         if (powerAcceptorBlockEntity == null) {

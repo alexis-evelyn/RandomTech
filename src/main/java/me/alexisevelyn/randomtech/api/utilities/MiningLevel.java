@@ -3,12 +3,12 @@ package me.alexisevelyn.randomtech.api.utilities;
 import net.minecraft.item.ToolMaterials;
 
 public enum MiningLevel {
-    WOOD(ToolMaterials.WOOD.getMiningLevel()),
-    STONE(ToolMaterials.STONE.getMiningLevel()),
-    IRON(ToolMaterials.IRON.getMiningLevel()),
-    DIAMOND(ToolMaterials.DIAMOND.getMiningLevel()),
-    GOLD(ToolMaterials.GOLD.getMiningLevel()),
-    NETHERITE(ToolMaterials.NETHERITE.getMiningLevel()),
+    @SuppressWarnings("unused") WOOD(ToolMaterials.WOOD.getMiningLevel()),
+    @SuppressWarnings("unused") STONE(ToolMaterials.STONE.getMiningLevel()),
+    @SuppressWarnings("unused") IRON(ToolMaterials.IRON.getMiningLevel()),
+    @SuppressWarnings("unused") DIAMOND(ToolMaterials.DIAMOND.getMiningLevel()),
+    @SuppressWarnings("unused") GOLD(ToolMaterials.GOLD.getMiningLevel()),
+    @SuppressWarnings("unused") NETHERITE(ToolMaterials.NETHERITE.getMiningLevel()),
     POWERED(5);
 
     private final int miningLevel;

@@ -17,11 +17,6 @@ import net.minecraft.util.Hand;
 import net.minecraft.world.World;
 
 public class WizardEntity extends PathAwareEntity {
-
-    public WizardEntity(World world) {
-        this(RegistryHelper.WIZARD, world);
-    }
-
     public WizardEntity(EntityType<WizardEntity> entityEntityType, World world) {
         super(entityEntityType, world);
     }

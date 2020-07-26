@@ -22,6 +22,8 @@ public class FuserRecipeCrafter extends RecipeCrafter {
         super(Recipes.LIQUID_FUSER, blockEntity, inputSlots.length, outputSlots.length, inventory, inputSlots, outputSlots);
     }
 
+
+    @SuppressWarnings("EmptyMethod")
     @Override
     public void updateEntity() {
         super.updateEntity();
@@ -32,6 +34,7 @@ public class FuserRecipeCrafter extends RecipeCrafter {
 //        }
     }
 
+    @SuppressWarnings("EmptyMethod")
     @Override
     public void updateCurrentRecipe() {
         super.updateCurrentRecipe();

@@ -48,8 +48,8 @@ public abstract class GenericPoweredTool extends MiningToolItem implements Energ
     private final String dischargedTranslationKey;
 
     // Pulled From: net.minecraft.item.Item
-    public static final UUID ATTACK_DAMAGE_UUID = UUID.fromString("CB3F55D3-645C-4F38-A497-9C13A33DB5CF");
-    public static final UUID ATTACK_SPEED_UUID = UUID.fromString("FA233E1C-4180-4865-B01B-BCCE9785ACA3");
+//    public static final UUID ATTACK_DAMAGE_UUID = UUID.fromString("CB3F55D3-645C-4F38-A497-9C13A33DB5CF");
+//    public static final UUID ATTACK_SPEED_UUID = UUID.fromString("FA233E1C-4180-4865-B01B-BCCE9785ACA3");
 
     public GenericPoweredTool(ToolMaterial material, int energyCapacity, EnergyTier tier, int cost, float poweredSpeed, float unpoweredSpeed, float attackDamage, Set<Block> effectiveBlocks, Settings settings) {
         this(material, energyCapacity, tier, cost, poweredSpeed, unpoweredSpeed, attackDamage, effectiveBlocks, settings, null);
@@ -125,11 +125,13 @@ public abstract class GenericPoweredTool extends MiningToolItem implements Energ
 
     // Used by mobs to determine if they prefer a weapon over another one.
     // It does not actually modify the attack damage of an item (for vanilla purposes)?
+    @SuppressWarnings("EmptyMethod")
     @Override
     public float getAttackDamage() {
         return super.getAttackDamage();
     }
 
+    @SuppressWarnings("unused")
     public float getAttackSpeed() {
         return this.unpoweredSpeed;
     }
@@ -200,6 +202,7 @@ public abstract class GenericPoweredTool extends MiningToolItem implements Energ
         return ActionResult.FAIL;
     }
 
+    @SuppressWarnings("EmptyMethod")
     @Override
     public boolean isFireproof() {
         return super.isFireproof();

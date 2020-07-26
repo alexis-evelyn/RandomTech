@@ -55,7 +55,7 @@ public class InverseDarkIntangibleGlass extends AbstractGlassBlock implements Bl
         if (inverseIntangibleDarkGlassBlockEntity == null)
             return state.getOutlineShape(world, pos);
 
-        return inverseIntangibleDarkGlassBlockEntity.getCollisionShape(state, world, pos, context);
+        return inverseIntangibleDarkGlassBlockEntity.getCollisionShape(state, world, pos);
     }
 
     @Override

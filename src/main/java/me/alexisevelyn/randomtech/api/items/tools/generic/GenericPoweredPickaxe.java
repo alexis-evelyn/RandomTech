@@ -20,10 +20,6 @@ public abstract class GenericPoweredPickaxe extends GenericPoweredTool {
         super(material, energyCapacity, tier, cost, poweredSpeed, unpoweredSpeed, attackDamage, EFFECTIVE_BLOCKS, settings, dischargedTranslationKey);
     }
 
-    public GenericPoweredPickaxe(ToolMaterial material, int energyCapacity, EnergyTier tier, int cost, float poweredSpeed, float unpoweredSpeed, Settings settings) {
-        super(material, energyCapacity, tier, cost, poweredSpeed, unpoweredSpeed, attackDamage, EFFECTIVE_BLOCKS, settings);
-    }
-
     @Override
     public boolean isEffectiveOn(BlockState state) {
         int i = this.getMaterial().getMiningLevel();

@@ -23,6 +23,7 @@ public abstract class CobaltWiringMixin extends Block {
 	 * Fix bug where a top level piece of wire can power a lower wire of a different type.
 	 */
 
+	@SuppressWarnings("unused")
 	public CobaltWiringMixin(Settings settings) {
 		super(settings);
 	}

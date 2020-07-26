@@ -22,7 +22,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @SuppressWarnings("UnusedMixin") // The mixin is used, just is loaded by Fabric and not Sponge methods
 @Mixin(ArmorFeatureRenderer.class)
 public abstract class DynamicArmorTextureMixin<T extends LivingEntity, M extends BipedEntityModel<T>, A extends BipedEntityModel<T>> extends FeatureRenderer<T, M> {
-
+	@SuppressWarnings("unused")
 	public DynamicArmorTextureMixin(FeatureRendererContext<T, M> context) {
 		super(context);
 	}

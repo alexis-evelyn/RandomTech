@@ -15,7 +15,7 @@ public abstract class InverseIntangibleBlockEntity extends BlockEntity {
         super(blockEntityType);
     }
 
-    public VoxelShape getCollisionShape(BlockState state, BlockView worldView, BlockPos pos, ShapeContext context) {
+    public VoxelShape getCollisionShape(BlockState state, BlockView worldView, BlockPos pos) {
         if (world == null)
             return state.getOutlineShape(worldView, pos);
 

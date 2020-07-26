@@ -32,10 +32,6 @@ public abstract class GenericPoweredShovel extends GenericPoweredTool {
         super(material, energyCapacity, tier, cost, poweredSpeed, unpoweredSpeed, attackDamage, EFFECTIVE_BLOCKS, settings, dischargedTranslationKey);
     }
 
-    public GenericPoweredShovel(ToolMaterial material, int energyCapacity, EnergyTier tier, int cost, float poweredSpeed, float unpoweredSpeed, Settings settings) {
-        super(material, energyCapacity, tier, cost, poweredSpeed, unpoweredSpeed, attackDamage, EFFECTIVE_BLOCKS, settings);
-    }
-
     @Override
     public ActionResult useOnBlock(ItemUsageContext context) {
         World world = context.getWorld();

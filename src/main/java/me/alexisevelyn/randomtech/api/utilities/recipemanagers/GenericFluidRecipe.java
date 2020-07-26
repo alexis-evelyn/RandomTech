@@ -18,10 +18,12 @@ public class GenericFluidRecipe extends RebornFluidRecipe {
         super(type, name);
     }
 
+    @SuppressWarnings("unused")
     public GenericFluidRecipe(RebornRecipeType<?> type, Identifier name, DefaultedList<RebornIngredient> ingredients, DefaultedList<ItemStack> outputs, int power, int time) {
         super(type, name, ingredients, outputs, power, time);
     }
 
+    @SuppressWarnings("unused")
     public GenericFluidRecipe(RebornRecipeType<?> type, Identifier name, DefaultedList<RebornIngredient> ingredients, DefaultedList<ItemStack> outputs, int power, int time, FluidInstance fluidInstance) {
         super(type, name, ingredients, outputs, power, time, fluidInstance);
     }
@@ -36,8 +38,6 @@ public class GenericFluidRecipe extends RebornFluidRecipe {
 
         if (tank == null)
             return false;
-
-        final FluidInstance tankFluid = tank.getFluidInstance();
 
         // To Not Waste Energy on Last "Possible" Craft
         return tank.getFreeSpace().equalOrMoreThan(getFluidInstance().getAmount());
@@ -77,11 +77,13 @@ public class GenericFluidRecipe extends RebornFluidRecipe {
         return null;
     }
 
+    @SuppressWarnings("EmptyMethod")
     @Override
     public String getGroup() {
         return super.getGroup();
     }
 
+    @SuppressWarnings("EmptyMethod")
     @Override
     public ItemStack getRecipeKindIcon() {
         return super.getRecipeKindIcon();

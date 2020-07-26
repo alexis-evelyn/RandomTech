@@ -13,11 +13,13 @@ public abstract class FluidMachineBase extends PowerAcceptorBlock {
         super(settings);
     }
 
+    @SuppressWarnings("unused")
     public FluidMachineBase(AbstractBlock.Settings settings, boolean customStates) {
         super(settings, customStates);
     }
 
     @Nullable
+    @SuppressWarnings("unused")
     public FluidValue getFluidLevel(BlockState state, World world, BlockPos pos) {
         FluidMachineBlockEntityBase fluidMachineBlockEntity = (FluidMachineBlockEntityBase) world.getBlockEntity(pos);
 
@@ -29,6 +31,7 @@ public abstract class FluidMachineBase extends PowerAcceptorBlock {
     }
 
     @Nullable
+    @SuppressWarnings("unused")
     public FluidValue getMaxFluidLevel(BlockState state, World world, BlockPos pos) {
         FluidMachineBlockEntityBase fluidMachineBlockEntity = (FluidMachineBlockEntityBase) world.getBlockEntity(pos);
 

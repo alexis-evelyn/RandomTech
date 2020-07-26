@@ -4,14 +4,11 @@ import net.minecraft.block.AbstractGlassBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.state.StateManager;
-import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.state.property.IntProperty;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
-
-import java.util.HashMap;
 
 public abstract class BasePoweredGlass extends AbstractGlassBlock {
     public static final IntProperty POWER = IntProperty.of("power", 0, 15);

@@ -5,6 +5,7 @@ import me.sargunvohra.mcmods.autoconfig1u.annotation.Config;
 import me.sargunvohra.mcmods.autoconfig1u.annotation.ConfigEntry;
 
 @Config(name = "randomtech")
+@SuppressWarnings("unused")
 public class MainScreen implements ConfigData {
     // Experimental Settings
     // Debug Level

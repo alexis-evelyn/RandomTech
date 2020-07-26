@@ -10,6 +10,7 @@ public class PreRegistryHelper {
     public static final String unzoom = "unzoom";
 
     // This might be useful for detecting if certain mods exist and adding crafting recipes accordingly
+    @SuppressWarnings("EmptyMethod")
     public void preRegister() {
 
     }

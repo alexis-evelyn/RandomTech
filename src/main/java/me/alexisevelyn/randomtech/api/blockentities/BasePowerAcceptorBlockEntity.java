@@ -36,6 +36,7 @@ public abstract class BasePowerAcceptorBlockEntity extends PowerAcceptorBlockEnt
         super(blockEntityType);
     }
 
+    @SuppressWarnings("EmptyMethod")
     @Override
     public void tick() {
         super.tick();
@@ -119,7 +120,7 @@ public abstract class BasePowerAcceptorBlockEntity extends PowerAcceptorBlockEnt
     }
 
     // Future Proofing
-    @SuppressWarnings("SameReturnValue")
+    @SuppressWarnings({"SameReturnValue", "unused"})
     public abstract int getMinPower();
 
     @Override
@@ -132,6 +133,7 @@ public abstract class BasePowerAcceptorBlockEntity extends PowerAcceptorBlockEnt
         return canProvideEnergy;
     }
 
+    @SuppressWarnings("EmptyMethod")
     @Override
     public void onLoad() {
         super.onLoad();

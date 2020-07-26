@@ -46,8 +46,8 @@ public class Machines implements IComponentProvider, IServerDataProvider<BlockEn
             if (accessor.getBlock() == RegistryHelper.TELEPORTER) {
                 TeleporterBlock teleporterBlock = (TeleporterBlock) accessor.getBlock();
 
-                double energy = teleporterBlock.getPower(accessor.getBlockState(), accessor.getWorld(), accessor.getPosition());
-                double maxEnergy = teleporterBlock.getMaxPower(accessor.getBlockState(), accessor.getWorld(), accessor.getPosition());
+                double energy = teleporterBlock.getPower(accessor.getWorld(), accessor.getPosition());
+                double maxEnergy = teleporterBlock.getMaxPower(accessor.getWorld(), accessor.getPosition());
 
                 TranslatableText energyLine = new TranslatableText("tooltip.waila.energy", PowerSystem.getLocaliszedPowerNoSuffix(energy), PowerSystem.getLocaliszedPower(maxEnergy));
 

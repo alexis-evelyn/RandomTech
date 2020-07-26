@@ -55,10 +55,6 @@ public abstract class GenericPoweredArmor extends ArmorItem implements EnergyHel
             UUID.fromString("2AD3F246-FEE1-4E67-B886-69FD380BB150")
     };
 
-    public GenericPoweredArmor(ArmorMaterial material, EquipmentSlot slot, int energyCapacity, EnergyTier tier, int cost, Settings settings) {
-        this(material, slot, energyCapacity, tier, cost, settings, null);
-    }
-
     public GenericPoweredArmor(ArmorMaterial material, EquipmentSlot slot, int energyCapacity, EnergyTier tier, int cost, Settings settings, @Nullable String dischargedTranslationKey) {
         super(material, slot, settings.maxDamage(-1).maxCount(1));
 
@@ -99,6 +95,7 @@ public abstract class GenericPoweredArmor extends ArmorItem implements EnergyHel
         return Energy.of(stack).getEnergy() >= this.cost;
     }
 
+    @SuppressWarnings("EmptyMethod")
     @Override
     public boolean isFireproof() {
         return super.isFireproof();
@@ -213,12 +210,14 @@ public abstract class GenericPoweredArmor extends ArmorItem implements EnergyHel
     }
 
     // Armor Protection Level
+    @SuppressWarnings("EmptyMethod")
     @Override
     public int getProtection() {
         return super.getProtection();
     }
 
     // Armor Toughness Level
+    @SuppressWarnings("EmptyMethod")
     @Override
     public float method_26353() {
         return super.method_26353();

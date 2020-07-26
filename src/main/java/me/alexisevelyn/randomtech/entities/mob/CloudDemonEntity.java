@@ -17,7 +17,7 @@ import net.minecraft.util.Hand;
 import net.minecraft.world.World;
 
 public class CloudDemonEntity extends HostileEntity {
-
+    @SuppressWarnings("unused")
     public CloudDemonEntity(World world) {
         this(RegistryHelper.CLOUD_DEMON, world);
     }

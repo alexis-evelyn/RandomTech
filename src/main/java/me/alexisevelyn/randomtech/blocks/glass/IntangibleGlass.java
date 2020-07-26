@@ -35,7 +35,7 @@ public class IntangibleGlass extends AbstractGlassBlock implements BlockEntityPr
         if (intangibleGlassBlockEntity == null)
             return state.getOutlineShape(world, pos);
 
-        return intangibleGlassBlockEntity.getCollisionShape(state, world, pos, context);
+        return intangibleGlassBlockEntity.getCollisionShape(state, world, pos);
     }
 
     @Override

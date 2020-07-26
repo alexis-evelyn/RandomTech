@@ -55,7 +55,7 @@ public class DarkIntangibleGlass extends AbstractGlassBlock implements BlockEnti
         if (intangibleDarkGlassBlockEntity == null)
             return state.getOutlineShape(world, pos);
 
-        return intangibleDarkGlassBlockEntity.getCollisionShape(state, world, pos, context);
+        return intangibleDarkGlassBlockEntity.getCollisionShape(state, world, pos);
     }
 
     @Override

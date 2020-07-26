@@ -35,7 +35,7 @@ public class InverseIntangibleGlass extends AbstractGlassBlock implements BlockE
         if (inverseIntangibleGlassBlockEntity == null)
             return state.getOutlineShape(world, pos);
 
-        return inverseIntangibleGlassBlockEntity.getCollisionShape(state, world, pos, context);
+        return inverseIntangibleGlassBlockEntity.getCollisionShape(state, world, pos);
     }
 
     @Override
