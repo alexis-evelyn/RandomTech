@@ -2,5 +2,8 @@
   "parent": "item/generated",
   "textures": {
     "layer0": "randomtech:item/other/teleporter_linker"
-  }
+  },
+  "overrides": [
+    {"predicate": {"custom_model_data": 1337}, "model": "randomtech:item/treasure_teleporter_linker"}
+  ]
 }
