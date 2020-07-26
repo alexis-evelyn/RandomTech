@@ -1,0 +1,9 @@
+{
+  "parent": "minecraft:block/orientable",
+  "textures": {
+    "top": "randomtech:block/bottled_demon/bottled_demon_side",
+    "front": "randomtech:block/bottled_demon/bottled_demon_front",
+    "side": "randomtech:block/bottled_demon/bottled_demon_side",
+    "bottom": "randomtech:block/bottled_demon/bottled_demon_side"
+  }
+}

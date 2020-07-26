@@ -5,7 +5,7 @@ import me.alexisevelyn.randomtech.armormaterials.PoweredArmorMaterial;
 import me.alexisevelyn.randomtech.blocks.FuserBlock;
 import me.alexisevelyn.randomtech.blocks.TeleporterBlock;
 import me.alexisevelyn.randomtech.blocks.VirtualTile;
-import me.alexisevelyn.randomtech.blocks.dusts.CobaltWire;
+import me.alexisevelyn.randomtech.blocks.wires.CobaltWire;
 import me.alexisevelyn.randomtech.blocks.glass.*;
 import me.alexisevelyn.randomtech.blocks.metals.CobaltBlock;
 import me.alexisevelyn.randomtech.blocks.ores.CobaltOre;
@@ -17,6 +17,7 @@ import me.alexisevelyn.randomtech.guis.FuserGui;
 import me.alexisevelyn.randomtech.guis.FuserGuiHandler;
 import me.alexisevelyn.randomtech.guis.TeleporterGui;
 import me.alexisevelyn.randomtech.guis.TeleporterGuiHandler;
+import me.alexisevelyn.randomtech.blockitems.BottledDemon;
 import me.alexisevelyn.randomtech.items.EdiblePower;
 import me.alexisevelyn.randomtech.items.TeleporterControlItem;
 import me.alexisevelyn.randomtech.items.armor.powered.PoweredBoots;
@@ -64,6 +65,8 @@ public class RegistryHelper {
 
     public static final Block COBALT_WIRE = new CobaltWire();
 
+    public static final Block BOTTLED_DEMON_BLOCK = new BottledDemon.BottledDemonBlock();
+
     // Metals
     public static final Block COBALT_BLOCK = new CobaltBlock();
 
@@ -78,6 +81,9 @@ public class RegistryHelper {
     public static final ItemGroup MACHINERY_GROUP = FabricItemGroupBuilder.build(
             new Identifier(Main.MODID, "machinery_group"),
             () -> new ItemStack(TELEPORTER));
+
+    // Block Items
+    public static final BlockItem BOTTLED_DEMON = new BottledDemon(BOTTLED_DEMON_BLOCK, new Item.Settings().group(MACHINERY_GROUP));
 
     // Items
     public static final Item MANUAL = new Manual(new Item.Settings().group(MACHINERY_GROUP));
@@ -173,6 +179,7 @@ public class RegistryHelper {
         registerGeneralItemBlocks();
         registerOreItemBlocks();
         registerMachineItemBlocks();
+        registerSpecialBlockItems();
 
         // Fluids
         registerFluids();
@@ -205,6 +212,8 @@ public class RegistryHelper {
         Registry.register(Registry.BLOCK, new Identifier(Main.MODID, "cobalt_block"), COBALT_BLOCK);
 
         Registry.register(Registry.BLOCK, new Identifier(Main.MODID, "cobalt_wire"), COBALT_WIRE);
+
+        Registry.register(Registry.BLOCK, new Identifier(Main.MODID, "bottled_demon"), BOTTLED_DEMON_BLOCK);
     }
 
     private void registerOreBlocks() {
@@ -285,6 +294,10 @@ public class RegistryHelper {
         // ItemBlocks Machines
         Registry.register(Registry.ITEM, new Identifier(Main.MODID, "teleporter"), new BlockItem(TELEPORTER, new Item.Settings().group(MACHINERY_GROUP)));
         Registry.register(Registry.ITEM, new Identifier(Main.MODID, "fuser"), new BlockItem(FUSER, new Item.Settings().group(MACHINERY_GROUP)));
+    }
+
+    private void registerSpecialBlockItems() {
+        Registry.register(Registry.ITEM, new Identifier(Main.MODID, "bottled_demon"), BOTTLED_DEMON);
     }
 
     private void registerFluids() {

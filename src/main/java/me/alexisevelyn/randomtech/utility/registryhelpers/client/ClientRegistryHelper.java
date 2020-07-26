@@ -4,7 +4,7 @@ import ladysnake.satin.api.event.ShaderEffectRenderCallback;
 import ladysnake.satin.api.managed.ManagedShaderEffect;
 import ladysnake.satin.api.managed.ShaderEffectManager;
 import me.alexisevelyn.randomtech.Main;
-import me.alexisevelyn.randomtech.blocks.dusts.CobaltWire;
+import me.alexisevelyn.randomtech.blocks.wires.CobaltWire;
 import me.alexisevelyn.randomtech.entities.renderers.CloudDemonRenderer;
 import me.alexisevelyn.randomtech.entities.renderers.WizardRenderer;
 import me.alexisevelyn.randomtech.modmenu.screens.MainScreen;

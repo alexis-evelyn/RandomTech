@@ -1,4 +1,4 @@
-package me.alexisevelyn.randomtech.blocks.dusts;
+package me.alexisevelyn.randomtech.blocks.wires;
 
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.BlockState;

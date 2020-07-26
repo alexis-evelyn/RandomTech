@@ -7,11 +7,15 @@ import net.fabricmc.api.ModInitializer;
 
 /* TODO: Ordered by importance and logical steps
  *
+ * Fix duplication bug when placing cobalt wire on top of other cobalt wire
+ *
  * Work on Fuser Gui
  * Work on entities
+ * Add cloud demon to bottle
  *
  * Consider how to obtain Death Ingot
  * Move api to separate jar so people can implement it without needing my mod to be installed.
+ * Decide what to do with the edible power
  */
 
 // This runs on both the server and the client
