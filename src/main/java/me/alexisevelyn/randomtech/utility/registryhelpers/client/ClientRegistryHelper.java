@@ -44,13 +44,11 @@ public class ClientRegistryHelper {
 
     private static final boolean grayscaleEnabled = false;  // can be disabled whenever you want
 
-    // TODO: Figure out why keybind keeps resetting
     // To provide zoom capability when wearing powered helmet.
-    public static final KeyBinding poweredHelmetZoom = new KeyBinding(
-            new Identifier(Main.MODID, "powered_helmet_zoom").toString(), // The translation key of the keybinding's name
+    public static final KeyBinding poweredHelmetZoom = new KeyBinding(Main.MODID + ".keybinds.powered_helmet_zoom", // The translation key of the keybinding's name
             InputUtil.Type.KEYSYM, // The type of the keybinding, KEYSYM for keyboard, MOUSE for mouse.
             GLFW.GLFW_KEY_C, // The keycode of the key
-            new Identifier(Main.MODID, "keybinds").toString() // The translation key of the keybinding's category.
+            Main.MODID + ".keybinds" // The translation key of the keybinding's category.
     );
 
     public void register() {
