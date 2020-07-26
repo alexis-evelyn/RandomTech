@@ -79,7 +79,8 @@ public abstract class CobaltWiringMixin extends Block {
 	@Inject(at = @At("INVOKE"), method = "getPlacementState(Lnet/minecraft/item/ItemPlacementContext;)Lnet/minecraft/block/BlockState;", cancellable = true)
 	public void getPlacementState(ItemPlacementContext ctx, CallbackInfoReturnable<BlockState> info) {
 		// This allows for fixing most of the visual connection issues provided by redstone wire wanting to connect to cobalt wire and vice versa.
-		neighborUpdate(this.dotShape, ctx.getWorld(), ctx.getBlockPos(), this.dotShape.getBlock(), ctx.getBlockPos(), true);
+		// Do note, this causes a dupe exploit that can be made by trying to place cobalt wire on top of existing cobalt wire
+		// neighborUpdate(this.dotShape, ctx.getWorld(), ctx.getBlockPos(), this.dotShape.getBlock(), ctx.getBlockPos(), true);
 	}
 
 	public boolean isSeparateWire(Block blockOne, Block blockTwo) {

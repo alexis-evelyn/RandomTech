@@ -23,9 +23,9 @@ import reborncore.common.chunkloading.ChunkLoaderManager;
 import java.util.List;
 import java.util.Optional;
 
-public class TeleporterControlItem extends Item {
+public class TeleporterLinker extends Item {
 
-    public TeleporterControlItem(Settings settings) {
+    public TeleporterLinker(Settings settings) {
         super(settings);
     }
 
@@ -50,7 +50,7 @@ public class TeleporterControlItem extends Item {
     private void alertPositionSaved(PlayerEntity playerEntity, GlobalPos globalPos) {
         BlockPos blockPos = globalPos.getPos();
 
-        Text message = new TranslatableText("message.randomtech.teleporter_control_saved",
+        Text message = new TranslatableText("message.randomtech.teleporter_linker_saved",
                 new LiteralText(String.valueOf(blockPos.getX()))
                         .formatted(Formatting.DARK_GREEN, Formatting.BOLD),
                 new LiteralText(String.valueOf(blockPos.getY()))
@@ -70,7 +70,7 @@ public class TeleporterControlItem extends Item {
         getPosition(stack).ifPresent(globalPos -> {
             BlockPos blockPos = globalPos.getPos();
 
-            Text coordinates = new TranslatableText("message.randomtech.teleporter_control_tooltip_coordinates",
+            Text coordinates = new TranslatableText("message.randomtech.teleporter_linker_tooltip_coordinates",
                     new LiteralText(String.valueOf(blockPos.getX()))
                             .formatted(Formatting.DARK_GREEN, Formatting.BOLD),
                     new LiteralText(String.valueOf(blockPos.getY()))
@@ -79,7 +79,7 @@ public class TeleporterControlItem extends Item {
                             .formatted(Formatting.DARK_GREEN, Formatting.BOLD))
                     .formatted(Formatting.GOLD, Formatting.BOLD);
 
-            Text dimension = new TranslatableText("message.randomtech.teleporter_control_tooltip_dimension",
+            Text dimension = new TranslatableText("message.randomtech.teleporter_linker_tooltip_dimension",
                     new LiteralText(globalPos.getDimension().getValue().toString())
                             .formatted(Formatting.DARK_GREEN, Formatting.BOLD))
                     .formatted(Formatting.GOLD, Formatting.BOLD);

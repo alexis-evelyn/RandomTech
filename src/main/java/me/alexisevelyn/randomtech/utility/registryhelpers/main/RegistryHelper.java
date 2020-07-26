@@ -18,8 +18,7 @@ import me.alexisevelyn.randomtech.guis.FuserGuiHandler;
 import me.alexisevelyn.randomtech.guis.TeleporterGui;
 import me.alexisevelyn.randomtech.guis.TeleporterGuiHandler;
 import me.alexisevelyn.randomtech.blockitems.BottledDemon;
-import me.alexisevelyn.randomtech.items.EdiblePower;
-import me.alexisevelyn.randomtech.items.TeleporterControlItem;
+import me.alexisevelyn.randomtech.items.TeleporterLinker;
 import me.alexisevelyn.randomtech.items.armor.powered.PoweredBoots;
 import me.alexisevelyn.randomtech.items.armor.powered.PoweredChestplate;
 import me.alexisevelyn.randomtech.items.armor.powered.PoweredHelmet;
@@ -30,12 +29,10 @@ import me.alexisevelyn.randomtech.items.ingots.DeathIngot;
 import me.alexisevelyn.randomtech.items.ingots.RedstoneIngot;
 import me.alexisevelyn.randomtech.items.tools.powered.*;
 import me.alexisevelyn.randomtech.utility.BlockEntities;
-import me.alexisevelyn.randomtech.utility.Foods;
 import me.alexisevelyn.randomtech.utility.Recipes;
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
-import net.fabricmc.fabric.api.registry.FuelRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.FluidBlock;
 import net.minecraft.entity.EntityDimensions;
@@ -88,8 +85,7 @@ public class RegistryHelper {
     // Items
     public static final Item MANUAL = new Manual(new Item.Settings().group(MACHINERY_GROUP));
 
-    public static final Item TELEPORTER_CONTROL = new TeleporterControlItem(new Item.Settings().group(MACHINERY_GROUP).maxCount(1)); // Max Count Sets Stack Size
-    public static final Item EDIBLE_POWER = new EdiblePower(new Item.Settings().group(ItemGroup.FOOD).food(Foods.EDIBLE_POWER));
+    public static final Item TELEPORTER_LINKER = new TeleporterLinker(new Item.Settings().group(MACHINERY_GROUP).maxCount(1)); // Max Count Sets Stack Size
 
     // Ingots
     public static final Item REDSTONE_INGOT = new RedstoneIngot(new Item.Settings().group(ItemGroup.MISC));
@@ -230,8 +226,7 @@ public class RegistryHelper {
         // Items
         Registry.register(Registry.ITEM, new Identifier(Main.MODID, Manual.itemID), MANUAL);
 
-        Registry.register(Registry.ITEM, new Identifier(Main.MODID, "teleporter_control"), TELEPORTER_CONTROL);
-        Registry.register(Registry.ITEM, new Identifier(Main.MODID, "edible_power"), EDIBLE_POWER);
+        Registry.register(Registry.ITEM, new Identifier(Main.MODID, "teleporter_linker"), TELEPORTER_LINKER);
 
         // Ingots
         Registry.register(Registry.ITEM, new Identifier(Main.MODID, "redstone_ingot"), REDSTONE_INGOT);
@@ -325,7 +320,7 @@ public class RegistryHelper {
 
     private void registerFuel() {
         // Fuel
-        FuelRegistry.INSTANCE.add(EDIBLE_POWER, 20*10); // 20*3 = 0.3 Items According to REI
+        // FuelRegistry.INSTANCE.add(EDIBLE_POWER, 20*10); // 20*3 = 0.3 Items According to REI
     }
 
     private void registerEntities() {

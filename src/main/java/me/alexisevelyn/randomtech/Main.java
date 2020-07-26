@@ -7,8 +7,6 @@ import net.fabricmc.api.ModInitializer;
 
 /* TODO: Ordered by importance and logical steps
  *
- * Fix duplication bug when placing cobalt wire on top of other cobalt wire
- *
  * Work on Fuser Gui
  * Work on entities
  * Add cloud demon to bottle

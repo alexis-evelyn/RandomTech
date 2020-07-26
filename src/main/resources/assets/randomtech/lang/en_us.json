@@ -6,8 +6,7 @@
 
   "item.randomtech.manual": "Manual",
 
-  "item.randomtech.teleporter_control": "Teleporter Linker",
-  "item.randomtech.edible_power": "Edible Power",
+  "item.randomtech.teleporter_linker": "Teleporter Linker",
   "item.randomtech.redstone_ingot": "Redstone Ingot",
   "item.randomtech.cobalt_ingot": "Cobalt Ingot",
   "item.randomtech.death_ingot": "Death Ingot",
@@ -78,9 +77,9 @@
 
   "message.randomtech.teleporter_energy_fail": "This teleporter needs at least %s and only has %s",
 
-  "message.randomtech.teleporter_control_saved": "Saved position (%s, %s, %s) in world %s",
-  "message.randomtech.teleporter_control_tooltip_coordinates": "Saved Position: (%s, %s, %s)",
-  "message.randomtech.teleporter_control_tooltip_dimension": "Saved World: %s",
+  "message.randomtech.teleporter_linker_saved": "Saved position (%s, %s, %s) in world %s",
+  "message.randomtech.teleporter_linker_tooltip_coordinates": "Saved Position: (%s, %s, %s)",
+  "message.randomtech.teleporter_linker_tooltip_dimension": "Saved World: %s",
 
   "config.waila.plugin_randomtech": "Alexis' Random Tech",
   "config.waila.plugin_randomtech.display_power": "Display Energy Level",

@@ -139,9 +139,9 @@ public class TeleporterBlockEntity extends BasePowerAcceptorBlockEntity implemen
         return frequencyTransmitter.isPresent() && item.getItem().equals(frequencyTransmitter.get());
     }
 
-    // This checks for my Teleporter Control Item (used if TechReborn is not installed)
+    // This checks for my Teleporter Linker (used if TechReborn is not installed)
     public boolean isTeleporterItem(ItemStack item) {
-        return item.getItem().equals(RegistryHelper.TELEPORTER_CONTROL);
+        return item.getItem().equals(RegistryHelper.TELEPORTER_LINKER);
     }
 
     public boolean isPlayerReadyToTeleport(PlayerEntity playerEntity) {
