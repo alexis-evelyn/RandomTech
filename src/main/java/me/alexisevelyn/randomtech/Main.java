@@ -8,6 +8,7 @@ import net.fabricmc.api.ModInitializer;
 /* TODO: Ordered by importance and logical steps
  *
  * TODO: Fix Fuser to properly not consume energy when crafting operation requires more energy than it has
+ * NEI: Autoclick Craft Fuser
  * Work on entities
  * Add cloud demon to bottle
  *

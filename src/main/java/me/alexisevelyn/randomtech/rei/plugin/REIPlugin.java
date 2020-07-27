@@ -2,11 +2,15 @@ package me.alexisevelyn.randomtech.rei.plugin;
 
 import me.alexisevelyn.randomtech.Main;
 import me.alexisevelyn.randomtech.api.utilities.recipemanagers.GenericFluidRecipe;
+import me.alexisevelyn.randomtech.rei.plugin.autocrafting.FuserAutocraftingHandler;
 import me.alexisevelyn.randomtech.rei.plugin.recipecategories.FuserRecipeCategory;
 import me.alexisevelyn.randomtech.rei.plugin.recipedisplays.FuserRecipeDisplay;
 import me.alexisevelyn.randomtech.utility.Recipes;
 import me.alexisevelyn.randomtech.utility.registryhelpers.main.RegistryHelper;
-import me.shedaniel.rei.api.*;
+import me.shedaniel.rei.api.DisplayHelper;
+import me.shedaniel.rei.api.EntryRegistry;
+import me.shedaniel.rei.api.EntryStack;
+import me.shedaniel.rei.api.RecipeHelper;
 import me.shedaniel.rei.api.plugins.REIPluginV0;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -55,6 +59,10 @@ public class REIPlugin implements REIPluginV0 {
     public void registerOthers(RecipeHelper recipeHelper) {
         // Register Working Station allows looking up recipes by that Workstation
         recipeHelper.registerWorkingStations(FUSER, EntryStack.create(RegistryHelper.FUSER));
+
+        // TODO: Move button to somewhere other than the input slot as REI won't let you click items in if it's blocking the slot
+        // recipeHelper.registerScreenClickArea(new Rectangle(FuserGui.ingredientSlotX, FuserGui.ingredientSlotY, FuserGui.inputSlotX, FuserGui.inputSlotY), FuserGui.class, FUSER); // Adds the show recipes for Fuser tooltip
+        recipeHelper.registerAutoCraftingHandler(new FuserAutocraftingHandler());
     }
 
     @Override

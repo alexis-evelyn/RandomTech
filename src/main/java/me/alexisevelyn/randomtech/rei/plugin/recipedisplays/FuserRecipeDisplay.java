@@ -1,11 +1,17 @@
 package me.alexisevelyn.randomtech.rei.plugin.recipedisplays;
 
 import me.alexisevelyn.randomtech.api.utilities.recipemanagers.GenericFluidRecipe;
+import me.alexisevelyn.randomtech.guis.FuserGui;
 import me.alexisevelyn.randomtech.rei.plugin.REIPlugin;
 import me.shedaniel.rei.api.EntryStack;
 import me.shedaniel.rei.api.RecipeDisplay;
+import me.shedaniel.rei.api.TransferRecipeDisplay;
+import me.shedaniel.rei.server.ContainerInfo;
 import net.minecraft.item.ItemStack;
+import net.minecraft.recipe.AbstractCookingRecipe;
+import net.minecraft.screen.ScreenHandler;
 import net.minecraft.util.Identifier;
+import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.Nullable;
 import reborncore.common.crafting.ingredient.RebornIngredient;
 import reborncore.common.fluid.container.FluidInstance;
@@ -13,14 +19,19 @@ import reborncore.common.fluid.container.FluidInstance;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
-public class FuserRecipeDisplay implements RecipeDisplay {
+public class FuserRecipeDisplay implements RecipeDisplay, TransferRecipeDisplay {
+    private final GenericFluidRecipe recipe;
+
     private EntryStack ingredient;
     private EntryStack fluid;
     private EntryStack byproduct;
     private int recipeCraftTime = 20;
 
     public FuserRecipeDisplay(GenericFluidRecipe genericFluidRecipe) {
+        this.recipe = genericFluidRecipe;
+
         // You can't craft something without an input in the fuser
         if (genericFluidRecipe.getRebornIngredients().size() <= 0)
             return;
@@ -92,5 +103,30 @@ public class FuserRecipeDisplay implements RecipeDisplay {
     @Override
     public List<List<EntryStack>> getRequiredEntries() {
         return getInputEntries();
+    }
+
+    /**
+     * @return the width of the crafting grid.
+     */
+    @Override
+    public int getWidth() {
+        return 1;
+    }
+
+    /**
+     * @return the height of the crafting grid.
+     */
+    @Override
+    public int getHeight() {
+        return 1;
+    }
+
+    @Override
+    public List<List<EntryStack>> getOrganisedInputEntries(ContainerInfo<ScreenHandler> containerInfo, ScreenHandler container) {
+        return getInputEntries();
+    }
+
+    public Optional<GenericFluidRecipe> getOptionalRecipe() {
+        return Optional.ofNullable(recipe);
     }
 }
