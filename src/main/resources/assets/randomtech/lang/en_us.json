@@ -73,7 +73,7 @@
   "item.randomtech.cloud_demon_spawn_egg": "Demon Spawn Egg",
 
   "tooltip.waila.energy": "Energy: %s/%s",
-  "tooltip.waila.redstone_signal_strength": "Redstone Signals: %s",
+  "tooltip.waila.redstone_signal_strength": "Power: %s",
 
   "message.randomtech.teleporter_energy_fail": "This teleporter needs at least %s and only has %s",
 
@@ -84,7 +84,7 @@
   "config.waila.plugin_randomtech": "Alexis' Random Tech",
   "config.waila.plugin_randomtech.display_power": "Display Energy Level",
 
-  "config.waila.plugin_randomtech.display_redstone_signal_strength": "Display Redstone Signal Strength",
+  "config.waila.plugin_randomtech.display_redstone_signal_strength": "Display Redstone Power",
 
   "text.autoconfig.randomtech.title": "Nothing Here Yet!!!",
   "text.autoconfig.randomtech.option.toggleA": "Useless Option A!!!",

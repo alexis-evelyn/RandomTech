@@ -7,13 +7,12 @@ import net.fabricmc.api.ModInitializer;
 
 /* TODO: Ordered by importance and logical steps
  *
- * Work on Fuser Gui
+ * TODO: Fix Fuser to properly not consume energy when crafting operation requires more energy than it has
  * Work on entities
  * Add cloud demon to bottle
  *
  * Consider how to obtain Death Ingot
- * Move api to separate jar so people can implement it without needing my mod to be installed.
- * Decide what to do with the edible power
+ * Move api to separate jar so people can implement it without needing my mod to be installed?
  */
 
 // This runs on both the server and the client

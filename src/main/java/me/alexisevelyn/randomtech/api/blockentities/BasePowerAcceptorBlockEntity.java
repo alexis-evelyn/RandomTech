@@ -21,7 +21,6 @@ import java.util.Set;
 
 public abstract class BasePowerAcceptorBlockEntity extends PowerAcceptorBlockEntity implements IToolDrop, InventoryProvider, BuiltScreenHandlerProvider {
     // Energy Values
-    @SuppressWarnings("CanBeFinal") double energyAddend = -1000.0;
     @SuppressWarnings("CanBeFinal") double maxPower = 10000;
     @SuppressWarnings("CanBeFinal") double maxInput = 10000;
 
@@ -115,7 +114,7 @@ public abstract class BasePowerAcceptorBlockEntity extends PowerAcceptorBlockEnt
         return false;
     }
 
-    public boolean hasEnoughEnergy() {
+    public boolean hasEnoughEnergy(int energyAddend) {
         return getEnergy() >= (-1 * energyAddend);
     }
 
@@ -160,9 +159,5 @@ public abstract class BasePowerAcceptorBlockEntity extends PowerAcceptorBlockEnt
         super.toTag(compoundTag);
 
         return compoundTag;
-    }
-
-    public double getEnergyAddend() {
-        return this.energyAddend;
     }
 }

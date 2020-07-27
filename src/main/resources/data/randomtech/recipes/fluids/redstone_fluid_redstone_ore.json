@@ -4,16 +4,16 @@
   "time": 600,
   "ingredients": [
     {
-      "tag": "c:cobalt_ores"
+      "tag": "c:redstone_ores"
     }
   ],
   "results": [
     {
-      "item": "randomtech:cobalt_dust"
+      "item": "minecraft:redstone"
     }
   ],
   "tank": {
-    "fluid": "randomtech:cobalt",
+    "fluid": "randomtech:redstone",
     "amount": 2000
   }
 }

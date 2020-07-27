@@ -5,6 +5,7 @@ import com.google.gson.JsonParser;
 import me.alexisevelyn.randomtech.api.blockentities.FluidMachineBlockEntityBase;
 import me.alexisevelyn.randomtech.api.utilities.recipemanagers.GenericFluidRecipe;
 import me.alexisevelyn.randomtech.crafters.FuserRecipeCrafter;
+import me.alexisevelyn.randomtech.guis.FuserGui;
 import me.alexisevelyn.randomtech.utility.BlockEntities;
 import me.alexisevelyn.randomtech.utility.registryhelpers.main.RegistryHelper;
 import net.minecraft.block.BlockState;
@@ -74,10 +75,10 @@ public class FuserBlockEntity extends FluidMachineBlockEntityBase implements ITo
                 .hotbar()
                 .addInventory()
                 .blockEntity(this)
-                .slot(inputSlot, 8, 72)
-                .outputSlot(outputSlot, 26, 72)
-                .fluidSlot(fluidInputSlot, 44, 72)
-                .fluidSlot(fluidOutputSlot, 62, 72)
+                .slot(inputSlot, FuserGui.ingredientSlotX, FuserGui.ingredientSlotY) // Ingredient Input
+                .outputSlot(outputSlot, FuserGui.byproductSlotX, FuserGui.byproductSlotY) // Byproduct Output
+                .fluidSlot(fluidInputSlot, FuserGui.emptyFluidContainerSlotX, FuserGui.emptyFluidContainerSlotY) // Empty Fluid Container (Input)
+                .fluidSlot(fluidOutputSlot, FuserGui.fullFluidContainerSlotX, FuserGui.fullFluidContainerSlotY) // Full Fluid Container (Output)
                 .syncEnergyValue()
                 .syncCrafterValue()
                 .sync(getTank())
@@ -181,10 +182,13 @@ public class FuserBlockEntity extends FluidMachineBlockEntityBase implements ITo
 
     @Override
     public boolean canCraft(RebornRecipe rebornRecipe) {
-        if (rebornRecipe instanceof GenericFluidRecipe)
-            rebornRecipe.canCraft(this);
+        if (!(rebornRecipe instanceof GenericFluidRecipe))
+            return false;
 
-        return false;
+        if (!hasEnoughEnergy(rebornRecipe.getPower() * rebornRecipe.getTime()))
+            return false;
+
+        return rebornRecipe.canCraft(this);
     }
 
     @Override

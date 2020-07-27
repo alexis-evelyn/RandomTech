@@ -1,16 +1,16 @@
 {
   "type": "randomtech:fuser",
-  "power": 3,
-  "time": 300,
+  "power": 1,
+  "time": 50,
   "ingredients": [
     {
-      "tag": "c:cobalt_ingots"
+      "tag": "c:redstone_dusts"
     }
   ],
   "results": [
   ],
   "tank": {
-    "fluid": "randomtech:cobalt",
+    "fluid": "randomtech:redstone",
     "amount": 110
   }
 }

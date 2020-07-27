@@ -33,10 +33,14 @@ public class CobaltWire extends RedstoneWireBlock {
     }
 
     public static int getWireColor(BlockState state, BlockRenderView world, BlockPos pos, int tintIndex) {
-        int redstonePower = state.get(RedstoneWireBlock.POWER);
+        int redstonePower = getPower(state);
 
         Vector3f vector3f = wireColor[redstonePower];
         return MathHelper.packRgb(vector3f.getX(), vector3f.getY(), vector3f.getZ());
+    }
+
+    public static int getPower(BlockState state) {
+        return state.get(RedstoneWireBlock.POWER);
     }
 
     static {

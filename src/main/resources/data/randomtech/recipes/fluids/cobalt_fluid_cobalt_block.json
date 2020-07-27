@@ -1,7 +1,7 @@
 {
   "_comment": "For some reason, Reborn Core or Minecraft refuses to read the tag c:cobalt_blocks even though the tag works fine",
   "type": "randomtech:fuser",
-  "power": 3,
+  "power": 5,
   "time": 300,
   "ingredients": [
     {

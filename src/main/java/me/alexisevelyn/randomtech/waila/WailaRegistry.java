@@ -6,8 +6,10 @@ import mcp.mobius.waila.api.TooltipPosition;
 import mcp.mobius.waila.overlay.tooltiprenderers.TooltipRendererStack;
 import me.alexisevelyn.randomtech.blocks.TeleporterBlock;
 import me.alexisevelyn.randomtech.blocks.glass.PoweredGlass;
+import me.alexisevelyn.randomtech.blocks.wires.CobaltWire;
 import me.alexisevelyn.randomtech.waila.glass.PoweredGlassInfo;
 import me.alexisevelyn.randomtech.waila.machines.Machines;
+import me.alexisevelyn.randomtech.waila.wires.CobaltWireInfo;
 import net.minecraft.util.Identifier;
 
 public class WailaRegistry implements IWailaPlugin {
@@ -31,5 +33,8 @@ public class WailaRegistry implements IWailaPlugin {
 
         // Powered Glass
         iRegistrar.registerComponentProvider(PoweredGlassInfo.INSTANCE, TooltipPosition.BODY, PoweredGlass.class);
+
+        // Cobalt Wire
+        iRegistrar.registerComponentProvider(CobaltWireInfo.INSTANCE, TooltipPosition.BODY, CobaltWire.class);
     }
 }

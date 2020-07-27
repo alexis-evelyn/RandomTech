@@ -1,6 +1,7 @@
 package me.alexisevelyn.randomtech.blockentities;
 
 import me.alexisevelyn.randomtech.api.blockentities.BasePowerAcceptorBlockEntity;
+import me.alexisevelyn.randomtech.guis.TeleporterGui;
 import me.alexisevelyn.randomtech.utility.BlockEntities;
 import me.alexisevelyn.randomtech.utility.registryhelpers.main.RegistryHelper;
 import me.alexisevelyn.randomtech.blocks.TeleporterBlock;
@@ -36,6 +37,8 @@ public class TeleporterBlockEntity extends BasePowerAcceptorBlockEntity implemen
     // Inventory Slot Markers
     final int inputSlot = 0;
 
+    final int energyAddend = -1000;
+
     public TeleporterBlockEntity() {
         super(BlockEntities.TELEPORTER);
         this.inventory = new RebornInventory<>(1, "TeleporterBlockEntity", 1, this);
@@ -60,7 +63,7 @@ public class TeleporterBlockEntity extends BasePowerAcceptorBlockEntity implemen
                 .hotbar()
                 .addInventory()
                 .blockEntity(this)
-                .slot(inputSlot, 8, 72)
+                .slot(inputSlot, TeleporterGui.linkerSlotX, TeleporterGui.linkerSlotY)
                 .syncEnergyValue()
                 .addInventory()
                 .create(this, syncID);
@@ -86,7 +89,7 @@ public class TeleporterBlockEntity extends BasePowerAcceptorBlockEntity implemen
     private void teleportPlayer(PlayerEntity playerEntity) {
         if (hasValidTeleporterItem()) {
             // Send Alert if Not Enough Energy
-            if (!hasEnoughEnergy()) {
+            if (!hasEnoughEnergy(energyAddend)) {
                 alertNotEnoughEnergy(playerEntity);
                 return;
             }
@@ -125,7 +128,7 @@ public class TeleporterBlockEntity extends BasePowerAcceptorBlockEntity implemen
                 ServerPlayerEntity serverPlayerEntity = (ServerPlayerEntity) playerEntity;
 
                 serverPlayerEntity.teleport(newWorld, pos[0], pos[1], pos[2], serverPlayerEntity.getHeadYaw(), serverPlayerEntity.getPitch(20));
-                addEnergy(getEnergyAddend()); // Take out the energy from use of the teleporter
+                addEnergy(energyAddend); // Take out the energy from use of the teleporter
             } catch (Exception exception) {
                 System.out.println("Teleport Exception: ");
                 exception.printStackTrace();
@@ -153,7 +156,7 @@ public class TeleporterBlockEntity extends BasePowerAcceptorBlockEntity implemen
             return;
 
         Text message = new TranslatableText("message.randomtech.teleporter_energy_fail",
-                new LiteralText(PowerSystem.getLocaliszedPower(-1 * getEnergyAddend()))
+                new LiteralText(PowerSystem.getLocaliszedPower(-1 * energyAddend))
                         .formatted(Formatting.DARK_GREEN, Formatting.BOLD),
                 new LiteralText(PowerSystem.getLocaliszedPower(getEnergy()))
                         .formatted(Formatting.DARK_RED, Formatting.BOLD))
@@ -173,7 +176,7 @@ public class TeleporterBlockEntity extends BasePowerAcceptorBlockEntity implemen
         if (world == null)
             return;
 
-        if (hasEnoughEnergy() && hasValidTeleporterItem())
+        if (hasEnoughEnergy(energyAddend) && hasValidTeleporterItem())
             world.setBlockState(pos, world.getBlockState(pos).with(BlockMachineBase.ACTIVE, true));
         else
             world.setBlockState(pos, world.getBlockState(pos).with(BlockMachineBase.ACTIVE, false));

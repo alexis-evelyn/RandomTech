@@ -1,19 +1,16 @@
 {
   "type": "randomtech:fuser",
-  "power": 5,
-  "time": 600,
+  "power": 1,
+  "time": 5,
   "ingredients": [
     {
-      "tag": "c:cobalt_ores"
+      "tag": "c:cobalt_dusts"
     }
   ],
   "results": [
-    {
-      "item": "randomtech:cobalt_dust"
-    }
   ],
   "tank": {
     "fluid": "randomtech:cobalt",
-    "amount": 2000
+    "amount": 10
   }
 }
