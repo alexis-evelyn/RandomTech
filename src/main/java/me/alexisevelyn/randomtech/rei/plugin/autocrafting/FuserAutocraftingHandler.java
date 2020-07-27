@@ -22,42 +22,39 @@ public class FuserAutocraftingHandler implements AutoTransferHandler {
 //        return 0;
 //    }
 
+    // I'm disabling the handler for now.
+    // It's only partially implemented.
     @Override
     public Result handle(Context context) {
         // TODO: Figure out how to determine if Fuser Gui is open and change success result to not applicable if not on fuser
-        RecipeDisplay display = context.getRecipe();
-
-        // I'm disabling the handler for now.
-        // It's only partially implemented.
-        if (false)
-            return Result.createNotApplicable();
-
-        if (!(display instanceof FuserRecipeDisplay))
-            return Result.createNotApplicable();
-        if (!context.isActuallyCrafting())
-            return Result.createSuccessful();
-
-        FuserRecipeDisplay fuserRecipeDisplay = (FuserRecipeDisplay) display;
-        ScreenHandler container = context.getContainer();
-
-        if (!fuserRecipeDisplay.getOptionalRecipe().isPresent())
-            return Result.createNotApplicable();
-
-        Recipe<Inventory> recipe = fuserRecipeDisplay.getOptionalRecipe().get();
-        ClientPlayerEntity playerEntity = context.getMinecraft().player;
-
-        if (playerEntity == null)
-            return Result.createNotApplicable();
-
-        context.getMinecraft().openScreen(context.getContainerScreen());
-
-        List<Ingredient> inputs = recipe.getPreviewInputs();
-
-        if (inputs.size() == 0)
-            return Result.createNotApplicable();
-
-        this.transferItemStack(container, inputs.get(0), playerEntity, playerEntity.isHoldingSneakKey());
-        ScreenHelper.getLastOverlay().init();
+//        RecipeDisplay display = context.getRecipe();
+//
+//        if (!(display instanceof FuserRecipeDisplay))
+//            return Result.createNotApplicable();
+//        if (!context.isActuallyCrafting())
+//            return Result.createSuccessful();
+//
+//        FuserRecipeDisplay fuserRecipeDisplay = (FuserRecipeDisplay) display;
+//        ScreenHandler container = context.getContainer();
+//
+//        if (!fuserRecipeDisplay.getOptionalRecipe().isPresent())
+//            return Result.createNotApplicable();
+//
+//        Recipe<Inventory> recipe = fuserRecipeDisplay.getOptionalRecipe().get();
+//        ClientPlayerEntity playerEntity = context.getMinecraft().player;
+//
+//        if (playerEntity == null)
+//            return Result.createNotApplicable();
+//
+//        context.getMinecraft().openScreen(context.getContainerScreen());
+//
+//        List<Ingredient> inputs = recipe.getPreviewInputs();
+//
+//        if (inputs.size() == 0)
+//            return Result.createNotApplicable();
+//
+//        this.transferItemStack(container, inputs.get(0), playerEntity, playerEntity.isHoldingSneakKey());
+//        ScreenHelper.getLastOverlay().init();
 
         return Result.createNotApplicable();
     }
