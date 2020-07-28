@@ -2,6 +2,7 @@ package me.alexisevelyn.randomtech.utility.registryhelpers.main;
 
 import me.alexisevelyn.randomtech.Main;
 import me.alexisevelyn.randomtech.armormaterials.PoweredArmorMaterial;
+import me.alexisevelyn.randomtech.blocks.BasicComputerBlock;
 import me.alexisevelyn.randomtech.blocks.FuserBlock;
 import me.alexisevelyn.randomtech.blocks.TeleporterBlock;
 import me.alexisevelyn.randomtech.blocks.VirtualTile;
@@ -13,10 +14,7 @@ import me.alexisevelyn.randomtech.entities.mob.CloudDemonEntity;
 import me.alexisevelyn.randomtech.entities.mob.WizardEntity;
 import me.alexisevelyn.randomtech.fluids.*;
 import me.alexisevelyn.randomtech.fluids.blocks.*;
-import me.alexisevelyn.randomtech.guis.FuserGui;
-import me.alexisevelyn.randomtech.guis.FuserGuiHandler;
-import me.alexisevelyn.randomtech.guis.TeleporterGui;
-import me.alexisevelyn.randomtech.guis.TeleporterGuiHandler;
+import me.alexisevelyn.randomtech.guis.*;
 import me.alexisevelyn.randomtech.blockitems.BottledDemon;
 import me.alexisevelyn.randomtech.items.TeleporterLinker;
 import me.alexisevelyn.randomtech.items.armor.powered.PoweredBoots;
@@ -73,6 +71,7 @@ public class RegistryHelper {
     // Machines
     public static final Block TELEPORTER = new TeleporterBlock();
     public static final Block FUSER = new FuserBlock();
+    public static final Block BASIC_COMPUTER = new BasicComputerBlock();
 
     // Item Groups
     public static final ItemGroup MACHINERY_GROUP = FabricItemGroupBuilder.build(
@@ -133,6 +132,7 @@ public class RegistryHelper {
     // Gui Handlers - Needs to be run on both client and server for gui open screen to work
     public static final TeleporterGuiHandler<TeleporterGui> teleporterGuiHandler = new TeleporterGuiHandler<>();
     public static final FuserGuiHandler<FuserGui> fuserGuiHandler = new FuserGuiHandler<>();
+    public static final BasicComputerGuiHandler<BasicComputerGui> basicComputerGuiHandler = new BasicComputerGuiHandler<>();
 
     // Entities
     public static final EntityType<WizardEntity> WIZARD = FabricEntityTypeBuilder.create(SpawnGroup.CREATURE, ((EntityType.EntityFactory<WizardEntity>) WizardEntity::new))
@@ -220,6 +220,7 @@ public class RegistryHelper {
         // Machines
         Registry.register(Registry.BLOCK, new Identifier(Main.MODID, "teleporter"), TELEPORTER);
         Registry.register(Registry.BLOCK, new Identifier(Main.MODID, "fuser"), FUSER);
+        Registry.register(Registry.BLOCK, new Identifier(Main.MODID, "basic_computer"), BASIC_COMPUTER);
     }
 
     private void registerGeneralItems() {
@@ -289,6 +290,7 @@ public class RegistryHelper {
         // ItemBlocks Machines
         Registry.register(Registry.ITEM, new Identifier(Main.MODID, "teleporter"), new BlockItem(TELEPORTER, new Item.Settings().group(MACHINERY_GROUP)));
         Registry.register(Registry.ITEM, new Identifier(Main.MODID, "fuser"), new BlockItem(FUSER, new Item.Settings().group(MACHINERY_GROUP)));
+        Registry.register(Registry.ITEM, new Identifier(Main.MODID, "basic_computer"), new BlockItem(BASIC_COMPUTER, new Item.Settings())); // TODO: Add to Machine Group When Basic Computer is Usable
     }
 
     private void registerSpecialBlockItems() {

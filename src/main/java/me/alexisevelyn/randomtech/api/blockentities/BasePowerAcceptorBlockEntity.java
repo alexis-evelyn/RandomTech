@@ -21,6 +21,7 @@ import java.util.Set;
 
 public abstract class BasePowerAcceptorBlockEntity extends PowerAcceptorBlockEntity implements IToolDrop, InventoryProvider, BuiltScreenHandlerProvider {
     // Energy Values
+    @SuppressWarnings("CanBeFinal") double minPower = 0;
     @SuppressWarnings("CanBeFinal") double maxPower = 10000;
     @SuppressWarnings("CanBeFinal") double maxInput = 10000;
 
@@ -120,7 +121,9 @@ public abstract class BasePowerAcceptorBlockEntity extends PowerAcceptorBlockEnt
 
     // Future Proofing
     @SuppressWarnings({"SameReturnValue", "unused"})
-    public abstract int getMinPower();
+    public double getMinPower() {
+        return this.minPower;
+    }
 
     @Override
     public boolean canAcceptEnergy(final Direction direction) {

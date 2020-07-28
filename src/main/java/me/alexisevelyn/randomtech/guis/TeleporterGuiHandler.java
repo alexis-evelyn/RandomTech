@@ -1,5 +1,6 @@
 package me.alexisevelyn.randomtech.guis;
 
+import me.alexisevelyn.randomtech.Main;
 import me.alexisevelyn.randomtech.api.utilities.GuiFactory;
 import me.alexisevelyn.randomtech.api.utilities.ScreenHandlerFactory;
 import me.alexisevelyn.randomtech.blockentities.TeleporterBlockEntity;
@@ -29,7 +30,7 @@ public class TeleporterGuiHandler<TeleporterGui> implements IMachineGuiHandler {
 
     public TeleporterGuiHandler() {
         ScreenHandlerRegistry.ExtendedClientHandlerFactory<BuiltScreenHandler> screenHandlerFactory = new ScreenHandlerFactory().getScreenHandlerFactory();
-        screenHandlerType = ScreenHandlerRegistry.registerExtended(new Identifier("randomtech", "teleporter_gui_handler"), screenHandlerFactory);
+        screenHandlerType = ScreenHandlerRegistry.registerExtended(new Identifier(Main.MODID, "teleporter_gui_handler"), screenHandlerFactory);
 
         // Register GuiFactory with Fabric
         if(FabricLoader.getInstance().getEnvironmentType() == EnvType.CLIENT) {

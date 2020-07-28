@@ -51,11 +51,6 @@ public class TeleporterBlockEntity extends BasePowerAcceptorBlockEntity implemen
     }
 
     @Override
-    public int getMinPower() {
-        return 0;
-    }
-
-    @Override
     public BuiltScreenHandler createScreenHandler(int syncID, PlayerEntity playerEntity) {
         return new ScreenHandlerBuilder("teleporter_gui")
                 .player(playerEntity.inventory)

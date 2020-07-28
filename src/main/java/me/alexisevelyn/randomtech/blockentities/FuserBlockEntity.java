@@ -3,7 +3,6 @@ package me.alexisevelyn.randomtech.blockentities;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import me.alexisevelyn.randomtech.api.blockentities.FluidMachineBlockEntityBase;
-import me.alexisevelyn.randomtech.api.utilities.recipemanagers.GenericFluidRecipe;
 import me.alexisevelyn.randomtech.crafters.FuserRecipeCrafter;
 import me.alexisevelyn.randomtech.guis.FuserGui;
 import me.alexisevelyn.randomtech.utility.BlockEntities;
@@ -59,12 +58,6 @@ public class FuserBlockEntity extends FluidMachineBlockEntityBase implements ITo
     @Override
     public ItemStack getToolDrop(PlayerEntity playerEntity) {
         return new ItemStack(RegistryHelper.FUSER);
-    }
-
-    @SuppressWarnings("unused")
-    @Override
-    public int getMinPower() {
-        return 0;
     }
 
     @Override

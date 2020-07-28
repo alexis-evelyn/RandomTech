@@ -3,7 +3,7 @@ package me.alexisevelyn.randomtech.guis;
 import me.alexisevelyn.randomtech.Main;
 import me.alexisevelyn.randomtech.api.utilities.GuiFactory;
 import me.alexisevelyn.randomtech.api.utilities.ScreenHandlerFactory;
-import me.alexisevelyn.randomtech.blockentities.FuserBlockEntity;
+import me.alexisevelyn.randomtech.blockentities.BasicComputerBlockEntity;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.fabric.api.client.screenhandler.v1.ScreenRegistry;
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory;
@@ -25,16 +25,15 @@ import org.jetbrains.annotations.Nullable;
 import reborncore.api.blockentity.IMachineGuiHandler;
 import reborncore.client.screen.builder.BuiltScreenHandler;
 
-public class FuserGuiHandler<FuserGui> implements IMachineGuiHandler {
+public class BasicComputerGuiHandler<BasicComputerGui> implements IMachineGuiHandler {
     private final ScreenHandlerType<BuiltScreenHandler> screenHandlerType;
 
-    public FuserGuiHandler() {
+    public BasicComputerGuiHandler() {
         ScreenHandlerRegistry.ExtendedClientHandlerFactory<BuiltScreenHandler> screenHandlerFactory = new ScreenHandlerFactory().getScreenHandlerFactory();
-        screenHandlerType = ScreenHandlerRegistry.registerExtended(new Identifier(Main.MODID, "fuser_gui_handler"), screenHandlerFactory);
+        screenHandlerType = ScreenHandlerRegistry.registerExtended(new Identifier(Main.MODID, "basic_computer_gui_handler"), screenHandlerFactory);
 
         // Register GuiFactory with Fabric
         if(FabricLoader.getInstance().getEnvironmentType() == EnvType.CLIENT) {
-            // System.out.println("TeleportGuiHandler - init - Client Side");
             ScreenRegistry.register(screenHandlerType, getGuiFactory());
         }
     }
@@ -43,9 +42,9 @@ public class FuserGuiHandler<FuserGui> implements IMachineGuiHandler {
     private GuiFactory getGuiFactory() {
         // Responsible For Allowing The Gui to Be Linked to The Block Entity
         return (syncId, playerEntity, blockEntity) -> {
-            FuserGui fuserGui = (FuserGui) new me.alexisevelyn.randomtech.guis.FuserGui(syncId, playerEntity, (FuserBlockEntity) blockEntity);
+            BasicComputerGui basicComputerGui = (BasicComputerGui) new me.alexisevelyn.randomtech.guis.BasicComputerGui(syncId, playerEntity, (BasicComputerBlockEntity) blockEntity);
 
-            return (HandledScreen<BuiltScreenHandler>) fuserGui;
+            return (HandledScreen<BuiltScreenHandler>) basicComputerGui;
         };
     }
 
@@ -60,22 +59,20 @@ public class FuserGuiHandler<FuserGui> implements IMachineGuiHandler {
 
             @Override
             public Text getDisplayName() {
-                return new LiteralText("Fuser - Add Me To Translator!!!");
+                return new LiteralText("Basic Computer - Add Me To Translator!!!");
             }
 
             @Nullable
             @Override
             public ScreenHandler createMenu(int syncID, PlayerInventory inv, PlayerEntity player) {
-                // System.out.println("TeleportGuiHandler - createMenu - Server Side - Sync ID: " + syncID);
+                final BasicComputerBlockEntity basicComputerBlockEntity = (BasicComputerBlockEntity) player.getEntityWorld().getBlockEntity(pos);
 
-                final FuserBlockEntity fuserBlockEntity = (FuserBlockEntity) player.getEntityWorld().getBlockEntity(pos);
-
-                if (fuserBlockEntity == null) {
-                    System.out.println("FuserGuiHandler - createMenu - fuserBlockEntity is null!!!");
+                if (basicComputerBlockEntity == null) {
+                    System.out.println("BasicComputerGuiHandler - createMenu - basicComputerBlockEntity is null!!!");
                     return null;
                 }
 
-                BuiltScreenHandler screenHandler = fuserBlockEntity.createScreenHandler(syncID, player);
+                BuiltScreenHandler screenHandler = basicComputerBlockEntity.createScreenHandler(syncID, player);
 
                 if (screenHandler == null)
                     return null;

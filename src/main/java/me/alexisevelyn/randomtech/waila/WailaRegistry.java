@@ -4,6 +4,7 @@ import mcp.mobius.waila.api.IRegistrar;
 import mcp.mobius.waila.api.IWailaPlugin;
 import mcp.mobius.waila.api.TooltipPosition;
 import mcp.mobius.waila.overlay.tooltiprenderers.TooltipRendererStack;
+import me.alexisevelyn.randomtech.Main;
 import me.alexisevelyn.randomtech.api.blocks.glass.BasePoweredGlass;
 import me.alexisevelyn.randomtech.api.blocks.machines.PowerAcceptorBlock;
 import me.alexisevelyn.randomtech.blocks.FuserBlock;
@@ -16,11 +17,11 @@ import me.alexisevelyn.randomtech.waila.wires.CobaltWireInfo;
 import net.minecraft.util.Identifier;
 
 public class WailaRegistry implements IWailaPlugin {
-    public static final Identifier RENDER_POWER = new Identifier("randomtech", "power_level");
+    public static final Identifier RENDER_POWER = new Identifier(Main.MODID, "power_level");
 
-    public static final Identifier CONFIG_DISPLAY_POWER = new Identifier("randomtech", "display_power");
-    public static final Identifier CONFIG_DISPLAY_REDSTONE_STRENGTH = new Identifier("randomtech", "display_redstone_signal_strength");
-    public static final Identifier CONFIG_DISPLAY_TANK = new Identifier("randomtech", "display_tank");
+    public static final Identifier CONFIG_DISPLAY_POWER = new Identifier(Main.MODID, "display_power");
+    public static final Identifier CONFIG_DISPLAY_REDSTONE_STRENGTH = new Identifier(Main.MODID, "display_redstone_signal_strength");
+    public static final Identifier CONFIG_DISPLAY_TANK = new Identifier(Main.MODID, "display_tank");
 
     @Override
     public void register(IRegistrar iRegistrar) {

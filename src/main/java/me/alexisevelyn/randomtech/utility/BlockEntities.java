@@ -15,6 +15,7 @@ import java.util.function.Supplier;
 public class BlockEntities {
     public static final BlockEntityType<TeleporterBlockEntity> TELEPORTER = register(TeleporterBlockEntity::new, "teleporter_block_entity", RegistryHelper.TELEPORTER);
     public static final BlockEntityType<FuserBlockEntity> FUSER = register(FuserBlockEntity::new, "fuser_block_entity", RegistryHelper.FUSER);
+    public static final BlockEntityType<BasicComputerBlockEntity> BASIC_COMPUTER = register(BasicComputerBlockEntity::new, "basic_computer_block_entity", RegistryHelper.BASIC_COMPUTER);
 
     public static final BlockEntityType<IntangibleDarkGlassBlockEntity> INTANGIBLE_DARK_GLASS = register(IntangibleDarkGlassBlockEntity::new, "intangible_dark_glass_block_entity", RegistryHelper.DARK_INTANGIBLE_GLASS);
     public static final BlockEntityType<IntangibleGlassBlockEntity> INTANGIBLE_GLASS = register(IntangibleGlassBlockEntity::new, "intangible_glass_block_entity", RegistryHelper.INTANGIBLE_GLASS);
