@@ -14,6 +14,12 @@ public abstract class FluidMachineBlockEntityBase extends BasePowerAcceptorBlock
         super(blockEntityType);
     }
 
+    @SuppressWarnings("EmptyMethod")
+    @Override
+    public void tick() {
+        super.tick();
+    }
+
     public FluidValue getMaxFluidLevel() {
         return tank.getCapacity();
     }

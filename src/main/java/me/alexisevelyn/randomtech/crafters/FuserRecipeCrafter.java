@@ -1,9 +1,10 @@
 package me.alexisevelyn.randomtech.crafters;
 
-import me.alexisevelyn.randomtech.api.blockentities.FluidMachineBlockEntityBase;
-import me.alexisevelyn.randomtech.utility.Recipes;
 import me.alexisevelyn.randomtech.api.utilities.recipemanagers.GenericFluidRecipe;
+import me.alexisevelyn.randomtech.blockentities.FuserBlockEntity;
+import me.alexisevelyn.randomtech.utility.Recipes;
 import net.minecraft.block.entity.BlockEntity;
+import reborncore.common.crafting.RebornRecipe;
 import reborncore.common.recipes.RecipeCrafter;
 import reborncore.common.util.RebornInventory;
 import reborncore.common.util.Tank;
@@ -11,7 +12,6 @@ import reborncore.common.util.Tank;
 // https://github.com/TechReborn/RebornCore/blob/1.16/src/main/java/reborncore/common/crafting/RebornFluidRecipe.java
 public class FuserRecipeCrafter extends RecipeCrafter {
     Tank tank;
-    GenericFluidRecipe genericFluidRecipe;
 
     /**
      * @param blockEntity Block Entity having this crafter
@@ -42,22 +42,21 @@ public class FuserRecipeCrafter extends RecipeCrafter {
 
     @Override
     public boolean canCraftAgain() {
-        if (!super.canCraftAgain())
-            return false;
+        return super.canCraftAgain();
 
-        if (!(blockEntity instanceof FluidMachineBlockEntityBase))
-            return false;
-
-        if (!(currentRecipe instanceof GenericFluidRecipe))
-            return false;
-
-        tank = ((FluidMachineBlockEntityBase) blockEntity).getTank();
-        genericFluidRecipe = (GenericFluidRecipe) currentRecipe;
-
-        if (tank == null)
-            return false;
-
-        return canFillTank(tank, genericFluidRecipe);
+//        if (!super.canCraftAgain())
+//            return false;
+//
+//        // Current Recipe is always null?
+//        if (!(blockEntity instanceof FuserBlockEntity))
+//            return false;
+//
+//        tank = ((FuserBlockEntity) blockEntity).getTank();
+//
+//        if (tank == null)
+//            return false;
+//
+//        return canFillTank(tank, (GenericFluidRecipe) currentRecipe);
     }
 
     public boolean canFillTank(Tank tank, GenericFluidRecipe genericFluidRecipe) {
