@@ -1,15 +1,13 @@
 package me.alexisevelyn.randomtech.crafters;
 
+import me.alexisevelyn.randomtech.blockentities.FuserBlockEntity;
 import me.alexisevelyn.randomtech.utility.Recipes;
 import net.minecraft.block.entity.BlockEntity;
 import reborncore.common.recipes.RecipeCrafter;
 import reborncore.common.util.RebornInventory;
-import reborncore.common.util.Tank;
 
 // https://github.com/TechReborn/RebornCore/blob/1.16/src/main/java/reborncore/common/crafting/RebornFluidRecipe.java
 public class FuserRecipeCrafter extends RecipeCrafter {
-    Tank tank;
-
     /**
      * @param blockEntity Block Entity having this crafter
      * @param inventory   Inventory from parent blockEntity
@@ -24,6 +22,13 @@ public class FuserRecipeCrafter extends RecipeCrafter {
     @Override
     public void updateEntity() {
         super.updateEntity();
+
+        if (!(blockEntity instanceof FuserBlockEntity))
+            return;
+
+        // Update Fuser on Current Progress
+        ((FuserBlockEntity) blockEntity).setMaxRecipeTime(currentNeededTicks);
+        ((FuserBlockEntity) blockEntity).setRemainingRecipeTime(currentTickTime);
 
 //        if (currentTickTime >= currentNeededTicks && canCraftAgain()) {
 ////            System.out.println("Can Fill Tank with: " + genericFluidRecipe.getFluidInstance().getAmount());

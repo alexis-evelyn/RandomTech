@@ -46,6 +46,9 @@ public class FuserBlockEntity extends FluidMachineBlockEntityBase implements ITo
     final int fluidInputSlot = 2;
     final int fluidOutputSlot = 3;
 
+    int remainingRecipeTime = 0;
+    int maxRecipeTime = 0;
+
     public FuserBlockEntity() {
         super(BlockEntities.FUSER);
         this.inventory = new RebornInventory<>(4, "FuserBlockEntity", 64, this);
@@ -75,6 +78,8 @@ public class FuserBlockEntity extends FluidMachineBlockEntityBase implements ITo
                 .syncEnergyValue()
                 .syncCrafterValue()
                 .sync(getTank())
+                .sync(this::getMaxRecipeTime, this::setMaxRecipeTime)
+                .sync(this::getRemainingRecipeTime, this::setRemainingRecipeTime)
                 .addInventory()
                 .create(this, syncID);
     }
@@ -187,6 +192,22 @@ public class FuserBlockEntity extends FluidMachineBlockEntityBase implements ITo
     @Override
     public int[] getInputSlots() {
         return inputSlots;
+    }
+
+    public void setRemainingRecipeTime(int remainingRecipeTime) {
+        this.remainingRecipeTime = remainingRecipeTime;
+    }
+
+    public void setMaxRecipeTime(int maxRecipeTime) {
+        this.maxRecipeTime = maxRecipeTime;
+    }
+
+    public int getRemainingRecipeTime() {
+        return this.remainingRecipeTime;
+    }
+
+    public int getMaxRecipeTime() {
+        return this.maxRecipeTime;
     }
 
     // Astromine is not stable and NetworkMember (interface) is being rewritten every update, so hold off on supporting Astromine cables.

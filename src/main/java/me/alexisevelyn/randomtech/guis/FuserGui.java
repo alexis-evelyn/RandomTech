@@ -9,10 +9,13 @@ import net.fabricmc.api.Environment;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.screen.ScreenHandler;
+import net.minecraft.text.LiteralText;
 import net.minecraft.util.Identifier;
 import reborncore.client.gui.builder.GuiBase;
 import reborncore.client.gui.guibuilder.GuiBuilder;
 import reborncore.client.screen.builder.BuiltScreenHandler;
+
+import java.awt.*;
 
 @Environment(EnvType.CLIENT)
 public class FuserGui extends GuiBase<BuiltScreenHandler> implements ContainerInfo<BuiltScreenHandler> {
@@ -45,16 +48,20 @@ public class FuserGui extends GuiBase<BuiltScreenHandler> implements ContainerIn
 
     // Slots - Give 2-4 Pixels of Room
     public static final int ingredientSlotX = tankX - (inputSlotX * 3);
-    public static final int ingredientSlotY = tankY + inputSlotY;
+    public static final int ingredientSlotY = tankY + (tankCenterY - inputSlotY); // tankY + inputSlotY;
 
-    public static final int byproductSlotX = ingredientSlotX + (inputSlotX + (inputSlotX/2));
-    public static final int byproductSlotY = ingredientSlotY + inputSlotY;
+    public static final int byproductSlotX = ingredientSlotX; // ingredientSlotX + (inputSlotX + (inputSlotX/2));
+    public static final int byproductSlotY = ingredientSlotY + inputSlotY + 2; // ingredientSlotY + inputSlotY;
 
     public static final int emptyFluidContainerSlotX = tankX + (tankCenterX * 2) + 4;
     public static final int emptyFluidContainerSlotY = tankY + (tankCenterY - inputSlotY);
 
     public static final int fullFluidContainerSlotX = emptyFluidContainerSlotX;
     public static final int fullFluidContainerSlotY = emptyFluidContainerSlotY + inputSlotY + 2;
+
+    // Progress Bar
+    public static final int arrowX = ingredientSlotX + inputSlotX + (inputSlotX/2);
+    public static final int arrowY = ingredientSlotY + (inputSlotY); // TODO: Fix
 
     public FuserGui(int syncID, PlayerEntity player, FuserBlockEntity blockEntity) {
         super(player, blockEntity, blockEntity.createScreenHandler(syncID, player));
@@ -83,6 +90,9 @@ public class FuserGui extends GuiBase<BuiltScreenHandler> implements ContainerIn
 
         // Fluid
         builder.drawTank(matrixStack, this, tankX,tankY, mouseX, mouseY, blockEntity.getFluid(), blockEntity.getMaxFluidLevel(), blockEntity.isEmpty(), layer);
+
+        // Progress Bar
+        builder.drawProgressBar(matrixStack, this, blockEntity.getRemainingRecipeTime(), blockEntity.getMaxRecipeTime(), arrowX, arrowY, mouseX, mouseY, GuiBuilder.ProgressDirection.RIGHT, layer);
 
         // Energy Bar
         builder.drawMultiEnergyBar(matrixStack, this, multiEnergyBarX, multiEnergyBarY, (int) blockEntity.getEnergy(), (int) blockEntity.getMaxPower(), mouseX, mouseY, 0, layer);

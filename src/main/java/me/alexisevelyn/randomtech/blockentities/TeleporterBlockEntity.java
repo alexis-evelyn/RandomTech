@@ -68,7 +68,7 @@ public class TeleporterBlockEntity extends BasePowerAcceptorBlockEntity implemen
     public void tick() {
         super.tick();
 
-        if (world == null){
+        if (world == null) {
             return;
         }
 
