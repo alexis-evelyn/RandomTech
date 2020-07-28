@@ -2,14 +2,10 @@ package me.alexisevelyn.randomtech.guis;
 
 import me.alexisevelyn.randomtech.Main;
 import me.alexisevelyn.randomtech.blockentities.BasicComputerBlockEntity;
-import me.alexisevelyn.randomtech.blockentities.FuserBlockEntity;
-import me.shedaniel.rei.server.ContainerInfo;
-import me.shedaniel.rei.server.RecipeFinder;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.screen.ScreenHandler;
 import net.minecraft.text.LiteralText;
 import net.minecraft.util.Identifier;
 import reborncore.client.gui.builder.GuiBase;
@@ -21,6 +17,7 @@ import reborncore.common.util.Color;
 public class BasicComputerGui extends GuiBase<BuiltScreenHandler> {
     final BasicComputerBlockEntity blockEntity;
     public GuiBuilder builder = new GuiBuilder(new Identifier(Main.MODID, "textures/gui/guielements.png"));
+    //private TextFieldWidget nameField;
 
     // Background
     public static final int backgroundCenterX = 176 / 2; // backgroundWidth = 176
@@ -36,7 +33,23 @@ public class BasicComputerGui extends GuiBase<BuiltScreenHandler> {
     public BasicComputerGui(int syncID, PlayerEntity player, BasicComputerBlockEntity blockEntity) {
         super(player, blockEntity, blockEntity.createScreenHandler(syncID, player));
         this.blockEntity = blockEntity;
+//        setup();
     }
+
+//    protected void setup() {
+//        int i = (this.width - this.backgroundWidth) / 2;
+//        int j = (this.height - this.backgroundHeight) / 2;
+//
+//        this.nameField = new TextFieldWidget(this.textRenderer, i + 62, j + 24, 103, 12, new TranslatableText("container.repair"));
+//        this.nameField.setFocusUnlocked(false);
+//        this.nameField.setEditableColor(-1);
+//        this.nameField.setUneditableColor(-1);
+//        this.nameField.setHasBorder(false);
+//        this.nameField.setMaxLength(35);
+//        // this.nameField.setChangedListener(this::onRenamed);
+//        this.children.add(this.nameField);
+//        this.setInitialFocus(this.nameField);
+//    }
 
     @Override
     protected void drawBackground(MatrixStack matrixStack, float lastFrameDuration, int mouseX, int mouseY) {
@@ -51,5 +64,6 @@ public class BasicComputerGui extends GuiBase<BuiltScreenHandler> {
         final Layer layer = Layer.FOREGROUND;
 
         builder.drawText(matrixStack, this, new LiteralText("Not Meant To Be Used Right Now!!!"), mouseX - this.x, mouseY - this.y, Color.RED.getColor());
+        //this.nameField.render(matrixStack, this.x, this.y, -1);
     }
 }
