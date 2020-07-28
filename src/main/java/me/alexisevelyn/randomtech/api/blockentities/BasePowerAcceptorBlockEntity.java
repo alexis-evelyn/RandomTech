@@ -115,7 +115,7 @@ public abstract class BasePowerAcceptorBlockEntity extends PowerAcceptorBlockEnt
     }
 
     public boolean hasEnoughEnergy(int energyAddend) {
-        return getEnergy() >= (-1 * energyAddend);
+        return getEnergy() >= energyAddend;
     }
 
     // Future Proofing

@@ -37,7 +37,7 @@ public class TeleporterBlockEntity extends BasePowerAcceptorBlockEntity implemen
     // Inventory Slot Markers
     final int inputSlot = 0;
 
-    final int energyAddend = -1000;
+    final int energyAddend = 1000;
 
     public TeleporterBlockEntity() {
         super(BlockEntities.TELEPORTER);
@@ -128,7 +128,7 @@ public class TeleporterBlockEntity extends BasePowerAcceptorBlockEntity implemen
                 ServerPlayerEntity serverPlayerEntity = (ServerPlayerEntity) playerEntity;
 
                 serverPlayerEntity.teleport(newWorld, pos[0], pos[1], pos[2], serverPlayerEntity.getHeadYaw(), serverPlayerEntity.getPitch(20));
-                addEnergy(energyAddend); // Take out the energy from use of the teleporter
+                addEnergy(-1 * energyAddend); // Take out the energy from use of the teleporter
             } catch (Exception exception) {
                 System.out.println("Teleport Exception: ");
                 exception.printStackTrace();
@@ -156,7 +156,7 @@ public class TeleporterBlockEntity extends BasePowerAcceptorBlockEntity implemen
             return;
 
         Text message = new TranslatableText("message.randomtech.teleporter_energy_fail",
-                new LiteralText(PowerSystem.getLocaliszedPower(-1 * energyAddend))
+                new LiteralText(PowerSystem.getLocaliszedPower(energyAddend))
                         .formatted(Formatting.DARK_GREEN, Formatting.BOLD),
                 new LiteralText(PowerSystem.getLocaliszedPower(getEnergy()))
                         .formatted(Formatting.DARK_RED, Formatting.BOLD))

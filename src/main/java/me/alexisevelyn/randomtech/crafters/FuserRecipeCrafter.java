@@ -1,10 +1,7 @@
 package me.alexisevelyn.randomtech.crafters;
 
-import me.alexisevelyn.randomtech.api.utilities.recipemanagers.GenericFluidRecipe;
-import me.alexisevelyn.randomtech.blockentities.FuserBlockEntity;
 import me.alexisevelyn.randomtech.utility.Recipes;
 import net.minecraft.block.entity.BlockEntity;
-import reborncore.common.crafting.RebornRecipe;
 import reborncore.common.recipes.RecipeCrafter;
 import reborncore.common.util.RebornInventory;
 import reborncore.common.util.Tank;
@@ -59,7 +56,7 @@ public class FuserRecipeCrafter extends RecipeCrafter {
 //        return canFillTank(tank, (GenericFluidRecipe) currentRecipe);
     }
 
-    public boolean canFillTank(Tank tank, GenericFluidRecipe genericFluidRecipe) {
-        return tank.canInsertFluid(null, genericFluidRecipe.getFluidInstance().getFluid(), genericFluidRecipe.getFluidInstance().getAmount());
-    }
+//    public boolean canFillTank(Tank tank, GenericFluidRecipe genericFluidRecipe) {
+//        return tank.canInsertFluid(null, genericFluidRecipe.getFluidInstance().getFluid(), genericFluidRecipe.getFluidInstance().getAmount());
+//    }
 }

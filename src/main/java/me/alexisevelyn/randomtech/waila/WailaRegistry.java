@@ -4,6 +4,9 @@ import mcp.mobius.waila.api.IRegistrar;
 import mcp.mobius.waila.api.IWailaPlugin;
 import mcp.mobius.waila.api.TooltipPosition;
 import mcp.mobius.waila.overlay.tooltiprenderers.TooltipRendererStack;
+import me.alexisevelyn.randomtech.api.blocks.glass.BasePoweredGlass;
+import me.alexisevelyn.randomtech.api.blocks.machines.PowerAcceptorBlock;
+import me.alexisevelyn.randomtech.blocks.FuserBlock;
 import me.alexisevelyn.randomtech.blocks.TeleporterBlock;
 import me.alexisevelyn.randomtech.blocks.glass.PoweredGlass;
 import me.alexisevelyn.randomtech.blocks.wires.CobaltWire;
@@ -17,22 +20,26 @@ public class WailaRegistry implements IWailaPlugin {
 
     public static final Identifier CONFIG_DISPLAY_POWER = new Identifier("randomtech", "display_power");
     public static final Identifier CONFIG_DISPLAY_REDSTONE_STRENGTH = new Identifier("randomtech", "display_redstone_signal_strength");
+    public static final Identifier CONFIG_DISPLAY_TANK = new Identifier("randomtech", "display_tank");
 
     @Override
     public void register(IRegistrar iRegistrar) {
-        // WAILA Configuration
+        // Server Side Config Options
         iRegistrar.addSyncedConfig(CONFIG_DISPLAY_POWER, true);
+        iRegistrar.addSyncedConfig(CONFIG_DISPLAY_TANK, true);
+
+        // Client Only Config Options
         iRegistrar.addConfig(CONFIG_DISPLAY_REDSTONE_STRENGTH, true);
 
         // ToolTip Rendering
         iRegistrar.registerTooltipRenderer(RENDER_POWER, new TooltipRendererStack());
 
-        // Teleporter
-        iRegistrar.registerComponentProvider(Machines.INSTANCE, TooltipPosition.BODY, TeleporterBlock.class);
-        iRegistrar.registerBlockDataProvider(Machines.INSTANCE, TeleporterBlock.class);
+        // Powered Machines Base Class - Includes Teleporter and Fuser
+        iRegistrar.registerComponentProvider(Machines.INSTANCE, TooltipPosition.BODY, PowerAcceptorBlock.class);
+        iRegistrar.registerBlockDataProvider(Machines.INSTANCE, PowerAcceptorBlock.class);
 
-        // Powered Glass
-        iRegistrar.registerComponentProvider(PoweredGlassInfo.INSTANCE, TooltipPosition.BODY, PoweredGlass.class);
+        // Base Powered Glass - Includes Powered Glass
+        iRegistrar.registerComponentProvider(PoweredGlassInfo.INSTANCE, TooltipPosition.BODY, BasePoweredGlass.class);
 
         // Cobalt Wire
         iRegistrar.registerComponentProvider(CobaltWireInfo.INSTANCE, TooltipPosition.BODY, CobaltWire.class);

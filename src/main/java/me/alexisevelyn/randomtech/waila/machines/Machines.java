@@ -1,6 +1,8 @@
 package me.alexisevelyn.randomtech.waila.machines;
 
 import mcp.mobius.waila.api.*;
+import me.alexisevelyn.randomtech.blockentities.FuserBlockEntity;
+import me.alexisevelyn.randomtech.blocks.FuserBlock;
 import me.alexisevelyn.randomtech.utility.registryhelpers.main.RegistryHelper;
 import me.alexisevelyn.randomtech.blocks.TeleporterBlock;
 import me.alexisevelyn.randomtech.waila.WailaRegistry;
@@ -12,7 +14,11 @@ import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.world.World;
 import reborncore.common.blockentity.MachineBaseBlockEntity;
+import reborncore.common.fluid.FluidUtil;
+import reborncore.common.fluid.FluidValue;
+import reborncore.common.fluid.container.FluidInstance;
 import reborncore.common.powerSystem.PowerSystem;
+import reborncore.common.util.Tank;
 
 import java.util.List;
 
@@ -41,6 +47,7 @@ public class Machines implements IComponentProvider, IServerDataProvider<BlockEn
     @Override
     public void appendBody(List<Text> tooltip, IDataAccessor accessor, IPluginConfig config) {
         boolean configDisplayPower = config.get(WailaRegistry.CONFIG_DISPLAY_POWER, true);
+        boolean configDisplayTank = config.get(WailaRegistry.CONFIG_DISPLAY_TANK, true);
 
         if (configDisplayPower) {
             if (accessor.getBlock() == RegistryHelper.TELEPORTER) {
@@ -52,6 +59,35 @@ public class Machines implements IComponentProvider, IServerDataProvider<BlockEn
                 TranslatableText energyLine = new TranslatableText("tooltip.waila.energy", PowerSystem.getLocaliszedPowerNoSuffix(energy), PowerSystem.getLocaliszedPower(maxEnergy));
 
                 tooltip.add(energyLine);
+            }
+
+            if (accessor.getBlock() == RegistryHelper.FUSER) {
+                FuserBlock fuserBlock = (FuserBlock) accessor.getBlock();
+
+                double energy = fuserBlock.getPower(accessor.getWorld(), accessor.getPosition());
+                double maxEnergy = fuserBlock.getMaxPower(accessor.getWorld(), accessor.getPosition());
+
+                TranslatableText energyLine = new TranslatableText("tooltip.waila.energy", PowerSystem.getLocaliszedPowerNoSuffix(energy), PowerSystem.getLocaliszedPower(maxEnergy));
+
+                tooltip.add(energyLine);
+            }
+        }
+
+        if (configDisplayTank) {
+            if (accessor.getBlock() == RegistryHelper.FUSER) {
+                FuserBlockEntity fuserBlockEntity = (FuserBlockEntity) accessor.getBlockEntity();
+
+                FluidInstance fluidInstance = fuserBlockEntity.getFluid();
+                FluidValue fluidValue = fluidInstance.getAmount();
+                Tank tank = fuserBlockEntity.getTank();
+
+                int tankCapacity = -1;
+                if (tank != null)
+                    tankCapacity = tank.getCapacity().getRawValue();
+
+                TranslatableText fluidLine = new TranslatableText("tooltip.waila.fluid_level", fluidValue.getRawValue(), tankCapacity, FluidUtil.getFluidName(fluidInstance.getFluid()));
+
+                tooltip.add(fluidLine);
             }
         }
     }

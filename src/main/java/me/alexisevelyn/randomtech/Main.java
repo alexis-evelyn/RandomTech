@@ -7,6 +7,8 @@ import net.fabricmc.api.ModInitializer;
 
 /* TODO: Ordered by importance and logical steps
  *
+ * Adjust cobalt fuser recipes to be balanced with redstone fuser recipes.
+ *
  * Work on entities
  * Add cloud demon to bottle
  *

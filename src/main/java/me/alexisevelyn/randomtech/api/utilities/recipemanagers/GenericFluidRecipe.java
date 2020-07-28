@@ -53,7 +53,7 @@ public class GenericFluidRecipe extends RebornFluidRecipe {
     }
 
     public boolean hasEnoughEnergy(BasePowerAcceptorBlockEntity fuserBlockEntity) {
-        return fuserBlockEntity.hasEnoughEnergy(-1 * getPower() * getTime());
+        return fuserBlockEntity.hasEnoughEnergy(getPower() * getTime());
     }
 
     @Override
