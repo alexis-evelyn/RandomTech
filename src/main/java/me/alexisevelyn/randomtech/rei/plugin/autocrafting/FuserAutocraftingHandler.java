@@ -1,17 +1,10 @@
 package me.alexisevelyn.randomtech.rei.plugin.autocrafting;
 
-import me.alexisevelyn.randomtech.rei.plugin.recipedisplays.FuserRecipeDisplay;
 import me.shedaniel.rei.api.AutoTransferHandler;
-import me.shedaniel.rei.api.RecipeDisplay;
-import me.shedaniel.rei.impl.ScreenHelper;
 import net.minecraft.client.network.ClientPlayerEntity;
-import net.minecraft.inventory.Inventory;
 import net.minecraft.recipe.Ingredient;
-import net.minecraft.recipe.Recipe;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.screen.slot.SlotActionType;
-
-import java.util.List;
 
 public class FuserAutocraftingHandler implements AutoTransferHandler {
     /**
@@ -27,6 +20,7 @@ public class FuserAutocraftingHandler implements AutoTransferHandler {
     @Override
     public Result handle(Context context) {
         // TODO: Figure out how to determine if Fuser Gui is open and change success result to not applicable if not on fuser
+        // Look at: https://discordapp.com/channels/432055962233470986/576851123345031177/737345567788761188
 //        RecipeDisplay display = context.getRecipe();
 //
 //        if (!(display instanceof FuserRecipeDisplay))
