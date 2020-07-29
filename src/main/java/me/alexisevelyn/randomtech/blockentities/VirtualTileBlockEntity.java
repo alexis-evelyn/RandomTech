@@ -8,10 +8,16 @@ import net.minecraft.nbt.CompoundTag;
 import java.awt.*;
 
 public class VirtualTileBlockEntity extends BlockEntity {
-    private Color color = new Color(57, 148, 25); // #399419 For Cool Green
+    private Color color = new Color(0, 0, 0); // #399419 For Cool Green
 
     public VirtualTileBlockEntity() {
         super(BlockEntities.VIRTUAL_TILE);
+        setColor(new Color(255, 255, 255));
+    }
+
+    public VirtualTileBlockEntity(Color color) {
+        super(BlockEntities.VIRTUAL_TILE);
+        setColor(color);
     }
 
     @Override
@@ -39,5 +45,9 @@ public class VirtualTileBlockEntity extends BlockEntity {
 
     public Color getColor() {
         return color;
+    }
+
+    public void setColor(Color color) {
+        this.color = color;
     }
 }

@@ -26,6 +26,7 @@ import java.util.function.ToIntFunction;
 
 public class VirtualTile extends BlockItem {
     // TODO: Figure out how to dynamically choose the color based on the crafting recipe ingredients
+    // TODO: Grab Block NBT Data when block mined and store in ItemStack
 
     public VirtualTile(Block block, Settings settings) {
         super(block, settings);
@@ -39,9 +40,9 @@ public class VirtualTile extends BlockItem {
         if (!(blockEntity instanceof VirtualTileBlockEntity))
             return new Color(255, 255, 255).getRGB();
 
-        VirtualTileBlockEntity virtualTileBlockEntity = (VirtualTileBlockEntity) blockEntity;
-
-        return virtualTileBlockEntity.getColor().getRGB();
+        // VirtualTileBlockEntity virtualTileBlockEntity = (VirtualTileBlockEntity) blockEntity;
+        // return virtualTileBlockEntity.getColor().getRGB(); // Temporarily disabled until data syncing is added
+        return new Color(57, 148, 25).getRGB();
     }
 
     // For Item Form
@@ -84,7 +85,8 @@ public class VirtualTile extends BlockItem {
 
         @Override
         public BlockEntity createBlockEntity(BlockView worldIn) {
-            return new VirtualTileBlockEntity();
+            // TODO: Retrieve color from ItemStack
+            return new VirtualTileBlockEntity(new Color(255, 0, 0));
         }
     }
 }
