@@ -61,7 +61,7 @@ public class FuserGui extends GuiBase<BuiltScreenHandler> implements ContainerIn
 
     // Progress Bar
     public static final int arrowX = ingredientSlotX + inputSlotX + (inputSlotX/2);
-    public static final int arrowY = ingredientSlotY + (inputSlotY); // TODO: Fix
+    public static final int arrowY = ingredientSlotY + (inputSlotY - 5);
 
     public FuserGui(int syncID, PlayerEntity player, FuserBlockEntity blockEntity) {
         super(player, blockEntity, blockEntity.createScreenHandler(syncID, player));
