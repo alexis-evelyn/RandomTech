@@ -82,6 +82,7 @@
   "message.randomtech.teleporter_linker_saved": "Saved position (%s, %s, %s) in world %s",
   "message.randomtech.teleporter_linker_tooltip_coordinates": "Saved Position: (%s, %s, %s)",
   "message.randomtech.teleporter_linker_tooltip_dimension": "Saved World: %s",
+  "message.randomtech.virtual_tile_color": "Color: (%s, %s, %s)",
 
   "config.waila.plugin_randomtech": "Alexis' Random Tech",
   "config.waila.plugin_randomtech.display_power": "Display Energy Level",
