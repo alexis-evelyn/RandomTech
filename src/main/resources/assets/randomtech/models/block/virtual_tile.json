@@ -1,0 +1,39 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "randomtech:block/decoration/virtual_tile"
+  },
+  "elements": [
+    {
+      "from": [0, 0, 0],
+      "to": [16, 16, 16],
+      "shade": false,
+      "faces": {
+        "up": {
+          "texture": "#all",
+          "tintindex": 0
+        },
+        "down": {
+          "texture": "#all",
+          "tintindex": 0
+        },
+        "north": {
+          "texture": "#all",
+          "tintindex": 0
+        },
+        "south": {
+          "texture": "#all",
+          "tintindex": 0
+        },
+        "east": {
+          "texture": "#all",
+          "tintindex": 0
+        },
+        "west": {
+          "texture": "#all",
+          "tintindex": 0
+        }
+      }
+    }
+  ]
+}

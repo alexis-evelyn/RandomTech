@@ -4,6 +4,7 @@ import ladysnake.satin.api.event.ShaderEffectRenderCallback;
 import ladysnake.satin.api.managed.ManagedShaderEffect;
 import ladysnake.satin.api.managed.ShaderEffectManager;
 import me.alexisevelyn.randomtech.Main;
+import me.alexisevelyn.randomtech.blocks.VirtualTile;
 import me.alexisevelyn.randomtech.blocks.wires.CobaltWire;
 import me.alexisevelyn.randomtech.entities.renderers.CloudDemonRenderer;
 import me.alexisevelyn.randomtech.entities.renderers.WizardRenderer;
@@ -21,6 +22,7 @@ import net.fabricmc.fabric.api.event.client.ClientSpriteRegistryCallback;
 import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
 import net.fabricmc.fabric.api.resource.SimpleSynchronousResourceReloadListener;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.color.item.ItemColorProvider;
 import net.minecraft.client.options.KeyBinding;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.texture.Sprite;
@@ -28,6 +30,7 @@ import net.minecraft.client.texture.SpriteAtlasTexture;
 import net.minecraft.client.util.InputUtil;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.fluid.FluidState;
+import net.minecraft.item.ItemStack;
 import net.minecraft.resource.ResourceManager;
 import net.minecraft.resource.ResourceType;
 import net.minecraft.util.Identifier;
@@ -91,7 +94,12 @@ public class ClientRegistryHelper {
         // Cobalt Wiring
         BlockRenderLayerMap.INSTANCE.putBlock(RegistryHelper.COBALT_WIRE, RenderLayer.getTranslucent());
 
+        // For Color Shading Like Vanilla Redstone
         ColorProviderRegistry.BLOCK.register(CobaltWire::getWireColor, RegistryHelper.COBALT_WIRE);
+
+        // For Dynamic Colors of Virtual Tiles
+        ColorProviderRegistry.BLOCK.register(VirtualTile::getEdgeColor, RegistryHelper.VIRTUAL_TILE_BLOCK);
+        ColorProviderRegistry.ITEM.register(VirtualTile::getEdgeColor, RegistryHelper.VIRTUAL_TILE);
     }
 
     private void fluidSetup() {

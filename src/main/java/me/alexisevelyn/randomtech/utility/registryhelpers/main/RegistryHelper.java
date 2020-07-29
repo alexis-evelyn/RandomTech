@@ -56,7 +56,7 @@ public class RegistryHelper {
 
     public static final Block POWERED_GLASS = new PoweredGlass();
 
-    public static final Block VIRTUAL_TILE = new VirtualTile();
+    public static final Block VIRTUAL_TILE_BLOCK = new VirtualTile.VirtualTileBlock();
 
     public static final Block COBALT_WIRE = new CobaltWire();
 
@@ -80,6 +80,7 @@ public class RegistryHelper {
 
     // Block Items
     public static final BlockItem BOTTLED_DEMON = new BottledDemon(BOTTLED_DEMON_BLOCK, new Item.Settings().group(MACHINERY_GROUP));
+    public static final BlockItem VIRTUAL_TILE = new VirtualTile(VIRTUAL_TILE_BLOCK, new Item.Settings().group(ItemGroup.DECORATIONS));
 
     // Items
     public static final Item MANUAL = new Manual(new Item.Settings().group(MACHINERY_GROUP));
@@ -203,7 +204,7 @@ public class RegistryHelper {
 
         Registry.register(Registry.BLOCK, new Identifier(Main.MODID, "powered_glass"), POWERED_GLASS);
 
-        Registry.register(Registry.BLOCK, new Identifier(Main.MODID, "green_virtual_tile"), VIRTUAL_TILE);
+        Registry.register(Registry.BLOCK, new Identifier(Main.MODID, "virtual_tile"), VIRTUAL_TILE_BLOCK);
 
         Registry.register(Registry.BLOCK, new Identifier(Main.MODID, "cobalt_block"), COBALT_BLOCK);
 
@@ -274,8 +275,6 @@ public class RegistryHelper {
 
         Registry.register(Registry.ITEM, new Identifier(Main.MODID, "powered_glass"), new BlockItem(POWERED_GLASS, new Item.Settings().group(ItemGroup.DECORATIONS)));
 
-        Registry.register(Registry.ITEM, new Identifier(Main.MODID, "green_virtual_tile"), new BlockItem(VIRTUAL_TILE, new Item.Settings().group(ItemGroup.DECORATIONS)));
-
         // Metals
         Registry.register(Registry.ITEM, new Identifier(Main.MODID, "cobalt_block"), new BlockItem(COBALT_BLOCK, new Item.Settings().group(ItemGroup.DECORATIONS)));
 
@@ -294,6 +293,7 @@ public class RegistryHelper {
     }
 
     private void registerSpecialBlockItems() {
+        Registry.register(Registry.ITEM, new Identifier(Main.MODID, "virtual_tile"), VIRTUAL_TILE);
         Registry.register(Registry.ITEM, new Identifier(Main.MODID, "bottled_demon"), BOTTLED_DEMON);
     }
 
