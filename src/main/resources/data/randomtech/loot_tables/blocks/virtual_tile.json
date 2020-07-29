@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "randomtech:green_virtual_tile"
+          "name": "randomtech:virtual_tile"
         }
       ],
       "conditions": [

@@ -13,14 +13,19 @@ import org.apache.commons.lang3.Validate;
 import java.util.function.Supplier;
 
 public class BlockEntities {
+    // Machines
     public static final BlockEntityType<TeleporterBlockEntity> TELEPORTER = register(TeleporterBlockEntity::new, "teleporter_block_entity", RegistryHelper.TELEPORTER);
     public static final BlockEntityType<FuserBlockEntity> FUSER = register(FuserBlockEntity::new, "fuser_block_entity", RegistryHelper.FUSER);
     public static final BlockEntityType<BasicComputerBlockEntity> BASIC_COMPUTER = register(BasicComputerBlockEntity::new, "basic_computer_block_entity", RegistryHelper.BASIC_COMPUTER);
 
+    // Intangible Glass
     public static final BlockEntityType<IntangibleDarkGlassBlockEntity> INTANGIBLE_DARK_GLASS = register(IntangibleDarkGlassBlockEntity::new, "intangible_dark_glass_block_entity", RegistryHelper.DARK_INTANGIBLE_GLASS);
     public static final BlockEntityType<IntangibleGlassBlockEntity> INTANGIBLE_GLASS = register(IntangibleGlassBlockEntity::new, "intangible_glass_block_entity", RegistryHelper.INTANGIBLE_GLASS);
     public static final BlockEntityType<InverseIntangibleDarkGlassBlockEntity> INVERSE_INTANGIBLE_DARK_GLASS = register(InverseIntangibleDarkGlassBlockEntity::new, "inverse_intangible_dark_glass_block_entity", RegistryHelper.INVERSE_DARK_INTANGIBLE_GLASS);
     public static final BlockEntityType<InverseIntangibleGlassBlockEntity> INVERSE_INTANGIBLE_GLASS = register(InverseIntangibleGlassBlockEntity::new, "inverse_intangible_glass_block_entity", RegistryHelper.INVERSE_INTANGIBLE_GLASS);
+
+    // Virtual Tile
+    public static final BlockEntityType<VirtualTileBlockEntity> VIRTUAL_TILE = register(VirtualTileBlockEntity::new, "virtual_tile_block_entity", RegistryHelper.VIRTUAL_TILE_BLOCK);
 
     public static <T extends BlockEntity> BlockEntityType<T> register(Supplier<T> supplier, String name, Block... blocks) {
         Validate.isTrue(blocks.length > 0, "Add a block to your Block Entity: " + supplier.get().getClass().getName());
