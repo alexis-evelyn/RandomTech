@@ -1,7 +1,6 @@
 package me.alexisevelyn.randomtech.blockitems;
 
 import me.alexisevelyn.randomtech.api.utilities.GenericBlockHelper;
-import me.alexisevelyn.randomtech.blockentities.FuserBlockEntity;
 import me.alexisevelyn.randomtech.blockentities.VirtualTileBlockEntity;
 import me.alexisevelyn.randomtech.utility.Materials;
 import net.fabricmc.api.EnvType;
@@ -13,7 +12,6 @@ import net.minecraft.block.BlockEntityProvider;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.client.item.TooltipContext;
-import net.minecraft.datafixer.NbtOps;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ToolMaterials;
@@ -23,14 +21,13 @@ import net.minecraft.text.LiteralText;
 import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Formatting;
-import net.minecraft.util.dynamic.GlobalPos;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.BlockRenderView;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
-import java.awt.*;
+import java.awt.Color;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.ToIntFunction;
@@ -53,9 +50,12 @@ public class VirtualTile extends BlockItem {
         if (!(blockEntity instanceof VirtualTileBlockEntity))
             return new Color(255, 255, 255).getRGB();
 
-        // VirtualTileBlockEntity virtualTileBlockEntity = (VirtualTileBlockEntity) blockEntity;
-        // return virtualTileBlockEntity.getColor().getRGB(); // Temporarily disabled until data syncing is added
-        return new Color(57, 148, 25).getRGB();
+        VirtualTileBlockEntity virtualTileBlockEntity = (VirtualTileBlockEntity) blockEntity;
+
+        if (virtualTileBlockEntity.getColor() == null)
+            return new Color(255, 255, 255).getRGB();
+
+        return virtualTileBlockEntity.getColor().getRGB();
     }
 
     // For Item Form
@@ -122,13 +122,13 @@ public class VirtualTile extends BlockItem {
         }
 
         public static ToIntFunction<BlockState> getLightLevel() {
+            // TODO: Adjust light level based on color brightness.
             return (state) -> 10; // 7?
         }
 
         @Override
         public BlockEntity createBlockEntity(BlockView worldIn) {
-            // TODO: Retrieve color from ItemStack
-            return new VirtualTileBlockEntity(new Color(255, 0, 0));
+            return new VirtualTileBlockEntity();
         }
     }
 }

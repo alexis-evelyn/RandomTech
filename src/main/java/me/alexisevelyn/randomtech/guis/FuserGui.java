@@ -9,13 +9,10 @@ import net.fabricmc.api.Environment;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.screen.ScreenHandler;
-import net.minecraft.text.LiteralText;
 import net.minecraft.util.Identifier;
 import reborncore.client.gui.builder.GuiBase;
 import reborncore.client.gui.guibuilder.GuiBuilder;
 import reborncore.client.screen.builder.BuiltScreenHandler;
-
-import java.awt.*;
 
 @Environment(EnvType.CLIENT)
 public class FuserGui extends GuiBase<BuiltScreenHandler> implements ContainerInfo<BuiltScreenHandler> {

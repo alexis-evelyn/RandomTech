@@ -42,7 +42,7 @@ import net.minecraft.item.*;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
-import java.awt.*;
+import java.awt.Color;
 
 public class RegistryHelper {
     // Blocks

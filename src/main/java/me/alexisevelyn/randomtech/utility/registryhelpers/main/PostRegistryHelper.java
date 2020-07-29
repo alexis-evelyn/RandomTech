@@ -29,6 +29,7 @@ public class PostRegistryHelper {
             }
         });
 
+        // To Handle Hotkey Presses From Client
         ServerSidePacketRegistry.INSTANCE.register(PreRegistryHelper.keybindPacketIdentifier, (packetContext, attachedData) -> {
             String key = attachedData.readString();
 
