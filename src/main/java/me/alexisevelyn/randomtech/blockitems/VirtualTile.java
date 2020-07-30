@@ -12,6 +12,7 @@ import net.minecraft.block.BlockEntityProvider;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.client.item.TooltipContext;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ToolMaterials;
@@ -41,10 +42,25 @@ public class VirtualTile extends BlockItem {
     // TODO: Grab Block NBT Data when block mined and store in ItemStack
 
     public static final Color defaultColor = Color.WHITE;
-    public static final Color initialColor = Color.BLACK;
+    public static Color initialColor = Color.BLACK;
 
     public VirtualTile(Block block, Settings settings) {
         super(block, settings);
+    }
+
+    @Override
+    protected boolean postPlacement(BlockPos pos, World world, @Nullable PlayerEntity player, ItemStack stack, BlockState state) {
+        boolean placed = super.postPlacement(pos, world, player, stack, state);
+
+        initialColor = new Color(getEdgeColor(stack, 0));
+        BlockEntity blockEntity = world.getBlockEntity(pos);
+        if (!(blockEntity instanceof VirtualTileBlockEntity))
+            return placed;
+
+        VirtualTileBlockEntity virtualTileBlockEntity = (VirtualTileBlockEntity) blockEntity;
+        virtualTileBlockEntity.setColor(initialColor);
+
+        return placed;
     }
 
     // For Block Form
