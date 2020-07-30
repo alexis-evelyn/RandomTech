@@ -12,12 +12,16 @@ import net.minecraft.block.BlockEntityProvider;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.client.item.TooltipContext;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ToolMaterials;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.BlockSoundGroup;
+import net.minecraft.stat.Stats;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.text.LiteralText;
@@ -25,9 +29,7 @@ import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.BlockRenderView;
-import net.minecraft.world.BlockView;
-import net.minecraft.world.World;
+import net.minecraft.world.*;
 import org.jetbrains.annotations.Nullable;
 
 import java.awt.Color;
@@ -39,8 +41,6 @@ import java.util.function.ToIntFunction;
 // I may replace the current recipe system with something similar to ArmorDyeRecipe
 
 public class VirtualTile extends BlockItem {
-    // TODO: Grab Block NBT Data when block mined and store in ItemStack
-
     public static final Color defaultColor = Color.WHITE;
     public static Color initialColor = Color.BLACK;
 
@@ -143,6 +143,63 @@ public class VirtualTile extends BlockItem {
                     .lightLevel(getLightLevel()));
 
             this.setDefaultState(this.getStateManager().getDefaultState().with(DUMMY, false));
+        }
+
+        @Override
+        public void onBroken(WorldAccess world, BlockPos pos, BlockState state) {
+            super.onBroken(world, pos, state);
+        }
+
+        @Override
+        public void afterBreak(World world, PlayerEntity player, BlockPos pos, BlockState state, @Nullable BlockEntity blockEntity, ItemStack stack) {
+            player.incrementStat(Stats.MINED.getOrCreateStat(this));
+            player.addExhaustion(0.005F);
+            dropNBTStacks(state, world, pos, blockEntity, player, stack);
+        }
+
+        public static void dropNBTStacks(BlockState state, World world, BlockPos pos, @Nullable BlockEntity blockEntity, Entity entity, ItemStack stack) {
+            if (world instanceof ServerWorld)
+                getDroppedStacks(state, (ServerWorld) world, pos, blockEntity, entity, stack).forEach((itemStack) -> dropNBTStack(world, pos, blockEntity, itemStack));
+
+            state.onStacksDropped(world, pos, stack);
+        }
+
+        // This allows for dropping custom nbt tagged items when Virtual Tile is mined.
+        public static void dropNBTStack(World world, BlockPos pos, BlockEntity blockEntity, ItemStack stack) {
+            if (!world.isClient && !stack.isEmpty() && blockEntity instanceof VirtualTileBlockEntity && world.getGameRules().getBoolean(GameRules.DO_TILE_DROPS)) {
+                float generalOffset = 0.5F;
+                double xOffset = (world.random.nextFloat() * generalOffset) + 0.25D;
+                double yOffset = (world.random.nextFloat() * generalOffset) + 0.25D;
+                double zOffset = (world.random.nextFloat() * generalOffset) + 0.25D;
+
+                VirtualTileBlockEntity virtualTileBlockEntity = (VirtualTileBlockEntity) blockEntity;
+                CompoundTag rootStackTag = stack.getOrCreateTag();
+                Color blockEntityColor = virtualTileBlockEntity.getColor();
+                ItemEntity itemEntity;
+
+                if (rootStackTag != null && blockEntityColor != null) {
+                    CompoundTag blockEntityTag = rootStackTag.getCompound("BlockEntityTag");
+
+                    blockEntityTag.putInt("red", blockEntityColor.getRed());
+                    blockEntityTag.putInt("green", blockEntityColor.getGreen());
+                    blockEntityTag.putInt("blue", blockEntityColor.getBlue());
+
+                    // rootStackTag.put("BlockEntityTag", blockEntityTag);
+                    stack.putSubTag("BlockEntityTag", blockEntityTag);
+                }
+
+                itemEntity = new ItemEntity(world, pos.getX() + xOffset, pos.getY() + yOffset, pos.getZ() + zOffset, stack);
+                itemEntity.setToDefaultPickupDelay();
+
+                world.spawnEntity(itemEntity);
+            }
+        }
+
+        @Deprecated
+        @Override
+        public void onStacksDropped(BlockState state, World world, BlockPos pos, ItemStack stack) {
+            // Do Nothing For Now!!!
+            super.onStacksDropped(state, world, pos, stack);
         }
 
         // This is a hack and I'm not happy with it.
