@@ -1,14 +1,22 @@
 package me.alexisevelyn.randomtech.blocks;
 
 import me.alexisevelyn.randomtech.api.blocks.machines.FluidMachineBase;
+import me.alexisevelyn.randomtech.api.utilities.ItemManager;
 import me.alexisevelyn.randomtech.blockentities.BasicComputerBlockEntity;
 import me.alexisevelyn.randomtech.utility.Materials;
 import me.alexisevelyn.randomtech.utility.registryhelpers.main.RegistryHelper;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.fabricmc.fabric.api.tool.attribute.v1.FabricToolTags;
+import net.minecraft.block.Block;
 import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.item.BlockItem;
+import net.minecraft.item.ItemGroup;
+import net.minecraft.item.ItemStack;
 import net.minecraft.item.ToolMaterials;
 import net.minecraft.sound.BlockSoundGroup;
+import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.world.BlockView;
 import reborncore.api.blockentity.IMachineGuiHandler;
 

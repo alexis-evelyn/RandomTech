@@ -289,7 +289,7 @@ public class RegistryHelper {
         // ItemBlocks Machines
         Registry.register(Registry.ITEM, new Identifier(Main.MODID, "teleporter"), new BlockItem(TELEPORTER, new Item.Settings().group(MACHINERY_GROUP)));
         Registry.register(Registry.ITEM, new Identifier(Main.MODID, "fuser"), new BlockItem(FUSER, new Item.Settings().group(MACHINERY_GROUP)));
-        Registry.register(Registry.ITEM, new Identifier(Main.MODID, "basic_computer"), new BlockItem(BASIC_COMPUTER, new Item.Settings())); // TODO: Add to Machine Group When Basic Computer is Usable
+        // Registry.register(Registry.ITEM, new Identifier(Main.MODID, "basic_computer"), new BlockItem(BASIC_COMPUTER, new Item.Settings().group(MACHINERY_GROUP))); // TODO: Add to Machine Group When Basic Computer is Usable
     }
 
     private void registerSpecialBlockItems() {
