@@ -15,6 +15,13 @@
   },
   "result": {
     "item": "randomtech:virtual_tile",
+    "data": {
+      "BlockEntityTag": {
+        "red": 57,
+        "green": 148,
+        "blue": 25
+      }
+    },
     "count": 8
   }
 }

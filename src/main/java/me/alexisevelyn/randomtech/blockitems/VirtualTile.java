@@ -36,9 +36,9 @@ import java.util.Optional;
 import java.util.function.ToIntFunction;
 
 // This block was inspired by an accidental texture produced by my clear glass not rendering properly. :P
+// I may replace the current recipe system with something similar to ArmorDyeRecipe
 
 public class VirtualTile extends BlockItem {
-    // TODO: Figure out how to dynamically choose the color based on the crafting recipe ingredients
     // TODO: Grab Block NBT Data when block mined and store in ItemStack
 
     public static final Color defaultColor = Color.WHITE;
