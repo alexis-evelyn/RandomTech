@@ -27,7 +27,7 @@ import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
-import java.awt.Color;
+import java.awt.*;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.ToIntFunction;
@@ -38,22 +38,23 @@ public class VirtualTile extends BlockItem {
     // TODO: Figure out how to dynamically choose the color based on the crafting recipe ingredients
     // TODO: Grab Block NBT Data when block mined and store in ItemStack
 
+    public static final Color defaultColor = Color.WHITE;
+
     public VirtualTile(Block block, Settings settings) {
         super(block, settings);
     }
 
     // For Block Form
     public static int getEdgeColor(BlockState state, BlockRenderView world, BlockPos pos, int tintIndex) {
-        // TODO: Ensure data is synced between server and client.
         BlockEntity blockEntity = world.getBlockEntity(pos);
 
         if (!(blockEntity instanceof VirtualTileBlockEntity))
-            return new Color(255, 255, 255).getRGB();
+            return defaultColor.getRGB();
 
         VirtualTileBlockEntity virtualTileBlockEntity = (VirtualTileBlockEntity) blockEntity;
 
         if (virtualTileBlockEntity.getColor() == null)
-            return new Color(255, 255, 255).getRGB();
+            return defaultColor.getRGB();
 
         return virtualTileBlockEntity.getColor().getRGB();
     }
@@ -63,12 +64,12 @@ public class VirtualTile extends BlockItem {
         CompoundTag tag = itemStack.getTag();
 
         if (tag == null)
-            return new Color(255, 255, 255).getRGB();
+            return defaultColor.getRGB();
 
         CompoundTag blockEntityTag = tag.getCompound("BlockEntityTag");
 
         if (blockEntityTag == null)
-            return new Color(255, 255, 255).getRGB();
+            return defaultColor.getRGB();
 
         int red = blockEntityTag.getInt("red");
         int green = blockEntityTag.getInt("green");
