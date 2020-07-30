@@ -44,6 +44,9 @@ public class VirtualTile extends BlockItem {
     public static final Color defaultColor = Color.WHITE;
     public static Color initialColor = Color.BLACK;
 
+    public static final String NBT_CRAFTING_REGEX = "^\\$\\d+\\#i";
+    public static final String INTEGER_REGEX = "\\d+";
+
     public VirtualTile(Block block, Settings settings) {
         super(block, settings);
     }
@@ -90,9 +93,23 @@ public class VirtualTile extends BlockItem {
         if (blockEntityTag == null)
             return defaultColor.getRGB();
 
-        int red = blockEntityTag.getInt("red");
-        int green = blockEntityTag.getInt("green");
-        int blue = blockEntityTag.getInt("blue");
+        int red = Integer.parseInt(blockEntityTag.getString("red"));
+        int green = Integer.parseInt(blockEntityTag.getString("green"));
+        int blue = Integer.parseInt(blockEntityTag.getString("blue"));
+
+//        String redString = blockEntityTag.getString("red");
+//        String greenString = blockEntityTag.getString("green");
+//        String blueString = blockEntityTag.getString("blue");
+//
+//        // This is to parse out the integer from the NBT Crafting Recipes (after it first checks to make sure it's the NBT Crafting String)
+//        if (redString.matches(NBT_CRAFTING_REGEX))
+//            red = Integer.parseInt(redString.replaceAll(NBT_CRAFTING_REGEX, INTEGER_REGEX));
+//
+//        if (greenString.matches(NBT_CRAFTING_REGEX))
+//            green = Integer.parseInt(greenString.replaceAll(NBT_CRAFTING_REGEX, INTEGER_REGEX));
+//
+//        if (blueString.matches(NBT_CRAFTING_REGEX))
+//            blue = Integer.parseInt(blueString.replaceAll(NBT_CRAFTING_REGEX, INTEGER_REGEX));
 
         return new Color(red, green, blue).getRGB();
     }
