@@ -3,6 +3,7 @@ package me.alexisevelyn.randomtech.blockentities;
 import me.alexisevelyn.randomtech.blockitems.VirtualTile;
 import me.alexisevelyn.randomtech.utility.BlockEntities;
 import net.fabricmc.fabric.api.block.entity.BlockEntityClientSerializable;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.nbt.CompoundTag;
@@ -40,7 +41,21 @@ public class VirtualTileBlockEntity extends BlockEntity implements BlockEntityCl
     public void fromClientTag(CompoundTag compoundTag) {
         setColor(readColorFromTag(compoundTag));
 
-        // TODO: Get client to rerender the BlockColorProvider after this function is ran.
+        updateBlockForRendering();
+    }
+
+    public void updateBlockForRendering() {
+        if (world == null)
+            return;
+
+        BlockState blockState = world.getBlockState(pos);
+        Block block = blockState.getBlock();
+
+        if (!(block instanceof VirtualTile.VirtualTileBlock))
+            return;
+
+        VirtualTile.VirtualTileBlock virtualTileBlock = (VirtualTile.VirtualTileBlock) block;
+        virtualTileBlock.updateBlockForRender(world, pos);
     }
 
     // Ran by server

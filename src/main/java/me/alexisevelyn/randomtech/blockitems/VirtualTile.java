@@ -17,6 +17,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.ToolMaterials;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.sound.BlockSoundGroup;
+import net.minecraft.state.StateManager;
+import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.text.LiteralText;
 import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
@@ -39,6 +41,7 @@ public class VirtualTile extends BlockItem {
     // TODO: Grab Block NBT Data when block mined and store in ItemStack
 
     public static final Color defaultColor = Color.WHITE;
+    public static final Color initialColor = Color.BLACK;
 
     public VirtualTile(Block block, Settings settings) {
         super(block, settings);
@@ -54,7 +57,7 @@ public class VirtualTile extends BlockItem {
         VirtualTileBlockEntity virtualTileBlockEntity = (VirtualTileBlockEntity) blockEntity;
 
         if (virtualTileBlockEntity.getColor() == null)
-            return defaultColor.getRGB();
+            return initialColor.getRGB(); // The color is black so the hack of a rerender looks less hacky.
 
         return virtualTileBlockEntity.getColor().getRGB();
     }
@@ -108,6 +111,8 @@ public class VirtualTile extends BlockItem {
     }
 
     public static class VirtualTileBlock extends Block implements BlockEntityProvider {
+        public static BooleanProperty DUMMY = BooleanProperty.of("dummy");
+
         public VirtualTileBlock() {
             super(FabricBlockSettings
                     .of(Materials.TILE_MATERIAL)
@@ -120,6 +125,15 @@ public class VirtualTile extends BlockItem {
                     .blockVision(GenericBlockHelper::always)
                     .strength(1.8F, 1.8F)
                     .lightLevel(getLightLevel()));
+
+            this.setDefaultState(this.getStateManager().getDefaultState().with(DUMMY, false));
+        }
+
+        // This is a hack and I'm not happy with it.
+        public void updateBlockForRender(World world, BlockPos pos) {
+            boolean dummy = world.getBlockState(pos).get(DUMMY);
+            BlockState state = world.getBlockState(pos).with(DUMMY, !dummy);
+            world.setBlockState(pos, state, 3);
         }
 
         public static ToIntFunction<BlockState> getLightLevel() {
@@ -130,6 +144,12 @@ public class VirtualTile extends BlockItem {
         @Override
         public BlockEntity createBlockEntity(BlockView worldIn) {
             return new VirtualTileBlockEntity();
+        }
+
+        @Override
+        protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
+            DUMMY = BooleanProperty.of("dummy");
+            builder.add(DUMMY);
         }
     }
 }
