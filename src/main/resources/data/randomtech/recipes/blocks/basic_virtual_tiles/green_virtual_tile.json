@@ -1,4 +1,5 @@
 {
+  "_comment": "This recipe uses NBT Crafting. Make sure to put #i after your color codes and $ before your color codes to ensure that the crafted stacks will combine with the mined stacks",
   "type": "minecraft:crafting_shaped",
   "pattern": [
     "###",
@@ -17,9 +18,9 @@
     "item": "randomtech:virtual_tile",
     "data": {
       "BlockEntityTag": {
-        "red": 57,
-        "green": 148,
-        "blue": 25
+        "red": "$57#i",
+        "green": "$148#i",
+        "blue": "$25#i"
       }
     },
     "count": 8
