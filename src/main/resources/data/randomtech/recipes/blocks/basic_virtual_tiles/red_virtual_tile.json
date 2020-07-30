@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "#B#",
+    "###"
+  ],
+  "key": {
+    "B": {
+      "item": "minecraft:red_dye"
+    },
+    "#": {
+      "item": "minecraft:black_concrete"
+    }
+  },
+  "result": {
+    "item": "randomtech:virtual_tile",
+    "data": {
+      "BlockEntityTag": {
+        "red": 196,
+        "green": 27,
+        "blue": 33
+      }
+    },
+    "count": 8
+  }
+}
