@@ -36,6 +36,8 @@ import java.awt.Color;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.ToIntFunction;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 // This block was inspired by an accidental texture produced by my clear glass not rendering properly. :P
 // I may replace the current recipe system with something similar to ArmorDyeRecipe
@@ -44,8 +46,8 @@ public class VirtualTile extends BlockItem {
     public static final Color defaultColor = Color.WHITE;
     public static Color initialColor = Color.BLACK;
 
-    public static final String NBT_CRAFTING_REGEX = "^\\$\\d+\\#i";
-    public static final String INTEGER_REGEX = "\\d+";
+    public static final Pattern NBT_CRAFTING_REGEX = Pattern.compile("^\\$\\d+#i$");
+    public static final Pattern INTEGER_REGEX = Pattern.compile("\\d+");
 
     public VirtualTile(Block block, Settings settings) {
         super(block, settings);
@@ -88,30 +90,12 @@ public class VirtualTile extends BlockItem {
         if (tag == null)
             return defaultColor.getRGB();
 
-        CompoundTag blockEntityTag = tag.getCompound("BlockEntityTag");
+        Color color = parseColorFromItemStack(itemStack);
 
-        if (blockEntityTag == null)
+        if (color == null)
             return defaultColor.getRGB();
 
-        int red = Integer.parseInt(blockEntityTag.getString("red"));
-        int green = Integer.parseInt(blockEntityTag.getString("green"));
-        int blue = Integer.parseInt(blockEntityTag.getString("blue"));
-
-//        String redString = blockEntityTag.getString("red");
-//        String greenString = blockEntityTag.getString("green");
-//        String blueString = blockEntityTag.getString("blue");
-//
-//        // This is to parse out the integer from the NBT Crafting Recipes (after it first checks to make sure it's the NBT Crafting String)
-//        if (redString.matches(NBT_CRAFTING_REGEX))
-//            red = Integer.parseInt(redString.replaceAll(NBT_CRAFTING_REGEX, INTEGER_REGEX));
-//
-//        if (greenString.matches(NBT_CRAFTING_REGEX))
-//            green = Integer.parseInt(greenString.replaceAll(NBT_CRAFTING_REGEX, INTEGER_REGEX));
-//
-//        if (blueString.matches(NBT_CRAFTING_REGEX))
-//            blue = Integer.parseInt(blueString.replaceAll(NBT_CRAFTING_REGEX, INTEGER_REGEX));
-
-        return new Color(red, green, blue).getRGB();
+        return color.getRGB();
     }
 
     @Environment(EnvType.CLIENT)
@@ -135,12 +119,40 @@ public class VirtualTile extends BlockItem {
         if (!stack.hasTag() || stack.getTag() == null)
             return Optional.empty();
 
-        CompoundTag blockEntityTag = stack.getTag().getCompound("BlockEntityTag");
+        Color color = parseColorFromItemStack(stack);
 
-        if (blockEntityTag == null || !blockEntityTag.contains("red") || !blockEntityTag.contains("green") || !blockEntityTag.contains("blue"))
+        if (color == null)
             return Optional.empty();
 
-        return Optional.of(new Color(blockEntityTag.getInt("red"), blockEntityTag.getInt("green"), blockEntityTag.getInt("blue")));
+        return Optional.of(color);
+    }
+
+    @Nullable
+    public static Color parseColorFromItemStack(ItemStack itemStack) {
+        CompoundTag blockEntityTag = itemStack.getOrCreateTag().getCompound("BlockEntityTag");
+
+        if (blockEntityTag == null || !blockEntityTag.contains("red") || !blockEntityTag.contains("green") || !blockEntityTag.contains("blue"))
+            return null;
+
+        int red = blockEntityTag.getInt("red");
+        int green = blockEntityTag.getInt("green");
+        int blue = blockEntityTag.getInt("blue");
+
+        Matcher redMatcher = INTEGER_REGEX.matcher(blockEntityTag.getString("red"));
+        Matcher greenMatcher = INTEGER_REGEX.matcher(blockEntityTag.getString("green"));
+        Matcher blueMatcher = INTEGER_REGEX.matcher(blockEntityTag.getString("blue"));
+
+        // This is to parse out the integer from the NBT Crafting Recipes
+        if (redMatcher.find())
+            red = Integer.parseInt(redMatcher.group());
+
+        if (greenMatcher.find())
+            green = Integer.parseInt(greenMatcher.group());
+
+        if (blueMatcher.find())
+            blue = Integer.parseInt(blueMatcher.group());
+
+        return new Color(red, green, blue);
     }
 
     public static class VirtualTileBlock extends Block implements BlockEntityProvider {
