@@ -46,18 +46,23 @@ public class VirtualTile extends BlockItem {
     public static final Color defaultColor = Color.WHITE;
     public static Color initialColor = Color.BLACK;
 
-    public static final Pattern NBT_CRAFTING_REGEX = Pattern.compile("^\\$\\d+#i$");
+    // public static final Pattern NBT_CRAFTING_REGEX = Pattern.compile("^\\$\\d+#i$");
     public static final Pattern INTEGER_REGEX = Pattern.compile("\\d+");
 
     public VirtualTile(Block block, Settings settings) {
         super(block, settings);
     }
 
+    // Used to set the color client side before the server sends the color. No visual difference between this and server color if done correctly.
     @Override
     protected boolean postPlacement(BlockPos pos, World world, @Nullable PlayerEntity player, ItemStack stack, BlockState state) {
         boolean placed = super.postPlacement(pos, world, player, stack, state);
 
-        initialColor = new Color(getEdgeColor(stack, 0));
+        initialColor = parseColorFromItemStack(stack);
+
+        if (initialColor == null)
+            initialColor = defaultColor;
+
         BlockEntity blockEntity = world.getBlockEntity(pos);
         if (!(blockEntity instanceof VirtualTileBlockEntity))
             return placed;
@@ -156,7 +161,7 @@ public class VirtualTile extends BlockItem {
     }
 
     public static class VirtualTileBlock extends Block implements BlockEntityProvider {
-        public static BooleanProperty DUMMY = BooleanProperty.of("dummy");
+        public static BooleanProperty DUMMY = BooleanProperty.of("dummy"); // Minecraft updates the rendering of a block when the blockstate is changed. This forces re-rendering of the block.
 
         public VirtualTileBlock() {
             super(FabricBlockSettings
@@ -174,10 +179,10 @@ public class VirtualTile extends BlockItem {
             this.setDefaultState(this.getStateManager().getDefaultState().with(DUMMY, false));
         }
 
-        @Override
-        public void onBroken(WorldAccess world, BlockPos pos, BlockState state) {
-            super.onBroken(world, pos, state);
-        }
+//        @Override
+//        public void onBroken(WorldAccess world, BlockPos pos, BlockState state) {
+//            super.onBroken(world, pos, state);
+//        }
 
         @Override
         public void afterBreak(World world, PlayerEntity player, BlockPos pos, BlockState state, @Nullable BlockEntity blockEntity, ItemStack stack) {
@@ -224,12 +229,12 @@ public class VirtualTile extends BlockItem {
             }
         }
 
-        @Deprecated
-        @Override
-        public void onStacksDropped(BlockState state, World world, BlockPos pos, ItemStack stack) {
-            // Do Nothing For Now!!!
-            super.onStacksDropped(state, world, pos, stack);
-        }
+//        @Deprecated
+//        @Override
+//        public void onStacksDropped(BlockState state, World world, BlockPos pos, ItemStack stack) {
+//            // Do Nothing For Now!!!
+//            super.onStacksDropped(state, world, pos, stack);
+//        }
 
         // This is a hack and I'm not happy with it.
         public void updateBlockForRender(World world, BlockPos pos) {
@@ -240,7 +245,32 @@ public class VirtualTile extends BlockItem {
 
         public static ToIntFunction<BlockState> getLightLevel() {
             // TODO: Adjust light level based on color brightness.
-            return (state) -> 10; // 7?
+            return (state) -> {
+                // I'm not sure how to grab the block entity from only the blockstate.
+                // If it's even possible to track down the block entity without the world and position.
+
+                // Light Gray - #AAAAAA - (170, 170, 170)
+                // Calculated to Produce Light Level 10 At Source.
+
+                // Lighter Gray - #BEBEBE - (190, 190, 190)
+                // Calculated to Produce Light Level 11 At Source.
+
+                // Until we can grab the color of the block, we are just hardcoding the light level
+                // Once we gain the ability to grab the color, we just output the rgb values into these three variables and profit!!!!
+                float red = 190;
+                float green = 190;
+                float blue = 190;
+
+                // Formula pulled from https://stackoverflow.com/a/596241/6828099
+                // Minimum 0; Maximum 255
+                double brightness = (red + red + blue + green + green + green)/6;
+
+                int maxLightLevel = 15;
+                int minLightLevel = 0;
+                int maxBrightness = 255;
+
+                return (int) ((brightness * maxLightLevel) / maxBrightness) + minLightLevel;
+            };
         }
 
         @Override
