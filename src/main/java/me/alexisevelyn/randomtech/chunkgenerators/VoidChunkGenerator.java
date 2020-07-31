@@ -3,16 +3,19 @@ package me.alexisevelyn.randomtech.chunkgenerators;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import me.alexisevelyn.randomtech.blockentities.VirtualTileBlockEntity;
+import me.alexisevelyn.randomtech.entities.mob.CloudDemonEntity;
+import me.alexisevelyn.randomtech.entities.mob.WizardEntity;
 import me.alexisevelyn.randomtech.utility.registryhelpers.main.RegistryHelper;
 import net.minecraft.block.BlockState;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.BlockView;
-import net.minecraft.world.ChunkRegion;
-import net.minecraft.world.Heightmap;
-import net.minecraft.world.WorldAccess;
+import net.minecraft.util.math.ChunkPos;
+import net.minecraft.world.*;
+import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.source.BiomeAccess;
 import net.minecraft.world.biome.source.BiomeSource;
 import net.minecraft.world.chunk.Chunk;
+import net.minecraft.world.gen.ChunkRandom;
 import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.StructureAccessor;
 import net.minecraft.world.gen.chunk.ChunkGenerator;
@@ -81,6 +84,27 @@ public class VoidChunkGenerator extends ChunkGenerator {
     }
 
     @Override
+    public void populateEntities(ChunkRegion region) {
+        if (region.getWorld().getGameRules().getBoolean(GameRules.DO_MOB_SPAWNING)) {
+            // Center Chunk of Region
+            int chunkX = region.getCenterChunkX();
+            int chunkZ = region.getCenterChunkZ();
+
+            // Biome
+            Biome biome = region.getBiome((new ChunkPos(chunkX, chunkZ)).getCenterBlockPos());
+
+            // Random Chunk
+            ChunkRandom chunkRandom = new ChunkRandom();
+            chunkRandom.setPopulationSeed(region.getSeed(), chunkX << 4, chunkZ << 4);
+
+            // Populate Chunk
+            SpawnHelper.populateEntities(region, biome, chunkX, chunkZ, chunkRandom);
+
+            // TODO: Mess around with spawning!!!
+        }
+    }
+
+    @Override
     public void carve(long seed, BiomeAccess access, Chunk chunk, GenerationStep.Carver carver) {
         super.carve(seed, access, chunk, carver);
     }
@@ -88,7 +112,7 @@ public class VoidChunkGenerator extends ChunkGenerator {
     /**
      * Generates the base shape of the chunk out of the basic block states as decided by this chunk generator's config.
      *
-     * @param world
+     * @param world Server World
      * @param accessor
      * @param chunk
      */
