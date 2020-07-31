@@ -5,6 +5,7 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import me.alexisevelyn.randomtech.blockentities.VirtualTileBlockEntity;
 import me.alexisevelyn.randomtech.utility.registryhelpers.main.RegistryHelper;
 import net.minecraft.block.BlockState;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.ChunkRegion;
 import net.minecraft.world.Heightmap;
@@ -19,6 +20,7 @@ import net.minecraft.world.gen.chunk.StructuresConfig;
 import net.minecraft.world.gen.chunk.VerticalBlockSample;
 
 import java.awt.*;
+import java.util.Random;
 
 public class VoidChunkGenerator extends ChunkGenerator {
     public final boolean debug;
@@ -63,7 +65,7 @@ public class VoidChunkGenerator extends ChunkGenerator {
 
         // Setup Block Entity
         VirtualTileBlockEntity virtualTileBlockEntity = new VirtualTileBlockEntity();
-        virtualTileBlockEntity.setColor(Color.RED);
+        virtualTileBlockEntity.setColor(randomColor(region.getSeed(), chunk.getPos().getCenterBlockPos()));
 
         // Set Block and BlockState
         chunk.setBlockState(chunk.getPos().getCenterBlockPos(), RegistryHelper.VIRTUAL_TILE_BLOCK.getDefaultState(), false);
@@ -72,9 +74,15 @@ public class VoidChunkGenerator extends ChunkGenerator {
         chunk.setBlockEntity(chunk.getPos().getCenterBlockPos(), virtualTileBlockEntity);
     }
 
+    public Color randomColor(long seed, BlockPos blockPos) {
+        Random rand = new Random(seed + blockPos.asLong());
+
+        return new Color(rand.nextInt(255), rand.nextInt(255), rand.nextInt(255));
+    }
+
     @Override
     public void carve(long seed, BiomeAccess access, Chunk chunk, GenerationStep.Carver carver) {
-        // ???
+        super.carve(seed, access, chunk, carver);
     }
 
     /**
