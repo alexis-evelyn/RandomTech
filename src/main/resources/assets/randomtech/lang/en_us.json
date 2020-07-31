@@ -87,6 +87,7 @@
   "config.waila.plugin_randomtech": "Alexis' Random Tech",
   "config.waila.plugin_randomtech.display_power": "Display Energy Level",
   "config.waila.plugin_randomtech.display_tank": "Display Tank Contents",
+  "config.waila.plugin_randomtech.display_color": "Display Tile Color",
 
   "config.waila.plugin_randomtech.display_redstone_signal_strength": "Display Redstone Power",
 
