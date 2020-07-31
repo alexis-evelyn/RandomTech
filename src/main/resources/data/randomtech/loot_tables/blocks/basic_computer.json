@@ -1,4 +1,5 @@
 {
+  "_comment": "Change back to randomtech:basic_computer when a basic computer actually exists.",
   "type": "minecraft:block",
   "pools": [
     {
@@ -6,7 +7,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "randomtech:basic_computer"
+          "name": "minecraft:cobblestone"
         }
       ],
       "conditions": [
