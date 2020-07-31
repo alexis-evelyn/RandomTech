@@ -1,0 +1,11 @@
+{
+  "generator": {
+    "type": "randomtech:void",
+    "debug": false,
+    "biome_source": {
+      "type": "minecraft:fixed",
+      "biome": "minecraft:the_void"
+    }
+  },
+  "type": "randomtech:void_type"
+}

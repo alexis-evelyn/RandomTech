@@ -2,20 +2,22 @@ package me.alexisevelyn.randomtech.utility.registryhelpers.main;
 
 import me.alexisevelyn.randomtech.Main;
 import me.alexisevelyn.randomtech.armormaterials.PoweredArmorMaterial;
+import me.alexisevelyn.randomtech.blockitems.BottledDemon;
+import me.alexisevelyn.randomtech.blockitems.VirtualTile;
 import me.alexisevelyn.randomtech.blocks.BasicComputerBlock;
 import me.alexisevelyn.randomtech.blocks.FuserBlock;
 import me.alexisevelyn.randomtech.blocks.TeleporterBlock;
-import me.alexisevelyn.randomtech.blockitems.VirtualTile;
-import me.alexisevelyn.randomtech.blocks.wires.CobaltWire;
 import me.alexisevelyn.randomtech.blocks.glass.*;
 import me.alexisevelyn.randomtech.blocks.metals.CobaltBlock;
 import me.alexisevelyn.randomtech.blocks.ores.CobaltOre;
+import me.alexisevelyn.randomtech.blocks.wires.CobaltWire;
+import me.alexisevelyn.randomtech.chunkgenerators.VoidChunkGenerator;
+import me.alexisevelyn.randomtech.dimensionhelpers.VoidDimensionHelper;
 import me.alexisevelyn.randomtech.entities.mob.CloudDemonEntity;
 import me.alexisevelyn.randomtech.entities.mob.WizardEntity;
 import me.alexisevelyn.randomtech.fluids.*;
 import me.alexisevelyn.randomtech.fluids.blocks.*;
 import me.alexisevelyn.randomtech.guis.*;
-import me.alexisevelyn.randomtech.blockitems.BottledDemon;
 import me.alexisevelyn.randomtech.items.TeleporterLinker;
 import me.alexisevelyn.randomtech.items.armor.powered.PoweredBoots;
 import me.alexisevelyn.randomtech.items.armor.powered.PoweredChestplate;
@@ -29,6 +31,7 @@ import me.alexisevelyn.randomtech.items.tools.powered.*;
 import me.alexisevelyn.randomtech.utility.BlockEntities;
 import me.alexisevelyn.randomtech.utility.Recipes;
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
+import net.fabricmc.fabric.api.dimension.v1.FabricDimensions;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
 import net.minecraft.block.Block;
@@ -41,8 +44,10 @@ import net.minecraft.fluid.FlowableFluid;
 import net.minecraft.item.*;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
+import net.minecraft.util.registry.RegistryKey;
+import net.minecraft.world.World;
 
-import java.awt.Color;
+import java.awt.*;
 
 public class RegistryHelper {
     // Blocks
@@ -148,6 +153,13 @@ public class RegistryHelper {
     public static final SpawnEggItem WIZARD_SPAWN_EGG = new SpawnEggItem(WIZARD, Color.BLUE.getRGB(), Color.RED.getRGB(), new Item.Settings().group(ItemGroup.MISC));
     public static final SpawnEggItem CLOUD_DEMON_SPAWN_EGG = new SpawnEggItem(CLOUD_DEMON, Color.BLACK.getRGB(), Color.DARK_GRAY.getRGB(), new Item.Settings().group(ItemGroup.MISC));
 
+    // Chunk Generators
+    public static final Identifier voidGenerator = new Identifier(Main.MODID, "void");
+
+    // Dimensions
+    public static final Identifier voidDimensionIdentifier = new Identifier(Main.MODID, "void");
+    private static final RegistryKey<World> voidDimension = RegistryKey.of(Registry.DIMENSION, voidDimensionIdentifier);
+
     // Force Load BlockEntities.java Early On
     // This is important to make sure that BlockEntities are loaded before a world is loaded
     // Yes, I know about the warning of instantiating a utility class. That's intentional for the reason stated above.
@@ -189,6 +201,12 @@ public class RegistryHelper {
 
         // Spawn Eggs
         registerSpawnEggs();
+
+        // Chunk Generators
+        registerChunkGenerators();
+
+        // Dimensions
+        registerDimensions();
     }
 
     private void registerGeneralBlocks() {
@@ -339,5 +357,15 @@ public class RegistryHelper {
         // Spawn Eggs
         Registry.register(Registry.ITEM, new Identifier(Main.MODID, "wizard_spawn_egg"), WIZARD_SPAWN_EGG);
         Registry.register(Registry.ITEM, new Identifier(Main.MODID, "cloud_demon_spawn_egg"), CLOUD_DEMON_SPAWN_EGG);
+    }
+
+    private void registerChunkGenerators() {
+        // Chunk Generators
+        Registry.register(Registry.CHUNK_GENERATOR, voidGenerator, VoidChunkGenerator.CODEC);
+    }
+
+    // Dimensions are actually registered as JSON files now. So, we just set up the chunk generator and player placement code.
+    private void registerDimensions() {
+        FabricDimensions.registerDefaultPlacer(voidDimension, VoidDimensionHelper::placeEntityInVoid);
     }
 }
