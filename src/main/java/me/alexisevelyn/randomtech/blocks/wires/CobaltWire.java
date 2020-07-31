@@ -1,14 +1,22 @@
 package me.alexisevelyn.randomtech.blocks.wires;
 
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Material;
 import net.minecraft.block.RedstoneWireBlock;
+import net.minecraft.block.enums.WireConnection;
 import net.minecraft.client.util.math.Vector3f;
+import net.minecraft.particle.DustParticleEffect;
+import net.minecraft.state.property.Property;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.BlockRenderView;
+import net.minecraft.world.World;
 
+import java.util.Random;
 import java.util.function.ToIntFunction;
 
 // This seems like a cool idea for a bluestone dust like what Mumbo joked about one time
@@ -41,6 +49,42 @@ public class CobaltWire extends RedstoneWireBlock {
 
     public static int getPower(BlockState state) {
         return state.get(RedstoneWireBlock.POWER);
+    }
+
+    // Responsible for setting particle properties including color of powered line
+    @Override
+    @Environment(EnvType.CLIENT)
+    public void randomDisplayTick(BlockState state, World world, BlockPos pos, Random random) {
+        int i = state.get(POWER);
+        if (i != 0) {
+
+            for (Direction direction : Direction.Type.HORIZONTAL) {
+                WireConnection wireConnection = state.get(DIRECTION_TO_WIRE_CONNECTION_PROPERTY.get(direction));
+                switch (wireConnection) {
+                    case UP:
+                        this.createParticle(world, random, pos, wireColor[i], direction, Direction.UP, -0.5F, 0.5F);
+                    case SIDE:
+                        this.createParticle(world, random, pos, wireColor[i], Direction.DOWN, direction, 0.0F, 0.5F);
+                        break;
+                    case NONE:
+                    default:
+                        this.createParticle(world, random, pos, wireColor[i], Direction.DOWN, direction, 0.0F, 0.3F);
+                }
+            }
+        }
+    }
+
+    public void createParticle(World world, Random random, BlockPos blockPos, Vector3f vector3f, Direction direction, Direction direction2, float f, float g) {
+        float h = g - f;
+
+        if (random.nextFloat() < 0.2F * h) {
+            float j = f + h * random.nextFloat();
+            double randomOffsetX = 0.5D + (0.4375F * direction.getOffsetX()) + (j * direction2.getOffsetX());
+            double randomOffsetY = 0.5D + (0.4375F * direction.getOffsetY()) + (j * direction2.getOffsetY());
+            double randomOffsetZ = 0.5D + (0.4375F * direction.getOffsetZ()) + (j * direction2.getOffsetZ());
+
+            world.addParticle(new DustParticleEffect(vector3f.getX(), vector3f.getY(), vector3f.getZ(), 1.0F), blockPos.getX() + randomOffsetX, blockPos.getY() + randomOffsetY, blockPos.getZ() + randomOffsetZ, 0.0D, 0.0D, 0.0D);
+        }
     }
 
     static {
