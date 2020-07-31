@@ -2,17 +2,23 @@ package me.alexisevelyn.randomtech.chunkgenerators;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import me.alexisevelyn.randomtech.blockentities.VirtualTileBlockEntity;
+import me.alexisevelyn.randomtech.utility.registryhelpers.main.RegistryHelper;
 import net.minecraft.block.BlockState;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.ChunkRegion;
 import net.minecraft.world.Heightmap;
 import net.minecraft.world.WorldAccess;
+import net.minecraft.world.biome.source.BiomeAccess;
 import net.minecraft.world.biome.source.BiomeSource;
 import net.minecraft.world.chunk.Chunk;
+import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.StructureAccessor;
 import net.minecraft.world.gen.chunk.ChunkGenerator;
 import net.minecraft.world.gen.chunk.StructuresConfig;
 import net.minecraft.world.gen.chunk.VerticalBlockSample;
+
+import java.awt.*;
 
 public class VoidChunkGenerator extends ChunkGenerator {
     public final boolean debug;
@@ -54,6 +60,21 @@ public class VoidChunkGenerator extends ChunkGenerator {
     @Override
     public void buildSurface(ChunkRegion region, Chunk chunk) {
         // Nothing For Now!!!
+
+        // Setup Block Entity
+        VirtualTileBlockEntity virtualTileBlockEntity = new VirtualTileBlockEntity();
+        virtualTileBlockEntity.setColor(Color.RED);
+
+        // Set Block and BlockState
+        chunk.setBlockState(chunk.getPos().getCenterBlockPos(), RegistryHelper.VIRTUAL_TILE_BLOCK.getDefaultState(), false);
+
+        // Set Block Entity
+        chunk.setBlockEntity(chunk.getPos().getCenterBlockPos(), virtualTileBlockEntity);
+    }
+
+    @Override
+    public void carve(long seed, BiomeAccess access, Chunk chunk, GenerationStep.Carver carver) {
+        // ???
     }
 
     /**
@@ -70,7 +91,7 @@ public class VoidChunkGenerator extends ChunkGenerator {
 
     @Override
     public int getHeight(int x, int z, Heightmap.Type heightmapType) {
-        return 0; // Intentionally Left 0 For Now!!!
+        return 1;
     }
 
     @Override

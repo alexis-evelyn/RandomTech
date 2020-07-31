@@ -1,6 +1,6 @@
 {
   "ultrawarm": false,
-  "natural": false,
+  "natural": true,
   "shrunk": false,
   "ambient_light": 0.1,
   "has_skylight": true,
@@ -9,6 +9,6 @@
   "logical_height" : 256,
   "has_raids" : false,
   "respawn_anchor_works": false,
-  "bed_works" : false,
+  "bed_works" : true,
   "piglin_safe" : false
 }

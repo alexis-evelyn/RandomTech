@@ -19,7 +19,7 @@ public class VoidDimensionHelper {
     }
 
     public static BlockPattern.TeleportTarget placeEntityInVoid(Entity teleported, ServerWorld destination, Direction portalDir, double horizontalOffset, double verticalOffset) {
-        // TODO: Test Me
+        // TODO: Figure out how to get this to run.
 
         // Setup Block Entity
         VirtualTileBlockEntity virtualTileBlockEntity = new VirtualTileBlockEntity();
