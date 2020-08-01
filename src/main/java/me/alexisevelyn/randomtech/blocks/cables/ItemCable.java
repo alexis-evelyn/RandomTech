@@ -28,7 +28,7 @@ public class ItemCable extends GenericCable {
     }
 
     @Override
-    public boolean isInstanceOfMachine(Block block) {
+    public boolean isInstanceOfInterfaceableBlock(Block block) {
         return block instanceof InventoryProvider;
     }
 }

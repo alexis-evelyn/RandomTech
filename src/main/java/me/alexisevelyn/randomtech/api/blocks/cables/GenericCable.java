@@ -55,12 +55,11 @@ public abstract class GenericCable extends Block {
     public abstract boolean isInstanceOfCable(Block block);
 
     // This is to make sure that we only connect to blocks that are supposed to connect to this cable.
-    // It doesn't necessarily have to be a machine, I just don't currently have a better name for it.
-    public abstract boolean isInstanceOfMachine(Block block);
+    public abstract boolean isInstanceOfInterfaceableBlock(Block block);
 
-    // Check if Air
-    public boolean isInstanceOfAir(Block block) {
-        return block instanceof AirBlock;
+    // Check if not a connectable block
+    public boolean isInstanceOfNonConnectableBlock(Block block) {
+        return !isInstanceOfCable(block) && !isInstanceOfInterfaceableBlock(block);
     }
 
     @Override
@@ -73,27 +72,25 @@ public abstract class GenericCable extends Block {
     public void onBroken(WorldAccess world, BlockPos pos, BlockState state) {
         super.onBroken(world, pos, state);
 
-        // TODO: Get this working
-        // The below function seems to cancel block breaking
-        // setupCableStates(world, pos, state);
+        // Responsible for Visually Disconnecting Cables on Block Breaking
+        setupCableStates(world, pos, state);
     }
 
     public BlockState setCableState(BlockState ourBlockState, BlockState neighborBlockState, EnumProperty<CableConnection> ourProperty, EnumProperty<CableConnection> neighborProperty, WorldAccess world, BlockPos ourPos, BlockPos neighborPos) {
-        if (isInstanceOfCable(neighborBlockState.getBlock())) {
+        if (isInstanceOfCable(ourBlockState.getBlock()) && isInstanceOfCable(neighborBlockState.getBlock())) {
             world.setBlockState(neighborPos, neighborBlockState.with(neighborProperty, CableConnection.CABLE), 0x1); // Flag 0x1 = 0b0000001 which means Propagate Changes. More info in net.minecraft.world.ModifiableWorld
-            world.setBlockState(ourPos, ourBlockState.with(ourProperty, CableConnection.CABLE), 0x1); // Flag 0x1 = 0b0000001 which means Propagate Changes. More info in net.minecraft.world.ModifiableWorld
+            world.setBlockState(ourPos, ourBlockState.with(ourProperty, CableConnection.CABLE), 0x1);
+        } else if (isInstanceOfInterfaceableBlock(neighborBlockState.getBlock())) {
+            // TODO: Get this to run when placing cable next to interfaceable block
+            System.out.println("Connected To Interfaceable Block At: " + neighborPos);
+            // Do Nothing For Now!!!
 
-            // Return Our Latest Changes So Changes Can Stack
-            return world.getBlockState(ourPos);
-        } else if (isInstanceOfMachine(neighborBlockState.getBlock())) {
-            System.out.println("Connected To Machine At: " + neighborPos);
-            // Do Nothing For Now!!!
-        } else if (isInstanceOfAir(ourBlockState.getBlock())) {
-            System.out.println("Broke Our Cable!!!");
-            // Do Nothing For Now!!!
+        } else if (isInstanceOfNonConnectableBlock(ourBlockState.getBlock()) && isInstanceOfCable(neighborBlockState.getBlock())) {
+            world.setBlockState(neighborPos, neighborBlockState.with(neighborProperty, CableConnection.NONE), 0x1);
         }
 
-        return ourBlockState;
+        // Return Our Latest Changes So Changes Can Stack
+        return world.getBlockState(ourPos);
     }
 
     public void setupCableStates(WorldAccess world, BlockPos pos, BlockState state) {
