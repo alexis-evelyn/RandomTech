@@ -71,6 +71,7 @@ dependencies {
 	// Reborn's Energy API
 	modApi "teamreborn:energy:${project.reborn_energy_version}"
 
+	// Note: The Tags Being Broken Only Occur in a Dev Environment and Is A Fabric Bug: https://github.com/FabricMC/fabric/issues/66 - Example is #minecraft:planks
 	// Tech Reborn (For Development Testing)
 	modRuntime "TechReborn:TechReborn-${project.tech_reborn_version}"
 
