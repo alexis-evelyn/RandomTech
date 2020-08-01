@@ -3,11 +3,11 @@ package me.alexisevelyn.randomtech.chunkgenerators;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import me.alexisevelyn.randomtech.blockentities.VirtualTileBlockEntity;
-import me.alexisevelyn.randomtech.entities.mob.CloudDemonEntity;
-import me.alexisevelyn.randomtech.entities.mob.WizardEntity;
 import me.alexisevelyn.randomtech.utility.registryhelpers.main.RegistryHelper;
 import net.minecraft.block.BlockState;
-import net.minecraft.server.MinecraftServer;
+import net.minecraft.block.StructureBlock;
+import net.minecraft.structure.StructureStart;
+import net.minecraft.util.math.BlockBox;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.world.*;
@@ -21,6 +21,7 @@ import net.minecraft.world.gen.StructureAccessor;
 import net.minecraft.world.gen.chunk.ChunkGenerator;
 import net.minecraft.world.gen.chunk.StructuresConfig;
 import net.minecraft.world.gen.chunk.VerticalBlockSample;
+import net.minecraft.world.gen.feature.StructureFeature;
 
 import java.awt.*;
 import java.util.Random;
@@ -64,23 +65,38 @@ public class VoidChunkGenerator extends ChunkGenerator {
 
     @Override
     public void buildSurface(ChunkRegion region, Chunk chunk) {
-        // Nothing For Now!!!
+        // Setup Color For Chunk
+        Color color = randomColor(region.getSeed(), chunk.getPos().getCenterBlockPos());
 
-        // Setup Block Entity
-        VirtualTileBlockEntity virtualTileBlockEntity = new VirtualTileBlockEntity();
-        virtualTileBlockEntity.setColor(randomColor(region.getSeed(), chunk.getPos().getCenterBlockPos()));
+        VirtualTileBlockEntity virtualTileBlockEntity;
+        BlockPos pos;
+        for (int x = chunk.getPos().getStartX(); x <= chunk.getPos().getEndX(); x++) {
+            for (int z = chunk.getPos().getStartZ(); z <= chunk.getPos().getEndZ(); z++) {
+                // Setup Block Entity
+                virtualTileBlockEntity = new VirtualTileBlockEntity();
+                virtualTileBlockEntity.setColor(color);
 
-        // Set Block and BlockState
-        chunk.setBlockState(chunk.getPos().getCenterBlockPos(), RegistryHelper.VIRTUAL_TILE_BLOCK.getDefaultState(), false);
+                // Setup Position
+                pos = new BlockPos(x, 1, z);
 
-        // Set Block Entity
-        chunk.setBlockEntity(chunk.getPos().getCenterBlockPos(), virtualTileBlockEntity);
-    }
+                // Set Block and BlockState
+                chunk.setBlockState(pos, RegistryHelper.VIRTUAL_TILE_BLOCK.getDefaultState(), false);
+
+                // Set Block Entity
+                chunk.setBlockEntity(pos, virtualTileBlockEntity);
+            }
+        }
+   }
 
     public Color randomColor(long seed, BlockPos blockPos) {
         Random rand = new Random(seed + blockPos.asLong());
 
         return new Color(rand.nextInt(255), rand.nextInt(255), rand.nextInt(255));
+    }
+
+    @Override
+    public void generateFeatures(ChunkRegion region, StructureAccessor accessor) {
+        // Do Nothing For Now!!!
     }
 
     @Override

@@ -32,6 +32,9 @@ import me.alexisevelyn.randomtech.utility.BlockEntities;
 import me.alexisevelyn.randomtech.utility.Recipes;
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
 import net.fabricmc.fabric.api.dimension.v1.FabricDimensions;
+import net.fabricmc.fabric.api.gamerule.v1.CustomGameRuleCategory;
+import net.fabricmc.fabric.api.gamerule.v1.GameRuleFactory;
+import net.fabricmc.fabric.api.gamerule.v1.GameRuleRegistry;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
 import net.minecraft.block.Block;
@@ -42,9 +45,12 @@ import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.SpawnGroup;
 import net.minecraft.fluid.FlowableFluid;
 import net.minecraft.item.*;
+import net.minecraft.text.TranslatableText;
+import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.util.registry.RegistryKey;
+import net.minecraft.world.GameRules;
 import net.minecraft.world.World;
 
 import java.awt.*;
@@ -171,7 +177,11 @@ public class RegistryHelper {
     // Yes, I know about the warning of instantiating a utility class. That's intentional for the reason stated above.
     @SuppressWarnings({"InstantiationOfUtilityClass", "unused"})
     public static final Recipes customRecipes = new Recipes();
-    
+
+    // Gamerules and Gamerule Categories
+    public static final CustomGameRuleCategory RANDOM_TECH_GAMERULES_CATEGORY = new CustomGameRuleCategory(new Identifier(Main.MODID, "gamerules"), new TranslatableText(Main.MODID + ".gamerules").styled(style -> style.withBold(true).withColor(Formatting.DARK_PURPLE)));
+    public static final GameRules.Key<GameRules.BooleanRule> HIDE_EXPERIMENTAL_SCREEN_GAMERULE = GameRuleRegistry.register("hideExperimentalScreen", RANDOM_TECH_GAMERULES_CATEGORY, GameRuleFactory.createBooleanRule(false));
+
     public void register() {
         // Blocks
         registerGeneralBlocks();

@@ -41,7 +41,8 @@
     "mixins/smithing-recipe-nbt-modifier-mixin.json",
     "mixins/dynamic-armor-texture-mixin.json",
     "mixins/cobalt-wiring-mixin.json",
-    "mixins/death-screen-mixin.json"
+    "mixins/death-screen-mixin.json",
+    "mixins/gamerule-based-backup-screen-mixin.json"
   ],
 
   "depends": {

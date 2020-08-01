@@ -12,7 +12,6 @@ import nerdhub.cardinal.components.api.event.ItemComponentCallback;
 import net.fabricmc.fabric.api.event.registry.RegistryEntryAddedCallback;
 import net.fabricmc.fabric.api.network.PacketContext;
 import net.fabricmc.fabric.api.network.ServerSidePacketRegistry;
-import net.minecraft.block.Blocks;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundTag;
@@ -20,11 +19,6 @@ import net.minecraft.network.PacketByteBuf;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.biome.Biome;
-import net.minecraft.world.gen.GenerationStep;
-import net.minecraft.world.gen.decorator.Decorator;
-import net.minecraft.world.gen.decorator.RangeDecoratorConfig;
-import net.minecraft.world.gen.feature.Feature;
-import net.minecraft.world.gen.feature.OreFeatureConfig;
 
 public class PostRegistryHelper {
     public static final ComponentType<BrokenItemComponent> BROKEN_ITEM_COMPONENT =
