@@ -3,7 +3,6 @@ package me.alexisevelyn.randomtech.api.blocks.cables;
 import me.alexisevelyn.randomtech.api.utilities.CalculationHelper;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.LivingEntity;
@@ -62,7 +61,7 @@ public abstract class GenericCable extends Block {
     @Override
     public void onPlaced(World world, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack itemStack) {
         // Responsible for Visually Connecting Cables Together
-        setupCableStates(world, pos, state, false);
+        setupCableStates(world, pos, state);
     }
 
     @Override
@@ -77,7 +76,7 @@ public abstract class GenericCable extends Block {
     @Environment(EnvType.CLIENT)
     public void randomDisplayTick(BlockState state, World world, BlockPos pos, Random random) {
         // No Way To Get A Block Update and Not Rely on a Ticker?
-        setupCableStates(world, pos, state, false);
+        setupCableStates(world, pos, state);
     }
 
     protected BlockState setCableState(BlockState ourBlockState, BlockState neighborBlockState, EnumProperty<CableConnection> ourProperty, EnumProperty<CableConnection> neighborProperty, WorldAccess world, BlockPos ourPos, BlockPos neighborPos, boolean broken) {
@@ -100,6 +99,10 @@ public abstract class GenericCable extends Block {
 
         // Return Our Latest Changes So Changes Can Stack
         return world.getBlockState(ourPos);
+    }
+
+    protected void setupCableStates(WorldAccess world, BlockPos pos, BlockState state) {
+        setupCableStates(world, pos, state, false);
     }
 
     protected void setupCableStates(WorldAccess world, BlockPos pos, BlockState state, boolean broken) {
