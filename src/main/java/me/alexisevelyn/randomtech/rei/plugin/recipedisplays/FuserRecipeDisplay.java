@@ -1,17 +1,14 @@
 package me.alexisevelyn.randomtech.rei.plugin.recipedisplays;
 
 import me.alexisevelyn.randomtech.api.utilities.recipemanagers.GenericFluidRecipe;
-import me.alexisevelyn.randomtech.guis.FuserGui;
 import me.alexisevelyn.randomtech.rei.plugin.REIPlugin;
 import me.shedaniel.rei.api.EntryStack;
 import me.shedaniel.rei.api.RecipeDisplay;
 import me.shedaniel.rei.api.TransferRecipeDisplay;
 import me.shedaniel.rei.server.ContainerInfo;
 import net.minecraft.item.ItemStack;
-import net.minecraft.recipe.AbstractCookingRecipe;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.util.Identifier;
-import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.Nullable;
 import reborncore.common.crafting.ingredient.RebornIngredient;
 import reborncore.common.fluid.container.FluidInstance;
