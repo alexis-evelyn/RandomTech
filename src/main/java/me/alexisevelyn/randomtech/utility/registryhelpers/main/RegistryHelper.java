@@ -7,6 +7,7 @@ import me.alexisevelyn.randomtech.blockitems.VirtualTile;
 import me.alexisevelyn.randomtech.blocks.BasicComputerBlock;
 import me.alexisevelyn.randomtech.blocks.FuserBlock;
 import me.alexisevelyn.randomtech.blocks.TeleporterBlock;
+import me.alexisevelyn.randomtech.blocks.cables.ItemCable;
 import me.alexisevelyn.randomtech.blocks.glass.*;
 import me.alexisevelyn.randomtech.blocks.metals.CobaltBlock;
 import me.alexisevelyn.randomtech.blocks.ores.CobaltOre;
@@ -72,6 +73,8 @@ public class RegistryHelper {
     public static final Block COBALT_WIRE = new CobaltWire();
 
     public static final Block BOTTLED_DEMON_BLOCK = new BottledDemon.BottledDemonBlock();
+
+    public static final Block ITEM_CABLE_BLOCK = new ItemCable();
 
     // Metals
     public static final Block COBALT_BLOCK = new CobaltBlock();
@@ -239,6 +242,8 @@ public class RegistryHelper {
         Registry.register(Registry.BLOCK, new Identifier(Main.MODID, "cobalt_wire"), COBALT_WIRE);
 
         Registry.register(Registry.BLOCK, new Identifier(Main.MODID, "bottled_demon"), BOTTLED_DEMON_BLOCK);
+
+        Registry.register(Registry.BLOCK, new Identifier(Main.MODID, "item_cable"), ITEM_CABLE_BLOCK);
     }
 
     private void registerOreBlocks() {
@@ -307,6 +312,8 @@ public class RegistryHelper {
         Registry.register(Registry.ITEM, new Identifier(Main.MODID, "cobalt_block"), new BlockItem(COBALT_BLOCK, new Item.Settings().group(ItemGroup.DECORATIONS)));
 
         Registry.register(Registry.ITEM, new Identifier(Main.MODID, "cobalt_dust"), new BlockItem(COBALT_WIRE, new Item.Settings().group(ItemGroup.REDSTONE)));
+
+        Registry.register(Registry.ITEM, new Identifier(Main.MODID, "item_cable"), new BlockItem(ITEM_CABLE_BLOCK, new Item.Settings().group(MACHINERY_GROUP)));
     }
 
     private void registerOreItemBlocks() {

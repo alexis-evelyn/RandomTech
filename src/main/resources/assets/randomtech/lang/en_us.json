@@ -53,6 +53,10 @@
   "block.randomtech.cobalt_ore": "Cobalt Ore",
   "block.randomtech.cobalt_wire": "Cobalt Wire",
 
+  "block.randomtech.item_cable": "Item Cable",
+  "block.randomtech.fluid_cable": "Fluid Cable",
+  "block.randomtech.energy_cable": "Energy Cable",
+
   "block.randomtech.bottled_demon": "Bottled Demon",
 
   "fluid.randomtech.experience": "Experience",

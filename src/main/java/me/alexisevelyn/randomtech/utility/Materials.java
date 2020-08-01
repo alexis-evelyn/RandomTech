@@ -12,4 +12,7 @@ public final class Materials {
 
     // For metal ores like Cobalt. Meant to be mined with Mining Level 5 or higher
     public static final Material METAL_ORE_MATERIAL = new FabricMaterialBuilder(MaterialColor.IRON).build();
+
+    // For Cables
+    public static final Material CABLE_MATERIAL = Material.STONE;
 }
