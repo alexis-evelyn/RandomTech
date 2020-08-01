@@ -18,12 +18,12 @@ import net.minecraft.world.WorldAccess;
 import org.jetbrains.annotations.Nullable;
 
 public abstract class GenericCable extends Block {
-    public static EnumProperty<CableConnection> CABLE_CONNECTION_NORTH = EnumProperty.of("north", CableConnection.class, CableConnection.NONE, CableConnection.CABLE, CableConnection.MACHINE);
-    public static EnumProperty<CableConnection> CABLE_CONNECTION_SOUTH = EnumProperty.of("south", CableConnection.class, CableConnection.NONE, CableConnection.CABLE, CableConnection.MACHINE);
-    public static EnumProperty<CableConnection> CABLE_CONNECTION_EAST = EnumProperty.of("east", CableConnection.class, CableConnection.NONE, CableConnection.CABLE, CableConnection.MACHINE);
-    public static EnumProperty<CableConnection> CABLE_CONNECTION_WEST = EnumProperty.of("west", CableConnection.class, CableConnection.NONE, CableConnection.CABLE, CableConnection.MACHINE);
-    public static EnumProperty<CableConnection> CABLE_CONNECTION_UP = EnumProperty.of("up", CableConnection.class, CableConnection.NONE, CableConnection.CABLE, CableConnection.MACHINE);
-    public static EnumProperty<CableConnection> CABLE_CONNECTION_DOWN = EnumProperty.of("down", CableConnection.class, CableConnection.NONE, CableConnection.CABLE, CableConnection.MACHINE);
+    public static EnumProperty<CableConnection> CABLE_CONNECTION_NORTH = EnumProperty.of("north", CableConnection.class, CableConnection.NONE, CableConnection.CABLE, CableConnection.INTERFACEABLE);
+    public static EnumProperty<CableConnection> CABLE_CONNECTION_SOUTH = EnumProperty.of("south", CableConnection.class, CableConnection.NONE, CableConnection.CABLE, CableConnection.INTERFACEABLE);
+    public static EnumProperty<CableConnection> CABLE_CONNECTION_EAST = EnumProperty.of("east", CableConnection.class, CableConnection.NONE, CableConnection.CABLE, CableConnection.INTERFACEABLE);
+    public static EnumProperty<CableConnection> CABLE_CONNECTION_WEST = EnumProperty.of("west", CableConnection.class, CableConnection.NONE, CableConnection.CABLE, CableConnection.INTERFACEABLE);
+    public static EnumProperty<CableConnection> CABLE_CONNECTION_UP = EnumProperty.of("up", CableConnection.class, CableConnection.NONE, CableConnection.CABLE, CableConnection.INTERFACEABLE);
+    public static EnumProperty<CableConnection> CABLE_CONNECTION_DOWN = EnumProperty.of("down", CableConnection.class, CableConnection.NONE, CableConnection.CABLE, CableConnection.INTERFACEABLE);
 
     private static final Vec3i northVector = Direction.NORTH.getVector();
     private static final Vec3i southVector = Direction.SOUTH.getVector();
@@ -52,14 +52,14 @@ public abstract class GenericCable extends Block {
     // This is to make sure that we only connect to the proper cable instance.
     // If you really want, you can connect to any cable by just checking if it's an instance of GenericCable.
     // Don't expect it to look right though if the other cable doesn't do the same.
-    public abstract boolean isInstanceOfCable(Block block);
+    public abstract boolean isInstanceOfCable(Block block, WorldAccess world, BlockPos blockPos);
 
     // This is to make sure that we only connect to blocks that are supposed to connect to this cable.
-    public abstract boolean isInstanceOfInterfaceableBlock(Block block);
+    public abstract boolean isInstanceOfInterfaceableBlock(Block block, WorldAccess world, BlockPos blockPos);
 
     // Check if not a connectable block
-    public boolean isInstanceOfNonConnectableBlock(Block block) {
-        return !isInstanceOfCable(block) && !isInstanceOfInterfaceableBlock(block);
+    public boolean isInstanceOfNonConnectableBlock(Block block, WorldAccess world, BlockPos blockPos) {
+        return !isInstanceOfCable(block, world, blockPos) && !isInstanceOfInterfaceableBlock(block, world, blockPos);
     }
 
     @Override
@@ -77,15 +77,12 @@ public abstract class GenericCable extends Block {
     }
 
     public BlockState setCableState(BlockState ourBlockState, BlockState neighborBlockState, EnumProperty<CableConnection> ourProperty, EnumProperty<CableConnection> neighborProperty, WorldAccess world, BlockPos ourPos, BlockPos neighborPos) {
-        if (isInstanceOfCable(ourBlockState.getBlock()) && isInstanceOfCable(neighborBlockState.getBlock())) {
+        if (isInstanceOfCable(ourBlockState.getBlock(), world, ourPos) && isInstanceOfCable(neighborBlockState.getBlock(), world, neighborPos)) {
             world.setBlockState(neighborPos, neighborBlockState.with(neighborProperty, CableConnection.CABLE), 0x1); // Flag 0x1 = 0b0000001 which means Propagate Changes. More info in net.minecraft.world.ModifiableWorld
             world.setBlockState(ourPos, ourBlockState.with(ourProperty, CableConnection.CABLE), 0x1);
-        } else if (isInstanceOfInterfaceableBlock(neighborBlockState.getBlock())) {
-            // TODO: Get this to run when placing cable next to interfaceable block
-            System.out.println("Connected To Interfaceable Block At: " + neighborPos);
-            // Do Nothing For Now!!!
-
-        } else if (isInstanceOfNonConnectableBlock(ourBlockState.getBlock()) && isInstanceOfCable(neighborBlockState.getBlock())) {
+        } else if (isInstanceOfCable(ourBlockState.getBlock(), world, ourPos) && isInstanceOfInterfaceableBlock(neighborBlockState.getBlock(), world, neighborPos)) {
+            world.setBlockState(ourPos, ourBlockState.with(ourProperty, CableConnection.INTERFACEABLE), 0x1);
+        } else if (isInstanceOfNonConnectableBlock(ourBlockState.getBlock(), world, ourPos) && isInstanceOfCable(neighborBlockState.getBlock(), world, neighborPos)) {
             world.setBlockState(neighborPos, neighborBlockState.with(neighborProperty, CableConnection.NONE), 0x1);
         }
 

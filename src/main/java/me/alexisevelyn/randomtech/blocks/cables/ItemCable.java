@@ -6,7 +6,10 @@ import me.alexisevelyn.randomtech.utility.Materials;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.Block;
 import net.minecraft.block.InventoryProvider;
+import net.minecraft.inventory.Inventory;
 import net.minecraft.sound.BlockSoundGroup;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.WorldAccess;
 
 public class ItemCable extends GenericCable {
     public ItemCable() {
@@ -23,12 +26,16 @@ public class ItemCable extends GenericCable {
     }
 
     @Override
-    public boolean isInstanceOfCable(Block block) {
+    public boolean isInstanceOfCable(Block block, WorldAccess world, BlockPos blockPos) {
         return block instanceof ItemCable;
     }
 
     @Override
-    public boolean isInstanceOfInterfaceableBlock(Block block) {
-        return block instanceof InventoryProvider;
+    public boolean isInstanceOfInterfaceableBlock(Block block, WorldAccess world, BlockPos blockPos) {
+        if (block instanceof InventoryProvider)
+            return true;
+
+        // Checking the instance of also inherently checks if the block entity is null
+        return world.getBlockEntity(blockPos) instanceof Inventory;
     }
 }

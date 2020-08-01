@@ -3,7 +3,7 @@ package me.alexisevelyn.randomtech.api.blocks.cables;
 import net.minecraft.util.StringIdentifiable;
 
 public enum CableConnection implements StringIdentifiable {
-    MACHINE("machine"), // When connected to Machine or Inventory Holder
+    INTERFACEABLE("interfaceable"), // When connected to an Interfaceable Block
     CABLE("cable"), // When connected to Other Cable
     NONE("none"); // When Not Connected To Anything
 
