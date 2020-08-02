@@ -6,9 +6,15 @@ import net.fabricmc.api.Environment;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.EnumProperty;
+import net.minecraft.text.LiteralText;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.Hand;
+import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Vec3i;
@@ -16,7 +22,8 @@ import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.Random;
+import java.util.*;
+import java.util.function.Consumer;
 
 public abstract class GenericCable extends Block {
     public static EnumProperty<CableConnection> CABLE_CONNECTION_NORTH = EnumProperty.of("north", CableConnection.class, CableConnection.NONE, CableConnection.CABLE, CableConnection.INTERFACEABLE);
@@ -32,6 +39,8 @@ public abstract class GenericCable extends Block {
     private static final Vec3i westVector = Direction.WEST.getVector();
     private static final Vec3i upVector = Direction.UP.getVector();
     private static final Vec3i downVector = Direction.DOWN.getVector();
+
+    public int maxCount = 5000; // Integer.MAX_VALUE;
 
     public GenericCable(Settings settings) {
         super(settings);
@@ -72,11 +81,171 @@ public abstract class GenericCable extends Block {
         setupCableStates(world, pos, state, true);
     }
 
+    // This runs for every block update that occurs to the cables
     @Override
-    @Environment(EnvType.CLIENT)
-    public void randomDisplayTick(BlockState state, World world, BlockPos pos, Random random) {
-        // No Way To Get A Block Update and Not Rely on a Ticker?
-        setupCableStates(world, pos, state);
+    public BlockState getStateForNeighborUpdate(BlockState state, Direction direction, BlockState newState, WorldAccess world, BlockPos pos, BlockPos posFrom) {
+        // This sets up the cable blockstates for each cable
+        return setupCableStates(world, pos, state);
+    }
+
+    @Override
+    public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
+        if (world.isClient)
+            return ActionResult.SUCCESS;
+
+        List<BlockPos> allCables = getAllInterfacingCables(world, pos);
+
+        if (allCables.size() == 0) {
+            player.sendMessage(new LiteralText("No Known Interfacing Cables!!!"), false);
+            return ActionResult.CONSUME;
+        }
+
+        for (BlockPos cablePos : allCables) {
+            player.sendMessage(new LiteralText("Cable: " + cablePos.toString()), false);
+        }
+
+        return ActionResult.CONSUME;
+    }
+
+    public List<BlockPos> getAllInterfacingCables(WorldAccess world, BlockPos pos) {
+        List<BlockPos> knownCables = getAllCables(world, pos);
+        List<BlockPos> interfacingCables = new ArrayList<>();
+
+        for (BlockPos cablePos : knownCables) {
+            if (isInterfacing(world.getBlockState(cablePos)))
+                interfacingCables.add(cablePos);
+        }
+
+        return interfacingCables;
+    }
+
+    public List<BlockPos> getAllCables(WorldAccess world, BlockPos pos) {
+        Set<BlockPos> passedCables = new HashSet<>();
+        List<BlockPos> knownCables = new ArrayList<>();
+
+        visitNeighbors(world, pos, passedCables, knownCables::add, this.maxCount);
+        return knownCables;
+    }
+
+    private void visitNeighbors(WorldAccess world, BlockPos pos, Set<BlockPos> passedCables, Consumer<BlockPos> visitor, int maxCount) {
+        visitNeighbors(world, pos, passedCables, visitor, 0, maxCount);
+    }
+
+    private void visitNeighbors(WorldAccess world, BlockPos pos, Set<BlockPos> passedCables, Consumer<BlockPos> visitor, int counter, int maxCount) {
+        if (counter >= maxCount)
+            return;
+
+        counter++;
+
+        // This check is so I can avoid duplicate results provided from outside this function.
+        if (!(pos instanceof BlockPos.Mutable))
+            visitor.accept(pos);
+
+        List<BlockPos> validNeighbors = getValidNeighbors(world, pos);
+
+        for(BlockPos attachedNeighbor : validNeighbors) {
+            if (!passedCables.contains(attachedNeighbor)) {
+                passedCables.add(attachedNeighbor);
+                visitNeighbors(world, attachedNeighbor, passedCables, visitor, counter, maxCount);
+            }
+        }
+    }
+
+    private boolean isInterfacing(BlockState blockState) {
+        return blockState.get(CABLE_CONNECTION_NORTH).equals(CableConnection.INTERFACEABLE) ||
+                blockState.get(CABLE_CONNECTION_SOUTH).equals(CableConnection.INTERFACEABLE) ||
+                blockState.get(CABLE_CONNECTION_EAST).equals(CableConnection.INTERFACEABLE) ||
+                blockState.get(CABLE_CONNECTION_WEST).equals(CableConnection.INTERFACEABLE) ||
+                blockState.get(CABLE_CONNECTION_UP).equals(CableConnection.INTERFACEABLE) ||
+                blockState.get(CABLE_CONNECTION_DOWN).equals(CableConnection.INTERFACEABLE);
+    }
+
+    private List<BlockPos> getValidNeighbors(WorldAccess world, BlockPos pos) {
+        BlockPos north, south, east, west, up, down;
+        BlockState northBlockState, southBlockState, eastBlockState, westBlockState, upBlockState, downBlockState;
+        boolean isNorthValid, isSouthValid, isEastValid, isWestValid, isUpValid, isDownValid;
+
+        // Neighbor Positions
+        north = CalculationHelper.addVectors(pos, northVector);
+        south = CalculationHelper.addVectors(pos, southVector);
+        east = CalculationHelper.addVectors(pos, eastVector);
+        west = CalculationHelper.addVectors(pos, westVector);
+        up = CalculationHelper.addVectors(pos, upVector);
+        down = CalculationHelper.addVectors(pos, downVector);
+
+        // Neighbor BlockStates
+        northBlockState = world.getBlockState(north);
+        southBlockState = world.getBlockState(south);
+        eastBlockState = world.getBlockState(east);
+        westBlockState = world.getBlockState(west);
+        upBlockState = world.getBlockState(up);
+        downBlockState = world.getBlockState(down);
+
+        isNorthValid = isNeighborValidForContinuance(world, northBlockState, north);
+        isSouthValid = isNeighborValidForContinuance(world, southBlockState, north);
+        isEastValid = isNeighborValidForContinuance(world, eastBlockState, north);
+        isWestValid = isNeighborValidForContinuance(world, westBlockState, north);
+        isUpValid = isNeighborValidForContinuance(world, upBlockState, north);
+        isDownValid = isNeighborValidForContinuance(world, downBlockState, north);
+
+        List<BlockPos> cables = new ArrayList<>();
+        if (isNorthValid) {
+            cables.add(north);
+        }
+
+        if (isSouthValid) {
+            cables.add(south);
+        }
+
+        if (isEastValid) {
+            cables.add(east);
+        }
+
+        if (isWestValid) {
+            cables.add(west);
+        }
+
+        if (isUpValid) {
+            cables.add(up);
+        }
+
+        if (isDownValid) {
+            cables.add(down);
+        }
+
+        return cables;
+    }
+
+    private boolean isNeighborValidForContinuance(WorldAccess world, BlockState neighborBlockState, BlockPos neighborPos) {
+        if (!isInstanceOfCable(neighborBlockState.getBlock(), world, neighborPos))
+            return false;
+
+        CableConnection northConnection = neighborBlockState.get(CABLE_CONNECTION_NORTH);
+        CableConnection southConnection = neighborBlockState.get(CABLE_CONNECTION_SOUTH);
+        CableConnection eastConnection = neighborBlockState.get(CABLE_CONNECTION_EAST);
+        CableConnection westConnection = neighborBlockState.get(CABLE_CONNECTION_WEST);
+        CableConnection upConnection = neighborBlockState.get(CABLE_CONNECTION_UP);
+        CableConnection downConnection = neighborBlockState.get(CABLE_CONNECTION_DOWN);
+
+        int isViable = 0;
+        isViable = getIsViable(northConnection, isViable);
+        isViable = getIsViable(southConnection, isViable);
+        isViable = getIsViable(eastConnection, isViable);
+        isViable = getIsViable(westConnection, isViable);
+        isViable = getIsViable(upConnection, isViable);
+        isViable = getIsViable(downConnection, isViable);
+
+        // If only one, then we are seeing our own cable. We need more than one.
+        return isViable >= 2;
+    }
+
+    // This is so the IDE will shutup about duplicate code.
+    private int getIsViable(CableConnection neighborConnection, int isViable) {
+        if (neighborConnection.equals(CableConnection.CABLE) || neighborConnection.equals(CableConnection.INTERFACEABLE)) {
+            isViable++;
+        }
+
+        return isViable;
     }
 
     protected BlockState setCableState(BlockState ourBlockState, BlockState neighborBlockState, EnumProperty<CableConnection> ourProperty, EnumProperty<CableConnection> neighborProperty, WorldAccess world, BlockPos ourPos, BlockPos neighborPos, boolean broken) {
@@ -101,11 +270,11 @@ public abstract class GenericCable extends Block {
         return world.getBlockState(ourPos);
     }
 
-    protected void setupCableStates(WorldAccess world, BlockPos pos, BlockState state) {
-        setupCableStates(world, pos, state, false);
+    protected BlockState setupCableStates(WorldAccess world, BlockPos pos, BlockState state) {
+        return setupCableStates(world, pos, state, false);
     }
 
-    protected void setupCableStates(WorldAccess world, BlockPos pos, BlockState state, boolean broken) {
+    protected BlockState setupCableStates(WorldAccess world, BlockPos pos, BlockState state, boolean broken) {
         // Neighbor Positions
         BlockPos north = CalculationHelper.addVectors(pos, northVector);
         BlockPos south = CalculationHelper.addVectors(pos, southVector);
@@ -128,6 +297,8 @@ public abstract class GenericCable extends Block {
         state = setCableState(state, eastBlockState, CABLE_CONNECTION_EAST, CABLE_CONNECTION_WEST, world, pos, east, broken);
         state = setCableState(state, westBlockState, CABLE_CONNECTION_WEST, CABLE_CONNECTION_EAST, world, pos, west, broken);
         state = setCableState(state, upBlockState, CABLE_CONNECTION_UP, CABLE_CONNECTION_DOWN, world, pos, up, broken);
-        setCableState(state, downBlockState, CABLE_CONNECTION_DOWN, CABLE_CONNECTION_UP, world, pos, down, broken);
+        state = setCableState(state, downBlockState, CABLE_CONNECTION_DOWN, CABLE_CONNECTION_UP, world, pos, down, broken);
+
+        return state;
     }
 }
