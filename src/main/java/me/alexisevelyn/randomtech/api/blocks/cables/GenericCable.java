@@ -1,17 +1,21 @@
 package me.alexisevelyn.randomtech.api.blocks.cables;
 
+import me.alexisevelyn.randomtech.Main;
 import me.alexisevelyn.randomtech.api.utilities.CalculationHelper;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.minecraft.block.AirBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.EnumProperty;
 import net.minecraft.text.LiteralText;
+import net.minecraft.text.TranslatableText;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.hit.BlockHitResult;
@@ -90,18 +94,24 @@ public abstract class GenericCable extends Block {
 
     @Override
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
+        // Only the server needs to bother with the connection of the network.
         if (world.isClient)
             return ActionResult.SUCCESS;
+
+        // So player has to click with an empty hand. This makes it easy to place blocks against the cable.
+        if (!player.getStackInHand(hand).getItem().equals(Items.AIR))
+            return ActionResult.PASS;
 
         List<BlockPos> allCables = getAllInterfacingCables(world, pos);
 
         if (allCables.size() == 0) {
-            player.sendMessage(new LiteralText("No Known Interfacing Cables!!!"), false);
+            player.sendMessage(new TranslatableText(Main.MODID + ".no_interfaceable_cables_found"), false);
             return ActionResult.CONSUME;
         }
 
+        player.sendMessage(new TranslatableText(Main.MODID + ".cable_position_header"), false);
         for (BlockPos cablePos : allCables) {
-            player.sendMessage(new LiteralText("Cable: " + cablePos.toString()), false);
+            player.sendMessage(new TranslatableText(Main.MODID + ".cable_position", cablePos.getX(), cablePos.getY(), cablePos.getZ()), false);
         }
 
         return ActionResult.CONSUME;
@@ -146,6 +156,8 @@ public abstract class GenericCable extends Block {
         for(BlockPos attachedNeighbor : validNeighbors) {
             if (!passedCables.contains(attachedNeighbor)) {
                 passedCables.add(attachedNeighbor);
+
+                // TODO: Figure out how to tail this recursion
                 visitNeighbors(world, attachedNeighbor, passedCables, visitor, counter, maxCount);
             }
         }

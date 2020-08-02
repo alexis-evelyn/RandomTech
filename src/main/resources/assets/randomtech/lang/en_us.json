@@ -116,5 +116,9 @@
   "patchouli.install.fail": "Patchouli is not installed. Cannot open %s",
 
   "randomtech.gamerules": "Alexis' Random Tech",
-  "gamerule.hideExperimentalScreen": "Hide Experimental Screen"
+  "gamerule.hideExperimentalScreen": "Hide Experimental Screen",
+
+  "randomtech.no_interfaceable_cables_found": "No known interfaceable blocks found!!!",
+  "randomtech.cable_position_header": "Cables Connected To Blocks:",
+  "randomtech.cable_position": "Cable: (%s, %s, %s)"
 }
