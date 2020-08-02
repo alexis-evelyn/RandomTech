@@ -7,6 +7,8 @@ import me.alexisevelyn.randomtech.blockitems.VirtualTile;
 import me.alexisevelyn.randomtech.blocks.BasicComputerBlock;
 import me.alexisevelyn.randomtech.blocks.FuserBlock;
 import me.alexisevelyn.randomtech.blocks.TeleporterBlock;
+import me.alexisevelyn.randomtech.blocks.cables.EnergyCable;
+import me.alexisevelyn.randomtech.blocks.cables.FluidCable;
 import me.alexisevelyn.randomtech.blocks.cables.ItemCable;
 import me.alexisevelyn.randomtech.blocks.glass.*;
 import me.alexisevelyn.randomtech.blocks.metals.CobaltBlock;
@@ -74,7 +76,10 @@ public class RegistryHelper {
 
     public static final Block BOTTLED_DEMON_BLOCK = new BottledDemon.BottledDemonBlock();
 
+    // Cables
     public static final Block ITEM_CABLE_BLOCK = new ItemCable();
+    public static final Block FLUID_CABLE_BLOCK = new FluidCable();
+    public static final Block ENERGY_CABLE_BLOCK = new EnergyCable();
 
     // Metals
     public static final Block COBALT_BLOCK = new CobaltBlock();
@@ -243,7 +248,10 @@ public class RegistryHelper {
 
         Registry.register(Registry.BLOCK, new Identifier(Main.MODID, "bottled_demon"), BOTTLED_DEMON_BLOCK);
 
+        // Cables
         Registry.register(Registry.BLOCK, new Identifier(Main.MODID, "item_cable"), ITEM_CABLE_BLOCK);
+        Registry.register(Registry.BLOCK, new Identifier(Main.MODID, "fluid_cable"), FLUID_CABLE_BLOCK);
+        Registry.register(Registry.BLOCK, new Identifier(Main.MODID, "energy_cable"), ENERGY_CABLE_BLOCK);
     }
 
     private void registerOreBlocks() {
@@ -314,6 +322,8 @@ public class RegistryHelper {
         Registry.register(Registry.ITEM, new Identifier(Main.MODID, "cobalt_dust"), new BlockItem(COBALT_WIRE, new Item.Settings().group(ItemGroup.REDSTONE)));
 
         Registry.register(Registry.ITEM, new Identifier(Main.MODID, "item_cable"), new BlockItem(ITEM_CABLE_BLOCK, new Item.Settings().group(MACHINERY_GROUP)));
+        Registry.register(Registry.ITEM, new Identifier(Main.MODID, "fluid_cable"), new BlockItem(FLUID_CABLE_BLOCK, new Item.Settings().group(MACHINERY_GROUP)));
+        Registry.register(Registry.ITEM, new Identifier(Main.MODID, "energy_cable"), new BlockItem(ENERGY_CABLE_BLOCK, new Item.Settings().group(MACHINERY_GROUP)));
     }
 
     private void registerOreItemBlocks() {

@@ -2,6 +2,10 @@ package me.alexisevelyn.randomtech.utility;
 
 import me.alexisevelyn.randomtech.Main;
 import me.alexisevelyn.randomtech.blockentities.*;
+import me.alexisevelyn.randomtech.blockentities.cables.EnergyCableBlockEntity;
+import me.alexisevelyn.randomtech.blockentities.cables.FluidCableBlockEntity;
+import me.alexisevelyn.randomtech.blockentities.cables.ItemCableBlockEntity;
+import me.alexisevelyn.randomtech.blocks.cables.ItemCable;
 import me.alexisevelyn.randomtech.utility.registryhelpers.main.RegistryHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.entity.BlockEntity;
@@ -26,6 +30,11 @@ public class BlockEntities {
 
     // Virtual Tile
     public static final BlockEntityType<VirtualTileBlockEntity> VIRTUAL_TILE = register(VirtualTileBlockEntity::new, "virtual_tile_block_entity", RegistryHelper.VIRTUAL_TILE_BLOCK);
+
+    // Cables
+    public static final BlockEntityType<ItemCableBlockEntity> ITEM_CABLE = register(ItemCableBlockEntity::new, "item_cable_block_entity", RegistryHelper.ITEM_CABLE_BLOCK);
+    public static final BlockEntityType<FluidCableBlockEntity> FLUID_CABLE = register(FluidCableBlockEntity::new, "fluid_cable_block_entity", RegistryHelper.FLUID_CABLE_BLOCK);
+    public static final BlockEntityType<EnergyCableBlockEntity> ENERGY_CABLE = register(EnergyCableBlockEntity::new, "energy_cable_block_entity", RegistryHelper.ENERGY_CABLE_BLOCK);
 
     public static <T extends BlockEntity> BlockEntityType<T> register(Supplier<T> supplier, String name, Block... blocks) {
         Validate.isTrue(blocks.length > 0, "Add a block to your Block Entity: " + supplier.get().getClass().getName());

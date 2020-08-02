@@ -7,14 +7,19 @@ import net.fabricmc.api.Environment;
 import net.minecraft.block.AirBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.InventoryProvider;
+import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.inventory.SidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.screen.ScreenHandler;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.EnumProperty;
 import net.minecraft.text.LiteralText;
+import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
@@ -92,6 +97,21 @@ public abstract class GenericCable extends Block {
         return setupCableStates(world, pos, state);
     }
 
+    // Override this to change the message text
+    public Text getNoInterfaceableCablesText() {
+        return new TranslatableText(Main.MODID + ".no_interfaceable_cables_found");
+    }
+
+    // Override this to change the message text
+    public Text getCablePositionHeaderText() {
+        return new TranslatableText(Main.MODID + ".cable_position_header");
+    }
+
+    // Override this to change the message text
+    public Text getCablePositionText(BlockPos cablePos) {
+        return new TranslatableText(Main.MODID + ".cable_position", cablePos.getX(), cablePos.getY(), cablePos.getZ());
+    }
+
     @Override
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
         // Only the server needs to bother with the connection of the network.
@@ -105,13 +125,13 @@ public abstract class GenericCable extends Block {
         List<BlockPos> allCables = getAllInterfacingCables(world, pos);
 
         if (allCables.size() == 0) {
-            player.sendMessage(new TranslatableText(Main.MODID + ".no_interfaceable_cables_found"), false);
+            player.sendMessage(getNoInterfaceableCablesText(), false);
             return ActionResult.CONSUME;
         }
 
-        player.sendMessage(new TranslatableText(Main.MODID + ".cable_position_header"), false);
+        player.sendMessage(getCablePositionHeaderText(), false);
         for (BlockPos cablePos : allCables) {
-            player.sendMessage(new TranslatableText(Main.MODID + ".cable_position", cablePos.getX(), cablePos.getY(), cablePos.getZ()), false);
+            player.sendMessage(getCablePositionText(cablePos), false);
         }
 
         return ActionResult.CONSUME;
@@ -163,7 +183,7 @@ public abstract class GenericCable extends Block {
         }
     }
 
-    private boolean isInterfacing(BlockState blockState) {
+    public boolean isInterfacing(BlockState blockState) {
         return blockState.get(CABLE_CONNECTION_NORTH).equals(CableConnection.INTERFACEABLE) ||
                 blockState.get(CABLE_CONNECTION_SOUTH).equals(CableConnection.INTERFACEABLE) ||
                 blockState.get(CABLE_CONNECTION_EAST).equals(CableConnection.INTERFACEABLE) ||
