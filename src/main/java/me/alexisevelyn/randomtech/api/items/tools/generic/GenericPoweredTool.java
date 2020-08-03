@@ -1,6 +1,7 @@
 package me.alexisevelyn.randomtech.api.items.tools.generic;
 
 import com.google.common.collect.Multimap;
+import me.alexisevelyn.randomtech.api.items.energy.EnergyHelper;
 import me.alexisevelyn.randomtech.api.utilities.ItemManager;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -37,7 +38,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.Set;
 
-public abstract class GenericPoweredTool extends MiningToolItem implements EnergyHolder, ItemDurabilityExtensions, ItemStackModifiers {
+public abstract class GenericPoweredTool extends MiningToolItem implements EnergyHelper, EnergyHolder, ItemDurabilityExtensions, ItemStackModifiers {
     public final int maxCharge;
     public final int cost;
     public final float poweredSpeed;
@@ -109,8 +110,24 @@ public abstract class GenericPoweredTool extends MiningToolItem implements Energ
         }
     }
 
+    @Override
+    public boolean isNotFull(ItemStack stack) {
+        return getEnergy(stack) != getMaxStoredPower();
+    }
+
+    @Override
     public boolean isUsable(ItemStack stack) {
         return Energy.of(stack).getEnergy() >= this.cost;
+    }
+
+    @Override
+    public double getEnergy(ItemStack stack) {
+        return Energy.of(stack).getEnergy();
+    }
+
+    @Override
+    public void setEnergy(ItemStack stack, double energy) {
+        Energy.of(stack).set(energy);
     }
 
     @Override
@@ -220,7 +237,7 @@ public abstract class GenericPoweredTool extends MiningToolItem implements Energ
 
     @Override
     public boolean showDurability(ItemStack stack) {
-        if (!(stack.getItem() instanceof GenericPoweredTool))
+        if (!(stack.getItem() instanceof EnergyHelper))
             return true;
 
         double currentEnergy = Energy.of(stack).getEnergy();
@@ -256,6 +273,7 @@ public abstract class GenericPoweredTool extends MiningToolItem implements Energ
         ItemManager.initPoweredItems(this, itemList);
     }
 
+    @Override
     public ItemStack onCraft(ItemStack oldStack, ItemStack newStack, CompoundTag tag) {
         return ItemManager.convertStackToEnergyItemStack(oldStack, newStack, tag);
     }

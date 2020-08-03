@@ -1,6 +1,7 @@
 package me.alexisevelyn.randomtech.api.utilities.enchanting;
 
 import me.alexisevelyn.randomtech.api.items.armor.generic.GenericPoweredArmor;
+import me.alexisevelyn.randomtech.api.items.energy.EnergyHelper;
 import me.alexisevelyn.randomtech.api.items.tools.generic.*;
 import net.minecraft.enchantment.EnchantmentTarget;
 import net.minecraft.entity.EquipmentSlot;
@@ -15,7 +16,7 @@ public class CustomEnchantmentHelper {
 
     // I need to be able to tell whether or not to interfere with vanilla enchant mechanics, so I'm using an enum to have 3 possible outcomes instead of just 2.
     public static ValidEnchant isValidEnchantment(ItemStack itemStack, EnchantmentTarget target) {
-        if (itemStack.getItem() instanceof GenericPoweredTool || itemStack.getItem() instanceof GenericPoweredArmor) {
+        if (itemStack.getItem() instanceof EnergyHelper) {
             // I use unbreaking to affect energy usage, so I'm allowing Unbreaking and Mending (although mending is useless).
             if (target == EnchantmentTarget.BREAKABLE) {
                 return ValidEnchant.TRUE;

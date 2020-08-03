@@ -1,9 +1,14 @@
 package me.alexisevelyn.randomtech.api.items.energy;
 
-import net.minecraft.entity.damage.DamageSource;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.CompoundTag;
 
 public interface EnergyHelper {
-    void addDamage(ItemStack stack, PlayerEntity playerEntity, @SuppressWarnings("unused") DamageSource damageSource, @SuppressWarnings("unused") float damage);
+    boolean isNotFull(ItemStack stack);
+    boolean isUsable(ItemStack stack);
+    double getEnergy(ItemStack stack);
+    void setEnergy(ItemStack stack, double energy);
+    double getMaxStoredPower();
+
+    ItemStack onCraft(ItemStack oldStack, ItemStack newStack, CompoundTag tag);
 }

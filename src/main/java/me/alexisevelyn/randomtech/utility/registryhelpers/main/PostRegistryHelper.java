@@ -2,6 +2,7 @@ package me.alexisevelyn.randomtech.utility.registryhelpers.main;
 
 import me.alexisevelyn.randomtech.Main;
 import me.alexisevelyn.randomtech.api.items.armor.generic.GenericPoweredArmor;
+import me.alexisevelyn.randomtech.api.items.energy.EnergyHelper;
 import me.alexisevelyn.randomtech.api.items.tools.generic.GenericPoweredTool;
 import me.alexisevelyn.randomtech.api.utilities.cardinalcomponents.BrokenItemComponent;
 import me.alexisevelyn.randomtech.blocks.ores.CobaltOre;
@@ -27,7 +28,7 @@ public class PostRegistryHelper {
     public void postRegister() {
         // Register All Powered Tools and Armor With Callback
         Registry.ITEM.stream().forEach(item -> {
-            if (item instanceof GenericPoweredTool || item instanceof GenericPoweredArmor) {
+            if (item instanceof EnergyHelper) {
                 ItemComponentCallback.event(item).register((stack, components) -> components.put(BROKEN_ITEM_COMPONENT, new BrokenItemComponent(stack)));
             }
         });

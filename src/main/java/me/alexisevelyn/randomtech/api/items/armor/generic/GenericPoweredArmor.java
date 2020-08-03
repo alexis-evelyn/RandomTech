@@ -91,8 +91,24 @@ public abstract class GenericPoweredArmor extends ArmorItem implements EnergyHel
         return this.dischargedTranslationKey;
     }
 
+    @Override
+    public boolean isNotFull(ItemStack stack) {
+        return getEnergy(stack) != getMaxStoredPower();
+    }
+
+    @Override
     public boolean isUsable(ItemStack stack) {
         return Energy.of(stack).getEnergy() >= this.cost;
+    }
+
+    @Override
+    public double getEnergy(ItemStack stack) {
+        return Energy.of(stack).getEnergy();
+    }
+
+    @Override
+    public void setEnergy(ItemStack stack, double energy) {
+        Energy.of(stack).set(energy);
     }
 
     @SuppressWarnings("EmptyMethod")
@@ -168,7 +184,7 @@ public abstract class GenericPoweredArmor extends ArmorItem implements EnergyHel
 
     @Override
     public boolean showDurability(ItemStack stack) {
-        if (!(stack.getItem() instanceof GenericPoweredArmor))
+        if (!(stack.getItem() instanceof EnergyHelper))
             return true;
 
         double currentEnergy = Energy.of(stack).getEnergy();
@@ -223,9 +239,8 @@ public abstract class GenericPoweredArmor extends ArmorItem implements EnergyHel
         return super.method_26353();
     }
 
-    @Override
     public void addDamage(ItemStack stack, PlayerEntity playerEntity, DamageSource damageSource, float damage) {
-        if (!(stack.getItem() instanceof GenericPoweredArmor))
+        if (!(stack.getItem() instanceof EnergyHelper))
             return;
 
         // Adds support for Unbreaking Enchants
@@ -239,6 +254,7 @@ public abstract class GenericPoweredArmor extends ArmorItem implements EnergyHel
         ItemManager.useEnergy(playerEntity, stack, cost);
     }
 
+    @Override
     public ItemStack onCraft(ItemStack oldStack, ItemStack newStack, CompoundTag tag) {
         return ItemManager.convertStackToEnergyItemStack(oldStack, newStack, tag);
     }

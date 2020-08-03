@@ -36,13 +36,14 @@
   },
   "mixins": [
     "mixins/example-mixin.json",
-    "mixins/energy-helper-mixin.json",
+    "mixins/damage-armor-mixin.json",
     "mixins/enchant-helper-mixin.json",
     "mixins/smithing-recipe-nbt-modifier-mixin.json",
     "mixins/dynamic-armor-texture-mixin.json",
     "mixins/cobalt-wiring-mixin.json",
     "mixins/death-screen-mixin.json",
-    "mixins/gamerule-based-backup-screen-mixin.json"
+    "mixins/gamerule-based-backup-screen-mixin.json",
+    "mixins/powered-mending-helper-mixin.json"
   ],
 
   "depends": {

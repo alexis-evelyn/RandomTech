@@ -1,6 +1,7 @@
 package me.alexisevelyn.randomtech.api.utilities.cardinalcomponents;
 
 import me.alexisevelyn.randomtech.api.items.armor.generic.GenericPoweredArmor;
+import me.alexisevelyn.randomtech.api.items.energy.EnergyHelper;
 import me.alexisevelyn.randomtech.api.items.tools.generic.GenericPoweredTool;
 import me.alexisevelyn.randomtech.utility.registryhelpers.main.PostRegistryHelper;
 import nerdhub.cardinal.components.api.ComponentType;
@@ -83,19 +84,10 @@ public class BrokenItemComponent implements CopyableComponent<BrokenItemComponen
         Item item = itemStack.getItem();
 
         int brokenModelData = 1337;
-        if (item instanceof GenericPoweredTool) {
-            GenericPoweredTool tool = (GenericPoweredTool) item;
+        if (item instanceof EnergyHelper) {
+            EnergyHelper tool = (EnergyHelper) item;
 
             if (tool.isUsable(itemStack))
-                removeStackModelData(itemStack);
-            else
-                setStackModelData(itemStack, brokenModelData);
-        }
-
-        if (item instanceof GenericPoweredArmor) {
-            GenericPoweredArmor armor = (GenericPoweredArmor) item;
-
-            if (armor.isUsable(itemStack))
                 removeStackModelData(itemStack);
             else
                 setStackModelData(itemStack, brokenModelData);

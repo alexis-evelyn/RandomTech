@@ -1,10 +1,11 @@
 package me.alexisevelyn.randomtech.mixin;
 
 import com.google.common.collect.Lists;
-import me.alexisevelyn.randomtech.api.items.armor.generic.GenericPoweredArmor;
-import me.alexisevelyn.randomtech.api.items.tools.generic.*;
+import me.alexisevelyn.randomtech.api.items.energy.EnergyHelper;
 import me.alexisevelyn.randomtech.api.utilities.enchanting.CustomEnchantmentHelper;
-import net.minecraft.enchantment.*;
+import net.minecraft.enchantment.Enchantment;
+import net.minecraft.enchantment.EnchantmentHelper;
+import net.minecraft.enchantment.EnchantmentLevelEntry;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.registry.Registry;
 import org.spongepowered.asm.mixin.Mixin;
@@ -22,7 +23,7 @@ public abstract class TableEnchantHelperMixin {
 	@Inject(at = @At("TAIL"), method = "getPossibleEntries(ILnet/minecraft/item/ItemStack;Z)Ljava/util/List;", cancellable = true)
 	private static void getPossibleEntries(int power, ItemStack itemStack, boolean treasureAllowed, CallbackInfoReturnable<List<EnchantmentLevelEntry>> info) {
 		// Only mess with enchantment table (and other enchanted loot generation) if our items.
-		if (!(itemStack.getItem() instanceof GenericPoweredTool || itemStack.getItem() instanceof GenericPoweredArmor))
+		if (!(itemStack.getItem() instanceof EnergyHelper))
 			return;
 
 		Iterator<Enchantment> enchantmentIterator = Registry.ENCHANTMENT.iterator();

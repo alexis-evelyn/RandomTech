@@ -1,5 +1,6 @@
 package me.alexisevelyn.randomtech.mixin;
 
+import me.alexisevelyn.randomtech.api.items.armor.generic.GenericPoweredArmor;
 import me.alexisevelyn.randomtech.api.items.energy.EnergyHelper;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.player.PlayerEntity;
@@ -14,7 +15,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @SuppressWarnings("UnusedMixin") // The mixin is used, just is loaded by Fabric and not Sponge methods
 @Mixin(PlayerEntity.class)
-public abstract class EnergyHelperMixin {
+public abstract class DamageArmorMixin {
 
 	@Shadow @Final public PlayerInventory inventory;
 
@@ -32,8 +33,8 @@ public abstract class EnergyHelperMixin {
  			for(int i = 0; i < this.inventory.armor.size(); ++i) {
 				ItemStack itemStack = this.inventory.armor.get(i);
 
-				if ((!damageSource.isFire() || !itemStack.getItem().isFireproof()) && itemStack.getItem() instanceof EnergyHelper) {
-					((EnergyHelper) itemStack.getItem()).addDamage(itemStack, this.inventory.player, damageSource, damage);
+				if ((!damageSource.isFire() || !itemStack.getItem().isFireproof()) && itemStack.getItem() instanceof GenericPoweredArmor) {
+					((GenericPoweredArmor) itemStack.getItem()).addDamage(itemStack, this.inventory.player, damageSource, damage);
 				}
 			}
 		}

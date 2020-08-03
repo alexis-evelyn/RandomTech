@@ -1,6 +1,7 @@
 package me.alexisevelyn.randomtech.mixin;
 
 import me.alexisevelyn.randomtech.api.items.armor.generic.GenericPoweredArmor;
+import me.alexisevelyn.randomtech.api.items.energy.EnergyHelper;
 import me.alexisevelyn.randomtech.api.items.tools.generic.GenericPoweredTool;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.item.Item;
@@ -34,10 +35,7 @@ public abstract class SmithingRecipeNBTModifierMixin {
 
 		CompoundTag compoundTag = oldItemStack.getTag();
 
-		if (item instanceof GenericPoweredTool)
-			info.setReturnValue(((GenericPoweredTool) item).onCraft(oldItemStack, newItemStack, compoundTag));
-
-		if (item instanceof GenericPoweredArmor)
-			info.setReturnValue(((GenericPoweredArmor) item).onCraft(oldItemStack, newItemStack, compoundTag));
+		if (item instanceof EnergyHelper)
+			info.setReturnValue(((EnergyHelper) item).onCraft(oldItemStack, newItemStack, compoundTag));
 	}
 }
