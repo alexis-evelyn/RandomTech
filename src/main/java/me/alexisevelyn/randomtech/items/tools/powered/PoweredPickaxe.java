@@ -44,6 +44,14 @@ public class PoweredPickaxe extends GenericPoweredPickaxe {
     }
 
     @Override
+    public float getUnbreakableBlockDifficultyMultiplier(BlockState state, PlayerEntity player, BlockView world, BlockPos pos) {
+        if (state.getBlock().is(Blocks.BEDROCK))
+            return 15.0F;
+
+        return 1.0F;
+    }
+
+    @Override
     public boolean isFireproof() {
         return true;
     }

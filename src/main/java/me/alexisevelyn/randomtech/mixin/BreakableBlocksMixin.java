@@ -55,7 +55,7 @@ public class BreakableBlocksMixin {
 				Block block = state.getBlock();
 
 				if (genericPoweredTool.canBreakUnbreakableBlock(state, player, world, pos) && !isDeniedBlock(block)) {
-					float dynamicBlockHardness = genericPoweredTool.getDynamicBlockHardness(state, player, world, pos);
+					float dynamicBlockHardness = genericPoweredTool.getUnbreakableBlockDifficultyMultiplier(state, player, world, pos);
 
 					// To ensure the hardness is always above 0.
 					if (dynamicBlockHardness <= 0.0F)

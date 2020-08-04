@@ -305,7 +305,7 @@ public abstract class GenericPoweredTool extends MiningToolItem implements Energ
         return false;
     }
 
-    public float getDynamicBlockHardness(BlockState state, PlayerEntity player, BlockView world, BlockPos pos) {
-        return 0.0F;
+    public float getUnbreakableBlockDifficultyMultiplier(BlockState state, PlayerEntity player, BlockView world, BlockPos pos) {
+        return 1.0F;
     }
 }
