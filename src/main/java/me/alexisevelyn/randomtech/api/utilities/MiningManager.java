@@ -44,7 +44,22 @@ public class MiningManager {
         if (!(toolHasSilkTouch(toolItemStack) > 0) && (needsSilkTouch(blockState, world, blockPos) > 0))
             return false;
 
+        if (checkUnbreakableBlock(playerEntity, toolItemStack, blockState, world, blockPos))
+            return true;
+
         return !(blockState.getHardness(world, blockPos) < 0) && canMine;
+    }
+
+    // Checks if the block can be broken by the tool. Requires special override in the tool's class.
+    public static boolean checkUnbreakableBlock(PlayerEntity playerEntity, ItemStack toolItemStack, BlockState blockState, World world, BlockPos blockPos) {
+        if (!(blockState.getHardness(world, blockPos) < 0))
+            return false;
+
+        if (!(toolItemStack.getItem() instanceof GenericPoweredTool))
+            return false;
+
+        GenericPoweredTool genericPoweredTool = (GenericPoweredTool) toolItemStack.getItem();
+        return genericPoweredTool.canBreakUnbreakableBlock(blockState, playerEntity, world, blockPos);
     }
 
     public static int needsSilkTouch(ItemUsageContext context) {

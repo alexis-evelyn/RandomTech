@@ -25,6 +25,7 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 import reborncore.api.items.ItemStackModifiers;
@@ -87,6 +88,11 @@ public abstract class GenericPoweredTool extends MiningToolItem implements Energ
     public boolean canMine(BlockState state, World world, BlockPos pos, PlayerEntity miner) {
         if (!super.canMine(state, world, pos, miner))
             return false;
+
+        // Allows player to break block in creative mode even when holding a dead tool.
+        // Sword still overrides this method, so breaking in creative is denied for sword.
+        if (miner.isCreative())
+            return true;
 
         return isUsable(miner.getMainHandStack());
     }
@@ -293,5 +299,10 @@ public abstract class GenericPoweredTool extends MiningToolItem implements Energ
     public void appendTooltip(ItemStack stack, @Nullable World worldIn, List<Text> tooltip, TooltipContext flagIn) {
         if (flagIn.isAdvanced())
             ItemManager.powerLevelTooltip(stack, tooltip);
+    }
+
+    @SuppressWarnings("unused")
+    public boolean canBreakUnbreakableBlock(BlockState state, PlayerEntity player, BlockView world, BlockPos pos) {
+        return false;
     }
 }
