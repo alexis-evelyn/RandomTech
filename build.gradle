@@ -158,6 +158,10 @@ dependencies {
 	modImplementation "com.github.Siphalor:nbt-crafting:${project.nbt_crafting_version}"
 	include "com.github.Siphalor:nbt-crafting:${project.nbt_crafting_version}"
 
+	// For Extra Annotations
+	// https://mvnrepository.com/artifact/com.google.errorprone/error_prone_annotations
+	// compile group: 'com.google.errorprone', name: 'error_prone_annotations', version: '2.4.0'
+
 	// PSA: Some older mods, compiled on Loom 0.2.1, might have outdated Maven POMs.
 	// You may need to force-disable transitiveness on them.
 }
