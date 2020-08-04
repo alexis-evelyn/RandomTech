@@ -1,5 +1,6 @@
 package me.alexisevelyn.randomtech.api.utilities;
 
+import me.alexisevelyn.randomtech.api.items.energy.EnergyHelper;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.entity.LivingEntity;
@@ -36,11 +37,16 @@ public class ItemManager {
 
     // This converts the old Item Stack's durability to energy based on the current durability, max durability, and max energy capacity.
     protected static double calculateCurrentPowerForConversion(ItemStack oldItemStack, ItemStack newItemStack) {
-        EnergyHandler energyHandler = Energy.of(newItemStack);
+         EnergyHandler energyHandler = Energy.of(newItemStack);
+         double oldDurability = oldItemStack.getMaxDamage() - oldItemStack.getDamage();
 
-        double oldDurability = oldItemStack.getMaxDamage() - oldItemStack.getDamage();
+         if (newItemStack.getItem() instanceof EnergyHelper){
+             EnergyHelper customEnergyItem = (EnergyHelper) newItemStack.getItem();
 
-        return (oldDurability * energyHandler.getMaxStored()) / oldItemStack.getMaxDamage();
+             return (oldDurability * customEnergyItem.getMaxEnergy(newItemStack)) / oldItemStack.getMaxDamage();
+        }
+
+         return (oldDurability * energyHandler.getMaxStored()) / oldItemStack.getMaxDamage();
     }
 
     public static ItemStack convertStackToEnergyItemStack(ItemStack oldStack, ItemStack newStack, CompoundTag tag) {
@@ -67,11 +73,11 @@ public class ItemManager {
     public static void powerLevelTooltip(ItemStack itemStack, List<Text> tooltip) {
         Item item = itemStack.getItem();
 
-        if (!(item instanceof EnergyHolder))
+        if (!(item instanceof EnergyHelper))
             return;
 
         double currentEnergy = Energy.of(itemStack).getEnergy();
-        double maxEnergy = ((EnergyHolder) item).getMaxStoredPower();
+        double maxEnergy = ((EnergyHelper) item).getMaxEnergy(itemStack);
 
         if (currentEnergy == maxEnergy)
             return;

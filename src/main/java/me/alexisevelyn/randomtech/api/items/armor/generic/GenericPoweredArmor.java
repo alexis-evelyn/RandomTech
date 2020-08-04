@@ -93,7 +93,7 @@ public abstract class GenericPoweredArmor extends ArmorItem implements EnergyHel
 
     @Override
     public boolean isNotFull(ItemStack stack) {
-        return getEnergy(stack) != getMaxStoredPower();
+        return getEnergy(stack) != getMaxEnergy(stack);
     }
 
     @Override
@@ -168,6 +168,15 @@ public abstract class GenericPoweredArmor extends ArmorItem implements EnergyHel
     }
 
     @Override
+    public double getMaxEnergy(ItemStack itemStack) {
+        // RebornCore uses getMaxStoredPower() for their hud.
+        // That makes it where the max energy cannot be set per ItemStack.
+        // Once I implement dynamic max energy, my code will be able to get the dynamic max energy.
+
+        return getMaxStoredPower();
+    }
+
+    @Override
     public double getMaxStoredPower() {
         return this.maxCharge;
     }
@@ -179,6 +188,7 @@ public abstract class GenericPoweredArmor extends ArmorItem implements EnergyHel
 
     @Override
     public double getDurability(ItemStack stack) {
+        // TODO: Replace this with a dynamic durability bar checker.
         return 1 - ItemUtils.getPowerForDurabilityBar(stack);
     }
 
@@ -188,7 +198,7 @@ public abstract class GenericPoweredArmor extends ArmorItem implements EnergyHel
             return true;
 
         double currentEnergy = Energy.of(stack).getEnergy();
-        double maxEnergy = Energy.of(stack).getMaxStored();
+        double maxEnergy = getMaxEnergy(stack);
 
         return currentEnergy < maxEnergy;
     }

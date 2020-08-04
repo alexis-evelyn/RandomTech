@@ -1,13 +1,10 @@
 package me.alexisevelyn.randomtech.mixin;
 
 import com.google.common.collect.Lists;
-import me.alexisevelyn.randomtech.api.items.armor.generic.GenericPoweredArmor;
 import me.alexisevelyn.randomtech.api.items.energy.EnergyHelper;
-import me.alexisevelyn.randomtech.api.items.tools.generic.GenericPoweredTool;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.*;
-import net.minecraft.entity.passive.PandaEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundTag;
@@ -22,13 +19,13 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import java.util.List;
 import java.util.Map;
 
-@SuppressWarnings({"UnusedMixin", "EmptyMethod"}) // The mixin is used, just is loaded by Fabric and not Sponge methods
+// This mixin makes mending useful for my tools and armor.
+
+@SuppressWarnings("UnusedMixin") // The mixin is used, just is loaded by Fabric and not Sponge methods
 @Mixin(ExperienceOrbEntity.class)
 public abstract class PoweredMendingHelper extends Entity {
-	// TODO: Fix this mixin!!!
-
-	@Shadow public int orbAge;
-	@Shadow private int health;
+//	@Shadow public int orbAge;
+//	@Shadow private int health;
 	@Shadow private int amount;
 	@Shadow public int pickupDelay;
 
@@ -58,16 +55,15 @@ public abstract class PoweredMendingHelper extends Entity {
 
 		if (entry != null) {
 			ItemStack itemStack = entry.getValue();
-			if (!itemStack.isEmpty() && itemStack.isDamaged() && itemStack.getItem() instanceof EnergyHelper) {
-				info.cancel();
+			if (!itemStack.isEmpty() && itemStack.getItem() instanceof EnergyHelper) {
 				isCancelled = true;
 
 				EnergyHelper genericPoweredItem = (EnergyHelper) itemStack.getItem();
 
-				int missingEnergy = Math.min(this.getMendingRepairAmount(this.amount), (int) (genericPoweredItem.getMaxStoredPower() - genericPoweredItem.getEnergy(itemStack)));
+				int missingEnergy = Math.min(this.getMendingRepairAmount(this.amount), (int) (genericPoweredItem.getMaxEnergy(itemStack) - genericPoweredItem.getEnergy(itemStack)));
 				this.amount -= this.getMendingRepairCost(missingEnergy);
 
-				genericPoweredItem.setEnergy(itemStack, genericPoweredItem.getEnergy(itemStack) - missingEnergy);
+				genericPoweredItem.setEnergy(itemStack, genericPoweredItem.getEnergy(itemStack) + missingEnergy);
 			}
 		}
 
@@ -80,6 +76,7 @@ public abstract class PoweredMendingHelper extends Entity {
 			}
 
 			this.remove();
+			info.cancel();
 		}
 	}
 
