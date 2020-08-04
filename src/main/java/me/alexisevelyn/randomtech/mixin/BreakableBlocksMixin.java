@@ -4,38 +4,29 @@ import me.alexisevelyn.randomtech.api.items.tools.generic.GenericPoweredTool;
 import net.minecraft.block.*;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.loot.LootTables;
+import net.minecraft.loot.context.LootContext;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.BlockView;
+import net.minecraft.world.World;
+import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 // This mixin is a 2 in 1. It handles making unbreakable blocks breakable and allows fixing the mining animation for dead tools to not occur.
 
 @SuppressWarnings("UnusedMixin") // The mixin is used, just is loaded by Fabric and not Sponge methods
 @Mixin(AbstractBlock.class)
-public class BreakableBlocksMixin {
-//	@Shadow private float resistance;
-//	@Shadow private float hardness;
-//	@Shadow private Identifier lootTableId;
-
-//	@Inject(at = @At("TAIL"), method = "strength(FF)Lnet/minecraft/block/AbstractBlock$Settings;", cancellable = true)
-//	private void strength(float hardness, float resistance, CallbackInfoReturnable<AbstractBlock.Settings> info) {
-//		if (hardness != -1.0)
-//			return;
-//
-//		this.hardness = MiningLevel.POWERED.getValue();
-//		this.resistance = Math.max(0.0F, resistance);
-//		info.setReturnValue(info.getReturnValue());
-//	}
-//
-//	@Inject(at = @At("TAIL"), method = "dropsNothing()Lnet/minecraft/block/AbstractBlock$Settings;", cancellable = true)
-//	public void dropsNothing(CallbackInfoReturnable<AbstractBlock.Settings> info) {
-//		// this.lootTableId = LootTables.ABANDONED_MINESHAFT_CHEST;
-//
-//		info.setReturnValue(info.getReturnValue());
-//	}
+public abstract class BreakableBlocksMixin {
+	@Shadow @Final public abstract Identifier getLootTableId();
 
 	// TODO: Test this with an actual server!!!
 	@Inject(at = @At("INVOKE"), method = "calcBlockBreakingDelta(Lnet/minecraft/block/BlockState;Lnet/minecraft/entity/player/PlayerEntity;Lnet/minecraft/world/BlockView;Lnet/minecraft/util/math/BlockPos;)F", cancellable = true)
@@ -87,5 +78,23 @@ public class BreakableBlocksMixin {
 		// This is to remove the visual indication of denied blocks which shouldn't be broken in survival.
 		// This would've been blocked anyway later on in the code, but I'd like to remove the visual indication of mining the block
 		return block instanceof CommandBlock || block instanceof StructureBlock || block instanceof JigsawBlock;
+	}
+
+	// Modifies Block Drops
+	@Inject(at = @At("INVOKE"), method = "getDroppedStacks(Lnet/minecraft/block/BlockState;Lnet/minecraft/loot/context/LootContext$Builder;)Ljava/util/List;", cancellable = true)
+	public void getDroppedStacks(BlockState state, LootContext.Builder builder, CallbackInfoReturnable<List<ItemStack>> info) {
+		Identifier identifier = this.getLootTableId();
+		List<ItemStack> drops = new ArrayList<>();
+
+		// Takes empty loot tables and make drop its own blocks
+		if (identifier == LootTables.EMPTY && isUnbreakableBlock(state, builder.getWorld())) {
+			drops.add(new ItemStack(state.getBlock()));
+			info.setReturnValue(drops);
+		}
+	}
+
+	public boolean isUnbreakableBlock(BlockState blockState, World world) {
+		// This is a hack. The only reason it works is because getHardness doesn't actually check the world or blockpos.
+		return blockState.getHardness(world, new BlockPos(0, 0, 0)) == -1.0;
 	}
 }
