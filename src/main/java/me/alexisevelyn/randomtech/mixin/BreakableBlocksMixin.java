@@ -55,7 +55,13 @@ public class BreakableBlocksMixin {
 				Block block = state.getBlock();
 
 				if (genericPoweredTool.canBreakUnbreakableBlock(state, player, world, pos) && !isDeniedBlock(block)) {
-					info.setReturnValue(player.getBlockBreakingSpeed(state) / 100.0F); // Makes the block have the expected mining speed as if it wasn't unbreakable
+					float dynamicBlockHardness = genericPoweredTool.getDynamicBlockHardness(state, player, world, pos);
+
+					// To ensure the hardness is always above 0.
+					if (dynamicBlockHardness <= 0.0F)
+						dynamicBlockHardness = 1.0F;
+
+					info.setReturnValue(player.getBlockBreakingSpeed(state) / dynamicBlockHardness / 100.0F); // Makes the block have the expected mining speed as if it wasn't unbreakable
 					return;
 				}
 			}

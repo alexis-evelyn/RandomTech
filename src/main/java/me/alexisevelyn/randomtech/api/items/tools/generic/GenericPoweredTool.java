@@ -3,6 +3,7 @@ package me.alexisevelyn.randomtech.api.items.tools.generic;
 import com.google.common.collect.Multimap;
 import me.alexisevelyn.randomtech.api.items.energy.EnergyHelper;
 import me.alexisevelyn.randomtech.api.utilities.ItemManager;
+import me.alexisevelyn.randomtech.api.utilities.annotations.AboveZero;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.block.Block;
@@ -27,6 +28,7 @@ import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import reborncore.api.items.ItemStackModifiers;
 import reborncore.common.util.ItemDurabilityExtensions;
@@ -301,8 +303,12 @@ public abstract class GenericPoweredTool extends MiningToolItem implements Energ
             ItemManager.powerLevelTooltip(stack, tooltip);
     }
 
-    @SuppressWarnings("unused")
     public boolean canBreakUnbreakableBlock(BlockState state, PlayerEntity player, BlockView world, BlockPos pos) {
         return false;
+    }
+
+    @AboveZero
+    public float getDynamicBlockHardness(BlockState state, PlayerEntity player, BlockView world, BlockPos pos) {
+        return 0.0F;
     }
 }
