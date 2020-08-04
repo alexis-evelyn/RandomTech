@@ -2,10 +2,12 @@ package me.alexisevelyn.randomtech.mixin;
 
 import me.alexisevelyn.randomtech.api.items.tools.generic.GenericPoweredTool;
 import net.minecraft.block.*;
+import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.loot.LootTables;
 import net.minecraft.loot.context.LootContext;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.BlockView;
@@ -15,10 +17,10 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 // This mixin is a 2 in 1. It handles making unbreakable blocks breakable and allows fixing the mining animation for dead tools to not occur.
@@ -27,6 +29,8 @@ import java.util.List;
 @Mixin(AbstractBlock.class)
 public abstract class BreakableBlocksMixin {
 	@Shadow @Final public abstract Identifier getLootTableId();
+
+	@Shadow @Final protected AbstractBlock.Settings settings;
 
 	// TODO: Test this with an actual server!!!
 	@Inject(at = @At("INVOKE"), method = "calcBlockBreakingDelta(Lnet/minecraft/block/BlockState;Lnet/minecraft/entity/player/PlayerEntity;Lnet/minecraft/world/BlockView;Lnet/minecraft/util/math/BlockPos;)F", cancellable = true)
@@ -88,10 +92,30 @@ public abstract class BreakableBlocksMixin {
 
 		// Takes empty loot tables and make drop its own blocks
 		if (identifier == LootTables.EMPTY && isUnbreakableBlock(state, builder.getWorld())) {
-			drops.add(new ItemStack(state.getBlock()));
+			ItemStack itemStack = new ItemStack(state.getBlock());
+			// builder.getWorld().getBlockEntity(blockPos)
+
+			drops.add(itemStack);
 			info.setReturnValue(drops);
 		}
 	}
+
+	// This below method either doesn't grab the block entity data or is simply not called. No further testing performed.
+	// Modify Dropped Stacks to Have Block Entity Data if Any
+//	@Inject(at = @At("HEAD"), method = "onStacksDropped(Lnet/minecraft/block/BlockState;Lnet/minecraft/world/World;Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/item/ItemStack;)V", cancellable = true)
+//	public void onStacksDropped(BlockState state, World world, BlockPos pos, ItemStack stack, CallbackInfo info) {
+//		BlockEntity blockEntity = world.getBlockEntity(pos);
+//
+//		if (blockEntity == null)
+//			return;
+//
+//		CompoundTag rootTag = stack.getOrCreateTag();
+//		// CompoundTag blockEntityTag = rootTag.getCompound("BlockEntityTag");
+//		CompoundTag blockEntityData = blockEntity.toTag(rootTag);
+//
+//		stack.putSubTag("BlockEntityTag", blockEntityData);
+//		info.cancel();
+//	}
 
 	public boolean isUnbreakableBlock(BlockState blockState, World world) {
 		// This is a hack. The only reason it works is because getHardness doesn't actually check the world or blockpos.
