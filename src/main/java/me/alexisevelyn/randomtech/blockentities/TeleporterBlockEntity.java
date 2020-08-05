@@ -1,12 +1,10 @@
 package me.alexisevelyn.randomtech.blockentities;
 
 import me.alexisevelyn.randomtech.api.blockentities.BasePowerAcceptorBlockEntity;
+import me.alexisevelyn.randomtech.blocks.TeleporterBlock;
 import me.alexisevelyn.randomtech.guis.TeleporterGui;
 import me.alexisevelyn.randomtech.utility.BlockEntities;
 import me.alexisevelyn.randomtech.utility.registryhelpers.main.RegistryHelper;
-import me.alexisevelyn.randomtech.blocks.TeleporterBlock;
-import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
-import net.minecraft.block.Block;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -19,11 +17,8 @@ import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.Util;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.util.registry.RegistryKey;
-import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 import reborncore.api.IToolDrop;
 import reborncore.api.blockentity.InventoryProvider;
@@ -33,8 +28,6 @@ import reborncore.client.screen.builder.ScreenHandlerBuilder;
 import reborncore.common.blocks.BlockMachineBase;
 import reborncore.common.powerSystem.PowerSystem;
 import reborncore.common.util.RebornInventory;
-import scheduler.CancellationToken;
-import scheduler.Scheduler;
 
 import java.util.Optional;
 
@@ -49,9 +42,6 @@ public class TeleporterBlockEntity extends BasePowerAcceptorBlockEntity implemen
     // Energy Usage
     private final int energyAddend = 1000;
 
-    // Scheduler Cancellation Token
-    CancellationToken cancellationToken;
-
     public TeleporterBlockEntity() {
         super(BlockEntities.TELEPORTER);
         this.inventory = new RebornInventory<>(1, "TeleporterBlockEntity", 1, this);
@@ -59,11 +49,6 @@ public class TeleporterBlockEntity extends BasePowerAcceptorBlockEntity implemen
 
     public int getEnergyAddend() {
         return this.energyAddend;
-    }
-
-    @Nullable
-    public CancellationToken getSchedulerCancellationToken() {
-        return this.cancellationToken;
     }
 
     // Used for TR's Wrench
