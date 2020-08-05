@@ -5,19 +5,26 @@ import me.alexisevelyn.randomtech.guis.TeleporterGui;
 import me.alexisevelyn.randomtech.utility.BlockEntities;
 import me.alexisevelyn.randomtech.utility.registryhelpers.main.RegistryHelper;
 import me.alexisevelyn.randomtech.blocks.TeleporterBlock;
+import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
+import net.minecraft.block.Block;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.sound.SoundCategory;
 import net.minecraft.text.LiteralText;
 import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.Util;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.util.registry.RegistryKey;
+import net.minecraft.world.World;
+import org.jetbrains.annotations.Nullable;
 import reborncore.api.IToolDrop;
 import reborncore.api.blockentity.InventoryProvider;
 import reborncore.client.screen.BuiltScreenHandlerProvider;
@@ -26,6 +33,8 @@ import reborncore.client.screen.builder.ScreenHandlerBuilder;
 import reborncore.common.blocks.BlockMachineBase;
 import reborncore.common.powerSystem.PowerSystem;
 import reborncore.common.util.RebornInventory;
+import scheduler.CancellationToken;
+import scheduler.Scheduler;
 
 import java.util.Optional;
 
@@ -35,13 +44,26 @@ public class TeleporterBlockEntity extends BasePowerAcceptorBlockEntity implemen
     @SuppressWarnings("OptionalUsedAsFieldOrParameterType") final Optional<Item> frequencyTransmitter = Registry.ITEM.getOrEmpty(frequencyTransmitterIdentifier);
 
     // Inventory Slot Markers
-    final int inputSlot = 0;
+    private final int inputSlot = 0;
 
-    final int energyAddend = 1000;
+    // Energy Usage
+    private final int energyAddend = 1000;
+
+    // Scheduler Cancellation Token
+    CancellationToken cancellationToken;
 
     public TeleporterBlockEntity() {
         super(BlockEntities.TELEPORTER);
         this.inventory = new RebornInventory<>(1, "TeleporterBlockEntity", 1, this);
+    }
+
+    public int getEnergyAddend() {
+        return this.energyAddend;
+    }
+
+    @Nullable
+    public CancellationToken getSchedulerCancellationToken() {
+        return this.cancellationToken;
     }
 
     // Used for TR's Wrench
@@ -122,13 +144,28 @@ public class TeleporterBlockEntity extends BasePowerAcceptorBlockEntity implemen
            try {
                 ServerPlayerEntity serverPlayerEntity = (ServerPlayerEntity) playerEntity;
 
-                serverPlayerEntity.teleport(newWorld, pos[0], pos[1], pos[2], serverPlayerEntity.getHeadYaw(), serverPlayerEntity.getPitch(20));
-                addEnergy(-1 * energyAddend); // Take out the energy from use of the teleporter
+                initializeAndTeleport(serverPlayerEntity, newWorld, pos);
             } catch (Exception exception) {
                 System.out.println("Teleport Exception: ");
                 exception.printStackTrace();
             }
         }
+    }
+
+    public void initializeAndTeleport(ServerPlayerEntity serverPlayerEntity, ServerWorld newWorld, int[] pos) {
+        newWorld.playSound(
+                null, // Player - if non-null, will play sound for every nearby player *except* the specified player
+                this.getPos(), // The position of where the sound will come from
+                RegistryHelper.TELEPORTER_TELEPORTS_SOUND, // The sound that will play
+                SoundCategory.BLOCKS, // This determines which of the volume sliders affect this sound
+                1.0F, // Volume multiplier, 1 is normal, 0.5 is half volume, etc
+                1.0F // Pitch multiplier, 1 is normal, 0.5 is half pitch, etc
+        );
+
+        // TODO: Delay the teleport by about two seconds
+        // Take a look at https://discordapp.com/channels/507304429255393322/507982478276034570/740471565866631279
+        serverPlayerEntity.teleport(newWorld, pos[0], pos[1], pos[2], serverPlayerEntity.getHeadYaw(), serverPlayerEntity.getPitch(20));
+        addEnergy(-1 * getEnergyAddend()); // Take out the energy from use of the teleporter
     }
 
     // This checks for TechReborn's Frequency Transmitter and Outputs the Destination of the Transmitter

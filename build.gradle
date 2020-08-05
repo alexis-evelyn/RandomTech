@@ -158,6 +158,10 @@ dependencies {
 	modImplementation "com.github.Siphalor:nbt-crafting:${project.nbt_crafting_version}"
 	include "com.github.Siphalor:nbt-crafting:${project.nbt_crafting_version}"
 
+	// For Code Scheduling - https://github.com/natanfudge/Working-Scheduler/blob/1.16/README.md
+	// modImplementation "com.lettuce.fudge:working-scheduler:${project.fudge_working_scheduler}"
+	// include "com.lettuce.fudge:working-scheduler:${project.fudge_working_scheduler}"
+
 	// For Extra Annotations
 	// https://mvnrepository.com/artifact/com.google.errorprone/error_prone_annotations
 	// compile group: 'com.google.errorprone', name: 'error_prone_annotations', version: '2.4.0'

@@ -1,0 +1,8 @@
+{
+  "teleporter_teleports": {
+    "subtitle": "subtitles.teleport.teleport",
+    "sounds": [
+      "randomtech:teleport_one"
+    ]
+  }
+}

@@ -48,6 +48,7 @@ import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.SpawnGroup;
 import net.minecraft.fluid.FlowableFluid;
 import net.minecraft.item.*;
+import net.minecraft.sound.SoundEvent;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
@@ -190,6 +191,10 @@ public class RegistryHelper {
     public static final CustomGameRuleCategory RANDOM_TECH_GAMERULES_CATEGORY = new CustomGameRuleCategory(new Identifier(Main.MODID, "gamerules"), new TranslatableText(Main.MODID + ".gamerules").styled(style -> style.withBold(true).withColor(Formatting.DARK_PURPLE)));
     public static final GameRules.Key<GameRules.BooleanRule> HIDE_EXPERIMENTAL_SCREEN_GAMERULE = GameRuleRegistry.register("hideExperimentalScreen", RANDOM_TECH_GAMERULES_CATEGORY, GameRuleFactory.createBooleanRule(false));
 
+    // Sounds
+    public static final Identifier TELEPORTER_TELEPORTS_SOUND_IDENTIFIER = new Identifier(Main.MODID, "teleporter_teleports");
+    public static final SoundEvent TELEPORTER_TELEPORTS_SOUND = new SoundEvent(TELEPORTER_TELEPORTS_SOUND_IDENTIFIER);
+
     public void register() {
         // Blocks
         registerGeneralBlocks();
@@ -225,6 +230,9 @@ public class RegistryHelper {
 
         // Dimensions
         registerDimensions();
+
+        // Sounds
+        registerSounds();
     }
 
     private void registerGeneralBlocks() {
@@ -394,5 +402,10 @@ public class RegistryHelper {
     // Dimensions are actually registered as JSON files now. So, we just set up the chunk generator and player placement code.
     private void registerDimensions() {
         FabricDimensions.registerDefaultPlacer(voidDimension, VoidDimensionHelper::placeEntityInVoid);
+    }
+
+    private void registerSounds() {
+        // Sounds
+        Registry.register(Registry.SOUND_EVENT, TELEPORTER_TELEPORTS_SOUND_IDENTIFIER, TELEPORTER_TELEPORTS_SOUND);
     }
 }
