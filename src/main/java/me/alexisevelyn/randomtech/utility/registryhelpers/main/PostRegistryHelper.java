@@ -21,6 +21,9 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.biome.Biome;
 
+import java.nio.charset.StandardCharsets;
+import java.util.Arrays;
+
 public class PostRegistryHelper {
     public static final ComponentType<BrokenItemComponent> BROKEN_ITEM_COMPONENT =
             ComponentRegistry.INSTANCE.registerIfAbsent(new Identifier(Main.MODID, "broken_item_component"), BrokenItemComponent.class);
@@ -41,12 +44,14 @@ public class PostRegistryHelper {
 
         // To Handle Hotkey Presses From Client
         ServerSidePacketRegistry.INSTANCE.register(PreRegistryHelper.keybindPacketIdentifier, (packetContext, attachedData) -> {
-            String key = attachedData.readString();
+            byte[] key = attachedData.readByteArray();
+            String encodedString = new String(key, StandardCharsets.UTF_8);
 
             packetContext.getTaskQueue().execute(() -> {
                 // Execute on the main thread
 
-                switch (key) {
+                // System.out.println("Packet Received: " + Arrays.toString(key));
+                switch (encodedString) {
                     case PreRegistryHelper.zoom:
                         zoomPressed(packetContext, attachedData);
                         break;

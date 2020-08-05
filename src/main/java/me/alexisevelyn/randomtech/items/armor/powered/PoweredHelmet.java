@@ -9,6 +9,7 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.network.ClientSidePacketRegistry;
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ArmorMaterial;
@@ -16,6 +17,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.PacketByteBuf;
 import team.reborn.energy.EnergyTier;
+
+import java.nio.charset.StandardCharsets;
 
 public class PoweredHelmet extends GenericPoweredArmor {
     private static final int energyCapacity = 512;
@@ -26,7 +29,9 @@ public class PoweredHelmet extends GenericPoweredArmor {
     public PoweredHelmet(ArmorMaterial material, EquipmentSlot slot, Settings settings) {
         super(material, slot, energyCapacity, energyTier, cost, settings, dischargedTranslationKey);
 
-        registerZoomKeybindSender();
+        // Only run on the client
+        if (FabricLoader.getInstance().getEnvironmentType() == EnvType.CLIENT)
+            registerZoomKeybindSender();
     }
 
     @Override
@@ -71,11 +76,11 @@ public class PoweredHelmet extends GenericPoweredArmor {
                 return;
 
             if (ClientRegistryHelper.poweredHelmetZoom.isPressed()) {
-                passedData.writeString(PreRegistryHelper.zoom);
+                passedData.writeByteArray(PreRegistryHelper.zoom.getBytes(StandardCharsets.UTF_8));
 
                 ClientSidePacketRegistry.INSTANCE.sendToServer(PreRegistryHelper.keybindPacketIdentifier, passedData);
             } else if (ClientRegistryHelper.poweredHelmetZoom.wasPressed()) {
-                passedData.writeString(PreRegistryHelper.unzoom);
+                passedData.writeByteArray(PreRegistryHelper.unzoom.getBytes(StandardCharsets.UTF_8));
 
                 ClientSidePacketRegistry.INSTANCE.sendToServer(PreRegistryHelper.keybindPacketIdentifier, passedData);
             }

@@ -8,10 +8,13 @@ import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.inventory.Inventory;
+import net.minecraft.inventory.SidedInventory;
+import net.minecraft.screen.ScreenHandler;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.BlockView;
+import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 
 import java.util.Random;
@@ -59,24 +62,23 @@ public class ItemCable extends GenericCable implements BlockEntityProvider, Wate
         return new ItemCableBlockEntity();
     }
 
-//    @Override
-//    public boolean hasComparatorOutput(BlockState state) {
-//        return true;
-//    }
-//
-//    @Override
-//    public int getComparatorOutput(BlockState state, World world, BlockPos pos) {
-//        return ScreenHandler.calculateComparatorOutput(getInventory(state, world, pos));
-//    }
+    @Override
+    public boolean hasComparatorOutput(BlockState state) {
+        return true;
+    }
 
-//    @Override
-//    public SidedInventory getInventory(BlockState state, WorldAccess world, BlockPos pos) {
-//        BlockEntity blockEntity = world.getBlockEntity(pos);
-//
-//        if (isInterfacing(state) && blockEntity instanceof SidedInventory) {
-//            return (SidedInventory) blockEntity;
-//        }
-//
-//        return null;
-//    }
+    @Override
+    public int getComparatorOutput(BlockState state, World world, BlockPos pos) {
+        return ScreenHandler.calculateComparatorOutput(getInventory(state, world, pos));
+    }
+
+    public SidedInventory getInventory(BlockState state, WorldAccess world, BlockPos pos) {
+        BlockEntity blockEntity = world.getBlockEntity(pos);
+
+        if (isInterfacing(state) && blockEntity instanceof SidedInventory) {
+            return (SidedInventory) blockEntity;
+        }
+
+        return null;
+    }
 }
