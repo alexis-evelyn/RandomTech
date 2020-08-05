@@ -122,6 +122,10 @@ public abstract class GenericCable extends Block {
         if (!player.getStackInHand(hand).getItem().equals(Items.AIR))
             return ActionResult.PASS;
 
+        // We want to allow the player to access the gui if they are not sneaking
+        if (!player.isSneaking())
+            return ActionResult.PASS;
+
         List<BlockPos> allCables = getAllInterfacingCables(world, pos);
 
         if (allCables.size() == 0) {

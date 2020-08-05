@@ -75,9 +75,8 @@ public class ItemCable extends GenericCable implements BlockEntityProvider, Wate
     public SidedInventory getInventory(BlockState state, WorldAccess world, BlockPos pos) {
         BlockEntity blockEntity = world.getBlockEntity(pos);
 
-        if (isInterfacing(state) && blockEntity instanceof SidedInventory) {
-            return (SidedInventory) blockEntity;
-        }
+        if (blockEntity instanceof InventoryProvider)
+            return ((InventoryProvider) blockEntity).getInventory(state, world, pos);
 
         return null;
     }

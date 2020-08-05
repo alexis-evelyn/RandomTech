@@ -2,7 +2,7 @@
   "multipart": [
     {
       "when": {
-        "north": "cable"
+        "north": "cable|interfaceable"
       },
       "apply": {
         "model": "minecraft:block/chorus_plant_side"
@@ -10,7 +10,7 @@
     },
     {
       "when": {
-        "east": "cable"
+        "east": "cable|interfaceable"
       },
       "apply": {
         "model": "minecraft:block/chorus_plant_side",
@@ -20,7 +20,7 @@
     },
     {
       "when": {
-        "south": "cable"
+        "south": "cable|interfaceable"
       },
       "apply": {
         "model": "minecraft:block/chorus_plant_side",
@@ -30,7 +30,7 @@
     },
     {
       "when": {
-        "west": "cable"
+        "west": "cable|interfaceable"
       },
       "apply": {
         "model": "minecraft:block/chorus_plant_side",
@@ -40,7 +40,7 @@
     },
     {
       "when": {
-        "up": "cable"
+        "up": "cable|interfaceable"
       },
       "apply": {
         "model": "minecraft:block/chorus_plant_side",
@@ -50,7 +50,7 @@
     },
     {
       "when": {
-        "down": "cable"
+        "down": "cable|interfaceable"
       },
       "apply": {
         "model": "minecraft:block/chorus_plant_side",
