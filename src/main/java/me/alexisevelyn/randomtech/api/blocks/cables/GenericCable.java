@@ -2,14 +2,21 @@ package me.alexisevelyn.randomtech.api.blocks.cables;
 
 import me.alexisevelyn.randomtech.Main;
 import me.alexisevelyn.randomtech.api.utilities.CalculationHelper;
+import me.alexisevelyn.randomtech.blockentities.InverseIntangibleGlassBlockEntity;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.ShapeContext;
+import net.minecraft.block.Waterloggable;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.fluid.FluidState;
+import net.minecraft.fluid.Fluids;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.state.StateManager;
+import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.state.property.EnumProperty;
+import net.minecraft.state.property.Properties;
 import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.ActionResult;
@@ -18,8 +25,11 @@ import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Vec3i;
+import net.minecraft.util.shape.VoxelShape;
+import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
@@ -28,13 +38,16 @@ import java.util.List;
 import java.util.Set;
 import java.util.function.Consumer;
 
-public abstract class GenericCable extends Block {
+public abstract class GenericCable extends Block implements Waterloggable {
     public static EnumProperty<CableConnection> CABLE_CONNECTION_NORTH = EnumProperty.of("north", CableConnection.class, CableConnection.NONE, CableConnection.CABLE, CableConnection.INTERFACEABLE);
     public static EnumProperty<CableConnection> CABLE_CONNECTION_SOUTH = EnumProperty.of("south", CableConnection.class, CableConnection.NONE, CableConnection.CABLE, CableConnection.INTERFACEABLE);
     public static EnumProperty<CableConnection> CABLE_CONNECTION_EAST = EnumProperty.of("east", CableConnection.class, CableConnection.NONE, CableConnection.CABLE, CableConnection.INTERFACEABLE);
     public static EnumProperty<CableConnection> CABLE_CONNECTION_WEST = EnumProperty.of("west", CableConnection.class, CableConnection.NONE, CableConnection.CABLE, CableConnection.INTERFACEABLE);
     public static EnumProperty<CableConnection> CABLE_CONNECTION_UP = EnumProperty.of("up", CableConnection.class, CableConnection.NONE, CableConnection.CABLE, CableConnection.INTERFACEABLE);
     public static EnumProperty<CableConnection> CABLE_CONNECTION_DOWN = EnumProperty.of("down", CableConnection.class, CableConnection.NONE, CableConnection.CABLE, CableConnection.INTERFACEABLE);
+
+    // Allows to be Waterlogged
+    public static final BooleanProperty WATERLOGGED = Properties.WATERLOGGED;
 
     private static final Vec3i northVector = Direction.NORTH.getVector();
     private static final Vec3i southVector = Direction.SOUTH.getVector();
@@ -45,7 +58,24 @@ public abstract class GenericCable extends Block {
 
     public int maxCount = 5000; // Integer.MAX_VALUE;
 
-    public GenericCable(Settings settings) {
+    private final VoxelShape OUTLINED_SHAPE;
+    private final VoxelShape VISUAL_SHAPE;
+    private final VoxelShape COLLISION_SHAPE;
+    private final VoxelShape[] CULLING_SHAPES;
+
+    public GenericCable(@NotNull Settings settings) {
+        this(settings, null, null, null, null);
+    }
+
+    public GenericCable(@NotNull Settings settings, @Nullable VoxelShape genericShape) {
+        this(settings, genericShape, genericShape, genericShape, null);
+    }
+
+    public GenericCable(@NotNull Settings settings, @Nullable VoxelShape genericShape, @Nullable VoxelShape[] cullingShapes) {
+        this(settings, genericShape, genericShape, genericShape, cullingShapes);
+    }
+
+    public GenericCable(@NotNull Settings settings, @Nullable VoxelShape outlinedShape, @Nullable VoxelShape visualShape, @Nullable VoxelShape collisionShape, @Nullable VoxelShape[] cullingShapes) {
         super(settings);
 
         this.setDefaultState(this.stateManager.getDefaultState()
@@ -54,12 +84,19 @@ public abstract class GenericCable extends Block {
                 .with(CABLE_CONNECTION_EAST, CableConnection.NONE)
                 .with(CABLE_CONNECTION_WEST, CableConnection.NONE)
                 .with(CABLE_CONNECTION_UP, CableConnection.NONE)
-                .with(CABLE_CONNECTION_DOWN, CableConnection.NONE));
+                .with(CABLE_CONNECTION_DOWN, CableConnection.NONE)
+                .with(WATERLOGGED, false)
+        );
+
+        this.OUTLINED_SHAPE = outlinedShape;
+        this.VISUAL_SHAPE = visualShape;
+        this.COLLISION_SHAPE = collisionShape;
+        this.CULLING_SHAPES = cullingShapes;
     }
 
     @Override
     protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
-        builder.add(CABLE_CONNECTION_NORTH, CABLE_CONNECTION_SOUTH, CABLE_CONNECTION_EAST, CABLE_CONNECTION_WEST, CABLE_CONNECTION_UP, CABLE_CONNECTION_DOWN);
+        builder.add(CABLE_CONNECTION_NORTH, CABLE_CONNECTION_SOUTH, CABLE_CONNECTION_EAST, CABLE_CONNECTION_WEST, CABLE_CONNECTION_UP, CABLE_CONNECTION_DOWN, WATERLOGGED);
     }
 
     // This is to make sure that we only connect to the proper cable instance.
@@ -87,6 +124,11 @@ public abstract class GenericCable extends Block {
     // This runs for every block update that occurs to the cables
     @Override
     public BlockState getStateForNeighborUpdate(BlockState state, Direction direction, BlockState newState, WorldAccess world, BlockPos pos, BlockPos posFrom) {
+        if (state.get(WATERLOGGED)) {
+            // Try to support generic fluids if possible
+            world.getFluidTickScheduler().schedule(pos, Fluids.WATER, Fluids.WATER.getTickRate(world));
+        }
+
         // This sets up the cable blockstates for each cable
         return setupCableStates(world, pos, state);
     }
@@ -109,7 +151,7 @@ public abstract class GenericCable extends Block {
     @Override
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
         // So player has to click with an empty hand. This makes it easy to place blocks against the cable.
-        if (!player.getStackInHand(hand).getItem().equals(Items.AIR))
+        if (!player.getStackInHand(hand).getItem().equals(Items.AIR)) // This causes weird behavior. Try again later. --> player.getStackInHand(hand).getItem() instanceof BlockItem
             return ActionResult.PASS;
 
         // Only the server needs to bother with the connection of the network.
@@ -332,5 +374,47 @@ public abstract class GenericCable extends Block {
         state = setCableState(state, downBlockState, CABLE_CONNECTION_DOWN, CABLE_CONNECTION_UP, world, pos, down, broken);
 
         return state;
+    }
+
+    // Used to visually indicate if waterlogged
+    @Override
+    public FluidState getFluidState(BlockState state) {
+        return state.get(WATERLOGGED) ? Fluids.WATER.getStill(false) : super.getFluidState(state);
+    }
+
+    @Override
+    public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
+        if (this.OUTLINED_SHAPE == null)
+            return super.getOutlineShape(state, world, pos, context);
+
+        return this.OUTLINED_SHAPE;
+    }
+
+    @Override
+    public VoxelShape getCullingShape(BlockState state, BlockView world, BlockPos pos) {
+        if (this.CULLING_SHAPES == null)
+            return super.getOutlineShape(state, world, pos, ShapeContext.absent());
+
+        return this.CULLING_SHAPES[this.getShapeIndex(state)];
+    }
+
+    @Override
+    public VoxelShape getVisualShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
+        if (this.VISUAL_SHAPE == null)
+            return super.getVisualShape(state, world, pos, context);
+
+        return this.VISUAL_SHAPE;
+    }
+
+    @Override
+    public VoxelShape getCollisionShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
+        if (this.COLLISION_SHAPE == null)
+            return super.getCollisionShape(state, world, pos, context);
+
+        return this.COLLISION_SHAPE;
+    }
+
+    public int getShapeIndex(BlockState state) {
+        return 0;
     }
 }

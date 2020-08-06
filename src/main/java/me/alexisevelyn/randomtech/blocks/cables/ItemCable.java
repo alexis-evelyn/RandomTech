@@ -19,7 +19,7 @@ import net.minecraft.world.WorldAccess;
 
 import java.util.Random;
 
-public class ItemCable extends GenericCable implements BlockEntityProvider, Waterloggable {
+public class ItemCable extends GenericCable implements BlockEntityProvider {
     public ItemCable() {
         super(FabricBlockSettings
                         .of(Materials.CABLE_MATERIAL)
