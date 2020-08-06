@@ -5,6 +5,7 @@ import me.alexisevelyn.randomtech.blocks.TeleporterBlock;
 import me.alexisevelyn.randomtech.guis.TeleporterGui;
 import me.alexisevelyn.randomtech.utility.BlockEntities;
 import me.alexisevelyn.randomtech.utility.registryhelpers.main.RegistryHelper;
+import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -17,9 +18,9 @@ import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.Util;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.util.registry.RegistryKey;
-import org.jetbrains.annotations.Nullable;
 import reborncore.api.IToolDrop;
 import reborncore.api.blockentity.InventoryProvider;
 import reborncore.client.screen.BuiltScreenHandlerProvider;
@@ -42,9 +43,42 @@ public class TeleporterBlockEntity extends BasePowerAcceptorBlockEntity implemen
     // Energy Usage
     private final int energyAddend = 1000;
 
+    // Scheduler Setup
+    private long tickTime;
+    private long lastTickTime = Util.getMeasuringTimeMs();
+
+    private ServerPlayerEntity serverPlayerEntity;
+    private ServerWorld newWorld;
+    private int[] newPos;
+
+    private final long delayTeleport = 2 * 1000;
+    private boolean isPlayingTeleportSound = false;
+
     public TeleporterBlockEntity() {
         super(BlockEntities.TELEPORTER);
         this.inventory = new RebornInventory<>(1, "TeleporterBlockEntity", 1, this);
+
+        registerScheduler();
+    }
+
+    public void registerScheduler() {
+        ServerTickEvents.END_SERVER_TICK.register((server) -> {
+            this.tickTime = Util.getMeasuringTimeMs();
+            if (this.lastTickTime < this.tickTime - this.delayTeleport) {
+                this.lastTickTime = this.tickTime;
+
+                if (serverPlayerEntity == null || newWorld == null || pos == null)
+                    return;
+
+                serverPlayerEntity.teleport(newWorld, newPos[0], newPos[1], newPos[2], serverPlayerEntity.getHeadYaw(), serverPlayerEntity.getPitch(20));
+                addEnergy(-1 * getEnergyAddend()); // Take out the energy from use of the teleporter
+
+                serverPlayerEntity = null;
+                newWorld = null;
+                newPos = null;
+                isPlayingTeleportSound = false;
+            }
+        });
     }
 
     public int getEnergyAddend() {
@@ -138,19 +172,23 @@ public class TeleporterBlockEntity extends BasePowerAcceptorBlockEntity implemen
     }
 
     public void initializeAndTeleport(ServerPlayerEntity serverPlayerEntity, ServerWorld newWorld, int[] pos) {
-        newWorld.playSound(
-                null, // Player - if non-null, will play sound for every nearby player *except* the specified player
-                this.getPos(), // The position of where the sound will come from
-                RegistryHelper.TELEPORTER_TELEPORTS_SOUND, // The sound that will play
-                SoundCategory.BLOCKS, // This determines which of the volume sliders affect this sound
-                1.0F, // Volume multiplier, 1 is normal, 0.5 is half volume, etc
-                1.0F // Pitch multiplier, 1 is normal, 0.5 is half pitch, etc
-        );
+        if (!isPlayingTeleportSound) {
+            newWorld.playSound(
+                    null, // Player - if non-null, will play sound for every nearby player *except* the specified player
+                    this.getPos(), // The position of where the sound will come from
+                    RegistryHelper.TELEPORTER_TELEPORTS_SOUND, // The sound that will play
+                    SoundCategory.BLOCKS, // This determines which of the volume sliders affect this sound
+                    1.0F, // Volume multiplier, 1 is normal, 0.5 is half volume, etc
+                    1.0F // Pitch multiplier, 1 is normal, 0.5 is half pitch, etc
+            );
 
-        // TODO: Delay the teleport by about two seconds
+            isPlayingTeleportSound = true;
+        }
+
         // Take a look at https://discordapp.com/channels/507304429255393322/507982478276034570/740471565866631279
-        serverPlayerEntity.teleport(newWorld, pos[0], pos[1], pos[2], serverPlayerEntity.getHeadYaw(), serverPlayerEntity.getPitch(20));
-        addEnergy(-1 * getEnergyAddend()); // Take out the energy from use of the teleporter
+        this.serverPlayerEntity = serverPlayerEntity;
+        this.newWorld = newWorld;
+        this.newPos = pos;
     }
 
     // This checks for TechReborn's Frequency Transmitter and Outputs the Destination of the Transmitter

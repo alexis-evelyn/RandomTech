@@ -1,35 +1,23 @@
 package me.alexisevelyn.randomtech.blocks;
 
 import me.alexisevelyn.randomtech.api.blocks.machines.PowerAcceptorBlock;
+import me.alexisevelyn.randomtech.blockentities.TeleporterBlockEntity;
 import me.alexisevelyn.randomtech.utility.Materials;
 import me.alexisevelyn.randomtech.utility.registryhelpers.main.RegistryHelper;
-import me.alexisevelyn.randomtech.blockentities.TeleporterBlockEntity;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.fabricmc.fabric.api.tool.attribute.v1.FabricToolTags;
-import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ToolMaterials;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.state.property.IntProperty;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
-import net.minecraft.util.registry.Registry;
-import net.minecraft.util.registry.RegistryKey;
 import net.minecraft.world.BlockView;
-import net.minecraft.world.World;
 import reborncore.api.blockentity.IMachineGuiHandler;
-import scheduler.Scheduleable;
 
-import java.util.Arrays;
 import java.util.function.ToIntFunction;
 
 public class TeleporterBlock extends PowerAcceptorBlock {

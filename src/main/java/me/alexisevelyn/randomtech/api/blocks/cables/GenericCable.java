@@ -2,23 +2,14 @@ package me.alexisevelyn.randomtech.api.blocks.cables;
 
 import me.alexisevelyn.randomtech.Main;
 import me.alexisevelyn.randomtech.api.utilities.CalculationHelper;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
-import net.minecraft.block.AirBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.InventoryProvider;
-import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.inventory.SidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
-import net.minecraft.screen.ScreenHandler;
-import net.minecraft.server.world.ServerWorld;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.EnumProperty;
-import net.minecraft.text.LiteralText;
 import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.ActionResult;
@@ -31,7 +22,10 @@ import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 import java.util.function.Consumer;
 
 public abstract class GenericCable extends Block {
@@ -114,13 +108,15 @@ public abstract class GenericCable extends Block {
 
     @Override
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
-        // Only the server needs to bother with the connection of the network.
-        if (world.isClient)
-            return ActionResult.SUCCESS;
-
         // So player has to click with an empty hand. This makes it easy to place blocks against the cable.
         if (!player.getStackInHand(hand).getItem().equals(Items.AIR))
             return ActionResult.PASS;
+
+        // Only the server needs to bother with the connection of the network.
+        // Success takes away the block placement sound, but also makes it where onUse is only called once.
+        //  That's why the check for isClient is after checking if the hand is empty
+        if (world.isClient)
+            return ActionResult.SUCCESS;
 
         // We want to allow the player to access the gui if they are not sneaking
         if (!player.isSneaking())

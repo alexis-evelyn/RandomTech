@@ -20,8 +20,6 @@ import net.minecraft.world.WorldAccess;
 import java.util.Random;
 
 public class ItemCable extends GenericCable implements BlockEntityProvider, Waterloggable {
-    // TODO: Figure out if it's possible to only implement a block entity on certain blocks of the same type.
-
     public ItemCable() {
         super(FabricBlockSettings
                         .of(Materials.CABLE_MATERIAL)
@@ -62,12 +60,14 @@ public class ItemCable extends GenericCable implements BlockEntityProvider, Wate
         return new ItemCableBlockEntity();
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public boolean hasComparatorOutput(BlockState state) {
         return true;
     }
 
     @Override
+    @SuppressWarnings("deprecation") // https://discordapp.com/channels/507304429255393322/523633816078647296/740720404800209041
     public int getComparatorOutput(BlockState state, World world, BlockPos pos) {
         return ScreenHandler.calculateComparatorOutput(getInventory(state, world, pos));
     }
