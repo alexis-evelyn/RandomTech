@@ -30,7 +30,10 @@ public class ItemCable extends GenericCable implements BlockEntityProvider {
                         .suffocates(GenericBlockHelper::never) // Suffocates player
                         .blockVision(GenericBlockHelper::never) // Blocks Vision inside of block
                         .strength(0.3F, 0.3F)
-                        .ticksRandomly()
+                        .ticksRandomly(),
+
+                // TODO: Remove me
+                Block.createCuboidShape(4.0D, 0.0D, 4.0D, 12.0D, 9.0D, 12.0D)
         );
     }
 
