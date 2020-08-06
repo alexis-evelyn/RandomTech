@@ -4,9 +4,9 @@
   "package": "me.alexisevelyn.randomtech.mixin.experiments",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
-    "DeathScreenMixin"
   ],
   "client": [
+    "DeathScreenMixin"
   ],
   "injectors": {
     "defaultRequire": 1

@@ -4,9 +4,9 @@
   "package": "me.alexisevelyn.randomtech.mixin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
+    "BreakableBlocksMixin"
   ],
   "client": [
-    "BreakableBlocksMixin"
   ],
   "injectors": {
     "defaultRequire": 1
