@@ -67,10 +67,12 @@ public abstract class GenericCable extends Block implements Waterloggable {
         this(settings, null, null, null, null);
     }
 
+    @SuppressWarnings("unused")
     public GenericCable(@NotNull Settings settings, @Nullable VoxelShape genericShape) {
         this(settings, genericShape, genericShape, genericShape, null);
     }
 
+    @SuppressWarnings("unused")
     public GenericCable(@NotNull Settings settings, @Nullable VoxelShape genericShape, @Nullable VoxelShape[] cullingShapes) {
         this(settings, genericShape, genericShape, genericShape, cullingShapes);
     }
