@@ -44,7 +44,8 @@
     "mixins/experiments/death-screen-mixin.json",
     "mixins/gamerule-based-backup-screen-mixin.json",
     "mixins/powered-mending-helper-mixin.json",
-    "mixins/breakable-blocks-mixin.json"
+    "mixins/breakable-blocks-mixin.json",
+    "mixins/kill-prevention-mixin.json"
   ],
 
   "depends": {
