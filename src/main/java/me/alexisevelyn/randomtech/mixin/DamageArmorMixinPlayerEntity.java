@@ -15,7 +15,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @SuppressWarnings("UnusedMixin") // The mixin is used, just is loaded by Fabric and not Sponge methods
 @Mixin(PlayerEntity.class)
-public abstract class DamageArmorMixin {
+public abstract class DamageArmorMixinPlayerEntity {
 
 	@Shadow @Final public PlayerInventory inventory;
 
@@ -30,11 +30,9 @@ public abstract class DamageArmorMixin {
 			if (damage < 1.0F)
 				damage = 1.0F;
 
- 			for(int i = 0; i < this.inventory.armor.size(); ++i) {
-				ItemStack itemStack = this.inventory.armor.get(i);
-
-				if ((!damageSource.isFire() || !itemStack.getItem().isFireproof()) && itemStack.getItem() instanceof GenericPoweredArmor) {
-					((GenericPoweredArmor) itemStack.getItem()).addDamage(itemStack, this.inventory.player, damageSource, damage);
+			for (ItemStack armorPiece : this.inventory.armor) {
+				if ((!damageSource.isFire() || !armorPiece.getItem().isFireproof()) && armorPiece.getItem() instanceof GenericPoweredArmor) {
+					((GenericPoweredArmor) armorPiece.getItem()).addDamage(armorPiece, this.inventory.player, damageSource, damage);
 				}
 			}
 		}

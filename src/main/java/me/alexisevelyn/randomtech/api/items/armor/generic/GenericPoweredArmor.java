@@ -11,6 +11,7 @@ import net.minecraft.enchantment.Enchantments;
 import net.minecraft.enchantment.UnbreakingEnchantment;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EquipmentSlot;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.attribute.EntityAttribute;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.attribute.EntityAttributes;
@@ -40,7 +41,7 @@ import java.util.List;
 import java.util.UUID;
 
 // TODO: Make enchants useless if item is broken.
-public abstract class GenericPoweredArmor extends ArmorItem implements EnergyHelper, ItemDurabilityExtensions, ItemStackModifiers, ArmorTickable, ArmorRemoveHandler, ArmorFovHandler, EnergyHolder {
+public abstract class GenericPoweredArmor extends ArmorItem implements EnergyHelper, ItemDurabilityExtensions, ItemStackModifiers, ArmorTickable, ArmorRemoveHandler, ArmorFovHandler, EnergyHolder, InvulnerabilityHandler {
     private final int maxCharge;
     private final int cost;
 
@@ -249,19 +250,19 @@ public abstract class GenericPoweredArmor extends ArmorItem implements EnergyHel
         return super.method_26353();
     }
 
-    public void addDamage(ItemStack stack, PlayerEntity playerEntity, DamageSource damageSource, float damage) {
+    public void addDamage(ItemStack stack, LivingEntity livingEntity, DamageSource damageSource, float damage) {
         if (!(stack.getItem() instanceof EnergyHelper))
             return;
 
         // Adds support for Unbreaking Enchants
         // This seems to occur more rarely than vanilla armor. I'm not sure if that's true though.
         int unbreakingLevel = EnchantmentHelper.getLevel(Enchantments.UNBREAKING, stack);
-        boolean shouldPreventDamage = UnbreakingEnchantment.shouldPreventDamage(stack, unbreakingLevel, playerEntity.getRandom());
+        boolean shouldPreventDamage = UnbreakingEnchantment.shouldPreventDamage(stack, unbreakingLevel, livingEntity.getRandom());
 
         if (shouldPreventDamage)
             return;
 
-        ItemManager.useEnergy(playerEntity, stack, cost);
+        ItemManager.useEnergy(livingEntity, stack, cost);
     }
 
     @Override
@@ -274,5 +275,15 @@ public abstract class GenericPoweredArmor extends ArmorItem implements EnergyHel
     public void appendTooltip(ItemStack stack, @Nullable World worldIn, List<Text> tooltip, TooltipContext flagIn) {
         if (flagIn.isAdvanced())
             ItemManager.powerLevelTooltip(stack, tooltip);
+    }
+
+    @Override
+    public boolean denyKillCommand(ItemStack itemStack, LivingEntity livingEntity) {
+        return false;
+    }
+
+    @Override
+    public boolean denyGeneralKill(ItemStack itemStack, LivingEntity livingEntity) {
+        return false;
     }
 }

@@ -4,7 +4,8 @@
   "package": "me.alexisevelyn.randomtech.mixin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
-    "DamageArmorMixin"
+    "DamageArmorMixinLivingEntity",
+    "DamageArmorMixinPlayerEntity"
   ],
   "client": [
   ],
