@@ -2,7 +2,6 @@ package me.alexisevelyn.randomtech.api.blocks.cables;
 
 import me.alexisevelyn.randomtech.Main;
 import me.alexisevelyn.randomtech.api.utilities.CalculationHelper;
-import me.alexisevelyn.randomtech.blockentities.InverseIntangibleGlassBlockEntity;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.ShapeContext;
