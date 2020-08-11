@@ -90,13 +90,76 @@ public class ItemCableBlockEntity extends BlockEntity implements InventoryProvid
             return;
 
         // We choose a slot ahead of time so we can figure out what slot needs to be transfered
-        List<BlockPos> currentPath = searchForDestination(currentItemStack, currentKnownCables, currentInterfaceableBlocks);
+        List<BlockPos> currentPath = resolvePathToDestination(currentItemStack, currentKnownCables, currentInterfaceableBlocks);
 
         // No Path Found, just Return
         if (currentPath.size() == 0)
             return;
 
-        // TODO: Implement Path Following Here
+        // Retrieve First Neighbor on Path
+        BlockEntity blockEntity = world.getBlockEntity(currentPath.get(0));
+
+        // Not Expected Block Entity, So Return
+        if (!(blockEntity instanceof ItemCableBlockEntity))
+            return;
+
+        ItemCableBlockEntity itemCableBlockEntity = (ItemCableBlockEntity) blockEntity;
+        int[] neighborSlots = itemCableBlockEntity.getSlots();
+
+        // Neighbor doesn't have any slots
+        if (neighborSlots == null)
+            return;
+
+        // Attempt to Add Items to Neighbor Slots
+        for (int slot : neighborSlots)
+            currentItemStack = transferItemStacks(itemCableBlockEntity, slot, currentItemStack);
+    }
+
+    @NotNull
+    private ItemStack transferItemStacks(@NotNull ItemCableBlockEntity neighborBlockEntity, int neighborSlot, @NotNull ItemStack ourItemStack) {
+        ItemStack neighborStack = neighborBlockEntity.retrieveItemStack(neighborSlot);
+
+        if (neighborStack == null)
+            return ourItemStack;
+
+        if (neighborStack.getItem().equals(ourItemStack.getItem()))
+            return addStacks(neighborStack, ourItemStack);
+
+        if (neighborStack.isEmpty()) {
+            neighborStack = ourItemStack.copy();
+            ourItemStack.setCount(0);
+
+            neighborBlockEntity.setStack(neighborStack, neighborSlot);
+            return ourItemStack;
+        }
+
+        return ourItemStack;
+    }
+
+    private void setStack(@NotNull ItemStack itemStack, int slot) {
+        // Test with negative slot numbers and one slot higher than the size of the inventory
+        if (inventory.size() < slot)
+            return;
+
+        inventory.setStack(slot, itemStack);
+    }
+
+    @Nullable
+    private ItemStack addStacks(@NotNull ItemStack neighborStack, @NotNull ItemStack ourItemStack) {
+        int neighborStackMaxCount = neighborStack.getMaxCount();
+        int neighborStackCount = neighborStack.getCount();
+
+        int ourItemStackCount = ourItemStack.getCount();
+
+        if ((ourItemStackCount + neighborStackCount) > neighborStackMaxCount) {
+            neighborStack.setCount(neighborStackMaxCount);
+            ourItemStack.decrement(neighborStackMaxCount - neighborStackCount);
+            return ourItemStack;
+        }
+
+        neighborStack.increment(ourItemStackCount);
+        ourItemStack.setCount(0);
+        return ourItemStack;
     }
 
     @Nullable
@@ -125,7 +188,7 @@ public class ItemCableBlockEntity extends BlockEntity implements InventoryProvid
     }
 
     @NotNull
-    private List<BlockPos> searchForDestination(@NotNull ItemStack chosenItemStack, @NotNull List<BlockPos> currentKnownCables, @NotNull List<BlockPos> currentInterfaceableBlocks) {
+    private List<BlockPos> resolvePathToDestination(@NotNull ItemStack chosenItemStack, @NotNull List<BlockPos> currentKnownCables, @NotNull List<BlockPos> currentInterfaceableBlocks) {
         // TODO: Implement Search Algorithm Here
         // https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm
 
