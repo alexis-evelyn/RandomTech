@@ -12,6 +12,7 @@ import net.minecraft.inventory.SidedInventory;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.BlockSoundGroup;
+import net.minecraft.util.ItemScatterer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
@@ -51,6 +52,25 @@ public class ItemCable extends GenericCable implements BlockEntityProvider {
     // For full control over cable shapes
     public ItemCable(@NotNull Settings settings, @Nullable VoxelShape outlinedShape, @Nullable VoxelShape visualShape, @Nullable VoxelShape collisionShape, @Nullable VoxelShape[] cullingShapes) {
         super(settings, outlinedShape, visualShape, collisionShape, cullingShapes);
+    }
+
+    // Used to make the cable drop its contents when broken
+    @Override
+    public void onStateReplaced(BlockState state, World world, BlockPos pos, BlockState newState, boolean moved) {
+        BlockEntity blockEntity = world.getBlockEntity(pos); // Retrieve and store block entity for further processing
+        super.onStateReplaced(state, world, pos, newState, moved); // Mark Block Entity to Be Removed
+
+        // If new block state is the same type of block as our own, return
+        if (state.isOf(newState.getBlock()))
+            return;
+
+        // If block entity is not expected type, return
+        if (!(blockEntity instanceof ItemCableBlockEntity))
+            return;
+
+        // Drop and Scatter Inventory
+        ItemCableBlockEntity itemCableBlockEntity = (ItemCableBlockEntity) blockEntity;
+        ItemScatterer.spawn(world, pos, itemCableBlockEntity.getInventory(state, world, pos));
     }
 
     @Override
