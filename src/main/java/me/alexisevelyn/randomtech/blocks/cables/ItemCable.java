@@ -4,6 +4,8 @@ import me.alexisevelyn.randomtech.api.blocks.cables.GenericCable;
 import me.alexisevelyn.randomtech.api.utilities.GenericBlockHelper;
 import me.alexisevelyn.randomtech.blockentities.cables.ItemCableBlockEntity;
 import me.alexisevelyn.randomtech.utility.Materials;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
@@ -73,11 +75,17 @@ public class ItemCable extends GenericCable implements BlockEntityProvider {
         ItemScatterer.spawn(world, pos, itemCableBlockEntity.getInventory(state, world, pos));
     }
 
+    // For Backend Use (Can be used for visual/auditory stuff too) - Server Side and Client Side
     @Override
     public void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
         super.randomTick(state, world, pos, random);
+    }
 
-
+    // For Visual Use Only - Client Side Only
+    @Override
+    @Environment(EnvType.CLIENT)
+    public void randomDisplayTick(BlockState state, World world, BlockPos pos, Random random) {
+        super.randomDisplayTick(state, world, pos, random);
     }
 
     @Override

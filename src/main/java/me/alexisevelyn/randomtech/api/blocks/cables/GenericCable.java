@@ -62,6 +62,7 @@ public abstract class GenericCable extends Block implements Waterloggable {
     private final VoxelShape COLLISION_SHAPE;
     private final VoxelShape[] CULLING_SHAPES;
 
+    @SuppressWarnings("unused")
     public GenericCable(@NotNull Settings settings) {
         this(settings, null, null, null, null);
     }
