@@ -4,11 +4,12 @@ import me.alexisevelyn.randomtech.api.items.armor.generic.GenericPoweredArmor;
 import me.alexisevelyn.randomtech.api.items.armor.generic.InvulnerabilityHandler;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.item.ArmorMaterial;
 import net.minecraft.item.ItemStack;
 import team.reborn.energy.EnergyTier;
 
-public class PoweredChestplate extends GenericPoweredArmor implements InvulnerabilityHandler {
+public class PoweredChestplate extends GenericPoweredArmor {
     private static final int energyCapacity = 712;
     private static final EnergyTier energyTier = EnergyTier.HIGH;
     private static final int cost = 1;
@@ -29,7 +30,7 @@ public class PoweredChestplate extends GenericPoweredArmor implements Invulnerab
     }
 
     @Override
-    public boolean denyGeneralKill(ItemStack itemStack, LivingEntity livingEntity) {
-        return super.denyGeneralKill(itemStack, livingEntity);
+    public boolean denyGeneralDamage(ItemStack itemStack, DamageSource damageSource, float amount, LivingEntity livingEntity) {
+        return super.denyGeneralDamage(itemStack, damageSource, amount, livingEntity);
     }
 }

@@ -33,7 +33,7 @@ public class ItemCable extends GenericCable implements BlockEntityProvider {
                         .ticksRandomly(),
 
                 // TODO: Remove me
-                Block.createCuboidShape(4.0D, 0.0D, 4.0D, 12.0D, 9.0D, 12.0D)
+                // Block.createCuboidShape(4.0D, 0.0D, 4.0D, 12.0D, 9.0D, 12.0D)
         );
     }
 

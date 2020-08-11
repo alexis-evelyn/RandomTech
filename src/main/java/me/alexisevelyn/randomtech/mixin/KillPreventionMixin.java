@@ -1,7 +1,7 @@
 package me.alexisevelyn.randomtech.mixin;
 
 import me.alexisevelyn.randomtech.api.items.armor.generic.InvulnerabilityHandler;
-import net.minecraft.entity.Entity;
+import me.alexisevelyn.randomtech.api.utilities.CustomDamageSource;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.player.PlayerEntity;
@@ -19,17 +19,17 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(LivingEntity.class)
 public abstract class KillPreventionMixin {
 	// For /kill invulnerability for api
+    // Also, for general damage prevention
 
     @Shadow public abstract boolean damage(DamageSource source, float amount);
-    // @Shadow public abstract void kill();
 
     @Inject(at = @At("HEAD"), method = "damage(Lnet/minecraft/entity/damage/DamageSource;F)Z", cancellable = true)
-	private void damage(DamageSource damageSource, float amount, CallbackInfoReturnable<Boolean> info) {
+	private void generalDamage(DamageSource damageSource, float amount, CallbackInfoReturnable<Boolean> info) {
         //noinspection ConstantConditions
         if ((Object) this instanceof PlayerEntity) {
             PlayerEntity playerEntity = (PlayerEntity) (Object) this;
 
-            handlePlayerDamage(playerEntity, info);
+            handlePlayerDamage(playerEntity, damageSource, amount, info);
             return;
         }
 
@@ -38,29 +38,33 @@ public abstract class KillPreventionMixin {
             return;
 
         LivingEntity livingEntity = (LivingEntity) (Object) this;
-        handleOtherLivingEntityDamage(livingEntity, info);
+        handleOtherLivingEntityDamage(livingEntity, damageSource, amount, info);
 	}
 
     @Inject(at = @At("INVOKE"), method = "kill()V", cancellable = true)
-	private void kill(CallbackInfo info) {
+	private void killCommand(CallbackInfo info) {
         //noinspection ConstantConditions - This claims to always return false, but it doesn't. That's because `this` becomes LivingEntity on runtime.
         if ((Object) this instanceof PlayerEntity) { // if ((LivingEntity) (Object) this instanceof PlayerEntity)
             PlayerEntity playerEntity = (PlayerEntity) (Object) this;
 
             handlePlayerKillCommand(playerEntity, info);
-            return;
+        } else //noinspection ConstantConditions
+            if (((Object) this instanceof LivingEntity)) {
+            LivingEntity livingEntity = (LivingEntity) (Object) this;
+
+            handleOtherLivingEntityKillCommand(livingEntity, info);
         }
 
-        //noinspection ConstantConditions
-        if (!((Object) this instanceof LivingEntity))
-            return;
-
-        LivingEntity livingEntity = (LivingEntity) (Object) this;
-        handleOtherLivingEntityKillCommand(livingEntity, info);
+        // If not already cancelled, cancel the kill command and replace it with a new damage source just for it.
+        // This is so I can differentiate between the kill command and the void in the general damage code
+        if (!info.isCancelled()) {
+            this.damage(CustomDamageSource.KILL_COMMAND, Float.MAX_VALUE);
+            info.cancel();
+        }
     }
 
     // Generic Damage to Players
-    private void handlePlayerDamage(PlayerEntity playerEntity, CallbackInfo info) {
+    private void handlePlayerDamage(PlayerEntity playerEntity, DamageSource damageSource, float amount, CallbackInfo info) {
         PlayerInventory inventory = playerEntity.inventory;
         DefaultedList<ItemStack> armorItems = inventory.armor;
 
@@ -70,13 +74,13 @@ public abstract class KillPreventionMixin {
 
             InvulnerabilityHandler invulnerabilityHandlerPiece = (InvulnerabilityHandler) armorPiece.getItem();
 
-            if (invulnerabilityHandlerPiece.denyGeneralKill(armorPiece, playerEntity))
+            if (invulnerabilityHandlerPiece.denyGeneralDamage(armorPiece, damageSource, amount, playerEntity))
                 info.cancel();
         }
     }
 
     // Generic Damage to Other Living Entities
-    private void handleOtherLivingEntityDamage(LivingEntity livingEntity, CallbackInfo info) {
+    private void handleOtherLivingEntityDamage(LivingEntity livingEntity, DamageSource damageSource, float amount, CallbackInfo info) {
         Iterable<ItemStack> armorItems = livingEntity.getArmorItems();
 
         for (ItemStack armorPiece : armorItems) {
@@ -85,7 +89,7 @@ public abstract class KillPreventionMixin {
 
             InvulnerabilityHandler invulnerabilityHandlerPiece = (InvulnerabilityHandler) armorPiece.getItem();
 
-            if (invulnerabilityHandlerPiece.denyGeneralKill(armorPiece, livingEntity))
+            if (invulnerabilityHandlerPiece.denyGeneralDamage(armorPiece, damageSource, amount, livingEntity))
                 info.cancel();
         }
     }

@@ -2,6 +2,7 @@ package me.alexisevelyn.randomtech.api.items.armor.generic;
 
 import com.google.common.collect.Multimap;
 import me.alexisevelyn.randomtech.api.items.energy.EnergyHelper;
+import me.alexisevelyn.randomtech.api.utilities.CustomDamageSource;
 import me.alexisevelyn.randomtech.api.utilities.ItemManager;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -283,7 +284,7 @@ public abstract class GenericPoweredArmor extends ArmorItem implements EnergyHel
     }
 
     @Override
-    public boolean denyGeneralKill(ItemStack itemStack, LivingEntity livingEntity) {
+    public boolean denyGeneralDamage(ItemStack itemStack, DamageSource damageSource, float amount, LivingEntity livingEntity) {
         return false;
     }
 }
