@@ -189,7 +189,7 @@ public class RegistryHelper {
 
     // Gamerules and Gamerule Categories
     public static final CustomGameRuleCategory RANDOM_TECH_GAMERULES_CATEGORY = new CustomGameRuleCategory(new Identifier(Main.MODID, "gamerules"), new TranslatableText(Main.MODID + ".gamerules").styled(style -> style.withBold(true).withColor(Formatting.DARK_PURPLE)));
-    public static final GameRules.Key<GameRules.BooleanRule> HIDE_EXPERIMENTAL_SCREEN_GAMERULE = GameRuleRegistry.register("hideExperimentalScreen", RANDOM_TECH_GAMERULES_CATEGORY, GameRuleFactory.createBooleanRule(false));
+    public static final GameRules.Key<GameRules.BooleanRule> HIDE_EXPERIMENTAL_SCREEN_GAMERULE = GameRuleRegistry.register("disableExperimentalScreen", RANDOM_TECH_GAMERULES_CATEGORY, GameRuleFactory.createBooleanRule(false));
 
     // Sounds
     public static final Identifier TELEPORTER_TELEPORTS_SOUND_IDENTIFIER = new Identifier(Main.MODID, "teleporter_teleports");

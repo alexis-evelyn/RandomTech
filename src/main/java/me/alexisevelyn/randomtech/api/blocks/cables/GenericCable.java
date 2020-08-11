@@ -55,7 +55,7 @@ public abstract class GenericCable extends Block implements Waterloggable {
     private static final Vec3i upVector = Direction.UP.getVector();
     private static final Vec3i downVector = Direction.DOWN.getVector();
 
-    public int maxCount = 5000; // Integer.MAX_VALUE;
+    public final int maxCount = 5000; // Integer.MAX_VALUE;
 
     private final VoxelShape OUTLINED_SHAPE;
     private final VoxelShape VISUAL_SHAPE;
