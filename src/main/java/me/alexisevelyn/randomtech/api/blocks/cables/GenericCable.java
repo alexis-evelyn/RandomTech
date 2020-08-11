@@ -183,6 +183,10 @@ public abstract class GenericCable extends Block implements Waterloggable {
 
     public List<BlockPos> getAllInterfacingCables(WorldAccess world, BlockPos pos) {
         List<BlockPos> knownCables = getAllCables(world, pos);
+        return getAllInterfacingCables(world, knownCables);
+    }
+
+    public List<BlockPos> getAllInterfacingCables(WorldAccess world, List<BlockPos> knownCables) {
         List<BlockPos> interfacingCables = new ArrayList<>();
 
         for (BlockPos cablePos : knownCables) {

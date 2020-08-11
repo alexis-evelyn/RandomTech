@@ -1,5 +1,8 @@
 package me.alexisevelyn.randomtech.inventories;
 
+import com.google.common.collect.ObjectArrays;
+import com.google.common.primitives.Ints;
+import jdk.internal.jline.internal.Nullable;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.Inventories;
 import net.minecraft.inventory.SidedInventory;
@@ -7,13 +10,15 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.Direction;
 
+import java.util.Arrays;
 import java.util.Iterator;
+import java.util.stream.Stream;
 
 public class ItemCableInventory implements SidedInventory {
     DefaultedList<ItemStack> inventory;
 
     public ItemCableInventory() {
-        this.inventory = DefaultedList.ofSize(9, ItemStack.EMPTY);
+        this.inventory = DefaultedList.ofSize(10, ItemStack.EMPTY);
     }
 
     public DefaultedList<ItemStack> getInventory() {
@@ -31,7 +36,19 @@ public class ItemCableInventory implements SidedInventory {
      */
     @Override
     public int[] getAvailableSlots(Direction side) {
+        int[] filterSlots = getFilterSlots(side);
+        int[] realSlots = getRealSlots(side);
+
+        // Concatenate Both Arrays into One
+        return Ints.concat(filterSlots, realSlots);
+    }
+
+    public int[] getFilterSlots(@Nullable Direction side) {
         return new int[]{0, 1, 2, 3, 4, 5, 6, 7, 8};
+    }
+
+    public int[] getRealSlots(@Nullable Direction side) {
+        return new int[]{9};
     }
 
     /**
