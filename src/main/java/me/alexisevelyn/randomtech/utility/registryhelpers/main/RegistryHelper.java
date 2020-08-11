@@ -84,9 +84,9 @@ public class RegistryHelper {
     public static final Block BOTTLED_DEMON_BLOCK = new BottledDemon.BottledDemonBlock();
 
     // Cables
-    public static final Block ITEM_CABLE_BLOCK = new ItemCable(null);
-    public static final Block FLUID_CABLE_BLOCK = new FluidCable(null);
-    public static final Block ENERGY_CABLE_BLOCK = new EnergyCable(null);
+    public static final Block ITEM_CABLE_BLOCK = new ItemCable();
+    public static final Block FLUID_CABLE_BLOCK = new FluidCable();
+    public static final Block ENERGY_CABLE_BLOCK = new EnergyCable();
 
     // Natural Cables
     private static final AbstractBlock.Settings CHORUS_CABLE_SETTINGS = FabricBlockSettings

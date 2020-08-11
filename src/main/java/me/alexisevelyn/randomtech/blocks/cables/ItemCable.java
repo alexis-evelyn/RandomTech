@@ -24,7 +24,6 @@ import java.util.Random;
 
 public class ItemCable extends GenericCable implements BlockEntityProvider {
     // Generic Instantiation of ItemCable with Default Shape
-    @SuppressWarnings("unused")
     public ItemCable() {
         this(null);
     }
