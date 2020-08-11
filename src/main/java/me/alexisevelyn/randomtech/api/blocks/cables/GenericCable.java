@@ -25,6 +25,7 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3i;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
@@ -33,10 +34,7 @@ import net.minecraft.world.WorldAccess;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.function.Consumer;
 
 public abstract class GenericCable extends Block implements Waterloggable {
@@ -132,9 +130,6 @@ public abstract class GenericCable extends Block implements Waterloggable {
             // Try to support generic fluids if possible
             world.getFluidTickScheduler().schedule(pos, Fluids.WATER, Fluids.WATER.getTickRate(world));
         }
-
-        // Have Cable BlockEntity Only Move During Block Update
-        tickCable(world, pos);
 
         // This sets up the cable blockstates for each cable
         return setupCableStates(world, pos, state);
@@ -433,17 +428,77 @@ public abstract class GenericCable extends Block implements Waterloggable {
     public static List<BlockPos> dijkstraAlgorithm(@NotNull List<BlockPos> currentKnownCables, @NotNull BlockPos destinationBlockPos) {
         // TODO: Implement Search Algorithm Here
         // https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm
+        // Algorithm Implemented from PsuedoCode on Above Wikipedia Article
 
-        return new ArrayList<>();
+        List<BlockPos> cableStacker = new ArrayList<>(); // Known as Q from PsuedoCode
+        final double INFINITY = Double.POSITIVE_INFINITY; // Shortcut for Infinity
+
+        HashMap<BlockPos, Double> distance = new HashMap<>(); // Not Explicitely Defined In PsuedoCode
+        List<BlockPos> path = new ArrayList<>(); // Not Explicitely Defined In PsuedoCode
+
+        // Foreach Loop From PsuedoCode
+        for(BlockPos currentPos : currentKnownCables) {
+            distance.put(currentPos, INFINITY);
+            cableStacker.add(currentPos);
+        }
+
+        // Known As Source
+        distance.put(destinationBlockPos, 0.0);
+
+        BlockPos workingBlockPos;
+        while(!cableStacker.isEmpty()) {
+            workingBlockPos = getLowestDistancePosition(cableStacker);
+
+            cableStacker.remove(workingBlockPos);
+
+            for(BlockPos neighborPos : getNeighbors(workingBlockPos)) {
+                double alternateDirection = distance.get(workingBlockPos) + CalculationHelper.distanceVectors(workingBlockPos, neighborPos);
+
+                if (alternateDirection < distance.get(neighborPos)) {
+                    distance.put(neighborPos, alternateDirection);
+                    path.add(workingBlockPos);
+                }
+            }
+        }
+
+        return path;
     }
 
-    public void tickCable(WorldAccess world, BlockPos blockPos) {
-        BlockEntity blockEntity = world.getBlockEntity(blockPos);
+    @Nullable
+    private static BlockPos getLowestDistancePosition(@NotNull List<BlockPos> cableStacker) {
+        BlockPos lowestDistancePosition = null;
+        int lowestDistance = Integer.MAX_VALUE;
 
-        if (!(blockEntity instanceof ItemCableBlockEntity))
-            return;
+        int currentDistance = 0;
+        for (BlockPos currentBlockPos : cableStacker) {
+            currentDistance = CalculationHelper.distanceVectors(); // Distance From What?
 
-        ItemCableBlockEntity itemCableBlockEntity = (ItemCableBlockEntity) blockEntity;
-        itemCableBlockEntity.moveItemInNetwork();
+            if (currentDistance < lowestDistance) {
+                lowestDistance = currentDistance;
+                lowestDistancePosition = currentBlockPos;
+            }
+        }
+
+        return lowestDistancePosition;
+    }
+
+    @SuppressWarnings("duplicate")
+    private static List<BlockPos> getNeighbors(BlockPos currentBlock) {
+        @SuppressWarnings("duplicate") BlockPos north = CalculationHelper.addVectors(currentBlock, northVector);
+        @SuppressWarnings("duplicate") BlockPos south = CalculationHelper.addVectors(currentBlock, southVector);
+        @SuppressWarnings("duplicate") BlockPos east = CalculationHelper.addVectors(currentBlock, eastVector);
+        @SuppressWarnings("duplicate") BlockPos west = CalculationHelper.addVectors(currentBlock, westVector);
+        @SuppressWarnings("duplicate") BlockPos up = CalculationHelper.addVectors(currentBlock, upVector);
+        @SuppressWarnings("duplicate") BlockPos down = CalculationHelper.addVectors(currentBlock, downVector);
+
+        List<BlockPos> neighbors = new ArrayList<>();
+        neighbors.add(north);
+        neighbors.add(south);
+        neighbors.add(east);
+        neighbors.add(west);
+        neighbors.add(up);
+        neighbors.add(down);
+
+        return neighbors;
     }
 }

@@ -9,6 +9,7 @@ import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.fluid.Fluids;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.inventory.SidedInventory;
 import net.minecraft.screen.ScreenHandler;
@@ -16,6 +17,7 @@ import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.ItemScatterer;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Direction;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
@@ -126,5 +128,24 @@ public class ItemCable extends GenericCable implements BlockEntityProvider {
             return ((InventoryProvider) blockEntity).getInventory(state, world, pos);
 
         return null;
+    }
+
+    @Override
+    public BlockState getStateForNeighborUpdate(BlockState state, Direction direction, BlockState newState, WorldAccess world, BlockPos pos, BlockPos posFrom) {
+        // Have Cable BlockEntity Only Move During Block Update
+        tickCable(world, pos);
+
+        // This sets up the cable blockstates for each cable
+        return super.getStateForNeighborUpdate(state, direction, newState, world, pos, posFrom);
+    }
+
+    public void tickCable(WorldAccess world, BlockPos blockPos) {
+        BlockEntity blockEntity = world.getBlockEntity(blockPos);
+
+        if (!(blockEntity instanceof ItemCableBlockEntity))
+            return;
+
+        ItemCableBlockEntity itemCableBlockEntity = (ItemCableBlockEntity) blockEntity;
+        itemCableBlockEntity.moveItemInNetwork();
     }
 }
