@@ -57,6 +57,10 @@
   "block.randomtech.fluid_cable": "Fluid Cable",
   "block.randomtech.energy_cable": "Energy Cable",
 
+  "block.randomtech.chorus_item_cable": "Natural Item Cable",
+  "block.randomtech.chorus_fluid_cable": "Natural Fluid Cable",
+  "block.randomtech.chorus_energy_cable": "Natural Energy Cable",
+
   "block.randomtech.bottled_demon": "Bottled Demon",
 
   "fluid.randomtech.experience": "Experience",

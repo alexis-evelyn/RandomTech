@@ -14,5 +14,5 @@ public final class Materials {
     public static final Material METAL_ORE_MATERIAL = new FabricMaterialBuilder(MaterialColor.IRON).build();
 
     // For Cables
-    public static final Material CABLE_MATERIAL = Material.STONE;
+    public static final Material CABLE_MATERIAL = new FabricMaterialBuilder(MaterialColor.BLACK).lightPassesThrough().build();
 }

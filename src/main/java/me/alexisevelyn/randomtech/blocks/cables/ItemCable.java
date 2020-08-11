@@ -13,28 +13,45 @@ import net.minecraft.screen.ScreenHandler;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Random;
 
 public class ItemCable extends GenericCable implements BlockEntityProvider {
+    // Generic Instantiation of ItemCable with Default Shape
+    @SuppressWarnings("unused")
     public ItemCable() {
-        super(FabricBlockSettings
-                        .of(Materials.CABLE_MATERIAL)
-                        .sounds(BlockSoundGroup.GLASS)
-                        .nonOpaque() // Fixes xray issue. Also allows light pass through block
-                        .allowsSpawning(GenericBlockHelper::never) // Allows or denies spawning
-                        .solidBlock(GenericBlockHelper::never) // ??? - Seems to have no apparent effect
-                        .suffocates(GenericBlockHelper::never) // Suffocates player
-                        .blockVision(GenericBlockHelper::never) // Blocks Vision inside of block
-                        .strength(0.3F, 0.3F)
-                        .ticksRandomly()//,
+        this(null);
+    }
 
-                // TODO: Remove me
-                // Block.createCuboidShape(4.0D, 0.0D, 4.0D, 12.0D, 9.0D, 12.0D)
-        );
+    // I may create more than one cable with this class, so I'm putting extra constructors here
+    // Generic Instantiation of ItemCable with Custom Shape
+    public ItemCable(@Nullable VoxelShape genericShape) {
+        this(FabricBlockSettings
+                .of(Materials.CABLE_MATERIAL)
+                .sounds(BlockSoundGroup.GLASS)
+                .nonOpaque() // Fixes xray issue. Also allows light pass through block
+                .allowsSpawning(GenericBlockHelper::never) // Allows or denies spawning
+                .solidBlock(GenericBlockHelper::never) // ??? - Seems to have no apparent effect
+                .suffocates(GenericBlockHelper::never) // Suffocates player
+                .blockVision(GenericBlockHelper::never) // Blocks Vision inside of block
+                .strength(0.3F, 0.3F)
+                .ticksRandomly(), genericShape);
+    }
+
+    // For customizing block settings while only supplying one shape
+    public ItemCable(@NotNull Settings settings, @Nullable VoxelShape genericShape) {
+        this(settings, genericShape, genericShape, genericShape, null);
+    }
+
+    // For full control over cable shapes
+    public ItemCable(@NotNull Settings settings, @Nullable VoxelShape outlinedShape, @Nullable VoxelShape visualShape, @Nullable VoxelShape collisionShape, @Nullable VoxelShape[] cullingShapes) {
+        super(settings, outlinedShape, visualShape, collisionShape, cullingShapes);
     }
 
     @Override

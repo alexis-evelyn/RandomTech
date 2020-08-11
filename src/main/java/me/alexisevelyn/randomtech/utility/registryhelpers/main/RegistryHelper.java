@@ -1,6 +1,7 @@
 package me.alexisevelyn.randomtech.utility.registryhelpers.main;
 
 import me.alexisevelyn.randomtech.Main;
+import me.alexisevelyn.randomtech.api.utilities.GenericBlockHelper;
 import me.alexisevelyn.randomtech.armormaterials.PoweredArmorMaterial;
 import me.alexisevelyn.randomtech.blockitems.BottledDemon;
 import me.alexisevelyn.randomtech.blockitems.VirtualTile;
@@ -32,22 +33,27 @@ import me.alexisevelyn.randomtech.items.ingots.DeathIngot;
 import me.alexisevelyn.randomtech.items.ingots.RedstoneIngot;
 import me.alexisevelyn.randomtech.items.tools.powered.*;
 import me.alexisevelyn.randomtech.utility.BlockEntities;
+import me.alexisevelyn.randomtech.utility.Materials;
 import me.alexisevelyn.randomtech.utility.Recipes;
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
 import net.fabricmc.fabric.api.dimension.v1.FabricDimensions;
 import net.fabricmc.fabric.api.gamerule.v1.CustomGameRuleCategory;
 import net.fabricmc.fabric.api.gamerule.v1.GameRuleFactory;
 import net.fabricmc.fabric.api.gamerule.v1.GameRuleRegistry;
+import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
+import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.FluidBlock;
+import net.minecraft.block.MaterialColor;
 import net.minecraft.entity.EntityDimensions;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.SpawnGroup;
 import net.minecraft.fluid.FlowableFluid;
 import net.minecraft.item.*;
+import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Formatting;
@@ -78,9 +84,25 @@ public class RegistryHelper {
     public static final Block BOTTLED_DEMON_BLOCK = new BottledDemon.BottledDemonBlock();
 
     // Cables
-    public static final Block ITEM_CABLE_BLOCK = new ItemCable();
-    public static final Block FLUID_CABLE_BLOCK = new FluidCable();
-    public static final Block ENERGY_CABLE_BLOCK = new EnergyCable();
+    public static final Block ITEM_CABLE_BLOCK = new ItemCable(null);
+    public static final Block FLUID_CABLE_BLOCK = new FluidCable(null);
+    public static final Block ENERGY_CABLE_BLOCK = new EnergyCable(null);
+
+    // Natural Cables
+    private static final AbstractBlock.Settings CHORUS_CABLE_SETTINGS = FabricBlockSettings
+            .of(Materials.CABLE_MATERIAL, MaterialColor.PURPLE)
+            .sounds(BlockSoundGroup.WOOD) // Wood is what chorus plants use.
+            .nonOpaque() // Fixes xray issue. Also allows light pass through block
+            .allowsSpawning(GenericBlockHelper::never) // Allows or denies spawning
+            .solidBlock(GenericBlockHelper::never) // ??? - Seems to have no apparent effect
+            .suffocates(GenericBlockHelper::never) // Suffocates player
+            .blockVision(GenericBlockHelper::never) // Blocks Vision inside of block
+            .strength(0.3F, 0.3F)
+            .ticksRandomly();
+
+    public static final Block CHORUS_ITEM_CABLE_BLOCK = new ItemCable(CHORUS_CABLE_SETTINGS, null);
+    public static final Block CHORUS_FLUID_CABLE_BLOCK = new FluidCable(CHORUS_CABLE_SETTINGS, null);
+    public static final Block CHORUS_ENERGY_CABLE_BLOCK = new EnergyCable(CHORUS_CABLE_SETTINGS, null);
 
     // Metals
     public static final Block COBALT_BLOCK = new CobaltBlock();
@@ -260,6 +282,11 @@ public class RegistryHelper {
         Registry.register(Registry.BLOCK, new Identifier(Main.MODID, "item_cable"), ITEM_CABLE_BLOCK);
         Registry.register(Registry.BLOCK, new Identifier(Main.MODID, "fluid_cable"), FLUID_CABLE_BLOCK);
         Registry.register(Registry.BLOCK, new Identifier(Main.MODID, "energy_cable"), ENERGY_CABLE_BLOCK);
+
+        // Natural Cables
+        Registry.register(Registry.BLOCK, new Identifier(Main.MODID, "chorus_item_cable"), CHORUS_ITEM_CABLE_BLOCK);
+        Registry.register(Registry.BLOCK, new Identifier(Main.MODID, "chorus_fluid_cable"), CHORUS_FLUID_CABLE_BLOCK);
+        Registry.register(Registry.BLOCK, new Identifier(Main.MODID, "chorus_energy_cable"), CHORUS_ENERGY_CABLE_BLOCK);
     }
 
     private void registerOreBlocks() {
@@ -329,9 +356,15 @@ public class RegistryHelper {
 
         Registry.register(Registry.ITEM, new Identifier(Main.MODID, "cobalt_dust"), new BlockItem(COBALT_WIRE, new Item.Settings().group(ItemGroup.REDSTONE)));
 
+        // Cables
         Registry.register(Registry.ITEM, new Identifier(Main.MODID, "item_cable"), new BlockItem(ITEM_CABLE_BLOCK, new Item.Settings().group(MACHINERY_GROUP)));
         Registry.register(Registry.ITEM, new Identifier(Main.MODID, "fluid_cable"), new BlockItem(FLUID_CABLE_BLOCK, new Item.Settings().group(MACHINERY_GROUP)));
         Registry.register(Registry.ITEM, new Identifier(Main.MODID, "energy_cable"), new BlockItem(ENERGY_CABLE_BLOCK, new Item.Settings().group(MACHINERY_GROUP)));
+
+        // Natural Cables
+        Registry.register(Registry.ITEM, new Identifier(Main.MODID, "chorus_item_cable"), new BlockItem(CHORUS_ITEM_CABLE_BLOCK, new Item.Settings().group(MACHINERY_GROUP)));
+        Registry.register(Registry.ITEM, new Identifier(Main.MODID, "chorus_fluid_cable"), new BlockItem(CHORUS_FLUID_CABLE_BLOCK, new Item.Settings().group(MACHINERY_GROUP)));
+        Registry.register(Registry.ITEM, new Identifier(Main.MODID, "chorus_energy_cable"), new BlockItem(CHORUS_ENERGY_CABLE_BLOCK, new Item.Settings().group(MACHINERY_GROUP)));
     }
 
     private void registerOreItemBlocks() {
