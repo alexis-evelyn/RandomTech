@@ -423,4 +423,12 @@ public abstract class GenericCable extends Block implements Waterloggable {
     public int getShapeIndex(BlockState state) {
         return 0;
     }
+
+    @NotNull
+    public static List<BlockPos> dijkstraAlgorithm(@NotNull List<BlockPos> currentKnownCables, @NotNull BlockPos destinationBlockPos) {
+        // TODO: Implement Search Algorithm Here
+        // https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm
+
+        return new ArrayList<>();
+    }
 }

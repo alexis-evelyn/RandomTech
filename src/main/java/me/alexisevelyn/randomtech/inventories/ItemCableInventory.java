@@ -1,18 +1,15 @@
 package me.alexisevelyn.randomtech.inventories;
 
-import com.google.common.collect.ObjectArrays;
 import com.google.common.primitives.Ints;
-import jdk.internal.jline.internal.Nullable;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.Inventories;
 import net.minecraft.inventory.SidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.Direction;
+import org.jetbrains.annotations.Nullable;
 
-import java.util.Arrays;
 import java.util.Iterator;
-import java.util.stream.Stream;
 
 public class ItemCableInventory implements SidedInventory {
     DefaultedList<ItemStack> inventory;
