@@ -2,10 +2,12 @@ package me.alexisevelyn.randomtech.api.blocks.cables;
 
 import me.alexisevelyn.randomtech.Main;
 import me.alexisevelyn.randomtech.api.utilities.CalculationHelper;
+import me.alexisevelyn.randomtech.blockentities.cables.ItemCableBlockEntity;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.ShapeContext;
 import net.minecraft.block.Waterloggable;
+import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.FluidState;
@@ -130,6 +132,9 @@ public abstract class GenericCable extends Block implements Waterloggable {
             // Try to support generic fluids if possible
             world.getFluidTickScheduler().schedule(pos, Fluids.WATER, Fluids.WATER.getTickRate(world));
         }
+
+        // Have Cable BlockEntity Only Move During Block Update
+        tickCable(world, pos);
 
         // This sets up the cable blockstates for each cable
         return setupCableStates(world, pos, state);
@@ -430,5 +435,15 @@ public abstract class GenericCable extends Block implements Waterloggable {
         // https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm
 
         return new ArrayList<>();
+    }
+
+    public void tickCable(WorldAccess world, BlockPos blockPos) {
+        BlockEntity blockEntity = world.getBlockEntity(blockPos);
+
+        if (!(blockEntity instanceof ItemCableBlockEntity))
+            return;
+
+        ItemCableBlockEntity itemCableBlockEntity = (ItemCableBlockEntity) blockEntity;
+        itemCableBlockEntity.moveItemInNetwork();
     }
 }
