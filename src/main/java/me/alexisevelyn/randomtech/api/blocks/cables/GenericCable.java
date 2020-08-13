@@ -2,12 +2,14 @@ package me.alexisevelyn.randomtech.api.blocks.cables;
 
 import me.alexisevelyn.randomtech.Main;
 import me.alexisevelyn.randomtech.api.utilities.CalculationHelper;
-import me.alexisevelyn.randomtech.blockentities.cables.ItemCableBlockEntity;
+import me.alexisevelyn.randomtech.api.utilities.pathfinding.dijkstra.DijkstraAlgorithm;
+import me.alexisevelyn.randomtech.api.utilities.pathfinding.dijkstra.Edge;
+import me.alexisevelyn.randomtech.api.utilities.pathfinding.dijkstra.Graph;
+import me.alexisevelyn.randomtech.api.utilities.pathfinding.dijkstra.Vertex;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.ShapeContext;
 import net.minecraft.block.Waterloggable;
-import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.FluidState;
@@ -25,7 +27,6 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
-import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3i;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
@@ -424,81 +425,58 @@ public abstract class GenericCable extends Block implements Waterloggable {
         return 0;
     }
 
-    @NotNull
-    public static List<BlockPos> dijkstraAlgorithm(@NotNull List<BlockPos> currentKnownCables, @NotNull BlockPos destinationBlockPos) {
-        // TODO: Implement Search Algorithm Here
-        // https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm
-        // Algorithm Implemented from PsuedoCode on Above Wikipedia Article
+    public static List<BlockPos> dijkstraAlgorithm(List<BlockPos> currentKnownCables, BlockPos startingBlockPosition, BlockPos endingBlockPosition) {
+        List<Vertex> nodes = new ArrayList<>();
+        List<Edge> edges = new ArrayList<>();
+        List<BlockPos> path = new ArrayList<>();
 
-        List<BlockPos> cableStacker = new ArrayList<>(); // Known as Q from PsuedoCode
-        final double INFINITY = Double.POSITIVE_INFINITY; // Shortcut for Infinity
+        Vertex startingPosition = null;
+        Vertex endingPosition = null;
 
-        HashMap<BlockPos, Double> distance = new HashMap<>(); // Not Explicitely Defined In PsuedoCode
-        List<BlockPos> path = new ArrayList<>(); // Not Explicitely Defined In PsuedoCode
+        for(BlockPos currentCable : currentKnownCables) {
+            Vertex location = new Vertex(currentCable, getCableName(currentCable));
+            nodes.add(location);
 
-        // Foreach Loop From PsuedoCode
-        for(BlockPos currentPos : currentKnownCables) {
-            distance.put(currentPos, INFINITY);
-            cableStacker.add(currentPos);
+            // Add Starting Position to Variable To Track Later
+            if (currentCable.equals(startingBlockPosition))
+                startingPosition = location;
+
+            // Add Ending Position to Variable To Track Later
+            if (currentCable.equals(endingBlockPosition))
+                endingPosition = location;
         }
+        
+        if (startingPosition == null || endingPosition == null)
+            return path;
 
-        // Known As Source
-        distance.put(destinationBlockPos, 0.0);
+        // TODO: Add Edges
+        addLane(nodes, edges, "Lane_0", nodes.indexOf(startingPosition), nodes.indexOf(endingPosition), 1);
+        addLane(nodes, edges, "Lane_1", nodes.indexOf(endingPosition), nodes.indexOf(startingPosition), 1);
 
-        BlockPos workingBlockPos;
-        while(!cableStacker.isEmpty()) {
-            workingBlockPos = getLowestDistancePosition(cableStacker);
+        Graph graph = new Graph(nodes, edges);
+        DijkstraAlgorithm dijkstraAlgorithm = new DijkstraAlgorithm(graph);
 
-            cableStacker.remove(workingBlockPos);
+        dijkstraAlgorithm.execute(startingPosition);
 
-            for(BlockPos neighborPos : getNeighbors(workingBlockPos)) {
-                double alternateDirection = distance.get(workingBlockPos) + CalculationHelper.distanceVectors(workingBlockPos, neighborPos);
+        LinkedList<Vertex> vertexPath = dijkstraAlgorithm.getPath(endingPosition);
 
-                if (alternateDirection < distance.get(neighborPos)) {
-                    distance.put(neighborPos, alternateDirection);
-                    path.add(workingBlockPos);
-                }
-            }
+        if (vertexPath == null)
+            return path;
+
+        for(Vertex node : vertexPath) {
+            path.add(node.getPosition());
+            System.out.println("Node: " + getCableName(node.getPosition()));
         }
 
         return path;
     }
 
-    @Nullable
-    private static BlockPos getLowestDistancePosition(@NotNull List<BlockPos> cableStacker) {
-        BlockPos lowestDistancePosition = null;
-        int lowestDistance = Integer.MAX_VALUE;
-
-        int currentDistance = 0;
-        for (BlockPos currentBlockPos : cableStacker) {
-            currentDistance = CalculationHelper.distanceVectors(); // Distance From What?
-
-            if (currentDistance < lowestDistance) {
-                lowestDistance = currentDistance;
-                lowestDistancePosition = currentBlockPos;
-            }
-        }
-
-        return lowestDistancePosition;
+    private static void addLane(List<Vertex> nodes, List<Edge> edges, String laneId, int source, int destination, int weight) {
+        Edge lane = new Edge(laneId, nodes.get(source), nodes.get(destination), weight);
+        edges.add(lane);
     }
 
-    @SuppressWarnings("duplicate")
-    private static List<BlockPos> getNeighbors(BlockPos currentBlock) {
-        @SuppressWarnings("duplicate") BlockPos north = CalculationHelper.addVectors(currentBlock, northVector);
-        @SuppressWarnings("duplicate") BlockPos south = CalculationHelper.addVectors(currentBlock, southVector);
-        @SuppressWarnings("duplicate") BlockPos east = CalculationHelper.addVectors(currentBlock, eastVector);
-        @SuppressWarnings("duplicate") BlockPos west = CalculationHelper.addVectors(currentBlock, westVector);
-        @SuppressWarnings("duplicate") BlockPos up = CalculationHelper.addVectors(currentBlock, upVector);
-        @SuppressWarnings("duplicate") BlockPos down = CalculationHelper.addVectors(currentBlock, downVector);
-
-        List<BlockPos> neighbors = new ArrayList<>();
-        neighbors.add(north);
-        neighbors.add(south);
-        neighbors.add(east);
-        neighbors.add(west);
-        neighbors.add(up);
-        neighbors.add(down);
-
-        return neighbors;
+    private static String getCableName(BlockPos blockPos) {
+        return "(" + blockPos.getX() + ", " + blockPos.getY() + ", " + blockPos.getZ() + ")";
     }
 }

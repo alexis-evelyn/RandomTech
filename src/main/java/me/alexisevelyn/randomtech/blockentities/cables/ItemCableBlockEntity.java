@@ -29,7 +29,7 @@ public class ItemCableBlockEntity extends BlockEntity implements InventoryProvid
         inventory = new ItemCableInventory();
 
         // Jump start any cable networks when they are loaded in.
-        moveItemInNetwork();
+        // moveItemInNetwork();
     }
 
     @Override
@@ -94,22 +94,26 @@ public class ItemCableBlockEntity extends BlockEntity implements InventoryProvid
             return;
 
         // Retrieve First Neighbor on Path
-        BlockEntity blockEntity = world.getBlockEntity(nextBlockPos);
+        BlockEntity neighborBlockEntity = world.getBlockEntity(nextBlockPos);
 
         // Not Expected Block Entity, So Return
-        if (!(blockEntity instanceof ItemCableBlockEntity))
+        if (!(neighborBlockEntity instanceof ItemCableBlockEntity))
             return;
 
-        ItemCableBlockEntity itemCableBlockEntity = (ItemCableBlockEntity) blockEntity;
-        int[] neighborSlots = itemCableBlockEntity.getSlots();
+        ItemCableBlockEntity neighborCableEntity = (ItemCableBlockEntity) neighborBlockEntity;
+        int[] neighborSlots = neighborCableEntity.getSlots();
 
         // Neighbor doesn't have any slots
         if (neighborSlots == null)
             return;
 
         // Attempt to Add Items to Neighbor Slots
-        for (int slot : neighborSlots)
-            currentItemStack = transferItemStacks(itemCableBlockEntity, slot, currentItemStack);
+        for (int slot : neighborSlots) {
+            currentItemStack = transferItemStacks(neighborCableEntity, slot, currentItemStack);
+            world.updateComparators(neighborBlockEntity.getPos(), world.getBlockState(neighborBlockEntity.getPos()).getBlock());
+        }
+
+        world.updateComparators(pos, world.getBlockState(pos).getBlock());
     }
 
     @Override
@@ -182,11 +186,7 @@ public class ItemCableBlockEntity extends BlockEntity implements InventoryProvid
         if (inventory.size() <= slot)
             return null;
 
-        ItemStack chosenItemStack = inventory.getStack(slot);
-        if (chosenItemStack.equals(ItemStack.EMPTY))
-            return null;
-
-        return chosenItemStack;
+        return inventory.getStack(slot);
     }
 
     private BlockPos findNextBlockPos(@NotNull ItemStack chosenItemStack, @NotNull List<BlockPos> currentKnownCables, @NotNull List<BlockPos> currentInterfaceableBlocks) {
@@ -199,12 +199,12 @@ public class ItemCableBlockEntity extends BlockEntity implements InventoryProvid
         // TODO: Replace with filter search
         BlockPos nextBlockPos = currentInterfaceableBlocks.get(0);
 
-        List<BlockPos> path = GenericCable.dijkstraAlgorithm(currentKnownCables, nextBlockPos);
+        List<BlockPos> path = GenericCable.dijkstraAlgorithm(currentKnownCables, getPos(), nextBlockPos);
 
-        if (path.isEmpty())
+        if (path.size() <= 1)
             return null;
 
-        return path.get(0);
+        return path.get(1);
     }
 
     @Override
