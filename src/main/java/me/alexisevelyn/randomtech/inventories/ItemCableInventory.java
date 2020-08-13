@@ -7,6 +7,7 @@ import net.minecraft.inventory.SidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.Direction;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Iterator;
@@ -32,6 +33,7 @@ public class ItemCableInventory implements SidedInventory {
      * @param side
      */
     @Override
+    @NotNull
     public int[] getAvailableSlots(Direction side) {
         int[] filterSlots = getFilterSlots(side);
         int[] realSlots = getRealSlots(side);
@@ -40,10 +42,12 @@ public class ItemCableInventory implements SidedInventory {
         return Ints.concat(filterSlots, realSlots);
     }
 
+    @NotNull
     public int[] getFilterSlots(@Nullable Direction side) {
         return new int[]{0, 1, 2, 3, 4, 5, 6, 7, 8};
     }
 
+    @NotNull
     public int[] getRealSlots(@Nullable Direction side) {
         return new int[]{9};
     }
