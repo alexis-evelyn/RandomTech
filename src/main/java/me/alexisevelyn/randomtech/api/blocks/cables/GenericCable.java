@@ -2,6 +2,7 @@ package me.alexisevelyn.randomtech.api.blocks.cables;
 
 import me.alexisevelyn.randomtech.Main;
 import me.alexisevelyn.randomtech.api.utilities.CalculationHelper;
+import me.alexisevelyn.randomtech.api.utilities.pathfinding.dijkstra.VertexPath;
 import me.alexisevelyn.randomtech.api.utilities.pathfinding.dijkstra.DijkstraAlgorithm;
 import me.alexisevelyn.randomtech.api.utilities.pathfinding.dijkstra.Edge;
 import me.alexisevelyn.randomtech.api.utilities.pathfinding.dijkstra.Graph;
@@ -425,10 +426,10 @@ public abstract class GenericCable extends Block implements Waterloggable {
         return 0;
     }
 
-    public static List<BlockPos> dijkstraAlgorithm(List<BlockPos> currentKnownCables, BlockPos startingBlockPosition, BlockPos endingBlockPosition) {
+    @NotNull
+    public static VertexPath dijkstraAlgorithm(List<BlockPos> currentKnownCables, BlockPos startingBlockPosition, BlockPos endingBlockPosition) {
         List<Vertex> nodes = new ArrayList<>();
         List<Edge> edges = new ArrayList<>();
-        List<BlockPos> path = new ArrayList<>();
 
         Vertex startingPosition = null;
         Vertex endingPosition = null;
@@ -447,7 +448,7 @@ public abstract class GenericCable extends Block implements Waterloggable {
         }
         
         if (startingPosition == null || endingPosition == null)
-            return path;
+            return new VertexPath();
 
         // TODO: Add Edges
         addLane(nodes, edges, "Lane_0", nodes.indexOf(startingPosition), nodes.indexOf(endingPosition), 1);
@@ -458,17 +459,7 @@ public abstract class GenericCable extends Block implements Waterloggable {
 
         dijkstraAlgorithm.execute(startingPosition);
 
-        LinkedList<Vertex> vertexPath = dijkstraAlgorithm.getPath(endingPosition);
-
-        if (vertexPath == null)
-            return path;
-
-        for(Vertex node : vertexPath) {
-            path.add(node.getPosition());
-            System.out.println("Node: " + getCableName(node.getPosition()));
-        }
-
-        return path;
+        return dijkstraAlgorithm.getPath(endingPosition);
     }
 
     private static void addLane(List<Vertex> nodes, List<Edge> edges, String laneId, int source, int destination, int weight) {

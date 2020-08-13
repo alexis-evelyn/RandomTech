@@ -5,7 +5,6 @@ import me.alexisevelyn.randomtech.blockentities.*;
 import me.alexisevelyn.randomtech.blockentities.cables.EnergyCableBlockEntity;
 import me.alexisevelyn.randomtech.blockentities.cables.FluidCableBlockEntity;
 import me.alexisevelyn.randomtech.blockentities.cables.ItemCableBlockEntity;
-import me.alexisevelyn.randomtech.blocks.cables.ItemCable;
 import me.alexisevelyn.randomtech.utility.registryhelpers.main.RegistryHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.entity.BlockEntity;

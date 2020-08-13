@@ -1,5 +1,6 @@
 package me.alexisevelyn.randomtech.api.utilities.pathfinding.dijkstra;
 
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
@@ -7,7 +8,7 @@ import java.util.*;
 // Code pulled from https://www.vogella.com/tutorials/JavaAlgorithmsDijkstra/article.html
 // Found code from https://stackoverflow.com/questions/17480022/java-find-shortest-path-between-2-points-in-a-distance-weighted-map#comment61831401_17480244
 public class DijkstraAlgorithm {
-    private final List<Vertex> nodes;
+    // private final List<Vertex> nodes;
     private final List<Edge> edges;
     private Set<Vertex> settledNodes;
     private Set<Vertex> unSettledNodes;
@@ -16,7 +17,7 @@ public class DijkstraAlgorithm {
 
     public DijkstraAlgorithm(Graph graph) {
         // create a copy of the array so that we can operate on this array
-        this.nodes = new ArrayList<>(graph.getVertexes());
+        // this.nodes = new ArrayList<>(graph.getVertexes());
         this.edges = new ArrayList<>(graph.getEdges());
     }
 
@@ -95,15 +96,16 @@ public class DijkstraAlgorithm {
 
     /*
      * This method returns the path from the source to the selected target and
-     * NULL if no path exists
+     * Empty Path if no path exists
      */
-    @Nullable
-    public LinkedList<Vertex> getPath(Vertex target) {
-        LinkedList<Vertex> path = new LinkedList<>();
+    @NotNull
+    public VertexPath getPath(Vertex target) {
+        VertexPath path = new VertexPath();
         Vertex step = target;
+
         // check if a path exists
         if (predecessors.get(step) == null)
-            return null;
+            return path;
 
         path.add(step);
         while (predecessors.get(step) != null) {
@@ -112,7 +114,7 @@ public class DijkstraAlgorithm {
         }
 
         // Put it into the correct order
-        Collections.reverse(path);
+        path.reverse();
         return path;
     }
 }

@@ -1,6 +1,9 @@
 package me.alexisevelyn.randomtech.blockentities.cables;
 
 import me.alexisevelyn.randomtech.api.blocks.cables.GenericCable;
+import me.alexisevelyn.randomtech.api.utilities.CalculationHelper;
+import me.alexisevelyn.randomtech.api.utilities.pathfinding.dijkstra.Vertex;
+import me.alexisevelyn.randomtech.api.utilities.pathfinding.dijkstra.VertexPath;
 import me.alexisevelyn.randomtech.blocks.cables.ItemCable;
 import me.alexisevelyn.randomtech.inventories.ItemCableInventory;
 import me.alexisevelyn.randomtech.utility.BlockEntities;
@@ -9,20 +12,24 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.InventoryProvider;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.inventory.Inventories;
+import net.minecraft.inventory.Inventory;
 import net.minecraft.inventory.SidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.util.Tickable;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Direction;
+import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class ItemCableBlockEntity extends BlockEntity implements InventoryProvider, Tickable {
+public class ItemCableBlockEntity extends BlockEntity implements InventoryProvider {
     private final ItemCableInventory inventory;
+    private final ItemCable ourCable = new ItemCable();
 
     public ItemCableBlockEntity() {
         super(BlockEntities.ITEM_CABLE);
@@ -53,19 +60,10 @@ public class ItemCableBlockEntity extends BlockEntity implements InventoryProvid
 
     // Example Command For Testing: /data merge block ~ ~ ~-4 {Items: [{Slot: 9b, id: "minecraft:bedrock", Count: 1b}]}
     public void moveItemInNetwork() {
-        // This Causes too much lag
-        // I will need help getting this to work efficiently
-
         // Ensure World is Not Null (It always is for a little bit on world load)
         if (world == null)
             return;
 
-        // Ensure our block is actually an instance of ItemCable
-        Block ourBlock = world.getBlockState(pos).getBlock();
-        if (!(ourBlock instanceof ItemCable))
-            return;
-
-        ItemCable ourCable = (ItemCable) ourBlock;
         List<BlockPos> currentKnownCables = ourCable.getAllCables(world, pos); // Will be used for the search algorithm later
         List<BlockPos> currentInterfaceableBlocks = ourCable.getAllInterfacingCables(world, currentKnownCables); // Our endpoints to choose from in the search algorithm
 
@@ -87,20 +85,22 @@ public class ItemCableBlockEntity extends BlockEntity implements InventoryProvid
             return;
 
         // We choose a slot ahead of time so we can figure out what slot needs to be transfered
-        BlockPos nextBlockPos = findNextBlockPos(currentItemStack, currentKnownCables, currentInterfaceableBlocks);
+        VertexPath path = findPath(currentItemStack, currentKnownCables, currentInterfaceableBlocks);
 
         // No Path Found, just Return
-        if (nextBlockPos == null)
+        if (path.size() == 0)
             return;
 
-        // Retrieve First Neighbor on Path
-        BlockEntity neighborBlockEntity = world.getBlockEntity(nextBlockPos);
+        Vertex nextVertex = path.getNext();
 
-        // Not Expected Block Entity, So Return
-        if (!(neighborBlockEntity instanceof ItemCableBlockEntity))
+        // We are at the end of the path (if any path) if this if statement equals true
+        if (nextVertex == null || !(nextVertex.getPosition() instanceof BlockPos)) {
+            attemptTransferToContainer(world, pos, currentItemStack);
             return;
+        }
 
-        ItemCableBlockEntity neighborCableEntity = (ItemCableBlockEntity) neighborBlockEntity;
+        // Get Destination's Block Entity
+        ItemCableBlockEntity neighborCableEntity = (ItemCableBlockEntity) world.getBlockEntity((BlockPos) nextVertex.getPosition());
         int[] neighborSlots = neighborCableEntity.getSlots();
 
         // Neighbor doesn't have any slots
@@ -110,17 +110,48 @@ public class ItemCableBlockEntity extends BlockEntity implements InventoryProvid
         // Attempt to Add Items to Neighbor Slots
         for (int slot : neighborSlots) {
             currentItemStack = transferItemStacks(neighborCableEntity, slot, currentItemStack);
-            world.updateComparators(neighborBlockEntity.getPos(), world.getBlockState(neighborBlockEntity.getPos()).getBlock());
+            world.updateComparators(neighborCableEntity.getPos(), world.getBlockState(neighborCableEntity.getPos()).getBlock());
         }
 
         world.updateComparators(pos, world.getBlockState(pos).getBlock());
     }
 
-    @Override
-    public void tick() {
-        // Don't Use
+    private void attemptTransferToContainer(World world, BlockPos position, ItemStack itemStack) {
+        List<BlockPos> neighbors = getTransferrableNeighbors(world, position, itemStack);
+
+        for (BlockPos neighbor : neighbors) {
+            BlockEntity blockEntity = world.getBlockEntity(neighbor);
+            Block block = world.getBlockState(neighbor).getBlock();
+
+            // TODO: Turn the inventory handler to a helper class
+            if (blockEntity instanceof Inventory) {
+
+            }
+
+            if (block instanceof InventoryProvider) {
+
+            }
+        }
     }
 
+    // TODO: Turn to helper function
+    private List<BlockPos> getTransferrableNeighbors(World world, BlockPos position, ItemStack itemStack) {
+        ArrayList<BlockPos> neighbors = new ArrayList<>();
+
+        neighbors.add(CalculationHelper.addVectors(position, Direction.NORTH.getVector()));
+        neighbors.add(CalculationHelper.addVectors(position, Direction.SOUTH.getVector()));
+        neighbors.add(CalculationHelper.addVectors(position, Direction.EAST.getVector()));
+        neighbors.add(CalculationHelper.addVectors(position, Direction.WEST.getVector()));
+        neighbors.add(CalculationHelper.addVectors(position, Direction.UP.getVector()));
+        neighbors.add(CalculationHelper.addVectors(position, Direction.DOWN.getVector()));
+
+        // Remove if Not Interfaceable Neighbor
+        neighbors.removeIf(neighbor -> !ourCable.isInterfacing(world.getBlockState(neighbor)));
+
+        return neighbors;
+    }
+
+    // TODO: Helper Class
     @NotNull
     private ItemStack transferItemStacks(@NotNull ItemCableBlockEntity neighborBlockEntity, int neighborSlot, @NotNull ItemStack ourItemStack) {
         ItemStack neighborStack = neighborBlockEntity.retrieveItemStack(neighborSlot);
@@ -143,14 +174,16 @@ public class ItemCableBlockEntity extends BlockEntity implements InventoryProvid
     }
 
     private void setStack(@NotNull ItemStack itemStack, int slot) {
-        // Test with negative slot numbers and one slot higher than the size of the inventory
+        if (slot < 0)
+            return;
+
         if (inventory.size() < slot)
             return;
 
         inventory.setStack(slot, itemStack);
     }
 
-    @Nullable
+    @NotNull
     private ItemStack addStacks(@NotNull ItemStack neighborStack, @NotNull ItemStack ourItemStack) {
         int neighborStackMaxCount = neighborStack.getMaxCount();
         int neighborStackCount = neighborStack.getCount();
@@ -189,22 +222,15 @@ public class ItemCableBlockEntity extends BlockEntity implements InventoryProvid
         return inventory.getStack(slot);
     }
 
-    private BlockPos findNextBlockPos(@NotNull ItemStack chosenItemStack, @NotNull List<BlockPos> currentKnownCables, @NotNull List<BlockPos> currentInterfaceableBlocks) {
-        if (currentKnownCables.size() == 0)
-            return null;
-
+    @NotNull
+    private VertexPath findPath(@NotNull ItemStack chosenItemStack, @NotNull List<BlockPos> currentKnownCables, @NotNull List<BlockPos> currentInterfaceableBlocks) {
         if (currentInterfaceableBlocks.size() == 0)
-            return null;
+            return new VertexPath();
 
         // TODO: Replace with filter search
         BlockPos nextBlockPos = currentInterfaceableBlocks.get(0);
 
-        List<BlockPos> path = GenericCable.dijkstraAlgorithm(currentKnownCables, getPos(), nextBlockPos);
-
-        if (path.size() <= 1)
-            return null;
-
-        return path.get(1);
+        return GenericCable.dijkstraAlgorithm(currentKnownCables, getPos(), nextBlockPos);
     }
 
     @Override

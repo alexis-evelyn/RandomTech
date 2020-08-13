@@ -1,17 +1,15 @@
 package me.alexisevelyn.randomtech.api.utilities.pathfinding.dijkstra;
 
-import net.minecraft.util.math.BlockPos;
-
 public class Vertex {
-    final private BlockPos position;
+    final private Object position;
     final private String name;
 
-    public Vertex(BlockPos position, String name) {
+    public Vertex(Object position, String name) {
         this.position = position;
         this.name = name;
     }
 
-    public BlockPos getPosition() {
+    public Object getPosition() {
         return position;
     }
 
