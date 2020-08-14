@@ -60,6 +60,8 @@ public class ItemCableBlockEntity extends BlockEntity implements InventoryProvid
             return;
 
         attemptCableTransfer(world);
+
+        // TODO (Important): Use a boolean to determine if should extract or insert
         attemptInsertIntoInterfaceableBlocks(world);
         attemptExtractFromInterfaceableBlocks(world);
     }
