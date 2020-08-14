@@ -124,21 +124,39 @@ public class ItemTransferHelper {
         return (ItemCable) neighborBlock;
     }
 
-    public static void attemptTransferToContainer(@NotNull GenericCable ourCable, @NotNull World world, @NotNull BlockPos position, @NotNull ItemStack itemStack) {
-        List<BlockPos> neighbors = ItemTransferHelper.getTransferrableNeighbors(ourCable, world, position, itemStack);
+    public static void tryTransferToContainer(@NotNull GenericCable ourCable, @NotNull World world, @NotNull BlockPos position, @NotNull ItemStack itemStack) {
+        List<BlockPos> neighbors = getTransferrableNeighbors(ourCable, world, position, itemStack);
 
         for (BlockPos neighbor : neighbors) {
             BlockEntity blockEntity = world.getBlockEntity(neighbor);
             Block block = world.getBlockState(neighbor).getBlock();
 
-            // TODO: Turn the inventory handler to a helper class
-            if (blockEntity instanceof Inventory) {
-
-            }
-
-            if (block instanceof InventoryProvider) {
-
+            if (isInventoryProvider(block)) {
+                tryTransferToInventoryProvider(world, position, block, itemStack);
+            } else if (isInventory(blockEntity)) {
+                tryTransferToInventory(world, position, blockEntity, itemStack);
             }
         }
+    }
+
+    private static void tryTransferToInventoryProvider(@NotNull World world, @NotNull BlockPos position, @NotNull Block block, @NotNull ItemStack itemStack) {
+        // Block
+    }
+
+    private static void tryTransferToInventory(@NotNull World world, @NotNull BlockPos position, @NotNull BlockEntity blockEntity, @NotNull ItemStack itemStack) {
+        // Block Entity
+        // Look at Hopper Code to See How to Transfer To Chest
+    }
+
+    // Composter (Block) is an inventory provider
+    // Only blocks are supposed to be inventory providers.
+    public static boolean isInventoryProvider(Object object) {
+        return object instanceof InventoryProvider;
+    }
+
+    // ChestBlockEntity (BlockEntity) and HopperBlockEntity (BlockEntity) is an Inventory
+    // Only block entities are supposed to be inventories.
+    public static boolean isInventory(Object object) {
+        return object instanceof Inventory;
     }
 }

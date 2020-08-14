@@ -29,7 +29,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Random;
 
-public class ItemCable extends GenericCable implements BlockEntityProvider {
+public class ItemCable extends GenericCable implements BlockEntityProvider, InventoryProvider {
     // Generic Instantiation of ItemCable with Default Shape
     public ItemCable() {
         this(null);

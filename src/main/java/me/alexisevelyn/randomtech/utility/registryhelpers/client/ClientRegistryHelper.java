@@ -98,6 +98,11 @@ public class ClientRegistryHelper {
         // For Dynamic Colors of Virtual Tiles
         ColorProviderRegistry.BLOCK.register(VirtualTile::getEdgeColor, RegistryHelper.VIRTUAL_TILE_BLOCK);
         ColorProviderRegistry.ITEM.register(VirtualTile::getEdgeColor, RegistryHelper.VIRTUAL_TILE);
+
+        // For Cables
+        BlockRenderLayerMap.INSTANCE.putBlock(RegistryHelper.ITEM_CABLE_BLOCK, RenderLayer.getTranslucent());
+        BlockRenderLayerMap.INSTANCE.putBlock(RegistryHelper.FLUID_CABLE_BLOCK, RenderLayer.getTranslucent());
+        BlockRenderLayerMap.INSTANCE.putBlock(RegistryHelper.ENERGY_CABLE_BLOCK, RenderLayer.getTranslucent());
     }
 
     private void fluidSetup() {

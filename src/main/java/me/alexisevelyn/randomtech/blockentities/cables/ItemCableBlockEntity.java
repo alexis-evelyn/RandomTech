@@ -89,7 +89,7 @@ public class ItemCableBlockEntity extends BlockEntity implements InventoryProvid
 
         // We are at the end of the path (if any path) if this if statement equals true
         if (nextVertex == null || !(nextVertex.getPosition() instanceof BlockPos)) {
-            ItemTransferHelper.attemptTransferToContainer(ourCable, world, pos, currentItemStack);
+            ItemTransferHelper.tryTransferToContainer(ourCable, world, pos, currentItemStack);
             return;
         }
 
@@ -119,6 +119,7 @@ public class ItemCableBlockEntity extends BlockEntity implements InventoryProvid
         if (currentInterfaceableBlocks.size() == 0)
             return new VertexPath();
 
+        // TODO: Check which side the block is interfacing from. Hoppers only work one direction and are Inventories (in the block entity)
         // TODO: Replace with filter search
         BlockPos nextBlockPos = currentInterfaceableBlocks.get(0);
 
