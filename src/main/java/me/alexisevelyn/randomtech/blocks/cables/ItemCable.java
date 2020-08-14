@@ -7,10 +7,7 @@ import me.alexisevelyn.randomtech.utility.Materials;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockEntityProvider;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.InventoryProvider;
+import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.HopperBlockEntity;
 import net.minecraft.inventory.Inventory;
@@ -27,7 +24,6 @@ import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import reborncore.common.blocks.BlockMachineBase;
 
 import java.util.Random;
 
@@ -110,13 +106,16 @@ public class ItemCable extends GenericCable implements BlockEntityProvider, Inve
 
     @Override
     public boolean isValidSide(Block block, WorldAccess world, BlockPos blockPos, Direction side) {
-        // RebornCore does not implement SidedInventory (only Regular Inventory)
-        if (block instanceof BlockMachineBase)
-            return true;
-
         if (block instanceof InventoryProvider) {
             SidedInventory inventory = ((InventoryProvider) block).getInventory(world.getBlockState(blockPos), world, blockPos);
             int[] slots = inventory.getAvailableSlots(side);
+
+            if (slots.length == 0 && block instanceof ComposterBlock && side.equals(Direction.UP)) {
+                // Cause the Composter is Special
+                // When the composter has composted, it removes the bottom side from being valid.
+                // Vanilla hoppers can still pull from it, but it breaks any SidedInventory aware code. That being said, the Composter's slot is 0.
+                slots = new int[]{0};
+            }
 
             // Is there no universal check if a slot is an input slot or not?
 //            for (int slot : slots) {

@@ -16,6 +16,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 import org.jetbrains.annotations.NotNull;
 
@@ -58,6 +59,32 @@ public class ItemCableBlockEntity extends BlockEntity implements InventoryProvid
         if (world == null)
             return;
 
+        attemptCableTransfer(world);
+        attemptInsertIntoInterfaceableBlocks(world);
+        attemptExtractFromInterfaceableBlocks(world);
+    }
+
+    private void attemptInsertIntoInterfaceableBlocks(@NotNull World world) {
+        ItemStack currentItemStack = null;
+        for (int slot : ItemTransferHelper.getSlots(inventory)) {
+            currentItemStack = ItemTransferHelper.retrieveItemStack(inventory, slot);
+
+            if (currentItemStack != null)
+                break;
+        }
+
+        // If no itemstacks found, just return
+        if (currentItemStack == null)
+            return;
+
+        ItemTransferHelper.tryTransferToContainer(ourCable, world, pos, currentItemStack);
+    }
+
+    private void attemptExtractFromInterfaceableBlocks(@NotNull World world) {
+        // TODO (Important): Implement Me
+    }
+
+    private void attemptCableTransfer(@NotNull World world) {
         List<BlockPos> currentKnownCables = ourCable.getAllCables(world, pos); // Will be used for the search algorithm later
         List<BlockPos> currentInterfaceableBlocks = ourCable.getAllInterfacingCables(world, currentKnownCables); // Our endpoints to choose from in the search algorithm
 
@@ -83,10 +110,8 @@ public class ItemCableBlockEntity extends BlockEntity implements InventoryProvid
         Vertex nextVertex = path.getNext();
 
         // We are at the end of the path (if any path) if this if statement equals true
-        if (nextVertex == null || !(nextVertex.getPosition() instanceof BlockPos)) {
-            ItemTransferHelper.tryTransferToContainer(ourCable, world, pos, currentItemStack);
+        if (nextVertex == null || !(nextVertex.getPosition() instanceof BlockPos))
             return;
-        }
 
         // Get Destination's Block Entity
         ItemCableBlockEntity neighborCableEntity = ItemTransferHelper.getCableBlockEntity(world, (BlockPos) nextVertex.getPosition());

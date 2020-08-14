@@ -9,6 +9,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.InventoryProvider;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.inventory.Inventory;
+import net.minecraft.inventory.SidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
@@ -142,7 +143,7 @@ public class ItemTransferHelper {
             Block block = world.getBlockState(neighbor).getBlock();
 
             if (isInventoryProvider(block)) {
-                tryTransferToInventoryProvider(world, position, (InventoryProvider) block, itemStack);
+                tryTransferToInventoryProvider(world, position, neighbor, (InventoryProvider) block, itemStack);
             } else if (isInventory(blockEntity)) {
                 tryTransferToInventory(world, position, (Inventory) blockEntity, itemStack);
             }
@@ -155,13 +156,11 @@ public class ItemTransferHelper {
         world.updateComparators(position, world.getBlockState(position).getBlock());
     }
 
-    private static void tryTransferToInventoryProvider(@NotNull World world, @NotNull BlockPos position, @NotNull InventoryProvider inventoryProvider, @NotNull ItemStack itemStack) {
-        // Block
-    }
-
-    private static void tryTransferToInventory(@NotNull World world, @NotNull BlockPos position, @NotNull Inventory inventory, @NotNull ItemStack itemStack) {
-        // Block Entity
-        // Look at Hopper Code to See How to Transfer To Chest
+    @SuppressWarnings("DuplicatedCode")
+    private static void tryTransferToInventoryProvider(@NotNull World world, @NotNull BlockPos ourPosition, @NotNull BlockPos neighborPosition, @NotNull InventoryProvider inventoryProvider, @NotNull ItemStack itemStack) {
+        // Block - These are supposed to have proper SidedInventories, but are not guaranteed to (even if they say they do).
+        SidedInventory inventory = inventoryProvider.getInventory(world.getBlockState(neighborPosition), world, neighborPosition);
+        Direction direction = CalculationHelper.getDirection(neighborPosition, ourPosition);
 
         // Inventory has no slots, don't continue further
         if (inventory.size() == 0)
@@ -170,6 +169,37 @@ public class ItemTransferHelper {
         if (itemStack.isEmpty())
             return;
 
+        for (int slot : inventory.getAvailableSlots(direction)) {
+            if (itemStack.isEmpty())
+                break;
+
+            ItemStack temporaryStack = retrieveItemStack(inventory, slot);
+
+            if (temporaryStack == null)
+                break;
+
+            if (temporaryStack.isEmpty()) {
+                setStack(inventory, itemStack, slot);
+                continue;
+            }
+
+            if (itemStack.getItem() == temporaryStack.getItem())
+                mergeStacks(temporaryStack, itemStack);
+        }
+    }
+
+    @SuppressWarnings("DuplicatedCode")
+    private static void tryTransferToInventory(@NotNull World world, @NotNull BlockPos position, @NotNull Inventory inventory, @NotNull ItemStack itemStack) {
+        // Block Entity
+
+        // Inventory has no slots, don't continue further
+        if (inventory.size() == 0)
+            return;
+
+        if (itemStack.isEmpty())
+            return;
+
+        // May remove
         if (inventory.isEmpty()) {
             setStack(inventory, itemStack, 0);
             inventory.markDirty();
