@@ -1,28 +1,56 @@
 package me.alexisevelyn.randomtech.api.utilities;
 
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3i;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public class CalculationHelper {
-    public static BlockPos addVectors(Vec3i oneVector, Vec3i secondVector) {
-        return new BlockPos(oneVector.getX() + secondVector.getX(), oneVector.getY() + secondVector.getY(), oneVector.getZ() + secondVector.getZ());
+    public static BlockPos addVectors(@NotNull Vec3i firstVector, @NotNull Vec3i secondVector) {
+        return new BlockPos(firstVector.getX() + secondVector.getX(), firstVector.getY() + secondVector.getY(), firstVector.getZ() + secondVector.getZ());
     }
 
-    public static BlockPos subtractVectors(Vec3i oneVector, Vec3i secondVector) {
-        return new BlockPos(oneVector.getX() - secondVector.getX(), oneVector.getY() - secondVector.getY(), oneVector.getZ() - secondVector.getZ());
+    public static BlockPos subtractVectors(@NotNull Vec3i firstVector, @NotNull Vec3i secondVector) {
+        return new BlockPos(firstVector.getX() - secondVector.getX(), firstVector.getY() - secondVector.getY(), firstVector.getZ() - secondVector.getZ());
     }
 
-    public static BlockPos multiplyVectors(Vec3i oneVector, Vec3i secondVector) {
-        return new BlockPos(oneVector.getX() * secondVector.getX(), oneVector.getY() * secondVector.getY(), oneVector.getZ() * secondVector.getZ());
+    public static BlockPos multiplyVectors(@NotNull Vec3i firstVector, @NotNull Vec3i secondVector) {
+        return new BlockPos(firstVector.getX() * secondVector.getX(), firstVector.getY() * secondVector.getY(), firstVector.getZ() * secondVector.getZ());
     }
 
-    public static BlockPos divideVectors(Vec3i oneVector, Vec3i secondVector) {
-        return new BlockPos(oneVector.getX() / secondVector.getX(), oneVector.getY() / secondVector.getY(), oneVector.getZ() / secondVector.getZ());
+    public static BlockPos divideVectors(@NotNull Vec3i firstVector, @NotNull Vec3i secondVector) {
+        return new BlockPos(firstVector.getX() / secondVector.getX(), firstVector.getY() / secondVector.getY(), firstVector.getZ() / secondVector.getZ());
     }
 
-    public static double distanceVectors(Vec3i oneVector, Vec3i secondVector) {
-        BlockPos subtractedVectors = subtractVectors(oneVector, secondVector);
+    public static double distanceVectors(@NotNull Vec3i firstVector, @NotNull Vec3i secondVector) {
+        BlockPos subtractedVectors = subtractVectors(firstVector, secondVector);
         return MathHelper.abs(subtractedVectors.getX()) + MathHelper.abs(subtractedVectors.getY()) + MathHelper.abs(subtractedVectors.getZ());
+    }
+
+    @Nullable
+    public static Direction getDirection(@NotNull Vec3i neighborPos, @NotNull Vec3i ourPos) {
+        Vec3i result = subtractVectors(neighborPos, ourPos);
+
+        if (result.equals(Direction.NORTH.getVector()))
+            return Direction.NORTH;
+
+        if (result.equals(Direction.SOUTH.getVector()))
+            return Direction.SOUTH;
+
+        if (result.equals(Direction.EAST.getVector()))
+            return Direction.EAST;
+
+        if (result.equals(Direction.WEST.getVector()))
+            return Direction.WEST;
+
+        if (result.equals(Direction.UP.getVector()))
+            return Direction.UP;
+
+        if (result.equals(Direction.DOWN.getVector()))
+            return Direction.DOWN;
+
+        return Direction.fromVector(result.getX(), result.getY(), result.getZ());
     }
 }

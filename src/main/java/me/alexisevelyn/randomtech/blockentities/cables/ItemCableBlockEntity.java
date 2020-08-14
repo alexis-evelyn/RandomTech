@@ -119,7 +119,6 @@ public class ItemCableBlockEntity extends BlockEntity implements InventoryProvid
         if (currentInterfaceableBlocks.size() == 0)
             return new VertexPath();
 
-        // TODO: Check which side the block is interfacing from. Hoppers only work one direction and are Inventories (in the block entity)
         // TODO: Replace with filter search
         BlockPos nextBlockPos = currentInterfaceableBlocks.get(0);
 

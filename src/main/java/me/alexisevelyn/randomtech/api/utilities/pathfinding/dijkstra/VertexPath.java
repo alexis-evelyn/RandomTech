@@ -30,6 +30,7 @@ public class VertexPath implements Iterable<Vertex> {
     @Nullable
     public Vertex getNext() {
         try {
+            // TODO: Figure out why full path is added at end block!!!
             currentIndex++;
             return get(currentIndex);
         } catch (IndexOutOfBoundsException exception) {
@@ -81,7 +82,6 @@ public class VertexPath implements Iterable<Vertex> {
     }
 
     public Vertex get(int i) throws IndexOutOfBoundsException {
-        currentIndex = i;
         return path.get(i);
     }
 }

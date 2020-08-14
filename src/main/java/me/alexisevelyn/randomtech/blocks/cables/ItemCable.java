@@ -12,6 +12,7 @@ import net.minecraft.block.BlockEntityProvider;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.InventoryProvider;
 import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.block.entity.HopperBlockEntity;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.inventory.SidedInventory;
 import net.minecraft.screen.ScreenHandler;
@@ -104,6 +105,31 @@ public class ItemCable extends GenericCable implements BlockEntityProvider, Inve
 
         // Checking the instance of also inherently checks if the block entity is null
         return world.getBlockEntity(blockPos) instanceof Inventory;
+    }
+
+    @Override
+    public boolean isValidSide(Block block, WorldAccess world, BlockPos blockPos, Direction side) {
+        if (block instanceof InventoryProvider) {
+            SidedInventory inventory = ((InventoryProvider) block).getInventory(world.getBlockState(blockPos), world, blockPos);
+            int[] slots = inventory.getAvailableSlots(side);
+
+            // Is there no universal check if a slot is an input slot or not?
+//            for (int slot : slots) {
+//                if (inventory.canInsert(slot, null, side)) {
+//                    return true;
+//                }
+//            }
+
+            return slots.length > 0;
+        }
+
+        BlockEntity blockEntity = world.getBlockEntity(blockPos);
+
+        // There's no generic way to check a hopper's side for insertion validity?
+        if (blockEntity instanceof HopperBlockEntity)
+            return !side.equals(Direction.UP);
+
+        return blockEntity instanceof Inventory;
     }
 
     @Override

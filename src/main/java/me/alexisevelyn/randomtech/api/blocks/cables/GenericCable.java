@@ -111,6 +111,9 @@ public abstract class GenericCable extends Block implements Waterloggable {
     // This is to make sure that we only connect to blocks that are supposed to connect to this cable.
     public abstract boolean isInstanceOfInterfaceableBlock(Block block, WorldAccess world, BlockPos blockPos);
 
+    // This is to make sure that we only connect to blocks that are supposed to connect to this cable.
+    public abstract boolean isValidSide(Block block, WorldAccess world, BlockPos blockPos, Direction side);
+
     @Override
     public void onPlaced(World world, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack itemStack) {
         // Responsible for Visually Connecting Cables Together
@@ -336,7 +339,7 @@ public abstract class GenericCable extends Block implements Waterloggable {
                 // Connected to Cable
                 world.setBlockState(neighborPos, neighborBlockState.with(neighborProperty, CableConnection.CABLE), 0x1); // Flag 0x1 = 0b0000001 which means Propagate Changes. More info in net.minecraft.world.ModifiableWorld
                 world.setBlockState(ourPos, ourBlockState.with(ourProperty, CableConnection.CABLE), 0x1);
-            } else if (isInstanceOfInterfaceableBlock(neighborBlockState.getBlock(), world, neighborPos)) {
+            } else if (isInstanceOfInterfaceableBlock(neighborBlockState.getBlock(), world, neighborPos) && isValidSide(neighborBlockState.getBlock(), world, neighborPos, CalculationHelper.getDirection(neighborPos, ourPos))) {
                 // Connected to Interfaceable Block
                 world.setBlockState(ourPos, ourBlockState.with(ourProperty, CableConnection.INTERFACEABLE), 0x1);
             } else {

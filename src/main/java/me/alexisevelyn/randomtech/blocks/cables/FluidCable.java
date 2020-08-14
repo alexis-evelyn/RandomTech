@@ -12,6 +12,7 @@ import net.minecraft.block.InventoryProvider;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Direction;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.WorldAccess;
 import org.jetbrains.annotations.NotNull;
@@ -61,5 +62,10 @@ public class FluidCable extends GenericCable {
 
         // Checking the instance of also inherently checks if the block entity is null
         return world.getBlockEntity(blockPos) instanceof FluidMachineBlockEntityBase;
+    }
+
+    @Override
+    public boolean isValidSide(Block block, WorldAccess world, BlockPos blockPos, Direction side) {
+        return true;
     }
 }
