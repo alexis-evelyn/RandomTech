@@ -162,7 +162,10 @@ public class ItemCableBlockEntity extends BlockEntity implements InventoryProvid
             return;
 
         // We only want the cable to move when the inventory is updated
+        // Command blocks do not allow marking the inventory as dirty as they update the nbt data directly
         if (inventory.isDirty()) {
+            markDirty(); // Mark self as dirty to ensure the nbt data gets saved on next save
+
             moveItemInNetwork();
         }
     }

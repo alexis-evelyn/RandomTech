@@ -8,6 +8,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.text.LiteralText;
 import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.collection.DefaultedList;
@@ -85,6 +86,10 @@ public class ItemManager {
         // Could use item.durability
         Text energy = new TranslatableText("text.randomtech.power_level", PowerSystem.getLocaliszedPowerNoSuffix(currentEnergy), PowerSystem.getLocaliszedPower(maxEnergy));
         tooltip.add(energy);
+
+        // Just to put a newline below dead tool energy display
+        if (currentEnergy == 0)
+            tooltip.add(new LiteralText(""));
     }
 
     // This method exists to allow energy to not be used if the player is in Creative mode

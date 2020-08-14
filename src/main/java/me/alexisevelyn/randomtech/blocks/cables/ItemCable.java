@@ -164,8 +164,8 @@ public class ItemCable extends GenericCable implements BlockEntityProvider, Inve
 
     @Override
     public BlockState getStateForNeighborUpdate(BlockState state, Direction direction, BlockState newState, WorldAccess world, BlockPos pos, BlockPos posFrom) {
-        // Have Cable BlockEntity Only Move During Block Update - Bad Idea. Causes Headaches Later
-        // tickCable(world, pos);
+        // This allows command blocks to set the inventory of the cable and have items moved.
+        tickCable(world, pos);
 
         // This sets up the cable blockstates for each cable
         return super.getStateForNeighborUpdate(state, direction, newState, world, pos, posFrom);
