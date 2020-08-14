@@ -1,6 +1,5 @@
 package me.alexisevelyn.randomtech.inventories;
 
-import com.google.common.primitives.Ints;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.Inventories;
 import net.minecraft.inventory.SidedInventory;
@@ -38,12 +37,12 @@ public class ItemCableInventory implements SidedInventory {
     @NotNull
     public int[] getAvailableSlots(Direction side) {
         // int[] filterSlots = getFilterSlots(side);
-        int[] realSlots = getRealSlots(side);
+        // int[] realSlots = getRealSlots(side);
 
         // Concatenate Both Arrays into One
         // return Ints.concat(filterSlots, realSlots);
 
-        return realSlots;
+        return getRealSlots(side);
     }
 
     @NotNull
@@ -120,6 +119,7 @@ public class ItemCableInventory implements SidedInventory {
      */
     @Override
     public ItemStack removeStack(int slot, int amount) {
+        markDirty();
         return Inventories.splitStack(this.inventory, slot, amount);
     }
 
@@ -131,11 +131,13 @@ public class ItemCableInventory implements SidedInventory {
      */
     @Override
     public ItemStack removeStack(int slot) {
+        markDirty();
         return Inventories.removeStack(this.inventory, slot);
     }
 
     @Override
     public void setStack(int slot, ItemStack stack) {
+        markDirty();
         this.inventory.set(slot, stack);
 
         if (stack.getCount() > this.getMaxCountPerStack()) {
@@ -163,6 +165,7 @@ public class ItemCableInventory implements SidedInventory {
 
     @Override
     public void clear() {
+        markDirty();
         this.inventory.clear();
     }
 }

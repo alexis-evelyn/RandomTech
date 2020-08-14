@@ -41,11 +41,8 @@ public class ItemTransferHelper {
     public static ItemStack transferItemStacks(@NotNull Inventory neighborInventory, int neighborSlot, @NotNull ItemStack ourItemStack) {
         ItemStack neighborStack = retrieveItemStack(neighborInventory, neighborSlot);
 
-        if (neighborStack == null)
+        if (neighborStack == null || ourItemStack.isEmpty())
             return ourItemStack;
-
-        if (neighborStack.getItem().equals(ourItemStack.getItem()))
-            return mergeStacks(neighborStack, ourItemStack);
 
         if (neighborStack.isEmpty()) {
             neighborStack = ourItemStack.copy();
@@ -54,6 +51,9 @@ public class ItemTransferHelper {
             setStack(neighborInventory, neighborStack, neighborSlot);
             return ourItemStack;
         }
+
+        if (neighborStack.getItem().equals(ourItemStack.getItem()))
+            return mergeStacks(neighborStack, ourItemStack);
 
         return ourItemStack;
     }
@@ -177,6 +177,10 @@ public class ItemTransferHelper {
 
             if (temporaryStack == null)
                 break;
+
+            // Check if inventory will accept item (only exists in sidedinventories)
+            if (!inventory.canInsert(slot, itemStack, direction))
+                continue;
 
             if (temporaryStack.isEmpty()) {
                 setStack(inventory, itemStack, slot);

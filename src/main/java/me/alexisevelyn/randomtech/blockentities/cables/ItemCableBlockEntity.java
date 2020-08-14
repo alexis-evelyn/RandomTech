@@ -14,6 +14,7 @@ import net.minecraft.inventory.Inventories;
 import net.minecraft.inventory.SidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.util.Tickable;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -22,7 +23,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
-public class ItemCableBlockEntity extends BlockEntity implements InventoryProvider {
+public class ItemCableBlockEntity extends BlockEntity implements InventoryProvider, Tickable {
     private final ItemCableInventory inventory;
     private final ItemCable ourCable = new ItemCable();
 
@@ -40,6 +41,9 @@ public class ItemCableBlockEntity extends BlockEntity implements InventoryProvid
 
         // Save Inventory
         Inventories.toTag(tag, this.inventory.getInventory());
+
+        // Inventory is Saved Now, Mark Clean
+        this.inventory.markClean();
 
         return tag;
     }
@@ -150,5 +154,16 @@ public class ItemCableBlockEntity extends BlockEntity implements InventoryProvid
     @Override
     public SidedInventory getInventory(BlockState state, WorldAccess world, BlockPos pos) {
         return inventory;
+    }
+
+    @Override
+    public void tick() {
+        if (world == null)
+            return;
+
+        // We only want the cable to move when the inventory is updated
+        if (inventory.isDirty()) {
+            moveItemInNetwork();
+        }
     }
 }

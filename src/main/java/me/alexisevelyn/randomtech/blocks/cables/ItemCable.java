@@ -110,7 +110,7 @@ public class ItemCable extends GenericCable implements BlockEntityProvider, Inve
             SidedInventory inventory = ((InventoryProvider) block).getInventory(world.getBlockState(blockPos), world, blockPos);
             int[] slots = inventory.getAvailableSlots(side);
 
-            if (slots.length == 0 && block instanceof ComposterBlock && side.equals(Direction.UP)) {
+            if (slots.length == 0 && block instanceof ComposterBlock && (side.equals(Direction.UP) || side.equals(Direction.DOWN))) {
                 // Cause the Composter is Special
                 // When the composter has composted, it removes the bottom side from being valid.
                 // Vanilla hoppers can still pull from it, but it breaks any SidedInventory aware code. That being said, the Composter's slot is 0.
@@ -164,8 +164,8 @@ public class ItemCable extends GenericCable implements BlockEntityProvider, Inve
 
     @Override
     public BlockState getStateForNeighborUpdate(BlockState state, Direction direction, BlockState newState, WorldAccess world, BlockPos pos, BlockPos posFrom) {
-        // Have Cable BlockEntity Only Move During Block Update
-        tickCable(world, pos);
+        // Have Cable BlockEntity Only Move During Block Update - Bad Idea. Causes Headaches Later
+        // tickCable(world, pos);
 
         // This sets up the cable blockstates for each cable
         return super.getStateForNeighborUpdate(state, direction, newState, world, pos, posFrom);
