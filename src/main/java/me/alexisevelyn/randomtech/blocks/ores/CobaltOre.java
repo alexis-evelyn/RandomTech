@@ -15,7 +15,6 @@ import net.minecraft.world.gen.decorator.RangeDecoratorConfig;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.OreFeatureConfig;
 
-// TODO: Fix this so that mining level is respected
 public class CobaltOre extends Block {
     public CobaltOre() {
         super(FabricBlockSettings

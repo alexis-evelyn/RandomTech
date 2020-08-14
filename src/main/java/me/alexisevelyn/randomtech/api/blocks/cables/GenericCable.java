@@ -186,12 +186,18 @@ public abstract class GenericCable extends Block implements Waterloggable {
         return ActionResult.CONSUME;
     }
 
-    public List<BlockPos> getAllInterfacingCables(WorldAccess world, BlockPos pos) {
+    public List<BlockPos> getAllInterfacingCables(@NotNull WorldAccess world, @NotNull BlockPos pos) {
         List<BlockPos> knownCables = getAllCables(world, pos);
+
+        // Fixes problem with single cable setups
+        if (knownCables.size() == 0) {
+            knownCables.add(pos);
+        }
+
         return getAllInterfacingCables(world, knownCables);
     }
 
-    public List<BlockPos> getAllInterfacingCables(WorldAccess world, List<BlockPos> knownCables) {
+    public List<BlockPos> getAllInterfacingCables(@NotNull WorldAccess world, @NotNull List<BlockPos> knownCables) {
         List<BlockPos> interfacingCables = new ArrayList<>();
 
         for (BlockPos cablePos : knownCables) {
@@ -202,7 +208,7 @@ public abstract class GenericCable extends Block implements Waterloggable {
         return interfacingCables;
     }
 
-    public List<BlockPos> getAllCables(WorldAccess world, BlockPos pos) {
+    public List<BlockPos> getAllCables(@NotNull WorldAccess world, @NotNull BlockPos pos) {
         Set<BlockPos> passedCables = new HashSet<>();
         List<BlockPos> knownCables = new ArrayList<>();
 
@@ -210,11 +216,11 @@ public abstract class GenericCable extends Block implements Waterloggable {
         return knownCables;
     }
 
-    private void visitNeighbors(WorldAccess world, BlockPos pos, Set<BlockPos> passedCables, Consumer<BlockPos> visitor, int maxCount) {
+    private void visitNeighbors(@NotNull WorldAccess world, @NotNull BlockPos pos, @NotNull Set<BlockPos> passedCables, @NotNull Consumer<BlockPos> visitor, int maxCount) {
         visitNeighbors(world, pos, passedCables, visitor, 0, maxCount);
     }
 
-    private void visitNeighbors(WorldAccess world, BlockPos pos, Set<BlockPos> passedCables, Consumer<BlockPos> visitor, int counter, int maxCount) {
+    private void visitNeighbors(@NotNull WorldAccess world, @NotNull BlockPos pos, @NotNull Set<BlockPos> passedCables, @NotNull Consumer<BlockPos> visitor, int counter, int maxCount) {
         if (counter >= maxCount)
             return;
 
@@ -230,13 +236,13 @@ public abstract class GenericCable extends Block implements Waterloggable {
             if (!passedCables.contains(attachedNeighbor)) {
                 passedCables.add(attachedNeighbor);
 
-                // TODO: Figure out how to tail this recursion
+                // TODO (IMPORTANT): Figure out how to tail this recursion
                 visitNeighbors(world, attachedNeighbor, passedCables, visitor, counter, maxCount);
             }
         }
     }
 
-    public boolean isInterfacing(BlockState blockState) {
+    public boolean isInterfacing(@NotNull BlockState blockState) {
         return blockState.get(CABLE_CONNECTION_NORTH).equals(CableConnection.INTERFACEABLE) ||
                 blockState.get(CABLE_CONNECTION_SOUTH).equals(CableConnection.INTERFACEABLE) ||
                 blockState.get(CABLE_CONNECTION_EAST).equals(CableConnection.INTERFACEABLE) ||
@@ -245,7 +251,7 @@ public abstract class GenericCable extends Block implements Waterloggable {
                 blockState.get(CABLE_CONNECTION_DOWN).equals(CableConnection.INTERFACEABLE);
     }
 
-    private List<BlockPos> getValidNeighbors(WorldAccess world, BlockPos pos) {
+    private List<BlockPos> getValidNeighbors(@NotNull WorldAccess world, @NotNull BlockPos pos) {
         BlockPos north, south, east, west, up, down;
         BlockState northBlockState, southBlockState, eastBlockState, westBlockState, upBlockState, downBlockState;
         boolean isNorthValid, isSouthValid, isEastValid, isWestValid, isUpValid, isDownValid;
@@ -301,7 +307,7 @@ public abstract class GenericCable extends Block implements Waterloggable {
         return cables;
     }
 
-    private boolean isNeighborValidForContinuance(WorldAccess world, BlockState neighborBlockState, BlockPos neighborPos) {
+    private boolean isNeighborValidForContinuance(@NotNull WorldAccess world, @NotNull BlockState neighborBlockState, @NotNull BlockPos neighborPos) {
         if (!isInstanceOfCable(neighborBlockState.getBlock(), world, neighborPos))
             return false;
 
@@ -325,7 +331,7 @@ public abstract class GenericCable extends Block implements Waterloggable {
     }
 
     // This is so the IDE will shutup about duplicate code.
-    private int getIsViable(CableConnection neighborConnection, int isViable) {
+    private int getIsViable(@NotNull CableConnection neighborConnection, int isViable) {
         if (neighborConnection.equals(CableConnection.CABLE) || neighborConnection.equals(CableConnection.INTERFACEABLE)) {
             isViable++;
         }
@@ -453,7 +459,7 @@ public abstract class GenericCable extends Block implements Waterloggable {
         if (startingPosition == null || endingPosition == null)
             return new VertexPath();
 
-        // TODO: Add Edges
+        // TODO (IMPORTANT): Add Edges
         addLane(nodes, edges, "Lane_0", nodes.indexOf(startingPosition), nodes.indexOf(endingPosition), 1);
         addLane(nodes, edges, "Lane_1", nodes.indexOf(endingPosition), nodes.indexOf(startingPosition), 1);
 

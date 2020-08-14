@@ -31,7 +31,7 @@ public class ItemTransferHelper {
         neighbors.add(CalculationHelper.addVectors(position, Direction.DOWN.getVector()));
 
         // Remove if Not Interfaceable Neighbor
-        neighbors.removeIf(neighbor -> !ourCable.isInterfacing(world.getBlockState(neighbor)));
+        neighbors.removeIf(neighbor -> !ourCable.isInstanceOfInterfaceableBlock(world.getBlockState(neighbor).getBlock(), world, neighbor));
 
         return neighbors;
     }
@@ -44,7 +44,7 @@ public class ItemTransferHelper {
             return ourItemStack;
 
         if (neighborStack.getItem().equals(ourItemStack.getItem()))
-            return addStacks(neighborStack, ourItemStack);
+            return mergeStacks(neighborStack, ourItemStack);
 
         if (neighborStack.isEmpty()) {
             neighborStack = ourItemStack.copy();
@@ -58,7 +58,7 @@ public class ItemTransferHelper {
     }
 
     @NotNull
-    public static ItemStack addStacks(@NotNull ItemStack neighborStack, @NotNull ItemStack ourItemStack) {
+    public static ItemStack mergeStacks(@NotNull ItemStack neighborStack, @NotNull ItemStack ourItemStack) {
         int neighborStackMaxCount = neighborStack.getMaxCount();
         int neighborStackCount = neighborStack.getCount();
 
@@ -82,7 +82,8 @@ public class ItemTransferHelper {
         if (inventory.size() < slot)
             return;
 
-        inventory.setStack(slot, itemStack);
+        inventory.setStack(slot, itemStack.copy());
+        itemStack.setCount(0);
     }
 
     @Nullable
@@ -91,6 +92,15 @@ public class ItemTransferHelper {
             return null;
 
         return inventory.getStack(slot);
+    }
+
+    public static boolean hasItemStack(@NotNull Inventory inventory, int slot) {
+        ItemStack temporaryStack = retrieveItemStack(inventory, slot);
+
+        if (temporaryStack == null)
+            return false;
+
+        return !temporaryStack.isEmpty();
     }
 
     // I might move this somewhere else
@@ -132,20 +142,59 @@ public class ItemTransferHelper {
             Block block = world.getBlockState(neighbor).getBlock();
 
             if (isInventoryProvider(block)) {
-                tryTransferToInventoryProvider(world, position, block, itemStack);
+                tryTransferToInventoryProvider(world, position, (InventoryProvider) block, itemStack);
             } else if (isInventory(blockEntity)) {
-                tryTransferToInventory(world, position, blockEntity, itemStack);
+                tryTransferToInventory(world, position, (Inventory) blockEntity, itemStack);
             }
+
+            // Update Neighbors
+            world.updateComparators(neighbor, world.getBlockState(neighbor).getBlock());
         }
+
+        // Update Ourselves
+        world.updateComparators(position, world.getBlockState(position).getBlock());
     }
 
-    private static void tryTransferToInventoryProvider(@NotNull World world, @NotNull BlockPos position, @NotNull Block block, @NotNull ItemStack itemStack) {
+    private static void tryTransferToInventoryProvider(@NotNull World world, @NotNull BlockPos position, @NotNull InventoryProvider inventoryProvider, @NotNull ItemStack itemStack) {
         // Block
     }
 
-    private static void tryTransferToInventory(@NotNull World world, @NotNull BlockPos position, @NotNull BlockEntity blockEntity, @NotNull ItemStack itemStack) {
+    private static void tryTransferToInventory(@NotNull World world, @NotNull BlockPos position, @NotNull Inventory inventory, @NotNull ItemStack itemStack) {
         // Block Entity
         // Look at Hopper Code to See How to Transfer To Chest
+
+        // Inventory has no slots, don't continue further
+        if (inventory.size() == 0)
+            return;
+
+        if (itemStack.isEmpty())
+            return;
+
+        if (inventory.isEmpty()) {
+            setStack(inventory, itemStack, 0);
+            inventory.markDirty();
+            return;
+        }
+
+        for (int slot = 0; slot < inventory.size(); slot++) {
+            if (itemStack.isEmpty())
+                break;
+
+            ItemStack temporaryStack = retrieveItemStack(inventory, slot);
+
+            if (temporaryStack == null)
+                break;
+
+            if (temporaryStack.isEmpty()) {
+                setStack(inventory, itemStack, slot);
+                continue;
+            }
+
+            if (itemStack.getItem() == temporaryStack.getItem())
+                mergeStacks(temporaryStack, itemStack);
+        }
+
+        inventory.markDirty();
     }
 
     // Composter (Block) is an inventory provider

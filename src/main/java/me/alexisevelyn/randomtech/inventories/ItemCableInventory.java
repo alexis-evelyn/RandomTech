@@ -27,6 +27,8 @@ public class ItemCableInventory implements SidedInventory {
         this.inventory = inventory;
     }
 
+    private boolean isDirty = false;
+
     /**
      * Gets the available slot positions that are reachable from a given side.
      *
@@ -35,11 +37,13 @@ public class ItemCableInventory implements SidedInventory {
     @Override
     @NotNull
     public int[] getAvailableSlots(Direction side) {
-        int[] filterSlots = getFilterSlots(side);
+        // int[] filterSlots = getFilterSlots(side);
         int[] realSlots = getRealSlots(side);
 
         // Concatenate Both Arrays into One
-        return Ints.concat(filterSlots, realSlots);
+        // return Ints.concat(filterSlots, realSlots);
+
+        return realSlots;
     }
 
     @NotNull
@@ -141,7 +145,15 @@ public class ItemCableInventory implements SidedInventory {
 
     @Override
     public void markDirty() {
-        // Do Nothing For Now!!!
+        this.isDirty = true;
+    }
+
+    public void markClean() {
+        this.isDirty = false;
+    }
+
+    public boolean isDirty() {
+        return this.isDirty;
     }
 
     @Override

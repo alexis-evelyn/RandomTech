@@ -27,6 +27,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import reborncore.common.blocks.BlockMachineBase;
 
 import java.util.Random;
 
@@ -109,6 +110,10 @@ public class ItemCable extends GenericCable implements BlockEntityProvider, Inve
 
     @Override
     public boolean isValidSide(Block block, WorldAccess world, BlockPos blockPos, Direction side) {
+        // RebornCore does not implement SidedInventory (only Regular Inventory)
+        if (block instanceof BlockMachineBase)
+            return true;
+
         if (block instanceof InventoryProvider) {
             SidedInventory inventory = ((InventoryProvider) block).getInventory(world.getBlockState(blockPos), world, blockPos);
             int[] slots = inventory.getAvailableSlots(side);

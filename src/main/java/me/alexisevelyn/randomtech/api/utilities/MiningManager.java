@@ -104,8 +104,7 @@ public class MiningManager {
             }
         }
 
-        // TODO: Check if this works on a non-integrated server
-        System.out.println("Silk Touch Level: " + silkTouchLevel);
+        // System.out.println("Silk Touch Level: " + silkTouchLevel);
 
         return silkTouchLevel;
     }

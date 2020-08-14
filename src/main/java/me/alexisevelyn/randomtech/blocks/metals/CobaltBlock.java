@@ -8,7 +8,6 @@ import net.fabricmc.fabric.api.tool.attribute.v1.FabricToolTags;
 import net.minecraft.block.Block;
 import net.minecraft.sound.BlockSoundGroup;
 
-// TODO: Fix this so that mining level is respected
 public class CobaltBlock extends Block {
     public CobaltBlock() {
         super(FabricBlockSettings

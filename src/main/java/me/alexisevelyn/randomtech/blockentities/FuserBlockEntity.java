@@ -180,7 +180,7 @@ public class FuserBlockEntity extends FluidMachineBlockEntityBase implements ITo
 
     @Override
     public boolean canCraft(RebornRecipe rebornRecipe) {
-        // TODO: Figure out when this gets called.
+        // Figure out when this gets called.
         return crafter.canCraftAgain();
     }
 

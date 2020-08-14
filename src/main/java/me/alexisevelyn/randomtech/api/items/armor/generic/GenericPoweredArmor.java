@@ -41,7 +41,6 @@ import team.reborn.energy.EnergyTier;
 import java.util.List;
 import java.util.UUID;
 
-// TODO: Make enchants useless if item is broken.
 public abstract class GenericPoweredArmor extends ArmorItem implements EnergyHelper, ItemDurabilityExtensions, ItemStackModifiers, ArmorTickable, ArmorRemoveHandler, ArmorFovHandler, EnergyHolder, InvulnerabilityHandler {
     private final int maxCharge;
     private final int cost;
@@ -49,7 +48,7 @@ public abstract class GenericPoweredArmor extends ArmorItem implements EnergyHel
     private final EnergyTier tier;
     private final String dischargedTranslationKey;
 
-    // TODO: Figure out how these UUIDs were determined. Mojang has hardcoded UUIDs too.
+    // Figure out how these UUIDs were determined. Mojang has hardcoded UUIDs too.
     public static final UUID[] MODIFIERS = new UUID[]{
             UUID.fromString("845DB27C-C624-495F-8C9F-6020A9A58B6B"),
             UUID.fromString("D8499B04-0E66-4726-AB29-64469D734E0D"),
@@ -190,7 +189,7 @@ public abstract class GenericPoweredArmor extends ArmorItem implements EnergyHel
 
     @Override
     public double getDurability(ItemStack stack) {
-        // TODO: Replace this with a dynamic durability bar checker.
+        // Replace this with a dynamic durability bar checker.
         return 1 - ItemUtils.getPowerForDurabilityBar(stack);
     }
 

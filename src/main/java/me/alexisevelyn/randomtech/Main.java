@@ -7,6 +7,8 @@ import net.fabricmc.api.ModInitializer;
 
 /* TODO: Ordered by importance and logical steps
  *
+ * Make enchants useless if armor/tool is broken.
+ *
  * Adjust cobalt fuser recipes to be balanced with redstone fuser recipes.
  *
  * Work on entities
@@ -14,6 +16,8 @@ import net.fabricmc.api.ModInitializer;
  *
  * Consider how to obtain Death Ingot
  * Move api to separate jar so people can implement it without needing my mod to be installed?
+ *
+ * Check if a block needs silk touch for right click info on pickaxe
  */
 
 // This runs on both the server and the client

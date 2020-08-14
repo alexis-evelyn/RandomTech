@@ -83,7 +83,6 @@ public class FuserRecipeDisplay implements RecipeDisplay, TransferRecipeDisplay 
 
     @Override
     public List<EntryStack> getOutputEntries() {
-        // TODO: Output both fluid and byproduct
         ArrayList<EntryStack> outputEntries = new ArrayList<>();
 
         outputEntries.add(fluid);
