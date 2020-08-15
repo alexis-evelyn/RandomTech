@@ -143,7 +143,7 @@ public class ClientRegistryHelper {
      * @param flowing        the flowing
      * @param textureFluidId the texture fluid id
      */
-// From Tutorial at https://fabricmc.net/wiki/tutorial:fluids
+    // From Tutorial at https://fabricmc.net/wiki/tutorial:fluids
     private static void setupFluidRendering(final Fluid still, final Fluid flowing, final Identifier textureFluidId) {
         setupFluidRendering(still, flowing, textureFluidId, 0xFFFFFF);
     }
@@ -156,7 +156,7 @@ public class ClientRegistryHelper {
      * @param textureFluidId the texture fluid id
      * @param color          the color
      */
-// From Tutorial at https://fabricmc.net/wiki/tutorial:fluids
+    // From Tutorial at https://fabricmc.net/wiki/tutorial:fluids
     private static void setupFluidRendering(final Fluid still, final Fluid flowing, final Identifier textureFluidId, @SuppressWarnings("SameParameterValue") final int color) {
         final Identifier stillSpriteId = new Identifier(textureFluidId.getNamespace(), "block/liquids/" + textureFluidId.getPath() + "/" + textureFluidId.getPath() + "_still");
         final Identifier flowingSpriteId = new Identifier(textureFluidId.getNamespace(), "block/liquids/" + textureFluidId.getPath() + "/" + textureFluidId.getPath() + "_flow");

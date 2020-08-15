@@ -350,7 +350,7 @@ public abstract class GenericPoweredArmor extends ArmorItem implements EnergyHel
      * @param stack the stack
      * @return the boolean
      */
-// This only applies to the enchantment table, not anvils?
+    // This only applies to the enchantment table, not anvils?
     @Override
     public boolean isEnchantable(ItemStack stack) {
         return true;
@@ -390,7 +390,7 @@ public abstract class GenericPoweredArmor extends ArmorItem implements EnergyHel
      *
      * @return the protection
      */
-// Armor Protection Level
+    // Armor Protection Level
     @SuppressWarnings("EmptyMethod")
     @Override
     public int getProtection() {
@@ -402,7 +402,7 @@ public abstract class GenericPoweredArmor extends ArmorItem implements EnergyHel
      *
      * @return the float
      */
-// Armor Toughness Level
+    // Armor Toughness Level
     @SuppressWarnings("EmptyMethod")
     @Override
     public float method_26353() {

@@ -23,7 +23,7 @@ public abstract class DamageArmorMixinLivingEntity {
 	 *
 	 * @return the armor items
 	 */
-// @Shadow @Final public PlayerInventory inventory;
+    // @Shadow @Final public PlayerInventory inventory;
 	@Shadow public abstract Iterable<ItemStack> getArmorItems();
 
 	/**

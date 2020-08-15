@@ -10,14 +10,6 @@ import net.minecraft.screen.slot.SlotActionType;
  * The type Fuser autocrafting handler.
  */
 public class FuserAutocraftingHandler implements AutoTransferHandler {
-    /**
-     * @return the priority of this handler, higher priorities will be called first.
-     */
-//    @Override
-//    public double getPriority() {
-//        return 0;
-//    }
-
     // I'm disabling the handler for now.
     // It's only partially implemented.
     @Override

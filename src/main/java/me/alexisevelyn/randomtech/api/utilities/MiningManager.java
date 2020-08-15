@@ -50,7 +50,7 @@ public class MiningManager {
      * @param blockPos      the block pos
      * @return the boolean
      */
-// TODO: Check if block requires silk touch.
+    // TODO: Check if block requires silk touch.
     public static boolean canMine(PlayerEntity playerEntity, ItemStack toolItemStack, BlockState blockState, World world, BlockPos blockPos) {
         boolean canMine = playerEntity.isUsingEffectiveTool(blockState);
         Item item = toolItemStack.getItem();
@@ -79,7 +79,7 @@ public class MiningManager {
      * @param blockPos      the block pos
      * @return the boolean
      */
-// Checks if the block can be broken by the tool. Requires special override in the tool's class.
+    // Checks if the block can be broken by the tool. Requires special override in the tool's class.
     public static boolean checkUnbreakableBlock(PlayerEntity playerEntity, ItemStack toolItemStack, BlockState blockState, World world, BlockPos blockPos) {
         if (!(blockState.getHardness(world, blockPos) < 0))
             return false;
@@ -113,7 +113,7 @@ public class MiningManager {
      * @param blockPos   the block pos
      * @return the int
      */
-// This is an integer so I can return the level of silk touch needed
+    // This is an integer so I can return the level of silk touch needed
     public static int needsSilkTouch(BlockState blockState, World world, BlockPos blockPos) {
         Identifier blockLootTableID = blockState.getBlock().getLootTableId();
         LootPoolEntryType lootPoolEntryType = Registry.LOOT_POOL_ENTRY_TYPE.get(blockLootTableID);
@@ -129,7 +129,7 @@ public class MiningManager {
      * @param itemStack the item stack
      * @return the short
      */
-// This is an integer so I can return the level of silk touch on the tool
+    // This is an integer so I can return the level of silk touch on the tool
     public static short toolHasSilkTouch(ItemStack itemStack) {
         // Enchantments: [{lvl: 5s, id: "minecraft:efficiency"}, {lvl: 1s, id: "minecraft:silk_touch"}]
 

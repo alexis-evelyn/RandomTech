@@ -15,7 +15,7 @@ public class PreRegistryHelper {
     /**
      * Pre register.
      */
-// This might be useful for detecting if certain mods exist and adding crafting recipes accordingly
+    // This might be useful for detecting if certain mods exist and adding crafting recipes accordingly
     @SuppressWarnings("EmptyMethod")
     public void preRegister() {
 

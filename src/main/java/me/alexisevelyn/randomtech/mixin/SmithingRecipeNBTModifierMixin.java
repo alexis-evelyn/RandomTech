@@ -34,7 +34,7 @@ public abstract class SmithingRecipeNBTModifierMixin {
 	 * @param inventory the inventory
 	 * @param info      the info
 	 */
-// Cancellable must be allowed, otherwise the game crashes when trying to modify the return value
+    // Cancellable must be allowed, otherwise the game crashes when trying to modify the return value
 	@Inject(at = @At("TAIL"), method = "craft(Lnet/minecraft/inventory/Inventory;)Lnet/minecraft/item/ItemStack;", cancellable = true)
 	private void craft(Inventory inventory, CallbackInfoReturnable<ItemStack> info) {
 		ItemStack oldItemStack = inventory.getStack(0);

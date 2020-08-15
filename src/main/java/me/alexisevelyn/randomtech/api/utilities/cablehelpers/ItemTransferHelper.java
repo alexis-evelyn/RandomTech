@@ -348,7 +348,7 @@ public class ItemTransferHelper {
      * @param object the object
      * @return the boolean
      */
-// ChestBlockEntity (BlockEntity) and HopperBlockEntity (BlockEntity) is an Inventory
+    // ChestBlockEntity (BlockEntity) and HopperBlockEntity (BlockEntity) is an Inventory
     // Only block entities are supposed to be inventories.
     public static boolean isInventory(Object object) {
         return object instanceof Inventory;

@@ -71,7 +71,7 @@ public class PoweredArmorMaterial implements ArmorMaterial {
      *
      * @return the name
      */
-// Used for Finding Armor Models
+    // Used for Finding Armor Models
     @Override
     public String getName() {
         return "powered";
@@ -82,7 +82,7 @@ public class PoweredArmorMaterial implements ArmorMaterial {
      *
      * @return the toughness
      */
-// I'm not entirely sure how armor toughness works, so I'm just stepping up one from Netherite.
+    // I'm not entirely sure how armor toughness works, so I'm just stepping up one from Netherite.
     @Override
     public float getToughness() {
         return 4;

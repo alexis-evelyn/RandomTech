@@ -85,7 +85,7 @@ public class CobaltWire extends RedstoneWireBlock {
      * @param pos    the pos
      * @param random the random
      */
-// Responsible for setting particle properties including color of powered line
+    // Responsible for setting particle properties including color of powered line
     @Override
     @Environment(EnvType.CLIENT)
     public void randomDisplayTick(BlockState state, World world, BlockPos pos, Random random) {

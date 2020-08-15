@@ -52,7 +52,7 @@ public class ItemManager {
      * @param newItemStack the new item stack
      * @return the double
      */
-// This converts the old Item Stack's durability to energy based on the current durability, max durability, and max energy capacity.
+    // This converts the old Item Stack's durability to energy based on the current durability, max durability, and max energy capacity.
     protected static double calculateCurrentPowerForConversion(ItemStack oldItemStack, ItemStack newItemStack) {
          EnergyHandler energyHandler = Energy.of(newItemStack);
          double oldDurability = oldItemStack.getMaxDamage() - oldItemStack.getDamage();
@@ -129,7 +129,7 @@ public class ItemManager {
      * @param stack        the stack
      * @param cost         the cost
      */
-// This method exists to allow energy to not be used if the player is in Creative mode
+    // This method exists to allow energy to not be used if the player is in Creative mode
     public static void useEnergy(LivingEntity livingEntity, ItemStack stack, int cost) {
         if (livingEntity instanceof PlayerEntity) {
             PlayerEntity playerEntity = (PlayerEntity) livingEntity;

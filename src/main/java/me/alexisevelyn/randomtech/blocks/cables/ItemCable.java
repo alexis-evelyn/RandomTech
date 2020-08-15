@@ -34,7 +34,7 @@ public class ItemCable extends GenericCable implements BlockEntityProvider, Inve
     /**
      * Instantiates a new Item cable.
      */
-// Generic Instantiation of ItemCable with Default Shape
+    // Generic Instantiation of ItemCable with Default Shape
     public ItemCable() {
         this(null);
     }
@@ -44,7 +44,7 @@ public class ItemCable extends GenericCable implements BlockEntityProvider, Inve
      *
      * @param genericShape the generic shape
      */
-// I may create more than one cable with this class, so I'm putting extra constructors here
+    // I may create more than one cable with this class, so I'm putting extra constructors here
     // Generic Instantiation of ItemCable with Custom Shape
     public ItemCable(@Nullable VoxelShape genericShape) {
         this(FabricBlockSettings
@@ -65,7 +65,7 @@ public class ItemCable extends GenericCable implements BlockEntityProvider, Inve
      * @param settings     the settings
      * @param genericShape the generic shape
      */
-// For customizing block settings while only supplying one shape
+    // For customizing block settings while only supplying one shape
     public ItemCable(@NotNull Settings settings, @Nullable VoxelShape genericShape) {
         this(settings, genericShape, genericShape, genericShape, null);
     }
@@ -79,7 +79,7 @@ public class ItemCable extends GenericCable implements BlockEntityProvider, Inve
      * @param collisionShape the collision shape
      * @param cullingShapes  the culling shapes
      */
-// For full control over cable shapes
+    // For full control over cable shapes
     public ItemCable(@NotNull Settings settings, @Nullable VoxelShape outlinedShape, @Nullable VoxelShape visualShape, @Nullable VoxelShape collisionShape, @Nullable VoxelShape[] cullingShapes) {
         super(settings, outlinedShape, visualShape, collisionShape, cullingShapes);
     }
@@ -93,7 +93,7 @@ public class ItemCable extends GenericCable implements BlockEntityProvider, Inve
      * @param newState the new state
      * @param moved    the moved
      */
-// Used to make the cable drop its contents when broken
+    // Used to make the cable drop its contents when broken
     @Override
     public void onStateReplaced(BlockState state, World world, BlockPos pos, BlockState newState, boolean moved) {
         BlockEntity blockEntity = world.getBlockEntity(pos); // Retrieve and store block entity for further processing
@@ -120,7 +120,7 @@ public class ItemCable extends GenericCable implements BlockEntityProvider, Inve
      * @param pos    the pos
      * @param random the random
      */
-// For Backend Use (Can be used for visual/auditory stuff too) - Server Side and Client Side
+    // For Backend Use (Can be used for visual/auditory stuff too) - Server Side and Client Side
     @Override
     public void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
         super.randomTick(state, world, pos, random);
@@ -134,7 +134,7 @@ public class ItemCable extends GenericCable implements BlockEntityProvider, Inve
      * @param pos    the pos
      * @param random the random
      */
-// For Visual Use Only - Client Side Only
+    // For Visual Use Only - Client Side Only
     @Override
     @Environment(EnvType.CLIENT)
     public void randomDisplayTick(BlockState state, World world, BlockPos pos, Random random) {

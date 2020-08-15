@@ -116,7 +116,7 @@ public abstract class BreakableBlocksMixin {
 	 * @param builder the builder
 	 * @param info    the info
 	 */
-// Modifies Block Drops
+    // Modifies Block Drops
 	@Inject(at = @At("INVOKE"), method = "getDroppedStacks(Lnet/minecraft/block/BlockState;Lnet/minecraft/loot/context/LootContext$Builder;)Ljava/util/List;", cancellable = true)
 	public void getDroppedStacks(BlockState state, LootContext.Builder builder, CallbackInfoReturnable<List<ItemStack>> info) {
 		Identifier identifier = this.getLootTableId();

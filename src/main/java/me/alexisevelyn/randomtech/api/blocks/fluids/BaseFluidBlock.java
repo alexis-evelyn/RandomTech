@@ -59,7 +59,7 @@ public abstract class BaseFluidBlock extends FluidBlock {
      *
      * @param livingEntity the living entity
      */
-// These exist solely to override from other fluids.
+    // These exist solely to override from other fluids.
     // I may eventually turn this into an interface
     protected abstract void applyEffects(@SuppressWarnings("unused") LivingEntity livingEntity);
 

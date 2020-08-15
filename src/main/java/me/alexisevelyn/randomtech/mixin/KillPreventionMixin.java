@@ -93,7 +93,7 @@ public abstract class KillPreventionMixin {
      * @param amount       the amount
      * @param info         the info
      */
-// Generic Damage to Players
+    // Generic Damage to Players
     private void handlePlayerDamage(PlayerEntity playerEntity, DamageSource damageSource, float amount, CallbackInfo info) {
         PlayerInventory inventory = playerEntity.inventory;
         DefaultedList<ItemStack> armorItems = inventory.armor;
@@ -117,7 +117,7 @@ public abstract class KillPreventionMixin {
      * @param amount       the amount
      * @param info         the info
      */
-// Generic Damage to Other Living Entities
+    // Generic Damage to Other Living Entities
     private void handleOtherLivingEntityDamage(LivingEntity livingEntity, DamageSource damageSource, float amount, CallbackInfo info) {
         Iterable<ItemStack> armorItems = livingEntity.getArmorItems();
 
@@ -138,7 +138,7 @@ public abstract class KillPreventionMixin {
      * @param playerEntity the player entity
      * @param info         the info
      */
-// Kill Command Specifically for Player
+    // Kill Command Specifically for Player
     private void handlePlayerKillCommand(PlayerEntity playerEntity, CallbackInfo info) {
         PlayerInventory inventory = playerEntity.inventory;
         DefaultedList<ItemStack> armorItems = inventory.armor;
@@ -160,7 +160,7 @@ public abstract class KillPreventionMixin {
      * @param livingEntity the living entity
      * @param info         the info
      */
-// Kill Command Specifically for Other Living Entities
+    // Kill Command Specifically for Other Living Entities
     private void handleOtherLivingEntityKillCommand(LivingEntity livingEntity, CallbackInfo info) {
         Iterable<ItemStack> armorItems = livingEntity.getArmorItems();
 

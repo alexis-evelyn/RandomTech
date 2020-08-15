@@ -26,7 +26,7 @@ public class FluidCable extends GenericCable {
     /**
      * Instantiates a new Fluid cable.
      */
-// Generic Instantiation of FluidCable with Default Shape
+    // Generic Instantiation of FluidCable with Default Shape
     public FluidCable() {
         this(null);
     }
@@ -36,7 +36,7 @@ public class FluidCable extends GenericCable {
      *
      * @param genericShape the generic shape
      */
-// I may create more than one cable with this class, so I'm putting extra constructors here
+    // I may create more than one cable with this class, so I'm putting extra constructors here
     // Generic Instantiation of FluidCable with Custom Shape
     public FluidCable(@Nullable VoxelShape genericShape) {
         this(FabricBlockSettings
@@ -57,7 +57,7 @@ public class FluidCable extends GenericCable {
      * @param settings     the settings
      * @param genericShape the generic shape
      */
-// For customizing block settings while only supplying one shape
+    // For customizing block settings while only supplying one shape
     public FluidCable(@NotNull Settings settings, @Nullable VoxelShape genericShape) {
         this(settings, genericShape, genericShape, genericShape, null);
     }
@@ -71,7 +71,7 @@ public class FluidCable extends GenericCable {
      * @param collisionShape the collision shape
      * @param cullingShapes  the culling shapes
      */
-// For full control over cable shapes
+    // For full control over cable shapes
     public FluidCable(@NotNull Settings settings, @Nullable VoxelShape outlinedShape, @Nullable VoxelShape visualShape, @Nullable VoxelShape collisionShape, @Nullable VoxelShape[] cullingShapes) {
         super(settings, outlinedShape, visualShape, collisionShape, cullingShapes);
     }

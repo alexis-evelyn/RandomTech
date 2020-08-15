@@ -237,7 +237,7 @@ public abstract class GenericPoweredTool extends MiningToolItem implements Energ
      *
      * @return the attack damage
      */
-// Used by mobs to determine if they prefer a weapon over another one.
+    // Used by mobs to determine if they prefer a weapon over another one.
     // It does not actually modify the attack damage of an item (for vanilla purposes)?
     @SuppressWarnings("EmptyMethod")
     @Override
@@ -263,7 +263,7 @@ public abstract class GenericPoweredTool extends MiningToolItem implements Energ
      * @param attacker the attacker
      * @return the boolean
      */
-// For Attacking
+    // For Attacking
     @Override
     public boolean postHit(ItemStack stack, LivingEntity target, LivingEntity attacker) {
         Random rand = new Random();
@@ -286,7 +286,7 @@ public abstract class GenericPoweredTool extends MiningToolItem implements Energ
      * @param miner the miner
      * @return the boolean
      */
-// For Mining
+    // For Mining
     @Override
     public boolean postMine(ItemStack stack, World world, BlockState state, BlockPos pos, LivingEntity miner) {
         Random rand = new Random();
@@ -310,7 +310,7 @@ public abstract class GenericPoweredTool extends MiningToolItem implements Energ
      * @param repairMaterial the repair material
      * @return the boolean
      */
-// ToolItem
+    // ToolItem
     @Override
     public boolean canRepair(ItemStack tool, ItemStack repairMaterial) {
         return false;
@@ -321,7 +321,7 @@ public abstract class GenericPoweredTool extends MiningToolItem implements Energ
      *
      * @return the boolean
      */
-// Item
+    // Item
     @Override
     public boolean isDamageable() {
         return false;
@@ -333,7 +333,7 @@ public abstract class GenericPoweredTool extends MiningToolItem implements Energ
      * @param stack the stack
      * @return the boolean
      */
-// This only applies to the enchantment table, not anvils?
+    // This only applies to the enchantment table, not anvils?
     @Override
     public boolean isEnchantable(ItemStack stack) {
         return true;
@@ -345,7 +345,7 @@ public abstract class GenericPoweredTool extends MiningToolItem implements Energ
      * @param context the context
      * @return the action result
      */
-// For Right Clicking Blocks
+    // For Right Clicking Blocks
     @Override
     public ActionResult useOnBlock(ItemUsageContext context) {
         if (isUsable(context.getStack()))
@@ -363,7 +363,7 @@ public abstract class GenericPoweredTool extends MiningToolItem implements Energ
      * @param hand   the hand
      * @return the action result
      */
-// For Right Clicking Entities
+    // For Right Clicking Entities
     @Override
     public ActionResult useOnEntity(ItemStack stack, PlayerEntity user, LivingEntity entity, Hand hand) {
         if (isUsable(stack))

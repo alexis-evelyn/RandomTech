@@ -24,7 +24,7 @@ public class EnergyCable extends GenericCable {
     /**
      * Instantiates a new Energy cable.
      */
-// Generic Instantiation of EnergyCable with Default Shape
+    // Generic Instantiation of EnergyCable with Default Shape
     public EnergyCable() {
         this(null);
     }
@@ -34,7 +34,7 @@ public class EnergyCable extends GenericCable {
      *
      * @param genericShape the generic shape
      */
-// I may create more than one cable with this class, so I'm putting extra constructors here
+    // I may create more than one cable with this class, so I'm putting extra constructors here
     // Generic Instantiation of EnergyCable with Custom Shape
     public EnergyCable(@Nullable VoxelShape genericShape) {
         this(FabricBlockSettings
@@ -55,7 +55,7 @@ public class EnergyCable extends GenericCable {
      * @param settings     the settings
      * @param genericShape the generic shape
      */
-// For customizing block settings while only supplying one shape
+    // For customizing block settings while only supplying one shape
     public EnergyCable(@NotNull Settings settings, @Nullable VoxelShape genericShape) {
         this(settings, genericShape, genericShape, genericShape, null);
     }
@@ -69,7 +69,7 @@ public class EnergyCable extends GenericCable {
      * @param collisionShape the collision shape
      * @param cullingShapes  the culling shapes
      */
-// For full control over cable shapes
+    // For full control over cable shapes
     public EnergyCable(@NotNull Settings settings, @Nullable VoxelShape outlinedShape, @Nullable VoxelShape visualShape, @Nullable VoxelShape collisionShape, @Nullable VoxelShape[] cullingShapes) {
         super(settings, outlinedShape, visualShape, collisionShape, cullingShapes);
     }

@@ -489,7 +489,7 @@ public class RegistryHelper {
     /**
      * Register dimensions.
      */
-// Dimensions are actually registered as JSON files now. So, we just set up the chunk generator and player placement code.
+    // Dimensions are actually registered as JSON files now. So, we just set up the chunk generator and player placement code.
     private void registerDimensions() {
         FabricDimensions.registerDefaultPlacer(voidDimension, VoidDimensionHelper::placeEntityInVoid);
     }

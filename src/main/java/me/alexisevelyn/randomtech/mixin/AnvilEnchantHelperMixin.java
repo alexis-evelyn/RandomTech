@@ -26,7 +26,7 @@ public abstract class AnvilEnchantHelperMixin {
 	 * @param itemStack the item stack
 	 * @param info      the info
 	 */
-// Cancellable must be allowed, otherwise the game crashes when trying to modify the return value
+    // Cancellable must be allowed, otherwise the game crashes when trying to modify the return value
 	@Inject(at = @At("TAIL"), method = "isAcceptableItem(Lnet/minecraft/item/ItemStack;)Z", cancellable = true)
 	private void isAcceptableItem(ItemStack itemStack, CallbackInfoReturnable<Boolean> info) {
 //		System.out.println("---");

@@ -46,7 +46,7 @@ public class InverseDarkIntangibleGlass extends AbstractGlassBlock implements Bl
      * @param pos   the pos
      * @return the opacity
      */
-// Used for light calculations
+    // Used for light calculations
     @Override
     public int getOpacity(BlockState state, BlockView world, BlockPos pos) {
         return 15;
@@ -60,7 +60,7 @@ public class InverseDarkIntangibleGlass extends AbstractGlassBlock implements Bl
      * @param pos    the pos
      * @param entity the entity
      */
-// Only gets called if block is not collidable by Block Settings
+    // Only gets called if block is not collidable by Block Settings
     @Override
     public void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity) {
         super.onEntityCollision(state, world, pos, entity);
@@ -78,7 +78,7 @@ public class InverseDarkIntangibleGlass extends AbstractGlassBlock implements Bl
      * @param context the context
      * @return the collision shape
      */
-// Allows to specify the collision shape of the block. Can be used to block certain entities from going through.
+    // Allows to specify the collision shape of the block. Can be used to block certain entities from going through.
     @Override
     public VoxelShape getCollisionShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
         InverseIntangibleDarkGlassBlockEntity inverseIntangibleDarkGlassBlockEntity = ((InverseIntangibleDarkGlassBlockEntity) world.getBlockEntity(pos));

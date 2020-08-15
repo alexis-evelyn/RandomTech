@@ -72,7 +72,7 @@ public class VirtualTile extends BlockItem {
      * @param state  the state
      * @return the boolean
      */
-// Used to set the color client side before the server sends the color. No visual difference between this and server color if done correctly.
+    // Used to set the color client side before the server sends the color. No visual difference between this and server color if done correctly.
     @Override
     protected boolean postPlacement(BlockPos pos, World world, @Nullable PlayerEntity player, ItemStack stack, BlockState state) {
         boolean placed = super.postPlacement(pos, world, player, stack, state);
@@ -101,7 +101,7 @@ public class VirtualTile extends BlockItem {
      * @param tintIndex the tint index
      * @return the edge color
      */
-// For Block Form
+    // For Block Form
     public static int getEdgeColor(BlockState state, BlockRenderView world, BlockPos pos, int tintIndex) {
         BlockEntity blockEntity = world.getBlockEntity(pos);
 
@@ -123,7 +123,7 @@ public class VirtualTile extends BlockItem {
      * @param tintIndex the tint index
      * @return the edge color
      */
-// For Item Form
+    // For Item Form
     public static int getEdgeColor(ItemStack itemStack, int tintIndex) {
         CompoundTag tag = itemStack.getTag();
 
@@ -289,7 +289,7 @@ public class VirtualTile extends BlockItem {
          * @param blockEntity the block entity
          * @param stack       the stack
          */
-// This allows for dropping custom nbt tagged items when Virtual Tile is mined.
+        // This allows for dropping custom nbt tagged items when Virtual Tile is mined.
         public static void dropNBTStack(World world, BlockPos pos, BlockEntity blockEntity, ItemStack stack) {
             if (!world.isClient && !stack.isEmpty() && blockEntity instanceof VirtualTileBlockEntity && world.getGameRules().getBoolean(GameRules.DO_TILE_DROPS)) {
                 float generalOffset = 0.5F;
@@ -333,7 +333,7 @@ public class VirtualTile extends BlockItem {
          * @param world the world
          * @param pos   the pos
          */
-// This is a hack and I'm not happy with it.
+        // This is a hack and I'm not happy with it.
         public void updateBlockForRender(World world, BlockPos pos) {
             boolean dummy = world.getBlockState(pos).get(DUMMY);
             BlockState state = world.getBlockState(pos).with(DUMMY, !dummy);

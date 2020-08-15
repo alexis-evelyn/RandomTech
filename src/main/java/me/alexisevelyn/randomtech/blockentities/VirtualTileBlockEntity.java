@@ -59,7 +59,7 @@ public class VirtualTileBlockEntity extends BlockEntity implements BlockEntityCl
      *
      * @param compoundTag the compound tag
      */
-// Ran by client
+    // Ran by client
     @Override
     public void fromClientTag(CompoundTag compoundTag) {
         setColor(readColorFromTag(compoundTag));
@@ -90,7 +90,7 @@ public class VirtualTileBlockEntity extends BlockEntity implements BlockEntityCl
      * @param compoundTag the compound tag
      * @return the compound tag
      */
-// Ran by server
+    // Ran by server
     @Override
     public CompoundTag toClientTag(CompoundTag compoundTag) {
         if (getColor() == null)
@@ -105,7 +105,7 @@ public class VirtualTileBlockEntity extends BlockEntity implements BlockEntityCl
      *
      * @return the color
      */
-// Ran by client and server
+    // Ran by client and server
     @Nullable
     public Color getColor() {
         return color;
@@ -116,7 +116,7 @@ public class VirtualTileBlockEntity extends BlockEntity implements BlockEntityCl
      *
      * @param color the color
      */
-// Ran by client and server
+    // Ran by client and server
     public void setColor(@NotNull Color color) {
         this.color = color;
     }
@@ -127,7 +127,7 @@ public class VirtualTileBlockEntity extends BlockEntity implements BlockEntityCl
      * @param compoundTag the compound tag
      * @return the color
      */
-// Ran by client and server
+    // Ran by client and server
     public Color readColorFromTag(@NotNull CompoundTag compoundTag) {
         if (compoundTag.contains("red") && compoundTag.contains("green") && compoundTag.contains("blue")) {
             int red = compoundTag.getInt("red");
@@ -148,7 +148,7 @@ public class VirtualTileBlockEntity extends BlockEntity implements BlockEntityCl
      * @param color       the color
      * @return the tag from color
      */
-// Ran by client and server
+    // Ran by client and server
     public CompoundTag setTagFromColor(@NotNull CompoundTag compoundTag, @NotNull Color color) {
         compoundTag.putInt("red", color.getRed());
         compoundTag.putInt("green", color.getGreen());

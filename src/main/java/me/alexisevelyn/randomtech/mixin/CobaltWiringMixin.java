@@ -58,7 +58,7 @@ public abstract class CobaltWiringMixin extends Block {
 	 * @param isNotUpwardSolidBlock the is not upward solid block
 	 * @param info                  the info
 	 */
-// The method is currently unmapped (as method_27841), I believe it should be mapped as getRenderConnectionType.
+    // The method is currently unmapped (as method_27841), I believe it should be mapped as getRenderConnectionType.
 	@Inject(at = @At("INVOKE"), method = "method_27841(Lnet/minecraft/world/BlockView;Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/util/math/Direction;Z)Lnet/minecraft/block/enums/WireConnection;", cancellable = true)
 	public void getRenderConnectionType(BlockView blockView, BlockPos blockPos, Direction direction, boolean isNotUpwardSolidBlock, CallbackInfoReturnable<WireConnection> info) {
 		BlockState currentBlockState = blockView.getBlockState(blockPos);
@@ -93,7 +93,7 @@ public abstract class CobaltWiringMixin extends Block {
 	 * @param dir                the dir
 	 * @return the boolean
 	 */
-// Is only used visually? Nope
+    // Is only used visually? Nope
 	public boolean connectsTo(BlockState currentBlockState, BlockState neighborBlockState, @Nullable Direction dir) {
 		if (isSameWire(currentBlockState.getBlock(), neighborBlockState.getBlock())) {
 			return true;

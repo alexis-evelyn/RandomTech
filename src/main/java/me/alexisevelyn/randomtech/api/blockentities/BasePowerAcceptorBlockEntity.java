@@ -141,7 +141,7 @@ public abstract class BasePowerAcceptorBlockEntity extends PowerAcceptorBlockEnt
      * @param playerEntity the player entity
      * @return the tool drop
      */
-// Used for TR's Wrench
+    // Used for TR's Wrench
     @Nullable
     public ItemStack getToolDrop(PlayerEntity playerEntity) {
         return null;
@@ -184,7 +184,7 @@ public abstract class BasePowerAcceptorBlockEntity extends PowerAcceptorBlockEnt
      *
      * @return the min power
      */
-// Future Proofing
+    // Future Proofing
     @SuppressWarnings({"SameReturnValue", "unused"})
     public double getMinPower() {
         return this.minPower;

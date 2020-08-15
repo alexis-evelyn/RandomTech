@@ -146,7 +146,7 @@ public abstract class GenericCable extends Block implements Waterloggable {
      * @param blockPos the block pos
      * @return the boolean
      */
-// This is to make sure that we only connect to the proper cable instance.
+    // This is to make sure that we only connect to the proper cable instance.
     // If you really want, you can connect to any cable by just checking if it's an instance of GenericCable.
     // Don't expect it to look right though if the other cable doesn't do the same.
     public abstract boolean isInstanceOfCable(Block block, WorldAccess world, BlockPos blockPos);
@@ -159,7 +159,7 @@ public abstract class GenericCable extends Block implements Waterloggable {
      * @param blockPos the block pos
      * @return the boolean
      */
-// This is to make sure that we only connect to blocks that are supposed to connect to this cable.
+    // This is to make sure that we only connect to blocks that are supposed to connect to this cable.
     public abstract boolean isInstanceOfInterfaceableBlock(Block block, WorldAccess world, BlockPos blockPos);
 
     /**
@@ -171,7 +171,7 @@ public abstract class GenericCable extends Block implements Waterloggable {
      * @param side     the side
      * @return the boolean
      */
-// This is to make sure that we only connect to blocks that are supposed to connect to this cable.
+    // This is to make sure that we only connect to blocks that are supposed to connect to this cable.
     public abstract boolean isValidSide(Block block, WorldAccess world, BlockPos blockPos, Direction side);
 
     /**
@@ -215,7 +215,7 @@ public abstract class GenericCable extends Block implements Waterloggable {
      * @param posFrom   the pos from
      * @return the state for neighbor update
      */
-// This runs for every block update that occurs to the cables
+    // This runs for every block update that occurs to the cables
     @Override
     public BlockState getStateForNeighborUpdate(BlockState state, Direction direction, BlockState newState, WorldAccess world, BlockPos pos, BlockPos posFrom) {
         // Try to support generic fluids if possible
@@ -231,7 +231,7 @@ public abstract class GenericCable extends Block implements Waterloggable {
      *
      * @return the no interfaceable cables text
      */
-// Override this to change the message text
+    // Override this to change the message text
     public Text getNoInterfaceableCablesText() {
         return new TranslatableText(Main.MODID + ".no_interfaceable_cables_found");
     }
@@ -241,7 +241,7 @@ public abstract class GenericCable extends Block implements Waterloggable {
      *
      * @return the cable position header text
      */
-// Override this to change the message text
+    // Override this to change the message text
     public Text getCablePositionHeaderText() {
         return new TranslatableText(Main.MODID + ".cable_position_header");
     }
@@ -252,7 +252,7 @@ public abstract class GenericCable extends Block implements Waterloggable {
      * @param cablePos the cable pos
      * @return the cable position text
      */
-// Override this to change the message text
+    // Override this to change the message text
     public Text getCablePositionText(BlockPos cablePos) {
         return new TranslatableText(Main.MODID + ".cable_position", cablePos.getX(), cablePos.getY(), cablePos.getZ());
     }
@@ -511,7 +511,7 @@ public abstract class GenericCable extends Block implements Waterloggable {
      * @param isViable           the is viable
      * @return the is viable
      */
-// This is so the IDE will shutup about duplicate code.
+    // This is so the IDE will shutup about duplicate code.
     private int getIsViable(@NotNull CableConnection neighborConnection, int isViable) {
         if (neighborConnection.equals(CableConnection.CABLE) || neighborConnection.equals(CableConnection.INTERFACEABLE)) {
             isViable++;
@@ -610,7 +610,7 @@ public abstract class GenericCable extends Block implements Waterloggable {
      * @param state the state
      * @return the fluid state
      */
-// Used to visually indicate if waterlogged
+    // Used to visually indicate if waterlogged
     @Override
     public FluidState getFluidState(BlockState state) {
         return state.get(WATERLOGGED) ? Fluids.WATER.getStill(false) : super.getFluidState(state);

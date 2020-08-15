@@ -42,7 +42,7 @@ public class InverseIntangibleGlass extends AbstractGlassBlock implements BlockE
      * @param context the context
      * @return the collision shape
      */
-// Allows to specify the collision shape of the block. Can be used to block certain entities from going through.
+    // Allows to specify the collision shape of the block. Can be used to block certain entities from going through.
     @Override
     public VoxelShape getCollisionShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
         InverseIntangibleGlassBlockEntity inverseIntangibleGlassBlockEntity = ((InverseIntangibleGlassBlockEntity) world.getBlockEntity(pos));

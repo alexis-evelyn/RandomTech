@@ -35,7 +35,7 @@ public abstract class GenericComputerBlockEntity extends BasePowerAcceptorBlockE
      * @param playerEntity the player entity
      * @return the tool drop
      */
-// Used for TR's Wrench
+    // Used for TR's Wrench
     @Override
     public ItemStack getToolDrop(PlayerEntity playerEntity) {
         return new ItemStack(this.block);

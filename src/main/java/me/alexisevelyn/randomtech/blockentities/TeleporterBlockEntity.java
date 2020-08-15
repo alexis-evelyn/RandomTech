@@ -105,7 +105,7 @@ public class TeleporterBlockEntity extends BasePowerAcceptorBlockEntity implemen
      * @param playerEntity the player entity
      * @return the tool drop
      */
-// Used for TR's Wrench
+    // Used for TR's Wrench
     @Override
     public ItemStack getToolDrop(PlayerEntity playerEntity) {
         return new ItemStack(RegistryHelper.TELEPORTER);
@@ -239,7 +239,7 @@ public class TeleporterBlockEntity extends BasePowerAcceptorBlockEntity implemen
      * @param item the item
      * @return the boolean
      */
-// This checks for TechReborn's Frequency Transmitter and Outputs the Destination of the Transmitter
+    // This checks for TechReborn's Frequency Transmitter and Outputs the Destination of the Transmitter
     // techreborn:frequency_transmitter
     public boolean isTRFrequencyTransmitter(ItemStack item) {
         return frequencyTransmitter.isPresent() && item.getItem().equals(frequencyTransmitter.get());
@@ -251,7 +251,7 @@ public class TeleporterBlockEntity extends BasePowerAcceptorBlockEntity implemen
      * @param item the item
      * @return the boolean
      */
-// This checks for my Teleporter Linker (used if TechReborn is not installed)
+    // This checks for my Teleporter Linker (used if TechReborn is not installed)
     public boolean isTeleporterItem(ItemStack item) {
         return item.getItem().equals(RegistryHelper.TELEPORTER_LINKER);
     }
@@ -299,7 +299,7 @@ public class TeleporterBlockEntity extends BasePowerAcceptorBlockEntity implemen
     /**
      * Update energy model state.
      */
-// Used to Update Visible Texture of Block
+    // Used to Update Visible Texture of Block
     public void updateEnergyModelState() {
         if (world == null)
             return;
@@ -318,7 +318,7 @@ public class TeleporterBlockEntity extends BasePowerAcceptorBlockEntity implemen
      *
      * @return the energy state
      */
-// Convert Current Energy Level to Level Within (Not Exclusive) Range 0 - 15
+    // Convert Current Energy Level to Level Within (Not Exclusive) Range 0 - 15
     public int getEnergyState() {
         int minLevel = 0;
         int maxLevel = 15;

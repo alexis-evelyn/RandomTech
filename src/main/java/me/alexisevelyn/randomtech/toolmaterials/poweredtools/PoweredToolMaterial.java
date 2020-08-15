@@ -64,7 +64,7 @@ public class PoweredToolMaterial implements ToolMaterial {
      *
      * @return the repair ingredient
      */
-// Repair Ingredient is Ignored As We Want To Use Energy To Repair These Tools
+    // Repair Ingredient is Ignored As We Want To Use Energy To Repair These Tools
     @Nullable
     @Override
     public Ingredient getRepairIngredient() {

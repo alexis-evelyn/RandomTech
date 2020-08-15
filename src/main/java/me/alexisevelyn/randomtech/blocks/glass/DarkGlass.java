@@ -12,7 +12,7 @@ import net.minecraft.world.BlockView;
 /**
  * The type Dark glass.
  */
-// TODO: Add inverted intangible glass which only blocks the player
+    // TODO: Add inverted intangible glass which only blocks the player
 // TODO: Fix rendering issue on edges of glass - This shows up on every glass block from my mod, but not vanilla (artifacts?)
 // TODO: Allow connecting different types of glass together
 public class DarkGlass extends AbstractGlassBlock {
