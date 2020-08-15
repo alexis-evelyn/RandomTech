@@ -30,9 +30,6 @@ public class ItemCableBlockEntity extends BlockEntity implements InventoryProvid
     public ItemCableBlockEntity() {
         super(BlockEntities.ITEM_CABLE);
         inventory = new ItemCableInventory();
-
-        // Jump start any cable networks when they are loaded in.
-        // moveItemInNetwork();
     }
 
     @Override
@@ -52,17 +49,24 @@ public class ItemCableBlockEntity extends BlockEntity implements InventoryProvid
     public void fromTag(BlockState state, CompoundTag tag) {
         super.fromTag(state, tag);
 
+        // To Compare Previous Inventory With Current Inventory
+        DefaultedList<ItemStack> itemStacks = this.inventory.getInventory();
+
         // Setup Inventory
         this.inventory.setInventory(DefaultedList.ofSize(this.inventory.size(), ItemStack.EMPTY));
         Inventories.fromTag(tag, this.inventory.getInventory());
-    }
 
-    // Example Command For Testing: /data merge block ~ ~ ~-4 {Items: [{Slot: 9b, id: "minecraft:bedrock", Count: 1b}]}
-    public void moveItemInNetwork() {
-        // Ensure World is Not Null (It always is for a little bit on world load)
         if (world == null)
             return;
 
+        // This allows command blocks to set the inventory of the cable and have items moved.
+        // Command blocks do not update the block themselves (using /data merge), but they do modify the inventory and we can tick the cable here
+        if (!itemStacks.equals(this.inventory.getInventory()))
+            moveItemInNetwork(world);
+    }
+
+    // Example Command For Testing: /data merge block ~ ~ ~-4 {Items: [{Slot: 9b, id: "minecraft:bedrock", Count: 1b}]}
+    public void moveItemInNetwork(@NotNull World world) {
         attemptCableTransfer(world);
 
         // TODO (Important): Use a boolean to determine if should extract or insert
@@ -158,6 +162,8 @@ public class ItemCableBlockEntity extends BlockEntity implements InventoryProvid
 
     @Override
     public void tick() {
+        // Only Run when World is Not Null
+        // Helps Lower World Load Lag
         if (world == null)
             return;
 
@@ -166,7 +172,7 @@ public class ItemCableBlockEntity extends BlockEntity implements InventoryProvid
         if (inventory.isDirty()) {
             markDirty(); // Mark self as dirty to ensure the nbt data gets saved on next save
 
-            moveItemInNetwork();
+            moveItemInNetwork(world);
         }
     }
 }

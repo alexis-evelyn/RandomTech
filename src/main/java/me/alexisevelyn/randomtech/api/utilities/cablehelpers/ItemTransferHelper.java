@@ -14,6 +14,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldAccess;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -116,7 +117,7 @@ public class ItemTransferHelper {
     }
 
     @Nullable
-    public static ItemCableBlockEntity getCableBlockEntity(@NotNull World world, BlockPos blockPos) {
+    public static ItemCableBlockEntity getCableBlockEntity(@NotNull WorldAccess world, BlockPos blockPos) {
         BlockEntity neighborBlockEntity = world.getBlockEntity(blockPos);
 
         if (!(neighborBlockEntity instanceof ItemCableBlockEntity))

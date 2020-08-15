@@ -138,6 +138,10 @@ public class ItemCable extends GenericCable implements BlockEntityProvider, Inve
 
     @Override
     public BlockEntity createBlockEntity(BlockView world) {
+        // I don't believe createBlockEntity is called while the world is null.
+        if (world == null)
+            return null;
+
         return new ItemCableBlockEntity();
     }
 
@@ -164,20 +168,21 @@ public class ItemCable extends GenericCable implements BlockEntityProvider, Inve
 
     @Override
     public BlockState getStateForNeighborUpdate(BlockState state, Direction direction, BlockState newState, WorldAccess world, BlockPos pos, BlockPos posFrom) {
-        // This allows command blocks to set the inventory of the cable and have items moved.
-        tickCable(world, pos);
+        // Attaching a new cable or interfaceable block will block update the current cables and may expand the network.
+        if (world instanceof World)
+            tickCable((World) world, pos);
 
         // This sets up the cable blockstates for each cable
         return super.getStateForNeighborUpdate(state, direction, newState, world, pos, posFrom);
     }
 
-    public void tickCable(WorldAccess world, BlockPos blockPos) {
+    public void tickCable(World world, BlockPos blockPos) {
         BlockEntity blockEntity = world.getBlockEntity(blockPos);
 
         if (!(blockEntity instanceof ItemCableBlockEntity))
             return;
 
         ItemCableBlockEntity itemCableBlockEntity = (ItemCableBlockEntity) blockEntity;
-        itemCableBlockEntity.moveItemInNetwork();
+        itemCableBlockEntity.moveItemInNetwork(world);
     }
 }
