@@ -12,14 +12,35 @@ import team.reborn.energy.EnergyTier;
 
 import java.util.Set;
 
+/**
+ * The type Generic powered pickaxe.
+ */
 public abstract class GenericPoweredPickaxe extends GenericPoweredTool {
     private static final Set<Block> EFFECTIVE_BLOCKS;
     private static final float attackDamage = 1;
 
+    /**
+     * Instantiates a new Generic powered pickaxe.
+     *
+     * @param material                 the material
+     * @param energyCapacity           the energy capacity
+     * @param tier                     the tier
+     * @param cost                     the cost
+     * @param poweredSpeed             the powered speed
+     * @param unpoweredSpeed           the unpowered speed
+     * @param settings                 the settings
+     * @param dischargedTranslationKey the discharged translation key
+     */
     public GenericPoweredPickaxe(ToolMaterial material, int energyCapacity, EnergyTier tier, int cost, float poweredSpeed, float unpoweredSpeed, Settings settings, @Nullable String dischargedTranslationKey) {
         super(material, energyCapacity, tier, cost, poweredSpeed, unpoweredSpeed, attackDamage, EFFECTIVE_BLOCKS, settings, dischargedTranslationKey);
     }
 
+    /**
+     * Is effective on boolean.
+     *
+     * @param state the state
+     * @return the boolean
+     */
     @Override
     public boolean isEffectiveOn(BlockState state) {
         int i = this.getMaterial().getMiningLevel();
@@ -40,6 +61,13 @@ public abstract class GenericPoweredPickaxe extends GenericPoweredTool {
         }
     }
 
+    /**
+     * Gets mining speed multiplier.
+     *
+     * @param stack the stack
+     * @param state the state
+     * @return the mining speed multiplier
+     */
     @Override
     public float getMiningSpeedMultiplier(ItemStack stack, BlockState state) {
         Material material = state.getMaterial();

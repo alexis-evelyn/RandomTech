@@ -12,6 +12,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundTag;
 import org.jetbrains.annotations.NotNull;
 
+/**
+ * The type Broken item component.
+ */
 /*
  Note to developers. Until I figure out how to register the items based on my Generic Tools/Armor,
   you'll have to register your item with this component
@@ -24,10 +27,20 @@ public class BrokenItemComponent implements CopyableComponent<BrokenItemComponen
     private int customModelData = 1337;
     private final ItemStack itemStack;
 
+    /**
+     * Instantiates a new Broken item component.
+     *
+     * @param itemStack the item stack
+     */
     public BrokenItemComponent(ItemStack itemStack) {
         this.itemStack = itemStack;
     }
 
+    /**
+     * From tag.
+     *
+     * @param compoundTag the compound tag
+     */
     @Override
     public void fromTag(CompoundTag compoundTag) {
         // this.customModelData = compoundTag.getInt("CustomModelData");
@@ -35,6 +48,12 @@ public class BrokenItemComponent implements CopyableComponent<BrokenItemComponen
         this.customModelData = getStackModelData(itemStack);
     }
 
+    /**
+     * To tag compound tag.
+     *
+     * @param compoundTag the compound tag
+     * @return the compound tag
+     */
     @Override
     public @NotNull CompoundTag toTag(CompoundTag compoundTag) {
         // compoundTag.putInt("CustomModelData", this.customModelData);
@@ -43,19 +62,42 @@ public class BrokenItemComponent implements CopyableComponent<BrokenItemComponen
         return compoundTag;
     }
 
+    /**
+     * Gets component type.
+     *
+     * @return the component type
+     */
     public @NotNull ComponentType<?> getComponentType() {
         return PostRegistryHelper.BROKEN_ITEM_COMPONENT;
     }
 
+    /**
+     * Is component equal boolean.
+     *
+     * @param other the other
+     * @return the boolean
+     */
     @Override
     public boolean isComponentEqual(Component other) {
         return isStackModelDataSet(itemStack);
     }
 
+    /**
+     * Is stack model data set boolean.
+     *
+     * @param itemStack the item stack
+     * @return the boolean
+     */
     public boolean isStackModelDataSet(ItemStack itemStack) {
         return customModelData == getStackModelData(itemStack);
     }
 
+    /**
+     * Gets stack model data.
+     *
+     * @param itemStack the item stack
+     * @return the stack model data
+     */
     public int getStackModelData(ItemStack itemStack) {
         CompoundTag tag = itemStack.getTag();
         if (tag == null)
@@ -64,6 +106,12 @@ public class BrokenItemComponent implements CopyableComponent<BrokenItemComponen
         return tag.getInt("CustomModelData");
     }
 
+    /**
+     * Sets stack model data.
+     *
+     * @param itemStack the item stack
+     * @param modelData the model data
+     */
     public void setStackModelData(ItemStack itemStack, int modelData) {
         CompoundTag tag = itemStack.getTag();
         if (tag == null)
@@ -72,6 +120,11 @@ public class BrokenItemComponent implements CopyableComponent<BrokenItemComponen
         tag.putInt("CustomModelData", modelData);
     }
 
+    /**
+     * Remove stack model data.
+     *
+     * @param itemStack the item stack
+     */
     public void removeStackModelData(ItemStack itemStack) {
         CompoundTag tag = itemStack.getTag();
         if (tag == null)
@@ -80,6 +133,11 @@ public class BrokenItemComponent implements CopyableComponent<BrokenItemComponen
         tag.remove("CustomModelData");
     }
 
+    /**
+     * Sets if stack broken.
+     *
+     * @param itemStack the item stack
+     */
     public void setIfStackBroken(ItemStack itemStack) {
         Item item = itemStack.getItem();
 

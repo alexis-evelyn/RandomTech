@@ -17,6 +17,9 @@ import net.fabricmc.api.Environment;
 import net.minecraft.util.Identifier;
 import reborncore.common.crafting.RecipeManager;
 
+/**
+ * The type Rei plugin.
+ */
 @Environment(EnvType.CLIENT)
 public class REIPlugin implements REIPluginV0 {
     public static final Identifier FUSER = new Identifier(Main.MODID, "fuser_category");
@@ -27,21 +30,41 @@ public class REIPlugin implements REIPluginV0 {
 //        return 0;
 //    }
 
+    /**
+     * Gets plugin identifier.
+     *
+     * @return the plugin identifier
+     */
     @Override
     public Identifier getPluginIdentifier() {
         return new Identifier(Main.MODID, "rei_plugin");
     }
 
+    /**
+     * Register entries.
+     *
+     * @param entryRegistry the entry registry
+     */
     @Override
     public void registerEntries(EntryRegistry entryRegistry) {
         // I believe this is used to register items that don't necessarily have recipes
     }
 
+    /**
+     * Register plugin categories.
+     *
+     * @param recipeHelper the recipe helper
+     */
     @Override
     public void registerPluginCategories(RecipeHelper recipeHelper) {
         recipeHelper.registerCategory(new FuserRecipeCategory());
     }
 
+    /**
+     * Register recipe displays.
+     *
+     * @param recipeHelper the recipe helper
+     */
     @Override
     public void registerRecipeDisplays(RecipeHelper recipeHelper) {
         RecipeManager.getRecipeTypes(Main.MODID).forEach(rebornRecipeType -> {
@@ -50,11 +73,21 @@ public class REIPlugin implements REIPluginV0 {
         });
     }
 
+    /**
+     * Register bounds.
+     *
+     * @param displayHelper the display helper
+     */
     @Override
     public void registerBounds(DisplayHelper displayHelper) {
         // I believe this is used to exclude certain recipes
     }
 
+    /**
+     * Register others.
+     *
+     * @param recipeHelper the recipe helper
+     */
     @Override
     public void registerOthers(RecipeHelper recipeHelper) {
         // Register Working Station allows looking up recipes by that Workstation
@@ -65,16 +98,27 @@ public class REIPlugin implements REIPluginV0 {
         recipeHelper.registerAutoCraftingHandler(new FuserAutocraftingHandler());
     }
 
+    /**
+     * Pre register.
+     */
     @Override
     public void preRegister() {
         // Do stuff before registering
     }
 
+    /**
+     * Post register.
+     */
     @Override
     public void postRegister() {
         // Do stuff after registering
     }
 
+    /**
+     * Register fuser.
+     *
+     * @param recipeHelper the recipe helper
+     */
     private void registerFuser(RecipeHelper recipeHelper) {
         // Note to self, if your fluids are not showing up, check the identifier in the recipe json files.
 

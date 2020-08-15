@@ -9,10 +9,16 @@ import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.BlockView;
 
+/**
+ * The type Dark glass.
+ */
 // TODO: Add inverted intangible glass which only blocks the player
 // TODO: Fix rendering issue on edges of glass - This shows up on every glass block from my mod, but not vanilla (artifacts?)
 // TODO: Allow connecting different types of glass together
 public class DarkGlass extends AbstractGlassBlock {
+    /**
+     * Instantiates a new Dark glass.
+     */
     public DarkGlass() {
         super(FabricBlockSettings
                 .of(Materials.DARK_GLASS_MATERIAL)
@@ -27,6 +33,14 @@ public class DarkGlass extends AbstractGlassBlock {
         );
     }
 
+    /**
+     * Gets opacity.
+     *
+     * @param state the state
+     * @param world the world
+     * @param pos   the pos
+     * @return the opacity
+     */
     @Override
     public int getOpacity(BlockState state, BlockView world, BlockPos pos) {
         return 15;

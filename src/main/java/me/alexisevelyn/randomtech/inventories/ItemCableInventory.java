@@ -11,17 +11,33 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Iterator;
 
+/**
+ * The type Item cable inventory.
+ */
 public class ItemCableInventory implements SidedInventory {
     DefaultedList<ItemStack> inventory;
 
+    /**
+     * Instantiates a new Item cable inventory.
+     */
     public ItemCableInventory() {
         this.inventory = DefaultedList.ofSize(10, ItemStack.EMPTY);
     }
 
+    /**
+     * Gets inventory.
+     *
+     * @return the inventory
+     */
     public DefaultedList<ItemStack> getInventory() {
         return this.inventory;
     }
 
+    /**
+     * Sets inventory.
+     *
+     * @param inventory the inventory
+     */
     public void setInventory(DefaultedList<ItemStack> inventory) {
         this.inventory = inventory;
     }
@@ -46,11 +62,23 @@ public class ItemCableInventory implements SidedInventory {
         return getRealSlots(side);
     }
 
+    /**
+     * Get filter slots int [ ].
+     *
+     * @param side the side
+     * @return the int [ ]
+     */
     @NotNull
     public int[] getFilterSlots(@Nullable Direction side) {
         return new int[]{0, 1, 2, 3, 4, 5, 6, 7, 8};
     }
 
+    /**
+     * Get real slots int [ ].
+     *
+     * @param side the side
+     * @return the int [ ]
+     */
     @NotNull
     public int[] getRealSlots(@Nullable Direction side) {
         return new int[]{9};
@@ -80,11 +108,21 @@ public class ItemCableInventory implements SidedInventory {
         return true;
     }
 
+    /**
+     * Size int.
+     *
+     * @return the int
+     */
     @Override
     public int size() {
         return this.inventory.size();
     }
 
+    /**
+     * Is empty boolean.
+     *
+     * @return the boolean
+     */
     @Override
     public boolean isEmpty() {
         Iterator<ItemStack> itemStackIterator = this.inventory.iterator();
@@ -100,6 +138,12 @@ public class ItemCableInventory implements SidedInventory {
         return false;
     }
 
+    /**
+     * Is empty boolean.
+     *
+     * @param side the side
+     * @return the boolean
+     */
     public boolean isEmpty(@Nullable Direction side) {
         for (int slot : getRealSlots(side)) {
             if (!getStack(slot).isEmpty())
@@ -109,6 +153,12 @@ public class ItemCableInventory implements SidedInventory {
         return true;
     }
 
+    /**
+     * Is filter empty boolean.
+     *
+     * @param side the side
+     * @return the boolean
+     */
     public boolean isFilterEmpty(@Nullable Direction side) {
         for (int slot : getFilterSlots(side)) {
             if (!getStack(slot).isEmpty())
@@ -118,6 +168,13 @@ public class ItemCableInventory implements SidedInventory {
         return true;
     }
 
+    /**
+     * Filter contains boolean.
+     *
+     * @param itemStack the item stack
+     * @param side      the side
+     * @return the boolean
+     */
     public boolean filterContains(@NotNull ItemStack itemStack, @Nullable Direction side) {
         for (int slot : getFilterSlots(side)) {
             if (getStack(slot).getItem().equals(itemStack.getItem()))
@@ -170,6 +227,12 @@ public class ItemCableInventory implements SidedInventory {
         return Inventories.removeStack(this.inventory, slot);
     }
 
+    /**
+     * Sets stack.
+     *
+     * @param slot  the slot
+     * @param stack the stack
+     */
     @Override
     public void setStack(int slot, ItemStack stack) {
         markDirty();
@@ -182,32 +245,62 @@ public class ItemCableInventory implements SidedInventory {
         this.inventory.set(slot, stack);
     }
 
+    /**
+     * Mark dirty.
+     */
     @Override
     public void markDirty() {
         this.isDirty = true;
     }
 
+    /**
+     * Mark clean.
+     */
     public void markClean() {
         this.isDirty = false;
     }
 
+    /**
+     * Is dirty boolean.
+     *
+     * @return the boolean
+     */
     public boolean isDirty() {
         return this.isDirty;
     }
 
+    /**
+     * Sets needs processing.
+     *
+     * @param needsProcessing the needs processing
+     */
     public void setNeedsProcessing(boolean needsProcessing) {
         this.needsProcessing = needsProcessing;
     }
 
+    /**
+     * Needs processing boolean.
+     *
+     * @return the boolean
+     */
     public boolean needsProcessing() {
         return this.needsProcessing;
     }
 
+    /**
+     * Can player use boolean.
+     *
+     * @param player the player
+     * @return the boolean
+     */
     @Override
     public boolean canPlayerUse(PlayerEntity player) {
         return true;
     }
 
+    /**
+     * Clear.
+     */
     @Override
     public void clear() {
         markDirty();

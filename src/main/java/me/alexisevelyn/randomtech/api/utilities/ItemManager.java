@@ -19,7 +19,16 @@ import team.reborn.energy.EnergyHolder;
 
 import java.util.List;
 
+/**
+ * The type Item manager.
+ */
 public class ItemManager {
+    /**
+     * Init powered items.
+     *
+     * @param item     the item
+     * @param itemList the item list
+     */
     public static void initPoweredItems(Item item, DefaultedList<ItemStack> itemList) {
         // Can be used to add multiple versions of items (e.g. a charged and discharged variant of each armor piece)
         ItemStack uncharged = new ItemStack(item);
@@ -36,7 +45,14 @@ public class ItemManager {
         itemList.add(charged);
     }
 
-    // This converts the old Item Stack's durability to energy based on the current durability, max durability, and max energy capacity.
+    /**
+     * Calculate current power for conversion double.
+     *
+     * @param oldItemStack the old item stack
+     * @param newItemStack the new item stack
+     * @return the double
+     */
+// This converts the old Item Stack's durability to energy based on the current durability, max durability, and max energy capacity.
     protected static double calculateCurrentPowerForConversion(ItemStack oldItemStack, ItemStack newItemStack) {
          EnergyHandler energyHandler = Energy.of(newItemStack);
          double oldDurability = oldItemStack.getMaxDamage() - oldItemStack.getDamage();
@@ -50,6 +66,14 @@ public class ItemManager {
          return (oldDurability * energyHandler.getMaxStored()) / oldItemStack.getMaxDamage();
     }
 
+    /**
+     * Convert stack to energy item stack item stack.
+     *
+     * @param oldStack the old stack
+     * @param newStack the new stack
+     * @param tag      the tag
+     * @return the item stack
+     */
     public static ItemStack convertStackToEnergyItemStack(ItemStack oldStack, ItemStack newStack, CompoundTag tag) {
         // Copy over existing NBT Data such as Enchants
         if (tag != null) {
@@ -70,6 +94,12 @@ public class ItemManager {
         return newStack;
     }
 
+    /**
+     * Power level tooltip.
+     *
+     * @param itemStack the item stack
+     * @param tooltip   the tooltip
+     */
     @Environment(EnvType.CLIENT)
     public static void powerLevelTooltip(ItemStack itemStack, List<Text> tooltip) {
         Item item = itemStack.getItem();
@@ -92,7 +122,14 @@ public class ItemManager {
             tooltip.add(new LiteralText(""));
     }
 
-    // This method exists to allow energy to not be used if the player is in Creative mode
+    /**
+     * Use energy.
+     *
+     * @param livingEntity the living entity
+     * @param stack        the stack
+     * @param cost         the cost
+     */
+// This method exists to allow energy to not be used if the player is in Creative mode
     public static void useEnergy(LivingEntity livingEntity, ItemStack stack, int cost) {
         if (livingEntity instanceof PlayerEntity) {
             PlayerEntity playerEntity = (PlayerEntity) livingEntity;

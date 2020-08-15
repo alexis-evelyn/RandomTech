@@ -32,6 +32,9 @@ import reborncore.common.util.RebornInventory;
 
 import java.util.Optional;
 
+/**
+ * The type Teleporter block entity.
+ */
 public class TeleporterBlockEntity extends BasePowerAcceptorBlockEntity implements IToolDrop, InventoryProvider, BuiltScreenHandlerProvider {
     // TechReborn's Frequency Transmitter
     final Identifier frequencyTransmitterIdentifier = new Identifier("techreborn", "frequency_transmitter");
@@ -54,6 +57,9 @@ public class TeleporterBlockEntity extends BasePowerAcceptorBlockEntity implemen
     private final long delayTeleport = 2 * 1000;
     private boolean isPlayingTeleportSound = false;
 
+    /**
+     * Instantiates a new Teleporter block entity.
+     */
     public TeleporterBlockEntity() {
         super(BlockEntities.TELEPORTER);
         this.inventory = new RebornInventory<>(1, "TeleporterBlockEntity", 1, this);
@@ -61,6 +67,9 @@ public class TeleporterBlockEntity extends BasePowerAcceptorBlockEntity implemen
         registerScheduler();
     }
 
+    /**
+     * Register scheduler.
+     */
     public void registerScheduler() {
         ServerTickEvents.END_SERVER_TICK.register((server) -> {
             this.tickTime = Util.getMeasuringTimeMs();
@@ -81,16 +90,34 @@ public class TeleporterBlockEntity extends BasePowerAcceptorBlockEntity implemen
         });
     }
 
+    /**
+     * Gets energy addend.
+     *
+     * @return the energy addend
+     */
     public int getEnergyAddend() {
         return this.energyAddend;
     }
 
-    // Used for TR's Wrench
+    /**
+     * Gets tool drop.
+     *
+     * @param playerEntity the player entity
+     * @return the tool drop
+     */
+// Used for TR's Wrench
     @Override
     public ItemStack getToolDrop(PlayerEntity playerEntity) {
         return new ItemStack(RegistryHelper.TELEPORTER);
     }
 
+    /**
+     * Create screen handler built screen handler.
+     *
+     * @param syncID       the sync id
+     * @param playerEntity the player entity
+     * @return the built screen handler
+     */
     @Override
     public BuiltScreenHandler createScreenHandler(int syncID, PlayerEntity playerEntity) {
         return new ScreenHandlerBuilder("teleporter_gui")
@@ -105,6 +132,9 @@ public class TeleporterBlockEntity extends BasePowerAcceptorBlockEntity implemen
                 .create(this, syncID);
     }
 
+    /**
+     * Tick.
+     */
     @Override
     public void tick() {
         super.tick();
@@ -122,6 +152,11 @@ public class TeleporterBlockEntity extends BasePowerAcceptorBlockEntity implemen
             teleportPlayer(playerEntity);
     }
 
+    /**
+     * Teleport player.
+     *
+     * @param playerEntity the player entity
+     */
     private void teleportPlayer(PlayerEntity playerEntity) {
         if (hasValidTeleporterItem()) {
             // Send Alert if Not Enough Energy
@@ -171,6 +206,13 @@ public class TeleporterBlockEntity extends BasePowerAcceptorBlockEntity implemen
         }
     }
 
+    /**
+     * Initialize and teleport.
+     *
+     * @param serverPlayerEntity the server player entity
+     * @param newWorld           the new world
+     * @param pos                the pos
+     */
     public void initializeAndTeleport(ServerPlayerEntity serverPlayerEntity, ServerWorld newWorld, int[] pos) {
         if (!isPlayingTeleportSound) {
             newWorld.playSound(
@@ -191,21 +233,44 @@ public class TeleporterBlockEntity extends BasePowerAcceptorBlockEntity implemen
         this.newPos = pos;
     }
 
-    // This checks for TechReborn's Frequency Transmitter and Outputs the Destination of the Transmitter
+    /**
+     * Is tr frequency transmitter boolean.
+     *
+     * @param item the item
+     * @return the boolean
+     */
+// This checks for TechReborn's Frequency Transmitter and Outputs the Destination of the Transmitter
     // techreborn:frequency_transmitter
     public boolean isTRFrequencyTransmitter(ItemStack item) {
         return frequencyTransmitter.isPresent() && item.getItem().equals(frequencyTransmitter.get());
     }
 
-    // This checks for my Teleporter Linker (used if TechReborn is not installed)
+    /**
+     * Is teleporter item boolean.
+     *
+     * @param item the item
+     * @return the boolean
+     */
+// This checks for my Teleporter Linker (used if TechReborn is not installed)
     public boolean isTeleporterItem(ItemStack item) {
         return item.getItem().equals(RegistryHelper.TELEPORTER_LINKER);
     }
 
+    /**
+     * Is player ready to teleport boolean.
+     *
+     * @param playerEntity the player entity
+     * @return the boolean
+     */
     public boolean isPlayerReadyToTeleport(PlayerEntity playerEntity) {
         return playerEntity != null && playerEntity.isInSneakingPose() && playerEntity.getBlockPos().equals(this.pos.add(0, 1, 0));
     }
 
+    /**
+     * Alert not enough energy.
+     *
+     * @param playerEntity the player entity
+     */
     private void alertNotEnoughEnergy(PlayerEntity playerEntity) {
         if (playerEntity == null)
             return;
@@ -220,13 +285,21 @@ public class TeleporterBlockEntity extends BasePowerAcceptorBlockEntity implemen
         playerEntity.sendMessage(message, true);
     }
 
+    /**
+     * Has valid teleporter item boolean.
+     *
+     * @return the boolean
+     */
     public boolean hasValidTeleporterItem() {
         ItemStack inputItem = inventory.getStack(inputSlot);
 
         return isTRFrequencyTransmitter(inputItem) || isTeleporterItem(inputItem);
     }
 
-    // Used to Update Visible Texture of Block
+    /**
+     * Update energy model state.
+     */
+// Used to Update Visible Texture of Block
     public void updateEnergyModelState() {
         if (world == null)
             return;
@@ -240,7 +313,12 @@ public class TeleporterBlockEntity extends BasePowerAcceptorBlockEntity implemen
         world.setBlockState(pos, world.getBlockState(pos).with(TeleporterBlock.ENERGY, getEnergyState()));
     }
 
-    // Convert Current Energy Level to Level Within (Not Exclusive) Range 0 - 15
+    /**
+     * Gets energy state.
+     *
+     * @return the energy state
+     */
+// Convert Current Energy Level to Level Within (Not Exclusive) Range 0 - 15
     public int getEnergyState() {
         int minLevel = 0;
         int maxLevel = 15;

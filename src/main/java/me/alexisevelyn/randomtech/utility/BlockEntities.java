@@ -15,6 +15,9 @@ import org.apache.commons.lang3.Validate;
 
 import java.util.function.Supplier;
 
+/**
+ * The type Block entities.
+ */
 public class BlockEntities {
     // Machines
     public static final BlockEntityType<TeleporterBlockEntity> TELEPORTER = register(TeleporterBlockEntity::new, "teleporter_block_entity", RegistryHelper.TELEPORTER);
@@ -35,12 +38,29 @@ public class BlockEntities {
     public static final BlockEntityType<FluidCableBlockEntity> FLUID_CABLE = register(FluidCableBlockEntity::new, "fluid_cable_block_entity", RegistryHelper.FLUID_CABLE_BLOCK, RegistryHelper.CHORUS_FLUID_CABLE_BLOCK);
     public static final BlockEntityType<EnergyCableBlockEntity> ENERGY_CABLE = register(EnergyCableBlockEntity::new, "energy_cable_block_entity", RegistryHelper.ENERGY_CABLE_BLOCK, RegistryHelper.CHORUS_ENERGY_CABLE_BLOCK);
 
+    /**
+     * Register block entity type.
+     *
+     * @param <T>      the type parameter
+     * @param supplier the supplier
+     * @param name     the name
+     * @param blocks   the blocks
+     * @return the block entity type
+     */
     public static <T extends BlockEntity> BlockEntityType<T> register(Supplier<T> supplier, String name, Block... blocks) {
         Validate.isTrue(blocks.length > 0, "Add a block to your Block Entity: " + supplier.get().getClass().getName());
 
         return register(new Identifier(Main.MODID, name).toString(), BlockEntityType.Builder.create(supplier, blocks));
     }
 
+    /**
+     * Register block entity type.
+     *
+     * @param <T>     the type parameter
+     * @param id      the id
+     * @param builder the builder
+     * @return the block entity type
+     */
     public static <T extends BlockEntity> BlockEntityType<T> register(String id, BlockEntityType.Builder<T> builder) {
         BlockEntityType<T> blockEntityType = builder.build(null);
         Registry.register(Registry.BLOCK_ENTITY_TYPE, new Identifier(id), blockEntityType);

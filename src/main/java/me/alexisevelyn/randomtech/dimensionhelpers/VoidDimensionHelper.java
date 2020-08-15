@@ -12,12 +12,35 @@ import net.minecraft.util.math.Vec3d;
 
 import java.awt.*;
 
+/**
+ * The type Void dimension helper.
+ */
 // This class helps with utilities needed for the void dimension
 public class VoidDimensionHelper {
+    /**
+     * Place entity block pattern . teleport target.
+     *
+     * @param teleported       the teleported
+     * @param destination      the destination
+     * @param portalDir        the portal dir
+     * @param horizontalOffset the horizontal offset
+     * @param verticalOffset   the vertical offset
+     * @return the block pattern . teleport target
+     */
     public static BlockPattern.TeleportTarget placeEntity(Entity teleported, ServerWorld destination, Direction portalDir, double horizontalOffset, double verticalOffset) {
         return new BlockPattern.TeleportTarget(new Vec3d(0, 100, 0), Vec3d.ZERO, 0);
     }
 
+    /**
+     * Place entity in void block pattern . teleport target.
+     *
+     * @param teleported       the teleported
+     * @param destination      the destination
+     * @param portalDir        the portal dir
+     * @param horizontalOffset the horizontal offset
+     * @param verticalOffset   the vertical offset
+     * @return the block pattern . teleport target
+     */
     public static BlockPattern.TeleportTarget placeEntityInVoid(Entity teleported, ServerWorld destination, Direction portalDir, double horizontalOffset, double verticalOffset) {
         // TODO: Figure out how to get this to run.
 

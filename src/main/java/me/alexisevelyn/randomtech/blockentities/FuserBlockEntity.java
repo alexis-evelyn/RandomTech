@@ -27,6 +27,9 @@ import reborncore.common.recipes.RecipeCrafter;
 import reborncore.common.util.RebornInventory;
 import reborncore.common.util.Tank;
 
+/**
+ * The type Fuser block entity.
+ */
 public class FuserBlockEntity extends FluidMachineBlockEntityBase implements IToolDrop, InventoryProvider, BuiltScreenHandlerProvider, IRecipeCrafterProvider {
     // Fluid Values
     // JsonElement buckets = new Gson().toJsonTree(5 * 1000);
@@ -49,6 +52,9 @@ public class FuserBlockEntity extends FluidMachineBlockEntityBase implements ITo
     int remainingRecipeTime = 0;
     int maxRecipeTime = 0;
 
+    /**
+     * Instantiates a new Fuser block entity.
+     */
     public FuserBlockEntity() {
         super(BlockEntities.FUSER);
         this.inventory = new RebornInventory<>(4, "FuserBlockEntity", 64, this);
@@ -57,12 +63,25 @@ public class FuserBlockEntity extends FluidMachineBlockEntityBase implements ITo
         crafter = new FuserRecipeCrafter(this, inventory, inputSlots, outputSlots);
     }
 
-    // Used for TR's Wrench
+    /**
+     * Gets tool drop.
+     *
+     * @param playerEntity the player entity
+     * @return the tool drop
+     */
+// Used for TR's Wrench
     @Override
     public ItemStack getToolDrop(PlayerEntity playerEntity) {
         return new ItemStack(RegistryHelper.FUSER);
     }
 
+    /**
+     * Create screen handler built screen handler.
+     *
+     * @param syncID       the sync id
+     * @param playerEntity the player entity
+     * @return the built screen handler
+     */
     @Override
     public BuiltScreenHandler createScreenHandler(int syncID, PlayerEntity playerEntity) {
         return new ScreenHandlerBuilder("fuser_gui")
@@ -84,6 +103,9 @@ public class FuserBlockEntity extends FluidMachineBlockEntityBase implements ITo
                 .create(this, syncID);
     }
 
+    /**
+     * Tick.
+     */
     @Override
     public void tick() {
         super.tick();
@@ -98,6 +120,12 @@ public class FuserBlockEntity extends FluidMachineBlockEntityBase implements ITo
         attemptFillEmptyFluidContainer(fluidInputSlot, fluidOutputSlot);
     }
 
+    /**
+     * Has empty fluid container boolean.
+     *
+     * @param inputSlot the input slot
+     * @return the boolean
+     */
     public boolean hasEmptyFluidContainer(int inputSlot) {
         Item item = inventory.getStack(inputSlot).getItem();
 
@@ -115,6 +143,12 @@ public class FuserBlockEntity extends FluidMachineBlockEntityBase implements ITo
         return itemFluidInfo.getEmpty().getItem().equals(item);
     }
 
+    /**
+     * Attempt fill empty fluid container.
+     *
+     * @param inputSlot  the input slot
+     * @param outputSlot the output slot
+     */
     public void attemptFillEmptyFluidContainer(int inputSlot, int outputSlot) {
         // Check if a bucket is in the fluid slot for outputting fluid contents
         if (!hasEmptyFluidContainer(inputSlot))
@@ -158,6 +192,12 @@ public class FuserBlockEntity extends FluidMachineBlockEntityBase implements ITo
             inventory.getStack(outputSlot).increment(1);
     }
 
+    /**
+     * From tag.
+     *
+     * @param blockState  the block state
+     * @param compoundTag the compound tag
+     */
     @Override
     public void fromTag(BlockState blockState, CompoundTag compoundTag) {
         super.fromTag(blockState, compoundTag);
@@ -165,6 +205,12 @@ public class FuserBlockEntity extends FluidMachineBlockEntityBase implements ITo
         tank.read(compoundTag);
     }
 
+    /**
+     * To tag compound tag.
+     *
+     * @param compoundTag the compound tag
+     * @return the compound tag
+     */
     @Override
     public CompoundTag toTag(CompoundTag compoundTag) {
         super.toTag(compoundTag);
@@ -173,39 +219,82 @@ public class FuserBlockEntity extends FluidMachineBlockEntityBase implements ITo
         return compoundTag;
     }
 
+    /**
+     * Gets recipe crafter.
+     *
+     * @return the recipe crafter
+     */
     @Override
     public RecipeCrafter getRecipeCrafter() {
         return crafter;
     }
 
+    /**
+     * Can craft boolean.
+     *
+     * @param rebornRecipe the reborn recipe
+     * @return the boolean
+     */
     @Override
     public boolean canCraft(RebornRecipe rebornRecipe) {
         // Figure out when this gets called.
         return crafter.canCraftAgain();
     }
 
+    /**
+     * Is stack valid boolean.
+     *
+     * @param slotID the slot id
+     * @param stack  the stack
+     * @return the boolean
+     */
     @Override
     public boolean isStackValid(int slotID, ItemStack stack) {
         return crafter.isStackValidInput(stack);
     }
 
+    /**
+     * Get input slots int [ ].
+     *
+     * @return the int [ ]
+     */
     @Override
     public int[] getInputSlots() {
         return inputSlots;
     }
 
+    /**
+     * Sets remaining recipe time.
+     *
+     * @param remainingRecipeTime the remaining recipe time
+     */
     public void setRemainingRecipeTime(int remainingRecipeTime) {
         this.remainingRecipeTime = remainingRecipeTime;
     }
 
+    /**
+     * Sets max recipe time.
+     *
+     * @param maxRecipeTime the max recipe time
+     */
     public void setMaxRecipeTime(int maxRecipeTime) {
         this.maxRecipeTime = maxRecipeTime;
     }
 
+    /**
+     * Gets remaining recipe time.
+     *
+     * @return the remaining recipe time
+     */
     public int getRemainingRecipeTime() {
         return this.remainingRecipeTime;
     }
 
+    /**
+     * Gets max recipe time.
+     *
+     * @return the max recipe time
+     */
     public int getMaxRecipeTime() {
         return this.maxRecipeTime;
     }

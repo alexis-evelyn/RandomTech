@@ -42,6 +42,9 @@ import java.util.regex.Pattern;
 // This block was inspired by an accidental texture produced by my clear glass not rendering properly. :P
 // I may replace the current recipe system with something similar to ArmorDyeRecipe
 
+/**
+ * The type Virtual tile.
+ */
 public class VirtualTile extends BlockItem {
     public static final Color defaultColor = Color.WHITE;
     public static Color initialColor = Color.BLACK;
@@ -49,11 +52,27 @@ public class VirtualTile extends BlockItem {
     // public static final Pattern NBT_CRAFTING_REGEX = Pattern.compile("^\\$\\d+#i$");
     public static final Pattern INTEGER_REGEX = Pattern.compile("\\d+");
 
+    /**
+     * Instantiates a new Virtual tile.
+     *
+     * @param block    the block
+     * @param settings the settings
+     */
     public VirtualTile(Block block, Settings settings) {
         super(block, settings);
     }
 
-    // Used to set the color client side before the server sends the color. No visual difference between this and server color if done correctly.
+    /**
+     * Post placement boolean.
+     *
+     * @param pos    the pos
+     * @param world  the world
+     * @param player the player
+     * @param stack  the stack
+     * @param state  the state
+     * @return the boolean
+     */
+// Used to set the color client side before the server sends the color. No visual difference between this and server color if done correctly.
     @Override
     protected boolean postPlacement(BlockPos pos, World world, @Nullable PlayerEntity player, ItemStack stack, BlockState state) {
         boolean placed = super.postPlacement(pos, world, player, stack, state);
@@ -73,7 +92,16 @@ public class VirtualTile extends BlockItem {
         return placed;
     }
 
-    // For Block Form
+    /**
+     * Gets edge color.
+     *
+     * @param state     the state
+     * @param world     the world
+     * @param pos       the pos
+     * @param tintIndex the tint index
+     * @return the edge color
+     */
+// For Block Form
     public static int getEdgeColor(BlockState state, BlockRenderView world, BlockPos pos, int tintIndex) {
         BlockEntity blockEntity = world.getBlockEntity(pos);
 
@@ -88,7 +116,14 @@ public class VirtualTile extends BlockItem {
         return virtualTileBlockEntity.getColor().getRGB();
     }
 
-    // For Item Form
+    /**
+     * Gets edge color.
+     *
+     * @param itemStack the item stack
+     * @param tintIndex the tint index
+     * @return the edge color
+     */
+// For Item Form
     public static int getEdgeColor(ItemStack itemStack, int tintIndex) {
         CompoundTag tag = itemStack.getTag();
 
@@ -103,6 +138,14 @@ public class VirtualTile extends BlockItem {
         return color.getRGB();
     }
 
+    /**
+     * Append tooltip.
+     *
+     * @param stack   the stack
+     * @param worldIn the world in
+     * @param tooltip the tooltip
+     * @param flagIn  the flag in
+     */
     @Environment(EnvType.CLIENT)
     @Override
     public void appendTooltip(ItemStack stack, @Nullable World worldIn, List<Text> tooltip, TooltipContext flagIn) {
@@ -120,6 +163,12 @@ public class VirtualTile extends BlockItem {
         });
     }
 
+    /**
+     * Gets edge color.
+     *
+     * @param stack the stack
+     * @return the edge color
+     */
     private Optional<Color> getEdgeColor(ItemStack stack) {
         if (!stack.hasTag() || stack.getTag() == null)
             return Optional.empty();
@@ -132,6 +181,12 @@ public class VirtualTile extends BlockItem {
         return Optional.of(color);
     }
 
+    /**
+     * Parse color from item stack color.
+     *
+     * @param itemStack the item stack
+     * @return the color
+     */
     @Nullable
     public static Color parseColorFromItemStack(ItemStack itemStack) {
         CompoundTag blockEntityTag = itemStack.getOrCreateTag().getCompound("BlockEntityTag");
@@ -160,11 +215,17 @@ public class VirtualTile extends BlockItem {
         return new Color(red, green, blue);
     }
 
+    /**
+     * The type Virtual tile block.
+     */
     public static class VirtualTileBlock extends Block implements BlockEntityProvider {
         public static BooleanProperty DUMMY = BooleanProperty.of("dummy"); // Minecraft updates the rendering of a block when the blockstate is changed. This forces re-rendering of the block.
 
         // Take a look at `Lnet/minecraft/entity/Entity;spawnSprintingParticles()V` for fixing sprinting particles
 
+        /**
+         * Instantiates a new Virtual tile block.
+         */
         public VirtualTileBlock() {
             super(FabricBlockSettings
                     .of(Materials.TILE_MATERIAL)
@@ -186,6 +247,16 @@ public class VirtualTile extends BlockItem {
 //            super.onBroken(world, pos, state);
 //        }
 
+        /**
+         * After break.
+         *
+         * @param world       the world
+         * @param player      the player
+         * @param pos         the pos
+         * @param state       the state
+         * @param blockEntity the block entity
+         * @param stack       the stack
+         */
         @Override
         public void afterBreak(World world, PlayerEntity player, BlockPos pos, BlockState state, @Nullable BlockEntity blockEntity, ItemStack stack) {
             player.incrementStat(Stats.MINED.getOrCreateStat(this));
@@ -193,6 +264,16 @@ public class VirtualTile extends BlockItem {
             dropNBTStacks(state, world, pos, blockEntity, player, stack);
         }
 
+        /**
+         * Drop nbt stacks.
+         *
+         * @param state       the state
+         * @param world       the world
+         * @param pos         the pos
+         * @param blockEntity the block entity
+         * @param entity      the entity
+         * @param stack       the stack
+         */
         public static void dropNBTStacks(BlockState state, World world, BlockPos pos, @Nullable BlockEntity blockEntity, Entity entity, ItemStack stack) {
             if (world instanceof ServerWorld)
                 getDroppedStacks(state, (ServerWorld) world, pos, blockEntity, entity, stack).forEach((itemStack) -> dropNBTStack(world, pos, blockEntity, itemStack));
@@ -200,7 +281,15 @@ public class VirtualTile extends BlockItem {
             state.onStacksDropped(world, pos, stack);
         }
 
-        // This allows for dropping custom nbt tagged items when Virtual Tile is mined.
+        /**
+         * Drop nbt stack.
+         *
+         * @param world       the world
+         * @param pos         the pos
+         * @param blockEntity the block entity
+         * @param stack       the stack
+         */
+// This allows for dropping custom nbt tagged items when Virtual Tile is mined.
         public static void dropNBTStack(World world, BlockPos pos, BlockEntity blockEntity, ItemStack stack) {
             if (!world.isClient && !stack.isEmpty() && blockEntity instanceof VirtualTileBlockEntity && world.getGameRules().getBoolean(GameRules.DO_TILE_DROPS)) {
                 float generalOffset = 0.5F;
@@ -238,13 +327,24 @@ public class VirtualTile extends BlockItem {
 //            super.onStacksDropped(state, world, pos, stack);
 //        }
 
-        // This is a hack and I'm not happy with it.
+        /**
+         * Update block for render.
+         *
+         * @param world the world
+         * @param pos   the pos
+         */
+// This is a hack and I'm not happy with it.
         public void updateBlockForRender(World world, BlockPos pos) {
             boolean dummy = world.getBlockState(pos).get(DUMMY);
             BlockState state = world.getBlockState(pos).with(DUMMY, !dummy);
             world.setBlockState(pos, state, 3);
         }
 
+        /**
+         * Gets light level.
+         *
+         * @return the light level
+         */
         public static ToIntFunction<BlockState> getLightLevel() {
             // TODO: Adjust light level based on color brightness.
             return (state) -> {
@@ -275,11 +375,22 @@ public class VirtualTile extends BlockItem {
             };
         }
 
+        /**
+         * Create block entity block entity.
+         *
+         * @param worldIn the world in
+         * @return the block entity
+         */
         @Override
         public BlockEntity createBlockEntity(BlockView worldIn) {
             return new VirtualTileBlockEntity();
         }
 
+        /**
+         * Append properties.
+         *
+         * @param builder the builder
+         */
         @Override
         protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
             DUMMY = BooleanProperty.of("dummy");

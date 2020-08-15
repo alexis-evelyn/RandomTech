@@ -6,6 +6,9 @@ import net.minecraft.block.entity.BlockEntity;
 import reborncore.common.recipes.RecipeCrafter;
 import reborncore.common.util.RebornInventory;
 
+/**
+ * The type Fuser recipe crafter.
+ */
 // https://github.com/TechReborn/RebornCore/blob/1.16/src/main/java/reborncore/common/crafting/RebornFluidRecipe.java
 public class FuserRecipeCrafter extends RecipeCrafter {
     /**
@@ -18,6 +21,9 @@ public class FuserRecipeCrafter extends RecipeCrafter {
     }
 
 
+    /**
+     * Update entity.
+     */
     @SuppressWarnings("EmptyMethod")
     @Override
     public void updateEntity() {
@@ -36,12 +42,20 @@ public class FuserRecipeCrafter extends RecipeCrafter {
 //        }
     }
 
+    /**
+     * Update current recipe.
+     */
     @SuppressWarnings("EmptyMethod")
     @Override
     public void updateCurrentRecipe() {
         super.updateCurrentRecipe();
     }
 
+    /**
+     * Can craft again boolean.
+     *
+     * @return the boolean
+     */
     @Override
     public boolean canCraftAgain() {
         return super.canCraftAgain();

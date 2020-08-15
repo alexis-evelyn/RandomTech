@@ -15,6 +15,9 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
+/**
+ * The type Cobalt wiring mixin.
+ */
 @SuppressWarnings("UnusedMixin") // The mixin is used, just is loaded by Fabric and not Sponge methods
 @Mixin(RedstoneWireBlock.class)
 public abstract class CobaltWiringMixin extends Block {
@@ -23,17 +26,39 @@ public abstract class CobaltWiringMixin extends Block {
 	 * Fix bug where a top level piece of wire can power a lower wire of a different type.
 	 */
 
+	/**
+	 * Instantiates a new Cobalt wiring mixin.
+	 *
+	 * @param settings the settings
+	 */
 	@SuppressWarnings("unused")
 	public CobaltWiringMixin(Settings settings) {
 		super(settings);
 	}
 
+	/**
+	 * Can run on top boolean.
+	 *
+	 * @param world the world
+	 * @param pos   the pos
+	 * @param floor the floor
+	 * @return the boolean
+	 */
 	@Shadow protected abstract boolean canRunOnTop(BlockView world, BlockPos pos, BlockState floor);
 	// @Shadow protected abstract BlockState method_27843(BlockView blockView, BlockState blockState, BlockPos blockPos);
 
 	@Shadow @Final private BlockState dotShape;
 
-	// The method is currently unmapped (as method_27841), I believe it should be mapped as getRenderConnectionType.
+	/**
+	 * Gets render connection type.
+	 *
+	 * @param blockView             the block view
+	 * @param blockPos              the block pos
+	 * @param direction             the direction
+	 * @param isNotUpwardSolidBlock the is not upward solid block
+	 * @param info                  the info
+	 */
+// The method is currently unmapped (as method_27841), I believe it should be mapped as getRenderConnectionType.
 	@Inject(at = @At("INVOKE"), method = "method_27841(Lnet/minecraft/world/BlockView;Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/util/math/Direction;Z)Lnet/minecraft/block/enums/WireConnection;", cancellable = true)
 	public void getRenderConnectionType(BlockView blockView, BlockPos blockPos, Direction direction, boolean isNotUpwardSolidBlock, CallbackInfoReturnable<WireConnection> info) {
 		BlockState currentBlockState = blockView.getBlockState(blockPos);
@@ -60,7 +85,15 @@ public abstract class CobaltWiringMixin extends Block {
 		info.setReturnValue(!this.connectsTo(currentBlockState, neighborBlockState, direction) && (neighborBlockState.isSolidBlock(blockView, neighborBlock) || !this.connectsTo(currentBlockState, blockView.getBlockState(neighborBlock.down()), null)) ? WireConnection.NONE : WireConnection.SIDE);
 	}
 
-	// Is only used visually? Nope
+	/**
+	 * Connects to boolean.
+	 *
+	 * @param currentBlockState  the current block state
+	 * @param neighborBlockState the neighbor block state
+	 * @param dir                the dir
+	 * @return the boolean
+	 */
+// Is only used visually? Nope
 	public boolean connectsTo(BlockState currentBlockState, BlockState neighborBlockState, @Nullable Direction dir) {
 		if (isSameWire(currentBlockState.getBlock(), neighborBlockState.getBlock())) {
 			return true;
@@ -76,6 +109,12 @@ public abstract class CobaltWiringMixin extends Block {
 		}
 	}
 
+	/**
+	 * Gets placement state.
+	 *
+	 * @param ctx  the ctx
+	 * @param info the info
+	 */
 	@Inject(at = @At("INVOKE"), method = "getPlacementState(Lnet/minecraft/item/ItemPlacementContext;)Lnet/minecraft/block/BlockState;", cancellable = true)
 	public void getPlacementState(ItemPlacementContext ctx, CallbackInfoReturnable<BlockState> info) {
 		// This allows for fixing most of the visual connection issues provided by redstone wire wanting to connect to cobalt wire and vice versa.
@@ -83,6 +122,13 @@ public abstract class CobaltWiringMixin extends Block {
 		// neighborUpdate(this.dotShape, ctx.getWorld(), ctx.getBlockPos(), this.dotShape.getBlock(), ctx.getBlockPos(), true);
 	}
 
+	/**
+	 * Is separate wire boolean.
+	 *
+	 * @param blockOne the block one
+	 * @param blockTwo the block two
+	 * @return the boolean
+	 */
 	public boolean isSeparateWire(Block blockOne, Block blockTwo) {
 		// We only care about preventing Cobalt Wire and Redstone Wire from Connecting to each other
 
@@ -92,6 +138,13 @@ public abstract class CobaltWiringMixin extends Block {
 		return blockOne.is(RegistryHelper.COBALT_WIRE) && blockTwo.is(Blocks.REDSTONE_WIRE);
 	}
 
+	/**
+	 * Is same wire boolean.
+	 *
+	 * @param blockOne the block one
+	 * @param blockTwo the block two
+	 * @return the boolean
+	 */
 	public boolean isSameWire(Block blockOne, Block blockTwo) {
 		// Only check if these are the same wires and nothing else.
 		// If one of these is not a wire, it's false.

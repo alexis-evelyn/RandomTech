@@ -16,7 +16,13 @@ import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 
+/**
+ * The type Dark intangible glass.
+ */
 public class DarkIntangibleGlass extends AbstractGlassBlock implements BlockEntityProvider {
+    /**
+     * Instantiates a new Dark intangible glass.
+     */
     public DarkIntangibleGlass() {
         super(FabricBlockSettings
                 .of(Materials.DARK_GLASS_MATERIAL)
@@ -32,13 +38,29 @@ public class DarkIntangibleGlass extends AbstractGlassBlock implements BlockEnti
         );
     }
 
-    // Used for light calculations
+    /**
+     * Gets opacity.
+     *
+     * @param state the state
+     * @param world the world
+     * @param pos   the pos
+     * @return the opacity
+     */
+// Used for light calculations
     @Override
     public int getOpacity(BlockState state, BlockView world, BlockPos pos) {
         return 15;
     }
 
-    // Only gets called if block is not collidable by Block Settings
+    /**
+     * On entity collision.
+     *
+     * @param state  the state
+     * @param world  the world
+     * @param pos    the pos
+     * @param entity the entity
+     */
+// Only gets called if block is not collidable by Block Settings
     @Override
     public void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity) {
         super.onEntityCollision(state, world, pos, entity);
@@ -47,7 +69,16 @@ public class DarkIntangibleGlass extends AbstractGlassBlock implements BlockEnti
 //            ((PlayerEntity) entity).sendMessage(new LiteralText("Entity Collision Detected!!!"), true);
     }
 
-    // Allows to specify the collision shape of the block. Can be used to block certain entities from going through.
+    /**
+     * Gets collision shape.
+     *
+     * @param state   the state
+     * @param world   the world
+     * @param pos     the pos
+     * @param context the context
+     * @return the collision shape
+     */
+// Allows to specify the collision shape of the block. Can be used to block certain entities from going through.
     @Override
     public VoxelShape getCollisionShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
         IntangibleDarkGlassBlockEntity intangibleDarkGlassBlockEntity = ((IntangibleDarkGlassBlockEntity) world.getBlockEntity(pos));
@@ -58,6 +89,12 @@ public class DarkIntangibleGlass extends AbstractGlassBlock implements BlockEnti
         return intangibleDarkGlassBlockEntity.getCollisionShape(state, world, pos);
     }
 
+    /**
+     * Create block entity block entity.
+     *
+     * @param worldIn the world in
+     * @return the block entity
+     */
     @Override
     public BlockEntity createBlockEntity(BlockView worldIn) {
         return new IntangibleDarkGlassBlockEntity();

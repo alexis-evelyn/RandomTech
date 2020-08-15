@@ -6,6 +6,9 @@ import net.minecraft.recipe.Ingredient;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.screen.slot.SlotActionType;
 
+/**
+ * The type Fuser autocrafting handler.
+ */
 public class FuserAutocraftingHandler implements AutoTransferHandler {
     /**
      * @return the priority of this handler, higher priorities will be called first.
@@ -53,6 +56,14 @@ public class FuserAutocraftingHandler implements AutoTransferHandler {
         return Result.createNotApplicable();
     }
 
+    /**
+     * Transfer item stack.
+     *
+     * @param container    the container
+     * @param input        the input
+     * @param playerEntity the player entity
+     * @param isShifting   the is shifting
+     */
     public void transferItemStack(ScreenHandler container, Ingredient input, ClientPlayerEntity playerEntity, boolean isShifting) {
         // TODO: Figure out how to finalize slot transfer
         // TODO: Copy player inventory and find applicable item to transfer

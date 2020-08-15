@@ -65,6 +65,9 @@ import net.minecraft.world.World;
 
 import java.awt.*;
 
+/**
+ * The type Registry helper.
+ */
 public class RegistryHelper {
     // Blocks
     public static final Block CLEAR_GLASS = new ClearGlass();
@@ -217,6 +220,9 @@ public class RegistryHelper {
     public static final Identifier TELEPORTER_TELEPORTS_SOUND_IDENTIFIER = new Identifier(Main.MODID, "teleporter_teleports");
     public static final SoundEvent TELEPORTER_TELEPORTS_SOUND = new SoundEvent(TELEPORTER_TELEPORTS_SOUND_IDENTIFIER);
 
+    /**
+     * Register.
+     */
     public void register() {
         // Blocks
         registerGeneralBlocks();
@@ -257,6 +263,9 @@ public class RegistryHelper {
         registerSounds();
     }
 
+    /**
+     * Register general blocks.
+     */
     private void registerGeneralBlocks() {
         // Blocks
         Registry.register(Registry.BLOCK, new Identifier(Main.MODID, "clear_glass"), CLEAR_GLASS);
@@ -289,10 +298,16 @@ public class RegistryHelper {
         Registry.register(Registry.BLOCK, new Identifier(Main.MODID, "chorus_energy_cable"), CHORUS_ENERGY_CABLE_BLOCK);
     }
 
+    /**
+     * Register ore blocks.
+     */
     private void registerOreBlocks() {
         Registry.register(Registry.BLOCK, new Identifier(Main.MODID, "cobalt_ore"), COBALT_ORE);
     }
 
+    /**
+     * Register machines.
+     */
     private void registerMachines() {
         // Machines
         Registry.register(Registry.BLOCK, new Identifier(Main.MODID, "teleporter"), TELEPORTER);
@@ -300,6 +315,9 @@ public class RegistryHelper {
         Registry.register(Registry.BLOCK, new Identifier(Main.MODID, "basic_computer"), BASIC_COMPUTER);
     }
 
+    /**
+     * Register general items.
+     */
     private void registerGeneralItems() {
         // Items
         Registry.register(Registry.ITEM, new Identifier(Main.MODID, Manual.itemID), MANUAL);
@@ -312,6 +330,9 @@ public class RegistryHelper {
         Registry.register(Registry.ITEM, new Identifier(Main.MODID, "death_ingot"), DEATH_INGOT);
     }
 
+    /**
+     * Register tools.
+     */
     private void registerTools() {
         // Tools
         Registry.register(Registry.ITEM, new Identifier(Main.MODID, "powered_sword"), POWERED_SWORD);
@@ -321,6 +342,9 @@ public class RegistryHelper {
         Registry.register(Registry.ITEM, new Identifier(Main.MODID, "powered_hoe"), POWERED_HOE);
     }
 
+    /**
+     * Register buckets.
+     */
     private void registerBuckets() {
         // Buckets
         Registry.register(Registry.ITEM, new Identifier(Main.MODID, "experience_bucket"), EXPERIENCE_BUCKET);
@@ -330,6 +354,9 @@ public class RegistryHelper {
         Registry.register(Registry.ITEM, new Identifier(Main.MODID, "cobalt_bucket"), COBALT_BUCKET);
     }
 
+    /**
+     * Register armor.
+     */
     private void registerArmor() {
         // Armor
         Registry.register(Registry.ITEM, new Identifier(Main.MODID, "powered_helmet"), new PoweredHelmet(POWERED_ARMOR_MATERIAL, EquipmentSlot.HEAD, new Item.Settings().group(ItemGroup.COMBAT)));
@@ -338,6 +365,9 @@ public class RegistryHelper {
         Registry.register(Registry.ITEM, new Identifier(Main.MODID, "powered_boots"), new PoweredBoots(POWERED_ARMOR_MATERIAL, EquipmentSlot.FEET, new Item.Settings().group(ItemGroup.COMBAT)));
     }
 
+    /**
+     * Register general item blocks.
+     */
     private void registerGeneralItemBlocks() {
         // ItemBlocks
         Registry.register(Registry.ITEM, new Identifier(Main.MODID, "clear_glass"), new BlockItem(CLEAR_GLASS, new Item.Settings().group(ItemGroup.DECORATIONS)));
@@ -367,10 +397,16 @@ public class RegistryHelper {
         Registry.register(Registry.ITEM, new Identifier(Main.MODID, "chorus_energy_cable"), new BlockItem(CHORUS_ENERGY_CABLE_BLOCK, new Item.Settings().group(MACHINERY_GROUP)));
     }
 
+    /**
+     * Register ore item blocks.
+     */
     private void registerOreItemBlocks() {
         Registry.register(Registry.ITEM, new Identifier(Main.MODID, "cobalt_ore"), new BlockItem(COBALT_ORE, new Item.Settings().group(ItemGroup.MATERIALS)));
     }
 
+    /**
+     * Register machine item blocks.
+     */
     private void registerMachineItemBlocks() {
         // ItemBlocks Machines
         Registry.register(Registry.ITEM, new Identifier(Main.MODID, "teleporter"), new BlockItem(TELEPORTER, new Item.Settings().group(MACHINERY_GROUP)));
@@ -378,11 +414,17 @@ public class RegistryHelper {
         // Registry.register(Registry.ITEM, new Identifier(Main.MODID, "basic_computer"), new BlockItem(BASIC_COMPUTER, new Item.Settings().group(MACHINERY_GROUP))); // Add to Machine Group When Basic Computer is Usable
     }
 
+    /**
+     * Register special block items.
+     */
     private void registerSpecialBlockItems() {
         Registry.register(Registry.ITEM, new Identifier(Main.MODID, "virtual_tile"), VIRTUAL_TILE);
         Registry.register(Registry.ITEM, new Identifier(Main.MODID, "bottled_demon"), BOTTLED_DEMON);
     }
 
+    /**
+     * Register fluids.
+     */
     private void registerFluids() {
         // Flowing Fluids
         Registry.register(Registry.FLUID, new Identifier(Main.MODID, "experience_flowing"), EXPERIENCE_FLUID_FLOWING);
@@ -406,11 +448,17 @@ public class RegistryHelper {
         Registry.register(Registry.BLOCK, new Identifier(Main.MODID, "cobalt"), COBALT_FLUID_BLOCK);
     }
 
+    /**
+     * Register fuel.
+     */
     private void registerFuel() {
         // Fuel
         // FuelRegistry.INSTANCE.add(EDIBLE_POWER, 20*10); // 20*3 = 0.3 Items According to REI
     }
 
+    /**
+     * Register entities.
+     */
     private void registerEntities() {
         // Entity Types
         Registry.register(Registry.ENTITY_TYPE, new Identifier(Main.MODID, "wizard"), WIZARD);
@@ -421,22 +469,34 @@ public class RegistryHelper {
         FabricDefaultAttributeRegistry.register(CLOUD_DEMON, CloudDemonEntity.createHostileAttributes());
     }
 
+    /**
+     * Register spawn eggs.
+     */
     private void registerSpawnEggs() {
         // Spawn Eggs
         Registry.register(Registry.ITEM, new Identifier(Main.MODID, "wizard_spawn_egg"), WIZARD_SPAWN_EGG);
         Registry.register(Registry.ITEM, new Identifier(Main.MODID, "cloud_demon_spawn_egg"), CLOUD_DEMON_SPAWN_EGG);
     }
 
+    /**
+     * Register chunk generators.
+     */
     private void registerChunkGenerators() {
         // Chunk Generators
         Registry.register(Registry.CHUNK_GENERATOR, voidGenerator, VoidChunkGenerator.CODEC);
     }
 
-    // Dimensions are actually registered as JSON files now. So, we just set up the chunk generator and player placement code.
+    /**
+     * Register dimensions.
+     */
+// Dimensions are actually registered as JSON files now. So, we just set up the chunk generator and player placement code.
     private void registerDimensions() {
         FabricDimensions.registerDefaultPlacer(voidDimension, VoidDimensionHelper::placeEntityInVoid);
     }
 
+    /**
+     * Register sounds.
+     */
     private void registerSounds() {
         // Sounds
         Registry.register(Registry.SOUND_EVENT, TELEPORTER_TELEPORTS_SOUND_IDENTIFIER, TELEPORTER_TELEPORTS_SOUND);

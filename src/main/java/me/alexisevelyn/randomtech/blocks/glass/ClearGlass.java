@@ -6,10 +6,16 @@ import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.AbstractGlassBlock;
 import net.minecraft.sound.BlockSoundGroup;
 
+/**
+ * The type Clear glass.
+ */
 public class ClearGlass extends AbstractGlassBlock {
 //    public static DirectionProperty FACING = Properties.HORIZONTAL_FACING;
 //    public static final IntProperty CONNECTED_TEXTURE = IntProperty.of("connected", 0, 46);
 
+    /**
+     * Instantiates a new Clear glass.
+     */
     public ClearGlass() {
         super(FabricBlockSettings
                 .of(Materials.GLASS_MATERIAL)

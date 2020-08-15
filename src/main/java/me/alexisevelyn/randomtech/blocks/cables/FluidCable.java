@@ -19,13 +19,24 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import reborncore.common.powerSystem.PowerAcceptorBlockEntity;
 
+/**
+ * The type Fluid cable.
+ */
 public class FluidCable extends GenericCable {
-    // Generic Instantiation of FluidCable with Default Shape
+    /**
+     * Instantiates a new Fluid cable.
+     */
+// Generic Instantiation of FluidCable with Default Shape
     public FluidCable() {
         this(null);
     }
 
-    // I may create more than one cable with this class, so I'm putting extra constructors here
+    /**
+     * Instantiates a new Fluid cable.
+     *
+     * @param genericShape the generic shape
+     */
+// I may create more than one cable with this class, so I'm putting extra constructors here
     // Generic Instantiation of FluidCable with Custom Shape
     public FluidCable(@Nullable VoxelShape genericShape) {
         this(FabricBlockSettings
@@ -40,21 +51,52 @@ public class FluidCable extends GenericCable {
                 .ticksRandomly(), genericShape);
     }
 
-    // For customizing block settings while only supplying one shape
+    /**
+     * Instantiates a new Fluid cable.
+     *
+     * @param settings     the settings
+     * @param genericShape the generic shape
+     */
+// For customizing block settings while only supplying one shape
     public FluidCable(@NotNull Settings settings, @Nullable VoxelShape genericShape) {
         this(settings, genericShape, genericShape, genericShape, null);
     }
 
-    // For full control over cable shapes
+    /**
+     * Instantiates a new Fluid cable.
+     *
+     * @param settings       the settings
+     * @param outlinedShape  the outlined shape
+     * @param visualShape    the visual shape
+     * @param collisionShape the collision shape
+     * @param cullingShapes  the culling shapes
+     */
+// For full control over cable shapes
     public FluidCable(@NotNull Settings settings, @Nullable VoxelShape outlinedShape, @Nullable VoxelShape visualShape, @Nullable VoxelShape collisionShape, @Nullable VoxelShape[] cullingShapes) {
         super(settings, outlinedShape, visualShape, collisionShape, cullingShapes);
     }
 
+    /**
+     * Is instance of cable boolean.
+     *
+     * @param block    the block
+     * @param world    the world
+     * @param blockPos the block pos
+     * @return the boolean
+     */
     @Override
     public boolean isInstanceOfCable(Block block, WorldAccess world, BlockPos blockPos) {
         return block instanceof FluidCable;
     }
 
+    /**
+     * Is instance of interfaceable block boolean.
+     *
+     * @param block    the block
+     * @param world    the world
+     * @param blockPos the block pos
+     * @return the boolean
+     */
     @Override
     public boolean isInstanceOfInterfaceableBlock(Block block, WorldAccess world, BlockPos blockPos) {
         if (block instanceof FluidMachineBase)
@@ -64,6 +106,15 @@ public class FluidCable extends GenericCable {
         return world.getBlockEntity(blockPos) instanceof FluidMachineBlockEntityBase;
     }
 
+    /**
+     * Is valid side boolean.
+     *
+     * @param block    the block
+     * @param world    the world
+     * @param blockPos the block pos
+     * @param side     the side
+     * @return the boolean
+     */
     @Override
     public boolean isValidSide(Block block, WorldAccess world, BlockPos blockPos, Direction side) {
         return true;

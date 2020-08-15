@@ -39,6 +39,9 @@ import org.lwjgl.glfw.GLFW;
 
 import java.util.function.Function;
 
+/**
+ * The type Client registry helper.
+ */
 public class ClientRegistryHelper {
     private static final ManagedShaderEffect GRAYSCALE_SHADER = ShaderEffectManager.getInstance()
             .manage(new Identifier(Main.MODID, "shaders/post/grayscale.json"));
@@ -52,6 +55,9 @@ public class ClientRegistryHelper {
             Main.MODID + ".keybinds" // The translation key of the keybinding's category.
     );
 
+    /**
+     * Register.
+     */
     public void register() {
         // Register Configuration Screen for Mod Menu
         AutoConfig.register(MainScreen.class, GsonConfigSerializer::new);
@@ -72,12 +78,18 @@ public class ClientRegistryHelper {
         shaderSetup();
     }
 
+    /**
+     * Entity setup.
+     */
     private void entitySetup() {
         EntityRendererRegistry.INSTANCE.register(RegistryHelper.WIZARD, (dispatcher, context) -> new WizardRenderer(dispatcher));
 
         EntityRendererRegistry.INSTANCE.register(RegistryHelper.CLOUD_DEMON, (dispatcher, context) -> new CloudDemonRenderer(dispatcher));
     }
 
+    /**
+     * Block setup.
+     */
     private void blockSetup() {
         // Makes Glass Translucent
         BlockRenderLayerMap.INSTANCE.putBlock(RegistryHelper.CLEAR_GLASS, RenderLayer.getCutout());
@@ -105,6 +117,9 @@ public class ClientRegistryHelper {
         BlockRenderLayerMap.INSTANCE.putBlock(RegistryHelper.ENERGY_CABLE_BLOCK, RenderLayer.getTranslucent());
     }
 
+    /**
+     * Fluid setup.
+     */
     private void fluidSetup() {
         // Color is the HTML Color Code Formatted as 0xHTML-Color-Code. For example, #4CC248 becomes 0x4CC248
         setupFluidRendering(RegistryHelper.REDSTONE_FLUID, RegistryHelper.REDSTONE_FLUID_FLOWING, new Identifier(Main.MODID, "redstone"));
@@ -121,12 +136,27 @@ public class ClientRegistryHelper {
         BlockRenderLayerMap.INSTANCE.putFluids(RenderLayer.getSolid(), RegistryHelper.COBALT_FLUID, RegistryHelper.HONEY_FLUID_FLOWING);
     }
 
-    // From Tutorial at https://fabricmc.net/wiki/tutorial:fluids
+    /**
+     * Sets fluid rendering.
+     *
+     * @param still          the still
+     * @param flowing        the flowing
+     * @param textureFluidId the texture fluid id
+     */
+// From Tutorial at https://fabricmc.net/wiki/tutorial:fluids
     private static void setupFluidRendering(final Fluid still, final Fluid flowing, final Identifier textureFluidId) {
         setupFluidRendering(still, flowing, textureFluidId, 0xFFFFFF);
     }
 
-    // From Tutorial at https://fabricmc.net/wiki/tutorial:fluids
+    /**
+     * Sets fluid rendering.
+     *
+     * @param still          the still
+     * @param flowing        the flowing
+     * @param textureFluidId the texture fluid id
+     * @param color          the color
+     */
+// From Tutorial at https://fabricmc.net/wiki/tutorial:fluids
     private static void setupFluidRendering(final Fluid still, final Fluid flowing, final Identifier textureFluidId, @SuppressWarnings("SameParameterValue") final int color) {
         final Identifier stillSpriteId = new Identifier(textureFluidId.getNamespace(), "block/liquids/" + textureFluidId.getPath() + "/" + textureFluidId.getPath() + "_still");
         final Identifier flowingSpriteId = new Identifier(textureFluidId.getNamespace(), "block/liquids/" + textureFluidId.getPath() + "/" + textureFluidId.getPath() + "_flow");
@@ -176,10 +206,16 @@ public class ClientRegistryHelper {
         FluidRenderHandlerRegistry.INSTANCE.register(flowing, renderHandler);
     }
 
+    /**
+     * Keybind setup.
+     */
     private void keybindSetup() {
         KeyBindingHelper.registerKeyBinding(poweredHelmetZoom);
     }
 
+    /**
+     * Shader setup.
+     */
     private void shaderSetup() {
         ShaderEffectRenderCallback.EVENT.register(tickDelta -> {
             if (grayscaleEnabled) {

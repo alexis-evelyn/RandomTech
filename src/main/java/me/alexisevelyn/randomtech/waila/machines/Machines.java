@@ -22,9 +22,20 @@ import reborncore.common.util.Tank;
 
 import java.util.List;
 
+/**
+ * The type Machines.
+ */
 public class Machines implements IComponentProvider, IServerDataProvider<BlockEntity> {
     public static final Machines INSTANCE = new Machines();
 
+    /**
+     * Append server data.
+     *
+     * @param compoundTag        the compound tag
+     * @param serverPlayerEntity the server player entity
+     * @param world              the world
+     * @param blockEntity        the block entity
+     */
     @Override
     public void appendServerData(CompoundTag compoundTag, ServerPlayerEntity serverPlayerEntity, World world, BlockEntity blockEntity) {
         // Only Sync Energy Data When Player is Looking at Block With Hywla Active
@@ -34,16 +45,37 @@ public class Machines implements IComponentProvider, IServerDataProvider<BlockEn
         }
     }
 
+    /**
+     * Gets stack.
+     *
+     * @param accessor the accessor
+     * @param config   the config
+     * @return the stack
+     */
     @Override
     public ItemStack getStack(IDataAccessor accessor, IPluginConfig config) {
         return null;
     }
 
+    /**
+     * Append head.
+     *
+     * @param tooltip  the tooltip
+     * @param accessor the accessor
+     * @param config   the config
+     */
     @Override
     public void appendHead(List<Text> tooltip, IDataAccessor accessor, IPluginConfig config) {
 
     }
 
+    /**
+     * Append body.
+     *
+     * @param tooltip  the tooltip
+     * @param accessor the accessor
+     * @param config   the config
+     */
     @Override
     public void appendBody(List<Text> tooltip, IDataAccessor accessor, IPluginConfig config) {
         boolean configDisplayPower = config.get(WailaRegistry.CONFIG_DISPLAY_POWER, true);
@@ -92,6 +124,13 @@ public class Machines implements IComponentProvider, IServerDataProvider<BlockEn
         }
     }
 
+    /**
+     * Append tail.
+     *
+     * @param tooltip  the tooltip
+     * @param accessor the accessor
+     * @param config   the config
+     */
     @Override
     public void appendTail(List<Text> tooltip, IDataAccessor accessor, IPluginConfig config) {
 

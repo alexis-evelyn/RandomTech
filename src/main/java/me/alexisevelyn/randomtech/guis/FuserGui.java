@@ -14,6 +14,9 @@ import reborncore.client.gui.builder.GuiBase;
 import reborncore.client.gui.guibuilder.GuiBuilder;
 import reborncore.client.screen.builder.BuiltScreenHandler;
 
+/**
+ * The type Fuser gui.
+ */
 @Environment(EnvType.CLIENT)
 public class FuserGui extends GuiBase<BuiltScreenHandler> implements ContainerInfo<BuiltScreenHandler> {
     final FuserBlockEntity blockEntity;
@@ -60,11 +63,26 @@ public class FuserGui extends GuiBase<BuiltScreenHandler> implements ContainerIn
     public static final int arrowX = ingredientSlotX + inputSlotX + (inputSlotX/2);
     public static final int arrowY = ingredientSlotY + (inputSlotY - 5);
 
+    /**
+     * Instantiates a new Fuser gui.
+     *
+     * @param syncID      the sync id
+     * @param player      the player
+     * @param blockEntity the block entity
+     */
     public FuserGui(int syncID, PlayerEntity player, FuserBlockEntity blockEntity) {
         super(player, blockEntity, blockEntity.createScreenHandler(syncID, player));
         this.blockEntity = blockEntity;
     }
 
+    /**
+     * Draw background.
+     *
+     * @param matrixStack       the matrix stack
+     * @param lastFrameDuration the last frame duration
+     * @param mouseX            the mouse x
+     * @param mouseY            the mouse y
+     */
     @Override
     protected void drawBackground(MatrixStack matrixStack, float lastFrameDuration, int mouseX, int mouseY) {
         super.drawBackground(matrixStack, lastFrameDuration, mouseX, mouseY);
@@ -79,6 +97,13 @@ public class FuserGui extends GuiBase<BuiltScreenHandler> implements ContainerIn
         drawSlot(matrixStack, fullFluidContainerSlotX, fullFluidContainerSlotY, layer); // Full Fluid Container (Output)
     }
 
+    /**
+     * Draw foreground.
+     *
+     * @param matrixStack the matrix stack
+     * @param mouseX      the mouse x
+     * @param mouseY      the mouse y
+     */
     @Override
     protected void drawForeground(MatrixStack matrixStack, int mouseX, int mouseY) {
         // The ordering of these gui elements is bottom right first to top left last.
@@ -95,31 +120,65 @@ public class FuserGui extends GuiBase<BuiltScreenHandler> implements ContainerIn
         builder.drawMultiEnergyBar(matrixStack, this, multiEnergyBarX, multiEnergyBarY, (int) blockEntity.getEnergy(), (int) blockEntity.getMaxPower(), mouseX, mouseY, 0, layer);
     }
 
+    /**
+     * Gets container class.
+     *
+     * @return the container class
+     */
     @Override
     public Class<? extends ScreenHandler> getContainerClass() {
         return null;
     }
 
+    /**
+     * Gets crafting result slot index.
+     *
+     * @param container the container
+     * @return the crafting result slot index
+     */
     @Override
     public int getCraftingResultSlotIndex(BuiltScreenHandler container) {
         return 0; // The slot is actually 0, not just me forgetting about it.
     }
 
+    /**
+     * Gets crafting width.
+     *
+     * @param container the container
+     * @return the crafting width
+     */
     @Override
     public int getCraftingWidth(BuiltScreenHandler container) {
         return 1;
     }
 
+    /**
+     * Gets crafting height.
+     *
+     * @param container the container
+     * @return the crafting height
+     */
     @Override
     public int getCraftingHeight(BuiltScreenHandler container) {
         return 1;
     }
 
+    /**
+     * Clear crafting slots.
+     *
+     * @param container the container
+     */
     @Override
     public void clearCraftingSlots(BuiltScreenHandler container) {
         // Do Nothing For Now!!!
     }
 
+    /**
+     * Populate recipe finder.
+     *
+     * @param container the container
+     * @param var1      the var 1
+     */
     @Override
     public void populateRecipeFinder(BuiltScreenHandler container, RecipeFinder var1) {
         // container.getSlot(0);

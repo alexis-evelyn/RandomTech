@@ -5,12 +5,18 @@ import me.alexisevelyn.randomtech.utility.registryhelpers.server.ServerPreRegist
 import me.alexisevelyn.randomtech.utility.registryhelpers.server.ServerRegistryHelper;
 import net.fabricmc.api.DedicatedServerModInitializer;
 
+/**
+ * The type Main server.
+ */
 public class MainServer implements DedicatedServerModInitializer {
 	final protected ServerPreRegistryHelper serverPreRegistryHelper = new ServerPreRegistryHelper();
 	final protected ServerPostRegistryHelper serverPostRegistryHelper = new ServerPostRegistryHelper();
 	final protected ServerRegistryHelper serverRegistryHelper = new ServerRegistryHelper();
 
-	@Override
+    /**
+     * On initialize server.
+     */
+    @Override
 	public void onInitializeServer() {
 		// Server Side Only!!!
 

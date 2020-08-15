@@ -12,8 +12,16 @@ import net.minecraft.item.Item;
 // Video at Timestamp: https://youtu.be/lf5yLC25LNk?t=1430 (23:50)
 // Desh Ingot: https://ftbwiki.org/Desh_Ingot_(Galacticraft)
 
+/**
+ * The type Death ingot.
+ */
 // This death ingot will most likely be the purest black that can be portrayed in Minecraft
 public class DeathIngot extends Item {
+    /**
+     * Instantiates a new Death ingot.
+     *
+     * @param settings the settings
+     */
     public DeathIngot(Settings settings) {
         super(settings);
     }

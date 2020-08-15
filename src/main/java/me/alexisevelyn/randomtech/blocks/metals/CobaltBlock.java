@@ -8,7 +8,13 @@ import net.fabricmc.fabric.api.tool.attribute.v1.FabricToolTags;
 import net.minecraft.block.Block;
 import net.minecraft.sound.BlockSoundGroup;
 
+/**
+ * The type Cobalt block.
+ */
 public class CobaltBlock extends Block {
+    /**
+     * Instantiates a new Cobalt block.
+     */
     public CobaltBlock() {
         super(FabricBlockSettings
                 .of(Materials.METAL_ORE_MATERIAL)

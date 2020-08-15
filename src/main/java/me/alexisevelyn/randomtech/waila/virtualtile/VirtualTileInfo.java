@@ -15,19 +15,43 @@ import net.minecraft.text.TranslatableText;
 import java.awt.*;
 import java.util.List;
 
+/**
+ * The type Virtual tile info.
+ */
 public class VirtualTileInfo implements IComponentProvider {
     public static final VirtualTileInfo INSTANCE = new VirtualTileInfo();
 
+    /**
+     * Gets stack.
+     *
+     * @param accessor the accessor
+     * @param config   the config
+     * @return the stack
+     */
     @Override
     public ItemStack getStack(IDataAccessor accessor, IPluginConfig config) {
         return null;
     }
 
+    /**
+     * Append head.
+     *
+     * @param tooltip  the tooltip
+     * @param accessor the accessor
+     * @param config   the config
+     */
     @Override
     public void appendHead(List<Text> tooltip, IDataAccessor accessor, IPluginConfig config) {
 
     }
 
+    /**
+     * Append body.
+     *
+     * @param tooltip  the tooltip
+     * @param accessor the accessor
+     * @param config   the config
+     */
     @Override
     public void appendBody(List<Text> tooltip, IDataAccessor accessor, IPluginConfig config) {
         boolean configDisplayColor = config.get(WailaRegistry.CONFIG_DISPLAY_COLOR, true);
@@ -48,6 +72,13 @@ public class VirtualTileInfo implements IComponentProvider {
         }
     }
 
+    /**
+     * Append tail.
+     *
+     * @param tooltip  the tooltip
+     * @param accessor the accessor
+     * @param config   the config
+     */
     @Override
     public void appendTail(List<Text> tooltip, IDataAccessor accessor, IPluginConfig config) {
 

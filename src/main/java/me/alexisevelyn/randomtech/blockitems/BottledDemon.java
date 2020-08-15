@@ -21,18 +21,41 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 import java.util.function.ToIntFunction;
 
+/**
+ * The type Bottled demon.
+ */
 public class BottledDemon extends BlockItem {
+    /**
+     * Instantiates a new Bottled demon.
+     *
+     * @param block    the block
+     * @param settings the settings
+     */
     public BottledDemon(Block block, Settings settings) {
         super(block, settings);
     }
 
+    /**
+     * Append tooltip.
+     *
+     * @param stack   the stack
+     * @param worldIn the world in
+     * @param tooltip the tooltip
+     * @param flagIn  the flag in
+     */
     @Environment(EnvType.CLIENT)
     @Override
     public void appendTooltip(ItemStack stack, @Nullable World worldIn, List<Text> tooltip, TooltipContext flagIn) {
         // TODO: Add info about captured cloud demon
     }
 
+    /**
+     * The type Bottled demon block.
+     */
     public static class BottledDemonBlock extends Block {
+        /**
+         * Instantiates a new Bottled demon block.
+         */
         public BottledDemonBlock() {
             super(FabricBlockSettings
                     .of(Materials.TILE_MATERIAL)
@@ -47,6 +70,11 @@ public class BottledDemon extends BlockItem {
                     .lightLevel(getLightLevel()));
         }
 
+        /**
+         * Gets light level.
+         *
+         * @return the light level
+         */
         public static ToIntFunction<BlockState> getLightLevel() {
             return (state) -> 0; // 7?
         }

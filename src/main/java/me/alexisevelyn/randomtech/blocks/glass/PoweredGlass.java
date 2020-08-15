@@ -9,8 +9,14 @@ import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.BlockView;
 
+/**
+ * The type Powered glass.
+ */
 public class PoweredGlass extends BasePoweredGlass {
-   public PoweredGlass() {
+    /**
+     * Instantiates a new Powered glass.
+     */
+    public PoweredGlass() {
         super(FabricBlockSettings
                 .of(Materials.GLASS_MATERIAL)
                 .sounds(BlockSoundGroup.GLASS)
@@ -22,6 +28,14 @@ public class PoweredGlass extends BasePoweredGlass {
                 .strength(0.3F, 0.3F));
     }
 
+    /**
+     * Gets opacity.
+     *
+     * @param state the state
+     * @param world the world
+     * @param pos   the pos
+     * @return the opacity
+     */
     @Override
     public int getOpacity(BlockState state, BlockView world, BlockPos pos) {
         if (state.get(POWER) > 0)

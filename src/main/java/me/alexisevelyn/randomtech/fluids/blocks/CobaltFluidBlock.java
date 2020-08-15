@@ -12,13 +12,29 @@ import net.minecraft.fluid.FlowableFluid;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
+/**
+ * The type Cobalt fluid block.
+ */
 public class CobaltFluidBlock extends BaseFluidBlock {
+    /**
+     * Instantiates a new Cobalt fluid block.
+     *
+     * @param fluid the fluid
+     */
     public CobaltFluidBlock(FlowableFluid fluid) {
         super(fluid, FabricBlockSettings
                 .copy(Blocks.LAVA)
                 .lightLevel(getLightLevel()));
     }
 
+    /**
+     * On entity collision.
+     *
+     * @param state  the state
+     * @param world  the world
+     * @param pos    the pos
+     * @param entity the entity
+     */
     @Override
     public void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity) {
         if (!entity.isFireImmune()) {
@@ -27,14 +43,29 @@ public class CobaltFluidBlock extends BaseFluidBlock {
         }
     }
 
+    /**
+     * Apply effects.
+     *
+     * @param livingEntity the living entity
+     */
     public void applyEffects(LivingEntity livingEntity) {
 
     }
 
+    /**
+     * Apply shader.
+     *
+     * @param playerEntity the player entity
+     */
     public void applyShader(PlayerEntity playerEntity) {
 
     }
 
+    /**
+     * Remove shader.
+     *
+     * @param playerEntity the player entity
+     */
     public void removeShader(PlayerEntity playerEntity) {
 
     }

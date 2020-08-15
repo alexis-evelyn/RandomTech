@@ -20,6 +20,9 @@ import net.fabricmc.api.ModInitializer;
  * Check if a block needs silk touch for right click info on pickaxe
  */
 
+/**
+ * The type Main.
+ */
 // This runs on both the server and the client
 public class Main implements ModInitializer {
 	public static final String MODID = "randomtech";
@@ -28,7 +31,10 @@ public class Main implements ModInitializer {
 	final protected PostRegistryHelper postRegistryHelper = new PostRegistryHelper();
 	final protected RegistryHelper registryHelper = new RegistryHelper();
 
-	@Override
+    /**
+     * On initialize.
+     */
+    @Override
 	public void onInitialize() {
 		// Client and Server Side!!!
 

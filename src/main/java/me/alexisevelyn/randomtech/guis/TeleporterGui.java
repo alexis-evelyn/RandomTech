@@ -11,6 +11,9 @@ import reborncore.client.gui.builder.GuiBase;
 import reborncore.client.gui.guibuilder.GuiBuilder;
 import reborncore.client.screen.builder.BuiltScreenHandler;
 
+/**
+ * The type Teleporter gui.
+ */
 @Environment(EnvType.CLIENT)
 public class TeleporterGui extends GuiBase<BuiltScreenHandler> {
     final TeleporterBlockEntity blockEntity;
@@ -35,11 +38,26 @@ public class TeleporterGui extends GuiBase<BuiltScreenHandler> {
     public static final int linkerSlotX = 8;
     public static final int linkerSlotY = 72;
 
+    /**
+     * Instantiates a new Teleporter gui.
+     *
+     * @param syncID      the sync id
+     * @param player      the player
+     * @param blockEntity the block entity
+     */
     public TeleporterGui(int syncID, PlayerEntity player, TeleporterBlockEntity blockEntity) {
         super(player, blockEntity, blockEntity.createScreenHandler(syncID, player));
         this.blockEntity = blockEntity;
     }
 
+    /**
+     * Draw background.
+     *
+     * @param matrixStack       the matrix stack
+     * @param lastFrameDuration the last frame duration
+     * @param mouseX            the mouse x
+     * @param mouseY            the mouse y
+     */
     @Override
     protected void drawBackground(MatrixStack matrixStack, float lastFrameDuration, int mouseX, int mouseY) {
         super.drawBackground(matrixStack, lastFrameDuration, mouseX, mouseY);
@@ -48,6 +66,13 @@ public class TeleporterGui extends GuiBase<BuiltScreenHandler> {
         drawSlot(matrixStack, linkerSlotX, linkerSlotY, layer);
     }
 
+    /**
+     * Draw foreground.
+     *
+     * @param matrixStack the matrix stack
+     * @param mouseX      the mouse x
+     * @param mouseY      the mouse y
+     */
     @Override
     protected void drawForeground(MatrixStack matrixStack, int mouseX, int mouseY) {
         super.drawForeground(matrixStack, mouseX, mouseY);

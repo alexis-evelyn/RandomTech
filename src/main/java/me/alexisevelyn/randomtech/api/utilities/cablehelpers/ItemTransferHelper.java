@@ -21,7 +21,19 @@ import org.jetbrains.annotations.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The type Item transfer helper.
+ */
 public class ItemTransferHelper {
+    /**
+     * Gets transferrable neighbors.
+     *
+     * @param ourCable    the our cable
+     * @param world       the world
+     * @param ourPosition the our position
+     * @param itemStack   the item stack
+     * @return the transferrable neighbors
+     */
     public static List<BlockPos> getTransferrableNeighbors(@NotNull GenericCable ourCable, @NotNull World world, @NotNull BlockPos ourPosition, @NotNull ItemStack itemStack) {
         ArrayList<BlockPos> neighbors = new ArrayList<>();
 
@@ -43,6 +55,14 @@ public class ItemTransferHelper {
         return neighbors;
     }
 
+    /**
+     * Transfer item stacks item stack.
+     *
+     * @param neighborInventory the neighbor inventory
+     * @param neighborSlot      the neighbor slot
+     * @param ourItemStack      the our item stack
+     * @return the item stack
+     */
     @NotNull
     public static ItemStack transferItemStacks(@NotNull Inventory neighborInventory, int neighborSlot, @NotNull ItemStack ourItemStack) {
         ItemStack neighborStack = retrieveItemStack(neighborInventory, neighborSlot);
@@ -64,6 +84,13 @@ public class ItemTransferHelper {
         return ourItemStack;
     }
 
+    /**
+     * Merge stacks item stack.
+     *
+     * @param neighborStack the neighbor stack
+     * @param ourItemStack  the our item stack
+     * @return the item stack
+     */
     @NotNull
     public static ItemStack mergeStacks(@NotNull ItemStack neighborStack, @NotNull ItemStack ourItemStack) {
         int neighborStackMaxCount = neighborStack.getMaxCount();
@@ -82,6 +109,13 @@ public class ItemTransferHelper {
         return ourItemStack;
     }
 
+    /**
+     * Sets stack.
+     *
+     * @param inventory the inventory
+     * @param itemStack the item stack
+     * @param slot      the slot
+     */
     private static void setStack(@NotNull Inventory inventory, @NotNull ItemStack itemStack, int slot) {
         if (slot < 0)
             return;
@@ -93,6 +127,13 @@ public class ItemTransferHelper {
         itemStack.setCount(0);
     }
 
+    /**
+     * Retrieve item stack item stack.
+     *
+     * @param inventory the inventory
+     * @param slot      the slot
+     * @return the item stack
+     */
     @Nullable
     public static ItemStack retrieveItemStack(@NotNull Inventory inventory, int slot) {
         if (inventory.size() <= slot)
@@ -101,6 +142,13 @@ public class ItemTransferHelper {
         return inventory.getStack(slot);
     }
 
+    /**
+     * Has item stack boolean.
+     *
+     * @param inventory the inventory
+     * @param slot      the slot
+     * @return the boolean
+     */
     public static boolean hasItemStack(@NotNull Inventory inventory, int slot) {
         ItemStack temporaryStack = retrieveItemStack(inventory, slot);
 
@@ -110,6 +158,12 @@ public class ItemTransferHelper {
         return !temporaryStack.isEmpty();
     }
 
+    /**
+     * Get slots int [ ].
+     *
+     * @param inventory the inventory
+     * @return the int [ ]
+     */
     // I might move this somewhere else
     @NotNull
     public static int[] getSlots(ItemCableInventory inventory) {
@@ -121,6 +175,13 @@ public class ItemTransferHelper {
         return slots;
     }
 
+    /**
+     * Gets cable block entity.
+     *
+     * @param world    the world
+     * @param blockPos the block pos
+     * @return the cable block entity
+     */
     @Nullable
     public static ItemCableBlockEntity getCableBlockEntity(@NotNull WorldAccess world, BlockPos blockPos) {
         BlockEntity neighborBlockEntity = world.getBlockEntity(blockPos);
@@ -131,6 +192,13 @@ public class ItemTransferHelper {
         return (ItemCableBlockEntity) neighborBlockEntity;
     }
 
+    /**
+     * Gets cable block.
+     *
+     * @param world    the world
+     * @param blockPos the block pos
+     * @return the cable block
+     */
     @Nullable
     public static ItemCable getCableBlock(@NotNull World world, BlockPos blockPos) {
         Block neighborBlock = world.getBlockState(blockPos).getBlock();
@@ -141,6 +209,14 @@ public class ItemTransferHelper {
         return (ItemCable) neighborBlock;
     }
 
+    /**
+     * Try transfer to container.
+     *
+     * @param ourCable  the our cable
+     * @param world     the world
+     * @param position  the position
+     * @param itemStack the item stack
+     */
     public static void tryTransferToContainer(@NotNull GenericCable ourCable, @NotNull World world, @NotNull BlockPos position, @NotNull ItemStack itemStack) {
         List<BlockPos> neighbors = getTransferrableNeighbors(ourCable, world, position, itemStack);
 
@@ -162,6 +238,15 @@ public class ItemTransferHelper {
         world.updateComparators(position, world.getBlockState(position).getBlock());
     }
 
+    /**
+     * Try transfer to inventory provider.
+     *
+     * @param world             the world
+     * @param ourPosition       the our position
+     * @param neighborPosition  the neighbor position
+     * @param inventoryProvider the inventory provider
+     * @param itemStack         the item stack
+     */
     @SuppressWarnings("DuplicatedCode")
     private static void tryTransferToInventoryProvider(@NotNull World world, @NotNull BlockPos ourPosition, @NotNull BlockPos neighborPosition, @NotNull InventoryProvider inventoryProvider, @NotNull ItemStack itemStack) {
         // Block - These are supposed to have proper SidedInventories, but are not guaranteed to (even if they say they do).
@@ -198,6 +283,14 @@ public class ItemTransferHelper {
         }
     }
 
+    /**
+     * Try transfer to inventory.
+     *
+     * @param world     the world
+     * @param position  the position
+     * @param inventory the inventory
+     * @param itemStack the item stack
+     */
     @SuppressWarnings("DuplicatedCode")
     private static void tryTransferToInventory(@NotNull World world, @NotNull BlockPos position, @NotNull Inventory inventory, @NotNull ItemStack itemStack) {
         // Block Entity
@@ -237,13 +330,25 @@ public class ItemTransferHelper {
         inventory.markDirty();
     }
 
+    /**
+     * Is inventory provider boolean.
+     *
+     * @param object the object
+     * @return the boolean
+     */
     // Composter (Block) is an inventory provider
     // Only blocks are supposed to be inventory providers.
     public static boolean isInventoryProvider(Object object) {
         return object instanceof InventoryProvider;
     }
 
-    // ChestBlockEntity (BlockEntity) and HopperBlockEntity (BlockEntity) is an Inventory
+    /**
+     * Is inventory boolean.
+     *
+     * @param object the object
+     * @return the boolean
+     */
+// ChestBlockEntity (BlockEntity) and HopperBlockEntity (BlockEntity) is an Inventory
     // Only block entities are supposed to be inventories.
     public static boolean isInventory(Object object) {
         return object instanceof Inventory;

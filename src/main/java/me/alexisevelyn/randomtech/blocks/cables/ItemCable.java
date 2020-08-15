@@ -27,13 +27,24 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Random;
 
+/**
+ * The type Item cable.
+ */
 public class ItemCable extends GenericCable implements BlockEntityProvider, InventoryProvider {
-    // Generic Instantiation of ItemCable with Default Shape
+    /**
+     * Instantiates a new Item cable.
+     */
+// Generic Instantiation of ItemCable with Default Shape
     public ItemCable() {
         this(null);
     }
 
-    // I may create more than one cable with this class, so I'm putting extra constructors here
+    /**
+     * Instantiates a new Item cable.
+     *
+     * @param genericShape the generic shape
+     */
+// I may create more than one cable with this class, so I'm putting extra constructors here
     // Generic Instantiation of ItemCable with Custom Shape
     public ItemCable(@Nullable VoxelShape genericShape) {
         this(FabricBlockSettings
@@ -48,17 +59,41 @@ public class ItemCable extends GenericCable implements BlockEntityProvider, Inve
                 .ticksRandomly(), genericShape);
     }
 
-    // For customizing block settings while only supplying one shape
+    /**
+     * Instantiates a new Item cable.
+     *
+     * @param settings     the settings
+     * @param genericShape the generic shape
+     */
+// For customizing block settings while only supplying one shape
     public ItemCable(@NotNull Settings settings, @Nullable VoxelShape genericShape) {
         this(settings, genericShape, genericShape, genericShape, null);
     }
 
-    // For full control over cable shapes
+    /**
+     * Instantiates a new Item cable.
+     *
+     * @param settings       the settings
+     * @param outlinedShape  the outlined shape
+     * @param visualShape    the visual shape
+     * @param collisionShape the collision shape
+     * @param cullingShapes  the culling shapes
+     */
+// For full control over cable shapes
     public ItemCable(@NotNull Settings settings, @Nullable VoxelShape outlinedShape, @Nullable VoxelShape visualShape, @Nullable VoxelShape collisionShape, @Nullable VoxelShape[] cullingShapes) {
         super(settings, outlinedShape, visualShape, collisionShape, cullingShapes);
     }
 
-    // Used to make the cable drop its contents when broken
+    /**
+     * On state replaced.
+     *
+     * @param state    the state
+     * @param world    the world
+     * @param pos      the pos
+     * @param newState the new state
+     * @param moved    the moved
+     */
+// Used to make the cable drop its contents when broken
     @Override
     public void onStateReplaced(BlockState state, World world, BlockPos pos, BlockState newState, boolean moved) {
         BlockEntity blockEntity = world.getBlockEntity(pos); // Retrieve and store block entity for further processing
@@ -77,24 +112,56 @@ public class ItemCable extends GenericCable implements BlockEntityProvider, Inve
         ItemScatterer.spawn(world, pos, itemCableBlockEntity.getInventory(state, world, pos));
     }
 
-    // For Backend Use (Can be used for visual/auditory stuff too) - Server Side and Client Side
+    /**
+     * Random tick.
+     *
+     * @param state  the state
+     * @param world  the world
+     * @param pos    the pos
+     * @param random the random
+     */
+// For Backend Use (Can be used for visual/auditory stuff too) - Server Side and Client Side
     @Override
     public void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
         super.randomTick(state, world, pos, random);
     }
 
-    // For Visual Use Only - Client Side Only
+    /**
+     * Random display tick.
+     *
+     * @param state  the state
+     * @param world  the world
+     * @param pos    the pos
+     * @param random the random
+     */
+// For Visual Use Only - Client Side Only
     @Override
     @Environment(EnvType.CLIENT)
     public void randomDisplayTick(BlockState state, World world, BlockPos pos, Random random) {
         super.randomDisplayTick(state, world, pos, random);
     }
 
+    /**
+     * Is instance of cable boolean.
+     *
+     * @param block    the block
+     * @param world    the world
+     * @param blockPos the block pos
+     * @return the boolean
+     */
     @Override
     public boolean isInstanceOfCable(Block block, WorldAccess world, BlockPos blockPos) {
         return block instanceof ItemCable;
     }
 
+    /**
+     * Is instance of interfaceable block boolean.
+     *
+     * @param block    the block
+     * @param world    the world
+     * @param blockPos the block pos
+     * @return the boolean
+     */
     @Override
     public boolean isInstanceOfInterfaceableBlock(Block block, WorldAccess world, BlockPos blockPos) {
         // Cables get checked beforehand and are not a part of this check.
@@ -108,6 +175,15 @@ public class ItemCable extends GenericCable implements BlockEntityProvider, Inve
         return world.getBlockEntity(blockPos) instanceof Inventory;
     }
 
+    /**
+     * Is valid side boolean.
+     *
+     * @param block    the block
+     * @param world    the world
+     * @param blockPos the block pos
+     * @param side     the side
+     * @return the boolean
+     */
     @Override
     public boolean isValidSide(Block block, WorldAccess world, BlockPos blockPos, Direction side) {
         if (block instanceof InventoryProvider) {
@@ -140,6 +216,12 @@ public class ItemCable extends GenericCable implements BlockEntityProvider, Inve
         return blockEntity instanceof Inventory;
     }
 
+    /**
+     * Create block entity block entity.
+     *
+     * @param world the world
+     * @return the block entity
+     */
     @Override
     public BlockEntity createBlockEntity(BlockView world) {
         // I don't believe createBlockEntity is called while the world is null.
@@ -149,18 +231,40 @@ public class ItemCable extends GenericCable implements BlockEntityProvider, Inve
         return new ItemCableBlockEntity();
     }
 
+    /**
+     * Has comparator output boolean.
+     *
+     * @param state the state
+     * @return the boolean
+     */
     @SuppressWarnings("deprecation")
     @Override
     public boolean hasComparatorOutput(BlockState state) {
         return true;
     }
 
+    /**
+     * Gets comparator output.
+     *
+     * @param state the state
+     * @param world the world
+     * @param pos   the pos
+     * @return the comparator output
+     */
     @Override
     @SuppressWarnings("deprecation") // https://discordapp.com/channels/507304429255393322/523633816078647296/740720404800209041
     public int getComparatorOutput(BlockState state, World world, BlockPos pos) {
         return ScreenHandler.calculateComparatorOutput(getInventory(state, world, pos));
     }
 
+    /**
+     * Gets inventory.
+     *
+     * @param state the state
+     * @param world the world
+     * @param pos   the pos
+     * @return the inventory
+     */
     public SidedInventory getInventory(BlockState state, WorldAccess world, BlockPos pos) {
         BlockEntity blockEntity = world.getBlockEntity(pos);
 
@@ -170,6 +274,17 @@ public class ItemCable extends GenericCable implements BlockEntityProvider, Inve
         return null;
     }
 
+    /**
+     * Gets state for neighbor update.
+     *
+     * @param state     the state
+     * @param direction the direction
+     * @param newState  the new state
+     * @param world     the world
+     * @param pos       the pos
+     * @param posFrom   the pos from
+     * @return the state for neighbor update
+     */
     @Override
     public BlockState getStateForNeighborUpdate(BlockState state, Direction direction, BlockState newState, WorldAccess world, BlockPos pos, BlockPos posFrom) {
         // Attaching a new cable or interfaceable block will block update the current cables and may expand the network.
@@ -180,6 +295,12 @@ public class ItemCable extends GenericCable implements BlockEntityProvider, Inve
         return super.getStateForNeighborUpdate(state, direction, newState, world, pos, posFrom);
     }
 
+    /**
+     * Tick cable.
+     *
+     * @param world    the world
+     * @param blockPos the block pos
+     */
     public void tickCable(World world, BlockPos blockPos) {
         BlockEntity blockEntity = world.getBlockEntity(blockPos);
 

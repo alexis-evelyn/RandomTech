@@ -8,6 +8,9 @@ import reborncore.api.IToolDrop;
 import reborncore.api.blockentity.InventoryProvider;
 import reborncore.client.screen.BuiltScreenHandlerProvider;
 
+/**
+ * The type Generic computer block entity.
+ */
 public abstract class GenericComputerBlockEntity extends BasePowerAcceptorBlockEntity implements IToolDrop, InventoryProvider, BuiltScreenHandlerProvider {
     // Inventory Slot Markers
     final int inputSlot = 0;
@@ -15,17 +18,32 @@ public abstract class GenericComputerBlockEntity extends BasePowerAcceptorBlockE
 
     final Block block;
 
+    /**
+     * Instantiates a new Generic computer block entity.
+     *
+     * @param block           the block
+     * @param blockEntityType the block entity type
+     */
     public GenericComputerBlockEntity(Block block, BlockEntityType<?> blockEntityType) {
         super(blockEntityType);
         this.block = block;
     }
 
-    // Used for TR's Wrench
+    /**
+     * Gets tool drop.
+     *
+     * @param playerEntity the player entity
+     * @return the tool drop
+     */
+// Used for TR's Wrench
     @Override
     public ItemStack getToolDrop(PlayerEntity playerEntity) {
         return new ItemStack(this.block);
     }
 
+    /**
+     * Tick.
+     */
     @Override
     public void tick() {
         super.tick();

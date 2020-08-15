@@ -25,9 +25,17 @@ import org.jetbrains.annotations.Nullable;
 import reborncore.api.blockentity.IMachineGuiHandler;
 import reborncore.client.screen.builder.BuiltScreenHandler;
 
+/**
+ * The type Basic computer gui handler.
+ *
+ * @param <BasicComputerGui> the type parameter
+ */
 public class BasicComputerGuiHandler<BasicComputerGui> implements IMachineGuiHandler {
     private final ScreenHandlerType<BuiltScreenHandler> screenHandlerType;
 
+    /**
+     * Instantiates a new Basic computer gui handler.
+     */
     public BasicComputerGuiHandler() {
         ScreenHandlerRegistry.ExtendedClientHandlerFactory<BuiltScreenHandler> screenHandlerFactory = new ScreenHandlerFactory().getScreenHandlerFactory();
         screenHandlerType = ScreenHandlerRegistry.registerExtended(new Identifier(Main.MODID, "basic_computer_gui_handler"), screenHandlerFactory);
@@ -38,6 +46,11 @@ public class BasicComputerGuiHandler<BasicComputerGui> implements IMachineGuiHan
         }
     }
 
+    /**
+     * Gets gui factory.
+     *
+     * @return the gui factory
+     */
     @SuppressWarnings("unchecked") // The Unchecked Casts are in fact correctly casted. There's no way to properly check it afaik.
     private GuiFactory getGuiFactory() {
         // Responsible For Allowing The Gui to Be Linked to The Block Entity
@@ -48,6 +61,13 @@ public class BasicComputerGuiHandler<BasicComputerGui> implements IMachineGuiHan
         };
     }
 
+    /**
+     * Open.
+     *
+     * @param player the player
+     * @param pos    the pos
+     * @param world  the world
+     */
     @Override
     public void open(PlayerEntity player, BlockPos pos, World world) {
         player.openHandledScreen(new ExtendedScreenHandlerFactory() {

@@ -16,10 +16,21 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import java.util.Iterator;
 import java.util.List;
 
+/**
+ * The type Table enchant helper mixin.
+ */
 @SuppressWarnings("UnusedMixin") // The mixin is used, just is loaded by Fabric and not Sponge methods
 @Mixin(EnchantmentHelper.class)
 public abstract class TableEnchantHelperMixin {
-	// Cancellable must be allowed, otherwise the game crashes when trying to modify the return value
+	/**
+	 * Gets possible entries.
+	 *
+	 * @param power           the power
+	 * @param itemStack       the item stack
+	 * @param treasureAllowed the treasure allowed
+	 * @param info            the info
+	 */
+// Cancellable must be allowed, otherwise the game crashes when trying to modify the return value
 	@Inject(at = @At("TAIL"), method = "getPossibleEntries(ILnet/minecraft/item/ItemStack;Z)Ljava/util/List;", cancellable = true)
 	private static void getPossibleEntries(int power, ItemStack itemStack, boolean treasureAllowed, CallbackInfoReturnable<List<EnchantmentLevelEntry>> info) {
 		// Only mess with enchantment table (and other enchanted loot generation) if our items.
@@ -40,6 +51,15 @@ public abstract class TableEnchantHelperMixin {
 		info.setReturnValue(customAllowedEnchants);
 	}
 
+	/**
+	 * Should add enchantment int.
+	 *
+	 * @param itemStack     the item stack
+	 * @param enchantment   the enchantment
+	 * @param power         the power
+	 * @param allowTreasure the allow treasure
+	 * @return the int
+	 */
 	private static int shouldAddEnchantment(ItemStack itemStack, Enchantment enchantment, int power, boolean allowTreasure) {
 		if (CustomEnchantmentHelper.isValidEnchantment(itemStack, enchantment.type) != CustomEnchantmentHelper.ValidEnchant.TRUE)
 			return -1;

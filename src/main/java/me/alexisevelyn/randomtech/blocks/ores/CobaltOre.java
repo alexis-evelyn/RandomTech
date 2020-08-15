@@ -15,7 +15,13 @@ import net.minecraft.world.gen.decorator.RangeDecoratorConfig;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.OreFeatureConfig;
 
+/**
+ * The type Cobalt ore.
+ */
 public class CobaltOre extends Block {
+    /**
+     * Instantiates a new Cobalt ore.
+     */
     public CobaltOre() {
         super(FabricBlockSettings
                 .of(Materials.METAL_ORE_MATERIAL)
@@ -29,6 +35,11 @@ public class CobaltOre extends Block {
                 .strength(10.0F, 11.0F));
     }
 
+    /**
+     * Add ore feature.
+     *
+     * @param biome the biome
+     */
     public static void addOreFeature(Biome biome) {
         // Don't Add Ore to Nether or End
         if (biome.getCategory() != Biome.Category.NETHER && biome.getCategory() != Biome.Category.THEEND) {

@@ -39,6 +39,9 @@ import org.jetbrains.annotations.Nullable;
 import java.util.*;
 import java.util.function.Consumer;
 
+/**
+ * The type Generic cable.
+ */
 public abstract class GenericCable extends Block implements Waterloggable {
     public static EnumProperty<CableConnection> CABLE_CONNECTION_NORTH = EnumProperty.of("north", CableConnection.class, CableConnection.NONE, CableConnection.CABLE, CableConnection.INTERFACEABLE);
     public static EnumProperty<CableConnection> CABLE_CONNECTION_SOUTH = EnumProperty.of("south", CableConnection.class, CableConnection.NONE, CableConnection.CABLE, CableConnection.INTERFACEABLE);
@@ -64,21 +67,48 @@ public abstract class GenericCable extends Block implements Waterloggable {
     private final VoxelShape COLLISION_SHAPE;
     private final VoxelShape[] CULLING_SHAPES;
 
+    /**
+     * Instantiates a new Generic cable.
+     *
+     * @param settings the settings
+     */
     @SuppressWarnings("unused")
     public GenericCable(@NotNull Settings settings) {
         this(settings, null, null, null, null);
     }
 
+    /**
+     * Instantiates a new Generic cable.
+     *
+     * @param settings     the settings
+     * @param genericShape the generic shape
+     */
     @SuppressWarnings("unused")
     public GenericCable(@NotNull Settings settings, @Nullable VoxelShape genericShape) {
         this(settings, genericShape, genericShape, genericShape, null);
     }
 
+    /**
+     * Instantiates a new Generic cable.
+     *
+     * @param settings      the settings
+     * @param genericShape  the generic shape
+     * @param cullingShapes the culling shapes
+     */
     @SuppressWarnings("unused")
     public GenericCable(@NotNull Settings settings, @Nullable VoxelShape genericShape, @Nullable VoxelShape[] cullingShapes) {
         this(settings, genericShape, genericShape, genericShape, cullingShapes);
     }
 
+    /**
+     * Instantiates a new Generic cable.
+     *
+     * @param settings       the settings
+     * @param outlinedShape  the outlined shape
+     * @param visualShape    the visual shape
+     * @param collisionShape the collision shape
+     * @param cullingShapes  the culling shapes
+     */
     public GenericCable(@NotNull Settings settings, @Nullable VoxelShape outlinedShape, @Nullable VoxelShape visualShape, @Nullable VoxelShape collisionShape, @Nullable VoxelShape[] cullingShapes) {
         super(settings);
 
@@ -98,28 +128,74 @@ public abstract class GenericCable extends Block implements Waterloggable {
         this.CULLING_SHAPES = cullingShapes;
     }
 
+    /**
+     * Append properties.
+     *
+     * @param builder the builder
+     */
     @Override
     protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
         builder.add(CABLE_CONNECTION_NORTH, CABLE_CONNECTION_SOUTH, CABLE_CONNECTION_EAST, CABLE_CONNECTION_WEST, CABLE_CONNECTION_UP, CABLE_CONNECTION_DOWN, WATERLOGGED);
     }
 
-    // This is to make sure that we only connect to the proper cable instance.
+    /**
+     * Is instance of cable boolean.
+     *
+     * @param block    the block
+     * @param world    the world
+     * @param blockPos the block pos
+     * @return the boolean
+     */
+// This is to make sure that we only connect to the proper cable instance.
     // If you really want, you can connect to any cable by just checking if it's an instance of GenericCable.
     // Don't expect it to look right though if the other cable doesn't do the same.
     public abstract boolean isInstanceOfCable(Block block, WorldAccess world, BlockPos blockPos);
 
-    // This is to make sure that we only connect to blocks that are supposed to connect to this cable.
+    /**
+     * Is instance of interfaceable block boolean.
+     *
+     * @param block    the block
+     * @param world    the world
+     * @param blockPos the block pos
+     * @return the boolean
+     */
+// This is to make sure that we only connect to blocks that are supposed to connect to this cable.
     public abstract boolean isInstanceOfInterfaceableBlock(Block block, WorldAccess world, BlockPos blockPos);
 
-    // This is to make sure that we only connect to blocks that are supposed to connect to this cable.
+    /**
+     * Is valid side boolean.
+     *
+     * @param block    the block
+     * @param world    the world
+     * @param blockPos the block pos
+     * @param side     the side
+     * @return the boolean
+     */
+// This is to make sure that we only connect to blocks that are supposed to connect to this cable.
     public abstract boolean isValidSide(Block block, WorldAccess world, BlockPos blockPos, Direction side);
 
+    /**
+     * On placed.
+     *
+     * @param world     the world
+     * @param pos       the pos
+     * @param state     the state
+     * @param placer    the placer
+     * @param itemStack the item stack
+     */
     @Override
     public void onPlaced(World world, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack itemStack) {
         // Responsible for Visually Connecting Cables Together
         setupCableStates(world, pos, state);
     }
 
+    /**
+     * On broken.
+     *
+     * @param world the world
+     * @param pos   the pos
+     * @param state the state
+     */
     @Override
     public void onBroken(WorldAccess world, BlockPos pos, BlockState state) {
         super.onBroken(world, pos, state);
@@ -128,7 +204,18 @@ public abstract class GenericCable extends Block implements Waterloggable {
         setupCableStates(world, pos, state, true);
     }
 
-    // This runs for every block update that occurs to the cables
+    /**
+     * Gets state for neighbor update.
+     *
+     * @param state     the state
+     * @param direction the direction
+     * @param newState  the new state
+     * @param world     the world
+     * @param pos       the pos
+     * @param posFrom   the pos from
+     * @return the state for neighbor update
+     */
+// This runs for every block update that occurs to the cables
     @Override
     public BlockState getStateForNeighborUpdate(BlockState state, Direction direction, BlockState newState, WorldAccess world, BlockPos pos, BlockPos posFrom) {
         // Try to support generic fluids if possible
@@ -139,21 +226,48 @@ public abstract class GenericCable extends Block implements Waterloggable {
         return setupCableStates(world, pos, state);
     }
 
-    // Override this to change the message text
+    /**
+     * Gets no interfaceable cables text.
+     *
+     * @return the no interfaceable cables text
+     */
+// Override this to change the message text
     public Text getNoInterfaceableCablesText() {
         return new TranslatableText(Main.MODID + ".no_interfaceable_cables_found");
     }
 
-    // Override this to change the message text
+    /**
+     * Gets cable position header text.
+     *
+     * @return the cable position header text
+     */
+// Override this to change the message text
     public Text getCablePositionHeaderText() {
         return new TranslatableText(Main.MODID + ".cable_position_header");
     }
 
-    // Override this to change the message text
+    /**
+     * Gets cable position text.
+     *
+     * @param cablePos the cable pos
+     * @return the cable position text
+     */
+// Override this to change the message text
     public Text getCablePositionText(BlockPos cablePos) {
         return new TranslatableText(Main.MODID + ".cable_position", cablePos.getX(), cablePos.getY(), cablePos.getZ());
     }
 
+    /**
+     * On use action result.
+     *
+     * @param state  the state
+     * @param world  the world
+     * @param pos    the pos
+     * @param player the player
+     * @param hand   the hand
+     * @param hit    the hit
+     * @return the action result
+     */
     @Override
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
         // So player has to click with an empty hand. This makes it easy to place blocks against the cable.
@@ -185,6 +299,13 @@ public abstract class GenericCable extends Block implements Waterloggable {
         return ActionResult.CONSUME;
     }
 
+    /**
+     * Gets all interfacing cables.
+     *
+     * @param world the world
+     * @param pos   the pos
+     * @return the all interfacing cables
+     */
     public List<BlockPos> getAllInterfacingCables(@NotNull WorldAccess world, @NotNull BlockPos pos) {
         List<BlockPos> knownCables = getAllCables(world, pos);
 
@@ -196,6 +317,13 @@ public abstract class GenericCable extends Block implements Waterloggable {
         return getAllInterfacingCables(world, knownCables);
     }
 
+    /**
+     * Gets all interfacing cables.
+     *
+     * @param world       the world
+     * @param knownCables the known cables
+     * @return the all interfacing cables
+     */
     public List<BlockPos> getAllInterfacingCables(@NotNull WorldAccess world, @NotNull List<BlockPos> knownCables) {
         List<BlockPos> interfacingCables = new ArrayList<>();
 
@@ -207,6 +335,13 @@ public abstract class GenericCable extends Block implements Waterloggable {
         return interfacingCables;
     }
 
+    /**
+     * Gets all cables.
+     *
+     * @param world the world
+     * @param pos   the pos
+     * @return the all cables
+     */
     public List<BlockPos> getAllCables(@NotNull WorldAccess world, @NotNull BlockPos pos) {
         Set<BlockPos> passedCables = new HashSet<>();
         List<BlockPos> knownCables = new ArrayList<>();
@@ -215,10 +350,29 @@ public abstract class GenericCable extends Block implements Waterloggable {
         return knownCables;
     }
 
+    /**
+     * Visit neighbors.
+     *
+     * @param world        the world
+     * @param pos          the pos
+     * @param passedCables the passed cables
+     * @param visitor      the visitor
+     * @param maxCount     the max count
+     */
     private void visitNeighbors(@NotNull WorldAccess world, @NotNull BlockPos pos, @NotNull Set<BlockPos> passedCables, @NotNull Consumer<BlockPos> visitor, int maxCount) {
         visitNeighbors(world, pos, passedCables, visitor, 0, maxCount);
     }
 
+    /**
+     * Visit neighbors.
+     *
+     * @param world        the world
+     * @param pos          the pos
+     * @param passedCables the passed cables
+     * @param visitor      the visitor
+     * @param counter      the counter
+     * @param maxCount     the max count
+     */
     private void visitNeighbors(@NotNull WorldAccess world, @NotNull BlockPos pos, @NotNull Set<BlockPos> passedCables, @NotNull Consumer<BlockPos> visitor, int counter, int maxCount) {
         if (counter >= maxCount)
             return;
@@ -241,6 +395,12 @@ public abstract class GenericCable extends Block implements Waterloggable {
         }
     }
 
+    /**
+     * Is interfacing boolean.
+     *
+     * @param blockState the block state
+     * @return the boolean
+     */
     public boolean isInterfacing(@NotNull BlockState blockState) {
         return blockState.get(CABLE_CONNECTION_NORTH).equals(CableConnection.INTERFACEABLE) ||
                 blockState.get(CABLE_CONNECTION_SOUTH).equals(CableConnection.INTERFACEABLE) ||
@@ -250,6 +410,13 @@ public abstract class GenericCable extends Block implements Waterloggable {
                 blockState.get(CABLE_CONNECTION_DOWN).equals(CableConnection.INTERFACEABLE);
     }
 
+    /**
+     * Gets valid neighbors.
+     *
+     * @param world the world
+     * @param pos   the pos
+     * @return the valid neighbors
+     */
     private List<BlockPos> getValidNeighbors(@NotNull WorldAccess world, @NotNull BlockPos pos) {
         BlockPos north, south, east, west, up, down;
         BlockState northBlockState, southBlockState, eastBlockState, westBlockState, upBlockState, downBlockState;
@@ -306,6 +473,14 @@ public abstract class GenericCable extends Block implements Waterloggable {
         return cables;
     }
 
+    /**
+     * Is neighbor valid for continuance boolean.
+     *
+     * @param world              the world
+     * @param neighborBlockState the neighbor block state
+     * @param neighborPos        the neighbor pos
+     * @return the boolean
+     */
     private boolean isNeighborValidForContinuance(@NotNull WorldAccess world, @NotNull BlockState neighborBlockState, @NotNull BlockPos neighborPos) {
         if (!isInstanceOfCable(neighborBlockState.getBlock(), world, neighborPos))
             return false;
@@ -329,7 +504,14 @@ public abstract class GenericCable extends Block implements Waterloggable {
         return isViable >= 2;
     }
 
-    // This is so the IDE will shutup about duplicate code.
+    /**
+     * Gets is viable.
+     *
+     * @param neighborConnection the neighbor connection
+     * @param isViable           the is viable
+     * @return the is viable
+     */
+// This is so the IDE will shutup about duplicate code.
     private int getIsViable(@NotNull CableConnection neighborConnection, int isViable) {
         if (neighborConnection.equals(CableConnection.CABLE) || neighborConnection.equals(CableConnection.INTERFACEABLE)) {
             isViable++;
@@ -338,6 +520,19 @@ public abstract class GenericCable extends Block implements Waterloggable {
         return isViable;
     }
 
+    /**
+     * Sets cable state.
+     *
+     * @param ourBlockState      the our block state
+     * @param neighborBlockState the neighbor block state
+     * @param ourProperty        the our property
+     * @param neighborProperty   the neighbor property
+     * @param world              the world
+     * @param ourPos             the our pos
+     * @param neighborPos        the neighbor pos
+     * @param broken             the broken
+     * @return the cable state
+     */
     protected BlockState setCableState(BlockState ourBlockState, BlockState neighborBlockState, EnumProperty<CableConnection> ourProperty, EnumProperty<CableConnection> neighborProperty, WorldAccess world, BlockPos ourPos, BlockPos neighborPos, boolean broken) {
         if (isInstanceOfCable(ourBlockState.getBlock(), world, ourPos) && !broken) {
             if (isInstanceOfCable(neighborBlockState.getBlock(), world, neighborPos)) {
@@ -360,10 +555,27 @@ public abstract class GenericCable extends Block implements Waterloggable {
         return world.getBlockState(ourPos);
     }
 
+    /**
+     * Sets cable states.
+     *
+     * @param world the world
+     * @param pos   the pos
+     * @param state the state
+     * @return the cable states
+     */
     protected BlockState setupCableStates(WorldAccess world, BlockPos pos, BlockState state) {
         return setupCableStates(world, pos, state, false);
     }
 
+    /**
+     * Sets cable states.
+     *
+     * @param world  the world
+     * @param pos    the pos
+     * @param state  the state
+     * @param broken the broken
+     * @return the cable states
+     */
     protected BlockState setupCableStates(WorldAccess world, BlockPos pos, BlockState state, boolean broken) {
         // Neighbor Positions
         BlockPos north = CalculationHelper.addVectors(pos, northVector);
@@ -392,12 +604,27 @@ public abstract class GenericCable extends Block implements Waterloggable {
         return state;
     }
 
-    // Used to visually indicate if waterlogged
+    /**
+     * Gets fluid state.
+     *
+     * @param state the state
+     * @return the fluid state
+     */
+// Used to visually indicate if waterlogged
     @Override
     public FluidState getFluidState(BlockState state) {
         return state.get(WATERLOGGED) ? Fluids.WATER.getStill(false) : super.getFluidState(state);
     }
 
+    /**
+     * Gets outline shape.
+     *
+     * @param state   the state
+     * @param world   the world
+     * @param pos     the pos
+     * @param context the context
+     * @return the outline shape
+     */
     @Override
     public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
         if (this.OUTLINED_SHAPE == null)
@@ -406,6 +633,14 @@ public abstract class GenericCable extends Block implements Waterloggable {
         return this.OUTLINED_SHAPE;
     }
 
+    /**
+     * Gets culling shape.
+     *
+     * @param state the state
+     * @param world the world
+     * @param pos   the pos
+     * @return the culling shape
+     */
     @Override
     public VoxelShape getCullingShape(BlockState state, BlockView world, BlockPos pos) {
         if (this.CULLING_SHAPES == null)
@@ -414,6 +649,15 @@ public abstract class GenericCable extends Block implements Waterloggable {
         return this.CULLING_SHAPES[this.getShapeIndex(state)];
     }
 
+    /**
+     * Gets visual shape.
+     *
+     * @param state   the state
+     * @param world   the world
+     * @param pos     the pos
+     * @param context the context
+     * @return the visual shape
+     */
     @Override
     public VoxelShape getVisualShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
         if (this.VISUAL_SHAPE == null)
@@ -422,6 +666,15 @@ public abstract class GenericCable extends Block implements Waterloggable {
         return this.VISUAL_SHAPE;
     }
 
+    /**
+     * Gets collision shape.
+     *
+     * @param state   the state
+     * @param world   the world
+     * @param pos     the pos
+     * @param context the context
+     * @return the collision shape
+     */
     @Override
     public VoxelShape getCollisionShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
         if (this.COLLISION_SHAPE == null)
@@ -430,10 +683,24 @@ public abstract class GenericCable extends Block implements Waterloggable {
         return this.COLLISION_SHAPE;
     }
 
+    /**
+     * Gets shape index.
+     *
+     * @param state the state
+     * @return the shape index
+     */
     public int getShapeIndex(BlockState state) {
         return 0;
     }
 
+    /**
+     * Dijkstra algorithm vertex path.
+     *
+     * @param currentKnownCables    the current known cables
+     * @param startingBlockPosition the starting block position
+     * @param endingBlockPosition   the ending block position
+     * @return the vertex path
+     */
     @NotNull
     public static VertexPath dijkstraAlgorithm(List<BlockPos> currentKnownCables, BlockPos startingBlockPosition, BlockPos endingBlockPosition) {
         List<Vertex> nodes = new ArrayList<>();
@@ -470,11 +737,27 @@ public abstract class GenericCable extends Block implements Waterloggable {
         return dijkstraAlgorithm.getPath(endingPosition);
     }
 
+    /**
+     * Add lane.
+     *
+     * @param nodes       the nodes
+     * @param edges       the edges
+     * @param laneId      the lane id
+     * @param source      the source
+     * @param destination the destination
+     * @param weight      the weight
+     */
     private static void addLane(List<Vertex> nodes, List<Edge> edges, String laneId, int source, int destination, int weight) {
         Edge lane = new Edge(laneId, nodes.get(source), nodes.get(destination), weight);
         edges.add(lane);
     }
 
+    /**
+     * Gets cable name.
+     *
+     * @param blockPos the block pos
+     * @return the cable name
+     */
     private static String getCableName(BlockPos blockPos) {
         return "(" + blockPos.getX() + ", " + blockPos.getY() + ", " + blockPos.getZ() + ")";
     }

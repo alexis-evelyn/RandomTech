@@ -22,13 +22,30 @@ import java.util.List;
 
 // This mixin is a 2 in 1. It handles making unbreakable blocks breakable and allows fixing the mining animation for dead tools to not occur.
 
+/**
+ * The type Breakable blocks mixin.
+ */
 @SuppressWarnings("UnusedMixin") // The mixin is used, just is loaded by Fabric and not Sponge methods
 @Mixin(AbstractBlock.class)
 public abstract class BreakableBlocksMixin {
+	/**
+	 * Gets loot table id.
+	 *
+	 * @return the loot table id
+	 */
 	@Shadow @Final public abstract Identifier getLootTableId();
 
 	@Shadow @Final protected AbstractBlock.Settings settings;
 
+	/**
+	 * Calc block breaking delta.
+	 *
+	 * @param state  the state
+	 * @param player the player
+	 * @param world  the world
+	 * @param pos    the pos
+	 * @param info   the info
+	 */
 	@Inject(at = @At("INVOKE"), method = "calcBlockBreakingDelta(Lnet/minecraft/block/BlockState;Lnet/minecraft/entity/player/PlayerEntity;Lnet/minecraft/world/BlockView;Lnet/minecraft/util/math/BlockPos;)F", cancellable = true)
 	public void calcBlockBreakingDelta(BlockState state, PlayerEntity player, BlockView world, BlockPos pos, CallbackInfoReturnable<Float> info) {
 		float blockHardness = state.getHardness(world, pos);
@@ -65,6 +82,12 @@ public abstract class BreakableBlocksMixin {
 		info.setReturnValue(player.getBlockBreakingSpeed(state) / blockHardness / effectiveToolMultiplier);
 	}
 
+	/**
+	 * Disable animation for dead tool boolean.
+	 *
+	 * @param itemStack the item stack
+	 * @return the boolean
+	 */
 	public boolean disableAnimationForDeadTool(ItemStack itemStack) {
 		if (itemStack.getItem() instanceof GenericPoweredTool) {
 			GenericPoweredTool genericPoweredTool = (GenericPoweredTool) itemStack.getItem();
@@ -74,13 +97,26 @@ public abstract class BreakableBlocksMixin {
 		return false;
 	}
 
+	/**
+	 * Is denied block boolean.
+	 *
+	 * @param block the block
+	 * @return the boolean
+	 */
 	public boolean isDeniedBlock(Block block) {
 		// This is to remove the visual indication of denied blocks which shouldn't be broken in survival.
 		// This would've been blocked anyway later on in the code, but I'd like to remove the visual indication of mining the block
 		return block instanceof CommandBlock || block instanceof StructureBlock || block instanceof JigsawBlock;
 	}
 
-	// Modifies Block Drops
+	/**
+	 * Gets dropped stacks.
+	 *
+	 * @param state   the state
+	 * @param builder the builder
+	 * @param info    the info
+	 */
+// Modifies Block Drops
 	@Inject(at = @At("INVOKE"), method = "getDroppedStacks(Lnet/minecraft/block/BlockState;Lnet/minecraft/loot/context/LootContext$Builder;)Ljava/util/List;", cancellable = true)
 	public void getDroppedStacks(BlockState state, LootContext.Builder builder, CallbackInfoReturnable<List<ItemStack>> info) {
 		Identifier identifier = this.getLootTableId();
@@ -113,6 +149,13 @@ public abstract class BreakableBlocksMixin {
 //		info.cancel();
 //	}
 
+	/**
+	 * Is unbreakable block boolean.
+	 *
+	 * @param blockState the block state
+	 * @param world      the world
+	 * @return the boolean
+	 */
 	public boolean isUnbreakableBlock(BlockState blockState, World world) {
 		// This is a hack. The only reason it works is because getHardness doesn't actually check the world or blockpos.
 		return blockState.getHardness(world, new BlockPos(0, 0, 0)) == -1.0;

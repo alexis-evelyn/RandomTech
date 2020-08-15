@@ -19,13 +19,31 @@ import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import team.reborn.energy.EnergyTier;
 
+/**
+ * The type Powered pickaxe.
+ */
 public class PoweredPickaxe extends GenericPoweredPickaxe {
     private static final String dischargedTranslationKey = "item.randomtech.unpowered_pickaxe";
 
+    /**
+     * Instantiates a new Powered pickaxe.
+     *
+     * @param settings the settings
+     */
     public PoweredPickaxe(Settings settings) {
         super(new PoweredToolMaterial(), 2561, EnergyTier.HIGH, 1, 20, -2.8F, settings, dischargedTranslationKey);
     }
 
+    /**
+     * Post mine boolean.
+     *
+     * @param stack the stack
+     * @param world the world
+     * @param state the state
+     * @param pos   the pos
+     * @param miner the miner
+     * @return the boolean
+     */
     @Override
     public boolean postMine(ItemStack stack, World world, BlockState state, BlockPos pos, LivingEntity miner) {
         // TODO: Decide what to do with mining tool/player when mining unbreakable block.
@@ -37,12 +55,30 @@ public class PoweredPickaxe extends GenericPoweredPickaxe {
         return super.postMine(stack, world, state, pos, miner);
     }
 
+    /**
+     * Can break unbreakable block boolean.
+     *
+     * @param state  the state
+     * @param player the player
+     * @param world  the world
+     * @param pos    the pos
+     * @return the boolean
+     */
     @Override
     public boolean canBreakUnbreakableBlock(BlockState state, PlayerEntity player, BlockView world, BlockPos pos) {
         // TODO: Add Upgrades to Pickaxe and determine if upgrade is installed to allow mining these blocks
         return state.getBlock().is(Blocks.BEDROCK) || state.getBlock().is(Blocks.END_PORTAL_FRAME);
     }
 
+    /**
+     * Gets unbreakable block difficulty multiplier.
+     *
+     * @param state  the state
+     * @param player the player
+     * @param world  the world
+     * @param pos    the pos
+     * @return the unbreakable block difficulty multiplier
+     */
     @Override
     public float getUnbreakableBlockDifficultyMultiplier(BlockState state, PlayerEntity player, BlockView world, BlockPos pos) {
         if (state.getBlock().is(Blocks.BEDROCK))
@@ -51,11 +87,22 @@ public class PoweredPickaxe extends GenericPoweredPickaxe {
         return 1.0F;
     }
 
+    /**
+     * Is fireproof boolean.
+     *
+     * @return the boolean
+     */
     @Override
     public boolean isFireproof() {
         return true;
     }
 
+    /**
+     * Use on block action result.
+     *
+     * @param context the context
+     * @return the action result
+     */
     @Override
     public ActionResult useOnBlock(ItemUsageContext context) {
         PlayerEntity playerEntity = context.getPlayer();
@@ -77,11 +124,24 @@ public class PoweredPickaxe extends GenericPoweredPickaxe {
         return super.useOnBlock(context);
     }
 
+    /**
+     * Is effective on boolean.
+     *
+     * @param state the state
+     * @return the boolean
+     */
     @Override
     public boolean isEffectiveOn(BlockState state) {
         return super.isEffectiveOn(state);
     }
 
+    /**
+     * Gets mining speed multiplier.
+     *
+     * @param stack the stack
+     * @param state the state
+     * @return the mining speed multiplier
+     */
     @Override
     public float getMiningSpeedMultiplier(ItemStack stack, BlockState state) {
         return super.getMiningSpeedMultiplier(stack, state);

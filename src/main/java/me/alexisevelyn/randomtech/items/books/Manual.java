@@ -12,16 +12,32 @@ import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
 import vazkii.patchouli.api.PatchouliAPI;
 
+/**
+ * The type Manual.
+ */
 public class Manual extends Item {
     public static final String itemID = "manual";
 
     final Identifier bookIdentifier = new Identifier(Main.MODID, itemID);
     final Identifier patchouliGuidebookIdentifier = new Identifier("patchouli", "guide_book");
 
+    /**
+     * Instantiates a new Manual.
+     *
+     * @param settings the settings
+     */
     public Manual(Settings settings) {
         super(settings);
     }
 
+    /**
+     * Use typed action result.
+     *
+     * @param world        the world
+     * @param playerEntity the player entity
+     * @param hand         the hand
+     * @return the typed action result
+     */
     @Override
     public TypedActionResult<ItemStack> use(World world, PlayerEntity playerEntity, Hand hand) {
         if (!isPatchouliInstalled()) {
@@ -40,10 +56,20 @@ public class Manual extends Item {
         return new TypedActionResult<>(ActionResult.SUCCESS, playerEntity.getStackInHand(hand));
     }
 
+    /**
+     * Is patchouli installed boolean.
+     *
+     * @return the boolean
+     */
     public boolean isPatchouliInstalled() {
         return Registry.ITEM.getOrEmpty(patchouliGuidebookIdentifier).isPresent();
     }
 
+    /**
+     * Alert failed open.
+     *
+     * @param playerEntity the player entity
+     */
     private void alertFailedOpen(PlayerEntity playerEntity) {
         if (playerEntity == null)
             return;

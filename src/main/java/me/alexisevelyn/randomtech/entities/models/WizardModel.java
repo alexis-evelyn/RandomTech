@@ -9,10 +9,16 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.function.Consumer;
 
+/**
+ * The type Wizard model.
+ */
 // From Tutorial: https://fabricmc.net/wiki/tutorial:entity
 public class WizardModel extends EntityModel<WizardEntity> {
     private final ModelPart base;
 
+    /**
+     * Instantiates a new Wizard model.
+     */
     public WizardModel() {
         this.textureHeight = 64;
         this.textureWidth = 64;
@@ -21,11 +27,33 @@ public class WizardModel extends EntityModel<WizardEntity> {
         base.addCuboid(-6, -6, -6, 12, 12, 12);
     }
 
+    /**
+     * Sets angles.
+     *
+     * @param entity            the entity
+     * @param limbAngle         the limb angle
+     * @param limbDistance      the limb distance
+     * @param animationProgress the animation progress
+     * @param headYaw           the head yaw
+     * @param headPitch         the head pitch
+     */
     @Override
     public void setAngles(WizardEntity entity, float limbAngle, float limbDistance, float animationProgress, float headYaw, float headPitch) {
         // ???
     }
 
+    /**
+     * Render.
+     *
+     * @param matrices the matrices
+     * @param vertices the vertices
+     * @param light    the light
+     * @param overlay  the overlay
+     * @param red      the red
+     * @param green    the green
+     * @param blue     the blue
+     * @param alpha    the alpha
+     */
     @Override
     public void render(MatrixStack matrices, VertexConsumer vertices, int light, int overlay, float red, float green, float blue, float alpha) {
         // translate model down

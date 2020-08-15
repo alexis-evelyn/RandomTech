@@ -11,13 +11,22 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import me.alexisevelyn.randomtech.api.utilities.enchanting.CustomEnchantmentHelper;
 
+/**
+ * The type Anvil enchant helper mixin.
+ */
 @SuppressWarnings("UnusedMixin") // The mixin is used, just is loaded by Fabric and not Sponge methods
 @Mixin(Enchantment.class)
 public abstract class AnvilEnchantHelperMixin {
 
 	@Shadow @Final public EnchantmentTarget type;
 
-	// Cancellable must be allowed, otherwise the game crashes when trying to modify the return value
+	/**
+	 * Is acceptable item.
+	 *
+	 * @param itemStack the item stack
+	 * @param info      the info
+	 */
+// Cancellable must be allowed, otherwise the game crashes when trying to modify the return value
 	@Inject(at = @At("TAIL"), method = "isAcceptableItem(Lnet/minecraft/item/ItemStack;)Z", cancellable = true)
 	private void isAcceptableItem(ItemStack itemStack, CallbackInfoReturnable<Boolean> info) {
 //		System.out.println("---");

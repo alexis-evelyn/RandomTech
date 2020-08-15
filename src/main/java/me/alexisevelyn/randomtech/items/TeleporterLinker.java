@@ -23,12 +23,28 @@ import reborncore.common.chunkloading.ChunkLoaderManager;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * The type Teleporter linker.
+ */
 public class TeleporterLinker extends Item {
 
+    /**
+     * Instantiates a new Teleporter linker.
+     *
+     * @param settings the settings
+     */
     public TeleporterLinker(Settings settings) {
         super(settings);
     }
 
+    /**
+     * Use typed action result.
+     *
+     * @param world        the world
+     * @param playerEntity the player entity
+     * @param hand         the hand
+     * @return the typed action result
+     */
     @Override
     public TypedActionResult<ItemStack> use(World world, PlayerEntity playerEntity, Hand hand) {
         //playerEntity.playSound(SoundEvents.MUSIC_DISC_PIGSTEP, 1.0F, 2.0F);
@@ -47,6 +63,12 @@ public class TeleporterLinker extends Item {
         return new TypedActionResult<>(ActionResult.SUCCESS, playerEntity.getStackInHand(hand));
     }
 
+    /**
+     * Alert position saved.
+     *
+     * @param playerEntity the player entity
+     * @param globalPos    the global pos
+     */
     private void alertPositionSaved(PlayerEntity playerEntity, GlobalPos globalPos) {
         BlockPos blockPos = globalPos.getPos();
 
@@ -64,6 +86,14 @@ public class TeleporterLinker extends Item {
         playerEntity.sendMessage(message, true);
     }
 
+    /**
+     * Append tooltip.
+     *
+     * @param stack   the stack
+     * @param worldIn the world in
+     * @param tooltip the tooltip
+     * @param flagIn  the flag in
+     */
     @Environment(EnvType.CLIENT)
     @Override
     public void appendTooltip(ItemStack stack, @Nullable World worldIn, List<Text> tooltip, TooltipContext flagIn) {
@@ -89,6 +119,12 @@ public class TeleporterLinker extends Item {
         });
     }
 
+    /**
+     * Gets position.
+     *
+     * @param stack the stack
+     * @return the position
+     */
     private Optional<GlobalPos> getPosition(ItemStack stack) {
         if (!stack.hasTag() || !stack.getOrCreateTag().contains("pos"))
             return Optional.empty();

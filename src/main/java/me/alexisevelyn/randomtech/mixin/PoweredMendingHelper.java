@@ -21,6 +21,9 @@ import java.util.Map;
 
 // This mixin makes mending useful for my tools and armor.
 
+/**
+ * The type Powered mending helper.
+ */
 @SuppressWarnings("UnusedMixin") // The mixin is used, just is loaded by Fabric and not Sponge methods
 @Mixin(ExperienceOrbEntity.class)
 public abstract class PoweredMendingHelper extends Entity {
@@ -29,18 +32,64 @@ public abstract class PoweredMendingHelper extends Entity {
 	@Shadow private int amount;
 	@Shadow public int pickupDelay;
 
+	/**
+	 * Gets mending repair amount.
+	 *
+	 * @param experienceAmount the experience amount
+	 * @return the mending repair amount
+	 */
 	@Shadow protected abstract int getMendingRepairAmount(int experienceAmount);
+
+	/**
+	 * Gets mending repair cost.
+	 *
+	 * @param repairAmount the repair amount
+	 * @return the mending repair cost
+	 */
 	@Shadow protected abstract int getMendingRepairCost(int repairAmount);
 
+	/**
+	 * Create spawn packet packet.
+	 *
+	 * @return the packet
+	 */
 	@Shadow public abstract Packet<?> createSpawnPacket();
+
+	/**
+	 * Write custom data to tag.
+	 *
+	 * @param tag the tag
+	 */
 	@Shadow public abstract void writeCustomDataToTag(CompoundTag tag);
+
+	/**
+	 * Read custom data from tag.
+	 *
+	 * @param tag the tag
+	 */
 	@Shadow public abstract void readCustomDataFromTag(CompoundTag tag);
+
+	/**
+	 * Init data tracker.
+	 */
 	@Shadow protected abstract void initDataTracker();
 
+	/**
+	 * Instantiates a new Powered mending helper.
+	 *
+	 * @param type  the type
+	 * @param world the world
+	 */
 	public PoweredMendingHelper(EntityType<?> type, World world) {
 		super(type, world);
 	}
 
+	/**
+	 * On player collision.
+	 *
+	 * @param player the player
+	 * @param info   the info
+	 */
 	@Inject(at = @At("HEAD"), method = "onPlayerCollision(Lnet/minecraft/entity/player/PlayerEntity;)V", cancellable = true)
 	private void onPlayerCollision(PlayerEntity player, CallbackInfo info) {
 		boolean isCancelled = false;
@@ -80,6 +129,12 @@ public abstract class PoweredMendingHelper extends Entity {
 		}
 	}
 
+	/**
+	 * Choose equipment with map . entry.
+	 *
+	 * @param entity the entity
+	 * @return the map . entry
+	 */
 	private static Map.Entry<EquipmentSlot, ItemStack> chooseEquipmentWith(LivingEntity entity) {
 		Map<EquipmentSlot, ItemStack> map = Enchantments.MENDING.getEquipment(entity);
 
@@ -99,6 +154,12 @@ public abstract class PoweredMendingHelper extends Entity {
 		return repairableItemStacks.isEmpty() ? null : repairableItemStacks.get(entity.getRandom().nextInt(repairableItemStacks.size()));
 	}
 
+	/**
+	 * Is in need of repair boolean.
+	 *
+	 * @param itemStack the item stack
+	 * @return the boolean
+	 */
 	private static boolean isInNeedOfRepair(ItemStack itemStack) {
 		if (!(itemStack.getItem() instanceof EnergyHelper))
 			return false;

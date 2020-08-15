@@ -20,12 +20,22 @@ import team.reborn.energy.EnergyTier;
 
 import java.nio.charset.StandardCharsets;
 
+/**
+ * The type Powered helmet.
+ */
 public class PoweredHelmet extends GenericPoweredArmor {
     private static final int energyCapacity = 512;
     private static final EnergyTier energyTier = EnergyTier.HIGH;
     private static final int cost = 1;
     private static final String dischargedTranslationKey = "item.randomtech.unpowered_helmet";
 
+    /**
+     * Instantiates a new Powered helmet.
+     *
+     * @param material the material
+     * @param slot     the slot
+     * @param settings the settings
+     */
     public PoweredHelmet(ArmorMaterial material, EquipmentSlot slot, Settings settings) {
         super(material, slot, energyCapacity, energyTier, cost, settings, dischargedTranslationKey);
 
@@ -34,6 +44,14 @@ public class PoweredHelmet extends GenericPoweredArmor {
             registerZoomKeybindSender();
     }
 
+    /**
+     * Change fov float.
+     *
+     * @param oldFOV       the old fov
+     * @param stack        the stack
+     * @param playerEntity the player entity
+     * @return the float
+     */
     @Override
     public float changeFov(float oldFOV, ItemStack stack, PlayerEntity playerEntity) {
         // This runs client side
@@ -48,11 +66,22 @@ public class PoweredHelmet extends GenericPoweredArmor {
         return super.changeFov(oldFOV, stack, playerEntity);
     }
 
+    /**
+     * Is fireproof boolean.
+     *
+     * @return the boolean
+     */
     @Override
     public boolean isFireproof() {
         return true;
     }
 
+    /**
+     * Tick armor.
+     *
+     * @param stack        the stack
+     * @param playerEntity the player entity
+     */
     @Override
     public void tickArmor(ItemStack stack, PlayerEntity playerEntity) {
         super.tickArmor(stack, playerEntity);
@@ -66,6 +95,9 @@ public class PoweredHelmet extends GenericPoweredArmor {
         }
     }
 
+    /**
+     * Register zoom keybind sender.
+     */
     @Environment(EnvType.CLIENT)
     public void registerZoomKeybindSender() {
         ClientTickEvents.END_CLIENT_TICK.register(client -> {

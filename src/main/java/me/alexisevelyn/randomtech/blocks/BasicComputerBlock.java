@@ -20,7 +20,13 @@ import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.world.BlockView;
 import reborncore.api.blockentity.IMachineGuiHandler;
 
+/**
+ * The type Basic computer block.
+ */
 public class BasicComputerBlock extends FluidMachineBase {
+    /**
+     * Instantiates a new Basic computer block.
+     */
     public BasicComputerBlock() {
         super(FabricBlockSettings
                 .of(Materials.MACHINE_MATERIAL)
@@ -30,11 +36,22 @@ public class BasicComputerBlock extends FluidMachineBase {
                 .strength(2.0F, 0.2F));
     }
 
+    /**
+     * Create block entity block entity.
+     *
+     * @param worldIn the world in
+     * @return the block entity
+     */
     @Override
     public BlockEntity createBlockEntity(BlockView worldIn) {
         return new BasicComputerBlockEntity();
     }
 
+    /**
+     * Gets gui.
+     *
+     * @return the gui
+     */
     @Override
     public IMachineGuiHandler getGui() {
         return RegistryHelper.basicComputerGuiHandler;

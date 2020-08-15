@@ -16,16 +16,38 @@ import team.reborn.energy.EnergyTier;
 
 import java.util.Set;
 
+/**
+ * The type Generic powered axe.
+ */
 public abstract class GenericPoweredAxe extends GenericPoweredTool {
     private static final Set<Material> NATURAL_EFFECTIVE_MATERIALS;
     private static final Set<Block> EFFECTIVE_BLOCKS;
     protected static final ImmutableMap<Block, Block> STRIPPED_BLOCKS;
     private static final float attackDamage = 5.0F;
 
+    /**
+     * Instantiates a new Generic powered axe.
+     *
+     * @param material                 the material
+     * @param energyCapacity           the energy capacity
+     * @param tier                     the tier
+     * @param cost                     the cost
+     * @param poweredSpeed             the powered speed
+     * @param unpoweredSpeed           the unpowered speed
+     * @param settings                 the settings
+     * @param dischargedTranslationKey the discharged translation key
+     */
     public GenericPoweredAxe(ToolMaterial material, int energyCapacity, EnergyTier tier, int cost, float poweredSpeed, float unpoweredSpeed, Settings settings, @Nullable String dischargedTranslationKey) {
         super(material, energyCapacity, tier, cost, poweredSpeed, unpoweredSpeed, attackDamage, EFFECTIVE_BLOCKS, settings, dischargedTranslationKey);
     }
 
+    /**
+     * Gets mining speed multiplier.
+     *
+     * @param stack the stack
+     * @param state the state
+     * @return the mining speed multiplier
+     */
     @Override
     public float getMiningSpeedMultiplier(ItemStack stack, BlockState state) {
         Material material = state.getMaterial();
@@ -33,6 +55,12 @@ public abstract class GenericPoweredAxe extends GenericPoweredTool {
         return NATURAL_EFFECTIVE_MATERIALS.contains(material) ? this.miningSpeed : super.getMiningSpeedMultiplier(stack, state);
     }
 
+    /**
+     * Use on block action result.
+     *
+     * @param context the context
+     * @return the action result
+     */
     @Override
     public ActionResult useOnBlock(ItemUsageContext context) {
         World world = context.getWorld();
@@ -55,6 +83,12 @@ public abstract class GenericPoweredAxe extends GenericPoweredTool {
         return super.useOnBlock(context);
     }
 
+    /**
+     * Is effective on boolean.
+     *
+     * @param state the state
+     * @return the boolean
+     */
     @Override
     public boolean isEffectiveOn(BlockState state) {
         if (super.isEffectiveOn(state))

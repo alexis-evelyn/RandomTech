@@ -17,6 +17,9 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 // NOTE: This mixin only exists because you can't specify nbt data in a crafting recipe.
 
+/**
+ * The type Smithing recipe nbt modifier mixin.
+ */
 @SuppressWarnings("UnusedMixin") // The mixin is used, just is loaded by Fabric and not Sponge methods
 @Mixin(SmithingRecipe.class)
 public abstract class SmithingRecipeNBTModifierMixin {
@@ -25,7 +28,13 @@ public abstract class SmithingRecipeNBTModifierMixin {
 //	@Shadow @Final private Ingredient addition; // Conversion Ingredient
 	@Shadow @Final private ItemStack result; // New Item
 
-	// Cancellable must be allowed, otherwise the game crashes when trying to modify the return value
+	/**
+	 * Craft.
+	 *
+	 * @param inventory the inventory
+	 * @param info      the info
+	 */
+// Cancellable must be allowed, otherwise the game crashes when trying to modify the return value
 	@Inject(at = @At("TAIL"), method = "craft(Lnet/minecraft/inventory/Inventory;)Lnet/minecraft/item/ItemStack;", cancellable = true)
 	private void craft(Inventory inventory, CallbackInfoReturnable<ItemStack> info) {
 		ItemStack oldItemStack = inventory.getStack(0);

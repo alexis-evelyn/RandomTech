@@ -9,16 +9,29 @@ import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.FlowableFluid;
 
+/**
+ * The type Magic fluid block.
+ */
 public class MagicFluidBlock extends BaseFluidBlock {
     final int levitation_level = 1;
     final int night_vision_level = 1;
 
+    /**
+     * Instantiates a new Magic fluid block.
+     *
+     * @param fluid the fluid
+     */
     public MagicFluidBlock(FlowableFluid fluid) {
         super(fluid, FabricBlockSettings
                 .copy(Blocks.WATER)
                 .lightLevel(getLightLevel()));
     }
 
+    /**
+     * Apply effects.
+     *
+     * @param livingEntity the living entity
+     */
     public void applyEffects(LivingEntity livingEntity) {
         livingEntity.addStatusEffect(new StatusEffectInstance(StatusEffects.LEVITATION, 20 * 2 * levitation_level, levitation_level - 1));
 
@@ -27,10 +40,20 @@ public class MagicFluidBlock extends BaseFluidBlock {
             livingEntity.addStatusEffect(new StatusEffectInstance(StatusEffects.NIGHT_VISION, 20 * 2 * night_vision_level, night_vision_level - 1));
     }
 
+    /**
+     * Apply shader.
+     *
+     * @param playerEntity the player entity
+     */
     public void applyShader(PlayerEntity playerEntity) {
 
     }
 
+    /**
+     * Remove shader.
+     *
+     * @param playerEntity the player entity
+     */
     public void removeShader(PlayerEntity playerEntity) {
 
     }

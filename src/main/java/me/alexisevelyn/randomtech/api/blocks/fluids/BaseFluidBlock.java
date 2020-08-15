@@ -12,11 +12,28 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.function.ToIntFunction;
 
+/**
+ * The type Base fluid block.
+ */
 public abstract class BaseFluidBlock extends FluidBlock {
+    /**
+     * Instantiates a new Base fluid block.
+     *
+     * @param fluid    the fluid
+     * @param settings the settings
+     */
     public BaseFluidBlock(FlowableFluid fluid, Settings settings) {
         super(fluid, settings);
     }
 
+    /**
+     * On entity collision.
+     *
+     * @param state  the state
+     * @param world  the world
+     * @param pos    the pos
+     * @param entity the entity
+     */
     @Override
     public void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity) {
         //super.onEntityCollision(state, world, pos, entity);
@@ -37,19 +54,47 @@ public abstract class BaseFluidBlock extends FluidBlock {
         }
     }
 
-    // These exist solely to override from other fluids.
+    /**
+     * Apply effects.
+     *
+     * @param livingEntity the living entity
+     */
+// These exist solely to override from other fluids.
     // I may eventually turn this into an interface
     protected abstract void applyEffects(@SuppressWarnings("unused") LivingEntity livingEntity);
 
+    /**
+     * Apply shader.
+     *
+     * @param playerEntity the player entity
+     */
     @SuppressWarnings("EmptyMethod") protected abstract void applyShader(@SuppressWarnings("unused") PlayerEntity playerEntity);
 
+    /**
+     * Remove shader.
+     *
+     * @param playerEntity the player entity
+     */
     @SuppressWarnings("EmptyMethod") protected abstract void removeShader(@SuppressWarnings("unused") PlayerEntity playerEntity);
 
+    /**
+     * Is eye in fluid boolean.
+     *
+     * @param playerEntity the player entity
+     * @param blockPos     the block pos
+     * @return the boolean
+     */
     public boolean isEyeInFluid(PlayerEntity playerEntity, BlockPos blockPos) {
         // This activates the same as water would. Can be used to determine if needing to apply shaders.
         return (int) playerEntity.getEyeY() == blockPos.getY() && playerEntity.getBlockPos().getZ() == blockPos.getZ() && playerEntity.getBlockPos().getX() == blockPos.getX();
     }
 
+    /**
+     * Gets light level.
+     *
+     * @param currentFluidLevel the current fluid level
+     * @return the light level
+     */
     public static int getLightLevel(@Nullable Integer currentFluidLevel) {
         int minLightLevel = 0;
         int maxLightLevel = 15;
@@ -68,10 +113,20 @@ public abstract class BaseFluidBlock extends FluidBlock {
         return (-1 * currentLightLevel) + 15;
     }
 
+    /**
+     * Gets light level.
+     *
+     * @return the light level
+     */
     public static ToIntFunction<BlockState> getLightLevel() {
         return (state) -> getLightLevel(state.get(LEVEL));
     }
 
+    /**
+     * Gets zero light level.
+     *
+     * @return the zero light level
+     */
     public static ToIntFunction<BlockState> getZeroLightLevel() {
         return (state) -> 0;
     }

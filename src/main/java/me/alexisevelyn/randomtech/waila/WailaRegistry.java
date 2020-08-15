@@ -18,6 +18,9 @@ import me.alexisevelyn.randomtech.waila.virtualtile.VirtualTileInfo;
 import me.alexisevelyn.randomtech.waila.wires.CobaltWireInfo;
 import net.minecraft.util.Identifier;
 
+/**
+ * The type Waila registry.
+ */
 public class WailaRegistry implements IWailaPlugin {
     public static final Identifier RENDER_POWER = new Identifier(Main.MODID, "power_level");
 
@@ -26,6 +29,11 @@ public class WailaRegistry implements IWailaPlugin {
     public static final Identifier CONFIG_DISPLAY_TANK = new Identifier(Main.MODID, "display_tank");
     public static final Identifier CONFIG_DISPLAY_COLOR = new Identifier(Main.MODID, "display_color");
 
+    /**
+     * Register.
+     *
+     * @param iRegistrar the registrar
+     */
     @Override
     public void register(IRegistrar iRegistrar) {
         // Server Side Config Options

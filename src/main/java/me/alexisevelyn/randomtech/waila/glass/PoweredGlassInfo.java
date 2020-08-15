@@ -12,19 +12,43 @@ import net.minecraft.text.TranslatableText;
 
 import java.util.List;
 
+/**
+ * The type Powered glass info.
+ */
 public class PoweredGlassInfo implements IComponentProvider {
     public static final PoweredGlassInfo INSTANCE = new PoweredGlassInfo();
 
+    /**
+     * Gets stack.
+     *
+     * @param accessor the accessor
+     * @param config   the config
+     * @return the stack
+     */
     @Override
     public ItemStack getStack(IDataAccessor accessor, IPluginConfig config) {
         return null;
     }
 
+    /**
+     * Append head.
+     *
+     * @param tooltip  the tooltip
+     * @param accessor the accessor
+     * @param config   the config
+     */
     @Override
     public void appendHead(List<Text> tooltip, IDataAccessor accessor, IPluginConfig config) {
 
     }
 
+    /**
+     * Append body.
+     *
+     * @param tooltip  the tooltip
+     * @param accessor the accessor
+     * @param config   the config
+     */
     @Override
     public void appendBody(List<Text> tooltip, IDataAccessor accessor, IPluginConfig config) {
         boolean configDisplayRedstoneStrength = config.get(WailaRegistry.CONFIG_DISPLAY_REDSTONE_STRENGTH, true);
@@ -42,6 +66,13 @@ public class PoweredGlassInfo implements IComponentProvider {
         }
     }
 
+    /**
+     * Append tail.
+     *
+     * @param tooltip  the tooltip
+     * @param accessor the accessor
+     * @param config   the config
+     */
     @Override
     public void appendTail(List<Text> tooltip, IDataAccessor accessor, IPluginConfig config) {
 

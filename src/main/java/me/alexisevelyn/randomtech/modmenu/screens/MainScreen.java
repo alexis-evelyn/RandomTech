@@ -5,6 +5,9 @@ import me.sargunvohra.mcmods.autoconfig1u.ConfigData;
 import me.sargunvohra.mcmods.autoconfig1u.annotation.Config;
 import me.sargunvohra.mcmods.autoconfig1u.annotation.ConfigEntry;
 
+/**
+ * The type Main screen.
+ */
 @Config(name = Main.MODID)
 @SuppressWarnings("unused")
 public class MainScreen implements ConfigData {
@@ -21,6 +24,9 @@ public class MainScreen implements ConfigData {
     @ConfigEntry.Gui.Excluded
     InnerStuff invisibleStuff = new InnerStuff();
 
+    /**
+     * The type Inner stuff.
+     */
     static class InnerStuff {
         int a = 0;
         int b = 1;

@@ -8,16 +8,38 @@ import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 import reborncore.common.fluid.FluidValue;
 
+/**
+ * The type Fluid machine base.
+ */
 public abstract class FluidMachineBase extends PowerAcceptorBlock {
+    /**
+     * Instantiates a new Fluid machine base.
+     *
+     * @param settings the settings
+     */
     public FluidMachineBase(AbstractBlock.Settings settings) {
         super(settings);
     }
 
+    /**
+     * Instantiates a new Fluid machine base.
+     *
+     * @param settings     the settings
+     * @param customStates the custom states
+     */
     @SuppressWarnings("unused")
     public FluidMachineBase(AbstractBlock.Settings settings, boolean customStates) {
         super(settings, customStates);
     }
 
+    /**
+     * Gets fluid level.
+     *
+     * @param state the state
+     * @param world the world
+     * @param pos   the pos
+     * @return the fluid level
+     */
     @Nullable
     @SuppressWarnings("unused")
     public FluidValue getFluidLevel(BlockState state, World world, BlockPos pos) {
@@ -30,6 +52,14 @@ public abstract class FluidMachineBase extends PowerAcceptorBlock {
         return fluidMachineBlockEntity.getFluidLevel();
     }
 
+    /**
+     * Gets max fluid level.
+     *
+     * @param state the state
+     * @param world the world
+     * @param pos   the pos
+     * @return the max fluid level
+     */
     @Nullable
     @SuppressWarnings("unused")
     public FluidValue getMaxFluidLevel(BlockState state, World world, BlockPos pos) {

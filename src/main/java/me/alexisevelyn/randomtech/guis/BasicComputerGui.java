@@ -13,6 +13,9 @@ import reborncore.client.gui.guibuilder.GuiBuilder;
 import reborncore.client.screen.builder.BuiltScreenHandler;
 import reborncore.common.util.Color;
 
+/**
+ * The type Basic computer gui.
+ */
 @Environment(EnvType.CLIENT)
 public class BasicComputerGui extends GuiBase<BuiltScreenHandler> {
     final BasicComputerBlockEntity blockEntity;
@@ -30,6 +33,13 @@ public class BasicComputerGui extends GuiBase<BuiltScreenHandler> {
     public static final int outputSlotX = 26;
     public static final int outputSlotY = 26;
 
+    /**
+     * Instantiates a new Basic computer gui.
+     *
+     * @param syncID      the sync id
+     * @param player      the player
+     * @param blockEntity the block entity
+     */
     public BasicComputerGui(int syncID, PlayerEntity player, BasicComputerBlockEntity blockEntity) {
         super(player, blockEntity, blockEntity.createScreenHandler(syncID, player));
         this.blockEntity = blockEntity;
@@ -51,12 +61,27 @@ public class BasicComputerGui extends GuiBase<BuiltScreenHandler> {
 //        this.setInitialFocus(this.nameField);
 //    }
 
+    /**
+     * Draw background.
+     *
+     * @param matrixStack       the matrix stack
+     * @param lastFrameDuration the last frame duration
+     * @param mouseX            the mouse x
+     * @param mouseY            the mouse y
+     */
     @Override
     protected void drawBackground(MatrixStack matrixStack, float lastFrameDuration, int mouseX, int mouseY) {
         super.drawBackground(matrixStack, lastFrameDuration, mouseX, mouseY);
         final Layer layer = Layer.BACKGROUND;
     }
 
+    /**
+     * Draw foreground.
+     *
+     * @param matrixStack the matrix stack
+     * @param mouseX      the mouse x
+     * @param mouseY      the mouse y
+     */
     @Override
     protected void drawForeground(MatrixStack matrixStack, int mouseX, int mouseY) {
         // The ordering of these gui elements is bottom right first to top left last.

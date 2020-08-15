@@ -9,11 +9,27 @@ import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
 
+/**
+ * The type Intangible block entity.
+ */
 public abstract class IntangibleBlockEntity extends BlockEntity {
+    /**
+     * Instantiates a new Intangible block entity.
+     *
+     * @param blockEntityType the block entity type
+     */
     public IntangibleBlockEntity(BlockEntityType blockEntityType) {
         super(blockEntityType);
     }
 
+    /**
+     * Gets collision shape.
+     *
+     * @param state     the state
+     * @param worldView the world view
+     * @param pos       the pos
+     * @return the collision shape
+     */
     public VoxelShape getCollisionShape(BlockState state, BlockView worldView, BlockPos pos) {
         if (world == null)
             return state.getOutlineShape(worldView, pos);

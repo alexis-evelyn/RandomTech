@@ -12,7 +12,13 @@ import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.world.BlockView;
 import reborncore.api.blockentity.IMachineGuiHandler;
 
+/**
+ * The type Fuser block.
+ */
 public class FuserBlock extends FluidMachineBase {
+    /**
+     * Instantiates a new Fuser block.
+     */
     public FuserBlock() {
         super(FabricBlockSettings
                 .of(Materials.MACHINE_MATERIAL)
@@ -22,11 +28,22 @@ public class FuserBlock extends FluidMachineBase {
                 .strength(2.0F, 0.2F));
     }
 
+    /**
+     * Create block entity block entity.
+     *
+     * @param worldIn the world in
+     * @return the block entity
+     */
     @Override
     public BlockEntity createBlockEntity(BlockView worldIn) {
         return new FuserBlockEntity();
     }
 
+    /**
+     * Gets gui.
+     *
+     * @return the gui
+     */
     @Override
     public IMachineGuiHandler getGui() {
         return RegistryHelper.fuserGuiHandler;

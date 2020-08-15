@@ -24,10 +24,16 @@ import net.minecraft.world.biome.Biome;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 
+/**
+ * The type Post registry helper.
+ */
 public class PostRegistryHelper {
     public static final ComponentType<BrokenItemComponent> BROKEN_ITEM_COMPONENT =
             ComponentRegistry.INSTANCE.registerIfAbsent(new Identifier(Main.MODID, "broken_item_component"), BrokenItemComponent.class);
 
+    /**
+     * Post register.
+     */
     public void postRegister() {
         // Register All Powered Tools and Armor With Callback
         Registry.ITEM.stream().forEach(item -> {
@@ -63,6 +69,12 @@ public class PostRegistryHelper {
         });
     }
 
+    /**
+     * Zoom pressed.
+     *
+     * @param packetContext the packet context
+     * @param attachedData  the attached data
+     */
     public void zoomPressed(PacketContext packetContext, @SuppressWarnings("unused") PacketByteBuf attachedData) {
         ItemStack helmetStack = packetContext.getPlayer().getEquippedStack(EquipmentSlot.HEAD);
 
@@ -78,6 +90,12 @@ public class PostRegistryHelper {
             rootTag.putInt("zoom", 1);
     }
 
+    /**
+     * Zoom released.
+     *
+     * @param packetContext the packet context
+     * @param attachedData  the attached data
+     */
     public void zoomReleased(PacketContext packetContext, @SuppressWarnings("unused") PacketByteBuf attachedData) {
         ItemStack helmetStack = packetContext.getPlayer().getEquippedStack(EquipmentSlot.HEAD);
 
@@ -93,6 +111,11 @@ public class PostRegistryHelper {
             rootTag.remove("zoom");
     }
 
+    /**
+     * Handle biome.
+     *
+     * @param biome the biome
+     */
     private void handleBiome(Biome biome) {
         // Add Structure Features to Biomes Here
         CobaltOre.addOreFeature(biome);

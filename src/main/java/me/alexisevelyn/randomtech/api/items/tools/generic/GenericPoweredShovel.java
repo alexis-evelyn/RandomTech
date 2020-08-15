@@ -23,15 +23,36 @@ import team.reborn.energy.EnergyTier;
 import java.util.Map;
 import java.util.Set;
 
+/**
+ * The type Generic powered shovel.
+ */
 public abstract class GenericPoweredShovel extends GenericPoweredTool {
     private static final Set<Block> EFFECTIVE_BLOCKS;
     protected static final Map<Block, BlockState> PATH_STATES;
     private static final float attackDamage = 1.5F;
 
+    /**
+     * Instantiates a new Generic powered shovel.
+     *
+     * @param material                 the material
+     * @param energyCapacity           the energy capacity
+     * @param tier                     the tier
+     * @param cost                     the cost
+     * @param poweredSpeed             the powered speed
+     * @param unpoweredSpeed           the unpowered speed
+     * @param settings                 the settings
+     * @param dischargedTranslationKey the discharged translation key
+     */
     public GenericPoweredShovel(ToolMaterial material, int energyCapacity, EnergyTier tier, int cost, float poweredSpeed, float unpoweredSpeed, Settings settings, @Nullable String dischargedTranslationKey) {
         super(material, energyCapacity, tier, cost, poweredSpeed, unpoweredSpeed, attackDamage, EFFECTIVE_BLOCKS, settings, dischargedTranslationKey);
     }
 
+    /**
+     * Use on block action result.
+     *
+     * @param context the context
+     * @return the action result
+     */
     @Override
     public ActionResult useOnBlock(ItemUsageContext context) {
         World world = context.getWorld();

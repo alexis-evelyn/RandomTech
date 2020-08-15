@@ -19,12 +19,18 @@ import net.minecraft.world.World;
 import java.util.Random;
 import java.util.function.ToIntFunction;
 
+/**
+ * The type Cobalt wire.
+ */
 // This seems like a cool idea for a bluestone dust like what Mumbo joked about one time
 // Video for reference: https://www.youtube.com/watch?v=9qO7325uDl4&ab_channel=MumboJumbo
 public class CobaltWire extends RedstoneWireBlock {
     // static Color blue = new Color(0, 0, 255);
     static final Vector3f[] wireColor;
 
+    /**
+     * Instantiates a new Cobalt wire.
+     */
     public CobaltWire() {
         super(FabricBlockSettings
                 .of(Material.SUPPORTED)
@@ -34,12 +40,26 @@ public class CobaltWire extends RedstoneWireBlock {
                 .lightLevel(getLightLevel()));
     }
 
+    /**
+     * Gets light level.
+     *
+     * @return the light level
+     */
     public static ToIntFunction<BlockState> getLightLevel() {
         // This works just fine.
         //return (state) -> state.get(RedstoneWireBlock.POWER);
         return (state) -> 0;
     }
 
+    /**
+     * Gets wire color.
+     *
+     * @param state     the state
+     * @param world     the world
+     * @param pos       the pos
+     * @param tintIndex the tint index
+     * @return the wire color
+     */
     public static int getWireColor(BlockState state, BlockRenderView world, BlockPos pos, int tintIndex) {
         int redstonePower = getPower(state);
 
@@ -47,11 +67,25 @@ public class CobaltWire extends RedstoneWireBlock {
         return MathHelper.packRgb(vector3f.getX(), vector3f.getY(), vector3f.getZ());
     }
 
+    /**
+     * Gets power.
+     *
+     * @param state the state
+     * @return the power
+     */
     public static int getPower(BlockState state) {
         return state.get(RedstoneWireBlock.POWER);
     }
 
-    // Responsible for setting particle properties including color of powered line
+    /**
+     * Random display tick.
+     *
+     * @param state  the state
+     * @param world  the world
+     * @param pos    the pos
+     * @param random the random
+     */
+// Responsible for setting particle properties including color of powered line
     @Override
     @Environment(EnvType.CLIENT)
     public void randomDisplayTick(BlockState state, World world, BlockPos pos, Random random) {
@@ -74,6 +108,18 @@ public class CobaltWire extends RedstoneWireBlock {
         }
     }
 
+    /**
+     * Create particle.
+     *
+     * @param world      the world
+     * @param random     the random
+     * @param blockPos   the block pos
+     * @param vector3f   the vector 3 f
+     * @param direction  the direction
+     * @param direction2 the direction 2
+     * @param f          the f
+     * @param g          the g
+     */
     public void createParticle(World world, Random random, BlockPos blockPos, Vector3f vector3f, Direction direction, Direction direction2, float f, float g) {
         float h = g - f;
 

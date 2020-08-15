@@ -1,22 +1,46 @@
 package me.alexisevelyn.randomtech.api.utilities.pathfinding.dijkstra;
 
+/**
+ * The type Vertex.
+ */
 public class Vertex {
     final private Object position;
     final private String name;
 
+    /**
+     * Instantiates a new Vertex.
+     *
+     * @param position the position
+     * @param name     the name
+     */
     public Vertex(Object position, String name) {
         this.position = position;
         this.name = name;
     }
 
+    /**
+     * Gets position.
+     *
+     * @return the position
+     */
     public Object getPosition() {
         return position;
     }
 
+    /**
+     * Gets name.
+     *
+     * @return the name
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * Hash code int.
+     *
+     * @return the int
+     */
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -26,6 +50,12 @@ public class Vertex {
         return result;
     }
 
+    /**
+     * Equals boolean.
+     *
+     * @param obj the obj
+     * @return the boolean
+     */
     @Override
     public boolean equals(Object obj) {
         if (this == obj)
@@ -44,6 +74,11 @@ public class Vertex {
         return position.equals(other.position);
     }
 
+    /**
+     * To string string.
+     *
+     * @return the string
+     */
     @Override
     public String toString() {
         return name;

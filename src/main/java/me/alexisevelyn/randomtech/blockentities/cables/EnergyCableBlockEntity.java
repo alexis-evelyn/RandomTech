@@ -10,7 +10,13 @@ import net.minecraft.util.math.Direction;
 
 import java.util.Set;
 
+/**
+ * The type Energy cable block entity.
+ */
 public class EnergyCableBlockEntity extends BlockEntity implements SidedInventory {
+    /**
+     * Instantiates a new Energy cable block entity.
+     */
     public EnergyCableBlockEntity() {
         super(BlockEntities.ENERGY_CABLE);
     }
@@ -49,11 +55,21 @@ public class EnergyCableBlockEntity extends BlockEntity implements SidedInventor
         return false;
     }
 
+    /**
+     * Size int.
+     *
+     * @return the int
+     */
     @Override
     public int size() {
         return 0;
     }
 
+    /**
+     * Is empty boolean.
+     *
+     * @return the boolean
+     */
     @Override
     public boolean isEmpty() {
         return false;
@@ -93,6 +109,12 @@ public class EnergyCableBlockEntity extends BlockEntity implements SidedInventor
         return null;
     }
 
+    /**
+     * Sets stack.
+     *
+     * @param slot  the slot
+     * @param stack the stack
+     */
     @Override
     public void setStack(int slot, ItemStack stack) {
 
@@ -110,21 +132,40 @@ public class EnergyCableBlockEntity extends BlockEntity implements SidedInventor
         return 0;
     }
 
+    /**
+     * Mark dirty.
+     */
     @Override
     public void markDirty() {
 
     }
 
+    /**
+     * Can player use boolean.
+     *
+     * @param player the player
+     * @return the boolean
+     */
     @Override
     public boolean canPlayerUse(PlayerEntity player) {
         return false;
     }
 
+    /**
+     * On open.
+     *
+     * @param player the player
+     */
     @Override
     public void onOpen(PlayerEntity player) {
 
     }
 
+    /**
+     * On close.
+     *
+     * @param player the player
+     */
     @Override
     public void onClose(PlayerEntity player) {
 
@@ -161,6 +202,9 @@ public class EnergyCableBlockEntity extends BlockEntity implements SidedInventor
         return false;
     }
 
+    /**
+     * Clear.
+     */
     @Override
     public void clear() {
 

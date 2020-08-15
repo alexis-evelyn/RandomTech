@@ -4,6 +4,9 @@ import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.item.FoodComponent;
 
+/**
+ * The type Foods.
+ */
 public final class Foods {
     public static final FoodComponent EDIBLE_POWER = new FoodComponent
             .Builder()

@@ -12,13 +12,25 @@ import org.jetbrains.annotations.Nullable;
 
 import java.awt.Color;
 
+/**
+ * The type Virtual tile block entity.
+ */
 public class VirtualTileBlockEntity extends BlockEntity implements BlockEntityClientSerializable {
     private Color color; // #399419 For Cool Green
 
+    /**
+     * Instantiates a new Virtual tile block entity.
+     */
     public VirtualTileBlockEntity() {
         super(BlockEntities.VIRTUAL_TILE);
     }
 
+    /**
+     * To tag compound tag.
+     *
+     * @param tag the tag
+     * @return the compound tag
+     */
     @Override
     public CompoundTag toTag(CompoundTag tag) {
         super.toTag(tag);
@@ -29,6 +41,12 @@ public class VirtualTileBlockEntity extends BlockEntity implements BlockEntityCl
         return setTagFromColor(tag, getColor());
     }
 
+    /**
+     * From tag.
+     *
+     * @param state the state
+     * @param tag   the tag
+     */
     @Override
     public void fromTag(BlockState state, CompoundTag tag) {
         super.fromTag(state, tag);
@@ -36,7 +54,12 @@ public class VirtualTileBlockEntity extends BlockEntity implements BlockEntityCl
         setColor(readColorFromTag(tag));
     }
 
-    // Ran by client
+    /**
+     * From client tag.
+     *
+     * @param compoundTag the compound tag
+     */
+// Ran by client
     @Override
     public void fromClientTag(CompoundTag compoundTag) {
         setColor(readColorFromTag(compoundTag));
@@ -44,6 +67,9 @@ public class VirtualTileBlockEntity extends BlockEntity implements BlockEntityCl
         updateBlockForRendering();
     }
 
+    /**
+     * Update block for rendering.
+     */
     public void updateBlockForRendering() {
         if (world == null)
             return;
@@ -58,7 +84,13 @@ public class VirtualTileBlockEntity extends BlockEntity implements BlockEntityCl
         virtualTileBlock.updateBlockForRender(world, pos);
     }
 
-    // Ran by server
+    /**
+     * To client tag compound tag.
+     *
+     * @param compoundTag the compound tag
+     * @return the compound tag
+     */
+// Ran by server
     @Override
     public CompoundTag toClientTag(CompoundTag compoundTag) {
         if (getColor() == null)
@@ -68,18 +100,34 @@ public class VirtualTileBlockEntity extends BlockEntity implements BlockEntityCl
     }
 
 
-    // Ran by client and server
+    /**
+     * Gets color.
+     *
+     * @return the color
+     */
+// Ran by client and server
     @Nullable
     public Color getColor() {
         return color;
     }
 
-    // Ran by client and server
+    /**
+     * Sets color.
+     *
+     * @param color the color
+     */
+// Ran by client and server
     public void setColor(@NotNull Color color) {
         this.color = color;
     }
 
-    // Ran by client and server
+    /**
+     * Read color from tag color.
+     *
+     * @param compoundTag the compound tag
+     * @return the color
+     */
+// Ran by client and server
     public Color readColorFromTag(@NotNull CompoundTag compoundTag) {
         if (compoundTag.contains("red") && compoundTag.contains("green") && compoundTag.contains("blue")) {
             int red = compoundTag.getInt("red");
@@ -93,7 +141,14 @@ public class VirtualTileBlockEntity extends BlockEntity implements BlockEntityCl
         return VirtualTile.defaultColor;
     }
 
-    // Ran by client and server
+    /**
+     * Sets tag from color.
+     *
+     * @param compoundTag the compound tag
+     * @param color       the color
+     * @return the tag from color
+     */
+// Ran by client and server
     public CompoundTag setTagFromColor(@NotNull CompoundTag compoundTag, @NotNull Color color) {
         compoundTag.putInt("red", color.getRed());
         compoundTag.putInt("green", color.getGreen());

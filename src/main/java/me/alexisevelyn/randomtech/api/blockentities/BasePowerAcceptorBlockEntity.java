@@ -19,6 +19,9 @@ import reborncore.common.util.RebornInventory;
 
 import java.util.Set;
 
+/**
+ * The type Base power acceptor block entity.
+ */
 public abstract class BasePowerAcceptorBlockEntity extends PowerAcceptorBlockEntity implements IToolDrop, InventoryProvider, BuiltScreenHandlerProvider {
     // Energy Values
     @SuppressWarnings("CanBeFinal") double minPower = 0;
@@ -32,26 +35,49 @@ public abstract class BasePowerAcceptorBlockEntity extends PowerAcceptorBlockEnt
 
     public RebornInventory<?> inventory;
 
+    /**
+     * Instantiates a new Base power acceptor block entity.
+     *
+     * @param blockEntityType the block entity type
+     */
     public BasePowerAcceptorBlockEntity(BlockEntityType<?> blockEntityType) {
         super(blockEntityType);
     }
 
+    /**
+     * Tick.
+     */
     @SuppressWarnings("EmptyMethod")
     @Override
     public void tick() {
         super.tick();
     }
 
+    /**
+     * Gets base max power.
+     *
+     * @return the base max power
+     */
     @Override
     public double getBaseMaxPower() {
         return maxPower;
     }
 
+    /**
+     * Gets base max output.
+     *
+     * @return the base max output
+     */
     @Override
     public double getBaseMaxOutput() {
         return maxOutput;
     }
 
+    /**
+     * Gets base max input.
+     *
+     * @return the base max input
+     */
     @Override
     public double getBaseMaxInput() {
         return maxInput;
@@ -89,74 +115,152 @@ public abstract class BasePowerAcceptorBlockEntity extends PowerAcceptorBlockEnt
         return inventory.containsAny(items);
     }
 
+    /**
+     * On open.
+     *
+     * @param player the player
+     */
     @Override
     public void onOpen(PlayerEntity player) {
 
     }
 
+    /**
+     * On close.
+     *
+     * @param player the player
+     */
     @Override
     public void onClose(PlayerEntity player) {
 
     }
 
-    // Used for TR's Wrench
+    /**
+     * Gets tool drop.
+     *
+     * @param playerEntity the player entity
+     * @return the tool drop
+     */
+// Used for TR's Wrench
     @Nullable
     public ItemStack getToolDrop(PlayerEntity playerEntity) {
         return null;
     }
 
+    /**
+     * Can be upgraded boolean.
+     *
+     * @return the boolean
+     */
     @Override
     public boolean canBeUpgraded() {
         return false;
     }
 
+    /**
+     * Is upgrade valid boolean.
+     *
+     * @param upgrade the upgrade
+     * @param stack   the stack
+     * @return the boolean
+     */
     @Override
     public boolean isUpgradeValid(IUpgrade upgrade, ItemStack stack) {
         return false;
     }
 
+    /**
+     * Has enough energy boolean.
+     *
+     * @param energyAddend the energy addend
+     * @return the boolean
+     */
     public boolean hasEnoughEnergy(int energyAddend) {
         return getEnergy() >= energyAddend;
     }
 
-    // Future Proofing
+    /**
+     * Gets min power.
+     *
+     * @return the min power
+     */
+// Future Proofing
     @SuppressWarnings({"SameReturnValue", "unused"})
     public double getMinPower() {
         return this.minPower;
     }
 
+    /**
+     * Can accept energy boolean.
+     *
+     * @param direction the direction
+     * @return the boolean
+     */
     @Override
     public boolean canAcceptEnergy(final Direction direction) {
         return canAcceptEnergy;
     }
 
+    /**
+     * Can provide energy boolean.
+     *
+     * @param direction the direction
+     * @return the boolean
+     */
     @Override
     public boolean canProvideEnergy(final Direction direction) {
         return canProvideEnergy;
     }
 
+    /**
+     * On load.
+     */
     @SuppressWarnings("EmptyMethod")
     @Override
     public void onLoad() {
         super.onLoad();
     }
 
+    /**
+     * Gets inventory.
+     *
+     * @return the inventory
+     */
     @Override
     public Inventory getInventory() {
         return inventory;
     }
 
+    /**
+     * Create screen handler built screen handler.
+     *
+     * @param syncID the sync id
+     * @param player the player
+     * @return the built screen handler
+     */
     @Nullable
     @Override
     public BuiltScreenHandler createScreenHandler(int syncID, PlayerEntity player) {
         return null;
     }
 
+    /**
+     * From tag.
+     *
+     * @param blockState  the block state
+     * @param compoundTag the compound tag
+     */
     @Override
     public void fromTag(BlockState blockState, CompoundTag compoundTag) {
         super.fromTag(blockState, compoundTag);
     }
 
+    /**
+     * To tag compound tag.
+     *
+     * @param compoundTag the compound tag
+     * @return the compound tag
+     */
     @Override
     public CompoundTag toTag(CompoundTag compoundTag) {
         super.toTag(compoundTag);

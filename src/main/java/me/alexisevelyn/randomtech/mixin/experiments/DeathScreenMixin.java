@@ -20,24 +20,52 @@ import reborncore.common.util.Color;
 // The below mentioned method is what shows the death screen
 // net.minecraft.client.network.ClientPlayNetworkHandler#onCombatEvent(CombatEventS2CPacket)
 
+/**
+ * The type Death screen mixin.
+ */
 @SuppressWarnings("UnusedMixin") // The mixin is used, just is loaded by Fabric and not Sponge methods
 @Mixin(DeathScreen.class)
 public abstract class DeathScreenMixin extends Screen {
 	@Shadow @Final private Text message;
 
-	@Shadow protected abstract Style getTextComponentUnderMouse(int mouseX);
+    /**
+     * Gets text component under mouse.
+     *
+     * @param mouseX the mouse x
+     * @return the text component under mouse
+     */
+    @Shadow protected abstract Style getTextComponentUnderMouse(int mouseX);
 
-	protected DeathScreenMixin(Text title) {
+    /**
+     * Instantiates a new Death screen mixin.
+     *
+     * @param title the title
+     */
+    protected DeathScreenMixin(Text title) {
 		super(title);
 	}
 
-	@Inject(at = @At("HEAD"), method = "init()V", cancellable = true)
+    /**
+     * Init.
+     *
+     * @param info the info
+     */
+    @Inject(at = @At("HEAD"), method = "init()V", cancellable = true)
 	private void init(CallbackInfo info) {
 		// Nothing For Now. Commented Out print line to prevent unnecessary messages in the log
 		//System.out.println("This line is printed by an example mod mixin!");
 	}
 
-	@Inject(at = @At("INVOKE"), method = "render(Lnet/minecraft/client/util/math/MatrixStack;IIF)V", cancellable = true)
+    /**
+     * Render.
+     *
+     * @param matrices the matrices
+     * @param mouseX   the mouse x
+     * @param mouseY   the mouse y
+     * @param delta    the delta
+     * @param info     the info
+     */
+    @Inject(at = @At("INVOKE"), method = "render(Lnet/minecraft/client/util/math/MatrixStack;IIF)V", cancellable = true)
 	public void render(MatrixStack matrices, int mouseX, int mouseY, float delta, CallbackInfo info) {
 		// Allow option of showing coordinates on death
 		// Make special changes to death screen depending on cause of death

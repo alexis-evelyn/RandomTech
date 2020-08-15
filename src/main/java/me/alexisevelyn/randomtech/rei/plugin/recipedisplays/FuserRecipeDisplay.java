@@ -18,6 +18,9 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * The type Fuser recipe display.
+ */
 public class FuserRecipeDisplay implements RecipeDisplay, TransferRecipeDisplay {
     private final GenericFluidRecipe recipe;
 
@@ -26,6 +29,11 @@ public class FuserRecipeDisplay implements RecipeDisplay, TransferRecipeDisplay 
     private EntryStack byproduct;
     private int recipeCraftTime = 20;
 
+    /**
+     * Instantiates a new Fuser recipe display.
+     *
+     * @param genericFluidRecipe the generic fluid recipe
+     */
     public FuserRecipeDisplay(GenericFluidRecipe genericFluidRecipe) {
         this.recipe = genericFluidRecipe;
 
@@ -60,27 +68,57 @@ public class FuserRecipeDisplay implements RecipeDisplay, TransferRecipeDisplay 
         this.byproduct = EntryStack.create(output);
     }
 
+    /**
+     * Gets ingredient.
+     *
+     * @return the ingredient
+     */
     public @Nullable EntryStack getIngredient() {
         return this.ingredient;
     }
 
+    /**
+     * Gets fluid.
+     *
+     * @return the fluid
+     */
     public @Nullable EntryStack getFluid() {
         return this.fluid;
     }
 
+    /**
+     * Gets byproduct.
+     *
+     * @return the byproduct
+     */
     public @Nullable EntryStack getByproduct() {
         return this.byproduct;
     }
 
+    /**
+     * Gets recipe craft time.
+     *
+     * @return the recipe craft time
+     */
     public int getRecipeCraftTime() {
         return this.recipeCraftTime;
     }
 
+    /**
+     * Gets input entries.
+     *
+     * @return the input entries
+     */
     @Override
     public List<List<EntryStack>> getInputEntries() {
         return Collections.singletonList(Collections.singletonList(ingredient));
     }
 
+    /**
+     * Gets output entries.
+     *
+     * @return the output entries
+     */
     @Override
     public List<EntryStack> getOutputEntries() {
         ArrayList<EntryStack> outputEntries = new ArrayList<>();
@@ -91,11 +129,21 @@ public class FuserRecipeDisplay implements RecipeDisplay, TransferRecipeDisplay 
         return outputEntries;
     }
 
+    /**
+     * Gets recipe category.
+     *
+     * @return the recipe category
+     */
     @Override
     public Identifier getRecipeCategory() {
         return REIPlugin.FUSER;
     }
 
+    /**
+     * Gets required entries.
+     *
+     * @return the required entries
+     */
     @Override
     public List<List<EntryStack>> getRequiredEntries() {
         return getInputEntries();
@@ -117,11 +165,23 @@ public class FuserRecipeDisplay implements RecipeDisplay, TransferRecipeDisplay 
         return 1;
     }
 
+    /**
+     * Gets organised input entries.
+     *
+     * @param containerInfo the container info
+     * @param container     the container
+     * @return the organised input entries
+     */
     @Override
     public List<List<EntryStack>> getOrganisedInputEntries(ContainerInfo<ScreenHandler> containerInfo, ScreenHandler container) {
         return getInputEntries();
     }
 
+    /**
+     * Gets optional recipe.
+     *
+     * @return the optional recipe
+     */
     public Optional<GenericFluidRecipe> getOptionalRecipe() {
         return Optional.ofNullable(recipe);
     }

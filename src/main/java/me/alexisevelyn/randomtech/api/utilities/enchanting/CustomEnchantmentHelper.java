@@ -7,14 +7,27 @@ import net.minecraft.enchantment.EnchantmentTarget;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.ItemStack;
 
+/**
+ * The type Custom enchantment helper.
+ */
 public class CustomEnchantmentHelper {
+    /**
+     * The enum Valid enchant.
+     */
     public enum ValidEnchant {
         VANILLA,
         FALSE,
         TRUE
     }
 
-    // I need to be able to tell whether or not to interfere with vanilla enchant mechanics, so I'm using an enum to have 3 possible outcomes instead of just 2.
+    /**
+     * Is valid enchantment valid enchant.
+     *
+     * @param itemStack the item stack
+     * @param target    the target
+     * @return the valid enchant
+     */
+// I need to be able to tell whether or not to interfere with vanilla enchant mechanics, so I'm using an enum to have 3 possible outcomes instead of just 2.
     public static ValidEnchant isValidEnchantment(ItemStack itemStack, EnchantmentTarget target) {
         if (itemStack.getItem() instanceof EnergyHelper) {
             // I use unbreaking to affect energy usage, so I'm allowing Unbreaking and Mending.

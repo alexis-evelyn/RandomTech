@@ -15,23 +15,48 @@ import net.minecraft.util.Identifier;
 
 import java.util.List;
 
+/**
+ * The type Fuser recipe category.
+ */
 public class FuserRecipeCategory implements RecipeCategory<FuserRecipeDisplay> {
 
+    /**
+     * Gets identifier.
+     *
+     * @return the identifier
+     */
     @Override
     public Identifier getIdentifier() {
         return REIPlugin.FUSER;
     }
 
+    /**
+     * Gets logo.
+     *
+     * @return the logo
+     */
     @Override
     public EntryStack getLogo() {
         return EntryStack.create(RegistryHelper.FUSER);
     }
 
+    /**
+     * Gets category name.
+     *
+     * @return the category name
+     */
     @Override
     public String getCategoryName() {
         return I18n.translate("text.rei.category.fuser");
     }
 
+    /**
+     * Sets display.
+     *
+     * @param recipeDisplay the recipe display
+     * @param bounds        the bounds
+     * @return the display
+     */
     @Override
     public List<Widget> setupDisplay(FuserRecipeDisplay recipeDisplay, Rectangle bounds) {
         EntryStack input = recipeDisplay.getIngredient();
@@ -79,23 +104,63 @@ public class FuserRecipeCategory implements RecipeCategory<FuserRecipeDisplay> {
         return widgets;
     }
 
+    /**
+     * Create start point point.
+     *
+     * @param bounds the bounds
+     * @param x      the x
+     * @param y      the y
+     * @return the point
+     */
     public Point createStartPoint(Rectangle bounds, int x, int y) {
         return new Point(bounds.getCenterX() - x, bounds.getCenterY() - y);
     }
 
+    /**
+     * Create arrow.
+     *
+     * @param startPoint      the start point
+     * @param widgets         the widgets
+     * @param x               the x
+     * @param y               the y
+     * @param recipeCraftTime the recipe craft time
+     */
     public void createArrow(Point startPoint, List<Widget> widgets, int x, int y, int recipeCraftTime) {
         widgets.add(Widgets.createArrow(new Point(startPoint.x + x, startPoint.y + y)).animationDurationTicks(recipeCraftTime));
     }
 
+    /**
+     * Create input slot.
+     *
+     * @param startPoint the start point
+     * @param widgets    the widgets
+     * @param entryStack the entry stack
+     * @param x          the x
+     * @param y          the y
+     */
     public void createInputSlot(Point startPoint, List<Widget> widgets, EntryStack entryStack, int x, int y) {
         widgets.add(Widgets.createSlot(new Point(startPoint.x + x, startPoint.y + y)).entry(entryStack).markInput());
     }
 
+    /**
+     * Create output slot.
+     *
+     * @param startPoint the start point
+     * @param widgets    the widgets
+     * @param entryStack the entry stack
+     * @param x          the x
+     * @param y          the y
+     */
     public void createOutputSlot(Point startPoint, List<Widget> widgets, EntryStack entryStack, int x, int y) {
         widgets.add(Widgets.createResultSlotBackground(new Point(startPoint.x + x, startPoint.y + y)));
         widgets.add(Widgets.createSlot(new Point(startPoint.x + x, startPoint.y + y)).entry(entryStack).disableBackground().markOutput());
     }
 
+    /**
+     * Gets display height.
+     *
+     * @return the display height
+     */
     @Override
     public int getDisplayHeight() {
         return 36;

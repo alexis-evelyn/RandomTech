@@ -20,10 +20,16 @@ import reborncore.api.blockentity.IMachineGuiHandler;
 
 import java.util.function.ToIntFunction;
 
+/**
+ * The type Teleporter block.
+ */
 public class TeleporterBlock extends PowerAcceptorBlock {
     public static final BooleanProperty ACTIVE = BooleanProperty.of("active");
     public static final IntProperty ENERGY = IntProperty.of("energy", 0, 15);
 
+    /**
+     * Instantiates a new Teleporter block.
+     */
     public TeleporterBlock() {
         super(FabricBlockSettings
                 .of(Materials.MACHINE_MATERIAL)
@@ -40,20 +46,41 @@ public class TeleporterBlock extends PowerAcceptorBlock {
                 .with(ENERGY, 0));
     }
 
+    /**
+     * Gets light level.
+     *
+     * @return the light level
+     */
     public static ToIntFunction<BlockState> getLightLevel() {
         return (state) -> state.get(ACTIVE) ? state.get(ENERGY) : 0;
     }
 
+    /**
+     * Append properties.
+     *
+     * @param builder the builder
+     */
     @Override
     protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
         builder.add(FACING, ACTIVE, ENERGY);
     }
 
+    /**
+     * Create block entity block entity.
+     *
+     * @param worldIn the world in
+     * @return the block entity
+     */
     @Override
     public BlockEntity createBlockEntity(BlockView worldIn) {
         return new TeleporterBlockEntity();
     }
 
+    /**
+     * Gets gui.
+     *
+     * @return the gui
+     */
     @Override
     public IMachineGuiHandler getGui() {
         return RegistryHelper.teleporterGuiHandler;

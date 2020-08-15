@@ -5,6 +5,9 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
 
+/**
+ * The type Dijkstra algorithm.
+ */
 // Code pulled from https://www.vogella.com/tutorials/JavaAlgorithmsDijkstra/article.html
 // Found code from https://stackoverflow.com/questions/17480022/java-find-shortest-path-between-2-points-in-a-distance-weighted-map#comment61831401_17480244
 public class DijkstraAlgorithm {
@@ -15,12 +18,22 @@ public class DijkstraAlgorithm {
     private Map<Vertex, Vertex> predecessors;
     private Map<Vertex, Double> distance;
 
+    /**
+     * Instantiates a new Dijkstra algorithm.
+     *
+     * @param graph the graph
+     */
     public DijkstraAlgorithm(Graph graph) {
         // create a copy of the array so that we can operate on this array
         // this.nodes = new ArrayList<>(graph.getVertexes());
         this.edges = new ArrayList<>(graph.getEdges());
     }
 
+    /**
+     * Execute.
+     *
+     * @param source the source
+     */
     public void execute(Vertex source) {
         settledNodes = new HashSet<>();
         unSettledNodes = new HashSet<>();
@@ -38,6 +51,11 @@ public class DijkstraAlgorithm {
         }
     }
 
+    /**
+     * Find minimal distances.
+     *
+     * @param node the node
+     */
     private void findMinimalDistances(Vertex node) {
         List<Vertex> adjacentNodes = getNeighbors(node);
         for (Vertex target : adjacentNodes) {
@@ -49,6 +67,13 @@ public class DijkstraAlgorithm {
         }
     }
 
+    /**
+     * Gets distance.
+     *
+     * @param node   the node
+     * @param target the target
+     * @return the distance
+     */
     private double getDistance(Vertex node, Vertex target) {
         for (Edge edge : edges)
             if (edge.getSource().equals(node) && edge.getDestination().equals(target))
@@ -57,6 +82,12 @@ public class DijkstraAlgorithm {
         return Double.POSITIVE_INFINITY;
     }
 
+    /**
+     * Gets neighbors.
+     *
+     * @param node the node
+     * @return the neighbors
+     */
     private List<Vertex> getNeighbors(Vertex node) {
         List<Vertex> neighbors = new ArrayList<>();
 
@@ -67,6 +98,12 @@ public class DijkstraAlgorithm {
         return neighbors;
     }
 
+    /**
+     * Gets minimum.
+     *
+     * @param vertexes the vertexes
+     * @return the minimum
+     */
     @Nullable
     private Vertex getMinimum(Set<Vertex> vertexes) {
         Vertex minimum = null;
@@ -82,10 +119,22 @@ public class DijkstraAlgorithm {
         return minimum;
     }
 
+    /**
+     * Is settled boolean.
+     *
+     * @param vertex the vertex
+     * @return the boolean
+     */
     private boolean isSettled(Vertex vertex) {
         return settledNodes.contains(vertex);
     }
 
+    /**
+     * Gets shortest distance.
+     *
+     * @param destination the destination
+     * @return the shortest distance
+     */
     private double getShortestDistance(Vertex destination) {
         Double d = distance.get(destination);
         if (d == null)
@@ -94,6 +143,12 @@ public class DijkstraAlgorithm {
         return d;
     }
 
+    /**
+     * Gets path.
+     *
+     * @param target the target
+     * @return the path
+     */
     /*
      * This method returns the path from the source to the selected target and
      * Empty Path if no path exists

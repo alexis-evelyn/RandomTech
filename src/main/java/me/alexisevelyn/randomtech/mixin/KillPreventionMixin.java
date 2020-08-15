@@ -15,14 +15,31 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
+/**
+ * The type Kill prevention mixin.
+ */
 @SuppressWarnings("UnusedMixin") // The mixin is used, just is loaded by Fabric and not Sponge methods
 @Mixin(LivingEntity.class)
 public abstract class KillPreventionMixin {
 	// For /kill invulnerability for api
     // Also, for general damage prevention
 
+    /**
+     * Damage boolean.
+     *
+     * @param source the source
+     * @param amount the amount
+     * @return the boolean
+     */
     @Shadow public abstract boolean damage(DamageSource source, float amount);
 
+    /**
+     * General damage.
+     *
+     * @param damageSource the damage source
+     * @param amount       the amount
+     * @param info         the info
+     */
     @Inject(at = @At("HEAD"), method = "damage(Lnet/minecraft/entity/damage/DamageSource;F)Z", cancellable = true)
 	private void generalDamage(DamageSource damageSource, float amount, CallbackInfoReturnable<Boolean> info) {
         //noinspection ConstantConditions
@@ -41,6 +58,11 @@ public abstract class KillPreventionMixin {
         handleOtherLivingEntityDamage(livingEntity, damageSource, amount, info);
 	}
 
+    /**
+     * Kill command.
+     *
+     * @param info the info
+     */
     @Inject(at = @At("INVOKE"), method = "kill()V", cancellable = true)
 	private void killCommand(CallbackInfo info) {
         //noinspection ConstantConditions - This claims to always return false, but it doesn't. That's because `this` becomes LivingEntity on runtime.
@@ -63,7 +85,15 @@ public abstract class KillPreventionMixin {
         }
     }
 
-    // Generic Damage to Players
+    /**
+     * Handle player damage.
+     *
+     * @param playerEntity the player entity
+     * @param damageSource the damage source
+     * @param amount       the amount
+     * @param info         the info
+     */
+// Generic Damage to Players
     private void handlePlayerDamage(PlayerEntity playerEntity, DamageSource damageSource, float amount, CallbackInfo info) {
         PlayerInventory inventory = playerEntity.inventory;
         DefaultedList<ItemStack> armorItems = inventory.armor;
@@ -79,7 +109,15 @@ public abstract class KillPreventionMixin {
         }
     }
 
-    // Generic Damage to Other Living Entities
+    /**
+     * Handle other living entity damage.
+     *
+     * @param livingEntity the living entity
+     * @param damageSource the damage source
+     * @param amount       the amount
+     * @param info         the info
+     */
+// Generic Damage to Other Living Entities
     private void handleOtherLivingEntityDamage(LivingEntity livingEntity, DamageSource damageSource, float amount, CallbackInfo info) {
         Iterable<ItemStack> armorItems = livingEntity.getArmorItems();
 
@@ -94,7 +132,13 @@ public abstract class KillPreventionMixin {
         }
     }
 
-    // Kill Command Specifically for Player
+    /**
+     * Handle player kill command.
+     *
+     * @param playerEntity the player entity
+     * @param info         the info
+     */
+// Kill Command Specifically for Player
     private void handlePlayerKillCommand(PlayerEntity playerEntity, CallbackInfo info) {
         PlayerInventory inventory = playerEntity.inventory;
         DefaultedList<ItemStack> armorItems = inventory.armor;
@@ -110,7 +154,13 @@ public abstract class KillPreventionMixin {
         }
     }
 
-    // Kill Command Specifically for Other Living Entities
+    /**
+     * Handle other living entity kill command.
+     *
+     * @param livingEntity the living entity
+     * @param info         the info
+     */
+// Kill Command Specifically for Other Living Entities
     private void handleOtherLivingEntityKillCommand(LivingEntity livingEntity, CallbackInfo info) {
         Iterable<ItemStack> armorItems = livingEntity.getArmorItems();
 

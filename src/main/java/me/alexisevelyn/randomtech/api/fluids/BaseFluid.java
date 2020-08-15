@@ -21,6 +21,9 @@ import net.minecraft.world.WorldView;
 import java.util.Map;
 import java.util.Random;
 
+/**
+ * The type Base fluid.
+ */
 public abstract class BaseFluid extends FlowableFluid {
     /**
      * @return a dripping particle effect. Requires a dripping particle to be visible?
@@ -92,25 +95,62 @@ public abstract class BaseFluid extends FlowableFluid {
         return 100.0F;
     }
 
+    /**
+     * Calculate level int.
+     *
+     * @param state the state
+     * @return the int
+     */
     protected static int calculateLevel(FluidState state) {
         return state.isStill() ? 0 : 8 - Math.min(state.getLevel(), 8) + (state.get(FALLING) ? 8 : 0);
     }
 
+    /**
+     * On random tick.
+     *
+     * @param world  the world
+     * @param pos    the pos
+     * @param state  the state
+     * @param random the random
+     */
     @Override
     public void onRandomTick(World world, BlockPos pos, FluidState state, Random random) {
         super.onRandomTick(world, pos, state, random);
     }
 
+    /**
+     * Gets velocity.
+     *
+     * @param world the world
+     * @param pos   the pos
+     * @param state the state
+     * @return the velocity
+     */
     @Override
     public Vec3d getVelocity(BlockView world, BlockPos pos, FluidState state) {
         return super.getVelocity(world, pos, state);
     }
 
+    /**
+     * Gets spread.
+     *
+     * @param world the world
+     * @param pos   the pos
+     * @param state the state
+     * @return the spread
+     */
     @Override
     protected Map<Direction, FluidState> getSpread(WorldView world, BlockPos pos, BlockState state) {
         return super.getSpread(world, pos, state);
     }
 
+    /**
+     * On scheduled tick.
+     *
+     * @param world the world
+     * @param pos   the pos
+     * @param state the state
+     */
     @Override
     public void onScheduledTick(World world, BlockPos pos, FluidState state) {
         super.onScheduledTick(world, pos, state);

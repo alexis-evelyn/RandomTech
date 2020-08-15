@@ -23,15 +23,27 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
+/**
+ * The type Item cable block entity.
+ */
 public class ItemCableBlockEntity extends BlockEntity implements InventoryProvider, Tickable {
     private final ItemCableInventory inventory;
     private final ItemCable ourCable = new ItemCable();
 
+    /**
+     * Instantiates a new Item cable block entity.
+     */
     public ItemCableBlockEntity() {
         super(BlockEntities.ITEM_CABLE);
         inventory = new ItemCableInventory();
     }
 
+    /**
+     * To tag compound tag.
+     *
+     * @param tag the tag
+     * @return the compound tag
+     */
     @Override
     public CompoundTag toTag(CompoundTag tag) {
         super.toTag(tag);
@@ -45,6 +57,12 @@ public class ItemCableBlockEntity extends BlockEntity implements InventoryProvid
         return tag;
     }
 
+    /**
+     * From tag.
+     *
+     * @param state the state
+     * @param tag   the tag
+     */
     @Override
     public void fromTag(BlockState state, CompoundTag tag) {
         super.fromTag(state, tag);
@@ -65,7 +83,12 @@ public class ItemCableBlockEntity extends BlockEntity implements InventoryProvid
             moveItemInNetwork(world);
     }
 
-    // Example Command For Testing: /data merge block ~ ~ ~-4 {Items: [{Slot: 9b, id: "minecraft:bedrock", Count: 1b}]}
+    /**
+     * Move item in network.
+     *
+     * @param world the world
+     */
+// Example Command For Testing: /data merge block ~ ~ ~-4 {Items: [{Slot: 9b, id: "minecraft:bedrock", Count: 1b}]}
     public void moveItemInNetwork(@NotNull World world) {
         // This should only run on the server side.
         if (world.isClient)
@@ -82,6 +105,11 @@ public class ItemCableBlockEntity extends BlockEntity implements InventoryProvid
         attemptCableTransfer(world);
     }
 
+    /**
+     * Attempt insert into interfaceable blocks.
+     *
+     * @param world the world
+     */
     private void attemptInsertIntoInterfaceableBlocks(@NotNull World world) {
         ItemStack currentItemStack = null;
         for (int slot : ItemTransferHelper.getSlots(inventory)) {
@@ -98,10 +126,20 @@ public class ItemCableBlockEntity extends BlockEntity implements InventoryProvid
         ItemTransferHelper.tryTransferToContainer(ourCable, world, pos, currentItemStack);
     }
 
+    /**
+     * Attempt extract from interfaceable blocks.
+     *
+     * @param world the world
+     */
     private void attemptExtractFromInterfaceableBlocks(@NotNull World world) {
         // TODO (Important): Implement Me
     }
 
+    /**
+     * Attempt cable transfer.
+     *
+     * @param world the world
+     */
     private void attemptCableTransfer(@NotNull World world) {
         List<BlockPos> currentKnownCables = ourCable.getAllCables(world, pos); // Will be used for the search algorithm later
         List<BlockPos> currentInterfaceableBlocks = ourCable.getAllInterfacingCables(world, currentKnownCables); // Our endpoints to choose from in the search algorithm
@@ -152,6 +190,14 @@ public class ItemCableBlockEntity extends BlockEntity implements InventoryProvid
         world.updateComparators(pos, world.getBlockState(pos).getBlock());
     }
 
+    /**
+     * Find path vertex path.
+     *
+     * @param chosenItemStack            the chosen item stack
+     * @param currentKnownCables         the current known cables
+     * @param currentInterfaceableBlocks the current interfaceable blocks
+     * @return the vertex path
+     */
     @NotNull
     private VertexPath findPath(@NotNull ItemStack chosenItemStack, @NotNull List<BlockPos> currentKnownCables, @NotNull List<BlockPos> currentInterfaceableBlocks) {
         if (currentInterfaceableBlocks.size() == 0)
@@ -163,11 +209,22 @@ public class ItemCableBlockEntity extends BlockEntity implements InventoryProvid
         return GenericCable.dijkstraAlgorithm(currentKnownCables, getPos(), nextBlockPos);
     }
 
+    /**
+     * Gets inventory.
+     *
+     * @param state the state
+     * @param world the world
+     * @param pos   the pos
+     * @return the inventory
+     */
     @Override
     public SidedInventory getInventory(BlockState state, WorldAccess world, BlockPos pos) {
         return inventory;
     }
 
+    /**
+     * Tick.
+     */
     @Override
     public void tick() {
         // Only Run when World is Not Null
