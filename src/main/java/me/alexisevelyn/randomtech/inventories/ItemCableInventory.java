@@ -145,11 +145,11 @@ public class ItemCableInventory implements SidedInventory {
         markDirty();
         setNeedsProcessing(true);
 
-        this.inventory.set(slot, stack);
+//        if (stack.getCount() > this.getMaxCountPerStack()) {
+//            stack.setCount(this.getMaxCountPerStack());
+//        }
 
-        if (stack.getCount() > this.getMaxCountPerStack()) {
-            stack.setCount(this.getMaxCountPerStack());
-        }
+        this.inventory.set(slot, stack);
     }
 
     @Override

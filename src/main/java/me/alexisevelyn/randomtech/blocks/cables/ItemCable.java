@@ -97,6 +97,10 @@ public class ItemCable extends GenericCable implements BlockEntityProvider, Inve
 
     @Override
     public boolean isInstanceOfInterfaceableBlock(Block block, WorldAccess world, BlockPos blockPos) {
+        // Cables get checked beforehand and are not a part of this check.
+        if (block instanceof GenericCable)
+            return false;
+
         if (block instanceof InventoryProvider)
             return true;
 

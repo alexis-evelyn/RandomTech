@@ -131,10 +131,9 @@ public abstract class GenericCable extends Block implements Waterloggable {
     // This runs for every block update that occurs to the cables
     @Override
     public BlockState getStateForNeighborUpdate(BlockState state, Direction direction, BlockState newState, WorldAccess world, BlockPos pos, BlockPos posFrom) {
-        if (state.get(WATERLOGGED)) {
-            // Try to support generic fluids if possible
+        // Try to support generic fluids if possible
+        if (state.get(WATERLOGGED))
             world.getFluidTickScheduler().schedule(pos, Fluids.WATER, Fluids.WATER.getTickRate(world));
-        }
 
         // This sets up the cable blockstates for each cable
         return setupCableStates(world, pos, state);

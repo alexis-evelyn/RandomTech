@@ -67,11 +67,19 @@ public class ItemCableBlockEntity extends BlockEntity implements InventoryProvid
 
     // Example Command For Testing: /data merge block ~ ~ ~-4 {Items: [{Slot: 9b, id: "minecraft:bedrock", Count: 1b}]}
     public void moveItemInNetwork(@NotNull World world) {
-        attemptCableTransfer(world);
+        // This should only run on the server side.
+        if (world.isClient)
+            return;
 
         // TODO (Important): Use a boolean to determine if should extract or insert
+        // Attempt to Transfer into Inventory
         attemptInsertIntoInterfaceableBlocks(world);
+
+        // Attempt to Transfer Out of Inventory
         attemptExtractFromInterfaceableBlocks(world);
+
+        // Attempt to Transfer To Another Cable
+        attemptCableTransfer(world);
     }
 
     private void attemptInsertIntoInterfaceableBlocks(@NotNull World world) {
@@ -112,7 +120,7 @@ public class ItemCableBlockEntity extends BlockEntity implements InventoryProvid
         }
 
         // If no itemstacks found, just return
-        if (currentItemStack == null)
+        if (currentItemStack == null || currentItemStack.isEmpty())
             return;
 
         // We choose a slot ahead of time so we can figure out what slot needs to be transfered
