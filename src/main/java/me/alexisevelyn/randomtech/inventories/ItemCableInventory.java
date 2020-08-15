@@ -100,6 +100,33 @@ public class ItemCableInventory implements SidedInventory {
         return false;
     }
 
+    public boolean isEmpty(@Nullable Direction side) {
+        for (int slot : getRealSlots(side)) {
+            if (!getStack(slot).isEmpty())
+                return false;
+        }
+
+        return true;
+    }
+
+    public boolean isFilterEmpty(@Nullable Direction side) {
+        for (int slot : getFilterSlots(side)) {
+            if (!getStack(slot).isEmpty())
+                return false;
+        }
+
+        return true;
+    }
+
+    public boolean filterContains(@NotNull ItemStack itemStack, @Nullable Direction side) {
+        for (int slot : getFilterSlots(side)) {
+            if (getStack(slot).getItem().equals(itemStack.getItem()))
+                return true;
+        }
+
+        return false;
+    }
+
     /**
      * Fetches the stack currently stored at the given slot. If the slot is empty,
      * or is outside the bounds of this inventory, returns see {@link ItemStack#EMPTY}.
@@ -107,6 +134,7 @@ public class ItemCableInventory implements SidedInventory {
      * @param slot
      */
     @Override
+    @NotNull
     public ItemStack getStack(int slot) {
         return this.inventory.get(slot);
     }
@@ -119,6 +147,7 @@ public class ItemCableInventory implements SidedInventory {
      * @return the removed items as a stack
      */
     @Override
+    @NotNull
     public ItemStack removeStack(int slot, int amount) {
         markDirty();
         setNeedsProcessing(true);
@@ -133,6 +162,7 @@ public class ItemCableInventory implements SidedInventory {
      * @return the stack previously stored at the indicated slot.
      */
     @Override
+    @NotNull
     public ItemStack removeStack(int slot) {
         markDirty();
         setNeedsProcessing(true);

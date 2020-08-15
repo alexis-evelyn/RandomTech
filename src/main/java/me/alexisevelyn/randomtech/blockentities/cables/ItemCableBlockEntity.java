@@ -92,7 +92,7 @@ public class ItemCableBlockEntity extends BlockEntity implements InventoryProvid
         }
 
         // If no itemstacks found, just return
-        if (currentItemStack == null)
+        if (currentItemStack == null || currentItemStack.isEmpty())
             return;
 
         ItemTransferHelper.tryTransferToContainer(ourCable, world, pos, currentItemStack);
