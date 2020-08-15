@@ -22,18 +22,23 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ItemTransferHelper {
-    public static List<BlockPos> getTransferrableNeighbors(@NotNull GenericCable ourCable, @NotNull World world, @NotNull BlockPos position, @NotNull ItemStack itemStack) {
+    public static List<BlockPos> getTransferrableNeighbors(@NotNull GenericCable ourCable, @NotNull World world, @NotNull BlockPos ourPosition, @NotNull ItemStack itemStack) {
         ArrayList<BlockPos> neighbors = new ArrayList<>();
 
-        neighbors.add(CalculationHelper.addVectors(position, Direction.NORTH.getVector()));
-        neighbors.add(CalculationHelper.addVectors(position, Direction.SOUTH.getVector()));
-        neighbors.add(CalculationHelper.addVectors(position, Direction.EAST.getVector()));
-        neighbors.add(CalculationHelper.addVectors(position, Direction.WEST.getVector()));
-        neighbors.add(CalculationHelper.addVectors(position, Direction.UP.getVector()));
-        neighbors.add(CalculationHelper.addVectors(position, Direction.DOWN.getVector()));
+        neighbors.add(CalculationHelper.addVectors(ourPosition, Direction.NORTH.getVector()));
+        neighbors.add(CalculationHelper.addVectors(ourPosition, Direction.SOUTH.getVector()));
+        neighbors.add(CalculationHelper.addVectors(ourPosition, Direction.EAST.getVector()));
+        neighbors.add(CalculationHelper.addVectors(ourPosition, Direction.WEST.getVector()));
+        neighbors.add(CalculationHelper.addVectors(ourPosition, Direction.UP.getVector()));
+        neighbors.add(CalculationHelper.addVectors(ourPosition, Direction.DOWN.getVector()));
 
         // Remove if Not Interfaceable Neighbor
-        neighbors.removeIf(neighbor -> !ourCable.isInstanceOfInterfaceableBlock(world.getBlockState(neighbor).getBlock(), world, neighbor));
+        neighbors.removeIf(neighborPos -> {
+            boolean isInterfaceable = ourCable.isInstanceOfInterfaceableBlock(world.getBlockState(neighborPos).getBlock(), world, neighborPos);
+            boolean isValidSide = ourCable.isValidSide(world.getBlockState(neighborPos).getBlock(), world, neighborPos, CalculationHelper.getDirection(neighborPos, ourPosition));
+
+            return !(isInterfaceable && isValidSide);
+        });
 
         return neighbors;
     }

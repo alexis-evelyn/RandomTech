@@ -27,6 +27,7 @@ public class ItemCableInventory implements SidedInventory {
     }
 
     private boolean isDirty = false;
+    private boolean needsProcessing = false;
 
     /**
      * Gets the available slot positions that are reachable from a given side.
@@ -120,6 +121,8 @@ public class ItemCableInventory implements SidedInventory {
     @Override
     public ItemStack removeStack(int slot, int amount) {
         markDirty();
+        setNeedsProcessing(true);
+
         return Inventories.splitStack(this.inventory, slot, amount);
     }
 
@@ -132,12 +135,16 @@ public class ItemCableInventory implements SidedInventory {
     @Override
     public ItemStack removeStack(int slot) {
         markDirty();
+        setNeedsProcessing(true);
+
         return Inventories.removeStack(this.inventory, slot);
     }
 
     @Override
     public void setStack(int slot, ItemStack stack) {
         markDirty();
+        setNeedsProcessing(true);
+
         this.inventory.set(slot, stack);
 
         if (stack.getCount() > this.getMaxCountPerStack()) {
@@ -158,6 +165,14 @@ public class ItemCableInventory implements SidedInventory {
         return this.isDirty;
     }
 
+    public void setNeedsProcessing(boolean needsProcessing) {
+        this.needsProcessing = needsProcessing;
+    }
+
+    public boolean needsProcessing() {
+        return this.needsProcessing;
+    }
+
     @Override
     public boolean canPlayerUse(PlayerEntity player) {
         return true;
@@ -166,6 +181,8 @@ public class ItemCableInventory implements SidedInventory {
     @Override
     public void clear() {
         markDirty();
+        setNeedsProcessing(true);
+
         this.inventory.clear();
     }
 }
