@@ -539,7 +539,7 @@ public abstract class GenericCable extends Block implements Waterloggable {
                 // Connected to Cable
                 world.setBlockState(neighborPos, neighborBlockState.with(neighborProperty, CableConnection.CABLE), 0x1); // Flag 0x1 = 0b0000001 which means Propagate Changes. More info in net.minecraft.world.ModifiableWorld
                 world.setBlockState(ourPos, ourBlockState.with(ourProperty, CableConnection.CABLE), 0x1);
-            } else if (isInstanceOfInterfaceableBlock(neighborBlockState.getBlock(), world, neighborPos) && isValidSide(neighborBlockState.getBlock(), world, neighborPos, CalculationHelper.getDirection(neighborPos, ourPos))) {
+            } else if (isInstanceOfInterfaceableBlock(neighborBlockState.getBlock(), world, neighborPos) && isValidSide(neighborBlockState.getBlock(), world, neighborPos, CalculationHelper.getDirection(ourPos, neighborPos))) {
                 // Connected to Interfaceable Block
                 world.setBlockState(ourPos, ourBlockState.with(ourProperty, CableConnection.INTERFACEABLE), 0x1);
             } else {

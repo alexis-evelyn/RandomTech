@@ -6,6 +6,7 @@ import me.alexisevelyn.randomtech.blockentities.cables.ItemCableBlockEntity;
 import me.alexisevelyn.randomtech.blocks.cables.ItemCable;
 import me.alexisevelyn.randomtech.inventories.ItemCableInventory;
 import net.minecraft.block.Block;
+import net.minecraft.block.Blocks;
 import net.minecraft.block.InventoryProvider;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.inventory.Inventory;
@@ -47,7 +48,7 @@ public class ItemTransferHelper {
         // Remove if Not Interfaceable Neighbor
         neighbors.removeIf(neighborPos -> {
             boolean isInterfaceable = ourCable.isInstanceOfInterfaceableBlock(world.getBlockState(neighborPos).getBlock(), world, neighborPos);
-            boolean isValidSide = ourCable.isValidSide(world.getBlockState(neighborPos).getBlock(), world, neighborPos, CalculationHelper.getDirection(neighborPos, ourPosition));
+            boolean isValidSide = ourCable.isValidSide(world.getBlockState(neighborPos).getBlock(), world, neighborPos, CalculationHelper.getDirection(ourPosition, neighborPos));
 
             return !(isInterfaceable && isValidSide);
         });
@@ -223,11 +224,10 @@ public class ItemTransferHelper {
             BlockEntity blockEntity = world.getBlockEntity(neighbor);
             Block block = world.getBlockState(neighbor).getBlock();
 
-            if (isInventoryProvider(block)) {
+            if (isInventoryProvider(block))
                 tryTransferToInventoryProvider(world, position, neighbor, (InventoryProvider) block, itemStack);
-            } else if (isInventory(blockEntity)) {
+            else if (isInventory(blockEntity))
                 tryTransferToInventory(world, position, (Inventory) blockEntity, itemStack);
-            }
 
             // Update Neighbors
             world.updateComparators(neighbor, world.getBlockState(neighbor).getBlock());

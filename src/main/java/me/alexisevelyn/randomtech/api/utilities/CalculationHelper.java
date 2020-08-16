@@ -70,13 +70,13 @@ public class CalculationHelper {
     /**
      * Gets direction.
      *
-     * @param neighborPos the neighbor pos
-     * @param ourPos      the our pos
+     * @param firstVector The vector of the block you are checking from
+     * @param secondVector The vector of the block you are checking
      * @return the direction
      */
     @Nullable
-    public static Direction getDirection(@NotNull Vec3i neighborPos, @NotNull Vec3i ourPos) {
-        Vec3i result = subtractVectors(neighborPos, ourPos);
+    public static Direction getDirection(@NotNull Vec3i firstVector, @NotNull Vec3i secondVector) {
+        Vec3i result = subtractVectors(secondVector, firstVector);
 
         if (result.equals(Direction.NORTH.getVector()))
             return Direction.NORTH;
