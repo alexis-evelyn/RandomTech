@@ -64,10 +64,10 @@ public class ItemCableInventory implements SidedInventory {
     }
 
     /**
-     * Get filter slots int [ ].
+     * Retrieve slot numbers used for filtering items
      *
      * @param side the side
-     * @return the int [ ]
+     * @return int[] containing slot numbers
      */
     @NotNull
     public int[] getFilterSlots(@Nullable Direction side) {
@@ -75,10 +75,10 @@ public class ItemCableInventory implements SidedInventory {
     }
 
     /**
-     * Get real slots int [ ].
+     * Retrieve slot numbers used for item transfer
      *
      * @param side the side
-     * @return the int [ ]
+     * @return int[] containing slot numbers
      */
     @NotNull
     public int[] getRealSlots(@Nullable Direction side) {
@@ -106,7 +106,7 @@ public class ItemCableInventory implements SidedInventory {
      */
     @Override
     public boolean canExtract(int slot, ItemStack stack, Direction dir) {
-        return true;
+        return this.isValid(slot, stack);
     }
 
     /**

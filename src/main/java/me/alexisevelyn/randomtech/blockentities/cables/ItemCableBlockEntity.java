@@ -232,7 +232,5 @@ public class ItemCableBlockEntity extends BlockEntity implements InventoryProvid
         // Command blocks do not allow marking the inventory as dirty as they update the nbt data directly
         if (inventory.needsProcessing())
             moveItemInNetwork(world);
-
-        // TODO (Important): Figure out why slot 11 gets skipped
     }
 }

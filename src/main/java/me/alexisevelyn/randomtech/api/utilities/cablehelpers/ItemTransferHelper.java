@@ -356,10 +356,15 @@ public class ItemTransferHelper {
     @NotNull
     public static ItemStack findNonEmptyItemStack(ItemCableInventory inventory) {
         for (int slot : ItemTransferHelper.getSlots(inventory)) {
-            ItemStack currentItemStack = ItemTransferHelper.retrieveItemStack(inventory, slot);
+            ItemStack currentItemStack = retrieveItemStack(inventory, slot);
 
-            if (currentItemStack != null && !currentItemStack.isEmpty())
+            if (currentItemStack != null && !currentItemStack.isEmpty()) {
+                // Currently necessary to ensure all items get processed,
+                // but may not be necessary in the future once proper cable traveling is implemented.
+                inventory.setNeedsProcessing(true);
+
                 return currentItemStack;
+            }
         }
 
         return ItemStack.EMPTY;
