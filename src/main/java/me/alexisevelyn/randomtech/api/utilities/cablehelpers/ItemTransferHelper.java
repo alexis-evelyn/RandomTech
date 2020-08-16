@@ -6,6 +6,7 @@ import me.alexisevelyn.randomtech.blockentities.cables.ItemCableBlockEntity;
 import me.alexisevelyn.randomtech.blocks.cables.ItemCable;
 import me.alexisevelyn.randomtech.inventories.ItemCableInventory;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.InventoryProvider;
 import net.minecraft.block.entity.BlockEntity;
@@ -32,10 +33,9 @@ public class ItemTransferHelper {
      * @param ourCable    the our cable
      * @param world       the world
      * @param ourPosition the our position
-     * @param itemStack   the item stack
      * @return the transferrable neighbors
      */
-    public static List<BlockPos> getTransferrableNeighbors(@NotNull GenericCable ourCable, @NotNull World world, @NotNull BlockPos ourPosition, @NotNull ItemStack itemStack) {
+    public static List<BlockPos> getTransferrableNeighbors(@NotNull GenericCable ourCable, @NotNull World world, @NotNull BlockPos ourPosition) {
         ArrayList<BlockPos> neighbors = new ArrayList<>();
 
         neighbors.add(CalculationHelper.addVectors(ourPosition, Direction.NORTH.getVector()));
@@ -72,10 +72,10 @@ public class ItemTransferHelper {
             return ourItemStack;
 
         if (neighborStack.isEmpty()) {
-            setStack(neighborInventory, ourItemStack.copy(), neighborSlot); // We copy the itemstack as it'll cause Quasi-Connected Stacks if We Share the Same Instance Across Inventories
-            ourItemStack.setCount(0); // Setting the count to zero allows clearing the itemstack from the original inventory
+            setStack(neighborInventory, ourItemStack, neighborSlot);
+            // ourItemStack.setCount(0); // Setting the count to zero allows clearing the itemstack from the original inventory
 
-            return ItemStack.EMPTY; // Return an Empty Stack to pass the isEmpty checks.
+            return ourItemStack; // Return an Empty Stack to pass the isEmpty checks.
         }
 
         if (neighborStack.getItem().equals(ourItemStack.getItem()))
@@ -123,8 +123,12 @@ public class ItemTransferHelper {
         if (inventory.size() < slot)
             return;
 
-        inventory.setStack(slot, itemStack.copy());
-        itemStack.setCount(0);
+        // This is written like this because Java likes to do funky things with instructions (apparently). - Video of Weird Behavior: https://youtu.be/dwmg8v3eE74
+        ItemStack newItemStack = itemStack.copy();
+        itemStack.setCount(0); // It would skip this instruction if I set the new instance of the itemstack in the composter's inventory and then set the count of the old stack to zero.
+
+        // We copy the itemstack as it'll cause Quasi-Connected Stacks if We Share the Same Instance Across Inventories
+        inventory.setStack(slot, newItemStack);
     }
 
     /**
@@ -218,7 +222,7 @@ public class ItemTransferHelper {
      * @param itemStack the item stack
      */
     public static void tryTransferToContainer(@NotNull GenericCable ourCable, @NotNull World world, @NotNull BlockPos position, @NotNull ItemStack itemStack) {
-        List<BlockPos> neighbors = getTransferrableNeighbors(ourCable, world, position, itemStack);
+        List<BlockPos> neighbors = getTransferrableNeighbors(ourCable, world, position);
 
         for (BlockPos neighbor : neighbors) {
             BlockEntity blockEntity = world.getBlockEntity(neighbor);
@@ -368,5 +372,56 @@ public class ItemTransferHelper {
         }
 
         return ItemStack.EMPTY;
+    }
+
+    public static boolean canReceiveStack(@NotNull ItemCable itemCable, @NotNull World world, @NotNull BlockPos blockPos, @NotNull ItemStack itemStack) {
+        // Check filter here
+        SidedInventory sidedInventory = itemCable.getInventory(world.getBlockState(blockPos), world, blockPos);
+
+        if (!(sidedInventory instanceof ItemCableInventory))
+            return false;
+
+        ItemCableInventory itemCableInventory = (ItemCableInventory) sidedInventory;
+
+        // If filter is not empty and does not contain the itemstack in question, then deny receiving
+        if (filterDenied(itemStack, itemCableInventory, world, blockPos))
+            return false;
+
+        // For checking neighbors
+        List<BlockPos> neighbors = getTransferrableNeighbors(itemCable, world, blockPos);
+
+        return hasInsertableNeighbors(neighbors, world, blockPos, itemStack);
+    }
+
+    public static boolean filterDenied(@NotNull ItemStack itemStack, @NotNull ItemCableInventory itemCableInventory, @NotNull World world, @NotNull BlockPos blockPos) {
+        // TODO: Add support for checking metadata such as nbt data.
+
+        return !itemCableInventory.isFilterEmpty(null) && !itemCableInventory.filterContains(itemStack, null);
+    }
+
+    public static boolean hasInsertableNeighbors(@NotNull List<BlockPos> neighbors, @NotNull World world, @NotNull BlockPos ourPosition, @NotNull ItemStack itemStack) {
+        for (BlockPos neighborPosition : neighbors) {
+            BlockState blockState = world.getBlockState(neighborPosition);
+            Block block = blockState.getBlock();
+            BlockEntity blockEntity = world.getBlockEntity(neighborPosition);
+
+            if (isInventoryProvider(block)) {
+                Direction direction = CalculationHelper.getDirection(neighborPosition, ourPosition);
+
+                if (canInsertIntoSidedInventory(((InventoryProvider) block).getInventory(blockState, world, neighborPosition), direction, itemStack))
+                    return true;
+            } else if (isInventory(blockEntity))
+                return true;
+        }
+
+        return false;
+    }
+
+    public static boolean canInsertIntoSidedInventory(@NotNull SidedInventory sidedInventory, @Nullable Direction side, @NotNull ItemStack itemStack) {
+        for (int slot : sidedInventory.getAvailableSlots(side))
+            if (sidedInventory.canInsert(slot, itemStack, side))
+                return true;
+
+        return false;
     }
 }

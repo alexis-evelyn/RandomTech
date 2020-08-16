@@ -150,7 +150,7 @@ public class ItemCableBlockEntity extends BlockEntity implements InventoryProvid
             return;
 
         // We choose a slot ahead of time so we can figure out what slot needs to be transfered
-        VertexPath path = findPath(currentItemStack, currentKnownCables, currentInterfaceableBlocks);
+        VertexPath path = findPath(world, currentItemStack, currentKnownCables, currentInterfaceableBlocks);
         Vertex nextVertex = path.getNext();
 
         // We are at the end of the path (if any path) if this if statement equals true
@@ -191,12 +191,20 @@ public class ItemCableBlockEntity extends BlockEntity implements InventoryProvid
      * @return the vertex path
      */
     @NotNull
-    private VertexPath findPath(@NotNull ItemStack chosenItemStack, @NotNull List<BlockPos> currentKnownCables, @NotNull List<BlockPos> currentInterfaceableBlocks) {
+    private VertexPath findPath(@NotNull World world, @NotNull ItemStack chosenItemStack, @NotNull List<BlockPos> currentKnownCables, @NotNull List<BlockPos> currentInterfaceableBlocks) {
         if (currentInterfaceableBlocks.size() == 0)
             return new VertexPath();
 
-        // TODO (IMPORTANT): Replace with filter search
-        BlockPos nextBlockPos = currentInterfaceableBlocks.get(0);
+        BlockPos nextBlockPos = null;
+        for (BlockPos currentCable : currentInterfaceableBlocks) {
+            if (ItemTransferHelper.canReceiveStack(ourCable, world, currentCable, chosenItemStack)) {
+                nextBlockPos = currentCable;
+                break;
+            }
+        }
+
+        if (nextBlockPos == null)
+            return new VertexPath();
 
         return GenericCable.dijkstraAlgorithm(currentKnownCables, getPos(), nextBlockPos);
     }
