@@ -111,16 +111,10 @@ public class ItemCableBlockEntity extends BlockEntity implements InventoryProvid
      * @param world the world
      */
     private void attemptInsertIntoInterfaceableBlocks(@NotNull World world) {
-        ItemStack currentItemStack = null;
-        for (int slot : ItemTransferHelper.getSlots(inventory)) {
-            currentItemStack = ItemTransferHelper.retrieveItemStack(inventory, slot);
-
-            if (currentItemStack != null)
-                break;
-        }
+        ItemStack currentItemStack = ItemTransferHelper.findNonEmptyItemStack(inventory);
 
         // If no itemstacks found, just return
-        if (currentItemStack == null || currentItemStack.isEmpty())
+        if (currentItemStack.isEmpty())
             return;
 
         ItemTransferHelper.tryTransferToContainer(ourCable, world, pos, currentItemStack);
@@ -149,16 +143,10 @@ public class ItemCableBlockEntity extends BlockEntity implements InventoryProvid
             return;
 
         // Look for first non-empty slot
-        ItemStack currentItemStack = null;
-        for (int slot : ItemTransferHelper.getSlots(inventory)) {
-            currentItemStack = ItemTransferHelper.retrieveItemStack(inventory, slot);
-
-            if (currentItemStack != null)
-                break;
-        }
+        ItemStack currentItemStack = ItemTransferHelper.findNonEmptyItemStack(inventory);
 
         // If no itemstacks found, just return
-        if (currentItemStack == null || currentItemStack.isEmpty())
+        if (currentItemStack.isEmpty())
             return;
 
         // We choose a slot ahead of time so we can figure out what slot needs to be transfered
@@ -183,6 +171,10 @@ public class ItemCableBlockEntity extends BlockEntity implements InventoryProvid
 
         // Attempt to Add Items to Neighbor Slots
         for (int slot : neighborSlots) {
+            // Don't bother looping through neighbor's slots if nothing to transfer to those slots
+            if (currentItemStack.isEmpty())
+                break;
+
             currentItemStack = ItemTransferHelper.transferItemStacks(neighborCableEntity.inventory, slot, currentItemStack);
             world.updateComparators(neighborCableEntity.getPos(), world.getBlockState(neighborCableEntity.getPos()).getBlock());
         }
@@ -238,9 +230,9 @@ public class ItemCableBlockEntity extends BlockEntity implements InventoryProvid
 
         // We only want the cable to move when the inventory is updated
         // Command blocks do not allow marking the inventory as dirty as they update the nbt data directly
-        if (inventory.needsProcessing()) {
-            inventory.setNeedsProcessing(false);
+        if (inventory.needsProcessing())
             moveItemInNetwork(world);
-        }
+
+        // TODO (Important): Figure out why slot 11 gets skipped
     }
 }

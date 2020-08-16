@@ -10,6 +10,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Iterator;
+import java.util.stream.IntStream;
 
 /**
  * The type Item cable inventory.
@@ -21,7 +22,7 @@ public class ItemCableInventory implements SidedInventory {
      * Instantiates a new Item cable inventory.
      */
     public ItemCableInventory() {
-        this.inventory = DefaultedList.ofSize(10, ItemStack.EMPTY);
+        this.inventory = DefaultedList.ofSize(getFilterSlots(null).length + getRealSlots(null).length, ItemStack.EMPTY);
     }
 
     /**
@@ -70,7 +71,7 @@ public class ItemCableInventory implements SidedInventory {
      */
     @NotNull
     public int[] getFilterSlots(@Nullable Direction side) {
-        return new int[]{0, 1, 2, 3, 4, 5, 6, 7, 8};
+        return IntStream.rangeClosed(0, 8).toArray();
     }
 
     /**
@@ -81,7 +82,7 @@ public class ItemCableInventory implements SidedInventory {
      */
     @NotNull
     public int[] getRealSlots(@Nullable Direction side) {
-        return new int[]{9};
+        return IntStream.rangeClosed(9, 11).toArray();
     }
 
     /**

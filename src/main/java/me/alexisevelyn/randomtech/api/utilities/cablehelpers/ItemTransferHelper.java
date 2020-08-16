@@ -71,11 +71,10 @@ public class ItemTransferHelper {
             return ourItemStack;
 
         if (neighborStack.isEmpty()) {
-            neighborStack = ourItemStack.copy();
-            ourItemStack.setCount(0);
+            setStack(neighborInventory, ourItemStack.copy(), neighborSlot); // We copy the itemstack as it'll cause Quasi-Connected Stacks if We Share the Same Instance Across Inventories
+            ourItemStack.setCount(0); // Setting the count to zero allows clearing the itemstack from the original inventory
 
-            setStack(neighborInventory, neighborStack, neighborSlot);
-            return ourItemStack;
+            return ItemStack.EMPTY; // Return an Empty Stack to pass the isEmpty checks.
         }
 
         if (neighborStack.getItem().equals(ourItemStack.getItem()))
@@ -106,7 +105,7 @@ public class ItemTransferHelper {
 
         neighborStack.increment(ourItemStackCount);
         ourItemStack.setCount(0);
-        return ourItemStack;
+        return ItemStack.EMPTY;
     }
 
     /**
@@ -170,7 +169,7 @@ public class ItemTransferHelper {
         int[] slots = inventory.getRealSlots(null);
 
         if (slots.length == 0)
-            return new int[]{0};
+            return new int[]{};
 
         return slots;
     }
@@ -352,5 +351,17 @@ public class ItemTransferHelper {
     // Only block entities are supposed to be inventories.
     public static boolean isInventory(Object object) {
         return object instanceof Inventory;
+    }
+
+    @NotNull
+    public static ItemStack findNonEmptyItemStack(ItemCableInventory inventory) {
+        for (int slot : ItemTransferHelper.getSlots(inventory)) {
+            ItemStack currentItemStack = ItemTransferHelper.retrieveItemStack(inventory, slot);
+
+            if (currentItemStack != null && !currentItemStack.isEmpty())
+                return currentItemStack;
+        }
+
+        return ItemStack.EMPTY;
     }
 }
