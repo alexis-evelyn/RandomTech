@@ -43,6 +43,7 @@ import net.fabricmc.fabric.api.gamerule.v1.GameRuleRegistry;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
+import net.fabricmc.fabric.api.screenhandler.v1.ScreenHandlerRegistry;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.FluidBlock;
@@ -53,6 +54,7 @@ import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.SpawnGroup;
 import net.minecraft.fluid.FlowableFluid;
 import net.minecraft.item.*;
+import net.minecraft.screen.ScreenHandlerType;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.text.TranslatableText;
@@ -175,10 +177,13 @@ public class RegistryHelper {
     public static final Item HONEY_BUCKET = new BucketItem(HONEY_FLUID, new Item.Settings().recipeRemainder(Items.BUCKET).maxCount(1));
     public static final Item COBALT_BUCKET = new BucketItem(COBALT_FLUID, new Item.Settings().recipeRemainder(Items.BUCKET).maxCount(1));
 
-    // Gui Handlers - Needs to be run on both client and server for gui open screen to work
+    // Gui Handlers - Handled By RebornCore - Needs to be run on both client and server for gui open screen to work
     public static final TeleporterGuiHandler<TeleporterGui> teleporterGuiHandler = new TeleporterGuiHandler<>();
     public static final FuserGuiHandler<FuserGui> fuserGuiHandler = new FuserGuiHandler<>();
     public static final BasicComputerGuiHandler<BasicComputerGui> basicComputerGuiHandler = new BasicComputerGuiHandler<>();
+
+    // Gui Handlers - Handled Myself
+    public static final ScreenHandlerType<ItemCableGuiHandler> itemCableScreenHandlerType = ScreenHandlerRegistry.registerExtended(new Identifier(Main.MODID, "item_cable_screen_handler"), ItemCableGuiHandler::new);
 
     // Entities
     public static final EntityType<WizardEntity> WIZARD = FabricEntityTypeBuilder.create(SpawnGroup.CREATURE, ((EntityType.EntityFactory<WizardEntity>) WizardEntity::new))

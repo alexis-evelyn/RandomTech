@@ -6,7 +6,7 @@ import me.alexisevelyn.randomtech.api.utilities.pathfinding.dijkstra.Vertex;
 import me.alexisevelyn.randomtech.api.utilities.pathfinding.dijkstra.VertexPath;
 import me.alexisevelyn.randomtech.blocks.cables.ItemCable;
 import me.alexisevelyn.randomtech.guis.ItemCableGui;
-import me.alexisevelyn.randomtech.guis.TeleporterGui;
+import me.alexisevelyn.randomtech.guis.ItemCableGuiHandler;
 import me.alexisevelyn.randomtech.inventories.ItemCableInventory;
 import me.alexisevelyn.randomtech.utility.BlockEntities;
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory;
@@ -20,7 +20,6 @@ import net.minecraft.inventory.SidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.PacketByteBuf;
-import net.minecraft.screen.NamedScreenHandlerFactory;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.Text;
@@ -37,7 +36,7 @@ import java.util.List;
 /**
  * The type Item cable block entity.
  */
-public class ItemCableBlockEntity extends BlockEntity implements InventoryProvider, Tickable, NamedScreenHandlerFactory {
+public class ItemCableBlockEntity extends BlockEntity implements InventoryProvider, Tickable, ExtendedScreenHandlerFactory {
     private final ItemCableInventory inventory;
     private final ItemCable ourCable = new ItemCable();
 
@@ -260,10 +259,10 @@ public class ItemCableBlockEntity extends BlockEntity implements InventoryProvid
      * @param serverPlayerEntity
      * @param packetByteBuf
      */
-//    @Override
-//    public void writeScreenOpeningData(ServerPlayerEntity serverPlayerEntity, PacketByteBuf packetByteBuf) {
-//        // Do Nothing For Now!!!
-//    }
+    @Override
+    public void writeScreenOpeningData(ServerPlayerEntity serverPlayerEntity, PacketByteBuf packetByteBuf) {
+        // Do Nothing For Now!!!
+    }
 
     /**
      * Returns the title of this screen handler; will be a part of the open
@@ -283,6 +282,6 @@ public class ItemCableBlockEntity extends BlockEntity implements InventoryProvid
      */
     @Override
     public ScreenHandler createMenu(int syncId, PlayerInventory inv, PlayerEntity player) {
-        return new ItemCableGui(syncId, player.inventory, this.inventory);
+        return new ItemCableGuiHandler(syncId, player.inventory, this.inventory);
     }
 }

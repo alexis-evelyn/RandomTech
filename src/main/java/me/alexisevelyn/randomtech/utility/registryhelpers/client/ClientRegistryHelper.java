@@ -8,6 +8,7 @@ import me.alexisevelyn.randomtech.blockitems.VirtualTile;
 import me.alexisevelyn.randomtech.blocks.wires.CobaltWire;
 import me.alexisevelyn.randomtech.entities.renderers.CloudDemonRenderer;
 import me.alexisevelyn.randomtech.entities.renderers.WizardRenderer;
+import me.alexisevelyn.randomtech.guis.ItemCableGui;
 import me.alexisevelyn.randomtech.modmenu.screens.MainScreen;
 import me.alexisevelyn.randomtech.utility.registryhelpers.main.RegistryHelper;
 import me.sargunvohra.mcmods.autoconfig1u.AutoConfig;
@@ -18,6 +19,7 @@ import net.fabricmc.fabric.api.client.render.fluid.v1.FluidRenderHandler;
 import net.fabricmc.fabric.api.client.render.fluid.v1.FluidRenderHandlerRegistry;
 import net.fabricmc.fabric.api.client.rendereregistry.v1.EntityRendererRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.ColorProviderRegistry;
+import net.fabricmc.fabric.api.client.screenhandler.v1.ScreenRegistry;
 import net.fabricmc.fabric.api.event.client.ClientSpriteRegistryCallback;
 import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
 import net.fabricmc.fabric.api.resource.SimpleSynchronousResourceReloadListener;
@@ -76,6 +78,9 @@ public class ClientRegistryHelper {
 
         // Shader Setup
         shaderSetup();
+
+        // Screen Registry
+        registerScreens();
     }
 
     /**
@@ -222,5 +227,13 @@ public class ClientRegistryHelper {
                 GRAYSCALE_SHADER.render(tickDelta);
             }
         });
+    }
+
+    /**
+     * Register Screens for Custom Guis Not Handled By RebornCore
+     */
+    private void registerScreens() {
+        // For Item Cable
+        ScreenRegistry.register(RegistryHelper.itemCableScreenHandlerType, ItemCableGui::new);
     }
 }
