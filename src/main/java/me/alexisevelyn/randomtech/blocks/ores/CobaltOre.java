@@ -43,20 +43,23 @@ public class CobaltOre extends Block {
     public static void addOreFeature(Biome biome) {
         // Don't Add Ore to Nether or End
         if (biome.getCategory() != Biome.Category.NETHER && biome.getCategory() != Biome.Category.THEEND) {
-            biome.addFeature(
-                    GenerationStep.Feature.UNDERGROUND_ORES,
-                    Feature.ORE.configure(
-                            new OreFeatureConfig(
-                                    OreFeatureConfig.Target.NATURAL_STONE,
-                                    RegistryHelper.COBALT_ORE.getDefaultState(),
-                                    8 // Ore vein size
-                            )).createDecoratedFeature(
-                            Decorator.COUNT_RANGE.configure(new RangeDecoratorConfig(
-                                    8, // Number of veins per chunk
-                                    0, // Bottom Offset
-                                    13, // Min y level
-                                    32 // Max y level
-                            ))));
+            // biome.generateFeatureStep();
+
+            // TODO (IMPORTANT): Fix this for 1.16.2
+//            biome.addFeature(
+//                    GenerationStep.Feature.UNDERGROUND_ORES,
+//                    Feature.ORE.configure(
+//                            new OreFeatureConfig(
+//                                    OreFeatureConfig.Target.NATURAL_STONE,
+//                                    RegistryHelper.COBALT_ORE.getDefaultState(),
+//                                    8 // Ore vein size
+//                            )).decorate(
+//                            Decorator.COUNT_RANGE.configure(new RangeDecoratorConfig(
+//                                    8, // Number of veins per chunk
+//                                    0, // Bottom Offset
+//                                    13, // Min y level
+//                                    32 // Max y level
+//                            ))));
         }
     }
 }

@@ -34,7 +34,7 @@ public class VoidChunkGenerator extends ChunkGenerator {
 
     public static final Codec<VoidChunkGenerator> CODEC = RecordCodecBuilder.create((instance) ->
             instance.group(
-                    BiomeSource.field_24713.fieldOf("biome_source")
+                    BiomeSource.CODEC.fieldOf("biome_source")
                             .forGetter((generator) -> generator.biomeSource),
                     Codec.BOOL.fieldOf("debug")
                             .forGetter((generator) -> generator.debug)
@@ -82,7 +82,7 @@ public class VoidChunkGenerator extends ChunkGenerator {
      * @return the codec
      */
     @Override
-    protected Codec<? extends ChunkGenerator> method_28506() {
+    protected Codec<? extends ChunkGenerator> getCodec() {
         return CODEC;
     }
 
@@ -159,7 +159,7 @@ public class VoidChunkGenerator extends ChunkGenerator {
      */
     @Override
     public void populateEntities(ChunkRegion region) {
-        if (region.getWorld().getGameRules().getBoolean(GameRules.DO_MOB_SPAWNING)) {
+        if (region.toServerWorld().getGameRules().getBoolean(GameRules.DO_MOB_SPAWNING)) {
             // Center Chunk of Region
             int chunkX = region.getCenterChunkX();
             int chunkZ = region.getCenterChunkZ();

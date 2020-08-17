@@ -57,7 +57,7 @@ public abstract class BaseFluid extends FlowableFluid {
     @Override
     protected void beforeBreakingBlock(WorldAccess world, BlockPos pos, BlockState state) {
         final BlockEntity blockEntity = state.getBlock().hasBlockEntity() ? world.getBlockEntity(pos) : null;
-        Block.dropStacks(state, world.getWorld(), pos, blockEntity);
+        Block.dropStacks(state, world, pos, blockEntity);
     }
 
     /**

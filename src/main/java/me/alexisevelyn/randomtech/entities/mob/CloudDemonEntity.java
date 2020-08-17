@@ -10,6 +10,7 @@ import net.minecraft.entity.mob.HostileEntity;
 import net.minecraft.entity.passive.PigEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.ActionResult;
@@ -145,11 +146,12 @@ public class CloudDemonEntity extends HostileEntity {
     /**
      * On struck by lightning.
      *
+     * @param serverWorld Server World
      * @param lightning the lightning
      */
     @Override
-    public void onStruckByLightning(LightningEntity lightning) {
-        super.onStruckByLightning(lightning);
+    public void onStruckByLightning(ServerWorld serverWorld, LightningEntity lightning) {
+        super.onStruckByLightning(serverWorld, lightning);
     }
 
     /**

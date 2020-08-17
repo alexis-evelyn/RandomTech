@@ -3,14 +3,10 @@ package me.alexisevelyn.randomtech.waila;
 import mcp.mobius.waila.api.IRegistrar;
 import mcp.mobius.waila.api.IWailaPlugin;
 import mcp.mobius.waila.api.TooltipPosition;
-import mcp.mobius.waila.overlay.tooltiprenderers.TooltipRendererStack;
 import me.alexisevelyn.randomtech.Main;
 import me.alexisevelyn.randomtech.api.blocks.glass.BasePoweredGlass;
 import me.alexisevelyn.randomtech.api.blocks.machines.PowerAcceptorBlock;
 import me.alexisevelyn.randomtech.blockitems.VirtualTile;
-import me.alexisevelyn.randomtech.blocks.FuserBlock;
-import me.alexisevelyn.randomtech.blocks.TeleporterBlock;
-import me.alexisevelyn.randomtech.blocks.glass.PoweredGlass;
 import me.alexisevelyn.randomtech.blocks.wires.CobaltWire;
 import me.alexisevelyn.randomtech.waila.glass.PoweredGlassInfo;
 import me.alexisevelyn.randomtech.waila.machines.Machines;
@@ -45,7 +41,7 @@ public class WailaRegistry implements IWailaPlugin {
         iRegistrar.addConfig(CONFIG_DISPLAY_COLOR, true);
 
         // ToolTip Rendering
-        iRegistrar.registerTooltipRenderer(RENDER_POWER, new TooltipRendererStack());
+        // iRegistrar.registerTooltipRenderer(RENDER_POWER, new TooltipRendererStack());
 
         // Powered Machines Base Class - Includes Teleporter and Fuser
         iRegistrar.registerComponentProvider(Machines.INSTANCE, TooltipPosition.BODY, PowerAcceptorBlock.class);

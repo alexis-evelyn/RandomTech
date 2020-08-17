@@ -1,6 +1,7 @@
 package me.alexisevelyn.randomtech.modmenu.screens;
 
 import me.alexisevelyn.randomtech.Main;
+import me.alexisevelyn.randomtech.modmenu.screens.MainScreen.InnerStuff;
 import me.sargunvohra.mcmods.autoconfig1u.ConfigData;
 import me.sargunvohra.mcmods.autoconfig1u.annotation.Config;
 import me.sargunvohra.mcmods.autoconfig1u.annotation.ConfigEntry;

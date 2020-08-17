@@ -16,7 +16,6 @@ import me.alexisevelyn.randomtech.blocks.metals.CobaltBlock;
 import me.alexisevelyn.randomtech.blocks.ores.CobaltOre;
 import me.alexisevelyn.randomtech.blocks.wires.CobaltWire;
 import me.alexisevelyn.randomtech.chunkgenerators.VoidChunkGenerator;
-import me.alexisevelyn.randomtech.dimensionhelpers.VoidDimensionHelper;
 import me.alexisevelyn.randomtech.entities.mob.CloudDemonEntity;
 import me.alexisevelyn.randomtech.entities.mob.WizardEntity;
 import me.alexisevelyn.randomtech.fluids.*;
@@ -36,7 +35,6 @@ import me.alexisevelyn.randomtech.utility.BlockEntities;
 import me.alexisevelyn.randomtech.utility.Materials;
 import me.alexisevelyn.randomtech.utility.Recipes;
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
-import net.fabricmc.fabric.api.dimension.v1.FabricDimensions;
 import net.fabricmc.fabric.api.gamerule.v1.CustomGameRuleCategory;
 import net.fabricmc.fabric.api.gamerule.v1.GameRuleFactory;
 import net.fabricmc.fabric.api.gamerule.v1.GameRuleRegistry;
@@ -496,7 +494,8 @@ public class RegistryHelper {
      */
     // Dimensions are actually registered as JSON files now. So, we just set up the chunk generator and player placement code.
     private void registerDimensions() {
-        FabricDimensions.registerDefaultPlacer(voidDimension, VoidDimensionHelper::placeEntityInVoid);
+        // TODO (IMPORTANT): Fix this for 1.16.2
+        // FabricDimensions.registerDefaultPlacer(voidDimension, new VoidDimensionHelper());
     }
 
     /**

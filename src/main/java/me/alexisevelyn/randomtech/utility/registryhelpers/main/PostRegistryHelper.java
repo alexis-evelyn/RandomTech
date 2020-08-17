@@ -18,6 +18,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.registry.BuiltinRegistries;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.biome.Biome;
 
@@ -42,11 +43,13 @@ public class PostRegistryHelper {
             }
         });
 
+        // TODO (IMPORTANT): Fix this for 1.16.2
         // Register Post-Generation in Existing Biomes
-        Registry.BIOME.forEach(this::handleBiome);
+        // Registry.BIOME.forEach(this::handleBiome);
 
+        // TODO (IMPORTANT): Fix this for 1.16.2
         // Register Post-Generation in Future Added Biomes
-        RegistryEntryAddedCallback.event(Registry.BIOME).register((i, identifier, biome) -> handleBiome(biome));
+        // RegistryEntryAddedCallback.event(Registry.BIOME).register((i, identifier, biome) -> handleBiome(biome));
 
         // To Handle Hotkey Presses From Client
         ServerSidePacketRegistry.INSTANCE.register(PreRegistryHelper.keybindPacketIdentifier, (packetContext, attachedData) -> {

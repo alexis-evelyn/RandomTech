@@ -275,10 +275,10 @@ public class VirtualTile extends BlockItem {
          * @param stack       the stack
          */
         public static void dropNBTStacks(BlockState state, World world, BlockPos pos, @Nullable BlockEntity blockEntity, Entity entity, ItemStack stack) {
-            if (world instanceof ServerWorld)
+            if (world instanceof ServerWorld) {
                 getDroppedStacks(state, (ServerWorld) world, pos, blockEntity, entity, stack).forEach((itemStack) -> dropNBTStack(world, pos, blockEntity, itemStack));
-
-            state.onStacksDropped(world, pos, stack);
+                state.onStacksDropped((ServerWorld) world, pos, stack);
+            }
         }
 
         /**
