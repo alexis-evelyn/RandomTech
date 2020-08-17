@@ -3,19 +3,27 @@ package me.alexisevelyn.randomtech.blocks.cables;
 import me.alexisevelyn.randomtech.api.blocks.cables.GenericCable;
 import me.alexisevelyn.randomtech.api.utilities.GenericBlockHelper;
 import me.alexisevelyn.randomtech.blockentities.cables.ItemCableBlockEntity;
+import me.alexisevelyn.randomtech.inventories.ItemCableInventory;
 import me.alexisevelyn.randomtech.utility.Materials;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.block.entity.DispenserBlockEntity;
 import net.minecraft.block.entity.HopperBlockEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.inventory.SidedInventory;
-import net.minecraft.screen.ScreenHandler;
+import net.minecraft.screen.*;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.BlockSoundGroup;
+import net.minecraft.stat.Stats;
+import net.minecraft.text.TranslatableText;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.Hand;
 import net.minecraft.util.ItemScatterer;
+import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.shape.VoxelShape;
@@ -217,6 +225,28 @@ public class ItemCable extends GenericCable implements BlockEntityProvider, Inve
     }
 
     /**
+     * Allows for Opening Gui
+     *
+     * @param state
+     * @param world
+     * @param pos
+     * @param player
+     * @param hand
+     * @param hit
+     * @return
+     */
+    @Override
+    public ActionResult openGui(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
+        BlockEntity blockEntity = world.getBlockEntity(pos);
+
+        if (!(blockEntity instanceof ItemCableBlockEntity))
+            return ActionResult.FAIL;
+
+        player.openHandledScreen((ItemCableBlockEntity) blockEntity);
+        return ActionResult.CONSUME;
+    }
+
+    /**
      * Create block entity block entity.
      *
      * @param world the world
@@ -254,7 +284,14 @@ public class ItemCable extends GenericCable implements BlockEntityProvider, Inve
     @Override
     @SuppressWarnings("deprecation") // https://discordapp.com/channels/507304429255393322/523633816078647296/740720404800209041
     public int getComparatorOutput(BlockState state, World world, BlockPos pos) {
-        return ScreenHandler.calculateComparatorOutput(getInventory(state, world, pos));
+        SidedInventory inventory = getInventory(state, world, pos);
+
+        // Ignore Filter Slots
+        if (inventory instanceof ItemCableInventory)
+            return ((ItemCableInventory) inventory).calculateComparatorOutput();
+
+        // Default Behavior
+        return ScreenHandler.calculateComparatorOutput(inventory);
     }
 
     /**

@@ -6,6 +6,7 @@ import net.minecraft.inventory.SidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.Direction;
+import net.minecraft.util.math.MathHelper;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -308,5 +309,25 @@ public class ItemCableInventory implements SidedInventory {
         setNeedsProcessing(true);
 
         this.inventory.clear();
+    }
+
+    public int calculateComparatorOutput() {
+        // Potential future idea of different comparator output depending on side?
+        int[] slots = getRealSlots(null);
+
+        int iterations = 0;
+        float itemToStackRatio = 0.0F;
+
+        for (int slot : slots) {
+            ItemStack itemStack = getStack(slot);
+
+            if (!itemStack.isEmpty()) {
+                itemToStackRatio += itemStack.getCount() / (float) Math.min(getMaxCountPerStack(), itemStack.getMaxCount());
+                ++iterations;
+            }
+        }
+
+        itemToStackRatio /= slots.length;
+        return MathHelper.floor(itemToStackRatio * 14.0F) + (iterations > 0 ? 1 : 0);
     }
 }

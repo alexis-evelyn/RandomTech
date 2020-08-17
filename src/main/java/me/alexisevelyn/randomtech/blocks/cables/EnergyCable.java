@@ -6,12 +6,18 @@ import me.alexisevelyn.randomtech.api.utilities.GenericBlockHelper;
 import me.alexisevelyn.randomtech.utility.Materials;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
 import net.minecraft.block.InventoryProvider;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.sound.BlockSoundGroup;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.Hand;
+import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.shape.VoxelShape;
+import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -116,5 +122,21 @@ public class EnergyCable extends GenericCable {
     @Override
     public boolean isValidSide(Block block, WorldAccess world, BlockPos blockPos, Direction side) {
         return true;
+    }
+
+    /**
+     * Allows for Opening Gui
+     *
+     * @param state
+     * @param world
+     * @param pos
+     * @param player
+     * @param hand
+     * @param hit
+     * @return
+     */
+    @Override
+    public ActionResult openGui(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
+        return ActionResult.PASS;
     }
 }

@@ -175,6 +175,19 @@ public abstract class GenericCable extends Block implements Waterloggable {
     public abstract boolean isValidSide(Block block, WorldAccess world, BlockPos blockPos, Direction side);
 
     /**
+     * Allows for Opening Gui
+     *
+     * @param state
+     * @param world
+     * @param pos
+     * @param player
+     * @param hand
+     * @param hit
+     * @return
+     */
+    public abstract ActionResult openGui(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit);
+
+    /**
      * On placed.
      *
      * @param world     the world
@@ -282,7 +295,7 @@ public abstract class GenericCable extends Block implements Waterloggable {
 
         // We want to allow the player to access the gui if they are not sneaking
         if (!player.isSneaking())
-            return ActionResult.PASS;
+            return openGui(state, world, pos, player, hand, hit);
 
         List<BlockPos> allCables = getAllInterfacingCables(world, pos);
 
@@ -446,29 +459,23 @@ public abstract class GenericCable extends Block implements Waterloggable {
         isDownValid = isNeighborValidForContinuance(world, downBlockState, north);
 
         List<BlockPos> cables = new ArrayList<>();
-        if (isNorthValid) {
+        if (isNorthValid)
             cables.add(north);
-        }
 
-        if (isSouthValid) {
+        if (isSouthValid)
             cables.add(south);
-        }
 
-        if (isEastValid) {
+        if (isEastValid)
             cables.add(east);
-        }
 
-        if (isWestValid) {
+        if (isWestValid)
             cables.add(west);
-        }
 
-        if (isUpValid) {
+        if (isUpValid)
             cables.add(up);
-        }
 
-        if (isDownValid) {
+        if (isDownValid)
             cables.add(down);
-        }
 
         return cables;
     }
