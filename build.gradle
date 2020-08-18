@@ -16,12 +16,12 @@ configurations {
 
 repositories {
 	maven {
-		name = "Patchouli"
-		url = "https://maven.blamejared.com/"
+		name "Patchouli"
+		url "https://maven.blamejared.com/"
 	}
 	ivy {
-		name = "Github Repos"
-		url = "https://jitpack.io/"
+		name "Github Repos"
+		url "https://jitpack.io/"
 
 		// This exists to force Gradle to ignore bad versioning information from commit based builds on JitPack
 		metadataSources {
@@ -36,24 +36,32 @@ repositories {
 		}
 	}
 	maven {
-		name = "CurseMaven"
-		url = "https://www.cursemaven.com"
+		name "CurseMaven"
+		url "https://www.cursemaven.com"
 	}
 	maven {
-		name = "Ladysnake Libs"
-		url = 'https://dl.bintray.com/ladysnake/libs'
+		name "Ladysnake Libs"
+		url "https://dl.bintray.com/ladysnake/libs"
 	}
 	maven {
-		name = "Spinnery"
-		url = "https://dl.bintray.com/spinnery/Spinnery"
+		name "Spinnery"
+		url "https://dl.bintray.com/spinnery/Spinnery"
 	}
 	maven {
-		name "Siphalor's Maven"
+		name "NBT Crafting"
 		url "https://maven.siphalor.de"
 	}
 	maven {
+		name "Hwyla"
 		url "https://maven.tehnut.info"
 	}
+//	maven {
+//		name "AE2"
+//		url "https://maven.pkg.github.com/AppliedEnergistics/Applied-Energistics-2"
+//		credentials {
+//			username = GITHUB_PACKAGES_KEY
+//		}
+//	}
 }
 
 dependencies {
@@ -88,19 +96,18 @@ dependencies {
 	// The TehNut Maven Repo Slows Down Gradle Way Too Much
 	// I am currently building from my own repo as Jitpack failed to build Hwyla the first time due to OOM Exception and Jitpack doesn't rebuild builds unless you own the repo.
 	modCompile ("mcp.mobius.waila:Hwyla:${project.hywla_version}:api")
-	// modRuntime ("mcp.mobius.waila:Hwyla:${project.hywla_version}") // TODO: Fix
+	// modRuntime ("mcp.mobius.waila:Hwyla:${project.hywla_version}") // TODO: Fix - Doesn't Remap for Dev Environment
 	// modImplementation "com.github.alexis-evelyn:HWYLA:${project.hywla_github_version}"
 
 	// Roughly Enough Items
-	modImplementation "me.shedaniel:RoughlyEnoughItems:${project.rei_version}"
+	modImplementation "me.shedaniel:RoughlyEnoughItems:${project.rei_version}" // TODO: Fix - Recipe Display Crashes
 
 	// AppleSkin
 	modRuntime "com.github.squeek502:AppleSkin:${project.appleskin_version}"
 
-	// Patchouli API
-	// modImplementation "vazkii.patchouli:Patchouli:${project.patchouli_version}" - 1.16-37
+	// Patchouli API - TODO: Update to non-snapshot version when released
 	modCompile "vazkii.patchouli:Patchouli:${project.patchouli_version}:api"
-	// modRuntime "vazkii.patchouli:Patchouli:${project.patchouli_version}" // TODO: Fix
+	// modRuntime "vazkii.patchouli:Patchouli:${project.patchouli_version}" // TODO: Fix - Gradle can't find it
 
 	// Used to speed Minecraft up in dev environment. Breaks compatibility with old worlds
 	modRuntime ("com.github.SuperCoder7979:databreaker:${project.databreaker_version}") {
@@ -112,10 +119,10 @@ dependencies {
 	// modRuntime "com.github.jellysquid3:sodium-fabric:${project.sodium_version}" // Skip
 
 	// General Purpose Performance Improvement
-	// modRuntime "com.github.jellysquid3:lithium-fabric:${project.lithium_version}" // TODO: Fix - VoronoiBiomeAccessType.method_22399
+	// modRuntime "com.github.jellysquid3:lithium-fabric:${project.lithium_version}" // Skip - Fix - VoronoiBiomeAccessType.method_22399
 
 	// Improves performance of lighting engine
-	modRuntime "com.github.jellysquid3:phosphor-fabric:${project.phosphor_version}"
+	// modRuntime "com.github.jellysquid3:phosphor-fabric:${project.phosphor_version}" // Skip
 
 	// Permission Granted From: https://discordapp.com/channels/507304429255393322/507982478276034570/730955439390326894 - Screenshots: https://imgur.com/a/R9xMlhX
 	modCompile "com.github.nuclearfarts:connected-block-textures:${project.connected_block_textures_version}"
@@ -143,7 +150,7 @@ dependencies {
 	 * This mod uses RebornCore and LBA.
 	 * LBA should be compatible with RebornCore, so if it is, I won't need to add custom support.
 	 */
-	// modRuntime "com.github.Chainmail-Studios:Astromine:${project.astromine_version}" // TODO: Fix
+	// modRuntime "com.github.Chainmail-Studios:Astromine:${project.astromine_version}" // TODO: Fix - `blade` Dependency?
 
 	// For Shaders - https://github.com/Ladysnake/Satin/blob/master/README.md
 	modImplementation "io.github.ladysnake:Satin:${project.satin_version}"
@@ -161,7 +168,8 @@ dependencies {
 	// compile group: 'com.google.errorprone', name: 'error_prone_annotations', version: '2.4.0'
 
 	// Applied Energistics 2
-	// modRuntime "com.github.AppliedEnergistics:Applied-Energistics-2:${project.applied_energistics_version}" // TODO: Test
+	// modRuntime "appeng:appliedenergistics2-fabric:${project.applied_energistics_github_packages_version}" // Requires Github Token
+	// modRuntime "curse.maven:ae2:${project.applied_energistics_curseforge_version}" // TODO: Fix - Doesn't Remap For Dev
 
 	// PSA: Some older mods, compiled on Loom 0.2.1, might have outdated Maven POMs.
 	// You may need to force-disable transitiveness on them.
@@ -219,12 +227,3 @@ publishing {
 		// mavenLocal()
 	}
 }
-
-//uploadArchives {
-//	repositories.mavenDeployer {
-//		configuration = configurations.deployerJars
-//		repository(url: "packagecloud+https://packagecloud.io/AlexisEvelyn/RandomTech") {
-//			authentication(password: MAVEN_API_KEY)
-//		}
-//	}
-//}
