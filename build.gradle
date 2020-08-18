@@ -55,6 +55,10 @@ repositories {
 		name "Hwyla"
 		url "https://maven.tehnut.info"
 	}
+	maven {
+		name "LibBlockAttributes - BuildCraft"
+		url "https://mod-buildcraft.com/maven"
+	}
 //	maven {
 //		name "AE2"
 //		url "https://maven.pkg.github.com/AppliedEnergistics/Applied-Energistics-2"
@@ -138,14 +142,18 @@ dependencies {
 	modRuntime "io.github.onyxstudios.Cardinal-Components-API:cardinal-components-util:${project.cardinal_components_version}"
 	modRuntime "com.github.vini2003:spinnery:${project.spinnery_version}"
 	modRuntime "com.github.Draylar:LibStructure:${project.libstructure_version}"
+	modRuntime "com.github.Draylar:magna:${project.magna_version}"
 	modRuntime "com.terraformersmc:shapes:${project.shapes_version}"
+	modRuntime "com.github.vini2003:blade:${project.blade_version}"
+	modRuntime "alexiil.mc.lib:libblockattributes-core:${project.lba_version}"
+	modRuntime "alexiil.mc.lib:libblockattributes-items:${project.lba_version}"
+	modRuntime "alexiil.mc.lib:libblockattributes-fluids:${project.lba_version}"
+	modRuntime ("me.shedaniel.cloth:config-2:${project.cloth_config_version}") {
+		exclude(group: "net.fabricmc.fabric-api")
+	}
 
-	/* Astromine Mod - A new tech mod.
-	 * Going to investigate if I need to add special support for it.
-	 * This mod uses RebornCore and LBA.
-	 * LBA should be compatible with RebornCore, so if it is, I won't need to add custom support.
-	 */
-	// modRuntime "com.github.Chainmail-Studios:Astromine:${project.astromine_version}" // TODO: Fix - `blade` Dependency?
+	// Astromine Mod - A Tech Mod
+	// modRuntime "com.github.Chainmail-Studios:Astromine:${project.astromine_version}" // TODO: Fix - Mixin Not Being Remapped For Dev Environment
 
 	// For Shaders - https://github.com/Ladysnake/Satin/blob/master/README.md
 	modImplementation "io.github.ladysnake:Satin:${project.satin_version}"
