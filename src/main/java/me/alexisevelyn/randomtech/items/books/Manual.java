@@ -10,7 +10,7 @@ import net.minecraft.text.TranslatableText;
 import net.minecraft.util.*;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
-// import vazkii.patchouli.api.PatchouliAPI;
+import vazkii.patchouli.api.PatchouliAPI;
 
 /**
  * The type Manual.
@@ -45,13 +45,12 @@ public class Manual extends Item {
             return new TypedActionResult<>(ActionResult.FAIL, playerEntity.getStackInHand(hand));
         }
 
-        // TODO (Important): Fix
-        // PatchouliAPI.IPatchouliAPI bookAPI = PatchouliAPI.instance;
+        PatchouliAPI.IPatchouliAPI bookAPI = PatchouliAPI.instance;
 
         // This method is called both by client and server.
         // This will crash if not preventing client from calling openBookGUI(...)
         if (!world.isClient) {
-            // bookAPI.openBookGUI((ServerPlayerEntity) playerEntity, bookIdentifier);
+            bookAPI.openBookGUI((ServerPlayerEntity) playerEntity, bookIdentifier);
         }
 
         return new TypedActionResult<>(ActionResult.SUCCESS, playerEntity.getStackInHand(hand));

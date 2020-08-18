@@ -52,10 +52,13 @@
     "fabricloader": ">=0.7.4",
     "fabric": "*",
     "minecraft": "1.16.x",
-    "reborncore": ">=4.3.1"
+    "reborncore": ">=4.3.1",
+    "nbtcrafting": "*"
   },
   "suggests": {
-    "hywla": "*"
+    "hywla": "*",
+    "patchouli": "*",
+    "techreborn": "*"
   },
 
   "custom": {

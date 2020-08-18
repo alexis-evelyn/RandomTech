@@ -24,16 +24,16 @@ public abstract class GameruleBasedBackupScreenMixin {
      * @return the game rules
      */
     @Shadow public abstract GameRules getGameRules();
-	@Shadow @Final private Lifecycle field_25426;
+	@Shadow @Final private Lifecycle lifecycle;
 
     /**
      * Show backup screen.
      *
      * @param info the info
      */
-    @Inject(at = @At("HEAD"), method = "method_29588()Lcom/mojang/serialization/Lifecycle;", cancellable = true)
+    @Inject(at = @At("HEAD"), method = "getLifecycle()Lcom/mojang/serialization/Lifecycle;", cancellable = true)
 	private void showBackupScreen(CallbackInfoReturnable<Lifecycle> info) {
-		if (getGameRules().getBoolean(RegistryHelper.HIDE_EXPERIMENTAL_SCREEN_GAMERULE) && field_25426 == Lifecycle.experimental()) {
+		if (getGameRules().getBoolean(RegistryHelper.HIDE_EXPERIMENTAL_SCREEN_GAMERULE) && lifecycle == Lifecycle.experimental()) {
 			info.setReturnValue(Lifecycle.stable());
 		}
 	}

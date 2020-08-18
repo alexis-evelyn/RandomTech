@@ -19,13 +19,20 @@ repositories {
 		name = "Patchouli"
 		url = "https://maven.blamejared.com/"
 	}
-	maven {
+	ivy {
 		name = "Github Repos"
 		url = "https://jitpack.io/"
 
 		// This exists to force Gradle to ignore bad versioning information from commit based builds on JitPack
 		metadataSources {
 			artifact() // Look directly for artifact
+		}
+
+		layout "maven"
+		patternLayout {
+			artifact "[organisation]/[module]/[revision]/[artifact]-[revision].[ext]"
+			artifact "[organisation]/[module]/[revision]/[artifact]-[revision]-dev.[ext]"
+			m2compatible = true
 		}
 	}
 	maven {
@@ -40,18 +47,13 @@ repositories {
 		name = "Spinnery"
 		url = "https://dl.bintray.com/spinnery/Spinnery"
 	}
-//	maven {
-//		name = "BuildCraft"
-//		url = "https://mod-buildcraft.com/maven"
-//	}
 	maven {
-		name = "Hywla"
-		url = "https://maven.tehnut.info/"
+		name "Siphalor's Maven"
+		url "https://maven.siphalor.de"
 	}
-
-	// TODO: Fix Repo Issue
-	// Temporary Solution for Jitpack Problem with Connected Block Textures
-	mavenLocal()
+	maven {
+		url "https://maven.tehnut.info"
+	}
 }
 
 dependencies {
@@ -69,14 +71,14 @@ dependencies {
 	modImplementation "RebornCore:RebornCore-${project.reborn_core_version}"
 
 	// Reborn's Energy API
-	modApi "teamreborn:energy:${project.reborn_energy_version}"
+	modImplementation "teamreborn:energy:${project.reborn_energy_version}"
 
 	// Note: The Tags Being Broken Only Occur in a Dev Environment and Is A Fabric Bug: https://github.com/FabricMC/fabric/issues/66 - Example is #minecraft:planks
 	// Tech Reborn (For Development Testing)
 	modRuntime "TechReborn:TechReborn-${project.tech_reborn_version}"
 
 	// Mod Menu
-	modApi "io.github.prospector:modmenu:${project.mod_menu_version}"
+	modImplementation "io.github.prospector:modmenu:${project.mod_menu_version}"
 
 	// AutoConfig for Use With Mod Menu
 	modCompile "me.sargunvohra.mcmods:autoconfig1u:${project.autoconf_version}"
@@ -84,50 +86,44 @@ dependencies {
 
 	// Hywla
 	// The TehNut Maven Repo Slows Down Gradle Way Too Much
-	// I am currently building from my own repo as Jitpack
-	// failed to build Hwyla the first time due to OOM Exception
-	// and Jitpack doesn't rebuild builds unless you own the repo.
-	// modApi "mcp.mobius.waila:Hwyla:${project.hywla_curseforge_version}"
-	// modApi "com.github.TehNut:HWYLA:${project.hywla_github_version}"
-	modCompile "mcp.mobius.waila:Hwyla:${project.hywla_version}:api"
-	// modRuntime "mcp.mobius.waila:Hwyla:${project.hywla_version}" // TODO: Fix
+	// I am currently building from my own repo as Jitpack failed to build Hwyla the first time due to OOM Exception and Jitpack doesn't rebuild builds unless you own the repo.
+	modCompile ("mcp.mobius.waila:Hwyla:${project.hywla_version}:api")
+	// modRuntime ("mcp.mobius.waila:Hwyla:${project.hywla_version}") // TODO: Fix
+	// modImplementation "com.github.alexis-evelyn:HWYLA:${project.hywla_github_version}"
 
 	// Roughly Enough Items
-	modApi "me.shedaniel:RoughlyEnoughItems:${project.rei_version}"
+	modImplementation "me.shedaniel:RoughlyEnoughItems:${project.rei_version}"
 
 	// AppleSkin
 	modRuntime "com.github.squeek502:AppleSkin:${project.appleskin_version}"
 
 	// Patchouli API
-	// modApi "vazkii.patchouli:Patchouli:${project.patchouli_version}" - 1.16-37
-	// modApi "vazkii.patchouli:Patchouli_1.16-fabric:${project.patchouli_version}" // TODO: Fix
+	// modImplementation "vazkii.patchouli:Patchouli:${project.patchouli_version}" - 1.16-37
+	modCompile "vazkii.patchouli:Patchouli:${project.patchouli_version}:api"
+	// modRuntime "vazkii.patchouli:Patchouli:${project.patchouli_version}" // TODO: Fix
 
 	// Used to speed Minecraft up in dev environment. Breaks compatibility with old worlds
-	// modRuntime "com.github.SuperCoder7979:databreaker:${project.databreaker_version}" // TODO: Fix
+	modRuntime ("com.github.SuperCoder7979:databreaker:${project.databreaker_version}") {
+		exclude module: "fabric-loader"
+	}
 
 	// Improves Performance of FPS and Rendering Engine
 	// Currently breaks fluid rendering - See https://github.com/jellysquid3/sodium-fabric/issues/5
 	// modRuntime "com.github.jellysquid3:sodium-fabric:${project.sodium_version}" // Skip
 
 	// General Purpose Performance Improvement
-	modRuntime "com.github.jellysquid3:lithium-fabric:${project.lithium_version}"
+	// modRuntime "com.github.jellysquid3:lithium-fabric:${project.lithium_version}" // TODO: Fix - VoronoiBiomeAccessType.method_22399
 
 	// Improves performance of lighting engine
 	modRuntime "com.github.jellysquid3:phosphor-fabric:${project.phosphor_version}"
 
-	// TODO: Get Online Repo For Connected Block Textures. Jitpack is refusing to cooperate
 	// Permission Granted From: https://discordapp.com/channels/507304429255393322/507982478276034570/730955439390326894 - Screenshots: https://imgur.com/a/R9xMlhX
-	// Note For Others: Here's the commit for my copy of Connected Block Textures - https://github.com/alexis-evelyn/connected-block-textures/tree/82790f74652e450e000b493d351bc74a92411361
-	// modCompile "io.github.nuclearfarts:connected-block-textures:${project.connected_block_textures_local_version}"  // TODO: Test
-	// include "io.github.nuclearfarts:connected-block-textures:${project.connected_block_textures_local_version}" // TODO: Test
-
-	// This is for Jitpack - I Swear Jitpack Hates This Project
-//	modCompile "com.github.Nuclearfarts:connected-block-textures:${project.connected_block_textures_version}"
-//	include "com.github.Nuclearfarts:connected-block-textures:${project.connected_block_textures_version}"
+	modCompile "com.github.nuclearfarts:connected-block-textures:${project.connected_block_textures_version}"
+	include "com.github.nuclearfarts:connected-block-textures:${project.connected_block_textures_version}"
 
 	// Used to allow customizing data of items and other things
-	modApi "io.github.onyxstudios.Cardinal-Components-API:cardinal-components-base:${project.cardinal_components_version}"
-	modApi "io.github.onyxstudios.Cardinal-Components-API:cardinal-components-item:${project.cardinal_components_version}"
+	modImplementation "io.github.onyxstudios.Cardinal-Components-API:cardinal-components-base:${project.cardinal_components_version}"
+	modImplementation "io.github.onyxstudios.Cardinal-Components-API:cardinal-components-item:${project.cardinal_components_version}"
 	include "io.github.onyxstudios.Cardinal-Components-API:cardinal-components-item:${project.cardinal_components_version}"
 	include "io.github.onyxstudios.Cardinal-Components-API:cardinal-components-base:${project.cardinal_components_version}"
 
@@ -157,8 +153,8 @@ dependencies {
 	modRuntime "com.github.gnembon:fabric-carpet:${project.carpet_version}"
 
 	// For NBT Crafting - https://github.com/Siphalor/nbt-crafting/blob/1.16-2.0/README.md
-	modImplementation "com.github.Siphalor:nbt-crafting:${project.nbt_crafting_version}"
-	include "com.github.Siphalor:nbt-crafting:${project.nbt_crafting_version}"
+	modImplementation "de.siphalor:nbtcrafting-1.16:${project.nbt_crafting_version}"
+	include "de.siphalor:nbtcrafting-1.16:${project.nbt_crafting_version}"
 
 	// For Extra Annotations
 	// https://mvnrepository.com/artifact/com.google.errorprone/error_prone_annotations
