@@ -32,6 +32,9 @@ import java.util.stream.Stream;
  * The type Cobalt ore.
  */
 public class CobaltOre extends Block {
+    private static final String cobalt = "ore_cobalt";
+    private static ConfiguredFeature<?, ?> configuredFeature;
+
     /**
      * Instantiates a new Cobalt ore.
      */
@@ -52,8 +55,13 @@ public class CobaltOre extends Block {
      * Add ore feature.
      */
     public static void addOreFeature(Biome biome) {
-        String cobalt = "ore_cobalt";
-        ConfiguredFeature<?, ?> configuredFeature = Feature.ORE.configure(new OreFeatureConfig(OreFeatureConfig.Rules.BASE_STONE_OVERWORLD, RegistryHelper.COBALT_ORE.getDefaultState(), 8))
+        // Don't Modify End or Nether Generation
+        if (biome.getCategory().equals(Biome.Category.NETHER) || biome.getCategory().equals(Biome.Category.THEEND))
+            return;
+
+        // Only set it once, otherwise bad things happen (e.g. all overworld ores being wiped from generation)
+        if (configuredFeature == null)
+            configuredFeature = Feature.ORE.configure(new OreFeatureConfig(OreFeatureConfig.Rules.BASE_STONE_OVERWORLD, RegistryHelper.COBALT_ORE.getDefaultState(), 8))
                 .method_30377(16).spreadHorizontally().repeat(8);
 
         if (!BuiltinRegistries.CONFIGURED_FEATURE.getKey(configuredFeature).isPresent() && !BuiltinRegistries.CONFIGURED_FEATURE.getOrEmpty(new Identifier(cobalt)).isPresent())

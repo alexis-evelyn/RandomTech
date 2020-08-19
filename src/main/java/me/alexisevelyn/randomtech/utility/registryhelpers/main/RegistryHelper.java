@@ -78,6 +78,7 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Supplier;
+import java.util.stream.Collectors;
 
 /**
  * The type Registry helper.
@@ -539,7 +540,7 @@ public class RegistryHelper {
      */
     private void handleBiome(Biome biome) {
         // Register Cobalt Ore
-        // CobaltOre.addOreFeature(biome); // TODO: Uncomment
+        CobaltOre.addOreFeature(biome);
     }
 
     /**
@@ -557,7 +558,7 @@ public class RegistryHelper {
         List<Supplier<ConfiguredFeature<?, ?>>> featureList = features.get(feature.ordinal());
         if (featureList instanceof ImmutableList) {
             featureList = new ArrayList<>(featureList);
-            // features.set(feature.ordinal(), featureList); // TODO (Important): Fix. This wipes out every ore in the game.
+            features.set(feature.ordinal(), featureList); // TODO (Important): Fix. This wipes out every ore in the game.
         }
 
         featureList.add(() -> configuredFeature);
