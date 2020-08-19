@@ -1,5 +1,7 @@
 package me.alexisevelyn.randomtech.blocks.ores;
 
+import com.google.common.collect.ImmutableList;
+import com.google.common.collect.Lists;
 import me.alexisevelyn.randomtech.api.utilities.GenericBlockHelper;
 import me.alexisevelyn.randomtech.api.utilities.MiningLevel;
 import me.alexisevelyn.randomtech.utility.Materials;
@@ -8,12 +10,23 @@ import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.fabricmc.fabric.api.tool.attribute.v1.FabricToolTags;
 import net.minecraft.block.Block;
 import net.minecraft.sound.BlockSoundGroup;
+import net.minecraft.util.Identifier;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.registry.BuiltinRegistries;
+import net.minecraft.util.registry.Registry;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.GenerationStep;
-import net.minecraft.world.gen.decorator.Decorator;
-import net.minecraft.world.gen.decorator.RangeDecoratorConfig;
+import net.minecraft.world.gen.decorator.*;
+import net.minecraft.world.gen.feature.ConfiguredFeature;
+import net.minecraft.world.gen.feature.ConfiguredFeatures;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.OreFeatureConfig;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+import java.util.function.Supplier;
+import java.util.stream.Stream;
 
 /**
  * The type Cobalt ore.
@@ -37,30 +50,16 @@ public class CobaltOre extends Block {
 
     /**
      * Add ore feature.
-     *
-     * @param biome the biome
      */
     public static void addOreFeature(Biome biome) {
-        // Don't Add Ore to Nether or End
-        if (biome.getCategory() != Biome.Category.NETHER && biome.getCategory() != Biome.Category.THEEND) {
-            // biome.generateFeatureStep();
+        String cobalt = "ore_cobalt";
+        ConfiguredFeature<?, ?> configuredFeature = Feature.ORE.configure(new OreFeatureConfig(OreFeatureConfig.Rules.BASE_STONE_OVERWORLD, RegistryHelper.COBALT_ORE.getDefaultState(), 8))
+                .method_30377(16).spreadHorizontally().repeat(8);
 
-            // TODO (IMPORTANT): Fix this for 1.16.2
-//            biome.addFeature(
-//                    GenerationStep.Feature.UNDERGROUND_ORES,
-//                    Feature.ORE.configure(
-//                            new OreFeatureConfig(
-//                                    OreFeatureConfig.Target.NATURAL_STONE,
-//                                    RegistryHelper.COBALT_ORE.getDefaultState(),
-//                                    8 // Ore vein size
-//                            )).decorate(
-//                            Decorator.COUNT_RANGE.configure(new RangeDecoratorConfig(
-//                                    8, // Number of veins per chunk
-//                                    0, // Bottom Offset
-//                                    13, // Min y level
-//                                    32 // Max y level
-//                            ))));
-        }
+        if (!BuiltinRegistries.CONFIGURED_FEATURE.getKey(configuredFeature).isPresent() && !BuiltinRegistries.CONFIGURED_FEATURE.getOrEmpty(new Identifier(cobalt)).isPresent())
+            BuiltinRegistries.add(BuiltinRegistries.CONFIGURED_FEATURE, cobalt, configuredFeature);
+
+        RegistryHelper.insertIntoBiome(configuredFeature, GenerationStep.Feature.UNDERGROUND_ORES, biome);
     }
 }
 

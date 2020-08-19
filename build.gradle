@@ -151,6 +151,7 @@ dependencies {
 	modRuntime ("me.shedaniel.cloth:config-2:${project.cloth_config_version}") {
 		exclude(group: "net.fabricmc.fabric-api")
 	}
+	modRuntime "net.fabricmc:fabric-language-kotlin:${project.kotlin_version}"
 
 	// Astromine Mod - A Tech Mod
 	// modRuntime "com.github.Chainmail-Studios:Astromine:${project.astromine_version}" // TODO: Fix - Mixin Not Being Remapped For Dev Environment

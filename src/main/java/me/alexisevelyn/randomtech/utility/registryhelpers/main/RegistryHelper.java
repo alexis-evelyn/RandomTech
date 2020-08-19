@@ -1,5 +1,7 @@
 package me.alexisevelyn.randomtech.utility.registryhelpers.main;
 
+import com.google.common.collect.ImmutableList;
+import com.google.common.collect.Lists;
 import me.alexisevelyn.randomtech.Main;
 import me.alexisevelyn.randomtech.api.utilities.GenericBlockHelper;
 import me.alexisevelyn.randomtech.armormaterials.PoweredArmorMaterial;
@@ -16,6 +18,7 @@ import me.alexisevelyn.randomtech.blocks.metals.CobaltBlock;
 import me.alexisevelyn.randomtech.blocks.ores.CobaltOre;
 import me.alexisevelyn.randomtech.blocks.wires.CobaltWire;
 import me.alexisevelyn.randomtech.chunkgenerators.VoidChunkGenerator;
+import me.alexisevelyn.randomtech.dimensionhelpers.VoidDimensionHelper;
 import me.alexisevelyn.randomtech.entities.mob.CloudDemonEntity;
 import me.alexisevelyn.randomtech.entities.mob.WizardEntity;
 import me.alexisevelyn.randomtech.fluids.*;
@@ -35,6 +38,7 @@ import me.alexisevelyn.randomtech.utility.BlockEntities;
 import me.alexisevelyn.randomtech.utility.Materials;
 import me.alexisevelyn.randomtech.utility.Recipes;
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
+import net.fabricmc.fabric.api.event.registry.RegistryEntryAddedCallback;
 import net.fabricmc.fabric.api.gamerule.v1.CustomGameRuleCategory;
 import net.fabricmc.fabric.api.gamerule.v1.GameRuleFactory;
 import net.fabricmc.fabric.api.gamerule.v1.GameRuleRegistry;
@@ -58,12 +62,22 @@ import net.minecraft.sound.SoundEvent;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.registry.BuiltinRegistries;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.util.registry.RegistryKey;
 import net.minecraft.world.GameRules;
 import net.minecraft.world.World;
+import net.minecraft.world.biome.Biome;
+import net.minecraft.world.gen.GenerationStep;
+import net.minecraft.world.gen.feature.ConfiguredFeature;
+import net.minecraft.world.gen.feature.ConfiguredFeatures;
+import net.minecraft.world.gen.feature.Feature;
+import net.minecraft.world.gen.feature.OreFeatureConfig;
 
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.function.Supplier;
 
 /**
  * The type Registry helper.
@@ -246,6 +260,9 @@ public class RegistryHelper {
 
         // Fluids
         registerFluids();
+
+        // Ores
+        registerOres();
 
         // Fuel
         registerFuel();
@@ -494,8 +511,18 @@ public class RegistryHelper {
      */
     // Dimensions are actually registered as JSON files now. So, we just set up the chunk generator and player placement code.
     private void registerDimensions() {
-        // TODO (IMPORTANT): Fix this for 1.16.2
+        // TODO (Important): Fix for 1.16.2
         // FabricDimensions.registerDefaultPlacer(voidDimension, new VoidDimensionHelper());
+    }
+
+    private void registerOres() {
+        // Handle Existing Biomes
+        for (Biome biome : BuiltinRegistries.BIOME) {
+            handleBiome(biome);
+        }
+
+        // Handle Future Biomes
+        RegistryEntryAddedCallback.event(BuiltinRegistries.BIOME).register((i, identifier, biome) -> handleBiome(biome));
     }
 
     /**
@@ -504,5 +531,35 @@ public class RegistryHelper {
     private void registerSounds() {
         // Sounds
         Registry.register(Registry.SOUND_EVENT, TELEPORTER_TELEPORTS_SOUND_IDENTIFIER, TELEPORTER_TELEPORTS_SOUND);
+    }
+
+    /**
+     *
+     * @param biome
+     */
+    private void handleBiome(Biome biome) {
+        // Register Cobalt Ore
+        // CobaltOre.addOreFeature(biome); // TODO: Uncomment
+    }
+
+    /**
+     *
+     * @param configuredFeature
+     * @param feature
+     * @param biome
+     */
+    public static void insertIntoBiome(ConfiguredFeature<?, ?> configuredFeature, GenerationStep.Feature feature, Biome biome) {
+        List<List<Supplier<ConfiguredFeature<?, ?>>>> features = biome.getGenerationSettings().getFeatures();
+
+        while (features.size() <= feature.ordinal())
+            features.add(Lists.newArrayList());
+
+        List<Supplier<ConfiguredFeature<?, ?>>> featureList = features.get(feature.ordinal());
+        if (featureList instanceof ImmutableList) {
+            featureList = new ArrayList<>(featureList);
+            // features.set(feature.ordinal(), featureList); // TODO (Important): Fix. This wipes out every ore in the game.
+        }
+
+        featureList.add(() -> configuredFeature);
     }
 }

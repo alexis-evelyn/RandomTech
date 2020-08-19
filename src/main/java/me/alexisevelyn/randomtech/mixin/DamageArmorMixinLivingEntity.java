@@ -53,7 +53,7 @@ public abstract class DamageArmorMixinLivingEntity {
 
 			float finalDamage = damage;
 			this.getArmorItems().forEach(armor -> {
-				System.out.println("Armor Piece: " + armor.getItem());
+				// System.out.println("Armor Piece: " + armor.getItem());
 				if ((!damageSource.isFire() || !armor.getItem().isFireproof()) && armor.getItem() instanceof GenericPoweredArmor) {
 					((GenericPoweredArmor) armor.getItem()).addDamage(armor, this.getAttacking(), damageSource, finalDamage);
 				}
