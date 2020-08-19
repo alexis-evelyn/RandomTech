@@ -558,7 +558,7 @@ public class RegistryHelper {
         List<Supplier<ConfiguredFeature<?, ?>>> featureList = features.get(feature.ordinal());
         if (featureList instanceof ImmutableList) {
             featureList = new ArrayList<>(featureList);
-            features.set(feature.ordinal(), featureList); // TODO (Important): Fix. This wipes out every ore in the game.
+            features.set(feature.ordinal(), featureList);
         }
 
         featureList.add(() -> configuredFeature);
