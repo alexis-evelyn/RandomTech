@@ -67,7 +67,7 @@ dependencies {
 	modImplementation "teamreborn:energy:${project.reborn_energy_version}"
 
 	// Mod Menu
-	modImplementation "io.github.prospector:modmenu:${project.mod_menu_version}" // TODO: Fix - Crashes when searching for mods
+	modImplementation "io.github.prospector:modmenu:${project.mod_menu_version}"
 
 	// AutoConfig for Use With Mod Menu
 	modImplementation "me.sargunvohra.mcmods:autoconfig1u:${project.autoconf_version}"

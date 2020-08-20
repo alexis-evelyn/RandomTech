@@ -28,7 +28,11 @@ repositories {
 	}
 	maven {
 		name "Grondag Fermion - Astromine Dependency"
-		url "https://maven.dblsaiko.net/"
+		url "https://maven.dblsaiko.net/" // https://github.com/grondag/canvas/blob/b69b0fd79e622b249e7bd5d727484427fed89c8f/build.gradle#L145
+	}
+	maven {
+		name "Cloth API"
+		url "https://dl.bintray.com/shedaniel/cloth"
 	}
 
 	// I don't like this, but apparently loom no longer has extractJars for the minecraft extension
@@ -80,15 +84,18 @@ dependencies {
 		exclude(group: "net.fabricmc.fabric-api")
 	}
 	modRuntime "net.fabricmc:fabric-language-kotlin:${project.kotlin_version}"
+	modRuntime "me.shedaniel.cloth.api:cloth-durability-bar-api-v1:${project.cloth_api_version}"
+	modRuntime "me.shedaniel.cloth.api:cloth-dynamic-registry-api-v1:${project.cloth_api_version}"
+	modRuntime "me.shedaniel.cloth.api:cloth-datagen-api-v1:${project.cloth_api_version}"
 
 	// Astromine Mod - A Tech Mod
 	// modRuntime "com.github.Chainmail-Studios:Astromine:${project.astromine_version}" // Jitpack generates mostly blank jar
 	// modRuntime ("curse.maven:astromine:${project.astromine_curseforge_version}")
 
-	// Astromine Dependencies Local Only - Run ./gradlew build publishToMavenLocal on the Astromine Repo at https://github.com/Chainmail-Studios/Astromine
+	// Astromine And Some Local Only Dependencies - Run ./gradlew build publishToMavenLocal on the Astromine Repo at https://github.com/Chainmail-Studios/Astromine
+	// modRuntime "com.github.chainmailstudios.astromine:astromine-core:${project.astromine_maven_local_version}" // TODO: Fix remapping issue with mixins
+	// modRuntime "com.github.chainmailstudios.astromine:astromine-foundations:${project.astromine_maven_local_version}"
 	// modRuntime "com.github.chainmailstudios.astromine:astromine:${project.astromine_maven_local_version}" // TODO: Fix remapping issue with mixins
-	modRuntime "com.github.chainmailstudios.astromine:astromine-core:${project.astromine_maven_local_version}"
-	modRuntime "com.github.chainmailstudios.astromine:astromine-foundations:${project.astromine_maven_local_version}"
 
 	// Carpet - Useful for Debugging Minecraft in General
 	modRuntime "com.github.gnembon:fabric-carpet:${project.carpet_version}"
