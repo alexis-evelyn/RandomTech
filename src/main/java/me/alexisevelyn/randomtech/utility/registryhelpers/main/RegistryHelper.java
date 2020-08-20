@@ -215,8 +215,8 @@ public class RegistryHelper {
     public static final Identifier voidGenerator = new Identifier(Main.MODID, "void");
 
     // Dimensions
-    public static final Identifier voidDimensionIdentifier = new Identifier(Main.MODID, "void");
-    private static final RegistryKey<World> voidDimension = RegistryKey.of(Registry.DIMENSION, voidDimensionIdentifier);
+    // public static final Identifier voidDimensionIdentifier = new Identifier(Main.MODID, "void");
+    // private static final RegistryKey<World> voidDimension = RegistryKey.of(Registry.DIMENSION, voidDimensionIdentifier);
 
     // Force Load BlockEntities.java Early On
     // This is important to make sure that BlockEntities are loaded before a world is loaded
@@ -512,7 +512,7 @@ public class RegistryHelper {
      */
     // Dimensions are actually registered as JSON files now. So, we just set up the chunk generator and player placement code.
     private void registerDimensions() {
-        // TODO (Important): Fix for 1.16.2
+        // This is not currently needed at the moment to register and load the dimension and chunk generator.
         // FabricDimensions.registerDefaultPlacer(voidDimension, new VoidDimensionHelper());
     }
 

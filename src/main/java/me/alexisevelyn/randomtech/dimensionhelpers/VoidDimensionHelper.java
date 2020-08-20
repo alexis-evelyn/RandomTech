@@ -1,6 +1,5 @@
 package me.alexisevelyn.randomtech.dimensionhelpers;
 
-import net.minecraft.block.pattern.BlockPattern;
 import net.minecraft.entity.Entity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.Direction;

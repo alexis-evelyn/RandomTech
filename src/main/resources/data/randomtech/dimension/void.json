@@ -2,11 +2,14 @@
   "_comment": "Marking the biome as minecraft:the_void causes net.minecraft.world.gen.feature.VoidStartPlatformFeature to be ran which produces a random platform at world origin.",
   "generator": {
     "type": "randomtech:void",
+    "seed": 0,
     "debug": false,
     "biome_source": {
       "type": "minecraft:fixed",
       "biome": "minecraft:plains"
     }
   },
+  "seed": 0,
+  "settings": "minecraft:overworld",
   "type": "randomtech:void_type"
 }

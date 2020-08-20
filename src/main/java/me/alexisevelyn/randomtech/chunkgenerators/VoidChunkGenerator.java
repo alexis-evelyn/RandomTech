@@ -105,27 +105,59 @@ public class VoidChunkGenerator extends ChunkGenerator {
      */
     @Override
     public void buildSurface(ChunkRegion region, Chunk chunk) {
-        // Setup Color For Chunk
-        Color color = randomColor(region.getSeed(), chunk.getPos().getCenterBlockPos());
-
-        VirtualTileBlockEntity virtualTileBlockEntity;
+        // Set the Rest of the Blocks To Powered Glass
         BlockPos pos;
         for (int x = chunk.getPos().getStartX(); x <= chunk.getPos().getEndX(); x++) {
             for (int z = chunk.getPos().getStartZ(); z <= chunk.getPos().getEndZ(); z++) {
-                // Setup Block Entity
-                virtualTileBlockEntity = new VirtualTileBlockEntity();
-                virtualTileBlockEntity.setColor(color);
-
-                // Setup Position
-                pos = new BlockPos(x, 1, z);
-
-                // Set Block and BlockState
-                chunk.setBlockState(pos, RegistryHelper.VIRTUAL_TILE_BLOCK.getDefaultState(), false);
-
-                // Set Block Entity
-                chunk.setBlockEntity(pos, virtualTileBlockEntity);
+                pos = new BlockPos(x,1, z);
+                chunk.setBlockState(pos, RegistryHelper.POWERED_GLASS.getDefaultState(), false);
             }
         }
+
+        // Note: Finetuning has to be done after as blocks can still be replaced after they have been placed.
+        // Set Center Block to Virtual Tile
+        setCenterBlock(region, chunk);
+   }
+
+   private void setCenterBlock(ChunkRegion region, Chunk chunk) {
+       // Center Block Position
+       BlockPos center = getCenterBlockPos(chunk);
+
+       // Setup Position (Center of Chunk)
+       BlockPos pos = new BlockPos(center.getX(), 1, center.getZ());
+
+       // Setup Color For Chunk
+       Color color = randomColor(region.getSeed(), pos);
+
+       // Setup Block Entity
+       VirtualTileBlockEntity virtualTileBlockEntity = new VirtualTileBlockEntity();
+       virtualTileBlockEntity.setColor(color);
+
+       // Set Block and BlockState
+       chunk.setBlockState(pos, RegistryHelper.VIRTUAL_TILE_BLOCK.getDefaultState(), false);
+
+       // Set Block Entity
+       chunk.setBlockEntity(pos, virtualTileBlockEntity);
+   }
+
+   private BlockPos getCenterBlockPos(Chunk chunk) {
+        int startX = chunk.getPos().getStartX();
+        int startZ = chunk.getPos().getStartZ();
+
+        int centerX;
+        int centerZ;
+
+        if (startX > 0)
+            centerX = startX - 8;
+        else
+            centerX = startX + 8;
+
+        if (startZ > 0)
+           centerZ = startZ - 8;
+        else
+           centerZ = startZ + 8;
+
+        return new BlockPos(centerX, 128, centerZ);
    }
 
     /**
