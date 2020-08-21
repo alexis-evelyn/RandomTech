@@ -1,12 +1,12 @@
 {
   "required": true,
   "minVersion": "0.8",
-  "package": "me.alexisevelyn.randomtech.mixin",
+  "package": "me.alexisevelyn.randomtech.mixin.blocks",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
+    "CobaltWiringMixin"
   ],
   "client": [
-    "ExampleMixin"
   ],
   "injectors": {
     "defaultRequire": 1

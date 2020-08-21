@@ -15,6 +15,7 @@
 
   "license": "MIT",
   "icon": "assets/randomtech/icon.png",
+  "accessWidener" : "randomtech.accesswidener",
 
   "environment": "*",
   "entrypoints": {
@@ -35,17 +36,17 @@
     ]
   },
   "mixins": [
-    "mixins/example-mixin.json",
-    "mixins/damage-armor-mixin.json",
-    "mixins/enchant-helper-mixin.json",
-    "mixins/smithing-recipe-nbt-modifier-mixin.json",
-    "mixins/dynamic-armor-texture-mixin.json",
-    "mixins/cobalt-wiring-mixin.json",
+    "mixins/example/example-mixin.json",
+    "mixins/armor/damage-armor-mixin.json",
+    "mixins/enchanting/enchant-helper-mixin.json",
+    "mixins/recipe/smithing-recipe-nbt-modifier-mixin.json",
+    "mixins/armor/dynamic-armor-texture-mixin.json",
+    "mixins/blocks/cobalt-wiring-mixin.json",
     "mixins/experiments/death-screen-mixin.json",
-    "mixins/gamerule-based-backup-screen-mixin.json",
-    "mixins/powered-mending-helper-mixin.json",
-    "mixins/breakable-blocks-mixin.json",
-    "mixins/kill-prevention-mixin.json"
+    "mixins/experimentalscreen/gamerule-based-backup-screen-mixin.json",
+    "mixins/enchanting/powered-mending-helper-mixin.json",
+    "mixins/overpowered/breakable-blocks-mixin.json",
+    "mixins/overpowered/kill-prevention-mixin.json"
   ],
 
   "depends": {

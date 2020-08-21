@@ -1,10 +1,10 @@
 {
   "required": true,
   "minVersion": "0.8",
-  "package": "me.alexisevelyn.randomtech.mixin",
+  "package": "me.alexisevelyn.randomtech.mixin.armor",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
-    "SmithingRecipeNBTModifierMixin"
+    "DynamicArmorTextureMixin"
   ],
   "client": [
   ],

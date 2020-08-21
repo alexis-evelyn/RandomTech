@@ -1,12 +1,13 @@
 {
   "required": true,
   "minVersion": "0.8",
-  "package": "me.alexisevelyn.randomtech.mixin",
+  "package": "me.alexisevelyn.randomtech.mixin.experimentalscreen",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
   ],
   "client": [
-    "GameruleBasedBackupScreenMixin"
+    "GameruleBasedBackupScreenMixin",
+    "ExperimentalPromptMessageMixin"
   ],
   "injectors": {
     "defaultRequire": 1

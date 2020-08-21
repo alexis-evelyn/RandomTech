@@ -1,4 +1,4 @@
-package me.alexisevelyn.randomtech.mixin;
+package me.alexisevelyn.randomtech.mixin.recipe;
 
 import me.alexisevelyn.randomtech.api.items.armor.generic.GenericPoweredArmor;
 import me.alexisevelyn.randomtech.api.items.energy.EnergyHelper;

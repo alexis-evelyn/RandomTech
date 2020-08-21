@@ -1,4 +1,4 @@
-package me.alexisevelyn.randomtech.mixin;
+package me.alexisevelyn.randomtech.mixin.enchanting;
 
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentTarget;

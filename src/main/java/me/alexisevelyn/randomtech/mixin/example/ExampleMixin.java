@@ -1,4 +1,4 @@
-package me.alexisevelyn.randomtech.mixin;
+package me.alexisevelyn.randomtech.mixin.example;
 
 import net.minecraft.client.gui.screen.TitleScreen;
 import org.spongepowered.asm.mixin.Mixin;

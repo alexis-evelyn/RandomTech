@@ -1,11 +1,10 @@
 {
   "required": true,
   "minVersion": "0.8",
-  "package": "me.alexisevelyn.randomtech.mixin",
+  "package": "me.alexisevelyn.randomtech.mixin.overpowered",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
-    "AnvilEnchantHelperMixin",
-    "TableEnchantHelperMixin"
+    "BreakableBlocksMixin"
   ],
   "client": [
   ],

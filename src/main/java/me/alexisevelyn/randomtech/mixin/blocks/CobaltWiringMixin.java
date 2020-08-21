@@ -1,4 +1,4 @@
-package me.alexisevelyn.randomtech.mixin;
+package me.alexisevelyn.randomtech.mixin.blocks;
 
 import me.alexisevelyn.randomtech.utility.registryhelpers.main.RegistryHelper;
 import net.minecraft.block.*;

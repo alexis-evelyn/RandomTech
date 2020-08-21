@@ -1,4 +1,4 @@
-package me.alexisevelyn.randomtech.mixin;
+package me.alexisevelyn.randomtech.mixin.experimentalscreen;
 
 import com.mojang.serialization.Lifecycle;
 import me.alexisevelyn.randomtech.utility.registryhelpers.main.RegistryHelper;

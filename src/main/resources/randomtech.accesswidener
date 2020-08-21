@@ -1,0 +1,7 @@
+accessWidener   v1  named
+# Information in https://fabricmc.net/wiki/tutorial:accesswideners
+# When changing this file, reimport the gradle project to have the changes show up in your ide.
+
+# For accessing enum in MinecraftClient
+# This access widener came from https://discordapp.com/channels/507304429255393322/523633816078647296/746228158956568697
+accessible  class   net/minecraft/client/MinecraftClient$WorldLoadAction

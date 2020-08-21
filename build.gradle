@@ -10,6 +10,11 @@ archivesBaseName = project.archives_base_name
 version = "${project.mod_version}-SNAPSHOT"
 group = project.maven_group
 
+minecraft {
+	// Used to make private methods/classes/fields public
+	accessWidener "src/main/resources/randomtech.accesswidener"
+}
+
 configurations {
 	deployerJars
 }

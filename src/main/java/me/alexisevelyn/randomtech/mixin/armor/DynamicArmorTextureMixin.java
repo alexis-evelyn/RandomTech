@@ -1,4 +1,4 @@
-package me.alexisevelyn.randomtech.mixin;
+package me.alexisevelyn.randomtech.mixin.armor;
 
 import me.alexisevelyn.randomtech.api.items.armor.generic.GenericPoweredArmor;
 import net.minecraft.client.render.VertexConsumerProvider;
