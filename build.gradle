@@ -1,5 +1,3 @@
-// TODO: Figure out how to improve this url - https://dl.bintray.com/alexis-evelyn/RandomTech/me/alexisevelyn/randomtech/randomtech/0.0.4/
-
 plugins {
 	id 'fabric-loom' version '0.4-SNAPSHOT'
 	id "com.jfrog.bintray" version '1.8.5' // For publishing to bintray - https://github.com/bintray/gradle-bintray-plugin
@@ -187,7 +185,7 @@ bintray {
 	publish = true
 
 	pkg {
-		repo = "RandomTech"
+		repo = "mods"
 		name = "RandomTech"
 		userOrg = "alexis-evelyn"
 		licenses = ["MIT"]
