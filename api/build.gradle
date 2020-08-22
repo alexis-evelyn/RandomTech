@@ -1,0 +1,177 @@
+plugins {
+	id 'fabric-loom'
+	id "com.jfrog.bintray" // For publishing to bintray - https://github.com/bintray/gradle-bintray-plugin
+	id 'maven-publish'
+}
+
+sourceCompatibility = JavaVersion.VERSION_1_8
+targetCompatibility = JavaVersion.VERSION_1_8
+
+archivesBaseName = project.archives_base_name
+version = "${project.mod_version}-SNAPSHOT"
+group = project.maven_group
+
+minecraft {
+	// Used to make private methods/classes/fields public
+	accessWidener "src/main/resources/api.accesswidener"
+}
+
+configurations {
+	deployerJars
+}
+
+repositories {
+	ivy {
+		name "Github Repos"
+		url "https://jitpack.io/"
+
+		// This exists to force Gradle to ignore bad versioning information from commit based builds on JitPack
+		metadataSources {
+			artifact() // Look directly for artifact
+		}
+
+		layout "maven"
+		patternLayout {
+			artifact "[organisation]/[module]/[revision]/[artifact]-[revision].[ext]"
+			artifact "[organisation]/[module]/[revision]/[artifact]-[revision]-dev.[ext]"
+			m2compatible = true
+		}
+	}
+}
+
+dependencies {
+	deployerJars "io.packagecloud.maven.wagon:maven-packagecloud-wagon:0.0.6"
+
+	//to change the versions see the gradle.properties file
+	minecraft "com.mojang:minecraft:${project.minecraft_version}"
+	mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
+	modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
+
+	// Fabric API. This is technically optional, but you probably want it anyway.
+	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
+
+	// Reborn Core
+	modImplementation "RebornCore:RebornCore-${project.reborn_core_version}"
+
+	// Reborn's Energy API
+	modImplementation "teamreborn:energy:${project.reborn_energy_version}"
+
+	// Mod Menu
+	modImplementation "io.github.prospector:modmenu:${project.mod_menu_version}"
+
+	// AutoConfig for Use With Mod Menu
+	modImplementation "me.sargunvohra.mcmods:autoconfig1u:${project.autoconf_version}"
+	include "me.sargunvohra.mcmods:autoconfig1u:${project.autoconf_version}"
+}
+
+processResources {
+	inputs.property "version", project.version
+
+	from(sourceSets.main.resources.srcDirs) {
+		include "fabric.mod.json"
+		expand "version": project.version
+	}
+
+	from(sourceSets.main.resources.srcDirs) {
+		exclude "fabric.mod.json"
+	}
+}
+
+// ensure that the encoding is set to UTF-8, no matter what the system default is
+// this fixes some edge cases with special characters not displaying correctly
+// see http://yodaconditions.net/blog/fix-for-java-file-encoding-problems-with-gradle.html
+tasks.withType(JavaCompile) {
+	options.encoding = "UTF-8"
+}
+
+task javadocs(type: Javadoc) {
+	source = sourceSets.main.allJava
+}
+
+task javadocsJar(type: Jar, dependsOn: javadocs) {
+	classifier = "javadocs"
+	javadocs.failOnError false
+	from javadocs.destinationDir
+}
+
+// Loom will automatically attach sourcesJar to a RemapSourcesJar task and to the "build" task
+// if it is present.
+// If you remove this task, sources will not be generated.
+task sourcesJar(type: Jar, dependsOn: classes) {
+	classifier = "sources"
+	from sourceSets.main.allSource
+}
+
+jar {
+	from "LICENSE.md"
+}
+
+// configure the maven publication
+// Use bintrayUpload, not bintrayPublish
+publishing {
+	publications {
+		mavenJava(MavenPublication) {
+			// add all the jars that should be included when publishing to maven
+			artifact(remapJar) {
+				builtBy remapJar
+			}
+			artifact(sourcesJar) {
+				builtBy remapSourcesJar
+			}
+			artifact javadocsJar
+			groupId = project.maven_group
+			artifactId 'randomtech'
+			version = project.mod_version // Bintray doesn't allow snapshot versions, so I'm removing the word SNAPSHOT from the version name
+		}
+	}
+
+	// select the repositories you want to publish to
+	repositories {
+		// uncomment to publish to the local maven
+		// mavenLocal()
+	}
+}
+
+bintray {
+	user = BINTRAY_USER
+	key = BINTRAY_KEY
+	publications = ['mavenJava']
+	publish = true
+
+	pkg {
+		repo = "mods"
+		name = "API"
+		userOrg = "alexis-evelyn"
+		licenses = ["MIT"]
+
+		publicDownloadNumbers = true
+
+		githubRepo = 'alexis-evelyn/RandomTech'
+		githubReleaseNotesFile = 'README.md'
+
+		dryRun = false // [Default: false] Whether to run this as dry-run, without deploying
+		publish = true // [Default: false] Whether version should be auto published after an upload
+		override = false // [Default: false] Whether to override version artifacts already published
+
+		version {
+			name = project.mod_version // Bintray doesn't allow snapshot versions, so I'm removing the word SNAPSHOT from the version name
+			vcsTag = project.version
+			released = new Date()
+			desc = "RandomTech API for Fabric 1.16+"
+			githubRepo = 'alexis-evelyn/RandomTech'
+			websiteUrl = 'https://github.com/alexis-evelyn/RandomTech'
+			issueTrackerUrl = 'https://github.com/alexis-evelyn/RandomTech/issues'
+			vcsUrl = 'https://github.com/alexis-evelyn/RandomTech.git'
+			gpg {
+				sign = true
+			}
+		}
+	}
+}
+
+/* https://discordapp.com/channels/507304429255393322/507982478276034570/745174375753449543
+ *
+ * modCompile - outdated, don't use.
+ * modImplementation -> if someone depends on YOUR mod, they get this dependency as runtime dependency, but can't reference its code
+ * modApi -> if someone depends on your mod, they get this dependency as compile time dependency, and can reference its code directly
+ */

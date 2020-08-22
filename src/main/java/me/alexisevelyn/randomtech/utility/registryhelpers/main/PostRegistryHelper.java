@@ -3,7 +3,6 @@ package me.alexisevelyn.randomtech.utility.registryhelpers.main;
 import me.alexisevelyn.randomtech.Main;
 import me.alexisevelyn.randomtech.api.items.energy.EnergyHelper;
 import me.alexisevelyn.randomtech.api.utilities.cardinalcomponents.BrokenItemComponent;
-import me.alexisevelyn.randomtech.blocks.ores.CobaltOre;
 import me.alexisevelyn.randomtech.items.armor.powered.PoweredHelmet;
 import nerdhub.cardinal.components.api.ComponentRegistry;
 import nerdhub.cardinal.components.api.ComponentType;
@@ -16,7 +15,6 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
-import net.minecraft.world.biome.Biome;
 
 import java.nio.charset.StandardCharsets;
 

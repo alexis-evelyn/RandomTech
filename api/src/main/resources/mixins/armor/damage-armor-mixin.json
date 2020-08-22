@@ -1,10 +1,11 @@
 {
   "required": true,
   "minVersion": "0.8",
-  "package": "me.alexisevelyn.randomtech.mixin.overpowered",
+  "package": "me.alexisevelyn.randomtech.api.mixin.armor",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
-    "KillPreventionMixin"
+    "DamageArmorMixinLivingEntity",
+    "DamageArmorMixinPlayerEntity"
   ],
   "client": [
   ],
