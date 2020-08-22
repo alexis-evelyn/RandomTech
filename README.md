@@ -1,4 +1,4 @@
-# Fabric Example Mod
+# Alexis' Random Tech
 
 ## Setup
 
