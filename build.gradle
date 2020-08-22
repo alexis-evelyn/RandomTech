@@ -42,10 +42,6 @@ repositories {
 		}
 	}
 	maven {
-		name "Ladysnake Libs"
-		url "https://dl.bintray.com/ladysnake/libs"
-	}
-	maven {
 		name "NBT Crafting"
 		url "https://maven.siphalor.de"
 	}
@@ -66,11 +62,11 @@ dependencies {
 	// Fabric API. This is technically optional, but you probably want it anyway.
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
-	// Reborn Core
-	modImplementation "RebornCore:RebornCore-${project.reborn_core_version}"
-
-	// Reborn's Energy API
-	modImplementation "teamreborn:energy:${project.reborn_energy_version}"
+//	// Reborn Core
+//	modImplementation "RebornCore:RebornCore-${project.reborn_core_version}"
+//
+//	// Reborn's Energy API
+//	modImplementation "teamreborn:energy:${project.reborn_energy_version}"
 
 	// Mod Menu
 	modImplementation "io.github.prospector:modmenu:${project.mod_menu_version}"
@@ -92,11 +88,11 @@ dependencies {
 	modImplementation "com.github.nuclearfarts:connected-block-textures:${project.connected_block_textures_version}"
 	include "com.github.nuclearfarts:connected-block-textures:${project.connected_block_textures_version}"
 
-	// Used to allow customizing data of items and other things
-	modImplementation "io.github.onyxstudios.Cardinal-Components-API:cardinal-components-base:${project.cardinal_components_version}"
-	modImplementation "io.github.onyxstudios.Cardinal-Components-API:cardinal-components-item:${project.cardinal_components_version}"
-	include "io.github.onyxstudios.Cardinal-Components-API:cardinal-components-item:${project.cardinal_components_version}"
-	include "io.github.onyxstudios.Cardinal-Components-API:cardinal-components-base:${project.cardinal_components_version}"
+//	// Used to allow customizing data of items and other things
+//	modImplementation "io.github.onyxstudios.Cardinal-Components-API:cardinal-components-base:${project.cardinal_components_version}"
+//	modImplementation "io.github.onyxstudios.Cardinal-Components-API:cardinal-components-item:${project.cardinal_components_version}"
+//	include "io.github.onyxstudios.Cardinal-Components-API:cardinal-components-item:${project.cardinal_components_version}"
+//	include "io.github.onyxstudios.Cardinal-Components-API:cardinal-components-base:${project.cardinal_components_version}"
 
 	// For Shaders - https://github.com/Ladysnake/Satin/blob/master/README.md
 	modImplementation "io.github.ladysnake:Satin:${project.satin_version}"
