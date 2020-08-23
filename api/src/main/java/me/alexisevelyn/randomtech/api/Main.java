@@ -1,6 +1,8 @@
 package me.alexisevelyn.randomtech.api;
 
 import me.alexisevelyn.randomtech.api.utilities.cardinalcomponents.BrokenItemComponent;
+import nerdhub.cardinal.components.api.ComponentRegistry;
+import nerdhub.cardinal.components.api.ComponentType;
 import net.fabricmc.api.ModInitializer;
 import net.minecraft.util.Identifier;
 

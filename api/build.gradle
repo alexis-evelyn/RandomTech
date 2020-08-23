@@ -1,6 +1,6 @@
 plugins {
-	id 'fabric-loom' version '0.5-SNAPSHOT'
-	id "com.jfrog.bintray" version '1.8.5' // For publishing to bintray - https://github.com/bintray/gradle-bintray-plugin
+	id 'fabric-loom'
+	id "com.jfrog.bintray" // For publishing to bintray - https://github.com/bintray/gradle-bintray-plugin
 	id 'maven-publish'
 }
 
