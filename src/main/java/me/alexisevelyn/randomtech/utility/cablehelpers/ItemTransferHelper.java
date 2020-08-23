@@ -1,4 +1,4 @@
-package me.alexisevelyn.randomtech.api.utilities.cablehelpers;
+package me.alexisevelyn.randomtech.utility.cablehelpers;
 
 import me.alexisevelyn.randomtech.api.blocks.cables.GenericCable;
 import me.alexisevelyn.randomtech.api.utilities.CalculationHelper;
@@ -7,7 +7,6 @@ import me.alexisevelyn.randomtech.blocks.cables.ItemCable;
 import me.alexisevelyn.randomtech.inventories.ItemCableInventory;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
 import net.minecraft.block.InventoryProvider;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.inventory.Inventory;

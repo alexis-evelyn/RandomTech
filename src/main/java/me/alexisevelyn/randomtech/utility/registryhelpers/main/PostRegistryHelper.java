@@ -22,9 +22,6 @@ import java.nio.charset.StandardCharsets;
  * The type Post registry helper.
  */
 public class PostRegistryHelper {
-    public static final ComponentType<BrokenItemComponent> BROKEN_ITEM_COMPONENT =
-            ComponentRegistry.INSTANCE.registerIfAbsent(new Identifier(Main.MODID, "broken_item_component"), BrokenItemComponent.class);
-
     /**
      * Post register.
      */

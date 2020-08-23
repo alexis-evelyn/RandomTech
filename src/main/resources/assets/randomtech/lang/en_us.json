@@ -122,10 +122,6 @@
   "randomtech.gamerules": "Alexis' Random Tech",
   "gamerule.disableExperimentalScreen": "Disable Experimental Screen",
 
-  "randomtech.no_interfaceable_cables_found": "No known interfaceable blocks found!!!",
-  "randomtech.cable_position_header": "Cables Connected To Blocks:",
-  "randomtech.cable_position": "Cable: (%s, %s, %s)",
-
   "subtitles.teleport.teleport": "Teleporter Teleporting",
 
   "death.attack.killCommand": "%1$s was /killed by an angry server owner ;)",

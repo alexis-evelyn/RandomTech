@@ -1,9 +1,7 @@
 package me.alexisevelyn.randomtech.api.utilities.cardinalcomponents;
 
-import me.alexisevelyn.randomtech.api.items.armor.generic.GenericPoweredArmor;
+import me.alexisevelyn.randomtech.api.Main;
 import me.alexisevelyn.randomtech.api.items.energy.EnergyHelper;
-import me.alexisevelyn.randomtech.api.items.tools.generic.GenericPoweredTool;
-import me.alexisevelyn.randomtech.utility.registryhelpers.main.PostRegistryHelper;
 import nerdhub.cardinal.components.api.ComponentType;
 import nerdhub.cardinal.components.api.component.Component;
 import nerdhub.cardinal.components.api.component.extension.CopyableComponent;
@@ -68,7 +66,7 @@ public class BrokenItemComponent implements CopyableComponent<BrokenItemComponen
      * @return the component type
      */
     public @NotNull ComponentType<?> getComponentType() {
-        return PostRegistryHelper.BROKEN_ITEM_COMPONENT;
+        return Main.BROKEN_ITEM_COMPONENT;
     }
 
     /**

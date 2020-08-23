@@ -1,7 +1,7 @@
 package me.alexisevelyn.randomtech.blockentities.cables;
 
 import me.alexisevelyn.randomtech.api.blocks.cables.GenericCable;
-import me.alexisevelyn.randomtech.api.utilities.cablehelpers.ItemTransferHelper;
+import me.alexisevelyn.randomtech.utility.cablehelpers.ItemTransferHelper;
 import me.alexisevelyn.randomtech.api.utilities.pathfinding.dijkstra.Vertex;
 import me.alexisevelyn.randomtech.api.utilities.pathfinding.dijkstra.VertexPath;
 import me.alexisevelyn.randomtech.blocks.cables.ItemCable;

@@ -1,6 +1,6 @@
 package me.alexisevelyn.randomtech.api.blocks.cables;
 
-import me.alexisevelyn.randomtech.Main;
+import me.alexisevelyn.randomtech.api.Main;
 import me.alexisevelyn.randomtech.api.utilities.CalculationHelper;
 import me.alexisevelyn.randomtech.api.utilities.pathfinding.dijkstra.VertexPath;
 import me.alexisevelyn.randomtech.api.utilities.pathfinding.dijkstra.DijkstraAlgorithm;
