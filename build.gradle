@@ -69,7 +69,7 @@ dependencies {
 	//   	> org.apache.logging.log4j:log4j-api:2.8.1 has more than one client module definitions.
 
 	modApi project(':api') // ./gradlew :api:build -> ./api/build/libs/alexisevelyn-api-0.0.4-SNAPSHOT.jar
-	include project(':api') // Causes circular dependency for :api:remapJar to :api:remapJar
+	// include project(':api') // Causes circular dependency for :api:remapJar to :api:remapJar
 
 	// Reborn Core
 	modImplementation "RebornCore:RebornCore-${project.reborn_core_version}"
@@ -246,6 +246,11 @@ subprojects {
 project(':api') {
 	// TODO: Figure out how to get :api:build ran whenever dependencies are downloaded and on :build
 }
+
+// TODO: How does this end up with a circular dependency for task build?
+//project(":") {
+//	build.dependsOn api:build
+//}
 
 /* https://discordapp.com/channels/507304429255393322/507982478276034570/745174375753449543
  *
