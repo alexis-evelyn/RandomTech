@@ -63,8 +63,13 @@ dependencies {
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
 	// RandomTech API - https://docs.gradle.org/current/userguide/multi_project_builds.html
+	// For modApi project(':api')
+	// Execution failed for task ':compileJava'.
+	//	> Could not resolve all dependencies for configuration ':compileClasspath'.
+	//   	> org.apache.logging.log4j:log4j-api:2.8.1 has more than one client module definitions.
+
 	modApi project(':api') // ./gradlew :api:build -> ./api/build/libs/alexisevelyn-api-0.0.4-SNAPSHOT.jar
-	include project(':api')
+	include project(':api') // Causes circular dependency for :api:remapJar to :api:remapJar
 
 	// Reborn Core
 	modImplementation "RebornCore:RebornCore-${project.reborn_core_version}"
@@ -226,6 +231,11 @@ gradle.taskGraph.afterTask { Task task, TaskState state ->
 	} else {
 		println "COMPLETED $task..."
 	}
+}
+
+allprojects {
+	// For all projects. This includes subprojects and our project.
+	// I believe it includes parent projects too, but verify that.
 }
 
 subprojects {
