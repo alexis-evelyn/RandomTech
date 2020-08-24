@@ -222,14 +222,14 @@ bintray {
 
 // https://docs.gradle.org/current/userguide/build_lifecycle.html
 gradle.taskGraph.beforeTask { Task task ->
-	println "Executing $task..."
+	println "(Root) Executing $task..."
 }
 
 gradle.taskGraph.afterTask { Task task, TaskState state ->
 	if (state.failure) {
-		println "FAILED $task..."
+		println "(Root) FAILED $task..."
 	} else {
-		println "COMPLETED $task..."
+		println "(Root) COMPLETED $task..."
 	}
 }
 
