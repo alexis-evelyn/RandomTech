@@ -62,6 +62,10 @@ dependencies {
 	// Fabric API. This is technically optional, but you probably want it anyway.
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
+	// RandomTech API - https://docs.gradle.org/current/userguide/multi_project_builds.html
+	modApi project(':api') // ./gradlew :api:build -> ./api/build/libs/alexisevelyn-api-0.0.4-SNAPSHOT.jar
+	include project(':api')
+
 	// Reborn Core
 	modImplementation "RebornCore:RebornCore-${project.reborn_core_version}"
 
@@ -209,6 +213,28 @@ bintray {
 			}
 		}
 	}
+}
+
+// https://docs.gradle.org/current/userguide/build_lifecycle.html
+gradle.taskGraph.beforeTask { Task task ->
+	println "Executing $task..."
+}
+
+gradle.taskGraph.afterTask { Task task, TaskState state ->
+	if (state.failure) {
+		println "FAILED $task..."
+	} else {
+		println "COMPLETED $task..."
+	}
+}
+
+subprojects {
+	// For Any General Subprojects
+}
+
+// Specifically the API Subproject
+project(':api') {
+	// TODO: Figure out how to get :api:build ran whenever dependencies are downloaded and on :build
 }
 
 /* https://discordapp.com/channels/507304429255393322/507982478276034570/745174375753449543

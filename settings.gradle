@@ -8,5 +8,6 @@ pluginManagement {
         gradlePluginPortal()
     }
 }
-include 'api'
 
+rootProject.name = 'RandomTech'
+include 'api'
