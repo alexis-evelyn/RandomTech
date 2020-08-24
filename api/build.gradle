@@ -179,6 +179,19 @@ bintray {
 	}
 }
 
+// https://docs.gradle.org/current/userguide/build_lifecycle.html
+gradle.taskGraph.beforeTask { Task task ->
+	println "(API) Executing $task..."
+}
+
+gradle.taskGraph.afterTask { Task task, TaskState state ->
+	if (state.failure) {
+		println "(API) FAILED $task..."
+	} else {
+		println "(API) COMPLETED $task..."
+	}
+}
+
 /* https://discordapp.com/channels/507304429255393322/507982478276034570/745174375753449543
  *
  * modCompile - outdated, don't use.
