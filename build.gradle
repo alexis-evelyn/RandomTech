@@ -55,6 +55,10 @@ repositories {
 		name "Hwyla"
 		url "https://maven.tehnut.info"
 	}
+	flatDir {
+		name "Local API Build"
+		dirs "api/build/libs"
+	}
 }
 
 dependencies {
@@ -71,6 +75,7 @@ dependencies {
 	// RandomTech API - https://docs.gradle.org/current/userguide/multi_project_builds.html
 	implementation project(path: ':api') // ./gradlew :api:build -> ./api/build/libs/alexisevelyn-api-0.0.4-SNAPSHOT.jar
 	// include project(path: ':api') // TODO: Fix - Causes a circular dependency issue when building with `./gradlew build`
+	include (name: 'alexisevelyn-api-0.0.4-SNAPSHOT', ext: 'jar') // This is ran before the api jar gets remapped.
 
 	// Reborn Core
 	modImplementation "RebornCore:RebornCore-${project.reborn_core_version}"
