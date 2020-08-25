@@ -1,8 +1,10 @@
 plugins {
 	id 'fabric-loom'
-	id "com.jfrog.bintray" // For publishing to bintray - https://github.com/bintray/gradle-bintray-plugin
+	id 'com.jfrog.bintray' // For publishing to bintray - https://github.com/bintray/gradle-bintray-plugin
 	id 'maven-publish'
 }
+
+logger.lifecycle "(API) Running Gradle Version: $gradle.gradleVersion"
 
 sourceCompatibility = JavaVersion.VERSION_1_8
 targetCompatibility = JavaVersion.VERSION_1_8
@@ -104,16 +106,11 @@ task javadocsJar(type: Jar, dependsOn: javadocs) {
 	from javadocs.destinationDir
 }
 
-// Loom will automatically attach sourcesJar to a RemapSourcesJar task and to the "build" task
-// if it is present.
+// Loom will automatically attach sourcesJar to a RemapSourcesJar task and to the "build" task if it is present.
 // If you remove this task, sources will not be generated.
 task sourcesJar(type: Jar, dependsOn: classes) {
 	classifier = "sources"
 	from sourceSets.main.allSource
-}
-
-jar {
-	from "LICENSE.md"
 }
 
 // configure the maven publication
@@ -130,7 +127,7 @@ publishing {
 			}
 			artifact javadocsJar
 			groupId = project.maven_group
-			artifactId 'randomtech'
+			artifactId 'randomtechapi'
 			version = project.mod_version // Bintray doesn't allow snapshot versions, so I'm removing the word SNAPSHOT from the version name
 		}
 	}
@@ -181,20 +178,13 @@ bintray {
 
 // https://docs.gradle.org/current/userguide/build_lifecycle.html
 gradle.taskGraph.beforeTask { Task task ->
-	println "(API) Executing $task..."
+	logger.lifecycle "(API) Executing $task..."
 }
 
 gradle.taskGraph.afterTask { Task task, TaskState state ->
 	if (state.failure) {
-		println "(API) FAILED $task..."
+		logger.lifecycle "(API) FAILED $task..."
 	} else {
-		println "(API) COMPLETED $task..."
+		logger.lifecycle "(API) COMPLETED $task..."
 	}
 }
-
-/* https://discordapp.com/channels/507304429255393322/507982478276034570/745174375753449543
- *
- * modCompile - outdated, don't use.
- * modImplementation -> if someone depends on YOUR mod, they get this dependency as runtime dependency, but can't reference its code
- * modApi -> if someone depends on your mod, they get this dependency as compile time dependency, and can reference its code directly
- */

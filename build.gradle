@@ -1,8 +1,10 @@
 plugins {
 	id 'fabric-loom' version '0.5-SNAPSHOT'
-	id "com.jfrog.bintray" version '1.8.5' // For publishing to bintray - https://github.com/bintray/gradle-bintray-plugin
+	id 'com.jfrog.bintray' version '1.8.5' // For publishing to bintray - https://github.com/bintray/gradle-bintray-plugin
 	id 'maven-publish'
 }
+
+logger.lifecycle "(Root) Running Gradle Version: $gradle.gradleVersion"
 
 sourceCompatibility = JavaVersion.VERSION_1_8
 targetCompatibility = JavaVersion.VERSION_1_8
@@ -67,13 +69,8 @@ dependencies {
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
 	// RandomTech API - https://docs.gradle.org/current/userguide/multi_project_builds.html
-	// For modApi project(':api')
-	// Execution failed for task ':compileJava'.
-	//	> Could not resolve all dependencies for configuration ':compileClasspath'.
-	//   	> org.apache.logging.log4j:log4j-api:2.8.1 has more than one client module definitions.
-
-	modApi project(':api') // ./gradlew :api:build -> ./api/build/libs/alexisevelyn-api-0.0.4-SNAPSHOT.jar
-	include project(':api') // Causes circular dependency for :api:remapJar to :api:remapJar
+	implementation project(path: ':api') // ./gradlew :api:build -> ./api/build/libs/alexisevelyn-api-0.0.4-SNAPSHOT.jar
+	// include project(path: ':api') // TODO: Fix - Causes a circular dependency issue when building with `./gradlew build`
 
 	// Reborn Core
 	modImplementation "RebornCore:RebornCore-${project.reborn_core_version}"
@@ -149,8 +146,7 @@ task javadocsJar(type: Jar, dependsOn: javadocs) {
 	from javadocs.destinationDir
 }
 
-// Loom will automatically attach sourcesJar to a RemapSourcesJar task and to the "build" task
-// if it is present.
+// Loom will automatically attach sourcesJar to a RemapSourcesJar task and to the "build" task if it is present.
 // If you remove this task, sources will not be generated.
 task sourcesJar(type: Jar, dependsOn: classes) {
 	classifier = "sources"
@@ -226,36 +222,37 @@ bintray {
 
 // https://docs.gradle.org/current/userguide/build_lifecycle.html
 gradle.taskGraph.beforeTask { Task task ->
-	println "(Root) Executing $task..."
+	logger.lifecycle "(Root) Executing $task..."
 }
 
 gradle.taskGraph.afterTask { Task task, TaskState state ->
 	if (state.failure) {
-		println "(Root) FAILED $task..."
+		logger.lifecycle "(Root) FAILED $task..."
 	} else {
-		println "(Root) COMPLETED $task..."
+		logger.lifecycle "(Root) COMPLETED $task..."
 	}
 }
 
+// Separating Runtime Only Dependencies From Other Dependencies
+apply from: 'runtime-only-dependencies.gradle'
+
+// For all projects. This includes subprojects and our project.
 allprojects {
-	// For all projects. This includes subprojects and our project.
 	// I believe it includes parent projects too, but verify that.
 }
 
-subprojects {
-	// For Any General Subprojects
-}
+// For Any General Subprojects
+subprojects {}
 
 // Specifically the API Subproject
 project(':api') {
 	// TODO: Figure out how to get :api:build ran whenever dependencies are downloaded and on :build
+	// https://github.com/FabricMC/fabric-loom/issues/68#issuecomment-483017169
+	apply plugin: 'fabric-loom'
 }
 
-// TODO: How does this end up with a circular dependency for task build?
-project(":") {
-	// build.dependsOn api:build
-	// tasks."build".dependsOn api:build
-}
+// Specifically for this project?
+project(":") {}
 
 /* https://discordapp.com/channels/507304429255393322/507982478276034570/745174375753449543
  *
@@ -263,6 +260,3 @@ project(":") {
  * modImplementation -> if someone depends on YOUR mod, they get this dependency as runtime dependency, but can't reference its code
  * modApi -> if someone depends on your mod, they get this dependency as compile time dependency, and can reference its code directly
  */
-
-// Separating Runtime Only Dependencies From Other Dependencies
-apply from: 'runtime-only-dependencies.gradle'
