@@ -8,8 +8,12 @@ sourceCompatibility = JavaVersion.VERSION_1_8
 targetCompatibility = JavaVersion.VERSION_1_8
 
 archivesBaseName = project.archives_base_name
-version = "${project.mod_version}-SNAPSHOT"
 group = project.maven_group
+
+//main_version = project.mod_version
+//current_date = new Date()
+//snapshot_version = "${main_version}-${current_date}-SNAPSHOT"
+version = "${project.mod_version}-SNAPSHOT"
 
 minecraft {
 	// Used to make private methods/classes/fields public
@@ -68,7 +72,7 @@ dependencies {
 	//	> Could not resolve all dependencies for configuration ':compileClasspath'.
 	//   	> org.apache.logging.log4j:log4j-api:2.8.1 has more than one client module definitions.
 
-	modApi project(':api') // ./gradlew :api:build -> ./api/build/libs/alexisevelyn-api-0.0.4-SNAPSHOT.jar
+	// modApi project(':api') // ./gradlew :api:build -> ./api/build/libs/alexisevelyn-api-0.0.4-SNAPSHOT.jar
 	// include project(':api') // Causes circular dependency for :api:remapJar to :api:remapJar
 
 	// Reborn Core
@@ -248,9 +252,10 @@ project(':api') {
 }
 
 // TODO: How does this end up with a circular dependency for task build?
-//project(":") {
-//	build.dependsOn api:build
-//}
+project(":") {
+	// build.dependsOn api:build
+	// tasks."build".dependsOn api:build
+}
 
 /* https://discordapp.com/channels/507304429255393322/507982478276034570/745174375753449543
  *

@@ -1,8 +1,6 @@
-package me.alexisevelyn.randomtech.mixin.recipe;
+package me.alexisevelyn.randomtech.api.mixin.recipe;
 
-import me.alexisevelyn.randomtech.api.items.armor.generic.GenericPoweredArmor;
 import me.alexisevelyn.randomtech.api.items.energy.EnergyHelper;
-import me.alexisevelyn.randomtech.api.items.tools.generic.GenericPoweredTool;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;

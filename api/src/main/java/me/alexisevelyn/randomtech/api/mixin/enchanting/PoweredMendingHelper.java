@@ -1,4 +1,4 @@
-package me.alexisevelyn.randomtech.mixin.enchanting;
+package me.alexisevelyn.randomtech.api.mixin.enchanting;
 
 import com.google.common.collect.Lists;
 import me.alexisevelyn.randomtech.api.items.energy.EnergyHelper;

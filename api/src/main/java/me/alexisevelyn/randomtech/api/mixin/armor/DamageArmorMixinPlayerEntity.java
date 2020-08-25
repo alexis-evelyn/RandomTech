@@ -1,7 +1,6 @@
-package me.alexisevelyn.randomtech.mixin.armor;
+package me.alexisevelyn.randomtech.api.mixin.armor;
 
 import me.alexisevelyn.randomtech.api.items.armor.generic.GenericPoweredArmor;
-import me.alexisevelyn.randomtech.api.items.energy.EnergyHelper;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;

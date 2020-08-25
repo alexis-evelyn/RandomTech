@@ -1,4 +1,4 @@
-package me.alexisevelyn.randomtech.mixin.overpowered;
+package me.alexisevelyn.randomtech.api.mixin.overpowered;
 
 import me.alexisevelyn.randomtech.api.items.armor.generic.InvulnerabilityHandler;
 import me.alexisevelyn.randomtech.api.utilities.CustomDamageSource;
