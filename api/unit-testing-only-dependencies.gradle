@@ -1,0 +1,7 @@
+dependencies {
+    // JUnit
+    testImplementation group: 'junit', name: 'junit', version: "${project.junit_version}"
+
+    // Mockito
+    testImplementation group: 'org.mockito', name: 'mockito-all', version: "${project.mockito_version}"
+}

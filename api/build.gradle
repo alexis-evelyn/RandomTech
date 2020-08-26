@@ -10,7 +10,7 @@ sourceCompatibility = JavaVersion.VERSION_1_8
 targetCompatibility = JavaVersion.VERSION_1_8
 
 archivesBaseName = project.archives_base_name
-version = "${project.mod_version}-SNAPSHOT"
+version = "${project.mod_version}" // Could look at https://discordapp.com/channels/507304429255393322/721100785936760876/747990135378935848
 group = project.maven_group
 
 minecraft {
@@ -188,3 +188,6 @@ gradle.taskGraph.afterTask { Task task, TaskState state ->
 		logger.lifecycle "(API) COMPLETED $task..."
 	}
 }
+
+// Separating Unit Testing Only Dependencies From Other Dependencies
+apply from: 'unit-testing-only-dependencies.gradle'

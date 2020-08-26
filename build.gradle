@@ -17,6 +17,9 @@ group = project.maven_group
 //snapshot_version = "${main_version}-${current_date}-SNAPSHOT"
 version = "${project.mod_version}-SNAPSHOT"
 
+// Tells Gradle to Wait for the API to Remap Before Remapping the Root Mod
+remapJar.dependsOn ':api:remapJar'
+
 minecraft {
 	// Used to make private methods/classes/fields public
 	accessWidener "src/main/resources/randomtech.accesswidener"
@@ -74,9 +77,8 @@ dependencies {
 
 	// RandomTech API - https://docs.gradle.org/current/userguide/multi_project_builds.html
 	implementation project(path: ':api') // ./gradlew :api:build -> ./api/build/libs/alexisevelyn-api-0.0.4-SNAPSHOT.jar
-	// include project(path: ':api') // TODO: Fix - Causes a circular dependency issue when building with `./gradlew build`
-	include (name: 'alexisevelyn-api-0.0.4-SNAPSHOT', ext: 'jar') // This is ran before the api jar gets remapped.
-
+	include (name: 'alexisevelyn-api', version: "${project(":api").mod_version}", ext: 'jar') // This is ran before the api jar gets remapped.
+	
 	// Reborn Core
 	modImplementation "RebornCore:RebornCore-${project.reborn_core_version}"
 
@@ -240,6 +242,9 @@ gradle.taskGraph.afterTask { Task task, TaskState state ->
 
 // Separating Runtime Only Dependencies From Other Dependencies
 apply from: 'runtime-only-dependencies.gradle'
+
+// Separating Unit Testing Only Dependencies From Other Dependencies
+apply from: 'unit-testing-only-dependencies.gradle'
 
 // For all projects. This includes subprojects and our project.
 allprojects {

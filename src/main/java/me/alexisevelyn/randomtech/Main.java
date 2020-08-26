@@ -41,7 +41,5 @@ public class Main implements ModInitializer {
 		preRegistryHelper.preRegister();
 		registryHelper.register();
 		postRegistryHelper.postRegister();
-
-		me.alexisevelyn.randomtech.api.Main test = new me.alexisevelyn.randomtech.api.Main();
 	}
 }
