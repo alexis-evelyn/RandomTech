@@ -1,7 +1,5 @@
 package me.alexisevelyn.randomtech.blocks.ores;
 
-import com.google.common.collect.ImmutableList;
-import com.google.common.collect.Lists;
 import me.alexisevelyn.randomtech.api.utilities.GenericBlockHelper;
 import me.alexisevelyn.randomtech.api.utilities.MiningLevel;
 import me.alexisevelyn.randomtech.utility.Materials;
@@ -11,22 +9,12 @@ import net.fabricmc.fabric.api.tool.attribute.v1.FabricToolTags;
 import net.minecraft.block.Block;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.registry.BuiltinRegistries;
-import net.minecraft.util.registry.Registry;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.GenerationStep;
-import net.minecraft.world.gen.decorator.*;
 import net.minecraft.world.gen.feature.ConfiguredFeature;
-import net.minecraft.world.gen.feature.ConfiguredFeatures;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.OreFeatureConfig;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-import java.util.function.Supplier;
-import java.util.stream.Stream;
 
 /**
  * The type Cobalt ore.

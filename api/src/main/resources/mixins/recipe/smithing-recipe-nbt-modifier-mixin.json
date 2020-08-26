@@ -1,0 +1,14 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "me.alexisevelyn.randomtech.api.mixin.recipe",
+  "compatibilityLevel": "JAVA_8",
+  "mixins": [
+    "SmithingRecipeNBTModifierMixin"
+  ],
+  "client": [
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

@@ -5,4 +5,3 @@ accessWidener   v1  named
 # For accessing enum in MinecraftClient
 # This access widener came from https://discordapp.com/channels/507304429255393322/523633816078647296/746228158956568697
 # accessible  class   net/minecraft/client/MinecraftClient$WorldLoadAction
-accessible  field   net/minecraft/world/biome/GenerationSettings    features    Ljava/util/List;

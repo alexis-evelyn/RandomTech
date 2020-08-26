@@ -1,12 +1,9 @@
 package me.alexisevelyn.randomtech.utility.registryhelpers.main;
 
-import me.alexisevelyn.randomtech.Main;
+import me.alexisevelyn.randomtech.api.Main;
 import me.alexisevelyn.randomtech.api.items.energy.EnergyHelper;
 import me.alexisevelyn.randomtech.api.utilities.cardinalcomponents.BrokenItemComponent;
-import me.alexisevelyn.randomtech.blocks.ores.CobaltOre;
 import me.alexisevelyn.randomtech.items.armor.powered.PoweredHelmet;
-import nerdhub.cardinal.components.api.ComponentRegistry;
-import nerdhub.cardinal.components.api.ComponentType;
 import nerdhub.cardinal.components.api.event.ItemComponentCallback;
 import net.fabricmc.fabric.api.network.PacketContext;
 import net.fabricmc.fabric.api.network.ServerSidePacketRegistry;
@@ -14,9 +11,7 @@ import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.PacketByteBuf;
-import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
-import net.minecraft.world.biome.Biome;
 
 import java.nio.charset.StandardCharsets;
 
@@ -24,9 +19,6 @@ import java.nio.charset.StandardCharsets;
  * The type Post registry helper.
  */
 public class PostRegistryHelper {
-    public static final ComponentType<BrokenItemComponent> BROKEN_ITEM_COMPONENT =
-            ComponentRegistry.INSTANCE.registerIfAbsent(new Identifier(Main.MODID, "broken_item_component"), BrokenItemComponent.class);
-
     /**
      * Post register.
      */
@@ -34,7 +26,7 @@ public class PostRegistryHelper {
         // Register All Powered Tools and Armor With Callback
         Registry.ITEM.stream().forEach(item -> {
             if (item instanceof EnergyHelper) {
-                ItemComponentCallback.event(item).register((stack, components) -> components.put(BROKEN_ITEM_COMPONENT, new BrokenItemComponent(stack)));
+                ItemComponentCallback.event(item).register((stack, components) -> components.put(Main.BROKEN_ITEM_COMPONENT, new BrokenItemComponent(stack)));
             }
         });
 

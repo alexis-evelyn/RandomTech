@@ -1,0 +1,14 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "me.alexisevelyn.randomtech.api.mixin.enchanting",
+  "compatibilityLevel": "JAVA_8",
+  "mixins": [
+    "PoweredMendingHelper"
+  ],
+  "client": [
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

@@ -1,28 +1,21 @@
 plugins {
-	id 'fabric-loom' version '0.5-SNAPSHOT'
-	id 'com.jfrog.bintray' version '1.8.5' // For publishing to bintray - https://github.com/bintray/gradle-bintray-plugin
+	id 'fabric-loom'
+	id 'com.jfrog.bintray' // For publishing to bintray - https://github.com/bintray/gradle-bintray-plugin
 	id 'maven-publish'
 }
 
-logger.lifecycle "(Root) Running Gradle Version: $gradle.gradleVersion"
+logger.lifecycle "(API) Running Gradle Version: $gradle.gradleVersion"
 
 sourceCompatibility = JavaVersion.VERSION_1_8
 targetCompatibility = JavaVersion.VERSION_1_8
 
 archivesBaseName = project.archives_base_name
+version = "${project.mod_version}" // Could look at https://discordapp.com/channels/507304429255393322/721100785936760876/747990135378935848
 group = project.maven_group
-
-//main_version = project.mod_version
-//current_date = new Date()
-//snapshot_version = "${main_version}-${current_date}-SNAPSHOT"
-version = "${project.mod_version}-SNAPSHOT"
-
-// Tells Gradle to Wait for the API to Remap Before Remapping the Root Mod
-remapJar.dependsOn ':api:remapJar'
 
 minecraft {
 	// Used to make private methods/classes/fields public
-	accessWidener "src/main/resources/randomtech.accesswidener"
+	accessWidener "src/main/resources/api.accesswidener"
 }
 
 configurations {
@@ -31,8 +24,8 @@ configurations {
 
 repositories {
 	maven {
-		name "Patchouli"
-		url "https://maven.blamejared.com/"
+		name "Ladysnake Libs"
+		url "https://dl.bintray.com/ladysnake/libs"
 	}
 	ivy {
 		name "Github Repos"
@@ -50,18 +43,6 @@ repositories {
 			m2compatible = true
 		}
 	}
-	maven {
-		name "NBT Crafting"
-		url "https://maven.siphalor.de"
-	}
-	maven {
-		name "Hwyla"
-		url "https://maven.tehnut.info"
-	}
-	flatDir {
-		name "Local API Build"
-		dirs "api/build/libs"
-	}
 }
 
 dependencies {
@@ -75,10 +56,6 @@ dependencies {
 	// Fabric API. This is technically optional, but you probably want it anyway.
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
-	// RandomTech API - https://docs.gradle.org/current/userguide/multi_project_builds.html
-	implementation project(path: ':api') // ./gradlew :api:build -> ./api/build/libs/alexisevelyn-api-0.0.4-SNAPSHOT.jar
-	include (name: 'alexisevelyn-api', version: "${project(":api").mod_version}", ext: 'jar') // Retrieves the version info from API's mod_version var and includes the remapped API jar into the root jar
-	
 	// Reborn Core
 	modImplementation "RebornCore:RebornCore-${project.reborn_core_version}"
 
@@ -92,35 +69,11 @@ dependencies {
 	modImplementation "me.sargunvohra.mcmods:autoconfig1u:${project.autoconf_version}"
 	include "me.sargunvohra.mcmods:autoconfig1u:${project.autoconf_version}"
 
-	// Hywla
-	modImplementation "mcp.mobius.waila:Hwyla:${project.hywla_version}" // Same fix as on Patchouli. the fix was that loom currently cannot handle depending on artifacts with the same ID but different classifier (regular patchouli jar vs :api)
-
-	// Roughly Enough Items
-	modImplementation "me.shedaniel:RoughlyEnoughItems:${project.rei_version}" // TODO: Fix - Recipe Display Crashes Game
-
-	// Patchouli API - TODO: Update to non-snapshot version when released
-	modImplementation "vazkii.patchouli:Patchouli:${project.patchouli_version}" // Note: https://discordapp.com/channels/507304429255393322/507982478276034570/745174055383990372
-
-	// Permission Granted From: https://discordapp.com/channels/507304429255393322/507982478276034570/730955439390326894 - Screenshots: https://imgur.com/a/R9xMlhX
-	modImplementation "com.github.nuclearfarts:connected-block-textures:${project.connected_block_textures_version}"
-	include "com.github.nuclearfarts:connected-block-textures:${project.connected_block_textures_version}"
-
 	// Used to allow customizing data of items and other things
 	modImplementation "io.github.onyxstudios.Cardinal-Components-API:cardinal-components-base:${project.cardinal_components_version}"
 	modImplementation "io.github.onyxstudios.Cardinal-Components-API:cardinal-components-item:${project.cardinal_components_version}"
 	include "io.github.onyxstudios.Cardinal-Components-API:cardinal-components-item:${project.cardinal_components_version}"
 	include "io.github.onyxstudios.Cardinal-Components-API:cardinal-components-base:${project.cardinal_components_version}"
-
-	// For Shaders - https://github.com/Ladysnake/Satin/blob/master/README.md
-	modImplementation "io.github.ladysnake:Satin:${project.satin_version}"
-	include "io.github.ladysnake:Satin:${project.satin_version}"
-
-	// For NBT Crafting - https://github.com/Siphalor/nbt-crafting/blob/1.16-2.0/README.md
-	modImplementation "de.siphalor:nbtcrafting-1.16:${project.nbt_crafting_version}"
-	include "de.siphalor:nbtcrafting-1.16:${project.nbt_crafting_version}"
-
-	// PSA: Some older mods, compiled on Loom 0.2.1, might have outdated Maven POMs.
-	// You may need to force-disable transitiveness on them.
 }
 
 processResources {
@@ -160,10 +113,6 @@ task sourcesJar(type: Jar, dependsOn: classes) {
 	from sourceSets.main.allSource
 }
 
-jar {
-	from "LICENSE.md"
-}
-
 // configure the maven publication
 // Use bintrayUpload, not bintrayPublish
 publishing {
@@ -178,7 +127,7 @@ publishing {
 			}
 			artifact javadocsJar
 			groupId = project.maven_group
-			artifactId 'randomtech'
+			artifactId 'randomtechapi'
 			version = project.mod_version // Bintray doesn't allow snapshot versions, so I'm removing the word SNAPSHOT from the version name
 		}
 	}
@@ -198,7 +147,7 @@ bintray {
 
 	pkg {
 		repo = "mods"
-		name = "RandomTech"
+		name = "API"
 		userOrg = "alexis-evelyn"
 		licenses = ["MIT"]
 
@@ -215,7 +164,7 @@ bintray {
 			name = project.mod_version // Bintray doesn't allow snapshot versions, so I'm removing the word SNAPSHOT from the version name
 			vcsTag = project.version
 			released = new Date()
-			desc = "RandomTech for Fabric 1.16+"
+			desc = "RandomTech API for Fabric 1.16+"
 			githubRepo = 'alexis-evelyn/RandomTech'
 			websiteUrl = 'https://github.com/alexis-evelyn/RandomTech'
 			issueTrackerUrl = 'https://github.com/alexis-evelyn/RandomTech/issues'
@@ -229,42 +178,16 @@ bintray {
 
 // https://docs.gradle.org/current/userguide/build_lifecycle.html
 gradle.taskGraph.beforeTask { Task task ->
-	logger.lifecycle "(Root) Executing $task..."
+	logger.lifecycle "(API) Executing $task..."
 }
 
 gradle.taskGraph.afterTask { Task task, TaskState state ->
 	if (state.failure) {
-		logger.lifecycle "(Root) FAILED $task..."
+		logger.lifecycle "(API) FAILED $task..."
 	} else {
-		logger.lifecycle "(Root) COMPLETED $task..."
+		logger.lifecycle "(API) COMPLETED $task..."
 	}
 }
 
-// Separating Runtime Only Dependencies From Other Dependencies
-apply from: 'runtime-only-dependencies.gradle'
-
 // Separating Unit Testing Only Dependencies From Other Dependencies
 apply from: 'unit-testing-only-dependencies.gradle'
-
-// For all projects. This includes subprojects and our project.
-//allprojects {
-//	// I believe it includes parent projects too, but verify that.
-//}
-
-// For Any General Subprojects
-//subprojects {}
-
-// Specifically the API Subproject
-project(':api') {
-	apply plugin: 'fabric-loom'
-}
-
-// Specifically for this project?
-//project(":") {}
-
-/* https://discordapp.com/channels/507304429255393322/507982478276034570/745174375753449543
- *
- * modCompile - outdated, don't use.
- * modImplementation -> if someone depends on YOUR mod, they get this dependency as runtime dependency, but can't reference its code
- * modApi -> if someone depends on your mod, they get this dependency as compile time dependency, and can reference its code directly
- */

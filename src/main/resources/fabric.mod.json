@@ -37,23 +37,17 @@
   },
   "mixins": [
     "mixins/example/example-mixin.json",
-    "mixins/armor/damage-armor-mixin.json",
-    "mixins/enchanting/enchant-helper-mixin.json",
-    "mixins/recipe/smithing-recipe-nbt-modifier-mixin.json",
-    "mixins/armor/dynamic-armor-texture-mixin.json",
     "mixins/blocks/cobalt-wiring-mixin.json",
     "mixins/experiments/death-screen-mixin.json",
-    "mixins/experimentalscreen/gamerule-based-backup-screen-mixin.json",
-    "mixins/enchanting/powered-mending-helper-mixin.json",
-    "mixins/overpowered/breakable-blocks-mixin.json",
-    "mixins/overpowered/kill-prevention-mixin.json"
+    "mixins/experimentalscreen/gamerule-based-backup-screen-mixin.json"
   ],
 
   "depends": {
     "fabricloader": ">=0.7.4",
     "fabric": "*",
     "minecraft": "1.16.x",
-    "reborncore": ">=4.3.1",
+    "reborncore": "*",
+    "randomtechapi": "*",
     "nbtcrafting": "*"
   },
   "suggests": {
