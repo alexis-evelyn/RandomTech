@@ -77,7 +77,7 @@ dependencies {
 
 	// RandomTech API - https://docs.gradle.org/current/userguide/multi_project_builds.html
 	implementation project(path: ':api') // ./gradlew :api:build -> ./api/build/libs/alexisevelyn-api-0.0.4-SNAPSHOT.jar
-	include (name: 'alexisevelyn-api', version: "${project(":api").mod_version}", ext: 'jar') // This is ran before the api jar gets remapped.
+	include (name: 'alexisevelyn-api', version: "${project(":api").mod_version}", ext: 'jar') // Retrieves the version info from API's mod_version var and includes the remapped API jar into the root jar
 	
 	// Reborn Core
 	modImplementation "RebornCore:RebornCore-${project.reborn_core_version}"
@@ -247,22 +247,20 @@ apply from: 'runtime-only-dependencies.gradle'
 apply from: 'unit-testing-only-dependencies.gradle'
 
 // For all projects. This includes subprojects and our project.
-allprojects {
-	// I believe it includes parent projects too, but verify that.
-}
+//allprojects {
+//	// I believe it includes parent projects too, but verify that.
+//}
 
 // For Any General Subprojects
-subprojects {}
+//subprojects {}
 
 // Specifically the API Subproject
 project(':api') {
-	// TODO: Figure out how to get :api:build ran whenever dependencies are downloaded and on :build
-	// https://github.com/FabricMC/fabric-loom/issues/68#issuecomment-483017169
 	apply plugin: 'fabric-loom'
 }
 
 // Specifically for this project?
-project(":") {}
+//project(":") {}
 
 /* https://discordapp.com/channels/507304429255393322/507982478276034570/745174375753449543
  *
