@@ -102,12 +102,15 @@ public abstract class GenericPoweredArmor extends ArmorItem implements EnergyHel
         if (!(itemStack.getItem() instanceof GenericPoweredArmor))
             return null;
 
-        GenericPoweredArmor genericPoweredArmor = (GenericPoweredArmor) itemStack.getItem();
+        int minPowerLevel = 0;
+        int maxPowerLevel = 15;
 
-        if (!genericPoweredArmor.isUsable(itemStack))
-            return "discharged";
+        double currentEnergy = this.getEnergy(itemStack);
+        double maxEnergy = this.getMaxEnergy(itemStack);
 
-        return null;
+        double currentPowerLevel = ((currentEnergy * maxPowerLevel) / maxEnergy) + minPowerLevel;
+
+        return String.valueOf((int) Math.floor(Math.min(Math.max(currentPowerLevel, minPowerLevel), maxPowerLevel)));
     }
 
     /**

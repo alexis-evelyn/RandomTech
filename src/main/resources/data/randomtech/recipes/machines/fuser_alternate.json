@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "rtfuser",
+  "pattern": [
+    "#i#",
+    "iri",
+    "#i#"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:obsidian"
+    },
+    "i": {
+      "tag": "c:iron_ingots"
+    },
+    "r": {
+      "tag": "c:redstone_ingots"
+    }
+  },
+  "result": {
+    "item": "randomtech:fuser",
+    "count": 1
+  }
+}
