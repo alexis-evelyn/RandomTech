@@ -5,3 +5,6 @@ accessWidener   v1  named
 # For accessing enum in MinecraftClient
 # This access widener came from https://discordapp.com/channels/507304429255393322/523633816078647296/746228158956568697
 # accessible  class   net/minecraft/client/MinecraftClient$WorldLoadAction
+
+# For Custom Damage That Can Damage Creative Mode Players
+accessible  method  net/minecraft/entity/damage/DamageSource    setOutOfWorld   ()Lnet/minecraft/entity/damage/DamageSource;

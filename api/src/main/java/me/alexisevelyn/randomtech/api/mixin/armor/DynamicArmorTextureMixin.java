@@ -1,6 +1,5 @@
 package me.alexisevelyn.randomtech.api.mixin.armor;
 
-import me.alexisevelyn.randomtech.api.items.armor.generic.GenericPoweredArmor;
 import me.alexisevelyn.randomtech.api.items.armor.generic.SecondaryTextureHandler;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.entity.feature.ArmorFeatureRenderer;

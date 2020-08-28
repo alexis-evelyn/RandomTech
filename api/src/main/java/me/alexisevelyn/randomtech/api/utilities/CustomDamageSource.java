@@ -6,7 +6,8 @@ import net.minecraft.entity.damage.DamageSource;
  * The type Custom damage source.
  */
 public class CustomDamageSource extends DamageSource {
-    public static final DamageSource KILL_COMMAND = new CustomDamageSource("killCommand").setBypassesArmor();
+    // Setting to out of world allows damaging creative mode players
+    public static final DamageSource KILL_COMMAND = new CustomDamageSource("killCommand").setBypassesArmor().setOutOfWorld();
 
     /**
      * Instantiates a new Custom damage source.
