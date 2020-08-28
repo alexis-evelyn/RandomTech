@@ -387,20 +387,20 @@ public class RegistryHelper {
      */
     private void registerGeneralItemBlocks() {
         // ItemBlocks
-        Registry.register(Registry.ITEM, new Identifier(Main.MODID, "clear_glass"), new BlockItem(CLEAR_GLASS, new Item.Settings().group(ItemGroup.DECORATIONS)));
-        Registry.register(Registry.ITEM, new Identifier(Main.MODID, "dark_glass"), new BlockItem(DARK_GLASS, new Item.Settings().group(ItemGroup.DECORATIONS)));
+        Registry.register(Registry.ITEM, new Identifier(Main.MODID, "clear_glass"), new BlockItem(CLEAR_GLASS, new Item.Settings().group(ItemGroup.BUILDING_BLOCKS)));
+        Registry.register(Registry.ITEM, new Identifier(Main.MODID, "dark_glass"), new BlockItem(DARK_GLASS, new Item.Settings().group(ItemGroup.BUILDING_BLOCKS)));
 
-        Registry.register(Registry.ITEM, new Identifier(Main.MODID, "intangible_glass"), new BlockItem(INTANGIBLE_GLASS, new Item.Settings().group(ItemGroup.DECORATIONS)));
-        Registry.register(Registry.ITEM, new Identifier(Main.MODID, "dark_intangible_glass"), new BlockItem(DARK_INTANGIBLE_GLASS, new Item.Settings().group(ItemGroup.DECORATIONS)));
+        Registry.register(Registry.ITEM, new Identifier(Main.MODID, "intangible_glass"), new BlockItem(INTANGIBLE_GLASS, new Item.Settings().group(ItemGroup.BUILDING_BLOCKS)));
+        Registry.register(Registry.ITEM, new Identifier(Main.MODID, "dark_intangible_glass"), new BlockItem(DARK_INTANGIBLE_GLASS, new Item.Settings().group(ItemGroup.BUILDING_BLOCKS)));
 
-        Registry.register(Registry.ITEM, new Identifier(Main.MODID, "inverse_intangible_glass"), new BlockItem(INVERSE_INTANGIBLE_GLASS, new Item.Settings().group(ItemGroup.DECORATIONS)));
-        Registry.register(Registry.ITEM, new Identifier(Main.MODID, "inverse_dark_intangible_glass"), new BlockItem(INVERSE_DARK_INTANGIBLE_GLASS, new Item.Settings().group(ItemGroup.DECORATIONS)));
+        Registry.register(Registry.ITEM, new Identifier(Main.MODID, "inverse_intangible_glass"), new BlockItem(INVERSE_INTANGIBLE_GLASS, new Item.Settings().group(ItemGroup.BUILDING_BLOCKS)));
+        Registry.register(Registry.ITEM, new Identifier(Main.MODID, "inverse_dark_intangible_glass"), new BlockItem(INVERSE_DARK_INTANGIBLE_GLASS, new Item.Settings().group(ItemGroup.BUILDING_BLOCKS)));
 
-        Registry.register(Registry.ITEM, new Identifier(Main.MODID, "powered_glass"), new BlockItem(POWERED_GLASS, new Item.Settings().group(ItemGroup.DECORATIONS)));
+        Registry.register(Registry.ITEM, new Identifier(Main.MODID, "powered_glass"), new BlockItem(POWERED_GLASS, new Item.Settings().group(ItemGroup.REDSTONE)));
 
         // Metals
-        Registry.register(Registry.ITEM, new Identifier(Main.MODID, "cobalt_block"), new BlockItem(COBALT_BLOCK, new Item.Settings().group(ItemGroup.DECORATIONS)));
-        Registry.register(Registry.ITEM, new Identifier(Main.MODID, "pure_redstone_block"), new BlockItem(PURE_REDSTONE_BLOCK, new Item.Settings().group(ItemGroup.DECORATIONS)));
+        Registry.register(Registry.ITEM, new Identifier(Main.MODID, "cobalt_block"), new BlockItem(COBALT_BLOCK, new Item.Settings().group(ItemGroup.BUILDING_BLOCKS)));
+        Registry.register(Registry.ITEM, new Identifier(Main.MODID, "pure_redstone_block"), new BlockItem(PURE_REDSTONE_BLOCK, new Item.Settings().group(ItemGroup.BUILDING_BLOCKS)));
 
         Registry.register(Registry.ITEM, new Identifier(Main.MODID, "cobalt_dust"), new BlockItem(COBALT_WIRE, new Item.Settings().group(ItemGroup.REDSTONE)));
 
@@ -419,7 +419,7 @@ public class RegistryHelper {
      * Register ore item blocks.
      */
     private void registerOreItemBlocks() {
-        Registry.register(Registry.ITEM, new Identifier(Main.MODID, "cobalt_ore"), new BlockItem(COBALT_ORE, new Item.Settings().group(ItemGroup.MATERIALS)));
+        Registry.register(Registry.ITEM, new Identifier(Main.MODID, "cobalt_ore"), new BlockItem(COBALT_ORE, new Item.Settings().group(ItemGroup.BUILDING_BLOCKS)));
     }
 
     /**

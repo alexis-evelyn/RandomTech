@@ -28,6 +28,6 @@ bin/
 
 run/
 
-# OSX
+# OSX - Remove .DS_Store with `find . -name ".DS_Store" -delete`
 
 .DS_Store
