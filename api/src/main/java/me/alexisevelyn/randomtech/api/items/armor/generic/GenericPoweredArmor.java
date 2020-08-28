@@ -44,7 +44,7 @@ import java.util.UUID;
 /**
  * The type Generic powered armor.
  */
-public abstract class GenericPoweredArmor extends ArmorItem implements EnergyHelper, ItemDurabilityExtensions, ItemStackModifiers, ArmorTickable, ArmorRemoveHandler, ArmorFovHandler, EnergyHolder, InvulnerabilityHandler {
+public abstract class GenericPoweredArmor extends ArmorItem implements EnergyHelper, ItemDurabilityExtensions, ItemStackModifiers, ArmorTickable, ArmorRemoveHandler, ArmorFovHandler, EnergyHolder, InvulnerabilityHandler, SecondaryTextureHandler {
     private final int maxCharge;
     private final int cost;
 
@@ -91,14 +91,14 @@ public abstract class GenericPoweredArmor extends ArmorItem implements EnergyHel
         return new TranslatableText(this.getTranslationKey(stack));
     }
 
-
     /**
      * Gets secondary armor texture.
      *
      * @param itemStack the item stack
      * @return the secondary armor texture
      */
-    public @Nullable String getSecondaryArmorTexture(ItemStack itemStack) {
+    @Override
+    public @Nullable String getSecondaryArmorTexture(LivingEntity livingEntity, ItemStack itemStack) {
         if (!(itemStack.getItem() instanceof GenericPoweredArmor))
             return null;
 

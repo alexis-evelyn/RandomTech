@@ -1,6 +1,7 @@
 package me.alexisevelyn.randomtech.api.mixin.armor;
 
 import me.alexisevelyn.randomtech.api.items.armor.generic.GenericPoweredArmor;
+import me.alexisevelyn.randomtech.api.items.armor.generic.SecondaryTextureHandler;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.entity.feature.ArmorFeatureRenderer;
 import net.minecraft.client.render.entity.feature.FeatureRenderer;
@@ -89,10 +90,10 @@ public abstract class DynamicArmorTextureMixin<T extends LivingEntity, M extends
 		ItemStack itemStack = livingEntity.getEquippedStack(equipmentSlot);
 		Item item = itemStack.getItem();
 
-		if (item instanceof GenericPoweredArmor) {
-			GenericPoweredArmor genericPoweredArmor = (GenericPoweredArmor) item;
+		if (item instanceof SecondaryTextureHandler) {
+			SecondaryTextureHandler genericArmor = (SecondaryTextureHandler) item;
 
-			if (genericPoweredArmor.getSlotType() != equipmentSlot)
+			if (genericArmor.getSlotType() != equipmentSlot)
 				return;
 
 			this.getContextModel().setAttributes(bipedEntityModel);
@@ -100,7 +101,7 @@ public abstract class DynamicArmorTextureMixin<T extends LivingEntity, M extends
 			boolean usesSecondLayer = this.usesSecondLayer(equipmentSlot);
 			boolean hasGlint = itemStack.hasGlint();
 
-			this.renderArmorParts(matrices, vertexConsumers, i, (ArmorItem) item, hasGlint, bipedEntityModel, usesSecondLayer, 1.0F, 1.0F, 1.0F, genericPoweredArmor.getSecondaryArmorTexture(itemStack));
+			this.renderArmorParts(matrices, vertexConsumers, i, (ArmorItem) item, hasGlint, bipedEntityModel, usesSecondLayer, 1.0F, 1.0F, 1.0F, genericArmor.getSecondaryArmorTexture(livingEntity, itemStack));
 
 			info.cancel();
 		}
