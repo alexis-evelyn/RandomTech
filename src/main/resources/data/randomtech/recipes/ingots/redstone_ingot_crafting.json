@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "randomtech:pure_redstone_block"
+    }
+  ],
+  "result": {
+    "item": "randomtech:redstone_ingot",
+    "count": 9
+  }
+}

@@ -263,7 +263,7 @@ public class TeleporterBlockEntity extends BasePowerAcceptorBlockEntity implemen
      * @return the boolean
      */
     public boolean isPlayerReadyToTeleport(PlayerEntity playerEntity) {
-        return playerEntity != null && playerEntity.isInSneakingPose() && playerEntity.getBlockPos().equals(this.pos.add(0, 1, 0));
+        return playerEntity != null && playerEntity.isInSneakingPose() && playerEntity.getBlockPos().equals(this.pos.add(0, 5.0/16, 0));
     }
 
     /**

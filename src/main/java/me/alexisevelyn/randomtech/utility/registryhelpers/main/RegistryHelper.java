@@ -15,6 +15,7 @@ import me.alexisevelyn.randomtech.blocks.cables.FluidCable;
 import me.alexisevelyn.randomtech.blocks.cables.ItemCable;
 import me.alexisevelyn.randomtech.blocks.glass.*;
 import me.alexisevelyn.randomtech.blocks.metals.CobaltBlock;
+import me.alexisevelyn.randomtech.blocks.metals.PureRedstoneBlock;
 import me.alexisevelyn.randomtech.blocks.ores.CobaltOre;
 import me.alexisevelyn.randomtech.blocks.wires.CobaltWire;
 import me.alexisevelyn.randomtech.chunkgenerators.VoidChunkGenerator;
@@ -117,6 +118,7 @@ public class RegistryHelper {
 
     // Metals
     public static final Block COBALT_BLOCK = new CobaltBlock();
+    public static final Block PURE_REDSTONE_BLOCK = new PureRedstoneBlock();
 
     // Ores
     public static final Block COBALT_ORE = new CobaltOre();
@@ -141,7 +143,7 @@ public class RegistryHelper {
     public static final Item TELEPORTER_LINKER = new TeleporterLinker(new Item.Settings().group(MACHINERY_GROUP).maxCount(1)); // Max Count Sets Stack Size
 
     // Ingots
-    public static final Item REDSTONE_INGOT = new RedstoneIngot(new Item.Settings().group(ItemGroup.MISC));
+    public static final Item REDSTONE_INGOT = new RedstoneIngot(new Item.Settings().group(ItemGroup.REDSTONE));
     public static final Item COBALT_INGOT = new CobaltIngot(new Item.Settings().group(ItemGroup.MISC));
     public static final Item DEATH_INGOT = new DeathIngot(new Item.Settings().group(ItemGroup.MISC));
 
@@ -296,6 +298,7 @@ public class RegistryHelper {
         Registry.register(Registry.BLOCK, new Identifier(Main.MODID, "virtual_tile"), VIRTUAL_TILE_BLOCK);
 
         Registry.register(Registry.BLOCK, new Identifier(Main.MODID, "cobalt_block"), COBALT_BLOCK);
+        Registry.register(Registry.BLOCK, new Identifier(Main.MODID, "pure_redstone_block"), PURE_REDSTONE_BLOCK);
 
         Registry.register(Registry.BLOCK, new Identifier(Main.MODID, "cobalt_wire"), COBALT_WIRE);
 
@@ -397,6 +400,7 @@ public class RegistryHelper {
 
         // Metals
         Registry.register(Registry.ITEM, new Identifier(Main.MODID, "cobalt_block"), new BlockItem(COBALT_BLOCK, new Item.Settings().group(ItemGroup.DECORATIONS)));
+        Registry.register(Registry.ITEM, new Identifier(Main.MODID, "pure_redstone_block"), new BlockItem(PURE_REDSTONE_BLOCK, new Item.Settings().group(ItemGroup.DECORATIONS)));
 
         Registry.register(Registry.ITEM, new Identifier(Main.MODID, "cobalt_dust"), new BlockItem(COBALT_WIRE, new Item.Settings().group(ItemGroup.REDSTONE)));
 
