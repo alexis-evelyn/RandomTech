@@ -99,9 +99,6 @@ public abstract class GenericPoweredArmor extends ArmorItem implements EnergyHel
      */
     @Override
     public @Nullable String getSecondaryArmorTexture(LivingEntity livingEntity, ItemStack itemStack) {
-        if (!(itemStack.getItem() instanceof GenericPoweredArmor))
-            return null;
-
         int minPowerLevel = 0;
         int maxPowerLevel = 15;
 
