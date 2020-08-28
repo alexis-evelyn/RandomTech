@@ -9,6 +9,14 @@ import org.jetbrains.annotations.Nullable;
  * For allowing armor to have more than one texture visible to other players of the wearer
  */
 public interface SecondaryTextureHandler {
+
+    /**
+     * Retrieve secondary texture that the armor may have based on it's itemstack and the wearer.
+     *
+     * @param livingEntity
+     * @param itemStack
+     * @return
+     */
     @Nullable String getSecondaryArmorTexture(LivingEntity livingEntity, ItemStack itemStack);
 
     /**
