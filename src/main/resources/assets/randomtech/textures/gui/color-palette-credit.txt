@@ -1,0 +1,8 @@
+Background - #23272b
+Slot - #2c2f33
+Arrow - #424242
+
+---
+
+From: https://www.planetminecraft.com/member/arkadya
+Permission Granted From: https://www.reddit.com/r/Minecraft/comments/i0cdgl/i_made_a_simplistic_dark_mode_gui/g3393tl/
