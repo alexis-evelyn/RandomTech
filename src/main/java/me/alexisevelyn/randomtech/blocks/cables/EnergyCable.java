@@ -8,6 +8,7 @@ import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.ItemStack;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
@@ -15,11 +16,14 @@ import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.shape.VoxelShape;
+import net.minecraft.world.BlockRenderView;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import reborncore.common.powerSystem.PowerAcceptorBlockEntity;
+
+import java.awt.*;
 
 /**
  * The type Energy cable.
@@ -76,6 +80,30 @@ public class EnergyCable extends GenericCable {
     // For full control over cable shapes
     public EnergyCable(@NotNull Settings settings, @Nullable VoxelShape outlinedShape, @Nullable VoxelShape visualShape, @Nullable VoxelShape collisionShape, @Nullable VoxelShape[] cullingShapes) {
         super(settings, outlinedShape, visualShape, collisionShape, cullingShapes);
+    }
+
+    /**
+     * For Block Form
+     *
+     * @param state
+     * @param world
+     * @param pos
+     * @param tintIndex
+     * @return
+     */
+    public static int getEdgeColor(BlockState state, BlockRenderView world, BlockPos pos, int tintIndex) {
+        return Color.GREEN.getRGB();
+    }
+
+    /**
+     * For Item Form
+     *
+     * @param itemStack
+     * @param tintIndex
+     * @return
+     */
+    public static int getEdgeColor(ItemStack itemStack, int tintIndex) {
+        return Color.GREEN.getRGB();
     }
 
     /**

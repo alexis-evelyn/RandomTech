@@ -14,6 +14,7 @@ import net.minecraft.block.entity.HopperBlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.inventory.SidedInventory;
+import net.minecraft.item.ItemStack;
 import net.minecraft.screen.*;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.BlockSoundGroup;
@@ -24,12 +25,14 @@ import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.shape.VoxelShape;
+import net.minecraft.world.BlockRenderView;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.awt.*;
 import java.util.Random;
 
 /**
@@ -87,6 +90,30 @@ public class ItemCable extends GenericCable implements BlockEntityProvider, Inve
     // For full control over cable shapes
     public ItemCable(@NotNull Settings settings, @Nullable VoxelShape outlinedShape, @Nullable VoxelShape visualShape, @Nullable VoxelShape collisionShape, @Nullable VoxelShape[] cullingShapes) {
         super(settings, outlinedShape, visualShape, collisionShape, cullingShapes);
+    }
+
+    /**
+     * For Block Form
+     *
+     * @param state
+     * @param world
+     * @param pos
+     * @param tintIndex
+     * @return
+     */
+    public static int getEdgeColor(BlockState state, BlockRenderView world, BlockPos pos, int tintIndex) {
+        return Color.RED.getRGB();
+    }
+
+    /**
+     * For Item Form
+     *
+     * @param itemStack
+     * @param tintIndex
+     * @return
+     */
+    public static int getEdgeColor(ItemStack itemStack, int tintIndex) {
+        return Color.RED.getRGB();
     }
 
     /**

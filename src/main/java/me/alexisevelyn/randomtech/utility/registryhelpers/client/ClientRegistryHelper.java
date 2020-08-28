@@ -5,6 +5,9 @@ import ladysnake.satin.api.managed.ManagedShaderEffect;
 import ladysnake.satin.api.managed.ShaderEffectManager;
 import me.alexisevelyn.randomtech.Main;
 import me.alexisevelyn.randomtech.blockitems.VirtualTile;
+import me.alexisevelyn.randomtech.blocks.cables.EnergyCable;
+import me.alexisevelyn.randomtech.blocks.cables.FluidCable;
+import me.alexisevelyn.randomtech.blocks.cables.ItemCable;
 import me.alexisevelyn.randomtech.blocks.wires.CobaltWire;
 import me.alexisevelyn.randomtech.entities.renderers.CloudDemonRenderer;
 import me.alexisevelyn.randomtech.entities.renderers.WizardRenderer;
@@ -116,10 +119,20 @@ public class ClientRegistryHelper {
         ColorProviderRegistry.BLOCK.register(VirtualTile::getEdgeColor, RegistryHelper.VIRTUAL_TILE_BLOCK);
         ColorProviderRegistry.ITEM.register(VirtualTile::getEdgeColor, RegistryHelper.VIRTUAL_TILE);
 
-        // For Cables
+        // For Cables - Transparency
         BlockRenderLayerMap.INSTANCE.putBlock(RegistryHelper.ITEM_CABLE_BLOCK, RenderLayer.getTranslucent());
         BlockRenderLayerMap.INSTANCE.putBlock(RegistryHelper.FLUID_CABLE_BLOCK, RenderLayer.getTranslucent());
         BlockRenderLayerMap.INSTANCE.putBlock(RegistryHelper.ENERGY_CABLE_BLOCK, RenderLayer.getTranslucent());
+
+        // For Cables - Custom Colors
+        ColorProviderRegistry.BLOCK.register(ItemCable::getEdgeColor, RegistryHelper.ITEM_CABLE_BLOCK);
+        ColorProviderRegistry.ITEM.register(ItemCable::getEdgeColor, RegistryHelper.ITEM_CABLE_BLOCK);
+
+        ColorProviderRegistry.BLOCK.register(FluidCable::getEdgeColor, RegistryHelper.FLUID_CABLE_BLOCK);
+        ColorProviderRegistry.ITEM.register(FluidCable::getEdgeColor, RegistryHelper.FLUID_CABLE_BLOCK);
+
+        ColorProviderRegistry.BLOCK.register(EnergyCable::getEdgeColor, RegistryHelper.ENERGY_CABLE_BLOCK);
+        ColorProviderRegistry.ITEM.register(EnergyCable::getEdgeColor, RegistryHelper.ENERGY_CABLE_BLOCK);
     }
 
     /**

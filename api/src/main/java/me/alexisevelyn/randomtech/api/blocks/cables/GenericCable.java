@@ -129,6 +129,18 @@ public abstract class GenericCable extends Block implements Waterloggable {
     }
 
     /**
+     * Makes it where light levels aren't blocked
+     *
+     * @param state
+     * @param world
+     * @param pos
+     * @return
+     */
+    public int getOpacity(BlockState state, BlockView world, BlockPos pos) {
+        return 0;
+    }
+
+    /**
      * Append properties.
      *
      * @param builder the builder
