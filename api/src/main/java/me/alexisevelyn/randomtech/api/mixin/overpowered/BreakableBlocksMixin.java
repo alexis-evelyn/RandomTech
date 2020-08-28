@@ -1,5 +1,6 @@
 package me.alexisevelyn.randomtech.api.mixin.overpowered;
 
+import me.alexisevelyn.randomtech.api.items.tools.generic.BreakableBlocksHelper;
 import me.alexisevelyn.randomtech.api.items.tools.generic.GenericPoweredTool;
 import net.minecraft.block.*;
 import net.minecraft.entity.player.PlayerEntity;
@@ -58,12 +59,12 @@ public abstract class BreakableBlocksMixin {
 		}
 
 		if (blockHardness == -1.0F) {
-			if (itemStack.getItem() instanceof GenericPoweredTool) {
-				GenericPoweredTool genericPoweredTool = (GenericPoweredTool) itemStack.getItem();
+			if (itemStack.getItem() instanceof BreakableBlocksHelper) {
+				BreakableBlocksHelper genericTool = (BreakableBlocksHelper) itemStack.getItem();
 				Block block = state.getBlock();
 
-				if (genericPoweredTool.canBreakUnbreakableBlock(state, player, world, pos) && !isDeniedBlock(block)) {
-					float dynamicBlockHardness = genericPoweredTool.getUnbreakableBlockDifficultyMultiplier(state, player, world, pos);
+				if (genericTool.canBreakUnbreakableBlock(state, player, world, pos) && !isDeniedBlock(block)) {
+					float dynamicBlockHardness = genericTool.getUnbreakableBlockDifficultyMultiplier(state, player, world, pos);
 
 					// To ensure the hardness is always above 0.
 					if (dynamicBlockHardness <= 0.0F)

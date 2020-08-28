@@ -42,7 +42,7 @@ import java.util.Set;
 /**
  * The type Generic powered tool.
  */
-public abstract class GenericPoweredTool extends MiningToolItem implements EnergyHelper, EnergyHolder, ItemDurabilityExtensions, ItemStackModifiers {
+public abstract class GenericPoweredTool extends MiningToolItem implements EnergyHelper, EnergyHolder, ItemDurabilityExtensions, ItemStackModifiers, BreakableBlocksHelper {
     public final int maxCharge;
     public final int cost;
     public final float poweredSpeed;
@@ -523,6 +523,7 @@ public abstract class GenericPoweredTool extends MiningToolItem implements Energ
      * @param pos    the pos
      * @return the boolean
      */
+    @Override
     public boolean canBreakUnbreakableBlock(BlockState state, PlayerEntity player, BlockView world, BlockPos pos) {
         return false;
     }
@@ -536,6 +537,7 @@ public abstract class GenericPoweredTool extends MiningToolItem implements Energ
      * @param pos    the pos
      * @return the unbreakable block difficulty multiplier
      */
+    @Override
     public float getUnbreakableBlockDifficultyMultiplier(BlockState state, PlayerEntity player, BlockView world, BlockPos pos) {
         return 1.0F;
     }
