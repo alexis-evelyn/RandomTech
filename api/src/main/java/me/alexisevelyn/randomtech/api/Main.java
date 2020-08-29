@@ -7,8 +7,15 @@ import net.fabricmc.api.ModInitializer;
 import net.minecraft.util.Identifier;
 
 /**
- * The type Main.
+ * Procedurally Generating Everything
+ *
+ * Idea from playing Starbound
+ * Potential Implementation Starting Point From: https://www.youtube.com/watch?v=CS5DQVSp058
+ *
+ * Fork of Spreadsheet From Video: https://docs.google.com/spreadsheets/d/1f1b7R4_hjlasOuSA6R7w309LwG3n43KKolTr_pERtnc
+ * Reused Grayscale Texture Issue Can Be Solved By Overlaying Translucent Textures With Different Colors Shaded In During Runtime (See Pure Redstone Block Gimp File)
  */
+
 // This runs on both the server and the client
 public class Main implements ModInitializer {
 	public static final String MODID = "randomtechapi";
