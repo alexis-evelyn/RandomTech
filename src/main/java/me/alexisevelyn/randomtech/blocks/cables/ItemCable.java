@@ -44,7 +44,7 @@ public class ItemCable extends GenericCable implements BlockEntityProvider, Inve
      *
      */
     public ItemCable() {
-        this((float) (6.0/16), FabricBlockSettings
+        this((float) (3.0/16), FabricBlockSettings
                 .of(Materials.CABLE_MATERIAL)
                 .sounds(BlockSoundGroup.GLASS)
                 .nonOpaque() // Fixes xray issue. Also allows light pass through block

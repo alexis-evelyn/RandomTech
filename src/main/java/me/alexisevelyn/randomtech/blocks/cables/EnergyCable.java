@@ -32,7 +32,7 @@ public class EnergyCable extends GenericCable {
      *
      */
     public EnergyCable() {
-        this((float) (6.0/16), FabricBlockSettings
+        this((float) (3.0/16), FabricBlockSettings
                 .of(Materials.CABLE_MATERIAL)
                 .sounds(BlockSoundGroup.GLASS)
                 .nonOpaque() // Fixes xray issue. Also allows light pass through block

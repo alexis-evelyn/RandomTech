@@ -34,7 +34,7 @@ public class FluidCable extends GenericCable {
      * Instantiates a new Fluid cable.
      */
     public FluidCable() {
-        this((float) (6.0/16), FabricBlockSettings
+        this((float) (3.0/16), FabricBlockSettings
                 .of(Materials.CABLE_MATERIAL)
                 .sounds(BlockSoundGroup.GLASS)
                 .nonOpaque() // Fixes xray issue. Also allows light pass through block
