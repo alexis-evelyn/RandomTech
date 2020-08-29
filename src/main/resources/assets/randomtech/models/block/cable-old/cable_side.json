@@ -1,0 +1,20 @@
+{
+    "ambientocclusion": false,
+    "textures": {
+        "texture": "randomtech:block/cable/cable",
+        "inside": "randomtech:block/cable/cable",
+        "particle": "randomtech:block/cable/cable"
+    },
+    "elements": [
+        {   "from": [ 4, 4, 0 ],
+            "to": [ 12, 12, 4 ],
+            "faces": {
+                "down":  { "texture": "#texture" },
+                "up":    { "texture": "#texture" },
+                "north": { "texture": "#texture", "cullface":"north" },
+                "west":  { "texture": "#texture" },
+                "east":  { "texture": "#texture" }
+            }
+        }
+    ]
+}

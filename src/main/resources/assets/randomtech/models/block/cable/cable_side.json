@@ -1,20 +1,21 @@
 {
-    "ambientocclusion": false,
-    "textures": {
-        "texture": "randomtech:block/cable/cable",
-        "inside": "randomtech:block/cable/cable",
-        "particle": "randomtech:block/cable/cable"
-    },
-    "elements": [
-        {   "from": [ 4, 4, 0 ],
-            "to": [ 12, 12, 4 ],
-            "faces": {
-                "down":  { "texture": "#texture" },
-                "up":    { "texture": "#texture" },
-                "north": { "texture": "#texture", "cullface":"north" },
-                "west":  { "texture": "#texture" },
-                "east":  { "texture": "#texture" }
-            }
-        }
-    ]
+	"credit": "Made with Blockbench",
+	"parent": "block/block",
+	"textures": {
+		"0": "randomtech:block/cable/cable",
+		"particle": "randomtech:block/cable/cable"
+	},
+	"elements": [
+		{
+			"name": "North",
+			"from": [5, 5, 0],
+			"to": [11, 11, 5],
+			"faces": {
+				"east": {"uv": [1, 0, 15, 16], "tintindex": 0, "texture": "#0"},
+				"west": {"uv": [1, 0, 15, 16], "tintindex": 0, "texture": "#0"},
+				"up": {"uv": [0, 1, 16, 15], "tintindex": 0, "texture": "#0"},
+				"down": {"uv": [0, 1, 16, 15], "tintindex": 0, "texture": "#0"}
+			}
+		}
+	]
 }

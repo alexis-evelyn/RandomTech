@@ -1,6 +1,11 @@
 {
   "multipart": [
     {
+      "apply": {
+        "model": "randomtech:block/cable/cable"
+      }
+    },
+    {
       "when": {
         "north": "cable|interfaceable"
       },
@@ -57,166 +62,6 @@
         "x": 90,
         "uvlock": true
       }
-    },
-    {
-      "when": {
-        "north": "none"
-      },
-      "apply": [
-        {
-          "model": "randomtech:block/cable/cable_noside",
-          "weight": 2
-        },
-        {
-          "model": "randomtech:block/cable/cable_noside1"
-        },
-        {
-          "model": "randomtech:block/cable/cable_noside2"
-        },
-        {
-          "model": "randomtech:block/cable/cable_noside3"
-        }
-      ]
-    },
-    {
-      "when": {
-        "east": "none"
-      },
-      "apply": [
-        {
-          "model": "randomtech:block/cable/cable_noside1",
-          "y": 90,
-          "uvlock": true
-        },
-        {
-          "model": "randomtech:block/cable/cable_noside2",
-          "y": 90,
-          "uvlock": true
-        },
-        {
-          "model": "randomtech:block/cable/cable_noside3",
-          "y": 90,
-          "uvlock": true
-        },
-        {
-          "model": "randomtech:block/cable/cable_noside",
-          "weight": 2,
-          "y": 90,
-          "uvlock": true
-        }
-      ]
-    },
-    {
-      "when": {
-        "south": "none"
-      },
-      "apply": [
-        {
-          "model": "randomtech:block/cable/cable_noside2",
-          "y": 180,
-          "uvlock": true
-        },
-        {
-          "model": "randomtech:block/cable/cable_noside3",
-          "y": 180,
-          "uvlock": true
-        },
-        {
-          "model": "randomtech:block/cable/cable_noside",
-          "weight": 2,
-          "y": 180,
-          "uvlock": true
-        },
-        {
-          "model": "randomtech:block/cable/cable_noside1",
-          "y": 180,
-          "uvlock": true
-        }
-      ]
-    },
-    {
-      "when": {
-        "west": "none"
-      },
-      "apply": [
-        {
-          "model": "randomtech:block/cable/cable_noside3",
-          "y": 270,
-          "uvlock": true
-        },
-        {
-          "model": "randomtech:block/cable/cable_noside",
-          "weight": 2,
-          "y": 270,
-          "uvlock": true
-        },
-        {
-          "model": "randomtech:block/cable/cable_noside1",
-          "y": 270,
-          "uvlock": true
-        },
-        {
-          "model": "randomtech:block/cable/cable_noside2",
-          "y": 270,
-          "uvlock": true
-        }
-      ]
-    },
-    {
-      "when": {
-        "up": "none"
-      },
-      "apply": [
-        {
-          "model": "randomtech:block/cable/cable_noside",
-          "weight": 2,
-          "x": 270,
-          "uvlock": true
-        },
-        {
-          "model": "randomtech:block/cable/cable_noside3",
-          "x": 270,
-          "uvlock": true
-        },
-        {
-          "model": "randomtech:block/cable/cable_noside1",
-          "x": 270,
-          "uvlock": true
-        },
-        {
-          "model": "randomtech:block/cable/cable_noside2",
-          "x": 270,
-          "uvlock": true
-        }
-      ]
-    },
-    {
-      "when": {
-        "down": "none"
-      },
-      "apply": [
-        {
-          "model": "randomtech:block/cable/cable_noside3",
-          "x": 90,
-          "uvlock": true
-        },
-        {
-          "model": "randomtech:block/cable/cable_noside2",
-          "x": 90,
-          "uvlock": true
-        },
-        {
-          "model": "randomtech:block/cable/cable_noside1",
-          "x": 90,
-          "uvlock": true
-        },
-        {
-          "model": "randomtech:block/cable/cable_noside",
-          "weight": 2,
-          "x": 90,
-          "uvlock": true
-        }
-      ]
     }
   ]
 }
