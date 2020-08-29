@@ -41,21 +41,10 @@ import java.util.Random;
 public class ItemCable extends GenericCable implements BlockEntityProvider, InventoryProvider {
     /**
      * Instantiates a new Item cable.
-     */
-    // Generic Instantiation of ItemCable with Default Shape
-    public ItemCable() {
-        this(null);
-    }
-
-    /**
-     * Instantiates a new Item cable.
      *
-     * @param genericShape the generic shape
      */
-    // I may create more than one cable with this class, so I'm putting extra constructors here
-    // Generic Instantiation of ItemCable with Custom Shape
-    public ItemCable(@Nullable VoxelShape genericShape) {
-        this(FabricBlockSettings
+    public ItemCable() {
+        this((float) (6.0/16), FabricBlockSettings
                 .of(Materials.CABLE_MATERIAL)
                 .sounds(BlockSoundGroup.GLASS)
                 .nonOpaque() // Fixes xray issue. Also allows light pass through block
@@ -64,32 +53,16 @@ public class ItemCable extends GenericCable implements BlockEntityProvider, Inve
                 .suffocates(GenericBlockHelper::never) // Suffocates player
                 .blockVision(GenericBlockHelper::never) // Blocks Vision inside of block
                 .strength(0.3F, 0.3F)
-                .ticksRandomly(), genericShape);
+                .ticksRandomly());
     }
 
     /**
-     * Instantiates a new Item cable.
      *
-     * @param settings     the settings
-     * @param genericShape the generic shape
+     * @param radius
+     * @param settings
      */
-    // For customizing block settings while only supplying one shape
-    public ItemCable(@NotNull Settings settings, @Nullable VoxelShape genericShape) {
-        this(settings, genericShape, genericShape, genericShape, null);
-    }
-
-    /**
-     * Instantiates a new Item cable.
-     *
-     * @param settings       the settings
-     * @param outlinedShape  the outlined shape
-     * @param visualShape    the visual shape
-     * @param collisionShape the collision shape
-     * @param cullingShapes  the culling shapes
-     */
-    // For full control over cable shapes
-    public ItemCable(@NotNull Settings settings, @Nullable VoxelShape outlinedShape, @Nullable VoxelShape visualShape, @Nullable VoxelShape collisionShape, @Nullable VoxelShape[] cullingShapes) {
-        super(settings, outlinedShape, visualShape, collisionShape, cullingShapes);
+    public ItemCable(float radius, @NotNull Settings settings) {
+        super(radius, settings);
     }
 
     /**

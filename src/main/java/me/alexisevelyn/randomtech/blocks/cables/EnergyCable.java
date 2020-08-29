@@ -15,12 +15,10 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
-import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockRenderView;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 import reborncore.common.powerSystem.PowerAcceptorBlockEntity;
 
 import java.awt.*;
@@ -31,21 +29,10 @@ import java.awt.*;
 public class EnergyCable extends GenericCable {
     /**
      * Instantiates a new Energy cable.
-     */
-    // Generic Instantiation of EnergyCable with Default Shape
-    public EnergyCable() {
-        this(null);
-    }
-
-    /**
-     * Instantiates a new Energy cable.
      *
-     * @param genericShape the generic shape
      */
-    // I may create more than one cable with this class, so I'm putting extra constructors here
-    // Generic Instantiation of EnergyCable with Custom Shape
-    public EnergyCable(@Nullable VoxelShape genericShape) {
-        this(FabricBlockSettings
+    public EnergyCable() {
+        this((float) (6.0/16), FabricBlockSettings
                 .of(Materials.CABLE_MATERIAL)
                 .sounds(BlockSoundGroup.GLASS)
                 .nonOpaque() // Fixes xray issue. Also allows light pass through block
@@ -54,32 +41,16 @@ public class EnergyCable extends GenericCable {
                 .suffocates(GenericBlockHelper::never) // Suffocates player
                 .blockVision(GenericBlockHelper::never) // Blocks Vision inside of block
                 .strength(0.3F, 0.3F)
-                .ticksRandomly(), genericShape);
+                .ticksRandomly());
     }
 
     /**
-     * Instantiates a new Energy cable.
      *
-     * @param settings     the settings
-     * @param genericShape the generic shape
+     * @param radius
+     * @param settings
      */
-    // For customizing block settings while only supplying one shape
-    public EnergyCable(@NotNull Settings settings, @Nullable VoxelShape genericShape) {
-        this(settings, genericShape, genericShape, genericShape, null);
-    }
-
-    /**
-     * Instantiates a new Energy cable.
-     *
-     * @param settings       the settings
-     * @param outlinedShape  the outlined shape
-     * @param visualShape    the visual shape
-     * @param collisionShape the collision shape
-     * @param cullingShapes  the culling shapes
-     */
-    // For full control over cable shapes
-    public EnergyCable(@NotNull Settings settings, @Nullable VoxelShape outlinedShape, @Nullable VoxelShape visualShape, @Nullable VoxelShape collisionShape, @Nullable VoxelShape[] cullingShapes) {
-        super(settings, outlinedShape, visualShape, collisionShape, cullingShapes);
+    public EnergyCable(float radius, @NotNull Settings settings) {
+        super(radius, settings);
     }
 
     /**

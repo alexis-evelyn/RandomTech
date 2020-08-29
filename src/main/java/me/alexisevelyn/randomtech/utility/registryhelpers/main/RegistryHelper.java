@@ -112,9 +112,9 @@ public class RegistryHelper {
             .strength(0.3F, 0.3F)
             .ticksRandomly();
 
-    public static final Block CHORUS_ITEM_CABLE_BLOCK = new ItemCable(CHORUS_CABLE_SETTINGS, null);
-    public static final Block CHORUS_FLUID_CABLE_BLOCK = new FluidCable(CHORUS_CABLE_SETTINGS, null);
-    public static final Block CHORUS_ENERGY_CABLE_BLOCK = new EnergyCable(CHORUS_CABLE_SETTINGS, null);
+    public static final Block CHORUS_ITEM_CABLE_BLOCK = new ItemCable(0.3125F, CHORUS_CABLE_SETTINGS);
+    public static final Block CHORUS_FLUID_CABLE_BLOCK = new FluidCable(0.3125F, CHORUS_CABLE_SETTINGS);
+    public static final Block CHORUS_ENERGY_CABLE_BLOCK = new EnergyCable(0.3125F, CHORUS_CABLE_SETTINGS);
 
     // Metals
     public static final Block COBALT_BLOCK = new CobaltBlock();
