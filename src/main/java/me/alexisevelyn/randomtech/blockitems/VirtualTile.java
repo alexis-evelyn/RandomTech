@@ -106,7 +106,7 @@ public class VirtualTile extends BlockItem {
         BlockEntity blockEntity = world.getBlockEntity(pos);
 
         if (!(blockEntity instanceof VirtualTileBlockEntity))
-            return defaultColor.getRGB();
+            return defaultColor.getRGB(); // Sprint Particles Trigger This Cause Block Entity is Null
 
         VirtualTileBlockEntity virtualTileBlockEntity = (VirtualTileBlockEntity) blockEntity;
 
@@ -128,7 +128,7 @@ public class VirtualTile extends BlockItem {
         CompoundTag tag = itemStack.getTag();
 
         if (tag == null)
-            return defaultColor.getRGB();
+            return defaultColor.getRGB(); // Hywla Triggers This as NBT Data is Null
 
         Color color = parseColorFromItemStack(itemStack);
 
