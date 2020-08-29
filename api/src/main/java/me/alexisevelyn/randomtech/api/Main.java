@@ -37,7 +37,7 @@ import net.minecraft.util.Identifier;
  *
  * Storing the custom block's properties in every copy of the block is going to waste so much space in the world save.
  * So, I'll most likely have a separate local database and use packets to send data between server/client as well as storing info about the
- * blocks/items/entities with their associated randomly generated id. Since blocks have names via translation keys, it's not necessary for the ids to make since to a human.
+ * blocks/items/entities with their associated randomly generated id. Since blocks have names via translation keys, it's not necessary for the ids to make sense to a human.
  * So, most likely, it'll be something along the lines of `procedural:some_uuid_converted_to_friendly_string`.
  *
  * Also, send the translation file between server/client. That way mods like AE2 can sort the items in inventory on the server side.
