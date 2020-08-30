@@ -12,6 +12,7 @@ import net.minecraft.block.BlockEntityProvider;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.client.item.TooltipContext;
+import net.minecraft.client.world.ClientWorld;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -29,10 +30,13 @@ import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.*;
+import net.minecraft.world.BlockRenderView;
+import net.minecraft.world.BlockView;
+import net.minecraft.world.GameRules;
+import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
-import java.awt.Color;
+import java.awt.*;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.ToIntFunction;
@@ -47,7 +51,7 @@ import java.util.regex.Pattern;
  */
 public class VirtualTile extends BlockItem {
     public static final Color defaultColor = Color.WHITE;
-    public static Color initialColor = Color.BLACK;
+    public static final Color defaultColor2 = Color.BLACK;
 
     // public static final Pattern NBT_CRAFTING_REGEX = Pattern.compile("^\\$\\d+#i$");
     public static final Pattern INTEGER_REGEX = Pattern.compile("\\d+");
@@ -77,7 +81,7 @@ public class VirtualTile extends BlockItem {
     protected boolean postPlacement(BlockPos pos, World world, @Nullable PlayerEntity player, ItemStack stack, BlockState state) {
         boolean placed = super.postPlacement(pos, world, player, stack, state);
 
-        initialColor = parseColorFromItemStack(stack);
+        Color initialColor = parseColorFromItemStack(stack);
 
         if (initialColor == null)
             initialColor = defaultColor;
@@ -105,15 +109,23 @@ public class VirtualTile extends BlockItem {
     public static int getEdgeColor(BlockState state, BlockRenderView world, BlockPos pos, int tintIndex) {
         BlockEntity blockEntity = world.getBlockEntity(pos);
 
-        if (!(blockEntity instanceof VirtualTileBlockEntity))
-            return defaultColor.getRGB(); // Sprint Particles Trigger This Cause Block Entity is Null
+        if (!(blockEntity instanceof VirtualTileBlockEntity) )
+            return determineFallbackColor(world, pos); // Sprint Particles Trigger This Cause Block Entity is Null
 
         VirtualTileBlockEntity virtualTileBlockEntity = (VirtualTileBlockEntity) blockEntity;
 
         if (virtualTileBlockEntity.getColor() == null)
-            return initialColor.getRGB(); // The color is black so the hack of a rerender looks less hacky.
+            return defaultColor2.getRGB(); // The color is black so the hack of a rerender looks less hacky.
 
         return virtualTileBlockEntity.getColor().getRGB();
+    }
+
+    public static int determineFallbackColor(BlockRenderView world, BlockPos pos) {
+        if (!(world instanceof ClientWorld))
+            return defaultColor.getRGB();
+
+        // Defaults to no color (same value as if color provider didn't exist) if ran by client
+        return -1;
     }
 
     /**
