@@ -92,7 +92,7 @@ public abstract class DynamicArmorTextureMixin<T extends LivingEntity, M extends
 		if (item instanceof SecondaryTextureHandler) {
 			SecondaryTextureHandler genericArmor = (SecondaryTextureHandler) item;
 
-			if (genericArmor.getSlotType() != equipmentSlot)
+			if (genericArmor.getArmorSlot() != equipmentSlot)
 				return;
 
 			this.getContextModel().setAttributes(bipedEntityModel);

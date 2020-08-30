@@ -4,6 +4,7 @@ import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Wearable;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 /**
@@ -24,5 +25,5 @@ public interface SecondaryTextureHandler extends Wearable {
      *
      * @return Slot armor was meant to be worn on
      */
-    EquipmentSlot getSlotType();
+    @NotNull EquipmentSlot getArmorSlot();
 }

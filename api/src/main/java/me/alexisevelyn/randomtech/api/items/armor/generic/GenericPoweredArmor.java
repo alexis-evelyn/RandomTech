@@ -27,6 +27,7 @@ import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.world.World;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import reborncore.api.items.ArmorFovHandler;
 import reborncore.api.items.ArmorRemoveHandler;
@@ -108,6 +109,11 @@ public abstract class GenericPoweredArmor extends ArmorItem implements EnergyHel
         double currentPowerLevel = ((currentEnergy * maxPowerLevel) / maxEnergy) + minPowerLevel;
 
         return String.valueOf((int) Math.floor(Math.min(Math.max(currentPowerLevel, minPowerLevel), maxPowerLevel)));
+    }
+
+    @Override
+    public @NotNull EquipmentSlot getArmorSlot() {
+        return this.getSlotType();
     }
 
     /**
