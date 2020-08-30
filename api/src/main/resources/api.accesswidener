@@ -13,6 +13,7 @@ accessible  method  net/minecraft/entity/damage/DamageSource    setOutOfWorld   
 accessible    field    net/minecraft/item/PickaxeItem    EFFECTIVE_BLOCKS    Ljava/util/Set;
 accessible    field    net/minecraft/item/AxeItem    EFFECTIVE_BLOCKS    Ljava/util/Set;
 accessible    field    net/minecraft/item/ShovelItem    EFFECTIVE_BLOCKS    Ljava/util/Set;
+accessible    field    net/minecraft/item/HoeItem    EFFECTIVE_BLOCKS    Ljava/util/Set;
 
 accessible    field    net/minecraft/item/AxeItem    STRIPPED_BLOCKS    Ljava/util/Map;
 accessible    field    net/minecraft/item/AxeItem    field_23139    Ljava/util/Set;
