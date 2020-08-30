@@ -140,8 +140,8 @@ publishing {
 }
 
 bintray {
-	user = BINTRAY_USER
-	key = BINTRAY_KEY
+	user = findProperty('BINTRAY_USER')
+	key = findProperty('BINTRAY_KEY')
 	publications = ['mavenJava']
 	publish = true
 

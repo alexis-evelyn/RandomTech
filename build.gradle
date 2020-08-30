@@ -106,7 +106,7 @@ dependencies {
 	// include "com.github.nuclearfarts:connected-block-textures:${project.connected_block_textures_version}"
 	modRuntime "com.github.nuclearfarts:connected-block-textures:${project.connected_block_textures_version}" // I decided to make it so the user has to manually install CBT as it modifies vanilla texture behavior and not just my mod's texture behavior.
 
-	// Used to allow customizing data of items and other things
+	// Used to allow customizing data of items and other thingsBINTRAY_USER
 	modImplementation "io.github.onyxstudios.Cardinal-Components-API:cardinal-components-base:${project.cardinal_components_version}"
 	modImplementation "io.github.onyxstudios.Cardinal-Components-API:cardinal-components-item:${project.cardinal_components_version}"
 	include "io.github.onyxstudios.Cardinal-Components-API:cardinal-components-item:${project.cardinal_components_version}"
@@ -192,8 +192,8 @@ publishing {
 }
 
 bintray {
-	user = BINTRAY_USER
-	key = BINTRAY_KEY
+	user = findProperty('BINTRAY_USER')
+	key = findProperty('BINTRAY_KEY')
 	publications = ['mavenJava']
 	publish = true
 
