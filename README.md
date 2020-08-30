@@ -31,6 +31,10 @@ If you want extra info in the meantime, https://fabricmc.net/wiki/tutorial:setup
 
 Note, Jitpack doesn't ever play nice with me, so I don't recommend trying to use it to download commit versions of my mod. If you can get it to work, then by all means, use it if you want to. I, however, don't know why Jitpack has so many issues when I try to use it, so I personally just recommend using the official repo I provide.
 
+### Notes
+
+If you have a problem with Log4J not being able to be read, build the api first `./gradlew :api:build`. Then build the mod `./gradlew build`. I'm not sure why the bug came back, but it has something to do with loom and my multi-project gradle setup. If anyone knows how to fix it, please send a PR.
+
 ## License
 
 This project is under MIT License. You can refer to LICENSE.md for more info.
