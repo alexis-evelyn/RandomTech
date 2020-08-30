@@ -4,7 +4,7 @@
 
 Not too many tech mods exist for 1.16, so I'm adding one. As I believe tech mods should work together, I'm using RebornCore as my dependency and therefor will make my machines compatible with any mods that use RebornCore (including TechReborn).
 
-To use this mod you need RebornCore. You'll want to install Patchouli so you can access my mod's manual. Also, this mod uses ConnectedBlockTextures for connected textures, but that is included as part of this mod so you can enjoy without having to download it. Screenshots of proof will be provided soon.
+To use this mod you need RebornCore. You'll want to install Patchouli so you can access my mod's manual. Also, this mod uses ConnectedBlockTextures for connected textures, but that is an optional dependency that you can download separately if you want to use it.
 
 ## Development
 
@@ -26,6 +26,10 @@ To compile the API by itself (dev, sources, and remapped), use `./gradlew :api:b
 The API is not yet setup to be sent to Maven. It can be used from commit though. More information about building will be provided later.
 
 If you want extra info in the meantime, https://fabricmc.net/wiki/tutorial:setup, is a great source. Also, you may want to refer to the commands `./gradlew downloadAssets` and `./gradlew genSources`.
+
+### Jitpack
+
+Note, Jitpack doesn't ever play nice with me, so I don't recommend trying to use it to download commit versions of my mod. If you can get it to work, then by all means, use it if you want to. I, however, don't know why Jitpack has so many issues when I try to use it, so I personally just recommend using the official repo I provide.
 
 ## License
 
