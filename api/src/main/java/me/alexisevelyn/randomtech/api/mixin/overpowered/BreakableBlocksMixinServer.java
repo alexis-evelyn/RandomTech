@@ -28,7 +28,7 @@ import java.util.List;
  */
 @SuppressWarnings("UnusedMixin") // The mixin is used, just is loaded by Fabric and not Sponge methods
 @Mixin(AbstractBlock.class)
-public abstract class BreakableBlocksMixin {
+public abstract class BreakableBlocksMixinServer {
 	/**
 	 * Gets loot table id.
 	 *

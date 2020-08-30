@@ -1,28 +1,27 @@
 package me.alexisevelyn.randomtech.api.items.tools.generic;
 
-import com.google.common.collect.ImmutableMap;
-import com.google.common.collect.Sets;
 import me.alexisevelyn.randomtech.api.utilities.ItemManager;
-import org.jetbrains.annotations.Nullable;
-import net.minecraft.block.*;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.Material;
+import net.minecraft.block.PillarBlock;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.*;
+import net.minecraft.item.AxeItem;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.ItemUsageContext;
+import net.minecraft.item.ToolMaterial;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import org.jetbrains.annotations.Nullable;
 import team.reborn.energy.EnergyTier;
-
-import java.util.Set;
 
 /**
  * The type Generic powered axe.
  */
 public abstract class GenericPoweredAxe extends GenericPoweredTool {
-    private static final Set<Material> NATURAL_EFFECTIVE_MATERIALS;
-    private static final Set<Block> EFFECTIVE_BLOCKS;
-    protected static final ImmutableMap<Block, Block> STRIPPED_BLOCKS;
     private static final float attackDamage = 5.0F;
 
     /**
@@ -38,7 +37,7 @@ public abstract class GenericPoweredAxe extends GenericPoweredTool {
      * @param dischargedTranslationKey the discharged translation key
      */
     public GenericPoweredAxe(ToolMaterial material, int energyCapacity, EnergyTier tier, int cost, float poweredSpeed, float unpoweredSpeed, Settings settings, @Nullable String dischargedTranslationKey) {
-        super(material, energyCapacity, tier, cost, poweredSpeed, unpoweredSpeed, attackDamage, EFFECTIVE_BLOCKS, settings, dischargedTranslationKey);
+        super(material, energyCapacity, tier, cost, poweredSpeed, unpoweredSpeed, attackDamage, AxeItem.EFFECTIVE_BLOCKS, settings, dischargedTranslationKey);
     }
 
     /**
@@ -52,7 +51,7 @@ public abstract class GenericPoweredAxe extends GenericPoweredTool {
     public float getMiningSpeedMultiplier(ItemStack stack, BlockState state) {
         Material material = state.getMaterial();
 
-        return NATURAL_EFFECTIVE_MATERIALS.contains(material) ? this.miningSpeed : super.getMiningSpeedMultiplier(stack, state);
+        return AxeItem.field_23139.contains(material) ? this.miningSpeed : super.getMiningSpeedMultiplier(stack, state);
     }
 
     /**
@@ -66,7 +65,7 @@ public abstract class GenericPoweredAxe extends GenericPoweredTool {
         World world = context.getWorld();
         BlockPos blockPos = context.getBlockPos();
         BlockState blockState = world.getBlockState(blockPos);
-        Block block = STRIPPED_BLOCKS.get(blockState.getBlock());
+        Block block = AxeItem.STRIPPED_BLOCKS.get(blockState.getBlock());
 
         if (isUsable(context.getStack()) && block != null) {
             PlayerEntity playerEntity = context.getPlayer();
@@ -95,45 +94,6 @@ public abstract class GenericPoweredAxe extends GenericPoweredTool {
             return true;
 
         // If not one of the explicitly stated effective blocks, then check the Material Type
-        return NATURAL_EFFECTIVE_MATERIALS.contains(state.getMaterial());
-    }
-
-    static {
-        // I would just reference the AxeItem's Effective Blocks and Stripped Blocks, but Mojang has those variables marked private.
-        NATURAL_EFFECTIVE_MATERIALS = Sets.newHashSet(Material.WOOD,
-                Material.NETHER_WOOD,
-                Material.PLANT,
-                Material.REPLACEABLE_PLANT,
-                Material.BAMBOO,
-                Material.GOURD);
-
-        EFFECTIVE_BLOCKS = Sets.newHashSet(Blocks.LADDER,
-                Blocks.SCAFFOLDING,
-                Blocks.OAK_BUTTON,
-                Blocks.SPRUCE_BUTTON,
-                Blocks.BIRCH_BUTTON,
-                Blocks.JUNGLE_BUTTON,
-                Blocks.DARK_OAK_BUTTON,
-                Blocks.ACACIA_BUTTON,
-                Blocks.CRIMSON_BUTTON,
-                Blocks.WARPED_BUTTON);
-
-        STRIPPED_BLOCKS = new ImmutableMap.Builder<Block, Block>()
-                .put(Blocks.OAK_WOOD, Blocks.STRIPPED_OAK_WOOD)
-                .put(Blocks.OAK_LOG, Blocks.STRIPPED_OAK_LOG)
-                .put(Blocks.DARK_OAK_WOOD, Blocks.STRIPPED_DARK_OAK_WOOD)
-                .put(Blocks.DARK_OAK_LOG, Blocks.STRIPPED_DARK_OAK_LOG)
-                .put(Blocks.ACACIA_WOOD, Blocks.STRIPPED_ACACIA_WOOD)
-                .put(Blocks.ACACIA_LOG, Blocks.STRIPPED_ACACIA_LOG)
-                .put(Blocks.BIRCH_WOOD, Blocks.STRIPPED_BIRCH_WOOD)
-                .put(Blocks.BIRCH_LOG, Blocks.STRIPPED_BIRCH_LOG)
-                .put(Blocks.JUNGLE_WOOD, Blocks.STRIPPED_JUNGLE_WOOD)
-                .put(Blocks.JUNGLE_LOG, Blocks.STRIPPED_JUNGLE_LOG)
-                .put(Blocks.SPRUCE_WOOD, Blocks.STRIPPED_SPRUCE_WOOD)
-                .put(Blocks.SPRUCE_LOG, Blocks.STRIPPED_SPRUCE_LOG)
-                .put(Blocks.WARPED_STEM, Blocks.STRIPPED_WARPED_STEM)
-                .put(Blocks.WARPED_HYPHAE, Blocks.STRIPPED_WARPED_HYPHAE)
-                .put(Blocks.CRIMSON_STEM, Blocks.STRIPPED_CRIMSON_STEM)
-                .put(Blocks.CRIMSON_HYPHAE, Blocks.STRIPPED_CRIMSON_HYPHAE).build();
+        return AxeItem.field_23139.contains(state.getMaterial());
     }
 }
