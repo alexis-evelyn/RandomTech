@@ -90,7 +90,7 @@ dependencies {
 
 	// Astromine Mod - A Tech Mod
 	// modRuntime "com.github.Chainmail-Studios:Astromine:${project.astromine_version}" // Jitpack generates mostly blank jar
-	// modRuntime ("curse.maven:astromine:${project.astromine_curseforge_version}")
+	// modRuntime "curse.maven:astromine:${project.astromine_curseforge_version}"
 
 	// Astromine And Some Local Only Dependencies - Run ./gradlew build publishToMavenLocal on the Astromine Repo at https://github.com/Chainmail-Studios/Astromine
 	// modRuntime "com.github.chainmailstudios.astromine:astromine-core:${project.astromine_maven_local_version}" // TODO: Fix remapping issue with mixins

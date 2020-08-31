@@ -93,7 +93,8 @@ dependencies {
 	include "me.sargunvohra.mcmods:autoconfig1u:${project.autoconf_version}"
 
 	// Hywla
-	modImplementation "mcp.mobius.waila:Hwyla:${project.hywla_version}" // Same fix as on Patchouli. the fix was that loom currently cannot handle depending on artifacts with the same ID but different classifier (regular patchouli jar vs :api)
+	// modImplementation "curse.maven:hywla:${project.hywla_curseforge_version}" // Same fix as on Patchouli. the fix was that loom currently cannot handle depending on artifacts with the same ID but different classifier (regular patchouli jar vs :api)
+	modCompileOnly "mcp.mobius.waila:Hwyla:${project.hywla_version}" // Used to be modImplementation, but kept causing issues with dev server
 
 	// Roughly Enough Items
 	modImplementation "me.shedaniel:RoughlyEnoughItems:${project.rei_version}" // TODO: Fix - Recipe Display Crashes Game
