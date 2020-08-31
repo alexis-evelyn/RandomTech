@@ -136,6 +136,7 @@ dependencies {
 	include "io.github.ladysnake:Satin:${project.satin_version}"
 
 	// For NBT Crafting - https://github.com/Siphalor/nbt-crafting/blob/1.16-2.0/README.md
+	// TODO: Fix this so dev servers can be connected to.
 	modImplementation ("de.siphalor:nbtcrafting-1.16:${project.nbt_crafting_version}") {
 		exclude(group: "net.fabricmc.fabric-api")
 	}
