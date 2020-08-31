@@ -65,28 +65,33 @@ dependencies {
 	// Improves performance of lighting engine
 	// modRuntime "com.github.jellysquid3:phosphor-fabric:${project.phosphor_version}" // Skip
 
+	// Permission Granted From: https://discordapp.com/channels/507304429255393322/507982478276034570/730955439390326894 - Screenshots: https://imgur.com/a/R9xMlhX
+	// modImplementation "com.github.nuclearfarts:connected-block-textures:${project.connected_block_textures_version}"
+	// include "com.github.nuclearfarts:connected-block-textures:${project.connected_block_textures_version}"
+	modRuntime "com.github.nuclearfarts:connected-block-textures:${project.connected_block_textures_version}" // I decided to make it so the user has to manually install CBT as it modifies vanilla texture behavior and not just my mod's texture behavior.
+
 	// Dependencies of Astromine
-	modRuntime "io.github.onyxstudios.Cardinal-Components-API:cardinal-components-block:${project.cardinal_components_version}"
-	modRuntime "io.github.onyxstudios.Cardinal-Components-API:cardinal-components-chunk:${project.cardinal_components_version}"
-	modRuntime "io.github.onyxstudios.Cardinal-Components-API:cardinal-components-entity:${project.cardinal_components_version}"
-	modRuntime "io.github.onyxstudios.Cardinal-Components-API:cardinal-components-level:${project.cardinal_components_version}"
-	modRuntime "io.github.onyxstudios.Cardinal-Components-API:cardinal-components-world:${project.cardinal_components_version}"
-	modRuntime "io.github.onyxstudios.Cardinal-Components-API:cardinal-components-util:${project.cardinal_components_version}"
-	modRuntime "com.github.vini2003:spinnery:${project.spinnery_version}"
+//	modRuntime "io.github.onyxstudios.Cardinal-Components-API:cardinal-components-block:${project.cardinal_components_version}"
+//	modRuntime "io.github.onyxstudios.Cardinal-Components-API:cardinal-components-chunk:${project.cardinal_components_version}"
+//	modRuntime "io.github.onyxstudios.Cardinal-Components-API:cardinal-components-entity:${project.cardinal_components_version}"
+//	modRuntime "io.github.onyxstudios.Cardinal-Components-API:cardinal-components-level:${project.cardinal_components_version}"
+//	modRuntime "io.github.onyxstudios.Cardinal-Components-API:cardinal-components-world:${project.cardinal_components_version}"
+//	modRuntime "io.github.onyxstudios.Cardinal-Components-API:cardinal-components-util:${project.cardinal_components_version}"
+//	modRuntime "com.github.vini2003:spinnery:${project.spinnery_version}"
 	// modRuntime "com.github.Draylar:LibStructure:${project.libstructure_github_version}"
-	modRuntime "com.github.Draylar:magna:${project.magna_version}"
-	modRuntime "com.terraformersmc:shapes:${project.shapes_version}"
-	modRuntime "com.github.vini2003:blade:${project.blade_version}"
-	modRuntime "alexiil.mc.lib:libblockattributes-core:${project.lba_version}"
-	modRuntime "alexiil.mc.lib:libblockattributes-items:${project.lba_version}"
-	modRuntime "alexiil.mc.lib:libblockattributes-fluids:${project.lba_version}"
-	modRuntime ("me.shedaniel.cloth:config-2:${project.cloth_config_version}") {
-		exclude(group: "net.fabricmc.fabric-api")
-	}
-	modRuntime "net.fabricmc:fabric-language-kotlin:${project.kotlin_version}"
-	modRuntime "me.shedaniel.cloth.api:cloth-durability-bar-api-v1:${project.cloth_api_version}"
-	modRuntime "me.shedaniel.cloth.api:cloth-dynamic-registry-api-v1:${project.cloth_api_version}"
-	modRuntime "me.shedaniel.cloth.api:cloth-datagen-api-v1:${project.cloth_api_version}"
+//	modRuntime "com.github.Draylar:magna:${project.magna_version}"
+//	modRuntime "com.terraformersmc:shapes:${project.shapes_version}"
+//	modRuntime "com.github.vini2003:blade:${project.blade_version}"
+//	modRuntime "alexiil.mc.lib:libblockattributes-core:${project.lba_version}"
+//	modRuntime "alexiil.mc.lib:libblockattributes-items:${project.lba_version}"
+//	modRuntime "alexiil.mc.lib:libblockattributes-fluids:${project.lba_version}"
+//	modRuntime ("me.shedaniel.cloth:config-2:${project.cloth_config_version}") {
+//		exclude(group: "net.fabricmc.fabric-api")
+//	}
+//	modRuntime "net.fabricmc:fabric-language-kotlin:${project.kotlin_version}"
+//	modRuntime "me.shedaniel.cloth.api:cloth-durability-bar-api-v1:${project.cloth_api_version}"
+//	modRuntime "me.shedaniel.cloth.api:cloth-dynamic-registry-api-v1:${project.cloth_api_version}"
+//	modRuntime "me.shedaniel.cloth.api:cloth-datagen-api-v1:${project.cloth_api_version}"
 
 	// Astromine Mod - A Tech Mod
 	// modRuntime "com.github.Chainmail-Studios:Astromine:${project.astromine_version}" // Jitpack generates mostly blank jar
@@ -102,6 +107,6 @@ dependencies {
 
 	// Applied Energistics 2
 	// modRuntime "appeng:appliedenergistics2-fabric:${project.applied_energistics_github_packages_version}" // Requires Github Token
-	modRuntime "curse.maven:ae2:${project.applied_energistics_curseforge_version}" // TODO: Fix - Crashes when trying to put fluid into fluid interface via bucket
+//	modRuntime "curse.maven:ae2:${project.applied_energistics_curseforge_version}" // TODO: Fix - Crashes when trying to put fluid into fluid interface via bucket
 	// modRuntime "com.github.AppliedEnergistics:Applied-Energistics-2:${project.applied_energistics_github_version}" // Doesn't build due to spotlessJson failure
 }

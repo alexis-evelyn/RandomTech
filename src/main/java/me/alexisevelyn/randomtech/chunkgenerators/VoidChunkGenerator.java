@@ -197,7 +197,7 @@ public class VoidChunkGenerator extends ChunkGenerator {
             int chunkZ = region.getCenterChunkZ();
 
             // Biome
-            Biome biome = region.getBiome((new ChunkPos(chunkX, chunkZ)).getCenterBlockPos());
+            Biome biome = region.getBiome((new ChunkPos(chunkX, chunkZ)).getStartPos());
 
             // Random Chunk
             ChunkRandom chunkRandom = new ChunkRandom();
