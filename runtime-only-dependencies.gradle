@@ -46,14 +46,19 @@ dependencies {
 	// Temporarily disable this to upgrade worlds between versions after finishing upgrading mods used in that world.
 	modRuntime ("com.github.SuperCoder7979:databreaker:${project.databreaker_version}") {
 		exclude module: "fabric-loader"
+		exclude(group: "net.fabricmc.fabric-api")
 	}
 
 	// Note: The Tags Being Broken Only Occur in a Dev Environment and Is A Fabric Bug: https://github.com/FabricMC/fabric/issues/66 - Example is #minecraft:planks
 	// Tech Reborn (For Development Testing)
-	modRuntime "TechReborn:TechReborn-${project.tech_reborn_version}"
+	modRuntime ("TechReborn:TechReborn-${project.tech_reborn_version}") {
+		exclude(group: "net.fabricmc.fabric-api")
+	}
 
 	// AppleSkin
-	modRuntime "com.github.squeek502:AppleSkin:${project.appleskin_version}"
+	modRuntime ("com.github.squeek502:AppleSkin:${project.appleskin_version}") {
+		exclude(group: "net.fabricmc.fabric-api")
+	}
 
 	// Improves Performance of FPS and Rendering Engine
 	// Currently breaks fluid rendering - See https://github.com/jellysquid3/sodium-fabric/issues/5
@@ -68,7 +73,9 @@ dependencies {
 	// Permission Granted From: https://discordapp.com/channels/507304429255393322/507982478276034570/730955439390326894 - Screenshots: https://imgur.com/a/R9xMlhX
 	// modImplementation "com.github.nuclearfarts:connected-block-textures:${project.connected_block_textures_version}"
 	// include "com.github.nuclearfarts:connected-block-textures:${project.connected_block_textures_version}"
-	modRuntime "com.github.nuclearfarts:connected-block-textures:${project.connected_block_textures_version}" // I decided to make it so the user has to manually install CBT as it modifies vanilla texture behavior and not just my mod's texture behavior.
+	modRuntime ("com.github.nuclearfarts:connected-block-textures:${project.connected_block_textures_version}") { // I decided to make it so the user has to manually install CBT as it modifies vanilla texture behavior and not just my mod's texture behavior.
+		exclude(group: "net.fabricmc.fabric-api")
+	}
 
 	// Dependencies of Astromine
 //	modRuntime "io.github.onyxstudios.Cardinal-Components-API:cardinal-components-block:${project.cardinal_components_version}"
@@ -103,7 +110,13 @@ dependencies {
 	// modRuntime "com.github.chainmailstudios.astromine:astromine:${project.astromine_maven_local_version}" // TODO: Fix remapping issue with mixins
 
 	// Carpet - Useful for Debugging Minecraft in General
-	modRuntime "com.github.gnembon:fabric-carpet:${project.carpet_version}"
+	modRuntime ("com.github.gnembon:fabric-carpet:${project.carpet_version}") {
+		exclude(group: "net.fabricmc.fabric-api")
+	}
+
+	// Cause Some Mod is JIJ it
+	// modRuntime ("net.fabricmc.fabric-api:fabric-object-builders-v0:${project.fabric_object_builder_version}")
+	modImplementation ("net.fabricmc.fabric-api:fabric-object-builder-api-v1:${project.fabric_object_builder_api_version}")
 
 	// Applied Energistics 2
 	// modRuntime "appeng:appliedenergistics2-fabric:${project.applied_energistics_github_packages_version}" // Requires Github Token

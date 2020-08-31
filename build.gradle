@@ -1,5 +1,5 @@
 plugins {
-	id 'fabric-loom' version '0.4.9'
+	id 'fabric-loom' version '0.5-SNAPSHOT'
 	id 'com.jfrog.bintray' version '1.8.5' // For publishing to bintray - https://github.com/bintray/gradle-bintray-plugin
 	id 'maven-publish'
 }
@@ -75,45 +75,70 @@ dependencies {
 	// Fabric API. This is technically optional, but you probably want it anyway.
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
+	// For annotations
+	compile "org.jetbrains:annotations:${project.jetbrains_annotation_version}"
+
 	// RandomTech API - https://docs.gradle.org/current/userguide/multi_project_builds.html
 	implementation project(path: ':api') // ./gradlew :api:build -> ./api/build/libs/alexisevelyn-api-0.0.4-SNAPSHOT.jar
 	include (name: 'alexisevelyn-api', version: "${project(":api").mod_version}", ext: 'jar') // Retrieves the version info from API's mod_version var and includes the remapped API jar into the root jar
 	
 	// Reborn Core
-	modImplementation "RebornCore:RebornCore-${project.reborn_core_version}"
+	modImplementation ("RebornCore:RebornCore-${project.reborn_core_version}") {
+		exclude(group: "net.fabricmc.fabric-api")
+	}
 
 	// Reborn's Energy API
-	modImplementation "teamreborn:energy:${project.reborn_energy_version}"
+	modImplementation ("teamreborn:energy:${project.reborn_energy_version}") {
+		exclude(group: "net.fabricmc.fabric-api")
+	}
 
 	// Mod Menu
-	modImplementation "io.github.prospector:modmenu:${project.mod_menu_version}"
+	modImplementation ("io.github.prospector:modmenu:${project.mod_menu_version}") {
+		exclude(group: "net.fabricmc.fabric-api")
+	}
 
 	// AutoConfig for Use With Mod Menu
-	modImplementation "me.sargunvohra.mcmods:autoconfig1u:${project.autoconf_version}"
+	modImplementation ("me.sargunvohra.mcmods:autoconfig1u:${project.autoconf_version}") {
+		exclude(group: "net.fabricmc.fabric-api")
+	}
 	include "me.sargunvohra.mcmods:autoconfig1u:${project.autoconf_version}"
 
 	// Hywla
 	// modImplementation "curse.maven:hywla:${project.hywla_curseforge_version}" // Same fix as on Patchouli. the fix was that loom currently cannot handle depending on artifacts with the same ID but different classifier (regular patchouli jar vs :api)
-	modCompileOnly "mcp.mobius.waila:Hwyla:${project.hywla_version}" // Used to be modImplementation, but kept causing issues with dev server
+	modCompileOnly ("mcp.mobius.waila:Hwyla:${project.hywla_version}") { // Used to be modImplementation, but kept causing issues with dev server
+		exclude(group: "net.fabricmc.fabric-api")
+	}
 
 	// Roughly Enough Items
-	modImplementation "me.shedaniel:RoughlyEnoughItems:${project.rei_version}" // TODO: Fix - Recipe Display Crashes Game
+	modImplementation ("me.shedaniel:RoughlyEnoughItems:${project.rei_version}") { // TODO: Fix - Recipe Display Crashes Game
+		exclude(group: "net.fabricmc.fabric-api")
+	}
 
 	// Patchouli API - TODO: Update to non-snapshot version when released
-	modImplementation "vazkii.patchouli:Patchouli:${project.patchouli_version}" // Note: https://discordapp.com/channels/507304429255393322/507982478276034570/745174055383990372
+	modImplementation ("vazkii.patchouli:Patchouli:${project.patchouli_version}") { // Note: https://discordapp.com/channels/507304429255393322/507982478276034570/745174055383990372
+		exclude(group: "net.fabricmc.fabric-api")
+	}
 
 	// Used to allow customizing data of items and other things
-	modImplementation "io.github.onyxstudios.Cardinal-Components-API:cardinal-components-base:${project.cardinal_components_version}"
-	modImplementation "io.github.onyxstudios.Cardinal-Components-API:cardinal-components-item:${project.cardinal_components_version}"
+	modImplementation ("io.github.onyxstudios.Cardinal-Components-API:cardinal-components-base:${project.cardinal_components_version}") {
+		exclude(group: "net.fabricmc.fabric-api")
+	}
+	modImplementation ("io.github.onyxstudios.Cardinal-Components-API:cardinal-components-item:${project.cardinal_components_version}") {
+		exclude(group: "net.fabricmc.fabric-api")
+	}
 	include "io.github.onyxstudios.Cardinal-Components-API:cardinal-components-item:${project.cardinal_components_version}"
 	include "io.github.onyxstudios.Cardinal-Components-API:cardinal-components-base:${project.cardinal_components_version}"
 
 	// For Shaders - https://github.com/Ladysnake/Satin/blob/master/README.md
-	modImplementation "io.github.ladysnake:Satin:${project.satin_version}"
+	modImplementation ("io.github.ladysnake:Satin:${project.satin_version}") {
+		exclude(group: "net.fabricmc.fabric-api")
+	}
 	include "io.github.ladysnake:Satin:${project.satin_version}"
 
 	// For NBT Crafting - https://github.com/Siphalor/nbt-crafting/blob/1.16-2.0/README.md
-	modImplementation "de.siphalor:nbtcrafting-1.16:${project.nbt_crafting_version}"
+	modImplementation ("de.siphalor:nbtcrafting-1.16:${project.nbt_crafting_version}") {
+		exclude(group: "net.fabricmc.fabric-api")
+	}
 	include "de.siphalor:nbtcrafting-1.16:${project.nbt_crafting_version}"
 
 	// PSA: Some older mods, compiled on Loom 0.2.1, might have outdated Maven POMs.

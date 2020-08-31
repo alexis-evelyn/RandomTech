@@ -56,22 +56,37 @@ dependencies {
 	// Fabric API. This is technically optional, but you probably want it anyway.
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
+	// For annotations
+	compile "org.jetbrains:annotations:${project.jetbrains_annotation_version}"
+
 	// Reborn Core
-	modImplementation "RebornCore:RebornCore-${project.reborn_core_version}"
+	modImplementation ("RebornCore:RebornCore-${project.reborn_core_version}") {
+		exclude(group: "net.fabricmc.fabric-api")
+	}
 
 	// Reborn's Energy API
-	modImplementation "teamreborn:energy:${project.reborn_energy_version}"
+	modImplementation ("teamreborn:energy:${project.reborn_energy_version}") {
+		exclude(group: "net.fabricmc.fabric-api")
+	}
 
 	// Mod Menu
-	modImplementation "io.github.prospector:modmenu:${project.mod_menu_version}"
+	modImplementation ("io.github.prospector:modmenu:${project.mod_menu_version}") {
+		exclude(group: "net.fabricmc.fabric-api")
+	}
 
 	// AutoConfig for Use With Mod Menu
-	modImplementation "me.sargunvohra.mcmods:autoconfig1u:${project.autoconf_version}"
+	modImplementation ("me.sargunvohra.mcmods:autoconfig1u:${project.autoconf_version}") {
+		exclude(group: "net.fabricmc.fabric-api")
+	}
 	include "me.sargunvohra.mcmods:autoconfig1u:${project.autoconf_version}"
 
 	// Used to allow customizing data of items and other things
-	modImplementation "io.github.onyxstudios.Cardinal-Components-API:cardinal-components-base:${project.cardinal_components_version}"
-	modImplementation "io.github.onyxstudios.Cardinal-Components-API:cardinal-components-item:${project.cardinal_components_version}"
+	modImplementation ("io.github.onyxstudios.Cardinal-Components-API:cardinal-components-base:${project.cardinal_components_version}") {
+		exclude(group: "net.fabricmc.fabric-api")
+	}
+	modImplementation ("io.github.onyxstudios.Cardinal-Components-API:cardinal-components-item:${project.cardinal_components_version}") {
+		exclude(group: "net.fabricmc.fabric-api")
+	}
 	include "io.github.onyxstudios.Cardinal-Components-API:cardinal-components-item:${project.cardinal_components_version}"
 	include "io.github.onyxstudios.Cardinal-Components-API:cardinal-components-base:${project.cardinal_components_version}"
 }
