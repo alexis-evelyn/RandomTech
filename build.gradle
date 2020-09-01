@@ -50,10 +50,10 @@ repositories {
 			m2compatible = true
 		}
 	}
-	maven {
-		name "NBT Crafting"
-		url "https://maven.siphalor.de"
-	}
+//	maven {
+//		name "NBT Crafting"
+//		url "https://maven.siphalor.de"
+//	}
 	maven {
 		name "Hwyla"
 		url "https://maven.tehnut.info"
@@ -62,6 +62,7 @@ repositories {
 		name "Local API Build"
 		dirs "api/build/libs"
 	}
+	mavenLocal()
 }
 
 dependencies {
