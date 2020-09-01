@@ -51,6 +51,7 @@ public abstract class GenericPoweredAxe extends GenericPoweredTool {
     public float getMiningSpeedMultiplier(ItemStack stack, BlockState state) {
         Material material = state.getMaterial();
 
+        // I know field_23139 as NATURAL_EFFECTIVE_MATERIALS
         return AxeItem.field_23139.contains(material) ? this.miningSpeed : super.getMiningSpeedMultiplier(stack, state);
     }
 

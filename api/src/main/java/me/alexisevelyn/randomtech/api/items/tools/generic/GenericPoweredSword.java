@@ -65,23 +65,12 @@ public abstract class GenericPoweredSword extends GenericPoweredTool {
      */
     @Override
     public float getMiningSpeedMultiplier(ItemStack stack, BlockState state) {
-        if (state.isOf(Blocks.COBWEB)) {
-            return 15.0F;
-        } else {
-            Material material = state.getMaterial();
-            return material != Material.PLANT && material != Material.REPLACEABLE_PLANT && material != Material.UNUSED_PLANT && !state.isIn(BlockTags.LEAVES) && material != Material.GOURD ? 1.0F : 1.5F;
-        }
-    }
+        Material material = state.getMaterial();
 
-    /**
-     * Is effective on boolean.
-     *
-     * @param state the state
-     * @return the boolean
-     */
-    @Override
-    public boolean isEffectiveOn(BlockState state) {
-        return EFFECTIVE_BLOCKS.contains(state.getBlock());
+        if (material.equals(Material.PLANT) || material.equals(Material.REPLACEABLE_PLANT) || material.equals(Material.UNUSED_PLANT) || material.equals(Material.LEAVES) || material.equals(Material.GOURD))
+            return 1.5F;
+
+        return super.getMiningSpeedMultiplier(stack, state);
     }
 
     static {

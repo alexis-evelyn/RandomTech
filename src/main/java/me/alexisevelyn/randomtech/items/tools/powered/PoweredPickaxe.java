@@ -123,27 +123,4 @@ public class PoweredPickaxe extends GenericPoweredPickaxe {
 
         return super.useOnBlock(context);
     }
-
-    /**
-     * Is effective on boolean.
-     *
-     * @param state the state
-     * @return the boolean
-     */
-    @Override
-    public boolean isEffectiveOn(BlockState state) {
-        return super.isEffectiveOn(state);
-    }
-
-    /**
-     * Gets mining speed multiplier.
-     *
-     * @param stack the stack
-     * @param state the state
-     * @return the mining speed multiplier
-     */
-    @Override
-    public float getMiningSpeedMultiplier(ItemStack stack, BlockState state) {
-        return super.getMiningSpeedMultiplier(stack, state);
-    }
 }
