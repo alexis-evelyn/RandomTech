@@ -50,10 +50,10 @@ repositories {
 			m2compatible = true
 		}
 	}
-//	maven {
-//		name "NBT Crafting"
-//		url "https://maven.siphalor.de"
-//	}
+	maven {
+		name "NBT Crafting"
+		url "https://maven.siphalor.de"
+	}
 	maven {
 		name "Hwyla"
 		url "https://maven.tehnut.info"
@@ -62,7 +62,6 @@ repositories {
 		name "Local API Build"
 		dirs "api/build/libs"
 	}
-	mavenLocal()
 }
 
 dependencies {
@@ -137,7 +136,6 @@ dependencies {
 	include "io.github.ladysnake:Satin:${project.satin_version}"
 
 	// For NBT Crafting - https://github.com/Siphalor/nbt-crafting/blob/1.16-2.0/README.md
-	// TODO: Fix this so dev servers can be connected to.
 	modImplementation ("de.siphalor:nbtcrafting-1.16:${project.nbt_crafting_version}") {
 		exclude(group: "net.fabricmc.fabric-api")
 	}

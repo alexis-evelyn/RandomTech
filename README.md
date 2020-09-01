@@ -6,6 +6,10 @@ Not too many tech mods exist for 1.16, so I'm adding one. As I believe tech mods
 
 To use this mod you need RebornCore. You'll want to install Patchouli so you can access my mod's manual. Also, this mod uses ConnectedBlockTextures for connected textures, but that is an optional dependency that you can download separately if you want to use it.
 
+## Discord
+
+I'm working on a Discord server to help people with the usage of my mods. I'm currently in the process of setting up the Discord server, so I'm not releasing an invite link yet, so if you have issues, just leave an issue in the issues tab for me to see.
+
 ## Development
 
 To include this mod in your development environment, use `modImplementation 'me.alexisevelyn:randomtech:0.0.4'` and include the maven repository below.

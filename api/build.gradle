@@ -56,8 +56,11 @@ dependencies {
 	// Fabric API. This is technically optional, but you probably want it anyway.
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
-	// For annotations
+	// For Jetbrain Annotations
 	compile "org.jetbrains:annotations:${project.jetbrains_annotation_version}"
+
+	// For API Guardian Annotations
+	compile "org.apiguardian:apiguardian-api:${project.api_guardian_version}"
 
 	// Reborn Core
 	modImplementation ("RebornCore:RebornCore-${project.reborn_core_version}") {
