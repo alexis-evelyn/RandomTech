@@ -1,5 +1,7 @@
 # Alexis' Random Tech
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/28e0e43f7cbc4678a0d3f6a8a2d69742)](https://app.codacy.com/manual/alexis-evelyn/RandomTech?utm_source=github.com&utm_medium=referral&utm_content=alexis-evelyn/RandomTech&utm_campaign=Badge_Grade_Dashboard)
+
 ## Setup
 
 Not too many tech mods exist for 1.16, so I'm adding one. As I believe tech mods should work together, I'm using RebornCore as my dependency and therefor will make my machines compatible with any mods that use RebornCore (including TechReborn).
