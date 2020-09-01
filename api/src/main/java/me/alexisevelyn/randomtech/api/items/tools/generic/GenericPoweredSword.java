@@ -74,7 +74,7 @@ public abstract class GenericPoweredSword extends GenericPoweredTool {
     }
 
     static {
-        // There is no static reference for SwordItem as their is only one block that a sword is effective on in vanilla.
+        // There is no static reference for SwordItem as there is only one block that a sword is effective on in vanilla.
         EFFECTIVE_BLOCKS = Sets.newHashSet(Blocks.COBWEB);
     }
 }
