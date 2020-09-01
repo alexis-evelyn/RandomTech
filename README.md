@@ -1,5 +1,7 @@
 # Alexis' Random Tech
 
+[![Codacy Badge][codacy-badge]][codacy-link] **Github Actions Here** **Crowdin Here** **Discord Badge Here**
+
 ## Setup
 
 Not too many tech mods exist for 1.16, so I'm adding one. As I believe tech mods should work together, I'm using RebornCore as my dependency and therefor will make my machines compatible with any mods that use RebornCore (including TechReborn).
@@ -8,7 +10,10 @@ To use this mod you need RebornCore. You'll want to install Patchouli so you can
 
 ## Discord
 
-I'm working on a Discord server to help people with the usage of my mods. I'm currently in the process of setting up the Discord server, so I'm not releasing an invite link yet, so if you have issues, just leave an issue in the issues tab for me to see.
+I've made a Discord for Fabric mods I (and a potential future team) develop. You can join this server to ask for help with developing with these mods or just showcase stuff you've made using these mods (or using other mods which use features provided by these mods).
+
+[![Discord Banner][discord-banner]]
+[discord-invite-link]
 
 ## Development
 
@@ -42,3 +47,9 @@ If you have a problem with Log4J not being able to be read, build the api first 
 ## License
 
 This project is under MIT License. You can refer to LICENSE.md for more info.
+
+[discord-banner]: <https://discord.com/api/guilds/750301084202958899/widget.png?style=banner2> "Discord Banner"
+[discord-invite-link]: <https://discord.gg/kBKwmdw> "Discord Invite Link"
+
+[codacy-badge]: <https://api.codacy.com/project/badge/Grade/28e0e43f7cbc4678a0d3f6a8a2d69742> "Codacy Badge"
+[codacy-link]: <https://app.codacy.com/manual/alexis-evelyn/RandomTech?utm_source=github.com&utm_medium=referral&utm_content=alexis-evelyn/RandomTech&utm_campaign=Badge_Grade_Dashboard> "Codacy Link"
