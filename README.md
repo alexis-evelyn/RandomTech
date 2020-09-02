@@ -57,5 +57,5 @@ This project is under MIT License. You can refer to LICENSE.md for more info.
 [crowdin-badge]: <https://badges.crowdin.net/randomtech/localized.svg> "Crowdin Badge"
 [crowdin-link]: <https://crwd.in/randomtech> "Crowdin Link"
 
-[github-actions-badge]: <https://github.com/alexis-evelyn/RandomTech/workflows/%7Bworkflow_name%7D/badge.svg> "Github Actions Badge"
+[github-actions-badge]: <https://github.com/alexis-evelyn/RandomTech/workflows/Build%20Mod/badge.svg> "Github Actions Badge"
 [github-actions-link]: <https://github.com/alexis-evelyn/RandomTech/actions> "Github Actions Link"
