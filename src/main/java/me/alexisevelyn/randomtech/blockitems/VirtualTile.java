@@ -231,7 +231,7 @@ public class VirtualTile extends BlockItem {
      * The type Virtual tile block.
      */
     public static class VirtualTileBlock extends Block implements BlockEntityProvider {
-        public static BooleanProperty DUMMY = BooleanProperty.of("dummy"); // Minecraft updates the rendering of a block when the blockstate is changed. This forces re-rendering of the block.
+        private static BooleanProperty DUMMY = BooleanProperty.of("dummy"); // Minecraft updates the rendering of a block when the blockstate is changed. This forces re-rendering of the block.
 
         // Take a look at `Lnet/minecraft/entity/Entity;spawnSprintingParticles()V` for fixing sprinting particles
 

@@ -2,6 +2,7 @@ plugins {
 	id 'fabric-loom'
 	id 'com.jfrog.bintray' // For publishing to bintray - https://github.com/bintray/gradle-bintray-plugin
 	id 'maven-publish'
+//	id "com.github.spotbugs"
 }
 
 logger.lifecycle "(API) Running Gradle Version: $gradle.gradleVersion"
@@ -17,6 +18,10 @@ minecraft {
 	// Used to make private methods/classes/fields public
 	accessWidener "src/main/resources/api.accesswidener"
 }
+
+//spotbugs {
+//	ignoreFailures = true
+//}
 
 configurations {
 	deployerJars
@@ -61,6 +66,12 @@ dependencies {
 
 	// For API Guardian Annotations
 	compile "org.apiguardian:apiguardian-api:${project.api_guardian_version}"
+
+//	// For Spotbugs Annotations
+//	compileOnly "com.github.spotbugs:spotbugs-annotations:${spotbugs.toolVersion.get()}"
+//
+//	// For Spotbugs Plugin
+//	spotbugs "com.github.spotbugs:spotbugs:${spotbugs.toolVersion.get()}"
 
 	// Reborn Core
 	modImplementation ("RebornCore:RebornCore-${project.reborn_core_version}") {

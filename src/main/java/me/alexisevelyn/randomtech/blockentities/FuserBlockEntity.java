@@ -27,6 +27,8 @@ import reborncore.common.recipes.RecipeCrafter;
 import reborncore.common.util.RebornInventory;
 import reborncore.common.util.Tank;
 
+import java.util.Arrays;
+
 /**
  * The type Fuser block entity.
  */
@@ -40,14 +42,14 @@ public class FuserBlockEntity extends FluidMachineBlockEntityBase implements ITo
     final FuserRecipeCrafter crafter;
 
     // Slots
-    final int[] inputSlots = { 0 };
-    final int[] outputSlots = { 1 };
+    final static int[] inputSlots = { 0 };
+    final static int[] outputSlots = { 1 };
 
-    final int inputSlot = inputSlots[0];
-    final int outputSlot = outputSlots[0];
+    final static int inputSlot = inputSlots[0];
+    final static int outputSlot = outputSlots[0];
 
-    final int fluidInputSlot = 2;
-    final int fluidOutputSlot = 3;
+    final static int fluidInputSlot = 2;
+    final static int fluidOutputSlot = 3;
 
     int remainingRecipeTime = 0;
     int maxRecipeTime = 0;
@@ -260,7 +262,7 @@ public class FuserBlockEntity extends FluidMachineBlockEntityBase implements ITo
      */
     @Override
     public int[] getInputSlots() {
-        return inputSlots;
+        return Arrays.copyOf(inputSlots, inputSlots.length);
     }
 
     /**

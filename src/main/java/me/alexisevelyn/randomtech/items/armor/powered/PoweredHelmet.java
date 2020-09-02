@@ -99,7 +99,7 @@ public class PoweredHelmet extends GenericPoweredArmor {
      * Register zoom keybind sender.
      */
     @Environment(EnvType.CLIENT)
-    public void registerZoomKeybindSender() {
+    public final void registerZoomKeybindSender() {
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
             PacketByteBuf passedData = new PacketByteBuf(Unpooled.buffer());
 

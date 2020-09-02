@@ -2,6 +2,7 @@ plugins {
 	id 'fabric-loom' version '0.5-SNAPSHOT'
 	id 'com.jfrog.bintray' version '1.8.5' // For publishing to bintray - https://github.com/bintray/gradle-bintray-plugin
 	id 'maven-publish'
+//	id "com.github.spotbugs" version '4.5.0'
 }
 
 logger.lifecycle "(Root) Running Gradle Version: $gradle.gradleVersion"
@@ -24,6 +25,10 @@ minecraft {
 	// Used to make private methods/classes/fields public
 	accessWidener "src/main/resources/randomtech.accesswidener"
 }
+
+//spotbugs {
+//	ignoreFailures = true
+//}
 
 configurations {
 	deployerJars
@@ -77,6 +82,12 @@ dependencies {
 
 	// For annotations
 	compile "org.jetbrains:annotations:${project.jetbrains_annotation_version}"
+
+//	// For Spotbugs Annotations
+//	compileOnly "com.github.spotbugs:spotbugs-annotations:${spotbugs.toolVersion.get()}"
+//
+//	// For Spotbugs Plugin
+//	spotbugs "com.github.spotbugs:spotbugs:${spotbugs.toolVersion.get()}"
 
 	// RandomTech API - https://docs.gradle.org/current/userguide/multi_project_builds.html
 	implementation project(path: ':api') // ./gradlew :api:build -> ./api/build/libs/alexisevelyn-api-0.0.4-SNAPSHOT.jar

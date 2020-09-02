@@ -71,7 +71,7 @@ public class ItemCableInventory implements SidedInventory {
      * @return int[] containing slot numbers
      */
     @NotNull
-    public int[] getFilterSlots(@Nullable Direction side) {
+    public final int[] getFilterSlots(@Nullable Direction side) {
         return IntStream.rangeClosed(0, 8).toArray();
     }
 
@@ -82,7 +82,7 @@ public class ItemCableInventory implements SidedInventory {
      * @return int[] containing slot numbers
      */
     @NotNull
-    public int[] getRealSlots(@Nullable Direction side) {
+    public final int[] getRealSlots(@Nullable Direction side) {
         return IntStream.rangeClosed(9, 11).toArray();
     }
 

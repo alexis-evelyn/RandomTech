@@ -201,7 +201,7 @@ public class ItemCableBlockEntity extends BlockEntity implements InventoryProvid
      */
     @NotNull
     private VertexPath findPath(@NotNull World world, @NotNull ItemStack chosenItemStack, @NotNull List<BlockPos> currentKnownCables, @NotNull List<BlockPos> currentInterfaceableBlocks) {
-        if (currentInterfaceableBlocks.size() == 0)
+        if (currentInterfaceableBlocks.isEmpty())
             return new VertexPath();
 
         BlockPos nextBlockPos = null;

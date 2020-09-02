@@ -30,6 +30,7 @@ import reborncore.common.blocks.BlockMachineBase;
 import reborncore.common.powerSystem.PowerSystem;
 import reborncore.common.util.RebornInventory;
 
+import java.util.Arrays;
 import java.util.Optional;
 
 /**
@@ -70,7 +71,7 @@ public class TeleporterBlockEntity extends BasePowerAcceptorBlockEntity implemen
     /**
      * Register scheduler.
      */
-    public void registerScheduler() {
+    public final void registerScheduler() {
         ServerTickEvents.END_SERVER_TICK.register((server) -> {
             this.tickTime = Util.getMeasuringTimeMs();
             if (this.lastTickTime < this.tickTime - this.delayTeleport) {
@@ -230,7 +231,7 @@ public class TeleporterBlockEntity extends BasePowerAcceptorBlockEntity implemen
         // Take a look at https://discordapp.com/channels/507304429255393322/507982478276034570/740471565866631279
         this.serverPlayerEntity = serverPlayerEntity;
         this.newWorld = newWorld;
-        this.newPos = pos;
+        this.newPos = Arrays.copyOf(pos, pos.length);
     }
 
     /**
