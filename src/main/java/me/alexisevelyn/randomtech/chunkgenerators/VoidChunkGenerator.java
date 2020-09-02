@@ -2,7 +2,7 @@ package me.alexisevelyn.randomtech.chunkgenerators;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+// import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import me.alexisevelyn.randomtech.blockentities.VirtualTileBlockEntity;
 import me.alexisevelyn.randomtech.utility.registryhelpers.main.RegistryHelper;
 import net.minecraft.block.BlockState;
@@ -164,7 +164,7 @@ public class VoidChunkGenerator extends ChunkGenerator {
      * @param blockPos the block pos
      * @return the color
      */
-    @SuppressFBWarnings("PREDICTABLE_RANDOM") // This is not a cryptographic number generator
+    // @SuppressFBWarnings("PREDICTABLE_RANDOM") // This is not a cryptographic number generator
     public Color randomColor(long seed, BlockPos blockPos) {
         Random rand = new Random(seed + blockPos.asLong());
 
