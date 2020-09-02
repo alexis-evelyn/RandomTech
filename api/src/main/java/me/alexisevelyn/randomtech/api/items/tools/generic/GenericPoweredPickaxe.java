@@ -1,9 +1,5 @@
 package me.alexisevelyn.randomtech.api.items.tools.generic;
 
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.Material;
-import net.minecraft.item.ItemStack;
 import net.minecraft.item.PickaxeItem;
 import net.minecraft.item.ToolMaterial;
 import org.jetbrains.annotations.Nullable;

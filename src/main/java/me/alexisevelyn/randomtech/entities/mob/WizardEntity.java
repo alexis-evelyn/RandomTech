@@ -26,7 +26,6 @@ public class WizardEntity extends PathAwareEntity {
      *
      * @param world the world
      */
-    @SuppressWarnings("unused")
     public WizardEntity(World world) {
         this(RegistryHelper.WIZARD, world);
     }

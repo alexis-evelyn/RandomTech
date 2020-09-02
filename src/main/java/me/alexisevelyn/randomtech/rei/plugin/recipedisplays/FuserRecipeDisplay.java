@@ -9,6 +9,7 @@ import me.shedaniel.rei.server.ContainerInfo;
 import net.minecraft.item.ItemStack;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.util.Identifier;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import reborncore.common.crafting.ingredient.RebornIngredient;
 import reborncore.common.fluid.container.FluidInstance;
@@ -110,7 +111,7 @@ public class FuserRecipeDisplay implements RecipeDisplay, TransferRecipeDisplay 
      * @return the input entries
      */
     @Override
-    public List<List<EntryStack>> getInputEntries() {
+    public @NotNull List<List<EntryStack>> getInputEntries() {
         return Collections.singletonList(Collections.singletonList(ingredient));
     }
 
@@ -120,7 +121,7 @@ public class FuserRecipeDisplay implements RecipeDisplay, TransferRecipeDisplay 
      * @return the output entries
      */
     @Override
-    public List<EntryStack> getOutputEntries() {
+    public @NotNull List<EntryStack> getOutputEntries() {
         ArrayList<EntryStack> outputEntries = new ArrayList<>();
 
         outputEntries.add(fluid);
@@ -135,7 +136,7 @@ public class FuserRecipeDisplay implements RecipeDisplay, TransferRecipeDisplay 
      * @return the recipe category
      */
     @Override
-    public Identifier getRecipeCategory() {
+    public @NotNull Identifier getRecipeCategory() {
         return REIPlugin.FUSER;
     }
 
@@ -145,7 +146,7 @@ public class FuserRecipeDisplay implements RecipeDisplay, TransferRecipeDisplay 
      * @return the required entries
      */
     @Override
-    public List<List<EntryStack>> getRequiredEntries() {
+    public @NotNull List<List<EntryStack>> getRequiredEntries() {
         return getInputEntries();
     }
 

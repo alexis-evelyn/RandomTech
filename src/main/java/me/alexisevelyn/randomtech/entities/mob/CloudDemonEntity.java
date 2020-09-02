@@ -26,7 +26,6 @@ public class CloudDemonEntity extends HostileEntity {
      *
      * @param world the world
      */
-    @SuppressWarnings("unused")
     public CloudDemonEntity(World world) {
         this(RegistryHelper.CLOUD_DEMON, world);
     }

@@ -10,7 +10,6 @@ import me.sargunvohra.mcmods.autoconfig1u.annotation.ConfigEntry;
  * The type Main screen.
  */
 @Config(name = Main.MODID)
-@SuppressWarnings("unused")
 public class MainScreen implements ConfigData {
     // Experimental Settings
     // Debug Level

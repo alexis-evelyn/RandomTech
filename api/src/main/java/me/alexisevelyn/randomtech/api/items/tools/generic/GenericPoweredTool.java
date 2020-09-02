@@ -250,7 +250,6 @@ public abstract class GenericPoweredTool extends MiningToolItem implements Energ
      *
      * @return the attack speed
      */
-    @SuppressWarnings("unused")
     public float getAttackSpeed() {
         return this.unpoweredSpeed;
     }

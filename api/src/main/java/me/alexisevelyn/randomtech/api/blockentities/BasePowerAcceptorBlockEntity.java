@@ -185,7 +185,7 @@ public abstract class BasePowerAcceptorBlockEntity extends PowerAcceptorBlockEnt
      * @return the min power
      */
     // Future Proofing
-    @SuppressWarnings({"SameReturnValue", "unused"})
+    @SuppressWarnings({"SameReturnValue"})
     public double getMinPower() {
         return this.minPower;
     }

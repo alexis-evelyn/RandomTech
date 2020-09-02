@@ -38,7 +38,6 @@ public class GenericFluidRecipe extends RebornFluidRecipe {
      * @param power       the power
      * @param time        the time
      */
-    @SuppressWarnings("unused")
     public GenericFluidRecipe(RebornRecipeType<?> type, Identifier name, DefaultedList<RebornIngredient> ingredients, DefaultedList<ItemStack> outputs, int power, int time) {
         super(type, name, ingredients, outputs, power, time);
     }
@@ -54,7 +53,6 @@ public class GenericFluidRecipe extends RebornFluidRecipe {
      * @param time          the time
      * @param fluidInstance the fluid instance
      */
-    @SuppressWarnings("unused")
     public GenericFluidRecipe(RebornRecipeType<?> type, Identifier name, DefaultedList<RebornIngredient> ingredients, DefaultedList<ItemStack> outputs, int power, int time, FluidInstance fluidInstance) {
         super(type, name, ingredients, outputs, power, time, fluidInstance);
     }

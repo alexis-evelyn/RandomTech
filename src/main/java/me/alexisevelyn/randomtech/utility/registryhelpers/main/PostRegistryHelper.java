@@ -57,7 +57,7 @@ public class PostRegistryHelper {
      * @param packetContext the packet context
      * @param attachedData  the attached data
      */
-    public void zoomPressed(PacketContext packetContext, @SuppressWarnings("unused") PacketByteBuf attachedData) {
+    public void zoomPressed(PacketContext packetContext, PacketByteBuf attachedData) {
         ItemStack helmetStack = packetContext.getPlayer().getEquippedStack(EquipmentSlot.HEAD);
 
         if (helmetStack == null || !(helmetStack.getItem() instanceof PoweredHelmet))
@@ -78,7 +78,7 @@ public class PostRegistryHelper {
      * @param packetContext the packet context
      * @param attachedData  the attached data
      */
-    public void zoomReleased(PacketContext packetContext, @SuppressWarnings("unused") PacketByteBuf attachedData) {
+    public void zoomReleased(PacketContext packetContext, PacketByteBuf attachedData) {
         ItemStack helmetStack = packetContext.getPlayer().getEquippedStack(EquipmentSlot.HEAD);
 
         if (helmetStack == null || !(helmetStack.getItem() instanceof PoweredHelmet))

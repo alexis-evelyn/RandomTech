@@ -8,7 +8,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.BlockView;
 import org.jetbrains.annotations.Nullable;
-import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -31,7 +30,6 @@ public abstract class CobaltWiringMixin extends Block {
 	 *
 	 * @param settings the settings
 	 */
-	@SuppressWarnings("unused")
 	public CobaltWiringMixin(Settings settings) {
 		super(settings);
 	}

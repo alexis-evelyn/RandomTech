@@ -17,7 +17,7 @@ public enum CableConnection implements StringIdentifiable {
      *
      * @param name the name
      */
-    private CableConnection(String name) {
+    CableConnection(String name) {
         this.name = name;
     }
 

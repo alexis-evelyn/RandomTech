@@ -34,7 +34,6 @@ public abstract class DynamicArmorTextureMixin<T extends LivingEntity, M extends
 	 *
 	 * @param context the context
 	 */
-	@SuppressWarnings("unused")
 	public DynamicArmorTextureMixin(FeatureRendererContext<T, M> context) {
 		super(context);
 	}

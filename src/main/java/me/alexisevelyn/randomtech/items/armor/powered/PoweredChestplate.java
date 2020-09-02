@@ -1,7 +1,6 @@
 package me.alexisevelyn.randomtech.items.armor.powered;
 
 import me.alexisevelyn.randomtech.api.items.armor.generic.GenericPoweredArmor;
-import me.alexisevelyn.randomtech.api.items.armor.generic.InvulnerabilityHandler;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;

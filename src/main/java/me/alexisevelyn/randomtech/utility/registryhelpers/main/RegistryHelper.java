@@ -216,13 +216,13 @@ public class RegistryHelper {
     // Force Load BlockEntities.java Early On
     // This is important to make sure that BlockEntities are loaded before a world is loaded
     // Yes, I know about the warning of instantiating a utility class. That's intentional for the reason stated above.
-    @SuppressWarnings({"InstantiationOfUtilityClass", "unused"})
+    @SuppressWarnings({"InstantiationOfUtilityClass"})
     public static final BlockEntities blockEntities = new BlockEntities();
 
     // Force Load Recipes.java Early On
     // This is important to make sure that recipes are loaded before a world is loaded
     // Yes, I know about the warning of instantiating a utility class. That's intentional for the reason stated above.
-    @SuppressWarnings({"InstantiationOfUtilityClass", "unused"})
+    @SuppressWarnings({"InstantiationOfUtilityClass"})
     public static final Recipes customRecipes = new Recipes();
 
     // Gamerules and Gamerule Categories

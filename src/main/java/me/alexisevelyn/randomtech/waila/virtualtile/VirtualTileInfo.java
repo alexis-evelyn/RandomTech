@@ -4,8 +4,6 @@ import mcp.mobius.waila.api.IComponentProvider;
 import mcp.mobius.waila.api.IDataAccessor;
 import mcp.mobius.waila.api.IPluginConfig;
 import me.alexisevelyn.randomtech.blockentities.VirtualTileBlockEntity;
-import me.alexisevelyn.randomtech.blockitems.VirtualTile;
-import me.alexisevelyn.randomtech.blocks.glass.PoweredGlass;
 import me.alexisevelyn.randomtech.utility.registryhelpers.main.RegistryHelper;
 import me.alexisevelyn.randomtech.waila.WailaRegistry;
 import net.minecraft.item.ItemStack;

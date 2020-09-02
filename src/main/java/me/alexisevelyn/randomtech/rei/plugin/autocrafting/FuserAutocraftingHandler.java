@@ -5,6 +5,7 @@ import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.screen.slot.SlotActionType;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * The type Fuser autocrafting handler.
@@ -13,7 +14,7 @@ public class FuserAutocraftingHandler implements AutoTransferHandler {
     // I'm disabling the handler for now.
     // It's only partially implemented.
     @Override
-    public Result handle(Context context) {
+    public @NotNull Result handle(@NotNull Context context) {
         // TODO: Figure out how to determine if Fuser Gui is open and change success result to not applicable if not on fuser
         // Look at: https://discordapp.com/channels/432055962233470986/576851123345031177/737345567788761188
 //        RecipeDisplay display = context.getRecipe();

@@ -61,21 +61,21 @@ public abstract class BaseFluidBlock extends FluidBlock {
      */
     // These exist solely to override from other fluids.
     // I may eventually turn this into an interface
-    protected abstract void applyEffects(@SuppressWarnings("unused") LivingEntity livingEntity);
+    protected abstract void applyEffects(LivingEntity livingEntity);
 
     /**
      * Apply shader.
      *
      * @param playerEntity the player entity
      */
-    @SuppressWarnings("EmptyMethod") protected abstract void applyShader(@SuppressWarnings("unused") PlayerEntity playerEntity);
+    @SuppressWarnings("EmptyMethod") protected abstract void applyShader(PlayerEntity playerEntity);
 
     /**
      * Remove shader.
      *
      * @param playerEntity the player entity
      */
-    @SuppressWarnings("EmptyMethod") protected abstract void removeShader(@SuppressWarnings("unused") PlayerEntity playerEntity);
+    @SuppressWarnings("EmptyMethod") protected abstract void removeShader(PlayerEntity playerEntity);
 
     /**
      * Is eye in fluid boolean.

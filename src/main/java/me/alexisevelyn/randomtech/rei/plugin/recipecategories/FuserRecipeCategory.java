@@ -12,6 +12,7 @@ import me.shedaniel.rei.api.widgets.Widgets;
 import me.shedaniel.rei.gui.widget.Widget;
 import net.minecraft.client.resource.language.I18n;
 import net.minecraft.util.Identifier;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
@@ -26,7 +27,7 @@ public class FuserRecipeCategory implements RecipeCategory<FuserRecipeDisplay> {
      * @return the identifier
      */
     @Override
-    public Identifier getIdentifier() {
+    public @NotNull Identifier getIdentifier() {
         return REIPlugin.FUSER;
     }
 
@@ -36,7 +37,7 @@ public class FuserRecipeCategory implements RecipeCategory<FuserRecipeDisplay> {
      * @return the logo
      */
     @Override
-    public EntryStack getLogo() {
+    public @NotNull EntryStack getLogo() {
         return EntryStack.create(RegistryHelper.FUSER);
     }
 
@@ -46,7 +47,7 @@ public class FuserRecipeCategory implements RecipeCategory<FuserRecipeDisplay> {
      * @return the category name
      */
     @Override
-    public String getCategoryName() {
+    public @NotNull String getCategoryName() {
         return I18n.translate("text.rei.category.fuser");
     }
 
@@ -58,7 +59,7 @@ public class FuserRecipeCategory implements RecipeCategory<FuserRecipeDisplay> {
      * @return the display
      */
     @Override
-    public List<Widget> setupDisplay(FuserRecipeDisplay recipeDisplay, Rectangle bounds) {
+    public @NotNull List<Widget> setupDisplay(FuserRecipeDisplay recipeDisplay, Rectangle bounds) {
         EntryStack input = recipeDisplay.getIngredient();
         EntryStack fluid = recipeDisplay.getFluid();
         EntryStack byproduct = recipeDisplay.getByproduct();

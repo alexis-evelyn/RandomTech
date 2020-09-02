@@ -249,7 +249,6 @@ public class ItemTransferHelper {
      * @param inventoryProvider the inventory provider
      * @param itemStack         the item stack
      */
-    @SuppressWarnings("DuplicatedCode")
     private static void tryTransferToInventoryProvider(@NotNull World world, @NotNull BlockPos ourPosition, @NotNull BlockPos neighborPosition, @NotNull InventoryProvider inventoryProvider, @NotNull ItemStack itemStack) {
         // Block - These are supposed to have proper SidedInventories, but are not guaranteed to (even if they say they do).
         SidedInventory inventory = inventoryProvider.getInventory(world.getBlockState(neighborPosition), world, neighborPosition);
@@ -293,7 +292,6 @@ public class ItemTransferHelper {
      * @param inventory the inventory
      * @param itemStack the item stack
      */
-    @SuppressWarnings("DuplicatedCode")
     private static void tryTransferToInventory(@NotNull World world, @NotNull BlockPos position, @NotNull Inventory inventory, @NotNull ItemStack itemStack) {
         // Block Entity
 

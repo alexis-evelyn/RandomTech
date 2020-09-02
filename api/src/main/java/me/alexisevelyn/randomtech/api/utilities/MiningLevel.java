@@ -6,12 +6,12 @@ import net.minecraft.item.ToolMaterials;
  * The enum Mining level.
  */
 public enum MiningLevel {
-    @SuppressWarnings("unused") WOOD(ToolMaterials.WOOD.getMiningLevel()),
-    @SuppressWarnings("unused") STONE(ToolMaterials.STONE.getMiningLevel()),
-    @SuppressWarnings("unused") IRON(ToolMaterials.IRON.getMiningLevel()),
-    @SuppressWarnings("unused") DIAMOND(ToolMaterials.DIAMOND.getMiningLevel()),
-    @SuppressWarnings("unused") GOLD(ToolMaterials.GOLD.getMiningLevel()),
-    @SuppressWarnings("unused") NETHERITE(ToolMaterials.NETHERITE.getMiningLevel()),
+    WOOD(ToolMaterials.WOOD.getMiningLevel()),
+    STONE(ToolMaterials.STONE.getMiningLevel()),
+    IRON(ToolMaterials.IRON.getMiningLevel()),
+    DIAMOND(ToolMaterials.DIAMOND.getMiningLevel()),
+    GOLD(ToolMaterials.GOLD.getMiningLevel()),
+    NETHERITE(ToolMaterials.NETHERITE.getMiningLevel()),
     POWERED(5);
 
     private final int miningLevel;
@@ -21,7 +21,6 @@ public enum MiningLevel {
      *
      * @param id the id
      */
-    @SuppressWarnings("unused")
     MiningLevel(int id) {
         this.miningLevel = id;
     }
