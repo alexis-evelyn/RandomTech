@@ -1,6 +1,6 @@
 # Alexis' Random Tech
 
-[![Codacy Badge][codacy-badge]][codacy-link] **Github Actions Here** **Crowdin Here** **Discord Badge Here**
+[![Codacy Badge][codacy-badge]][codacy-link] [![Github Actions Badge][github-actions-badge]][github-actions-link] [![Crowdin Badge][crowdin-badge]][crowdin-link] [![Discord Badge][discord-badge]][discord-invite-link]
 
 ## Setup
 
@@ -12,8 +12,7 @@ To use this mod you need RebornCore. You'll want to install Patchouli so you can
 
 I've made a Discord for Fabric mods I (and a potential future team) develop. You can join this server to ask for help with developing with these mods or just showcase stuff you've made using these mods (or using other mods which use features provided by these mods).
 
-[![Discord Banner][discord-banner]]
-[discord-invite-link]
+[![Discord Banner][discord-banner]][discord-invite-link]
 
 ## Development
 
@@ -48,8 +47,15 @@ If you have a problem with Log4J not being able to be read, build the api first 
 
 This project is under MIT License. You can refer to LICENSE.md for more info.
 
+[discord-badge]: <https://discord.com/api/guilds/750301084202958899/widget.png> "Discord Badge"
 [discord-banner]: <https://discord.com/api/guilds/750301084202958899/widget.png?style=banner2> "Discord Banner"
 [discord-invite-link]: <https://discord.gg/kBKwmdw> "Discord Invite Link"
 
 [codacy-badge]: <https://api.codacy.com/project/badge/Grade/28e0e43f7cbc4678a0d3f6a8a2d69742> "Codacy Badge"
 [codacy-link]: <https://app.codacy.com/manual/alexis-evelyn/RandomTech?utm_source=github.com&utm_medium=referral&utm_content=alexis-evelyn/RandomTech&utm_campaign=Badge_Grade_Dashboard> "Codacy Link"
+
+[crowdin-badge]: <https://badges.crowdin.net/randomtech/localized.svg> "Crowdin Badge"
+[crowdin-link]: <https://crwd.in/randomtech> "Crowdin Link"
+
+[github-actions-badge]: <https://github.com/alexis-evelyn/RandomTech/workflows/%7Bworkflow_name%7D/badge.svg> "Github Actions Badge"
+[github-actions-link]: <https://github.com/alexis-evelyn/RandomTech/actions> "Github Actions Link"
