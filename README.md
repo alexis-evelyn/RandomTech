@@ -37,7 +37,7 @@ To compile the API by itself (dev, sources, and remapped), use `./gradlew :api:b
 
 The API is not yet setup to be sent to Maven. It can be used from commit though. More information about building will be provided later.
 
-If you want extra info in the meantime, https://fabricmc.net/wiki/tutorial:setup, is a great source. Also, you may want to refer to the commands `./gradlew downloadAssets` and `./gradlew genSources`.
+If you want extra info in the meantime, [Fabric Setup Tutorial][fabric-tutorial-link], is a great source. Also, you may want to refer to the commands `./gradlew downloadAssets` and `./gradlew genSources`.
 
 ### Jitpack
 
@@ -50,6 +50,8 @@ If you have a problem with Log4J not being able to be read, build the api first 
 ## License
 
 This project is under MIT License. You can refer to LICENSE.md for more info.
+
+[fabric-tutorial-link]: <https://fabricmc.net/wiki/tutorial:setup> "Fabric Tutorial Link"
 
 [discord-badge]: <https://discord.com/api/guilds/750301084202958899/widget.png> "Discord Badge"
 [discord-banner]: <https://discord.com/api/guilds/750301084202958899/widget.png?style=banner2> "Discord Banner"
