@@ -195,7 +195,7 @@ bintray {
 			released = new Date()
 			desc = "RandomTech API for Fabric 1.16+"
 			githubRepo = 'alexis-evelyn/RandomTech'
-			websiteUrl = 'https://github.com/alexis-evelyn/RandomTech'
+			websiteUrl = 'https://github.com/alexis-evelyn/RandomTech/tree/master/api'
 			issueTrackerUrl = 'https://github.com/alexis-evelyn/RandomTech/issues'
 			vcsUrl = 'https://github.com/alexis-evelyn/RandomTech.git'
 			gpg {
