@@ -1,5 +1,5 @@
 {
-  "randomtechapi.no_interfaceable_cables_found": "Не найдено ни одного интерфейсного блока!!!",
-  "randomtechapi.cable_position_header": "Кабели подключены к Блокам:",
-  "randomtechapi.cable_position": "Кабель: (%s, %s, %s)"
+  "randomtechapi.no_interfaceable_cables_found": "",
+  "randomtechapi.cable_position_header": "",
+  "randomtechapi.cable_position": ""
 }
