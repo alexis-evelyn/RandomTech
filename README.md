@@ -20,7 +20,9 @@ I've made a Discord for Fabric mods I (and a potential future team) develop. You
 
 ## Development
 
-To include this mod in your development environment, use `modImplementation 'me.alexisevelyn:randomtech:0.0.4'` and include the maven repository below.
+To include this mod in your development environment, use `modImplementation 'me.alexisevelyn:randomtech:0.0.5'` and include the maven repository below.
+
+The same process applies for the API. Use `modImplementation 'me.alexisevelyn:randomtechapi:0.0.5'` and include the below repo.
 
 ```Gradle
 maven {
@@ -35,21 +37,15 @@ You'll find RandomTech in `./build/libs/` under a name like `alexisevelyn-random
 
 To compile the API by itself (dev, sources, and remapped), use `./gradlew :api:build`. You'll find the API in `./api/build/libs/`. It's the same deal for naming. It probably won't include `-SNAPSHOT`, but if it does, it just means it's not a release commit. Release commits just means the API is available for production use. Being a snapshot doesn't mean it isn't ready for production, just that we don't know.
 
-The API is not yet setup to be sent to Maven. It can be used from commit though. More information about building will be provided later.
-
 If you want extra info in the meantime, [Fabric Setup Tutorial][fabric-tutorial-link], is a great source. Also, you may want to refer to the commands `./gradlew downloadAssets` and `./gradlew genSources`.
-
-### Jitpack
-
-Note, Jitpack doesn't ever play nice with me, so I don't recommend trying to use it to download commit versions of my mod. If you can get it to work, then by all means, use it if you want to. I, however, don't know why Jitpack has so many issues when I try to use it, so I personally just recommend using the official repo I provide.
 
 ### Notes
 
-If you have a problem with Log4J not being able to be read, build the api first `./gradlew :api:build`. Then build the mod `./gradlew build`. I'm not sure why the bug came back, but it has something to do with loom and my multi-project gradle setup. If anyone knows how to fix it, please send a PR.
+Note, Jitpack doesn't ever play nice with me, so I don't recommend trying to use it to download commit versions of my mod. If you can get it to work, then by all means, use it if you want to. I, however, don't know why Jitpack has so many issues when I try to use it, so I personally just recommend using the official repo I provide.
 
 ## License
 
-This project is under MIT License. You can refer to LICENSE.md for more info.
+This project is under MIT License. You can refer to [LICENSE.md][license-link] for more info.
 
 [fabric-tutorial-link]: <https://fabricmc.net/wiki/tutorial:setup> "Fabric Tutorial Link"
 
@@ -69,3 +65,5 @@ This project is under MIT License. You can refer to LICENSE.md for more info.
 
 [bintray-badge]: <https://api.bintray.com/packages/alexis-evelyn/mods/RandomTech/images/download.svg> "Bintray Badge"
 [bintray-download-link]: <https://bintray.com/alexis-evelyn/mods/RandomTech/_latestVersion> "Bintray Download Link"
+
+[license-link]: <LICENSE.md> "License Markdown File"
