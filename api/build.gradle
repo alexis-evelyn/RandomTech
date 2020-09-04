@@ -3,6 +3,7 @@ plugins {
 	id 'com.jfrog.bintray' // ./gradlew bintrayUpload - For publishing to bintray - https://github.com/bintray/gradle-bintray-plugin
 	id 'com.jfrog.artifactory' // ./gradlew artifactoryPublish - For publishing snapshots to bintray artifactory oss - https://github.com/jfrog/build-info
 	id 'maven-publish'
+	id 'signing'
 //	id "com.github.spotbugs"
 }
 
@@ -143,123 +144,6 @@ task sourcesJar(type: Jar, dependsOn: classes) {
 	from sourceSets.main.allSource
 }
 
-// configure the maven publication
-// Use bintrayUpload, not bintrayPublish
-publishing {
-	publications {
-		publishAPI(MavenPublication) {
-			// add all the jars that should be included when publishing to maven
-			artifact(remapJar) {
-				builtBy remapJar
-			}
-//			artifact(sourcesJar) {
-//				builtBy remapSourcesJar
-//			}
-//			artifact javadocsJar
-			groupId = project.maven_group
-			artifactId 'randomtechapi'
-			version = project.version
-		}
-	}
-
-	// select the repositories you want to publish to
-	repositories {
-		// uncomment to publish to the local maven
-		// mavenLocal()
-	}
-}
-
-bintray {
-	// For Github Actions Building (Pull From Environment Variable) Otherwise Pull From Gradle Properties
-	// Username (Same as Bintray Username)
-	if (System.getenv('BINTRAY_USER') != null) {
-		user = System.getenv('BINTRAY_USER')
-	} else {
-		user = findProperty('BINTRAY_USER')
-	}
-
-	// Password (Same as Bintray API Key)
-	if (System.getenv('BINTRAY_KEY') != null) {
-		key = System.getenv('BINTRAY_KEY')
-	} else {
-		key = findProperty('BINTRAY_KEY')
-	}
-
-	// Maven Publication to Push to Bintray
-	publications = ['publishAPI']
-	publish = true
-
-	pkg {
-		repo = "mods"
-		name = "API"
-		userOrg = "alexis-evelyn"
-		licenses = ["MIT"]
-
-		publicDownloadNumbers = true
-
-		githubRepo = 'alexis-evelyn/RandomTech'
-		githubReleaseNotesFile = 'README.md'
-
-		dryRun = true // [Default: false] Whether to run this as dry-run, without deploying
-		publish = true // [Default: false] Whether version should be auto published after an upload
-		override = false // [Default: false] Whether to override version artifacts already published
-
-		version {
-			name = project.version
-			vcsTag = project.version
-			released = new Date()
-			desc = "RandomTech API for Fabric 1.16+"
-			githubRepo = 'alexis-evelyn/RandomTech'
-			websiteUrl = 'https://github.com/alexis-evelyn/RandomTech/tree/master/api'
-			issueTrackerUrl = 'https://github.com/alexis-evelyn/RandomTech/issues'
-			vcsUrl = 'https://github.com/alexis-evelyn/RandomTech.git'
-			gpg {
-				sign = true
-			}
-		}
-	}
-}
-
-// For Snapshot Builds - https://www.jfrog.com/confluence/display/JFROG/Gradle+Artifactory+Plugin#GradleArtifactoryPlugin-Configuration
-artifactory {
-	contextUrl = 'https://oss.jfrog.org'
-	resolve {
-		repository {
-			repoKey = 'libs-release'
-		}
-	}
-	publish {
-		repository {
-			// The Artifactory repository key to publish to
-			// when using oss.jfrog.org the credentials are from Bintray.
-			if (version.endsWith("-SNAPSHOT")) {
-				repoKey = 'oss-snapshot-local'
-			} else {
-				repoKey = 'oss-release-local'
-			}
-
-			// For Github Actions Building (Pull From Environment Variable)
-			// Otherwise Pull From Gradle Properties
-			if (System.getenv('BINTRAY_USER') != null) {
-				username = System.getenv('BINTRAY_USER')
-			} else {
-				username = findProperty('BINTRAY_USER')
-			}
-
-			if (System.getenv('BINTRAY_KEY') != null) {
-				password = System.getenv('BINTRAY_KEY')
-			} else {
-				password = findProperty('BINTRAY_KEY')
-			}
-		}
-		defaults {
-			// Maven Publication to Push to Artifactory
-			publications ('publishAPI')
-			// properties = [ 'bintray.repo': 'alexis-evelyn/mods', 'bintray.package': 'API', 'bintray.version': version.toString() ]
-		}
-	}
-}
-
 // https://docs.gradle.org/current/userguide/build_lifecycle.html
 gradle.taskGraph.beforeTask { Task task ->
 	logger.lifecycle "(API) Executing $task..."
@@ -272,6 +156,9 @@ gradle.taskGraph.afterTask { Task task, TaskState state ->
 		logger.lifecycle "(API) COMPLETED $task..."
 	}
 }
+
+// Apply Publishing Gradle File
+apply from: 'publishing.gradle'
 
 // Separating Unit Testing Only Dependencies From Other Dependencies
 apply from: 'unit-testing-only-dependencies.gradle'

@@ -1,0 +1,193 @@
+// configure the maven publication
+publishing {
+    publications {
+        publishRandomTech(MavenPublication) {
+            // add all the jars that should be included when publishing to maven
+            artifact(remapJar) {
+                builtBy remapJar
+            }
+            artifact(sourcesJar) {
+                builtBy remapSourcesJar
+            }
+            artifact javadocsJar
+            groupId = project.maven_group
+            artifactId 'randomtech'
+            version = project.version
+        }
+    }
+
+    // select the repositories you want to publish to
+    repositories {
+        // uncomment to publish to the local maven
+        // mavenLocal()
+    }
+}
+
+//uploadArchives {
+//    repositories {
+//        mavenDeployer {
+//            beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
+//
+//            // For Release Staging
+//            maven {
+//                url "https://oss.sonatype.org/service/local/staging/deploy/maven2/"
+//
+//                // Environment Var For Github, Other For Me
+//                if (System.getenv('SONATYPE_USERNAME') != null) {
+//                    username = System.getenv('SONATYPE_USERNAME')
+//                } else {
+//                    username = findProperty('SONATYPE_USERNAME')
+//                }
+//
+//                // Environment Var For Github, Other For Me
+//                if (System.getenv('SONATYPE_PASSWORD') != null) {
+//                    username = System.getenv('SONATYPE_PASSWORD')
+//                } else {
+//                    username = findProperty('SONATYPE_PASSWORD')
+//                }
+//            }
+//
+//            // For Snapshot Staging
+//            maven {
+//                url "https://oss.sonatype.org/content/repositories/snapshots/"
+//
+//                // Environment Var For Github, Other For Me
+//                if (System.getenv('SONATYPE_USERNAME') != null) {
+//                    username = System.getenv('SONATYPE_USERNAME')
+//                } else {
+//                    username = findProperty('SONATYPE_USERNAME')
+//                }
+//
+//                // Environment Var For Github, Other For Me
+//                if (System.getenv('SONATYPE_PASSWORD') != null) {
+//                    username = System.getenv('SONATYPE_PASSWORD')
+//                } else {
+//                    username = findProperty('SONATYPE_PASSWORD')
+//                }
+//            }
+//
+//            pom.project {
+//                name 'RandomTech'
+//                packaging 'jar'
+//                // optionally artifactId can be defined here
+//                description 'A tech mod to add features missing from other tech mods. Also includes an API that can be used with other mods.'
+//                url 'https://github.com/alexis-evelyn/RandomTech/README.md'
+//
+//                scm {
+//                    connection 'git@github.com:alexis-evelyn/RandomTech.git'
+//                    developerConnection 'git@github.com:alexis-evelyn/RandomTech.git'
+//                    url 'https://github.com/alexis-evelyn/RandomTech'
+//                }
+//
+//                licenses {
+//                    license {
+//                        name 'MIT'
+//                        url 'https://github.com/alexis-evelyn/RandomTech/blob/master/LICENSE.md'
+//                    }
+//                }
+//
+//                developers {
+//                    developer {
+//                        id 'alexis-evelyn'
+//                        name 'Alexis Evelyn'
+//                        email 'alexis.a.evelyn@gmail.com'
+//                    }
+//                }
+//            }
+//        }
+//    }
+//}
+
+//signing {
+//    def signingKeyId = findProperty("BINTRAY_GPG_KEY_ID")
+//    def signingKey = findProperty("BINTRAY_GPG_KEY")
+//
+//    useInMemoryPgpKeys(signingKeyId, signingKey)
+//    sign publishing.publications.publishRandomTech
+//}
+
+// For Release Builds
+bintray {
+    // For Github Actions Building (Pull From Environment Variable) Otherwise Pull From Gradle Properties
+    // Username (Same as Bintray Username)
+    if (System.getenv('BINTRAY_USER') != null) {
+        user = System.getenv('BINTRAY_USER')
+    } else {
+        user = findProperty('BINTRAY_USER')
+    }
+
+    // Password (Same as Bintray API Key)
+    if (System.getenv('BINTRAY_KEY') != null) {
+        key = System.getenv('BINTRAY_KEY')
+    } else {
+        key = findProperty('BINTRAY_KEY')
+    }
+
+    // Maven Publication to Push to Bintray
+    publications = ['publishRandomTech']
+    publish = true
+
+    pkg {
+        repo = "mods"
+        name = "RandomTech"
+        userOrg = "alexis-evelyn"
+        licenses = ["MIT"]
+
+        publicDownloadNumbers = true
+
+        githubRepo = 'alexis-evelyn/RandomTech'
+        githubReleaseNotesFile = 'README.md'
+
+        dryRun = true // [Default: false] Whether to run this as dry-run, without deploying
+        publish = true // [Default: false] Whether version should be auto published after an upload
+        override = false // [Default: false] Whether to override version artifacts already published
+
+        version {
+            name = project.version
+            vcsTag = project.version
+            released = new Date()
+            desc = "RandomTech for Fabric 1.16+"
+            githubRepo = 'alexis-evelyn/RandomTech'
+            websiteUrl = 'https://github.com/alexis-evelyn/RandomTech'
+            issueTrackerUrl = 'https://github.com/alexis-evelyn/RandomTech/issues'
+            vcsUrl = 'https://github.com/alexis-evelyn/RandomTech.git'
+            gpg {
+                sign = true
+            }
+        }
+    }
+}
+
+// For Snapshot Builds - https://www.jfrog.com/confluence/display/JFROG/Gradle+Artifactory+Plugin#GradleArtifactoryPlugin-Configuration
+artifactory {
+    contextUrl = 'https://oss.jfrog.org' // Use your own url if you are self-hosting the artifactory server
+    publish {
+        repository {
+            if (version.endsWith("-SNAPSHOT")) {
+                repoKey = 'oss-snapshot-local'
+            } else {
+                repoKey = 'oss-release-local'
+            }
+
+            // For Github Actions Building (Pull From Environment Variable) Otherwise Pull From Gradle Properties
+            // Username (Same as Bintray Username)
+            if (System.getenv('BINTRAY_USER') != null) {
+                username = System.getenv('BINTRAY_USER')
+            } else {
+                username = findProperty('BINTRAY_USER')
+            }
+
+            // Password (Same as Bintray API Key)
+            if (System.getenv('BINTRAY_OSS_KEY') != null) {
+                password = System.getenv('BINTRAY_KEY')
+            } else {
+                password = findProperty('BINTRAY_KEY')
+            }
+        }
+        defaults {
+            // Maven Publication to Push to Artifactory
+            publications ('publishRandomTech')
+            properties = [ 'bintray.repo': 'alexis-evelyn/mods', 'bintray.package': 'RandomTech', 'bintray.version': version.toString() ]
+        }
+    }
+}
