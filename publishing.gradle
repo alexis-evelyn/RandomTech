@@ -210,15 +210,19 @@ artifactory {
             // Username
             if (System.getenv('BINTRAY_USER') != null) {
                 username = System.getenv('BINTRAY_USER')
+                logger.lifecycle "(Root) Environment Username Chosen For Artifactory Auth"
             } else {
                 username = findProperty('BINTRAY_USER')
+                logger.lifecycle "(Root) Gradle Username Chosen For Artifactory Auth"
             }
 
             // Password
             if (System.getenv('BINTRAY_ENCRYPTED_PASSWORD') != null) {
                 password = System.getenv('BINTRAY_ENCRYPTED_PASSWORD')
+                logger.lifecycle "(Root) Environment Password Chosen For Artifactory Auth"
             } else {
                 password = findProperty('BINTRAY_ENCRYPTED_PASSWORD')
+                logger.lifecycle "(Root) Gradle Password Chosen For Artifactory Auth"
             }
 
             maven = true
