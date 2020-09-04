@@ -157,7 +157,7 @@ publishing {
 			artifact javadocsJar
 			groupId = project.maven_group
 			artifactId 'randomtechapi'
-			version = project.mod_version // Bintray doesn't allow snapshot versions, so I'm removing the word SNAPSHOT from the version name
+			version = project.mod_version // Bintray doesn't allow snapshot versions, so I'm removing the word SNAPSHOT from the version name. Use `version = version` for snapshot versions.
 		}
 	}
 
@@ -199,7 +199,7 @@ bintray {
 
 		dryRun = false // [Default: false] Whether to run this as dry-run, without deploying
 		publish = true // [Default: false] Whether version should be auto published after an upload
-		override = false // [Default: false] Whether to override version artifacts already published
+		override = true // [Default: false] Whether to override version artifacts already published
 
 		version {
 			name = project.mod_version // Bintray doesn't allow snapshot versions, so I'm removing the word SNAPSHOT from the version name
