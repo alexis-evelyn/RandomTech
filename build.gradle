@@ -206,10 +206,10 @@ publishing {
 			artifact(remapJar) {
 				builtBy remapJar
 			}
-			artifact(sourcesJar) {
-				builtBy remapSourcesJar
-			}
-			artifact javadocsJar
+//			artifact(sourcesJar) {
+//				builtBy remapSourcesJar
+//			}
+//			artifact javadocsJar
 			groupId = project.maven_group
 			artifactId 'randomtech'
 			version = project.version
