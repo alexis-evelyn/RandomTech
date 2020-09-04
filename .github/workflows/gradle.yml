@@ -48,7 +48,7 @@ jobs:
         draft: false
         prerelease: false
     - name: Publish RandomTech to Github Release
-      id: upload-release-asset
+      id: upload-release-asset-randomtech
       uses: actions/upload-release-asset@v1
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -57,7 +57,7 @@ jobs:
         file_glob: true
         file: build/libs/*.jar
     - name: Publish API to Github Release
-      id: upload-release-asset
+      id: upload-release-asset-api
       uses: actions/upload-release-asset@v1
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
