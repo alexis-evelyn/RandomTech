@@ -164,7 +164,8 @@ artifactory {
     contextUrl = 'https://oss.jfrog.org'
     resolve {
         repository {
-            repoKey = 'libs-release'
+            repoKey = 'libs-snapshot'
+            maven = true
         }
     }
     publish {
@@ -191,6 +192,8 @@ artifactory {
             } else {
                 password = findProperty('BINTRAY_ENCRYPTED_PASSWORD')
             }
+
+            maven = true
         }
         defaults {
             // Maven Publication to Push to Artifactory

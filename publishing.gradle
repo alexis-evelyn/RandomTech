@@ -1,4 +1,5 @@
 // configure the maven publication
+// Use bintrayUpload, not bintrayPublish
 publishing {
     publications {
         publishRandomTech(MavenPublication) {
@@ -161,6 +162,12 @@ bintray {
 // For Snapshot Builds - https://www.jfrog.com/confluence/display/JFROG/Gradle+Artifactory+Plugin#GradleArtifactoryPlugin-Configuration
 artifactory {
     contextUrl = 'https://oss.jfrog.org' // Use your own url if you are self-hosting the artifactory server
+    resolve {
+        repository {
+            repoKey = 'libs-snapshot'
+            maven = true
+        }
+    }
     publish {
         repository {
             if (version.endsWith("-SNAPSHOT")) {
@@ -183,6 +190,8 @@ artifactory {
             } else {
                 password = findProperty('BINTRAY_ENCRYPTED_PASSWORD')
             }
+
+            maven = true
         }
         defaults {
             // Maven Publication to Push to Artifactory
