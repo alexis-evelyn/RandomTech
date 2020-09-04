@@ -210,7 +210,7 @@ artifactory {
             // Username
             if (System.getenv('BINTRAY_USER') != null) {
                 username = System.getenv('BINTRAY_USER')
-                logger.lifecycle "(API) Environment Username Chosen  For Artifactory Auth"
+                logger.lifecycle "(API) Environment Username Chosen For Artifactory Auth"
             } else {
                 username = findProperty('BINTRAY_USER')
                 logger.lifecycle "(API) Gradle Username Chosen For Artifactory Auth"
