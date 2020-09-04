@@ -186,10 +186,10 @@ artifactory {
             }
 
             // Password (Same as Bintray API Key)
-            if (System.getenv('BINTRAY_OSS_KEY') != null) {
-                password = System.getenv('BINTRAY_KEY')
+            if (System.getenv('BINTRAY_ENCRYPTED_PASSWORD') != null) {
+                password = System.getenv('BINTRAY_ENCRYPTED_PASSWORD')
             } else {
-                password = findProperty('BINTRAY_KEY')
+                password = findProperty('BINTRAY_ENCRYPTED_PASSWORD')
             }
         }
         defaults {
