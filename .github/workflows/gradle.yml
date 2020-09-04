@@ -29,8 +29,8 @@ jobs:
         BINTRAY_KEY: ${{ secrets.BINTRAY_KEY }}
     - name: Publish Artifacts To Github Actions
       uses: actions/upload-artifact@v2
-        with:
-          name: Jars
-          path: |
-            build/libs/
-            api/build/libs/
+      with:
+        name: Jars
+        path: |
+          build/libs/
+          api/build/libs/
