@@ -212,7 +212,7 @@ publishing {
 			artifact javadocsJar
 			groupId = project.maven_group
 			artifactId 'randomtech'
-			version = project.mod_version // Bintray doesn't allow snapshot versions, so I'm removing the word SNAPSHOT from the version name
+			version = version // project.mod_version // Bintray doesn't allow snapshot versions, so I'm removing the word SNAPSHOT from the version name
 		}
 	}
 
