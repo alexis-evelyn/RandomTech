@@ -20,7 +20,7 @@ publishing {
                 packaging = 'jar'
                 // optionally artifactId can be defined here
                 description = 'The API designed for RandomTech, just released separately for other mod developers to use.'
-                url = 'https://github.com/alexis-evelyn/RandomTech/README.md'
+                url = 'https://github.com/alexis-evelyn/RandomTech/blob/master/README.md'
 
                 scm {
                     connection = 'git@github.com:alexis-evelyn/RandomTech.git'
