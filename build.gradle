@@ -1,6 +1,7 @@
 plugins {
 	id 'fabric-loom' version '0.5-SNAPSHOT'
-	id 'com.jfrog.bintray' version '1.8.5' // For publishing to bintray - https://github.com/bintray/gradle-bintray-plugin
+	id 'com.jfrog.bintray' version '1.8.5' // ./gradlew bintrayUpload - For publishing to bintray - https://github.com/bintray/gradle-bintray-plugin
+	id 'com.jfrog.artifactory' version '4.17.2' // ./gradlew artifactoryPublish - For publishing snapshots to bintray artifactory oss - https://github.com/jfrog/build-info
 	id 'maven-publish'
 //	id "com.github.spotbugs" version '4.5.0'
 }
@@ -16,7 +17,7 @@ group = project.maven_group
 //main_version = project.mod_version
 //current_date = new Date()
 //snapshot_version = "${main_version}-${current_date}-SNAPSHOT"
-version = "${project.mod_version}-SNAPSHOT"
+version = "${project.mod_version}"
 
 // Tells Gradle to Wait for the API to Remap Before Remapping the Root Mod
 remapJar.dependsOn ':api:remapJar'
@@ -198,10 +199,9 @@ jar {
 }
 
 // configure the maven publication
-// Use bintrayUpload, not bintrayPublish
 publishing {
 	publications {
-		mavenJava(MavenPublication) {
+		publishRandomTech(MavenPublication) {
 			// add all the jars that should be included when publishing to maven
 			artifact(remapJar) {
 				builtBy remapJar
@@ -212,7 +212,7 @@ publishing {
 			artifact javadocsJar
 			groupId = project.maven_group
 			artifactId 'randomtech'
-			version = project.mod_version // Bintray doesn't allow snapshot versions, so I'm removing the word SNAPSHOT from the version name. Use `version = version` for snapshot versions.
+			version = project.version
 		}
 	}
 
@@ -223,22 +223,25 @@ publishing {
 	}
 }
 
+// For Release Builds
 bintray {
-	// For Github Actions Building (Pull From Environment Variable)
-	// Otherwise Pull From Gradle Properties
+	// For Github Actions Building (Pull From Environment Variable) Otherwise Pull From Gradle Properties
+	// Username (Same as Bintray Username)
 	if (System.getenv('BINTRAY_USER') != null) {
 		user = System.getenv('BINTRAY_USER')
 	} else {
 		user = findProperty('BINTRAY_USER')
 	}
 
+	// Password (Same as Bintray API Key)
 	if (System.getenv('BINTRAY_KEY') != null) {
 		key = System.getenv('BINTRAY_KEY')
 	} else {
 		key = findProperty('BINTRAY_KEY')
 	}
 
-	publications = ['mavenJava']
+	// Maven Publication to Push to Bintray
+	publications = ['publishRandomTech']
 	publish = true
 
 	pkg {
@@ -252,12 +255,12 @@ bintray {
 		githubRepo = 'alexis-evelyn/RandomTech'
 		githubReleaseNotesFile = 'README.md'
 
-		dryRun = false // [Default: false] Whether to run this as dry-run, without deploying
+		dryRun = true // [Default: false] Whether to run this as dry-run, without deploying
 		publish = true // [Default: false] Whether version should be auto published after an upload
-		override = true // [Default: false] Whether to override version artifacts already published
+		override = false // [Default: false] Whether to override version artifacts already published
 
 		version {
-			name = project.mod_version // Bintray doesn't allow snapshot versions, so I'm removing the word SNAPSHOT from the version name
+			name = project.version
 			vcsTag = project.version
 			released = new Date()
 			desc = "RandomTech for Fabric 1.16+"
@@ -268,6 +271,40 @@ bintray {
 			gpg {
 				sign = true
 			}
+		}
+	}
+}
+
+// For Snapshot Builds - https://www.jfrog.com/confluence/display/JFROG/Gradle+Artifactory+Plugin#GradleArtifactoryPlugin-Configuration
+artifactory {
+	contextUrl = 'https://oss.jfrog.org' // Use your own url if you are self-hosting the artifactory server
+	publish {
+		repository {
+			if (version.endsWith("-SNAPSHOT")) {
+				repoKey = 'oss-snapshot-local'
+			} else {
+				repoKey = 'oss-release-local'
+			}
+
+			// For Github Actions Building (Pull From Environment Variable) Otherwise Pull From Gradle Properties
+			// Username (Same as Bintray Username)
+			if (System.getenv('BINTRAY_USER') != null) {
+				username = System.getenv('BINTRAY_USER')
+			} else {
+				username = findProperty('BINTRAY_USER')
+			}
+
+			// Password (Same as Bintray API Key)
+			if (System.getenv('BINTRAY_KEY') != null) {
+				password = System.getenv('BINTRAY_KEY')
+			} else {
+				password = findProperty('BINTRAY_KEY')
+			}
+		}
+		defaults {
+			// Maven Publication to Push to Artifactory
+			publications ('publishRandomTech')
+			// properties = [ 'bintray.repo': 'alexis-evelyn/mods', 'bintray.package': 'RandomTech', 'bintray.version': version.toString() ]
 		}
 	}
 }

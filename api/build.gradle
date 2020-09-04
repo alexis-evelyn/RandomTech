@@ -1,6 +1,7 @@
 plugins {
 	id 'fabric-loom'
-	id 'com.jfrog.bintray' // For publishing to bintray - https://github.com/bintray/gradle-bintray-plugin
+	id 'com.jfrog.bintray' // ./gradlew bintrayUpload - For publishing to bintray - https://github.com/bintray/gradle-bintray-plugin
+	id 'com.jfrog.artifactory' // ./gradlew artifactoryPublish - For publishing snapshots to bintray artifactory oss - https://github.com/jfrog/build-info
 	id 'maven-publish'
 //	id "com.github.spotbugs"
 }
@@ -146,7 +147,7 @@ task sourcesJar(type: Jar, dependsOn: classes) {
 // Use bintrayUpload, not bintrayPublish
 publishing {
 	publications {
-		mavenJava(MavenPublication) {
+		publishAPI(MavenPublication) {
 			// add all the jars that should be included when publishing to maven
 			artifact(remapJar) {
 				builtBy remapJar
@@ -157,7 +158,7 @@ publishing {
 			artifact javadocsJar
 			groupId = project.maven_group
 			artifactId 'randomtechapi'
-			version = project.mod_version // Bintray doesn't allow snapshot versions, so I'm removing the word SNAPSHOT from the version name. Use `version = version` for snapshot versions.
+			version = project.version
 		}
 	}
 
@@ -169,21 +170,23 @@ publishing {
 }
 
 bintray {
-	// For Github Actions Building (Pull From Environment Variable)
-	// Otherwise Pull From Gradle Properties
+	// For Github Actions Building (Pull From Environment Variable) Otherwise Pull From Gradle Properties
+	// Username (Same as Bintray Username)
 	if (System.getenv('BINTRAY_USER') != null) {
 		user = System.getenv('BINTRAY_USER')
 	} else {
 		user = findProperty('BINTRAY_USER')
 	}
 
+	// Password (Same as Bintray API Key)
 	if (System.getenv('BINTRAY_KEY') != null) {
 		key = System.getenv('BINTRAY_KEY')
 	} else {
 		key = findProperty('BINTRAY_KEY')
 	}
 
-	publications = ['mavenJava']
+	// Maven Publication to Push to Bintray
+	publications = ['publishAPI']
 	publish = true
 
 	pkg {
@@ -197,12 +200,12 @@ bintray {
 		githubRepo = 'alexis-evelyn/RandomTech'
 		githubReleaseNotesFile = 'README.md'
 
-		dryRun = false // [Default: false] Whether to run this as dry-run, without deploying
+		dryRun = true // [Default: false] Whether to run this as dry-run, without deploying
 		publish = true // [Default: false] Whether version should be auto published after an upload
-		override = true // [Default: false] Whether to override version artifacts already published
+		override = false // [Default: false] Whether to override version artifacts already published
 
 		version {
-			name = project.mod_version // Bintray doesn't allow snapshot versions, so I'm removing the word SNAPSHOT from the version name
+			name = project.version
 			vcsTag = project.version
 			released = new Date()
 			desc = "RandomTech API for Fabric 1.16+"
@@ -213,6 +216,46 @@ bintray {
 			gpg {
 				sign = true
 			}
+		}
+	}
+}
+
+// For Snapshot Builds - https://www.jfrog.com/confluence/display/JFROG/Gradle+Artifactory+Plugin#GradleArtifactoryPlugin-Configuration
+artifactory {
+	contextUrl = 'https://oss.jfrog.org'
+	resolve {
+		repository {
+			repoKey = 'libs-release'
+		}
+	}
+	publish {
+		repository {
+			// The Artifactory repository key to publish to
+			// when using oss.jfrog.org the credentials are from Bintray.
+			if (version.endsWith("-SNAPSHOT")) {
+				repoKey = 'oss-snapshot-local'
+			} else {
+				repoKey = 'oss-release-local'
+			}
+
+			// For Github Actions Building (Pull From Environment Variable)
+			// Otherwise Pull From Gradle Properties
+			if (System.getenv('BINTRAY_USER') != null) {
+				username = System.getenv('BINTRAY_USER')
+			} else {
+				username = findProperty('BINTRAY_USER')
+			}
+
+			if (System.getenv('BINTRAY_KEY') != null) {
+				password = System.getenv('BINTRAY_KEY')
+			} else {
+				password = findProperty('BINTRAY_KEY')
+			}
+		}
+		defaults {
+			// Maven Publication to Push to Artifactory
+			publications ('publishAPI')
+			// properties = [ 'bintray.repo': 'alexis-evelyn/mods', 'bintray.package': 'API', 'bintray.version': version.toString() ]
 		}
 	}
 }
