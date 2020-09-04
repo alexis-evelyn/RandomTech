@@ -1,7 +1,7 @@
 plugins {
 	id 'fabric-loom'
 	id 'com.jfrog.bintray' // ./gradlew bintrayUpload - For publishing to bintray - https://github.com/bintray/gradle-bintray-plugin
-	id 'com.jfrog.artifactory' // ./gradlew artifactoryPublish - For publishing snapshots to bintray artifactory oss - https://github.com/jfrog/build-info
+	// id 'com.jfrog.artifactory' // ./gradlew artifactoryPublish - For publishing snapshots to bintray artifactory oss - https://github.com/jfrog/build-info
 	id 'maven-publish'
 	id 'signing'
 //	id "com.github.spotbugs"

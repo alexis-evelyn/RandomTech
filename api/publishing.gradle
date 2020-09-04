@@ -160,45 +160,44 @@ bintray {
 }
 
 // For Snapshot Builds - https://www.jfrog.com/confluence/display/JFROG/Gradle+Artifactory+Plugin#GradleArtifactoryPlugin-Configuration
-artifactory {
-    contextUrl = 'https://oss.jfrog.org'
-    resolve {
-        repository {
-            repoKey = 'libs-snapshot'
-            maven = true
-        }
-    }
-    publish {
-        repository {
-            // The Artifactory repository key to publish to
-            // when using oss.jfrog.org the credentials are from Bintray.
-            if (version.endsWith("-SNAPSHOT")) {
-                repoKey = 'oss-snapshot-local'
-            } else {
-                repoKey = 'oss-release-local'
-            }
-
-            // For Github Actions Building (Pull From Environment Variable)
-            // Otherwise Pull From Gradle Properties
-            if (System.getenv('BINTRAY_USER') != null) {
-                username = System.getenv('BINTRAY_USER')
-            } else {
-                username = findProperty('BINTRAY_USER')
-            }
-
-            // Password (Same as Bintray API Key)
-            if (System.getenv('BINTRAY_ENCRYPTED_PASSWORD') != null) {
-                password = System.getenv('BINTRAY_ENCRYPTED_PASSWORD')
-            } else {
-                password = findProperty('BINTRAY_ENCRYPTED_PASSWORD')
-            }
-
-            maven = true
-        }
-        defaults {
-            // Maven Publication to Push to Artifactory
-            publications ('publishAPI')
-            properties = [ 'bintray.repo': 'alexis-evelyn/mods', 'bintray.package': 'API', 'bintray.version': version.toString() ]
-        }
-    }
-}
+//artifactory {
+//    contextUrl = 'https://oss.jfrog.org'
+//    resolve {
+//        repository {
+//            repoKey = 'libs-snapshot'
+//            maven = true
+//        }
+//    }
+//    publish {
+//        repository {
+//            // The Artifactory repository key to publish to when using oss.jfrog.org the credentials are from Bintray.
+//            if (version.endsWith("-SNAPSHOT")) {
+//                repoKey = 'oss-snapshot-local'
+//            } else {
+//                repoKey = 'oss-release-local'
+//            }
+//
+//            // For Github Actions Building (Pull From Environment Variable) Otherwise Pull From Gradle Properties
+//            // Username
+//            if (System.getenv('BINTRAY_USER') != null) {
+//                username = System.getenv('BINTRAY_USER')
+//            } else {
+//                username = findProperty('BINTRAY_USER')
+//            }
+//
+//            // Password
+//            if (System.getenv('BINTRAY_ENCRYPTED_PASSWORD') != null) {
+//                password = System.getenv('BINTRAY_ENCRYPTED_PASSWORD')
+//            } else {
+//                password = findProperty('BINTRAY_ENCRYPTED_PASSWORD')
+//            }
+//
+//            maven = true
+//        }
+//        defaults {
+//            // Maven Publication to Push to Artifactory
+//            publications ('publishAPI')
+//            properties = [ 'bintray.repo': 'alexis-evelyn/mods', 'bintray.package': 'API', 'bintray.version': version.toString() ]
+//        }
+//    }
+//}
