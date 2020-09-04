@@ -12,8 +12,37 @@ publishing {
             }
             artifact javadocsJar
             groupId = project.maven_group
-            artifactId 'randomtechapi'
+            artifactId = 'randomtechapi'
             version = project.version
+
+            pom {
+                name = 'API'
+                packaging = 'jar'
+                // optionally artifactId can be defined here
+                description = 'The API designed for RandomTech, just released separately for other mod developers to use.'
+                url = 'https://github.com/alexis-evelyn/RandomTech/README.md'
+
+                scm {
+                    connection = 'git@github.com:alexis-evelyn/RandomTech.git'
+                    developerConnection = 'git@github.com:alexis-evelyn/RandomTech.git'
+                    url = 'https://github.com/alexis-evelyn/RandomTech/tree/master/api'
+                }
+
+                licenses {
+                    license {
+                        name = 'MIT'
+                        url = 'https://github.com/alexis-evelyn/RandomTech/blob/master/LICENSE.md'
+                    }
+                }
+
+                developers {
+                    developer {
+                        id = 'alexis-evelyn'
+                        name = 'Alexis Evelyn'
+                        email = 'alexis.a.evelyn@gmail.com'
+                    }
+                }
+            }
         }
     }
 
@@ -160,44 +189,44 @@ bintray {
 }
 
 // For Snapshot Builds - https://www.jfrog.com/confluence/display/JFROG/Gradle+Artifactory+Plugin#GradleArtifactoryPlugin-Configuration
-//artifactory {
-//    contextUrl = 'https://oss.jfrog.org'
-//    resolve {
-//        repository {
-//            repoKey = 'libs-snapshot'
-//            maven = true
-//        }
-//    }
-//    publish {
-//        repository {
-//            // The Artifactory repository key to publish to when using oss.jfrog.org the credentials are from Bintray.
-//            if (version.endsWith("-SNAPSHOT")) {
-//                repoKey = 'oss-snapshot-local'
-//            } else {
-//                repoKey = 'oss-release-local'
-//            }
-//
-//            // For Github Actions Building (Pull From Environment Variable) Otherwise Pull From Gradle Properties
-//            // Username
-//            if (System.getenv('BINTRAY_USER') != null) {
-//                username = System.getenv('BINTRAY_USER')
-//            } else {
-//                username = findProperty('BINTRAY_USER')
-//            }
-//
-//            // Password
-//            if (System.getenv('BINTRAY_ENCRYPTED_PASSWORD') != null) {
-//                password = System.getenv('BINTRAY_ENCRYPTED_PASSWORD')
-//            } else {
-//                password = findProperty('BINTRAY_ENCRYPTED_PASSWORD')
-//            }
-//
-//            maven = true
-//        }
-//        defaults {
-//            // Maven Publication to Push to Artifactory
-//            publications ('publishAPI')
-//            properties = [ 'bintray.repo': 'alexis-evelyn/mods', 'bintray.package': 'API', 'bintray.version': version.toString() ]
-//        }
-//    }
-//}
+artifactory {
+    contextUrl = 'https://oss.jfrog.org'
+    resolve {
+        repository {
+            repoKey = 'libs-snapshot'
+            maven = true
+        }
+    }
+    publish {
+        repository {
+            // The Artifactory repository key to publish to when using oss.jfrog.org the credentials are from Bintray.
+            if (version.endsWith("-SNAPSHOT")) {
+                repoKey = 'oss-snapshot-local'
+            } else {
+                repoKey = 'oss-release-local'
+            }
+
+            // For Github Actions Building (Pull From Environment Variable) Otherwise Pull From Gradle Properties
+            // Username
+            if (System.getenv('BINTRAY_USER') != null) {
+                username = System.getenv('BINTRAY_USER')
+            } else {
+                username = findProperty('BINTRAY_USER')
+            }
+
+            // Password
+            if (System.getenv('BINTRAY_ENCRYPTED_PASSWORD') != null) {
+                password = System.getenv('BINTRAY_ENCRYPTED_PASSWORD')
+            } else {
+                password = findProperty('BINTRAY_ENCRYPTED_PASSWORD')
+            }
+
+            maven = true
+        }
+        defaults {
+            // Maven Publication to Push to Artifactory
+            publications ('publishAPI')
+            properties = [ 'bintray.repo': 'alexis-evelyn/mods', 'bintray.package': 'API', 'bintray.version': version.toString() ]
+        }
+    }
+}

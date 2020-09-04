@@ -183,7 +183,7 @@ task javadocs(type: Javadoc) {
 }
 
 task javadocsJar(type: Jar, dependsOn: javadocs) {
-	classifier = "javadocs"
+	classifier = "javadoc"
 	javadocs.failOnError false
 	from javadocs.destinationDir
 }
