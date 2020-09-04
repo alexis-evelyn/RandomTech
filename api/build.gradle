@@ -171,14 +171,14 @@ publishing {
 bintray {
 	// For Github Actions Building (Pull From Environment Variable)
 	// Otherwise Pull From Gradle Properties
-	if (System.getenv('BINTRAY_USER') != null) {
-		user = System.getenv('BINTRAY_USER')
+	if (System.getenv('secrets.BINTRAY_USER') != null) {
+		user = System.getenv('secrets.BINTRAY_USER')
 	} else {
 		user = findProperty('BINTRAY_USER')
 	}
 
-	if (System.getenv('BINTRAY_KEY') != null) {
-		key = System.getenv('BINTRAY_KEY')
+	if (System.getenv('secrets.BINTRAY_KEY') != null) {
+		key = System.getenv('secrets.BINTRAY_KEY')
 	} else {
 		key = findProperty('BINTRAY_KEY')
 	}
