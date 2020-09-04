@@ -229,8 +229,8 @@ artifactory {
         }
         defaults {
             // Maven Publication to Push to Artifactory
-            publications ('publishRandomTech')
-            properties = [ 'bintray.repo': 'alexis-evelyn/mods', 'bintray.package': 'RandomTech', 'bintray.version': version.toString() ]
+            publications ('publishAPI', 'publishRandomTech')
+            // properties = [ 'bintray.repo': 'alexis-evelyn/mods', 'bintray.package': 'RandomTech', 'bintray.version': version.toString() ]
         }
     }
 }
