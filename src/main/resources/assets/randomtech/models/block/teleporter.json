@@ -2,20 +2,22 @@
 	"credit": "Made with Blockbench",
 	"parent": "minecraft:block/orientable",
 	"textures": {
+		"2": "randomtech:block/teleporter/teleporter_bottom",
 		"top": "randomtech:block/teleporter/teleporter_top",
-		"front": "randomtech:block/teleporter/teleporter_side"
+		"front": "randomtech:block/teleporter/teleporter_side",
+		"particle": "randomtech:block/teleporter/teleporter_bottom"
 	},
 	"elements": [
 		{
 			"from": [0, 0, 0],
 			"to": [16, 5, 16],
 			"faces": {
-				"north": {"uv": [0, 0, 16, 5], "texture": "#front"},
-				"east": {"uv": [0, 0, 16, 5], "texture": "#front"},
-				"south": {"uv": [0, 0, 16, 5], "texture": "#front"},
-				"west": {"uv": [0, 0, 16, 5], "texture": "#front"},
+				"north": {"uv": [0, 0, 16, 16], "texture": "#front"},
+				"east": {"uv": [0, 0, 16, 16], "texture": "#front"},
+				"south": {"uv": [0, 0, 16, 16], "texture": "#front"},
+				"west": {"uv": [0, 0, 16, 16], "texture": "#front"},
 				"up": {"uv": [0, 0, 16, 16], "texture": "#top"},
-				"down": {"uv": [0, 0, 16, 16], "texture": "#front"}
+				"down": {"uv": [0, 0, 16, 16], "texture": "#2"}
 			}
 		}
 	],
