@@ -21,6 +21,7 @@ publishing {
                 // optionally artifactId can be defined here
                 description = 'The API designed for RandomTech, just released separately for other mod developers to use.'
                 url = 'https://github.com/alexis-evelyn/RandomTech/blob/master/README.md'
+                logo = 'https://raw.githubusercontent.com/alexis-evelyn/RandomTech/master/src/main/resources/assets/randomtech/icon.png' // My attempt at getting a logo to show up in mvnrepository.com
 
                 scm {
                     connection = 'git@github.com:alexis-evelyn/RandomTech.git'

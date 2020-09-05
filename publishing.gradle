@@ -21,6 +21,7 @@ publishing {
                 // optionally artifactId can be defined here
                 description = 'A tech mod to add features missing from other tech mods. Also includes an API that can be used with other mods.'
                 url = 'https://github.com/alexis-evelyn/RandomTech/blob/master/README.md'
+                logo = 'https://raw.githubusercontent.com/alexis-evelyn/RandomTech/master/src/main/resources/assets/randomtech/icon.png' // My attempt at getting a logo to show up in mvnrepository.com
 
                 scm {
                     connection = 'git@github.com:alexis-evelyn/RandomTech.git'
