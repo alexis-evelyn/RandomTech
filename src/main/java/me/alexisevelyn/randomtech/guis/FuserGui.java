@@ -2,13 +2,10 @@ package me.alexisevelyn.randomtech.guis;
 
 import me.alexisevelyn.randomtech.Main;
 import me.alexisevelyn.randomtech.blockentities.FuserBlockEntity;
-import me.shedaniel.rei.server.ContainerInfo;
-import me.shedaniel.rei.server.RecipeFinder;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.screen.ScreenHandler;
 import net.minecraft.util.Identifier;
 import reborncore.client.gui.builder.GuiBase;
 import reborncore.client.gui.guibuilder.GuiBuilder;
@@ -18,7 +15,7 @@ import reborncore.client.screen.builder.BuiltScreenHandler;
  * The type Fuser gui.
  */
 @Environment(EnvType.CLIENT)
-public class FuserGui extends GuiBase<BuiltScreenHandler> implements ContainerInfo<BuiltScreenHandler> {
+public class FuserGui extends GuiBase<BuiltScreenHandler> {
     final FuserBlockEntity blockEntity;
     public GuiBuilder builder = new GuiBuilder(new Identifier(Main.MODID, "textures/gui/guielements.png"));
 
@@ -118,70 +115,5 @@ public class FuserGui extends GuiBase<BuiltScreenHandler> implements ContainerIn
 
         // Energy Bar
         builder.drawMultiEnergyBar(matrixStack, this, multiEnergyBarX, multiEnergyBarY, (int) blockEntity.getEnergy(), (int) blockEntity.getMaxPower(), mouseX, mouseY, 0, layer);
-    }
-
-    /**
-     * Gets container class.
-     *
-     * @return the container class
-     */
-    @Override
-    public Class<? extends ScreenHandler> getContainerClass() {
-        return null;
-    }
-
-    /**
-     * Gets crafting result slot index.
-     *
-     * @param container the container
-     * @return the crafting result slot index
-     */
-    @Override
-    public int getCraftingResultSlotIndex(BuiltScreenHandler container) {
-        return 0; // The slot is actually 0, not just me forgetting about it.
-    }
-
-    /**
-     * Gets crafting width.
-     *
-     * @param container the container
-     * @return the crafting width
-     */
-    @Override
-    public int getCraftingWidth(BuiltScreenHandler container) {
-        return 1;
-    }
-
-    /**
-     * Gets crafting height.
-     *
-     * @param container the container
-     * @return the crafting height
-     */
-    @Override
-    public int getCraftingHeight(BuiltScreenHandler container) {
-        return 1;
-    }
-
-    /**
-     * Clear crafting slots.
-     *
-     * @param container the container
-     */
-    @Override
-    public void clearCraftingSlots(BuiltScreenHandler container) {
-        // Do Nothing For Now!!!
-    }
-
-    /**
-     * Populate recipe finder.
-     *
-     * @param container the container
-     * @param var1      the var 1
-     */
-    @Override
-    public void populateRecipeFinder(BuiltScreenHandler container, RecipeFinder var1) {
-        // container.getSlot(0);
-        // Unknown what is needed here!!!
     }
 }
