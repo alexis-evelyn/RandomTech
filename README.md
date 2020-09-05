@@ -1,10 +1,12 @@
 # Alexis' Random Tech
 
-[![Bintray Download Badge][bintray-badge]][bintray-download-link]
-[![Github Actions Badge][github-actions-badge]][github-actions-link]
-[![Codacy Badge][codacy-badge]][codacy-link]
-[![Crowdin Badge][crowdin-badge]][crowdin-link]
-[![Discord Badge][discord-badge]][discord-invite-link-badge]
+<!--[![Bintray Download Badge][bintray-badge]][bintray-download-link]-->
+[![Maven Central Download RandomTech Release][sonatype-release-badge-randomtech]][maven-central-release-randomtech-latest-download]
+[![Maven Central Download API Release][sonatype-release-badge-api]][maven-central-release-api-latest-download]
+[![Github Actions Link][github-actions-badge]][github-actions-link]
+[![Codacy Link][codacy-badge]][codacy-link]
+[![Crowdin Link][crowdin-badge]][crowdin-link]
+[![Discord Link][discord-badge]][discord-invite-link-badge]
 
 ## Setup
 
@@ -16,7 +18,7 @@ To use this mod you need RebornCore. You'll want to install Patchouli, so you ca
 
 I've made a Discord for Fabric mods I (and a potential future team) develop. You can join this server to ask for help with developing with these mods or just showcase stuff you've made using these mods (or using other mods which use features provided by these mods).
 
-[![Discord Banner][discord-banner]][discord-invite-link-banner]
+[![Discord Link][discord-banner]][discord-invite-link-banner]
 
 ## Development
 
@@ -67,3 +69,12 @@ This project is under MIT License. You can refer to [LICENSE.md][license-link] f
 [bintray-download-link]: <https://bintray.com/alexis-evelyn/mods/RandomTech/_latestVersion> "Bintray Download Link"
 
 [license-link]: <LICENSE.md> "License Markdown File"
+
+[sonatype-release-badge-randomtech]: <https://img.shields.io/nexus/r/me.alexisevelyn/randomtech.svg?server=https%3A%2F%2Foss.sonatype.org&style=flat&color=brightgreen&label=RandomTech%20Release> "Sonatype Release Badge For RandomTech"
+[sonatype-snapshot-badge-randomtech]: <https://img.shields.io/nexus/r/me.alexisevelyn/randomtech.svg?server=https%3A%2F%2Foss.sonatype.org&style=flat&color=brightgreen&label=RandomTech%20Snapshot> "Sonatype Snapshot Badge For RandomTech"
+[sonatype-release-badge-api]: <https://img.shields.io/nexus/r/me.alexisevelyn/randomtechapi.svg?server=https%3A%2F%2Foss.sonatype.org&style=flat&color=brightgreen&label=API%20Release> "Sonatype Release Badge For API"
+[sonatype-snapshot-badge-api]: <https://img.shields.io/nexus/r/me.alexisevelyn/randomtechapi.svg?server=https%3A%2F%2Foss.sonatype.org&style=flat&color=brightgreen&label=API%20Snapshot> "Sonatype Snapshot Badge For API"
+
+<!-- So, apparently, I cannot find a "latest release" link from directly on Maven Central (search.maven.org), so I'm using MVNRepository Instead. I'm also going to have to look for snapshot links too -->
+[maven-central-release-randomtech-latest-download]: <https://mvnrepository.com/artifact/me.alexisevelyn/randomtech/latest> "Maven Central Release RandomTech Latest Download"
+[maven-central-release-api-latest-download]: <https://mvnrepository.com/artifact/me.alexisevelyn/randomtechapi/latest> "Maven Central Release API Latest Download"
