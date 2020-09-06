@@ -64,6 +64,7 @@ public abstract class KillPreventionMixin {
      *
      * @param info the info
      */
+    @SuppressWarnings("PMD.UnusedPrivateMethod")
     @Inject(at = @At("INVOKE"), method = "kill()V", cancellable = true)
 	private void killCommand(CallbackInfo info) {
         //noinspection ConstantConditions - This claims to always return false, but it doesn't. That's because `this` becomes LivingEntity on runtime.

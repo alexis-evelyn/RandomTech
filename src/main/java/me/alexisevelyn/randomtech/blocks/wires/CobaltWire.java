@@ -85,6 +85,7 @@ public class CobaltWire extends RedstoneWireBlock {
      * @param random the random
      */
     // Responsible for setting particle properties including color of powered line
+    @SuppressWarnings("PMD.MissingBreakInSwitch") // For some reason, Codacy is missing the breaks in the switch statement
     @Override
     @Environment(EnvType.CLIENT)
     public void randomDisplayTick(BlockState state, World world, BlockPos pos, Random random) {
