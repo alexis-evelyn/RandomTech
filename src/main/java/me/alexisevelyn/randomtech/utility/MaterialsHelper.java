@@ -7,7 +7,7 @@ import net.minecraft.block.MaterialColor;
 /**
  * The type Materials.
  */
-public final class Materials {
+public final class MaterialsHelper {
     public static final Material MACHINE_MATERIAL = Material.METAL;
     public static final Material GLASS_MATERIAL = Material.GLASS;
     public static final Material TILE_MATERIAL = Material.STONE;

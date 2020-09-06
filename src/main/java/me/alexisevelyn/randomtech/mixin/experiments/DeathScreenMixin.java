@@ -21,7 +21,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @SuppressWarnings("UnusedMixin") // The mixin is used, just is loaded by Fabric and not Sponge methods
 @Mixin(DeathScreen.class)
 public abstract class DeathScreenMixin extends Screen {
-	@Shadow @Final private Text message;
+	@Shadow @Final @SuppressWarnings("PMD.UnusedPrivateField") private Text message;
 
     /**
      * Gets text component under mouse.

@@ -13,8 +13,8 @@ import reborncore.client.screen.BuiltScreenHandlerProvider;
  */
 public abstract class GenericComputerBlockEntity extends BasePowerAcceptorBlockEntity implements IToolDrop, InventoryProvider, BuiltScreenHandlerProvider {
     // Inventory Slot Markers
-    private final int inputSlot = 0;
-    private final int energyAddend = 0;
+//    private final int inputSlot = 0;
+//    private final int energyAddend = 0;
 
     private final Block block;
 

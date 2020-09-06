@@ -27,21 +27,23 @@ public abstract class DamageArmorMixinPlayerEntity {
 	 * @param damage       the damage
 	 * @param info         the info
 	 */
-	@SuppressWarnings("PMD.UnusedFormalParameter")
+	@SuppressWarnings({"PMD.UnusedPrivateMethod", "PMD.UnusedFormalParameter"})
 	@Inject(at = @At("INVOKE"), method = "damageArmor(Lnet/minecraft/entity/damage/DamageSource;F)V")
 	private void damageArmor(DamageSource damageSource, float damage, CallbackInfo info) {
-		if (damage > 0.0F) {
+		float currentDamage = damage;
+
+		if (currentDamage > 0.0F) {
 
 			// Divide damage by 4. May remove this later.
-			damage /= 4.0F;
+			currentDamage /= 4.0F;
 
 			// If damage is less than one, but greater than 0, set to 1.
-			if (damage < 1.0F)
-				damage = 1.0F;
+			if (currentDamage < 1.0F)
+				currentDamage = 1.0F;
 
 			for (ItemStack armorPiece : this.inventory.armor) {
 				if ((!damageSource.isFire() || !armorPiece.getItem().isFireproof()) && armorPiece.getItem() instanceof GenericPoweredArmor) {
-					((GenericPoweredArmor) armorPiece.getItem()).addDamage(armorPiece, this.inventory.player, damageSource, damage);
+					((GenericPoweredArmor) armorPiece.getItem()).addDamage(armorPiece, this.inventory.player, damageSource, currentDamage);
 				}
 			}
 		}

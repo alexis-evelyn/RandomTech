@@ -37,7 +37,6 @@ public class CobaltWireInfo implements IComponentProvider {
      * @param accessor the accessor
      * @param config   the config
      */
-    @SuppressWarnings("PMD.UncommentedEmptyMethodBody")
     @Override
     public void appendHead(List<Text> tooltip, IDataAccessor accessor, IPluginConfig config) {
         // Intentionally Left Empty
@@ -70,7 +69,6 @@ public class CobaltWireInfo implements IComponentProvider {
      * @param accessor the accessor
      * @param config   the config
      */
-    @SuppressWarnings("PMD.UncommentedEmptyMethodBody")
     @Override
     public void appendTail(List<Text> tooltip, IDataAccessor accessor, IPluginConfig config) {
         // Intentionally Left Empty

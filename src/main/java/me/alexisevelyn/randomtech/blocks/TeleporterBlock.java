@@ -2,7 +2,7 @@ package me.alexisevelyn.randomtech.blocks;
 
 import me.alexisevelyn.randomtech.api.blocks.machines.PowerAcceptorBlock;
 import me.alexisevelyn.randomtech.blockentities.TeleporterBlockEntity;
-import me.alexisevelyn.randomtech.utility.Materials;
+import me.alexisevelyn.randomtech.utility.MaterialsHelper;
 import me.alexisevelyn.randomtech.utility.registryhelpers.main.RegistryHelper;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.fabricmc.fabric.api.tool.attribute.v1.FabricToolTags;
@@ -41,7 +41,7 @@ public class TeleporterBlock extends PowerAcceptorBlock {
      */
     public TeleporterBlock() {
         super(FabricBlockSettings
-                .of(Materials.MACHINE_MATERIAL)
+                .of(MaterialsHelper.MACHINE_MATERIAL)
                 .breakByHand(false).requiresTool()
                 .breakByTool(FabricToolTags.PICKAXES, ToolMaterials.IRON.getMiningLevel())
                 .sounds(BlockSoundGroup.NETHERITE)

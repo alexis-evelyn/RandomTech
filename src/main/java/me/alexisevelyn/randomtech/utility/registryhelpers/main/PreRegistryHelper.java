@@ -16,7 +16,6 @@ public class PreRegistryHelper {
      * Pre register.
      */
     // This might be useful for detecting if certain mods exist and adding crafting recipes accordingly
-    @SuppressWarnings({"EmptyMethod", "PMD.UncommentedEmptyMethodBody"})
     public void preRegister() {
         // Intentionally Left Empty
     }

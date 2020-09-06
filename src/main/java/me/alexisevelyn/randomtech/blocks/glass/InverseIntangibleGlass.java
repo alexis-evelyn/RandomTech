@@ -2,7 +2,7 @@ package me.alexisevelyn.randomtech.blocks.glass;
 
 import me.alexisevelyn.randomtech.blockentities.InverseIntangibleGlassBlockEntity;
 import me.alexisevelyn.randomtech.api.utilities.GenericBlockHelper;
-import me.alexisevelyn.randomtech.utility.Materials;
+import me.alexisevelyn.randomtech.utility.MaterialsHelper;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.AbstractGlassBlock;
 import net.minecraft.block.BlockEntityProvider;
@@ -23,7 +23,7 @@ public class InverseIntangibleGlass extends AbstractGlassBlock implements BlockE
      */
     public InverseIntangibleGlass() {
         super(FabricBlockSettings
-                .of(Materials.GLASS_MATERIAL)
+                .of(MaterialsHelper.GLASS_MATERIAL)
                 .sounds(BlockSoundGroup.GLASS)
                 .nonOpaque()
                 .allowsSpawning(GenericBlockHelper::never)

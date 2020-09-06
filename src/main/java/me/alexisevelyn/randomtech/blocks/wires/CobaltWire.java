@@ -96,6 +96,7 @@ public class CobaltWire extends RedstoneWireBlock {
                 switch (wireConnection) {
                     case UP:
                         this.createParticle(world, random, pos, wireColor[i], direction, Direction.UP, -0.5F, 0.5F);
+                        break;
                     case SIDE:
                         this.createParticle(world, random, pos, wireColor[i], Direction.DOWN, direction, 0.0F, 0.5F);
                         break;

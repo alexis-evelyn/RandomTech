@@ -2,7 +2,7 @@ package me.alexisevelyn.randomtech.api.items.armor.generic;
 
 import com.google.common.collect.Multimap;
 import me.alexisevelyn.randomtech.api.items.energy.EnergyHelper;
-import me.alexisevelyn.randomtech.api.utilities.ItemManager;
+import me.alexisevelyn.randomtech.api.utilities.ItemManagerHelper;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.item.TooltipContext;
@@ -387,7 +387,7 @@ public abstract class GenericPoweredArmor extends ArmorItem implements EnergyHel
             return;
         }
 
-        ItemManager.initPoweredItems(this, itemList);
+        ItemManagerHelper.initPoweredItems(this, itemList);
     }
 
     /**
@@ -434,7 +434,7 @@ public abstract class GenericPoweredArmor extends ArmorItem implements EnergyHel
         if (shouldPreventDamage)
             return;
 
-        ItemManager.useEnergy(livingEntity, stack, cost);
+        ItemManagerHelper.useEnergy(livingEntity, stack, cost);
     }
 
     /**
@@ -447,7 +447,7 @@ public abstract class GenericPoweredArmor extends ArmorItem implements EnergyHel
      */
     @Override
     public ItemStack onCraft(ItemStack oldStack, ItemStack newStack, CompoundTag tag) {
-        return ItemManager.convertStackToEnergyItemStack(oldStack, newStack, tag);
+        return ItemManagerHelper.convertStackToEnergyItemStack(oldStack, newStack, tag);
     }
 
     /**
@@ -462,7 +462,7 @@ public abstract class GenericPoweredArmor extends ArmorItem implements EnergyHel
     @Override
     public void appendTooltip(ItemStack stack, @Nullable World worldIn, List<Text> tooltip, TooltipContext flagIn) {
         if (flagIn.isAdvanced())
-            ItemManager.powerLevelTooltip(stack, tooltip);
+            ItemManagerHelper.powerLevelTooltip(stack, tooltip);
     }
 
     /**

@@ -2,7 +2,7 @@ package me.alexisevelyn.randomtech.items.armor.powered;
 
 import io.netty.buffer.Unpooled;
 import me.alexisevelyn.randomtech.api.items.armor.generic.GenericPoweredArmor;
-import me.alexisevelyn.randomtech.api.utilities.ItemManager;
+import me.alexisevelyn.randomtech.api.utilities.ItemManagerHelper;
 import me.alexisevelyn.randomtech.utility.registryhelpers.client.ClientRegistryHelper;
 import me.alexisevelyn.randomtech.utility.registryhelpers.main.PreRegistryHelper;
 import net.fabricmc.api.EnvType;
@@ -85,10 +85,8 @@ public class PoweredHelmet extends GenericPoweredArmor {
 
         CompoundTag rootTag = stack.getTag();
 
-        if (rootTag != null) {
-            if (rootTag.getInt("zoom") > 0 && isUsable(stack)) {
-                ItemManager.useEnergy(playerEntity, stack, cost);
-            }
+        if (rootTag != null && rootTag.getInt("zoom") > 0 && isUsable(stack)) {
+            ItemManagerHelper.useEnergy(playerEntity, stack, cost);
         }
     }
 

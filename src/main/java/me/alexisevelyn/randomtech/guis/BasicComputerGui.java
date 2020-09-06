@@ -18,7 +18,7 @@ import reborncore.common.util.Color;
  */
 @Environment(EnvType.CLIENT)
 public class BasicComputerGui extends GuiBase<BuiltScreenHandler> {
-    @SuppressWarnings("FieldCanBeLocal") private final BasicComputerBlockEntity blockEntity;
+    // @SuppressWarnings("FieldCanBeLocal") private final BasicComputerBlockEntity blockEntity;
     public GuiBuilder builder = new GuiBuilder(new Identifier(Main.MODID, "textures/gui/guielements.png"));
     //private TextFieldWidget nameField;
 
@@ -42,7 +42,7 @@ public class BasicComputerGui extends GuiBase<BuiltScreenHandler> {
      */
     public BasicComputerGui(int syncID, PlayerEntity player, BasicComputerBlockEntity blockEntity) {
         super(player, blockEntity, blockEntity.createScreenHandler(syncID, player));
-        this.blockEntity = blockEntity;
+        // this.blockEntity = blockEntity;
 //        setup();
     }
 

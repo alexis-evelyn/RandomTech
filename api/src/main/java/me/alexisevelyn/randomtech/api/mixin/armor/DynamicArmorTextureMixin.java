@@ -83,6 +83,7 @@ public abstract class DynamicArmorTextureMixin<T extends LivingEntity, M extends
 	 * @param bipedEntityModel the biped entity model
 	 * @param info             the info
 	 */
+	@SuppressWarnings("PMD.UnusedPrivateMethod")
 	@Inject(at = @At("INVOKE"), method = "renderArmor(Lnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumerProvider;Lnet/minecraft/entity/LivingEntity;Lnet/minecraft/entity/EquipmentSlot;ILnet/minecraft/client/render/entity/model/BipedEntityModel;)V", cancellable = true)
 	private void renderArmor(MatrixStack matrices, VertexConsumerProvider vertexConsumers, T livingEntity, EquipmentSlot equipmentSlot, int i, A bipedEntityModel, CallbackInfo info) {
 		ItemStack itemStack = livingEntity.getEquippedStack(equipmentSlot);

@@ -117,7 +117,7 @@ public class EnergyCableBlockEntity extends BlockEntity implements SidedInventor
      */
     @Override
     public void setStack(int slot, ItemStack stack) {
-
+        // TODO: Will Be Written Later
     }
 
     /**
@@ -137,7 +137,7 @@ public class EnergyCableBlockEntity extends BlockEntity implements SidedInventor
      */
     @Override
     public void markDirty() {
-
+        // TODO: Will Be Written Later
     }
 
     /**
@@ -158,7 +158,7 @@ public class EnergyCableBlockEntity extends BlockEntity implements SidedInventor
      */
     @Override
     public void onOpen(PlayerEntity player) {
-
+        // TODO: Will Be Written Later
     }
 
     /**
@@ -168,7 +168,7 @@ public class EnergyCableBlockEntity extends BlockEntity implements SidedInventor
      */
     @Override
     public void onClose(PlayerEntity player) {
-
+        // Intentionally Left Empty
     }
 
     /**
@@ -207,6 +207,6 @@ public class EnergyCableBlockEntity extends BlockEntity implements SidedInventor
      */
     @Override
     public void clear() {
-
+        // Intentionally Left Empty
     }
 }

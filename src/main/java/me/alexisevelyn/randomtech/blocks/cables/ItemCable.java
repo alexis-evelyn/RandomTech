@@ -4,7 +4,7 @@ import me.alexisevelyn.randomtech.api.blocks.cables.GenericCable;
 import me.alexisevelyn.randomtech.api.utilities.GenericBlockHelper;
 import me.alexisevelyn.randomtech.blockentities.cables.ItemCableBlockEntity;
 import me.alexisevelyn.randomtech.inventories.ItemCableInventory;
-import me.alexisevelyn.randomtech.utility.Materials;
+import me.alexisevelyn.randomtech.utility.MaterialsHelper;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
@@ -15,7 +15,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.inventory.SidedInventory;
 import net.minecraft.item.ItemStack;
-import net.minecraft.screen.*;
+import net.minecraft.screen.ScreenHandler;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.ActionResult;
@@ -43,7 +43,7 @@ public class ItemCable extends GenericCable implements BlockEntityProvider, Inve
      */
     public ItemCable() {
         this((float) (3.0/16), FabricBlockSettings
-                .of(Materials.CABLE_MATERIAL)
+                .of(MaterialsHelper.CABLE_MATERIAL)
                 .sounds(BlockSoundGroup.GLASS)
                 .nonOpaque() // Fixes xray issue. Also allows light pass through block
                 .allowsSpawning(GenericBlockHelper::never) // Allows or denies spawning

@@ -122,7 +122,7 @@ public abstract class BasePowerAcceptorBlockEntity extends PowerAcceptorBlockEnt
      */
     @Override
     public void onOpen(PlayerEntity player) {
-
+        // Intentionally Left Empty
     }
 
     /**
@@ -132,7 +132,7 @@ public abstract class BasePowerAcceptorBlockEntity extends PowerAcceptorBlockEnt
      */
     @Override
     public void onClose(PlayerEntity player) {
-
+        // Intentionally Left Empty
     }
 
     /**

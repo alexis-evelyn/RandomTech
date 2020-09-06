@@ -2,7 +2,7 @@ package me.alexisevelyn.randomtech.api.items.tools.generic;
 
 import com.google.common.collect.Multimap;
 import me.alexisevelyn.randomtech.api.items.energy.EnergyHelper;
-import me.alexisevelyn.randomtech.api.utilities.ItemManager;
+import me.alexisevelyn.randomtech.api.utilities.ItemManagerHelper;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.block.Block;
@@ -267,7 +267,7 @@ public abstract class GenericPoweredTool extends MiningToolItem implements Energ
     public boolean postHit(ItemStack stack, LivingEntity target, LivingEntity attacker) {
         Random rand = new Random();
         if (isUsable(stack) && rand.nextInt(EnchantmentHelper.getLevel(Enchantments.UNBREAKING, stack) + 1) == 0) {
-            ItemManager.useEnergy(attacker, stack, cost);
+            ItemManagerHelper.useEnergy(attacker, stack, cost);
             return super.postHit(stack, target, attacker);
         }
 
@@ -291,9 +291,9 @@ public abstract class GenericPoweredTool extends MiningToolItem implements Energ
         Random rand = new Random();
         if (isUsable(stack) && (state.getHardness(world, pos) != 0.0F) && rand.nextInt(EnchantmentHelper.getLevel(Enchantments.UNBREAKING, stack) + 1) == 0) {
             if (isEffectiveOn(state))
-                ItemManager.useEnergy(miner, stack, cost);
+                ItemManagerHelper.useEnergy(miner, stack, cost);
             else
-                ItemManager.useEnergy(miner, stack, cost+1);
+                ItemManagerHelper.useEnergy(miner, stack, cost+1);
 
             return super.postMine(stack, world, state, pos, miner);
         }
@@ -482,7 +482,7 @@ public abstract class GenericPoweredTool extends MiningToolItem implements Energ
             return;
         }
 
-        ItemManager.initPoweredItems(this, itemList);
+        ItemManagerHelper.initPoweredItems(this, itemList);
     }
 
     /**
@@ -495,7 +495,7 @@ public abstract class GenericPoweredTool extends MiningToolItem implements Energ
      */
     @Override
     public ItemStack onCraft(ItemStack oldStack, ItemStack newStack, CompoundTag tag) {
-        return ItemManager.convertStackToEnergyItemStack(oldStack, newStack, tag);
+        return ItemManagerHelper.convertStackToEnergyItemStack(oldStack, newStack, tag);
     }
 
     /**
@@ -510,7 +510,7 @@ public abstract class GenericPoweredTool extends MiningToolItem implements Energ
     @Override
     public void appendTooltip(ItemStack stack, @Nullable World worldIn, List<Text> tooltip, TooltipContext flagIn) {
         if (flagIn.isAdvanced())
-            ItemManager.powerLevelTooltip(stack, tooltip);
+            ItemManagerHelper.powerLevelTooltip(stack, tooltip);
     }
 
     /**

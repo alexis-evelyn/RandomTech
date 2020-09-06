@@ -7,7 +7,7 @@ import net.minecraft.item.FoodComponent;
 /**
  * The type Foods.
  */
-public final class Foods {
+public final class FoodsHelper {
     public static final FoodComponent EDIBLE_POWER = new FoodComponent
             .Builder()
             .hunger(3)

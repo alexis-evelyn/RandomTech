@@ -2,7 +2,7 @@ package me.alexisevelyn.randomtech.blocks.metals;
 
 import me.alexisevelyn.randomtech.api.utilities.GenericBlockHelper;
 import me.alexisevelyn.randomtech.api.utilities.MiningLevel;
-import me.alexisevelyn.randomtech.utility.Materials;
+import me.alexisevelyn.randomtech.utility.MaterialsHelper;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.fabricmc.fabric.api.tool.attribute.v1.FabricToolTags;
 import net.minecraft.block.Block;
@@ -17,7 +17,7 @@ public class PureRedstoneBlock extends Block {
      */
     public PureRedstoneBlock() {
         super(FabricBlockSettings
-                .of(Materials.METAL_ORE_MATERIAL)
+                .of(MaterialsHelper.METAL_ORE_MATERIAL)
                 .sounds(BlockSoundGroup.METAL)
                 .breakByTool(FabricToolTags.PICKAXES, MiningLevel.IRON.getValue())
                 .requiresTool()

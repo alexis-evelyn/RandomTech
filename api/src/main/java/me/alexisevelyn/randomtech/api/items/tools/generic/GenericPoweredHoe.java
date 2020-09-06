@@ -1,6 +1,6 @@
 package me.alexisevelyn.randomtech.api.items.tools.generic;
 
-import me.alexisevelyn.randomtech.api.utilities.ItemManager;
+import me.alexisevelyn.randomtech.api.utilities.ItemManagerHelper;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.HoeItem;
@@ -63,7 +63,7 @@ public abstract class GenericPoweredHoe extends GenericPoweredTool {
                     world.setBlockState(blockPos, blockState, 11);
                 }
 
-                ItemManager.useEnergy(playerEntity, context.getStack(), cost); // To Make Sure Item Uses Durability
+                ItemManagerHelper.useEnergy(playerEntity, context.getStack(), cost); // To Make Sure Item Uses Durability
                 return ActionResult.success(world.isClient);
             }
         }

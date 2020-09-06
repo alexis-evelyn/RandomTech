@@ -22,7 +22,7 @@ import java.util.List;
 /**
  * The type Item manager.
  */
-public class ItemManager {
+public class ItemManagerHelper {
     /**
      * Init powered items.
      *

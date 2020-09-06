@@ -1,7 +1,7 @@
 package me.alexisevelyn.randomtech.blocks;
 
 import me.alexisevelyn.randomtech.api.blocks.machines.FluidMachineBase;
-import me.alexisevelyn.randomtech.utility.Materials;
+import me.alexisevelyn.randomtech.utility.MaterialsHelper;
 import me.alexisevelyn.randomtech.utility.registryhelpers.main.RegistryHelper;
 import me.alexisevelyn.randomtech.blockentities.FuserBlockEntity;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
@@ -21,7 +21,7 @@ public class FuserBlock extends FluidMachineBase {
      */
     public FuserBlock() {
         super(FabricBlockSettings
-                .of(Materials.MACHINE_MATERIAL)
+                .of(MaterialsHelper.MACHINE_MATERIAL)
                 .breakByHand(false).requiresTool()
                 .breakByTool(FabricToolTags.PICKAXES, ToolMaterials.IRON.getMiningLevel())
                 .sounds(BlockSoundGroup.NETHERITE)

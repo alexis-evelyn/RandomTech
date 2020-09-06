@@ -1,7 +1,7 @@
 package me.alexisevelyn.randomtech.blocks.glass;
 
 import me.alexisevelyn.randomtech.api.utilities.GenericBlockHelper;
-import me.alexisevelyn.randomtech.utility.Materials;
+import me.alexisevelyn.randomtech.utility.MaterialsHelper;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.AbstractGlassBlock;
 import net.minecraft.sound.BlockSoundGroup;
@@ -18,7 +18,7 @@ public class ClearGlass extends AbstractGlassBlock {
      */
     public ClearGlass() {
         super(FabricBlockSettings
-                .of(Materials.GLASS_MATERIAL)
+                .of(MaterialsHelper.GLASS_MATERIAL)
                 .sounds(BlockSoundGroup.GLASS)
                 .nonOpaque() // .noCollision() - Allows for walking through blocks
                 .allowsSpawning(GenericBlockHelper::never)

@@ -91,9 +91,9 @@ public class WizardEntity extends PathAwareEntity {
      */
     @Override
     public void tick() {
-        if (this.isAlive()) {
-            // Do Nothing For Now!!!
-        }
+//        if (this.isAlive()) {
+//            // Do Nothing For Now!!!
+//        }
 
         super.tick();
     }

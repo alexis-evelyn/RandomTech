@@ -38,7 +38,6 @@ public class VirtualTileInfo implements IComponentProvider {
      * @param accessor the accessor
      * @param config   the config
      */
-    @SuppressWarnings("PMD.UncommentedEmptyMethodBody")
     @Override
     public void appendHead(List<Text> tooltip, IDataAccessor accessor, IPluginConfig config) {
         // Intentionally Left Blank
@@ -76,7 +75,6 @@ public class VirtualTileInfo implements IComponentProvider {
      * @param accessor the accessor
      * @param config   the config
      */
-    @SuppressWarnings("PMD.UncommentedEmptyMethodBody")
     @Override
     public void appendTail(List<Text> tooltip, IDataAccessor accessor, IPluginConfig config) {
         // Intentionally Left Blank

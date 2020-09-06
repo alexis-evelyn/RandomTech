@@ -2,7 +2,7 @@ package me.alexisevelyn.randomtech.blocks.glass;
 
 import me.alexisevelyn.randomtech.blockentities.IntangibleDarkGlassBlockEntity;
 import me.alexisevelyn.randomtech.api.utilities.GenericBlockHelper;
-import me.alexisevelyn.randomtech.utility.Materials;
+import me.alexisevelyn.randomtech.utility.MaterialsHelper;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.AbstractGlassBlock;
 import net.minecraft.block.BlockEntityProvider;
@@ -25,7 +25,7 @@ public class DarkIntangibleGlass extends AbstractGlassBlock implements BlockEnti
      */
     public DarkIntangibleGlass() {
         super(FabricBlockSettings
-                .of(Materials.DARK_GLASS_MATERIAL)
+                .of(MaterialsHelper.DARK_GLASS_MATERIAL)
                 .sounds(BlockSoundGroup.GLASS)
                 .nonOpaque() // Fixes xray issue. Also allows light pass through block
 //                .noCollision() // Allows walking through block. Also allows light pass through block

@@ -35,7 +35,7 @@ import me.alexisevelyn.randomtech.items.ingots.DeathIngot;
 import me.alexisevelyn.randomtech.items.ingots.RedstoneIngot;
 import me.alexisevelyn.randomtech.items.tools.powered.*;
 import me.alexisevelyn.randomtech.utility.BlockEntitiesHelper;
-import me.alexisevelyn.randomtech.utility.Materials;
+import me.alexisevelyn.randomtech.utility.MaterialsHelper;
 import me.alexisevelyn.randomtech.utility.RecipesHelper;
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
 import net.fabricmc.fabric.api.event.registry.RegistryEntryAddedCallback;
@@ -102,7 +102,7 @@ public class RegistryHelper {
 
     // Natural Cables
     private static final AbstractBlock.Settings CHORUS_CABLE_SETTINGS = FabricBlockSettings
-            .of(Materials.CABLE_MATERIAL, MaterialColor.PURPLE)
+            .of(MaterialsHelper.CABLE_MATERIAL, MaterialColor.PURPLE)
             .sounds(BlockSoundGroup.WOOD) // Wood is what chorus plants use.
             .nonOpaque() // Fixes xray issue. Also allows light pass through block
             .allowsSpawning(GenericBlockHelper::never) // Allows or denies spawning

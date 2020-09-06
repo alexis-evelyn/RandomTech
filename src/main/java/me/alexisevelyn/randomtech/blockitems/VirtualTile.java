@@ -2,7 +2,7 @@ package me.alexisevelyn.randomtech.blockitems;
 
 import me.alexisevelyn.randomtech.api.utilities.GenericBlockHelper;
 import me.alexisevelyn.randomtech.blockentities.VirtualTileBlockEntity;
-import me.alexisevelyn.randomtech.utility.Materials;
+import me.alexisevelyn.randomtech.utility.MaterialsHelper;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
@@ -240,7 +240,7 @@ public class VirtualTile extends BlockItem {
          */
         public VirtualTileBlock() {
             super(FabricBlockSettings
-                    .of(Materials.TILE_MATERIAL)
+                    .of(MaterialsHelper.TILE_MATERIAL)
                     .sounds(BlockSoundGroup.STONE)
                     .breakByTool(FabricToolTags.PICKAXES, ToolMaterials.WOOD.getMiningLevel())
                     .requiresTool()

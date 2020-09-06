@@ -27,6 +27,7 @@ public abstract class AnvilEnchantHelperMixin {
 	 * @param info      the info
 	 */
     // Cancellable must be allowed, otherwise the game crashes when trying to modify the return value
+	@SuppressWarnings("PMD.UnusedPrivateMethod")
 	@Inject(at = @At("TAIL"), method = "isAcceptableItem(Lnet/minecraft/item/ItemStack;)Z", cancellable = true)
 	private void isAcceptableItem(ItemStack itemStack, CallbackInfoReturnable<Boolean> info) {
 //		System.out.println("---");

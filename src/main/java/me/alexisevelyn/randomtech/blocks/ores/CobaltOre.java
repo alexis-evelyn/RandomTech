@@ -2,7 +2,7 @@ package me.alexisevelyn.randomtech.blocks.ores;
 
 import me.alexisevelyn.randomtech.api.utilities.GenericBlockHelper;
 import me.alexisevelyn.randomtech.api.utilities.MiningLevel;
-import me.alexisevelyn.randomtech.utility.Materials;
+import me.alexisevelyn.randomtech.utility.MaterialsHelper;
 import me.alexisevelyn.randomtech.utility.registryhelpers.main.RegistryHelper;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.fabricmc.fabric.api.tool.attribute.v1.FabricToolTags;
@@ -28,7 +28,7 @@ public class CobaltOre extends Block {
      */
     public CobaltOre() {
         super(FabricBlockSettings
-                .of(Materials.METAL_ORE_MATERIAL)
+                .of(MaterialsHelper.METAL_ORE_MATERIAL)
                 .sounds(BlockSoundGroup.STONE)
                 .breakByTool(FabricToolTags.PICKAXES, MiningLevel.POWERED.getValue())
                 .requiresTool()

@@ -4,7 +4,7 @@ import me.alexisevelyn.randomtech.api.blockentities.FluidMachineBlockEntityBase;
 import me.alexisevelyn.randomtech.api.blocks.cables.GenericCable;
 import me.alexisevelyn.randomtech.api.blocks.machines.FluidMachineBase;
 import me.alexisevelyn.randomtech.api.utilities.GenericBlockHelper;
-import me.alexisevelyn.randomtech.utility.Materials;
+import me.alexisevelyn.randomtech.utility.MaterialsHelper;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -32,7 +32,7 @@ public class FluidCable extends GenericCable {
      */
     public FluidCable() {
         this((float) (3.0/16), FabricBlockSettings
-                .of(Materials.CABLE_MATERIAL)
+                .of(MaterialsHelper.CABLE_MATERIAL)
                 .sounds(BlockSoundGroup.GLASS)
                 .nonOpaque() // Fixes xray issue. Also allows light pass through block
                 .allowsSpawning(GenericBlockHelper::never) // Allows or denies spawning
