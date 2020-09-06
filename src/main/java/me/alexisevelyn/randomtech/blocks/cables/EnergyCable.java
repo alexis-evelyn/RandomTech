@@ -10,6 +10,8 @@ import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.sound.BlockSoundGroup;
+import net.minecraft.state.StateManager;
+import net.minecraft.state.property.IntProperty;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.hit.BlockHitResult;
@@ -27,6 +29,8 @@ import java.awt.*;
  * The type Energy cable.
  */
 public class EnergyCable extends GenericCable {
+    public static final IntProperty POWER = IntProperty.of("power", 0, 15);
+
     /**
      * Instantiates a new Energy cable.
      *
@@ -51,6 +55,11 @@ public class EnergyCable extends GenericCable {
      */
     public EnergyCable(float radius, @NotNull Settings settings) {
         super(radius, settings);
+
+        this.setDefaultState(this.getStateManager().getDefaultState()
+                .with(POWER, 0)
+                .with(GenericCable.WATERLOGGED, false) // For some reason, adding a new property reverses waterlogged to true, so we set it false here too
+        );
     }
 
     /**
@@ -135,5 +144,32 @@ public class EnergyCable extends GenericCable {
     @Override
     public ActionResult openGui(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
         return ActionResult.PASS;
+    }
+
+    /**
+     *
+     * @param state
+     * @param world
+     * @param pos
+     * @param block
+     * @param fromPos
+     * @param notify
+     */
+    @Override
+    public void neighborUpdate(BlockState state, World world, BlockPos pos, Block block, BlockPos fromPos, boolean notify) {
+        super.neighborUpdate(state, world, pos, block, fromPos, notify);
+
+        // world.setBlockState(pos, state.with(POWER, world.getReceivedRedstonePower(pos)));
+    }
+
+    /**
+     *
+     * @param builder the builder
+     */
+    @Override
+    protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
+        super.appendProperties(builder);
+
+        builder.add(POWER);
     }
 }
