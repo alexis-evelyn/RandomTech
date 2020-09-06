@@ -16,7 +16,7 @@ import reborncore.client.screen.builder.BuiltScreenHandler;
  */
 @Environment(EnvType.CLIENT)
 public class TeleporterGui extends GuiBase<BuiltScreenHandler> {
-    final TeleporterBlockEntity blockEntity;
+    private final TeleporterBlockEntity blockEntity;
     public GuiBuilder builder = new GuiBuilder(new Identifier(Main.MODID, "textures/gui/guielements.png"));
 
     // Background

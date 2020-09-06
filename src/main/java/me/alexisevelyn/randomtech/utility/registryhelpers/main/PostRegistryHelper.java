@@ -23,13 +23,22 @@ public class PostRegistryHelper {
      * Post register.
      */
     public void postRegister() {
+        this.registerCCACallback();
+        this.registerZoomHandler();
+    }
+
+    // TODO: Replace Need for CCA
+    private void registerCCACallback() {
         // Register All Powered Tools and Armor With Callback
         Registry.ITEM.stream().forEach(item -> {
             if (item instanceof EnergyHelper) {
                 ItemComponentCallback.event(item).register((stack, components) -> components.put(Main.BROKEN_ITEM_COMPONENT, new BrokenItemComponent(stack)));
             }
         });
+    }
 
+    @SuppressWarnings("PMD.SwitchStmtsShouldHaveDefault") // Cause the switch statement doesn't need a default statement
+    private void registerZoomHandler() {
         // To Handle Hotkey Presses From Client
         ServerSidePacketRegistry.INSTANCE.register(PreRegistryHelper.keybindPacketIdentifier, (packetContext, attachedData) -> {
             byte[] key = attachedData.readByteArray();

@@ -25,6 +25,7 @@ public abstract class ExperimentalPromptMessageMixin {
      * @return
      */
     @ModifyArg(method = "method_29601(Lnet/minecraft/client/MinecraftClient$WorldLoadAction;Ljava/lang/String;ZLjava/lang/Runnable;)V", at = @At(value = "INVOKE", target = "Lnet/minecraft/text/TranslatableText;<init>(Ljava/lang/String;)V"))
+    @SuppressWarnings("PMD.UnusedPrivateMethod")
     private String modifyExperimentalMessages(String identifier) {
         if (identifier.equals(BACKUP_QUESTION))
             return NEW_BACKUP_QUESTION;

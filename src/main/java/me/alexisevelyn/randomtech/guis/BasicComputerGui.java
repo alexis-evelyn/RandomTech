@@ -18,7 +18,7 @@ import reborncore.common.util.Color;
  */
 @Environment(EnvType.CLIENT)
 public class BasicComputerGui extends GuiBase<BuiltScreenHandler> {
-    final BasicComputerBlockEntity blockEntity;
+    @SuppressWarnings("FieldCanBeLocal") private final BasicComputerBlockEntity blockEntity;
     public GuiBuilder builder = new GuiBuilder(new Identifier(Main.MODID, "textures/gui/guielements.png"));
     //private TextFieldWidget nameField;
 
@@ -72,7 +72,7 @@ public class BasicComputerGui extends GuiBase<BuiltScreenHandler> {
     @Override
     protected void drawBackground(MatrixStack matrixStack, float lastFrameDuration, int mouseX, int mouseY) {
         super.drawBackground(matrixStack, lastFrameDuration, mouseX, mouseY);
-        final Layer layer = Layer.BACKGROUND;
+        // final Layer layer = Layer.BACKGROUND;
     }
 
     /**
@@ -86,7 +86,7 @@ public class BasicComputerGui extends GuiBase<BuiltScreenHandler> {
     protected void drawForeground(MatrixStack matrixStack, int mouseX, int mouseY) {
         // The ordering of these gui elements is bottom right first to top left last.
         super.drawForeground(matrixStack, mouseX, mouseY);
-        final Layer layer = Layer.FOREGROUND;
+        // final Layer layer = Layer.FOREGROUND;
 
         builder.drawText(matrixStack, this, new LiteralText("Not Meant To Be Used Right Now!!!"), mouseX - this.x, mouseY - this.y, Color.RED.getColor());
         //this.nameField.render(matrixStack, this.x, this.y, -1);

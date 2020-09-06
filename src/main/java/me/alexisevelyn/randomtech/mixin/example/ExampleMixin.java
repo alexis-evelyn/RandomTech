@@ -17,6 +17,7 @@ public class ExampleMixin {
      *
      * @param info the info
      */
+    @SuppressWarnings({"PMD.UnusedPrivateMethod", "PMD.UnusedFormalParameter"})
     @Inject(at = @At("HEAD"), method = "init()V")
 	private void init(CallbackInfo info) {
 		// Nothing For Now. Commented Out print line to prevent unnecessary messages in the log

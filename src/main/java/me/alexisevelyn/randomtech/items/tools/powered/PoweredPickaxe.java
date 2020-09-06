@@ -1,7 +1,7 @@
 package me.alexisevelyn.randomtech.items.tools.powered;
 
 import me.alexisevelyn.randomtech.api.items.tools.generic.GenericPoweredPickaxe;
-import me.alexisevelyn.randomtech.api.utilities.MiningManager;
+import me.alexisevelyn.randomtech.api.utilities.MiningManagerUtility;
 import me.alexisevelyn.randomtech.toolmaterials.poweredtools.PoweredToolMaterial;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -108,7 +108,7 @@ public class PoweredPickaxe extends GenericPoweredPickaxe {
         PlayerEntity playerEntity = context.getPlayer();
 
         if (playerEntity != null) {
-            boolean canMine = MiningManager.canMine(context);
+            boolean canMine = MiningManagerUtility.canMine(context);
 
             MutableText canMineVariable = new TranslatableText(canMine ? "text.randomtech.true" : "text.randomtech.false");
 

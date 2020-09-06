@@ -13,8 +13,8 @@ import net.minecraft.fluid.FlowableFluid;
  * The type Honey fluid block.
  */
 public class HoneyFluidBlock extends BaseFluidBlock {
-    final int slowness_level = 3;
-    final int slow_falling_level = 2;
+    protected final int slowness_level = 3;
+    protected final int slow_falling_level = 2;
 
     /**
      * Instantiates a new Honey fluid block.

@@ -90,6 +90,7 @@ public abstract class PoweredMendingHelper extends Entity {
 	 * @param player the player
 	 * @param info   the info
 	 */
+	@SuppressWarnings("PMD.UnusedPrivateMethod")
 	@Inject(at = @At("HEAD"), method = "onPlayerCollision(Lnet/minecraft/entity/player/PlayerEntity;)V", cancellable = true)
 	private void onPlayerCollision(PlayerEntity player, CallbackInfo info) {
 		boolean isCancelled = false;

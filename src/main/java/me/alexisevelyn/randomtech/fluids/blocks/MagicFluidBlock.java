@@ -13,8 +13,8 @@ import net.minecraft.fluid.FlowableFluid;
  * The type Magic fluid block.
  */
 public class MagicFluidBlock extends BaseFluidBlock {
-    final int levitation_level = 1;
-    final int night_vision_level = 1;
+    protected final int levitation_level = 1;
+    protected final int night_vision_level = 1;
 
     /**
      * Instantiates a new Magic fluid block.

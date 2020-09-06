@@ -38,9 +38,10 @@ public class VirtualTileInfo implements IComponentProvider {
      * @param accessor the accessor
      * @param config   the config
      */
+    @SuppressWarnings("PMD.UncommentedEmptyMethodBody")
     @Override
     public void appendHead(List<Text> tooltip, IDataAccessor accessor, IPluginConfig config) {
-
+        // Intentionally Left Blank
     }
 
     /**
@@ -54,19 +55,17 @@ public class VirtualTileInfo implements IComponentProvider {
     public void appendBody(List<Text> tooltip, IDataAccessor accessor, IPluginConfig config) {
         boolean configDisplayColor = config.get(WailaRegistry.CONFIG_DISPLAY_COLOR, true);
 
-        if (configDisplayColor) {
-            if (accessor.getBlock() == RegistryHelper.VIRTUAL_TILE_BLOCK) {
-                VirtualTileBlockEntity virtualTileBlockEntity = (VirtualTileBlockEntity) accessor.getBlockEntity();
+        if (configDisplayColor && accessor.getBlock().equals(RegistryHelper.VIRTUAL_TILE_BLOCK)) {
+            VirtualTileBlockEntity virtualTileBlockEntity = (VirtualTileBlockEntity) accessor.getBlockEntity();
 
-                Color color = virtualTileBlockEntity.getColor();
+            Color color = virtualTileBlockEntity.getColor();
 
-                if (color == null)
-                    return;
+            if (color == null)
+                return;
 
-                TranslatableText virtualTileColorLine = new TranslatableText("message.randomtech.virtual_tile_color", color.getRed(), color.getGreen(), color.getBlue());
+            TranslatableText virtualTileColorLine = new TranslatableText("message.randomtech.virtual_tile_color", color.getRed(), color.getGreen(), color.getBlue());
 
-                tooltip.add(virtualTileColorLine);
-            }
+            tooltip.add(virtualTileColorLine);
         }
     }
 
@@ -77,8 +76,9 @@ public class VirtualTileInfo implements IComponentProvider {
      * @param accessor the accessor
      * @param config   the config
      */
+    @SuppressWarnings("PMD.UncommentedEmptyMethodBody")
     @Override
     public void appendTail(List<Text> tooltip, IDataAccessor accessor, IPluginConfig config) {
-
+        // Intentionally Left Blank
     }
 }

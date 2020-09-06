@@ -92,10 +92,11 @@ public abstract class BaseFluidBlock extends FluidBlock {
     /**
      * Gets light level.
      *
-     * @param currentFluidLevel the current fluid level
+     * @param startingFluidLevel the current fluid level
      * @return the light level
      */
-    public static int getLightLevel(@Nullable Integer currentFluidLevel) {
+    public static int getLightLevel(@Nullable Integer startingFluidLevel) {
+        Integer currentFluidLevel = startingFluidLevel;
         int minLightLevel = 0;
         int maxLightLevel = 15;
 

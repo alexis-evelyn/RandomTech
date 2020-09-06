@@ -7,7 +7,7 @@ public class ClientPostRegistryHelper {
     /**
      * Post register.
      */
-    @SuppressWarnings("EmptyMethod")
+    @SuppressWarnings({"EmptyMethod", "PMD.UncommentedEmptyMethodBody"})
     public void postRegister() {
         // Intentionally Left Blank
     }

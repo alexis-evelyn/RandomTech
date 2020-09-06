@@ -37,9 +37,10 @@ public class CobaltWireInfo implements IComponentProvider {
      * @param accessor the accessor
      * @param config   the config
      */
+    @SuppressWarnings("PMD.UncommentedEmptyMethodBody")
     @Override
     public void appendHead(List<Text> tooltip, IDataAccessor accessor, IPluginConfig config) {
-
+        // Intentionally Left Empty
     }
 
     /**
@@ -53,14 +54,12 @@ public class CobaltWireInfo implements IComponentProvider {
     public void appendBody(List<Text> tooltip, IDataAccessor accessor, IPluginConfig config) {
         boolean configDisplayRedstoneStrength = config.get(WailaRegistry.CONFIG_DISPLAY_REDSTONE_STRENGTH, true);
 
-        if (configDisplayRedstoneStrength) {
-            if (accessor.getBlock() == RegistryHelper.COBALT_WIRE) {
-                int signalStrengthLine = CobaltWire.getPower(accessor.getBlockState());
+        if (configDisplayRedstoneStrength && accessor.getBlock().equals(RegistryHelper.COBALT_WIRE)) {
+            int signalStrengthLine = CobaltWire.getPower(accessor.getBlockState());
 
-                TranslatableText redstoneStrengthLine = new TranslatableText("tooltip.waila.redstone_signal_strength", signalStrengthLine);
+            TranslatableText redstoneStrengthLine = new TranslatableText("tooltip.waila.redstone_signal_strength", signalStrengthLine);
 
-                tooltip.add(redstoneStrengthLine);
-            }
+            tooltip.add(redstoneStrengthLine);
         }
     }
 
@@ -71,8 +70,9 @@ public class CobaltWireInfo implements IComponentProvider {
      * @param accessor the accessor
      * @param config   the config
      */
+    @SuppressWarnings("PMD.UncommentedEmptyMethodBody")
     @Override
     public void appendTail(List<Text> tooltip, IDataAccessor accessor, IPluginConfig config) {
-
+        // Intentionally Left Empty
     }
 }

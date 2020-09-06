@@ -57,11 +57,8 @@ public class PoweredHelmet extends GenericPoweredArmor {
         // This runs client side
         CompoundTag rootTag = stack.getTag();
 
-        if (rootTag != null) {
-            if (rootTag.getInt("zoom") > 0 && isUsable(stack)) {
-                return 0;
-            }
-        }
+        if (rootTag != null && rootTag.getInt("zoom") > 0 && isUsable(stack))
+            return 0;
 
         return super.changeFov(oldFOV, stack, playerEntity);
     }

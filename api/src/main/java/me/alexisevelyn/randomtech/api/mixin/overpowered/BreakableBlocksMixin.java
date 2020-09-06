@@ -29,14 +29,14 @@ import java.util.List;
 @SuppressWarnings("UnusedMixin") // The mixin is used, just is loaded by Fabric and not Sponge methods
 @Mixin(AbstractBlock.class)
 public abstract class BreakableBlocksMixin {
+	@Shadow @Final protected AbstractBlock.Settings settings;
+
 	/**
 	 * Gets loot table id.
 	 *
 	 * @return the loot table id
 	 */
 	@Shadow @Final public abstract Identifier getLootTableId();
-
-	@Shadow @Final protected AbstractBlock.Settings settings;
 
 	/**
 	 * Calc block breaking delta.

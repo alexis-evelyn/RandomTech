@@ -28,9 +28,9 @@ import reborncore.client.screen.builder.BuiltScreenHandler;
 /**
  * The type Fuser gui handler.
  *
- * @param <FuserGui> the type parameter
+ * @param <G extends FuserGui> the type parameter
  */
-public class FuserGuiHandler<FuserGui> implements IMachineGuiHandler {
+public class FuserGuiHandler<G extends FuserGui> implements IMachineGuiHandler {
     private final ScreenHandlerType<BuiltScreenHandler> screenHandlerType;
 
     /**
@@ -52,11 +52,10 @@ public class FuserGuiHandler<FuserGui> implements IMachineGuiHandler {
      *
      * @return the gui factory
      */
-    @SuppressWarnings("unchecked") // The Unchecked Casts are in fact correctly casted. There's no way to properly check it afaik.
     private GuiFactory getGuiFactory() {
         // Responsible For Allowing The Gui to Be Linked to The Block Entity
         return (syncId, playerEntity, blockEntity) -> {
-            FuserGui fuserGui = (FuserGui) new me.alexisevelyn.randomtech.guis.FuserGui(syncId, playerEntity, (FuserBlockEntity) blockEntity);
+            FuserGui fuserGui = new FuserGui(syncId, playerEntity, (FuserBlockEntity) blockEntity);
 
             return (HandledScreen<BuiltScreenHandler>) fuserGui;
         };

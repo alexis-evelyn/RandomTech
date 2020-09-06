@@ -38,8 +38,8 @@ import java.util.Optional;
  */
 public class TeleporterBlockEntity extends BasePowerAcceptorBlockEntity implements IToolDrop, InventoryProvider, BuiltScreenHandlerProvider {
     // TechReborn's Frequency Transmitter
-    final Identifier frequencyTransmitterIdentifier = new Identifier("techreborn", "frequency_transmitter");
-    @SuppressWarnings("OptionalUsedAsFieldOrParameterType") final Optional<Item> frequencyTransmitter = Registry.ITEM.getOrEmpty(frequencyTransmitterIdentifier);
+    private final Identifier frequencyTransmitterIdentifier = new Identifier("techreborn", "frequency_transmitter");
+    @SuppressWarnings("OptionalUsedAsFieldOrParameterType") private final Optional<Item> frequencyTransmitter = Registry.ITEM.getOrEmpty(frequencyTransmitterIdentifier);
 
     // Inventory Slot Markers
     private final int inputSlot = 0;

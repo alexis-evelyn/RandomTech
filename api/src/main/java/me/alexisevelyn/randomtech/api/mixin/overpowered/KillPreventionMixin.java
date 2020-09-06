@@ -40,6 +40,7 @@ public abstract class KillPreventionMixin {
      * @param amount       the amount
      * @param info         the info
      */
+    @SuppressWarnings("PMD.UnusedPrivateMethod")
     @Inject(at = @At("HEAD"), method = "damage(Lnet/minecraft/entity/damage/DamageSource;F)Z", cancellable = true)
 	private void generalDamage(DamageSource damageSource, float amount, CallbackInfoReturnable<Boolean> info) {
         //noinspection ConstantConditions

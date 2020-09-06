@@ -347,7 +347,7 @@ public abstract class GenericCable extends ConnectingBlock implements Waterlogga
         Set<BlockPos> passedCables = new HashSet<>();
         List<BlockPos> knownCables = new ArrayList<>();
 
-        visitNeighbors(world, pos, passedCables, knownCables::add, this.maxCount);
+        visitNeighbors(world, pos, passedCables, knownCables::add, maxCount);
         return knownCables;
     }
 
@@ -371,10 +371,12 @@ public abstract class GenericCable extends ConnectingBlock implements Waterlogga
      * @param pos          the pos
      * @param passedCables the passed cables
      * @param visitor      the visitor
-     * @param counter      the counter
+     * @param startCounter the counter
      * @param maxCount     the max count
      */
-    private void visitNeighbors(@NotNull WorldAccess world, @NotNull BlockPos pos, @NotNull Set<BlockPos> passedCables, @NotNull Consumer<BlockPos> visitor, int counter, int maxCount) {
+    private void visitNeighbors(@NotNull WorldAccess world, @NotNull BlockPos pos, @NotNull Set<BlockPos> passedCables, @NotNull Consumer<BlockPos> visitor, int startCounter, int maxCount) {
+        int counter = startCounter;
+
         if (counter >= maxCount)
             return;
 
@@ -427,32 +429,28 @@ public abstract class GenericCable extends ConnectingBlock implements Waterlogga
      * @return the valid neighbors
      */
     private List<BlockPos> getValidNeighbors(@NotNull WorldAccess world, @NotNull BlockPos pos) {
-        BlockPos north, south, east, west, up, down;
-        BlockState northBlockState, southBlockState, eastBlockState, westBlockState, upBlockState, downBlockState;
-        boolean isNorthValid, isSouthValid, isEastValid, isWestValid, isUpValid, isDownValid;
-
         // Neighbor Positions
-        north = CalculationHelper.addVectors(pos, northVector);
-        south = CalculationHelper.addVectors(pos, southVector);
-        east = CalculationHelper.addVectors(pos, eastVector);
-        west = CalculationHelper.addVectors(pos, westVector);
-        up = CalculationHelper.addVectors(pos, upVector);
-        down = CalculationHelper.addVectors(pos, downVector);
+        BlockPos north = CalculationHelper.addVectors(pos, northVector);
+        BlockPos south = CalculationHelper.addVectors(pos, southVector);
+        BlockPos east = CalculationHelper.addVectors(pos, eastVector);
+        BlockPos west = CalculationHelper.addVectors(pos, westVector);
+        BlockPos up = CalculationHelper.addVectors(pos, upVector);
+        BlockPos down = CalculationHelper.addVectors(pos, downVector);
 
         // Neighbor BlockStates
-        northBlockState = world.getBlockState(north);
-        southBlockState = world.getBlockState(south);
-        eastBlockState = world.getBlockState(east);
-        westBlockState = world.getBlockState(west);
-        upBlockState = world.getBlockState(up);
-        downBlockState = world.getBlockState(down);
+        BlockState northBlockState = world.getBlockState(north);
+        BlockState southBlockState = world.getBlockState(south);
+        BlockState eastBlockState = world.getBlockState(east);
+        BlockState westBlockState = world.getBlockState(west);
+        BlockState upBlockState = world.getBlockState(up);
+        BlockState downBlockState = world.getBlockState(down);
 
-        isNorthValid = isNeighborValidForContinuance(world, northBlockState, north);
-        isSouthValid = isNeighborValidForContinuance(world, southBlockState, north);
-        isEastValid = isNeighborValidForContinuance(world, eastBlockState, north);
-        isWestValid = isNeighborValidForContinuance(world, westBlockState, north);
-        isUpValid = isNeighborValidForContinuance(world, upBlockState, north);
-        isDownValid = isNeighborValidForContinuance(world, downBlockState, north);
+        boolean isNorthValid = isNeighborValidForContinuance(world, northBlockState, north);
+        boolean isSouthValid = isNeighborValidForContinuance(world, southBlockState, north);
+        boolean isEastValid = isNeighborValidForContinuance(world, eastBlockState, north);
+        boolean isWestValid = isNeighborValidForContinuance(world, westBlockState, north);
+        boolean isUpValid = isNeighborValidForContinuance(world, upBlockState, north);
+        boolean isDownValid = isNeighborValidForContinuance(world, downBlockState, north);
 
         List<BlockPos> cables = new ArrayList<>();
         if (isNorthValid)
@@ -516,11 +514,13 @@ public abstract class GenericCable extends ConnectingBlock implements Waterlogga
      */
     // This is so the IDE will shutup about duplicate code.
     private int getIsViable(@NotNull CableConnection neighborConnection, int isViable) {
+        int viability = isViable;
+
         if (neighborConnection.equals(CableConnection.CABLE) || neighborConnection.equals(CableConnection.INTERFACEABLE)) {
-            isViable++;
+            viability++;
         }
 
-        return isViable;
+        return viability;
     }
 
     /**
@@ -597,14 +597,14 @@ public abstract class GenericCable extends ConnectingBlock implements Waterlogga
         BlockState downBlockState = world.getBlockState(down);
 
         // Set Cable States
-        state = setCableState(state, northBlockState, CABLE_CONNECTION_NORTH, CABLE_CONNECTION_SOUTH, world, pos, north, broken);
-        state = setCableState(state, southBlockState, CABLE_CONNECTION_SOUTH, CABLE_CONNECTION_NORTH, world, pos, south, broken);
-        state = setCableState(state, eastBlockState, CABLE_CONNECTION_EAST, CABLE_CONNECTION_WEST, world, pos, east, broken);
-        state = setCableState(state, westBlockState, CABLE_CONNECTION_WEST, CABLE_CONNECTION_EAST, world, pos, west, broken);
-        state = setCableState(state, upBlockState, CABLE_CONNECTION_UP, CABLE_CONNECTION_DOWN, world, pos, up, broken);
-        state = setCableState(state, downBlockState, CABLE_CONNECTION_DOWN, CABLE_CONNECTION_UP, world, pos, down, broken);
+        BlockState modifiedState = setCableState(state, northBlockState, CABLE_CONNECTION_NORTH, CABLE_CONNECTION_SOUTH, world, pos, north, broken);
+        modifiedState = setCableState(modifiedState, southBlockState, CABLE_CONNECTION_SOUTH, CABLE_CONNECTION_NORTH, world, pos, south, broken);
+        modifiedState = setCableState(modifiedState, eastBlockState, CABLE_CONNECTION_EAST, CABLE_CONNECTION_WEST, world, pos, east, broken);
+        modifiedState = setCableState(modifiedState, westBlockState, CABLE_CONNECTION_WEST, CABLE_CONNECTION_EAST, world, pos, west, broken);
+        modifiedState = setCableState(modifiedState, upBlockState, CABLE_CONNECTION_UP, CABLE_CONNECTION_DOWN, world, pos, up, broken);
+        modifiedState = setCableState(modifiedState, downBlockState, CABLE_CONNECTION_DOWN, CABLE_CONNECTION_UP, world, pos, down, broken);
 
-        return state;
+        return modifiedState;
     }
 
     /**

@@ -18,7 +18,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @SuppressWarnings("UnusedMixin") // The mixin is used, just is loaded by Fabric and not Sponge methods
 @Mixin(PlayerEntity.class)
 public abstract class DamageArmorMixinPlayerEntity {
-
 	@Shadow @Final public PlayerInventory inventory;
 
 	/**
@@ -28,6 +27,7 @@ public abstract class DamageArmorMixinPlayerEntity {
 	 * @param damage       the damage
 	 * @param info         the info
 	 */
+	@SuppressWarnings("PMD.UnusedFormalParameter")
 	@Inject(at = @At("INVOKE"), method = "damageArmor(Lnet/minecraft/entity/damage/DamageSource;F)V")
 	private void damageArmor(DamageSource damageSource, float damage, CallbackInfo info) {
 		if (damage > 0.0F) {

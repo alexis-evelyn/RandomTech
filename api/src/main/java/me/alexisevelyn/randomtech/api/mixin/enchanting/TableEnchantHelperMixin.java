@@ -31,6 +31,7 @@ public abstract class TableEnchantHelperMixin {
 	 * @param info            the info
 	 */
     // Cancellable must be allowed, otherwise the game crashes when trying to modify the return value
+	@SuppressWarnings("PMD.UnusedFormalParameter")
 	@Inject(at = @At("TAIL"), method = "getPossibleEntries(ILnet/minecraft/item/ItemStack;Z)Ljava/util/List;", cancellable = true)
 	private static void getPossibleEntries(int power, ItemStack itemStack, boolean treasureAllowed, CallbackInfoReturnable<List<EnchantmentLevelEntry>> info) {
 		// Only mess with enchantment table (and other enchanted loot generation) if our items.

@@ -64,9 +64,10 @@ public class Machines implements IComponentProvider, IServerDataProvider<BlockEn
      * @param accessor the accessor
      * @param config   the config
      */
+    @SuppressWarnings("PMD.UncommentedEmptyMethodBody")
     @Override
     public void appendHead(List<Text> tooltip, IDataAccessor accessor, IPluginConfig config) {
-
+        // Intentionally Left Empty
     }
 
     /**
@@ -82,7 +83,7 @@ public class Machines implements IComponentProvider, IServerDataProvider<BlockEn
         boolean configDisplayTank = config.get(WailaRegistry.CONFIG_DISPLAY_TANK, true);
 
         if (configDisplayPower) {
-            if (accessor.getBlock() == RegistryHelper.TELEPORTER) {
+            if (accessor.getBlock().equals(RegistryHelper.TELEPORTER)) {
                 TeleporterBlock teleporterBlock = (TeleporterBlock) accessor.getBlock();
 
                 double energy = teleporterBlock.getPower(accessor.getWorld(), accessor.getPosition());
@@ -93,7 +94,7 @@ public class Machines implements IComponentProvider, IServerDataProvider<BlockEn
                 tooltip.add(energyLine);
             }
 
-            if (accessor.getBlock() == RegistryHelper.FUSER) {
+            if (accessor.getBlock().equals(RegistryHelper.FUSER)) {
                 FuserBlock fuserBlock = (FuserBlock) accessor.getBlock();
 
                 double energy = fuserBlock.getPower(accessor.getWorld(), accessor.getPosition());
@@ -105,22 +106,20 @@ public class Machines implements IComponentProvider, IServerDataProvider<BlockEn
             }
         }
 
-        if (configDisplayTank) {
-            if (accessor.getBlock() == RegistryHelper.FUSER) {
-                FuserBlockEntity fuserBlockEntity = (FuserBlockEntity) accessor.getBlockEntity();
+        if (configDisplayTank && accessor.getBlock().equals(RegistryHelper.FUSER)) {
+            FuserBlockEntity fuserBlockEntity = (FuserBlockEntity) accessor.getBlockEntity();
 
-                FluidInstance fluidInstance = fuserBlockEntity.getFluid();
-                FluidValue fluidValue = fluidInstance.getAmount();
-                Tank tank = fuserBlockEntity.getTank();
+            FluidInstance fluidInstance = fuserBlockEntity.getFluid();
+            FluidValue fluidValue = fluidInstance.getAmount();
+            Tank tank = fuserBlockEntity.getTank();
 
-                int tankCapacity = -1;
-                if (tank != null)
-                    tankCapacity = tank.getCapacity().getRawValue();
+            int tankCapacity = -1;
+            if (tank != null)
+                tankCapacity = tank.getCapacity().getRawValue();
 
-                TranslatableText fluidLine = new TranslatableText("tooltip.waila.fluid_level", fluidValue.getRawValue(), tankCapacity, FluidUtil.getFluidName(fluidInstance.getFluid()));
+            TranslatableText fluidLine = new TranslatableText("tooltip.waila.fluid_level", fluidValue.getRawValue(), tankCapacity, FluidUtil.getFluidName(fluidInstance.getFluid()));
 
-                tooltip.add(fluidLine);
-            }
+            tooltip.add(fluidLine);
         }
     }
 
@@ -131,8 +130,9 @@ public class Machines implements IComponentProvider, IServerDataProvider<BlockEn
      * @param accessor the accessor
      * @param config   the config
      */
+    @SuppressWarnings("PMD.UncommentedEmptyMethodBody")
     @Override
     public void appendTail(List<Text> tooltip, IDataAccessor accessor, IPluginConfig config) {
-
+        // Intentionally Left Empty
     }
 }

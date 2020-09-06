@@ -99,9 +99,9 @@ public abstract class CobaltWiringMixin extends Block {
 			return false;
 		} else if (neighborBlockState.isOf(Blocks.REPEATER)) {
 			Direction direction = neighborBlockState.get(RepeaterBlock.FACING);
-			return direction == dir || direction.getOpposite() == dir;
+			return direction.equals(dir) || direction.getOpposite().equals(dir);
 		} else if (neighborBlockState.isOf(Blocks.OBSERVER)) {
-			return dir == neighborBlockState.get(ObserverBlock.FACING);
+			return dir != null && dir.equals(neighborBlockState.get(ObserverBlock.FACING));
 		} else {
 			return neighborBlockState.emitsRedstonePower() && dir != null;
 		}

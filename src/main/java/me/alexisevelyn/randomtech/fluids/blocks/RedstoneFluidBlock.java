@@ -13,8 +13,8 @@ import net.minecraft.fluid.FlowableFluid;
  * The type Redstone fluid block.
  */
 public class RedstoneFluidBlock extends BaseFluidBlock {
-    final int swiftness_level = 3;
-    final int nausea_level = 2;
+    protected final int swiftness_level = 3;
+    protected final int nausea_level = 2;
 
     /**
      * Instantiates a new Redstone fluid block.

@@ -13,8 +13,8 @@ import net.minecraft.fluid.FlowableFluid;
  * The type Experience fluid block.
  */
 public class ExperienceFluidBlock extends BaseFluidBlock {
-    final int luck_level = 3;
-    final int glow_level = 1;
+    protected final int luck_level = 3;
+    protected final int glow_level = 1;
 
     /**
      * Instantiates a new Experience fluid block.

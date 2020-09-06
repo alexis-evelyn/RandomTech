@@ -116,11 +116,9 @@ public class GenericFluidRecipe extends RebornFluidRecipe {
         if (tankFluid.getFluid() instanceof EmptyFluid)
             tankFluid.setFluid(recipeFluid.getFluid());
 
-        if (tankFluid.getFluid().equals(recipeFluid.getFluid())) {
-            if (tank.getFreeSpace().equalOrMoreThan(recipeFluid.getAmount())) {
-                tankFluid.addAmount(recipeFluid.getAmount());
-                return true;
-            }
+        if (tankFluid.getFluid().equals(recipeFluid.getFluid()) && tank.getFreeSpace().equalOrMoreThan(recipeFluid.getAmount())) {
+            tankFluid.addAmount(recipeFluid.getAmount());
+            return true;
         }
         return false;
     }

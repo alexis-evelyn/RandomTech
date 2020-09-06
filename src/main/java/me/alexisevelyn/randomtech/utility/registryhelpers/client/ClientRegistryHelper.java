@@ -12,7 +12,7 @@ import me.alexisevelyn.randomtech.blocks.wires.CobaltWire;
 import me.alexisevelyn.randomtech.entities.renderers.CloudDemonRenderer;
 import me.alexisevelyn.randomtech.entities.renderers.WizardRenderer;
 import me.alexisevelyn.randomtech.guis.ItemCableGui;
-import me.alexisevelyn.randomtech.modmenu.screens.MainScreen;
+import me.alexisevelyn.randomtech.modmenu.screens.ConfigScreen;
 import me.alexisevelyn.randomtech.utility.registryhelpers.main.RegistryHelper;
 import me.sargunvohra.mcmods.autoconfig1u.AutoConfig;
 import me.sargunvohra.mcmods.autoconfig1u.serializer.GsonConfigSerializer;
@@ -65,7 +65,7 @@ public class ClientRegistryHelper {
      */
     public void register() {
         // Register Configuration Screen for Mod Menu
-        AutoConfig.register(MainScreen.class, GsonConfigSerializer::new);
+        AutoConfig.register(ConfigScreen.class, GsonConfigSerializer::new);
 
         // Blocks
         blockSetup();
