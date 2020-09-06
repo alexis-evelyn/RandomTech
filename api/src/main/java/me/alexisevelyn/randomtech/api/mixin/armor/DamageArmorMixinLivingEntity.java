@@ -42,16 +42,18 @@ public abstract class DamageArmorMixinLivingEntity {
 	 */
 	@Inject(at = @At("HEAD"), method = "damageArmor(Lnet/minecraft/entity/damage/DamageSource;F)V")
 	private void damageArmor(DamageSource damageSource, float damage, CallbackInfo info) {
-		if (damage > 0.0F) {
+		float newDamage = damage;
+
+		if (newDamage > 0.0F) {
 
 			// Divide damage by 4. May remove this later.
-			damage /= 4.0F;
+			newDamage /= 4.0F;
 
 			// If damage is less than one, but greater than 0, set to 1.
-			if (damage < 1.0F)
-				damage = 1.0F;
+			if (newDamage < 1.0F)
+				newDamage = 1.0F;
 
-			float finalDamage = damage;
+			float finalDamage = newDamage;
 			this.getArmorItems().forEach(armor -> {
 				// System.out.println("Armor Piece: " + armor.getItem());
 				if ((!damageSource.isFire() || !armor.getItem().isFireproof()) && armor.getItem() instanceof GenericPoweredArmor) {
