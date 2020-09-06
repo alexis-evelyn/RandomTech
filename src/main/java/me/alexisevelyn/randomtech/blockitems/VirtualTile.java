@@ -1,5 +1,6 @@
 package me.alexisevelyn.randomtech.blockitems;
 
+import me.alexisevelyn.randomtech.api.utilities.CalculationHelper;
 import me.alexisevelyn.randomtech.api.utilities.GenericBlockHelper;
 import me.alexisevelyn.randomtech.blockentities.VirtualTileBlockEntity;
 import me.alexisevelyn.randomtech.utility.MaterialsHelper;
@@ -383,7 +384,7 @@ public class VirtualTile extends BlockItem {
                 int minLightLevel = 0;
                 int maxBrightness = 255;
 
-                return (int) ((brightness * maxLightLevel) / maxBrightness) + minLightLevel;
+                return (int) Math.floor(CalculationHelper.proportionCalculator(brightness, 0, maxBrightness, minLightLevel, maxLightLevel)); // (brightness * maxLightLevel) / maxBrightness) + minLightLevel;
             };
         }
 

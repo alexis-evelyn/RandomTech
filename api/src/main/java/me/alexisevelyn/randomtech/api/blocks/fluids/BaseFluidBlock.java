@@ -1,5 +1,6 @@
 package me.alexisevelyn.randomtech.api.blocks.fluids;
 
+import me.alexisevelyn.randomtech.api.utilities.CalculationHelper;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.FluidBlock;
 import net.minecraft.entity.Entity;
@@ -106,7 +107,7 @@ public abstract class BaseFluidBlock extends FluidBlock {
         if (currentFluidLevel == null)
             currentFluidLevel = 8;
 
-        int currentLightLevel = ((currentFluidLevel * maxLightLevel) / maxFluidLevel) + minLightLevel;
+        int currentLightLevel = (int) Math.floor(CalculationHelper.proportionCalculator(currentFluidLevel, 0, maxFluidLevel, minLightLevel, maxLightLevel)); // ((currentFluidLevel * maxLightLevel) / maxFluidLevel) + minLightLevel;
 
         // Note: I have to invert the light level as for some reason, Minecraft has fluids produce the
         // exact inverse of the light level than what is expected when basing it off of fluid levels.

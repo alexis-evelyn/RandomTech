@@ -3,6 +3,8 @@ package me.alexisevelyn.randomtech.blockentities;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import me.alexisevelyn.randomtech.api.blockentities.FluidMachineBlockEntityBase;
+import me.alexisevelyn.randomtech.api.utilities.CalculationHelper;
+import me.alexisevelyn.randomtech.blocks.FuserBlock;
 import me.alexisevelyn.randomtech.crafters.FuserRecipeCrafter;
 import me.alexisevelyn.randomtech.guis.FuserGui;
 import me.alexisevelyn.randomtech.utility.BlockEntitiesHelper;
@@ -14,12 +16,16 @@ import net.minecraft.fluid.Fluids;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.util.math.Direction;
+import net.minecraft.world.World;
+import org.jetbrains.annotations.NotNull;
 import reborncore.api.IToolDrop;
 import reborncore.api.blockentity.InventoryProvider;
 import reborncore.api.recipe.IRecipeCrafterProvider;
 import reborncore.client.screen.BuiltScreenHandlerProvider;
 import reborncore.client.screen.builder.BuiltScreenHandler;
 import reborncore.client.screen.builder.ScreenHandlerBuilder;
+import reborncore.common.blocks.BlockMachineBase;
 import reborncore.common.crafting.RebornRecipe;
 import reborncore.common.fluid.FluidValue;
 import reborncore.common.fluid.container.ItemFluidInfo;
@@ -114,11 +120,31 @@ public class FuserBlockEntity extends FluidMachineBlockEntityBase implements ITo
         if (world == null || world.isClient)
             return;
 
+        updateEnergyModelState(world);
+
         // Reset Stored Fluid Type if Tank is Empty
         if (tank.getFluidAmount().isEmpty())
             tank.setFluid(Fluids.EMPTY);
 
         attemptFillEmptyFluidContainer(fluidInputSlot, fluidOutputSlot);
+    }
+
+    public void updateEnergyModelState(@NotNull World world) {
+        // This exists solely to have dynamic fuser textures based on power level
+        // The boolean active is set by RebornCore's recipe handler in FuserBlock
+        Direction facing = world.getBlockState(pos).get(BlockMachineBase.FACING);
+        Boolean active = world.getBlockState(pos).get(BlockMachineBase.ACTIVE);
+
+        BlockState state = world.getBlockState(pos)
+                .with(FuserBlock.POWER, getEnergyState(world, this.getEnergy(), this.getMaxPower()))
+                .with(BlockMachineBase.FACING, facing)
+                .with(BlockMachineBase.ACTIVE, active);
+
+        world.setBlockState(pos, state);
+    }
+
+    private int getEnergyState(@NotNull World world, double currentEnergy, double maxEnergy) {
+        return (int) Math.floor(CalculationHelper.proportionCalculator(currentEnergy, 0, maxEnergy, 0, 15));
     }
 
     /**

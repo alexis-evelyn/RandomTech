@@ -1,6 +1,7 @@
 package me.alexisevelyn.randomtech.blockentities;
 
 import me.alexisevelyn.randomtech.api.blockentities.BasePowerAcceptorBlockEntity;
+import me.alexisevelyn.randomtech.api.utilities.CalculationHelper;
 import me.alexisevelyn.randomtech.blocks.TeleporterBlock;
 import me.alexisevelyn.randomtech.guis.TeleporterGui;
 import me.alexisevelyn.randomtech.utility.BlockEntitiesHelper;
@@ -324,17 +325,13 @@ public class TeleporterBlockEntity extends BasePowerAcceptorBlockEntity implemen
         int minLevel = 0;
         int maxLevel = 15;
 
-        // Formula Pulled From: https://stackoverflow.com/a/929107/6828099
         double energyRange = (getMaxPower() - getMinPower());
-        double stateRange = maxLevel - minLevel;
         int energyState;
 
         if (energyRange == 0)
             energyState = 0;
         else
-        {
-            energyState = (int) ((((getEnergy() - getMinPower()) * stateRange) / energyRange) + minLevel);
-        }
+            energyState = (int) Math.floor(CalculationHelper.proportionCalculator(getEnergy(), getMinPower(), energyRange, minLevel, maxLevel)); // ((((getEnergy() - getMinPower()) * stateRange) / energyRange) + minLevel);
 
         return energyState;
     }

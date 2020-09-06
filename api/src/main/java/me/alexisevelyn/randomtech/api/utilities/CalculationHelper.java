@@ -98,4 +98,9 @@ public class CalculationHelper {
 
         return Direction.fromVector(result.getX(), result.getY(), result.getZ());
     }
+
+    // Formula Pulled From: https://stackoverflow.com/a/929107/6828099
+    public static double proportionCalculator(double currentInput, double minInput, double maxInput, double minOutput, double maxOutput) {
+        return (((currentInput - minInput) * maxOutput) / maxInput) + minOutput;
+    }
 }
