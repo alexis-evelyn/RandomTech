@@ -17,7 +17,10 @@ import java.util.stream.IntStream;
  * The type Item cable inventory.
  */
 public class ItemCableInventory implements SidedInventory {
-    DefaultedList<ItemStack> inventory;
+    private DefaultedList<ItemStack> inventory;
+
+    private boolean isDirty = false;
+    private boolean needsProcessing = false;
 
     /**
      * Instantiates a new Item cable inventory.
@@ -43,9 +46,6 @@ public class ItemCableInventory implements SidedInventory {
     public void setInventory(DefaultedList<ItemStack> inventory) {
         this.inventory = inventory;
     }
-
-    private boolean isDirty = false;
-    private boolean needsProcessing = false;
 
     /**
      * Gets the available slot positions that are reachable from a given side.

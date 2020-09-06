@@ -16,7 +16,7 @@ import reborncore.client.screen.builder.BuiltScreenHandler;
  */
 @Environment(EnvType.CLIENT)
 public class FuserGui extends GuiBase<BuiltScreenHandler> {
-    final FuserBlockEntity blockEntity;
+    private final FuserBlockEntity blockEntity;
     public GuiBuilder builder = new GuiBuilder(new Identifier(Main.MODID, "textures/gui/guielements.png"));
 
     // Background

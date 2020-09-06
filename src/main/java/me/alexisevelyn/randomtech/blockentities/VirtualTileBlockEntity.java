@@ -1,7 +1,7 @@
 package me.alexisevelyn.randomtech.blockentities;
 
 import me.alexisevelyn.randomtech.blockitems.VirtualTile;
-import me.alexisevelyn.randomtech.utility.BlockEntities;
+import me.alexisevelyn.randomtech.utility.BlockEntitiesHelper;
 import net.fabricmc.fabric.api.block.entity.BlockEntityClientSerializable;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -22,7 +22,7 @@ public class VirtualTileBlockEntity extends BlockEntity implements BlockEntityCl
      * Instantiates a new Virtual tile block entity.
      */
     public VirtualTileBlockEntity() {
-        super(BlockEntities.VIRTUAL_TILE);
+        super(BlockEntitiesHelper.VIRTUAL_TILE);
     }
 
     /**

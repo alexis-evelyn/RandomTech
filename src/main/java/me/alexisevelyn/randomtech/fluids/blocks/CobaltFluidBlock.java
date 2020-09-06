@@ -57,8 +57,9 @@ public class CobaltFluidBlock extends BaseFluidBlock {
      *
      * @param playerEntity the player entity
      */
+    @SuppressWarnings("PMD.UncommentedEmptyMethodBody")
     public void applyShader(PlayerEntity playerEntity) {
-
+        // Intentionally Left Empty
     }
 
     /**
@@ -66,7 +67,8 @@ public class CobaltFluidBlock extends BaseFluidBlock {
      *
      * @param playerEntity the player entity
      */
+    @SuppressWarnings("PMD.UncommentedEmptyMethodBody")
     public void removeShader(PlayerEntity playerEntity) {
-
+        // Intentionally Left Empty
     }
 }

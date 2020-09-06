@@ -46,6 +46,7 @@ public abstract class DeathScreenMixin extends Screen {
      * @param info the info
      */
     @Inject(at = @At("HEAD"), method = "init()V", cancellable = true)
+    @SuppressWarnings("unused")
 	private void init(CallbackInfo info) {
 		// Nothing For Now. Commented Out print line to prevent unnecessary messages in the log
 		//System.out.println("This line is printed by an example mod mixin!");

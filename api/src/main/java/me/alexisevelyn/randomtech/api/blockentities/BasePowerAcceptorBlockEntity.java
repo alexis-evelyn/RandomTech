@@ -24,14 +24,14 @@ import java.util.Set;
  */
 public abstract class BasePowerAcceptorBlockEntity extends PowerAcceptorBlockEntity implements IToolDrop, InventoryProvider, BuiltScreenHandlerProvider {
     // Energy Values
-    @SuppressWarnings("CanBeFinal") double minPower = 0;
-    @SuppressWarnings("CanBeFinal") double maxPower = 10000;
-    @SuppressWarnings("CanBeFinal") double maxInput = 10000;
+    @SuppressWarnings("CanBeFinal") protected double minPower = 0;
+    @SuppressWarnings("CanBeFinal") protected double maxPower = 10000;
+    @SuppressWarnings("CanBeFinal") protected double maxInput = 10000;
 
-    @SuppressWarnings("CanBeFinal") double maxOutput = 0;
+    @SuppressWarnings("CanBeFinal") protected double maxOutput = 0;
 
-    @SuppressWarnings("CanBeFinal") boolean canAcceptEnergy = true;
-    @SuppressWarnings("CanBeFinal") boolean canProvideEnergy = false;
+    @SuppressWarnings("CanBeFinal") protected boolean canAcceptEnergy = true;
+    @SuppressWarnings("CanBeFinal") protected boolean canProvideEnergy = false;
 
     public RebornInventory<?> inventory;
 

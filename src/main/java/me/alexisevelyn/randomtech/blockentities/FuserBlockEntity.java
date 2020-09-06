@@ -5,7 +5,7 @@ import com.google.gson.JsonParser;
 import me.alexisevelyn.randomtech.api.blockentities.FluidMachineBlockEntityBase;
 import me.alexisevelyn.randomtech.crafters.FuserRecipeCrafter;
 import me.alexisevelyn.randomtech.guis.FuserGui;
-import me.alexisevelyn.randomtech.utility.BlockEntities;
+import me.alexisevelyn.randomtech.utility.BlockEntitiesHelper;
 import me.alexisevelyn.randomtech.utility.registryhelpers.main.RegistryHelper;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
@@ -33,33 +33,32 @@ import java.util.Arrays;
  * The type Fuser block entity.
  */
 public class FuserBlockEntity extends FluidMachineBlockEntityBase implements IToolDrop, InventoryProvider, BuiltScreenHandlerProvider, IRecipeCrafterProvider {
-    // Fluid Values
-    // JsonElement buckets = new Gson().toJsonTree(5 * 1000);
-    final JsonObject buckets = new JsonParser().parse("{'buckets': 5}").getAsJsonObject();
-
-    @SuppressWarnings("CanBeFinal") FluidValue maxFluidCapacity = FluidValue.parseFluidValue(buckets);
-
-    final FuserRecipeCrafter crafter;
+    private final FuserRecipeCrafter crafter;
 
     // Slots
-    final static int[] inputSlots = { 0 };
-    final static int[] outputSlots = { 1 };
+    private final static int[] inputSlots = { 0 };
+    private final static int[] outputSlots = { 1 };
 
-    final static int inputSlot = inputSlots[0];
-    final static int outputSlot = outputSlots[0];
+    private final static int inputSlot = inputSlots[0];
+    private final static int outputSlot = outputSlots[0];
 
-    final static int fluidInputSlot = 2;
-    final static int fluidOutputSlot = 3;
+    private final static int fluidInputSlot = 2;
+    private final static int fluidOutputSlot = 3;
 
-    int remainingRecipeTime = 0;
-    int maxRecipeTime = 0;
+    private int remainingRecipeTime = 0;
+    private int maxRecipeTime = 0;
 
     /**
      * Instantiates a new Fuser block entity.
      */
     public FuserBlockEntity() {
-        super(BlockEntities.FUSER);
+        super(BlockEntitiesHelper.FUSER);
         this.inventory = new RebornInventory<>(4, "FuserBlockEntity", 64, this);
+
+        // JsonElement buckets = new Gson().toJsonTree(5 * 1000);
+        JsonObject buckets = new JsonParser().parse("{'buckets': 5}").getAsJsonObject();
+        FluidValue maxFluidCapacity = FluidValue.parseFluidValue(buckets);
+
         this.tank = new Tank("TankStorage", maxFluidCapacity, this);
 
         crafter = new FuserRecipeCrafter(this, inventory, inputSlots, outputSlots);

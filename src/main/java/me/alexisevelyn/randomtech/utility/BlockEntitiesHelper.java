@@ -18,7 +18,7 @@ import java.util.function.Supplier;
 /**
  * The type Block entities.
  */
-public class BlockEntities {
+public class BlockEntitiesHelper {
     // Machines
     public static final BlockEntityType<TeleporterBlockEntity> TELEPORTER = register(TeleporterBlockEntity::new, "teleporter_block_entity", RegistryHelper.TELEPORTER);
     public static final BlockEntityType<FuserBlockEntity> FUSER = register(FuserBlockEntity::new, "fuser_block_entity", RegistryHelper.FUSER);

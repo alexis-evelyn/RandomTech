@@ -1,6 +1,6 @@
 package me.alexisevelyn.randomtech.blockentities.cables;
 
-import me.alexisevelyn.randomtech.utility.BlockEntities;
+import me.alexisevelyn.randomtech.utility.BlockEntitiesHelper;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.SidedInventory;
@@ -18,7 +18,7 @@ public class EnergyCableBlockEntity extends BlockEntity implements SidedInventor
      * Instantiates a new Energy cable block entity.
      */
     public EnergyCableBlockEntity() {
-        super(BlockEntities.ENERGY_CABLE);
+        super(BlockEntitiesHelper.ENERGY_CABLE);
     }
 
     /**

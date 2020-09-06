@@ -1,6 +1,6 @@
 package me.alexisevelyn.randomtech.blockentities.cables;
 
-import me.alexisevelyn.randomtech.utility.BlockEntities;
+import me.alexisevelyn.randomtech.utility.BlockEntitiesHelper;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.SidedInventory;
@@ -18,7 +18,7 @@ public class FluidCableBlockEntity extends BlockEntity implements SidedInventory
      * Instantiates a new Fluid cable block entity.
      */
     public FluidCableBlockEntity() {
-        super(BlockEntities.FLUID_CABLE);
+        super(BlockEntitiesHelper.FLUID_CABLE);
     }
 
     /**

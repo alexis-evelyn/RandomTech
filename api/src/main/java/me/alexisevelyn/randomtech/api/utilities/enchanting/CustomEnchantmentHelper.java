@@ -29,12 +29,9 @@ public class CustomEnchantmentHelper {
      */
     // I need to be able to tell whether or not to interfere with vanilla enchant mechanics, so I'm using an enum to have 3 possible outcomes instead of just 2.
     public static ValidEnchant isValidEnchantment(ItemStack itemStack, EnchantmentTarget target) {
-        if (itemStack.getItem() instanceof EnergyHelper) {
+        if (itemStack.getItem() instanceof EnergyHelper && target == EnchantmentTarget.BREAKABLE)
             // I use unbreaking to affect energy usage, so I'm allowing Unbreaking and Mending.
-            if (target == EnchantmentTarget.BREAKABLE) {
-                return ValidEnchant.TRUE;
-            }
-        }
+            return ValidEnchant.TRUE;
 
         // Every Vanilla Mining Tool Except For Swords
         if ((itemStack.getItem() instanceof GenericPoweredAxe || itemStack.getItem() instanceof GenericPoweredHoe || itemStack.getItem() instanceof GenericPoweredPickaxe || itemStack.getItem() instanceof GenericPoweredShovel) && target == EnchantmentTarget.DIGGER) {

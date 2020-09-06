@@ -1,6 +1,6 @@
 package me.alexisevelyn.randomtech.blockentities;
 
-import me.alexisevelyn.randomtech.utility.BlockEntities;
+import me.alexisevelyn.randomtech.utility.BlockEntitiesHelper;
 
 /**
  * The type Inverse intangible glass block entity.
@@ -10,6 +10,6 @@ public class InverseIntangibleGlassBlockEntity extends InverseIntangibleBlockEnt
      * Instantiates a new Inverse intangible glass block entity.
      */
     public InverseIntangibleGlassBlockEntity() {
-        super(BlockEntities.INVERSE_INTANGIBLE_GLASS);
+        super(BlockEntitiesHelper.INVERSE_INTANGIBLE_GLASS);
     }
 }

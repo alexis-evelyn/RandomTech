@@ -115,9 +115,9 @@ public class MiningManager {
      */
     // This is an integer so I can return the level of silk touch needed
     public static int needsSilkTouch(BlockState blockState, World world, BlockPos blockPos) {
-        Identifier blockLootTableID = blockState.getBlock().getLootTableId();
-        LootPoolEntryType lootPoolEntryType = Registry.LOOT_POOL_ENTRY_TYPE.get(blockLootTableID);
-        LootPoolEntry lootPoolEntry;
+//        Identifier blockLootTableID = blockState.getBlock().getLootTableId();
+//        LootPoolEntryType lootPoolEntryType = Registry.LOOT_POOL_ENTRY_TYPE.get(blockLootTableID);
+//        LootPoolEntry lootPoolEntry;
 
         // TODO: Figure out how to tell if a block needs silk touch
         return 0;

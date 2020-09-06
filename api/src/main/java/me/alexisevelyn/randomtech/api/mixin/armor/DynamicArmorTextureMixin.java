@@ -69,7 +69,7 @@ public abstract class DynamicArmorTextureMixin<T extends LivingEntity, M extends
 	 * @param h                      the h
 	 * @param string                 the string
 	 */
-	@SuppressWarnings("SameParameterValue") @Shadow protected abstract void renderArmorParts(MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int i, ArmorItem armorItem, boolean bl, BipedEntityModel<?> bipedEntityModel, boolean bl2, float f, float g, float h, @Nullable String string);
+	@SuppressWarnings({"SameParameterValue", "PMD.ExcessiveParameterList"}) @Shadow protected abstract void renderArmorParts(MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int i, ArmorItem armorItem, boolean bl, BipedEntityModel<?> bipedEntityModel, boolean bl2, float f, float g, float h, @Nullable String string);
 	// @Shadow public abstract M getContextModel();
 
 	/**

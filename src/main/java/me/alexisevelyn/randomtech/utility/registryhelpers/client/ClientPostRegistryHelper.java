@@ -9,6 +9,6 @@ public class ClientPostRegistryHelper {
      */
     @SuppressWarnings("EmptyMethod")
     public void postRegister() {
-
+        // Intentionally Left Blank
     }
 }

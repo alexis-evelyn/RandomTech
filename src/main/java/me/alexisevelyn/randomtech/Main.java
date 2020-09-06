@@ -18,6 +18,10 @@ import net.fabricmc.api.ModInitializer;
  * Move api to separate jar so people can implement it without needing my mod to be installed?
  *
  * Check if a block needs silk touch for right click info on pickaxe
+ *
+ * Note: Only suppress warnings which cannot be fixed or should not be fixed (e.g. Mixins)
+ * PMD (Codacy) Warnings to Suppress - https://pmd.github.io/latest/pmd_rules_java.html
+ * PMD Annotations - https://pmd.github.io/latest/pmd_userdocs_suppressing_warnings.html#annotations
  */
 
 /**

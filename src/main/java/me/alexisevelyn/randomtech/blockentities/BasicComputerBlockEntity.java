@@ -1,7 +1,7 @@
 package me.alexisevelyn.randomtech.blockentities;
 
 import me.alexisevelyn.randomtech.api.blockentities.GenericComputerBlockEntity;
-import me.alexisevelyn.randomtech.utility.BlockEntities;
+import me.alexisevelyn.randomtech.utility.BlockEntitiesHelper;
 import me.alexisevelyn.randomtech.utility.registryhelpers.main.RegistryHelper;
 import net.minecraft.entity.player.PlayerEntity;
 import reborncore.client.screen.builder.BuiltScreenHandler;
@@ -16,7 +16,7 @@ public class BasicComputerBlockEntity extends GenericComputerBlockEntity {
      * Instantiates a new Basic computer block entity.
      */
     public BasicComputerBlockEntity() {
-        super(RegistryHelper.BASIC_COMPUTER, BlockEntities.BASIC_COMPUTER);
+        super(RegistryHelper.BASIC_COMPUTER, BlockEntitiesHelper.BASIC_COMPUTER);
         this.inventory = new RebornInventory<>(1, "BasicComputerBlockEntity", 1, this);
     }
 

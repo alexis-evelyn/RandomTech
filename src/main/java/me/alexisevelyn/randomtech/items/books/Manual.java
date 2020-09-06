@@ -18,8 +18,8 @@ import vazkii.patchouli.api.PatchouliAPI;
 public class Manual extends Item {
     public static final String itemID = "manual";
 
-    final Identifier bookIdentifier = new Identifier(Main.MODID, itemID);
-    final Identifier patchouliGuidebookIdentifier = new Identifier("patchouli", "guide_book");
+    private final Identifier bookIdentifier = new Identifier(Main.MODID, itemID);
+    private final Identifier patchouliGuidebookIdentifier = new Identifier("patchouli", "guide_book");
 
     /**
      * Instantiates a new Manual.

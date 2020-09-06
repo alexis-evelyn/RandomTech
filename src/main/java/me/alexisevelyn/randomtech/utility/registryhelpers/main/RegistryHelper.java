@@ -34,9 +34,9 @@ import me.alexisevelyn.randomtech.items.ingots.CobaltIngot;
 import me.alexisevelyn.randomtech.items.ingots.DeathIngot;
 import me.alexisevelyn.randomtech.items.ingots.RedstoneIngot;
 import me.alexisevelyn.randomtech.items.tools.powered.*;
-import me.alexisevelyn.randomtech.utility.BlockEntities;
+import me.alexisevelyn.randomtech.utility.BlockEntitiesHelper;
 import me.alexisevelyn.randomtech.utility.Materials;
-import me.alexisevelyn.randomtech.utility.Recipes;
+import me.alexisevelyn.randomtech.utility.RecipesHelper;
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
 import net.fabricmc.fabric.api.event.registry.RegistryEntryAddedCallback;
 import net.fabricmc.fabric.api.gamerule.v1.CustomGameRuleCategory;
@@ -217,13 +217,13 @@ public class RegistryHelper {
     // This is important to make sure that BlockEntities are loaded before a world is loaded
     // Yes, I know about the warning of instantiating a utility class. That's intentional for the reason stated above.
     @SuppressWarnings({"InstantiationOfUtilityClass"})
-    public static final BlockEntities blockEntities = new BlockEntities();
+    public static final BlockEntitiesHelper BLOCK_ENTITIES_HELPER = new BlockEntitiesHelper();
 
     // Force Load Recipes.java Early On
     // This is important to make sure that recipes are loaded before a world is loaded
     // Yes, I know about the warning of instantiating a utility class. That's intentional for the reason stated above.
     @SuppressWarnings({"InstantiationOfUtilityClass"})
-    public static final Recipes customRecipes = new Recipes();
+    public static final RecipesHelper CUSTOM_RECIPES_HELPER = new RecipesHelper();
 
     // Gamerules and Gamerule Categories
     public static final CustomGameRuleCategory RANDOM_TECH_GAMERULES_CATEGORY = new CustomGameRuleCategory(new Identifier(Main.MODID, "gamerules"), new TranslatableText(Main.MODID + ".gamerules").styled(style -> style.withBold(true).withColor(Formatting.DARK_PURPLE)));

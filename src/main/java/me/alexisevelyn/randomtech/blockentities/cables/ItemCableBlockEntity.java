@@ -7,7 +7,7 @@ import me.alexisevelyn.randomtech.api.utilities.pathfinding.dijkstra.VertexPath;
 import me.alexisevelyn.randomtech.blocks.cables.ItemCable;
 import me.alexisevelyn.randomtech.guis.ItemCableGuiHandler;
 import me.alexisevelyn.randomtech.inventories.ItemCableInventory;
-import me.alexisevelyn.randomtech.utility.BlockEntities;
+import me.alexisevelyn.randomtech.utility.BlockEntitiesHelper;
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.InventoryProvider;
@@ -43,7 +43,7 @@ public class ItemCableBlockEntity extends BlockEntity implements InventoryProvid
      * Instantiates a new Item cable block entity.
      */
     public ItemCableBlockEntity() {
-        super(BlockEntities.ITEM_CABLE);
+        super(BlockEntitiesHelper.ITEM_CABLE);
         inventory = new ItemCableInventory();
     }
 

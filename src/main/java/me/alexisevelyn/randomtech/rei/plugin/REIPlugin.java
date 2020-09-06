@@ -5,7 +5,7 @@ import me.alexisevelyn.randomtech.api.utilities.recipemanagers.GenericFluidRecip
 import me.alexisevelyn.randomtech.rei.plugin.autocrafting.FuserAutocraftingHandler;
 import me.alexisevelyn.randomtech.rei.plugin.recipecategories.FuserRecipeCategory;
 import me.alexisevelyn.randomtech.rei.plugin.recipedisplays.FuserRecipeDisplay;
-import me.alexisevelyn.randomtech.utility.Recipes;
+import me.alexisevelyn.randomtech.utility.RecipesHelper;
 import me.alexisevelyn.randomtech.utility.registryhelpers.main.RegistryHelper;
 import me.shedaniel.rei.api.DisplayHelper;
 import me.shedaniel.rei.api.EntryRegistry;
@@ -68,7 +68,7 @@ public class REIPlugin implements REIPluginV0 {
     @Override
     public void registerRecipeDisplays(RecipeHelper recipeHelper) {
         RecipeManager.getRecipeTypes(Main.MODID).forEach(rebornRecipeType -> {
-            if (rebornRecipeType == Recipes.LIQUID_FUSER)
+            if (rebornRecipeType == RecipesHelper.LIQUID_FUSER)
                 registerFuser(recipeHelper);
         });
     }

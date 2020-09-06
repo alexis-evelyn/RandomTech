@@ -1,7 +1,7 @@
 package me.alexisevelyn.randomtech.crafters;
 
 import me.alexisevelyn.randomtech.blockentities.FuserBlockEntity;
-import me.alexisevelyn.randomtech.utility.Recipes;
+import me.alexisevelyn.randomtech.utility.RecipesHelper;
 import net.minecraft.block.entity.BlockEntity;
 import reborncore.common.recipes.RecipeCrafter;
 import reborncore.common.util.RebornInventory;
@@ -17,7 +17,7 @@ public class FuserRecipeCrafter extends RecipeCrafter {
      * @param inputSlots  Slot IDs for input
      */
     public FuserRecipeCrafter(BlockEntity blockEntity, RebornInventory<?> inventory, int[] inputSlots, int[] outputSlots) {
-        super(Recipes.LIQUID_FUSER, blockEntity, inputSlots.length, outputSlots.length, inventory, inputSlots, outputSlots);
+        super(RecipesHelper.LIQUID_FUSER, blockEntity, inputSlots.length, outputSlots.length, inventory, inputSlots, outputSlots);
     }
 
 

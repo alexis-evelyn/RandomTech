@@ -9,6 +9,6 @@ import reborncore.common.crafting.RecipeManager;
 /**
  * The type Recipes.
  */
-public class Recipes {
+public class RecipesHelper {
     public static final RebornRecipeType<GenericFluidRecipe> LIQUID_FUSER = RecipeManager.newRecipeType(GenericFluidRecipe::new, new Identifier(Main.MODID, "fuser"));
 }

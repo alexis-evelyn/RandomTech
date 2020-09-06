@@ -3,7 +3,7 @@ package me.alexisevelyn.randomtech.blockentities;
 import me.alexisevelyn.randomtech.api.blockentities.BasePowerAcceptorBlockEntity;
 import me.alexisevelyn.randomtech.blocks.TeleporterBlock;
 import me.alexisevelyn.randomtech.guis.TeleporterGui;
-import me.alexisevelyn.randomtech.utility.BlockEntities;
+import me.alexisevelyn.randomtech.utility.BlockEntitiesHelper;
 import me.alexisevelyn.randomtech.utility.registryhelpers.main.RegistryHelper;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.minecraft.entity.player.PlayerEntity;
@@ -62,7 +62,7 @@ public class TeleporterBlockEntity extends BasePowerAcceptorBlockEntity implemen
      * Instantiates a new Teleporter block entity.
      */
     public TeleporterBlockEntity() {
-        super(BlockEntities.TELEPORTER);
+        super(BlockEntitiesHelper.TELEPORTER);
         this.inventory = new RebornInventory<>(1, "TeleporterBlockEntity", 1, this);
 
         registerScheduler();
