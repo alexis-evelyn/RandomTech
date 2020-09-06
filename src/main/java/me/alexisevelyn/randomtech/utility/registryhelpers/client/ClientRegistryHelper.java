@@ -133,6 +133,9 @@ public class ClientRegistryHelper {
 
         ColorProviderRegistry.BLOCK.register(EnergyCable::getEdgeColor, RegistryHelper.ENERGY_CABLE_BLOCK);
         ColorProviderRegistry.ITEM.register(EnergyCable::getEdgeColor, RegistryHelper.ENERGY_CABLE_BLOCK);
+
+        // For Machines
+        BlockRenderLayerMap.INSTANCE.putBlock(RegistryHelper.FUSER, RenderLayer.getTranslucent());
     }
 
     /**
