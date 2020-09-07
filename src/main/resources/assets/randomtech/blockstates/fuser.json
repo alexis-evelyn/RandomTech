@@ -26,7 +26,7 @@
       },
       "apply": {
         "model": "randomtech:block/fuser/fuser",
-        "y": 270
+        "y": 90
       }
     },
     {
@@ -36,7 +36,7 @@
       },
       "apply": {
         "model": "randomtech:block/fuser/fuser",
-        "y": 90
+        "y": 270
       }
     },
     {
@@ -65,7 +65,7 @@
       },
       "apply": {
         "model": "randomtech:block/fuser/fuser_active",
-        "y": 270
+        "y": 90
       }
     },
     {
@@ -75,7 +75,7 @@
       },
       "apply": {
         "model": "randomtech:block/fuser/fuser_active",
-        "y": 90
+        "y": 270
       }
     },
     {
@@ -128,7 +128,7 @@
       },
       "apply": {
         "model": "randomtech:block/fuser/door_0",
-        "y": 270
+        "y": 90
       }
     },
     {
@@ -146,7 +146,7 @@
       },
       "apply": {
         "model": "randomtech:block/fuser/door_0",
-        "y": 90
+        "y": 270
       }
     },
     {
@@ -199,7 +199,7 @@
       },
       "apply": {
         "model": "randomtech:block/fuser/door_1",
-        "y": 270
+        "y": 90
       }
     },
     {
@@ -217,7 +217,7 @@
       },
       "apply": {
         "model": "randomtech:block/fuser/door_1",
-        "y": 90
+        "y": 270
       }
     },
     {
@@ -246,7 +246,7 @@
       },
       "apply": {
         "model": "randomtech:block/fuser/door_2",
-        "y": 270
+        "y": 90
       }
     },
     {
@@ -256,7 +256,7 @@
       },
       "apply": {
         "model": "randomtech:block/fuser/door_2",
-        "y": 90
+        "y": 270
       }
     },
     {
@@ -309,7 +309,7 @@
       },
       "apply": {
         "model": "randomtech:block/fuser/door_3",
-        "y": 270
+        "y": 90
       }
     },
     {
@@ -327,7 +327,7 @@
       },
       "apply": {
         "model": "randomtech:block/fuser/door_3",
-        "y": 90
+        "y": 270
       }
     },
     {
@@ -380,7 +380,7 @@
       },
       "apply": {
         "model": "randomtech:block/fuser/door_4",
-        "y": 270
+        "y": 90
       }
     },
     {
@@ -398,7 +398,7 @@
       },
       "apply": {
         "model": "randomtech:block/fuser/door_4",
-        "y": 90
+        "y": 270
       }
     },
     {
@@ -427,7 +427,7 @@
       },
       "apply": {
         "model": "randomtech:block/fuser/door_5",
-        "y": 270
+        "y": 90
       }
     },
     {
@@ -437,7 +437,7 @@
       },
       "apply": {
         "model": "randomtech:block/fuser/door_5",
-        "y": 90
+        "y": 270
       }
     },
 
@@ -491,7 +491,7 @@
       },
       "apply": {
         "model": "randomtech:block/fuser/door_6",
-        "y": 270
+        "y": 90
       }
     },
     {
@@ -509,7 +509,7 @@
       },
       "apply": {
         "model": "randomtech:block/fuser/door_6",
-        "y": 90
+        "y": 270
       }
     },
 
@@ -563,7 +563,7 @@
       },
       "apply": {
         "model": "randomtech:block/fuser/door_7",
-        "y": 270
+        "y": 90
       }
     },
     {
@@ -581,7 +581,7 @@
       },
       "apply": {
         "model": "randomtech:block/fuser/door_7",
-        "y": 90
+        "y": 270
       }
     },
 
@@ -611,7 +611,7 @@
       },
       "apply": {
         "model": "randomtech:block/fuser/door_8",
-        "y": 270
+        "y": 90
       }
     },
     {
@@ -621,7 +621,7 @@
       },
       "apply": {
         "model": "randomtech:block/fuser/door_8",
-        "y": 90
+        "y": 270
       }
     },
 
@@ -651,7 +651,7 @@
       },
       "apply": {
         "model": "randomtech:block/fuser/door_9",
-        "y": 270
+        "y": 90
       }
     },
     {
@@ -661,7 +661,7 @@
       },
       "apply": {
         "model": "randomtech:block/fuser/door_9",
-        "y": 90
+        "y": 270
       }
     }
   ]

@@ -65,6 +65,7 @@ public class FuserBlock extends FluidMachineBase {
 
         setDefaultState(getStateManager()
                 .getDefaultState()
+                .with(ACTIVE, false)
                 .with(POWER, 0)
         );
     }
@@ -144,5 +145,17 @@ public class FuserBlock extends FluidMachineBase {
         BlockState state = world.getBlockState(pos).with(ACTIVE, active).with(FACING, facing).with(POWER, power);
 
         world.setBlockState(pos, state, 3);
+    }
+
+    /**
+     * RebornCore calls this to set the direction to face
+     *
+     * @param facing
+     * @param world
+     * @param pos
+     */
+    @Override
+    public void setFacing(Direction facing, World world, BlockPos pos) {
+        world.setBlockState(pos, world.getBlockState(pos).with(FACING, facing));
     }
 }
