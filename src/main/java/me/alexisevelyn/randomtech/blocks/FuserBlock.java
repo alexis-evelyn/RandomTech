@@ -41,16 +41,16 @@ public class FuserBlock extends FluidMachineBase {
     private static final VoxelShape BORDER_SHAPE = VoxelShapes.union(WEST_BORDER_SHAPE, EAST_BORDER_SHAPE, NORTH_BORDER_SHAPE, SOUTH_BORDER_SHAPE);
 
     // Drawer Handle
-    private static final VoxelShape NORTH_HANDLE_SHAPE = Block.createCuboidShape(4, 10, 0, 12, 11, 1);
-    private static final VoxelShape SOUTH_HANDLE_SHAPE = Block.createCuboidShape(12, 10, 16, 4, 11, 15);
-    private static final VoxelShape EAST_HANDLE_SHAPE = Block.createCuboidShape(0, 10, 4, 1, 11, 12);
-    private static final VoxelShape WEST_HANDLE_SHAPE = Block.createCuboidShape(16, 10, 12, 15, 11, 4);
+//    private static final VoxelShape NORTH_HANDLE_SHAPE = Block.createCuboidShape(4, 10, 0, 12, 11, 1);
+//    private static final VoxelShape SOUTH_HANDLE_SHAPE = Block.createCuboidShape(12, 10, 16, 4, 11, 15);
+//    private static final VoxelShape EAST_HANDLE_SHAPE = Block.createCuboidShape(0, 10, 4, 1, 11, 12);
+//    private static final VoxelShape WEST_HANDLE_SHAPE = Block.createCuboidShape(16, 10, 12, 15, 11, 4);
 
     // Full Combined Shape
-    private static final VoxelShape NORTH_SHAPE = VoxelShapes.union(BASE_SHAPE, BORDER_SHAPE, NORTH_HANDLE_SHAPE);
-    private static final VoxelShape SOUTH_SHAPE = VoxelShapes.union(BASE_SHAPE, BORDER_SHAPE, SOUTH_HANDLE_SHAPE);
-    private static final VoxelShape EAST_SHAPE = VoxelShapes.union(BASE_SHAPE, BORDER_SHAPE, EAST_HANDLE_SHAPE);
-    private static final VoxelShape WEST_SHAPE = VoxelShapes.union(BASE_SHAPE, BORDER_SHAPE, WEST_HANDLE_SHAPE);
+    private static final VoxelShape NORTH_SHAPE = VoxelShapes.union(BASE_SHAPE, BORDER_SHAPE); // NORTH_HANDLE_SHAPE
+    private static final VoxelShape SOUTH_SHAPE = VoxelShapes.union(BASE_SHAPE, BORDER_SHAPE); // SOUTH_HANDLE_SHAPE
+    private static final VoxelShape EAST_SHAPE = VoxelShapes.union(BASE_SHAPE, BORDER_SHAPE); // EAST_HANDLE_SHAPE
+    private static final VoxelShape WEST_SHAPE = VoxelShapes.union(BASE_SHAPE, BORDER_SHAPE); // WEST_HANDLE_SHAPE
 
     /**
      * Instantiates a new Fuser block.
