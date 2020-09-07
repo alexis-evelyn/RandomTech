@@ -1,0 +1,83 @@
+{
+	"credit": "Made with Blockbench",
+	"parent": "minecraft:block/orientable",
+	"textures": {
+		"1": "randomtech:block/fuser/fuser_body",
+		"7": "randomtech:block/fuser/door/door_8",
+		"particle": "randomtech:block/fuser/fuser_body"
+	},
+	"elements": [
+		{
+			"name": "Main",
+			"from": [2, 1, 1],
+			"to": [14, 12, 2],
+			"rotation": {"angle": 0, "axis": "z", "origin": [7, 1, 1]},
+			"faces": {
+				"north": {"uv": [2, 4, 14, 15], "texture": "#7"},
+				"east": {"uv": [2, 4, 3, 15], "texture": "#7"},
+				"south": {"uv": [14, 4, 2, 14.856], "texture": "#7"},
+				"west": {"uv": [13, 4, 14, 15], "texture": "#7"},
+				"up": {"uv": [2, 4, 14, 5], "texture": "#7"},
+				"down": {"uv": [2, 14, 14, 15], "texture": "#7"}
+			}
+		},
+		{
+			"name": "Handle",
+			"from": [4, 10, 0],
+			"to": [12, 11, 1],
+			"rotation": {"angle": 0, "axis": "z", "origin": [7, 1, 1]},
+			"faces": {
+				"north": {"uv": [4, 5, 11.989, 6], "texture": "#7"},
+				"east": {"uv": [11, 5, 12, 6], "texture": "#7"},
+				"south": {"uv": [4, 5, 12, 6], "texture": "#7"},
+				"west": {"uv": [4, 5, 5, 6], "texture": "#7"},
+				"up": {"uv": [4, 5, 12, 6], "texture": "#7"},
+				"down": {"uv": [4, 5, 12, 6], "texture": "#7"}
+			}
+		},
+		{
+			"from": [13, 3, 2],
+			"to": [3, 11, 14],
+			"rotation": {"angle": 0, "axis": "y", "origin": [27, 13, 11]},
+			"faces": {
+				"north": {"uv": [0, 0, 10, 8], "texture": "#1"},
+				"east": {"uv": [0, 0, 12, 8], "texture": "#1"},
+				"south": {"uv": [0, 0, 10, 8], "texture": "#1"},
+				"west": {"uv": [0, 0, 12, 8], "texture": "#1"},
+				"down": {"uv": [0, 0, 10, 12], "texture": "#1"}
+			}
+		},
+		{
+			"from": [3, 3, 2],
+			"to": [13, 11, 14],
+			"rotation": {"angle": 0, "axis": "y", "origin": [17, 13, 11]},
+			"faces": {
+				"north": {"uv": [0, 0, 10, 8], "texture": "#1"},
+				"east": {"uv": [0, 0, 12, 8], "texture": "#1"},
+				"south": {"uv": [0, 0, 10, 8], "texture": "#1"},
+				"west": {"uv": [0, 0, 12, 8], "texture": "#1"},
+				"down": {"uv": [0, 0, 10, 12], "texture": "#1"}
+			}
+		}
+	],
+	"display": {},
+	"groups": [
+		{
+			"name": "Root",
+			"origin": [8, 8, 8],
+			"children": [
+				{
+					"name": "Door",
+					"origin": [8, 8, 8],
+					"children": [0, 1,
+						{
+							"name": "Drawer",
+							"origin": [17, 13, 11],
+							"children": [2, 3]
+						}
+					]
+				}
+			]
+		}
+	]
+}

@@ -1,34 +1,7 @@
 {
   "variants": {
-    "facing=east,active=false": {
-      "model": "randomtech:block/fuser",
-      "y": 90
-    },
-    "facing=east,active=true": {
-      "model": "randomtech:block/fuser_active",
-      "y": 90
-    },
-    "facing=north,active=false": {
-      "model": "randomtech:block/fuser"
-    },
-    "facing=north,active=true": {
-      "model": "randomtech:block/fuser_active"
-    },
-    "facing=south,active=false": {
-      "model": "randomtech:block/fuser",
-      "y": 180
-    },
-    "facing=south,active=true": {
-      "model": "randomtech:block/fuser_active",
-      "y": 180
-    },
-    "facing=west,active=false": {
-      "model": "randomtech:block/fuser",
-      "y": 270
-    },
-    "facing=west,active=true": {
-      "model": "randomtech:block/fuser_active",
-      "y": 270
+    "": {
+      "model": "randomtech:block/cable/cable"
     }
   }
 }
