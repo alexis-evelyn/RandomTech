@@ -1,34 +1,472 @@
 {
-  "variants": {
-    "facing=east,active=false": {
-      "model": "randomtech:block/fuser/fuser",
-      "y": 270
+  "multipart": [
+    {
+      "when": {
+        "facing": "north",
+        "active": false
+      },
+      "apply": {
+        "model": "randomtech:block/fuser/fuser"
+      }
     },
-    "facing=east,active=true": {
-      "model": "randomtech:block/fuser/fuser_active",
-      "y": 270
+    {
+      "when": {
+        "facing": "south",
+        "active": false
+      },
+      "apply": {
+        "model": "randomtech:block/fuser/fuser",
+        "y": 180
+      }
     },
-    "facing=north,active=false": {
-      "model": "randomtech:block/fuser/fuser"
+    {
+      "when": {
+        "facing": "east",
+        "active": false
+      },
+      "apply": {
+        "model": "randomtech:block/fuser/fuser",
+        "y": 270
+      }
     },
-    "facing=north,active=true": {
-      "model": "randomtech:block/fuser/fuser_active"
+    {
+      "when": {
+        "facing": "west",
+        "active": false
+      },
+      "apply": {
+        "model": "randomtech:block/fuser/fuser",
+        "y": 90
+      }
     },
-    "facing=south,active=false": {
-      "model": "randomtech:block/fuser/fuser",
-      "y": 180
+    {
+      "when": {
+        "facing": "north",
+        "active": true
+      },
+      "apply": {
+        "model": "randomtech:block/fuser/fuser_active"
+      }
     },
-    "facing=south,active=true": {
-      "model": "randomtech:block/fuser/fuser_active",
-      "y": 180
+    {
+      "when": {
+        "facing": "south",
+        "active": true
+      },
+      "apply": {
+        "model": "randomtech:block/fuser/fuser_active",
+        "y": 180
+      }
     },
-    "facing=west,active=false": {
-      "model": "randomtech:block/fuser/fuser",
-      "y": 90
+    {
+      "when": {
+        "facing": "east",
+        "active": true
+      },
+      "apply": {
+        "model": "randomtech:block/fuser/fuser_active",
+        "y": 270
+      }
     },
-    "facing=west,active=true": {
-      "model": "randomtech:block/fuser/fuser_active",
-      "y": 90
+    {
+      "when": {
+        "facing": "west",
+        "active": true
+      },
+      "apply": {
+        "model": "randomtech:block/fuser/fuser_active",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "power": 0,
+        "facing": "north"
+      },
+      "apply": {
+        "model": "randomtech:block/fuser/door_0"
+      }
+    },
+    {
+      "when": {
+        "power": 0,
+        "facing": "south"
+      },
+      "apply": {
+        "model": "randomtech:block/fuser/door_0",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "power": 0,
+        "facing": "east"
+      },
+      "apply": {
+        "model": "randomtech:block/fuser/door_0",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "power": 0,
+        "facing": "west"
+      },
+      "apply": {
+        "model": "randomtech:block/fuser/door_0",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "power": 1,
+        "facing": "north"
+      },
+      "apply": {
+        "model": "randomtech:block/fuser/door_1"
+      }
+    },
+    {
+      "when": {
+        "power": 1,
+        "facing": "south"
+      },
+      "apply": {
+        "model": "randomtech:block/fuser/door_1",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "power": 1,
+        "facing": "east"
+      },
+      "apply": {
+        "model": "randomtech:block/fuser/door_1",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "power": 1,
+        "facing": "west"
+      },
+      "apply": {
+        "model": "randomtech:block/fuser/door_1",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "power": 2,
+        "facing": "north"
+      },
+      "apply": {
+        "model": "randomtech:block/fuser/door_2"
+      }
+    },
+    {
+      "when": {
+        "power": 2,
+        "facing": "south"
+      },
+      "apply": {
+        "model": "randomtech:block/fuser/door_2",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "power": 2,
+        "facing": "east"
+      },
+      "apply": {
+        "model": "randomtech:block/fuser/door_2",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "power": 2,
+        "facing": "west"
+      },
+      "apply": {
+        "model": "randomtech:block/fuser/door_2",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "power": 3,
+        "facing": "north"
+      },
+      "apply": {
+        "model": "randomtech:block/fuser/door_3"
+      }
+    },
+    {
+      "when": {
+        "power": 3,
+        "facing": "south"
+      },
+      "apply": {
+        "model": "randomtech:block/fuser/door_3",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "power": 3,
+        "facing": "east"
+      },
+      "apply": {
+        "model": "randomtech:block/fuser/door_3",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "power": 3,
+        "facing": "west"
+      },
+      "apply": {
+        "model": "randomtech:block/fuser/door_3",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "power": 4,
+        "facing": "north"
+      },
+      "apply": {
+        "model": "randomtech:block/fuser/door_4"
+      }
+    },
+    {
+      "when": {
+        "power": 4,
+        "facing": "south"
+      },
+      "apply": {
+        "model": "randomtech:block/fuser/door_4",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "power": 4,
+        "facing": "east"
+      },
+      "apply": {
+        "model": "randomtech:block/fuser/door_4",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "power": 4,
+        "facing": "west"
+      },
+      "apply": {
+        "model": "randomtech:block/fuser/door_4",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "power": 5,
+        "facing": "north"
+      },
+      "apply": {
+        "model": "randomtech:block/fuser/door_5"
+      }
+    },
+    {
+      "when": {
+        "power": 5,
+        "facing": "south"
+      },
+      "apply": {
+        "model": "randomtech:block/fuser/door_5",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "power": 5,
+        "facing": "east"
+      },
+      "apply": {
+        "model": "randomtech:block/fuser/door_5",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "power": 5,
+        "facing": "west"
+      },
+      "apply": {
+        "model": "randomtech:block/fuser/door_5",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "power": 6,
+        "facing": "north"
+      },
+      "apply": {
+        "model": "randomtech:block/fuser/door_6"
+      }
+    },
+    {
+      "when": {
+        "power": 6,
+        "facing": "south"
+      },
+      "apply": {
+        "model": "randomtech:block/fuser/door_6",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "power": 6,
+        "facing": "east"
+      },
+      "apply": {
+        "model": "randomtech:block/fuser/door_6",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "power": 6,
+        "facing": "west"
+      },
+      "apply": {
+        "model": "randomtech:block/fuser/door_6",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "power": 7,
+        "facing": "north"
+      },
+      "apply": {
+        "model": "randomtech:block/fuser/door_7"
+      }
+    },
+    {
+      "when": {
+        "power": 7,
+        "facing": "south"
+      },
+      "apply": {
+        "model": "randomtech:block/fuser/door_7",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "power": 7,
+        "facing": "east"
+      },
+      "apply": {
+        "model": "randomtech:block/fuser/door_7",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "power": 7,
+        "facing": "west"
+      },
+      "apply": {
+        "model": "randomtech:block/fuser/door_7",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "power": 8,
+        "facing": "north"
+      },
+      "apply": {
+        "model": "randomtech:block/fuser/door_8"
+      }
+    },
+    {
+      "when": {
+        "power": 8,
+        "facing": "south"
+      },
+      "apply": {
+        "model": "randomtech:block/fuser/door_8",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "power": 8,
+        "facing": "east"
+      },
+      "apply": {
+        "model": "randomtech:block/fuser/door_8",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "power": 8,
+        "facing": "west"
+      },
+      "apply": {
+        "model": "randomtech:block/fuser/door_8",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "power": 9,
+        "facing": "north"
+      },
+      "apply": {
+        "model": "randomtech:block/fuser/door_9"
+      }
+    },
+    {
+      "when": {
+        "power": 9,
+        "facing": "south"
+      },
+      "apply": {
+        "model": "randomtech:block/fuser/door_9",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "power": 9,
+        "facing": "east"
+      },
+      "apply": {
+        "model": "randomtech:block/fuser/door_9",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "power": 9,
+        "facing": "west"
+      },
+      "apply": {
+        "model": "randomtech:block/fuser/door_9",
+        "y": 90
+      }
     }
-  }
+  ]
 }
