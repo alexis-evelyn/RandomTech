@@ -30,20 +30,23 @@ public class FuserBlock extends FluidMachineBase {
 
     private static final VoxelShape BASE_SHAPE = Block.createCuboidShape(1, 1, 1, 15, 15, 15);
 
-    // These directions only apply if the block is not orientable. Otherwise Translate North to Front
     // These numbers were ripped straight from the model file produced by Blockbench
+    // Different Border Shapes Per Side
     private static final VoxelShape WEST_BORDER_SHAPE = VoxelShapes.union(Block.createCuboidShape(15, 0, 1, 16, 1, 15), Block.createCuboidShape(15, 15, 1, 16, 16, 15)); // Left
     private static final VoxelShape EAST_BORDER_SHAPE = VoxelShapes.union(Block.createCuboidShape(0, 0, 1, 1, 1, 15), Block.createCuboidShape(0, 15, 1, 1, 16, 15)); // Right
     private static final VoxelShape NORTH_BORDER_SHAPE = VoxelShapes.union(Block.createCuboidShape(0, 0, 0, 1, 16, 1), Block.createCuboidShape(15, 0, 0, 16, 16, 1), Block.createCuboidShape(1, 0, 0, 15, 1, 1), Block.createCuboidShape(1, 15, 0, 15, 16, 1)); // Front
     private static final VoxelShape SOUTH_BORDER_SHAPE = VoxelShapes.union(Block.createCuboidShape(0, 0, 15, 1, 16, 16), Block.createCuboidShape(15, 0, 15, 16, 16, 16), Block.createCuboidShape(1, 0, 15, 15, 1, 16), Block.createCuboidShape(1, 15, 15, 15, 16, 16)); // Back
 
+    // Full Combined Border Shape
     private static final VoxelShape BORDER_SHAPE = VoxelShapes.union(WEST_BORDER_SHAPE, EAST_BORDER_SHAPE, NORTH_BORDER_SHAPE, SOUTH_BORDER_SHAPE);
 
+    // Drawer Handle
     private static final VoxelShape NORTH_HANDLE_SHAPE = Block.createCuboidShape(4, 10, 0, 12, 11, 1);
-    private static final VoxelShape SOUTH_HANDLE_SHAPE = Block.createCuboidShape(4, 10, 0, 12, 11, 1);
-    private static final VoxelShape EAST_HANDLE_SHAPE = Block.createCuboidShape(4, 10, 0, 12, 11, 1);
-    private static final VoxelShape WEST_HANDLE_SHAPE = Block.createCuboidShape(4, 10, 0, 12, 11, 1);
+    private static final VoxelShape SOUTH_HANDLE_SHAPE = Block.createCuboidShape(12, 10, 16, 4, 11, 15);
+    private static final VoxelShape EAST_HANDLE_SHAPE = Block.createCuboidShape(0, 10, 4, 1, 11, 12);
+    private static final VoxelShape WEST_HANDLE_SHAPE = Block.createCuboidShape(16, 10, 12, 15, 11, 4);
 
+    // Full Combined Shape
     private static final VoxelShape NORTH_SHAPE = VoxelShapes.union(BASE_SHAPE, BORDER_SHAPE, NORTH_HANDLE_SHAPE);
     private static final VoxelShape SOUTH_SHAPE = VoxelShapes.union(BASE_SHAPE, BORDER_SHAPE, SOUTH_HANDLE_SHAPE);
     private static final VoxelShape EAST_SHAPE = VoxelShapes.union(BASE_SHAPE, BORDER_SHAPE, EAST_HANDLE_SHAPE);
