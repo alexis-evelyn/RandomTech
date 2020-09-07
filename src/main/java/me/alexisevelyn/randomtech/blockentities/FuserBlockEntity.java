@@ -136,14 +136,14 @@ public class FuserBlockEntity extends FluidMachineBlockEntityBase implements ITo
         Boolean active = world.getBlockState(pos).get(BlockMachineBase.ACTIVE);
 
         BlockState state = world.getBlockState(pos)
-                .with(FuserBlock.POWER, getEnergyState(world, this.getEnergy(), this.getMaxPower()))
+                .with(FuserBlock.POWER, getEnergyState(this.getEnergy(), this.getMaxPower()))
                 .with(BlockMachineBase.FACING, facing)
                 .with(BlockMachineBase.ACTIVE, active);
 
         world.setBlockState(pos, state);
     }
 
-    private int getEnergyState(@NotNull World world, double currentEnergy, double maxEnergy) {
+    private int getEnergyState(double currentEnergy, double maxEnergy) {
         return (int) Math.floor(CalculationHelper.proportionCalculator(currentEnergy, 0, maxEnergy, 0, 15));
     }
 
