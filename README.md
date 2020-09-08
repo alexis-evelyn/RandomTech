@@ -54,7 +54,7 @@ This project is under MIT License. You can refer to [LICENSE.md][license-link] f
 [discord-badge]: <https://discord.com/api/guilds/750301084202958899/widget.png> "Discord Badge"
 [discord-banner]: <https://discord.com/api/guilds/750301084202958899/widget.png?style=banner2> "Discord Banner"
 [discord-invite-link-banner]: <https://discord.gg/kBKwmdw> "Discord Invite Link Banner"
-[discord-invite-link-badge]: <https://discord.gg/m2wTSDZ> "Discord Invite Link Badge"
+[discord-invite-link-badge]: <https://discord.gg/kBKwmdw> "Discord Invite Link Badge"
 
 [codacy-badge]: <https://api.codacy.com/project/badge/Grade/28e0e43f7cbc4678a0d3f6a8a2d69742> "Codacy Badge"
 [codacy-link]: <https://app.codacy.com/manual/alexis-evelyn/RandomTech?utm_source=github.com&utm_medium=referral&utm_content=alexis-evelyn/RandomTech&utm_campaign=Badge_Grade_Dashboard> "Codacy Link"

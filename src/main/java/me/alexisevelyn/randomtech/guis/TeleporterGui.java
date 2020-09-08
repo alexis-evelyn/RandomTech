@@ -2,6 +2,8 @@ package me.alexisevelyn.randomtech.guis;
 
 import me.alexisevelyn.randomtech.Main;
 import me.alexisevelyn.randomtech.blockentities.TeleporterBlockEntity;
+import me.alexisevelyn.randomtech.modmenu.screens.ConfigScreen;
+import me.sargunvohra.mcmods.autoconfig1u.AutoConfig;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.util.math.MatrixStack;
@@ -17,7 +19,7 @@ import reborncore.client.screen.builder.BuiltScreenHandler;
 @Environment(EnvType.CLIENT)
 public class TeleporterGui extends GuiBase<BuiltScreenHandler> {
     private final TeleporterBlockEntity blockEntity;
-    public GuiBuilder builder = new GuiBuilder(new Identifier(Main.MODID, "textures/gui/guielements.png"));
+    public final GuiBuilder builder;
 
     // Background
 //    public static final int backgroundCenterX = 176 / 2; // backgroundWidth = 176
@@ -48,6 +50,23 @@ public class TeleporterGui extends GuiBase<BuiltScreenHandler> {
     public TeleporterGui(int syncID, PlayerEntity player, TeleporterBlockEntity blockEntity) {
         super(player, blockEntity, blockEntity.createScreenHandler(syncID, player));
         this.blockEntity = blockEntity;
+
+        ConfigScreen config = AutoConfig.getConfigHolder(ConfigScreen.class).getConfig();
+
+        Identifier theme;
+        switch (config.guiTheme) {
+            case ULTRADARK:
+                theme = new Identifier(Main.MODID, "textures/gui/reborncore/ultradark/guielements.png");
+                break;
+            case DARK:
+                theme = new Identifier(Main.MODID, "textures/gui/reborncore/dark/guielements.png");
+                break;
+            case VANILLA:
+            default:
+                theme = new Identifier(Main.MODID, "textures/gui/reborncore/vanilla/guielements.png");
+        }
+
+        builder = new GuiBuilder(theme);
     }
 
     /**

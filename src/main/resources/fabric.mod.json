@@ -9,9 +9,14 @@
     "Alexis Evelyn",
     "hackaholic5069 (Texture Designer)"
   ],
+  "contributors": [
+
+  ],
   "contact": {
     "homepage": "https://github.com/alexis-evelyn",
-    "sources": "https://github.com/alexis-evelyn/RandomTech"
+    "sources": "https://github.com/alexis-evelyn/RandomTech",
+    "issues": "https://github.com/alexis-evelyn/RandomTech/issues",
+    "discord": "https://discord.gg/kBKwmdw"
   },
 
   "license": "MIT",
@@ -61,6 +66,8 @@
     "waila:plugins": {
       "id": "randomtech:waila",
       "initializer": "me.alexisevelyn.randomtech.waila.WailaRegistry"
-    }
+    },
+    "modmenu:api": false,
+    "modmenu:clientsideOnly": false
   }
 }

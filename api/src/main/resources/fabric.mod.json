@@ -9,9 +9,14 @@
     "Alexis Evelyn",
     "hackaholic5069 (Texture Designer)"
   ],
+  "contributors": [
+
+  ],
   "contact": {
     "homepage": "https://github.com/alexis-evelyn",
-    "sources": "https://github.com/alexis-evelyn/RandomTech"
+    "sources": "https://github.com/alexis-evelyn/RandomTech",
+    "issues": "https://github.com/alexis-evelyn/RandomTech/issues",
+    "discord": "https://discord.gg/kBKwmdw"
   },
 
   "license": "MIT",
@@ -22,6 +27,9 @@
   "entrypoints": {
     "main": [
       "me.alexisevelyn.randomtech.api.Main"
+    ],
+    "modmenu": [
+      "me.alexisevelyn.randomtech.api.modmenu.ModMenu"
     ]
   },
   "mixins": [
@@ -41,5 +49,11 @@
     "reborncore": ">=4.3.1"
   },
   "suggests": {
+  },
+
+  "custom": {
+    "modmenu:api": true,
+    "modmenu:clientsideOnly": false,
+    "modmenu:parent": "randomtech"
   }
 }

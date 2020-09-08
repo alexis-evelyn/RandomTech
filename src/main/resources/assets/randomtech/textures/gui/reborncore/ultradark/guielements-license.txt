@@ -1,0 +1,6 @@
+The file guielements.png was pulled from RebornCore which is licensed under MIT. This file was pulled so I can modify how my gui looks.
+
+This file was modified from the original though.
+
+The license can be found here:
+https://github.com/TechReborn/RebornCore/blob/1.16/LICENSE.md

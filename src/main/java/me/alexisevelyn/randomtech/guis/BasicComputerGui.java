@@ -2,6 +2,8 @@ package me.alexisevelyn.randomtech.guis;
 
 import me.alexisevelyn.randomtech.Main;
 import me.alexisevelyn.randomtech.blockentities.BasicComputerBlockEntity;
+import me.alexisevelyn.randomtech.modmenu.screens.ConfigScreen;
+import me.sargunvohra.mcmods.autoconfig1u.AutoConfig;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.util.math.MatrixStack;
@@ -19,7 +21,7 @@ import reborncore.common.util.Color;
 @Environment(EnvType.CLIENT)
 public class BasicComputerGui extends GuiBase<BuiltScreenHandler> {
     // @SuppressWarnings("FieldCanBeLocal") private final BasicComputerBlockEntity blockEntity;
-    public GuiBuilder builder = new GuiBuilder(new Identifier(Main.MODID, "textures/gui/guielements.png"));
+    public final GuiBuilder builder;
     //private TextFieldWidget nameField;
 
     // Background
@@ -42,6 +44,24 @@ public class BasicComputerGui extends GuiBase<BuiltScreenHandler> {
      */
     public BasicComputerGui(int syncID, PlayerEntity player, BasicComputerBlockEntity blockEntity) {
         super(player, blockEntity, blockEntity.createScreenHandler(syncID, player));
+
+        ConfigScreen config = AutoConfig.getConfigHolder(ConfigScreen.class).getConfig();
+
+        Identifier theme;
+        switch (config.guiTheme) {
+            case ULTRADARK:
+                theme = new Identifier(Main.MODID, "textures/gui/reborncore/ultradark/guielements.png");
+                break;
+            case DARK:
+                theme = new Identifier(Main.MODID, "textures/gui/reborncore/dark/guielements.png");
+                break;
+            case VANILLA:
+            default:
+                theme = new Identifier(Main.MODID, "textures/gui/reborncore/vanilla/guielements.png");
+        }
+
+        builder = new GuiBuilder(theme);
+
         // this.blockEntity = blockEntity;
 //        setup();
     }

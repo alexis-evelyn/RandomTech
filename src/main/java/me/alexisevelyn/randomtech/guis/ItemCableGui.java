@@ -1,6 +1,9 @@
 package me.alexisevelyn.randomtech.guis;
 
 import com.mojang.blaze3d.systems.RenderSystem;
+import me.alexisevelyn.randomtech.Main;
+import me.alexisevelyn.randomtech.modmenu.screens.ConfigScreen;
+import me.sargunvohra.mcmods.autoconfig1u.AutoConfig;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.gui.Element;
@@ -10,12 +13,13 @@ import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
+import reborncore.client.gui.guibuilder.GuiBuilder;
 
 import java.util.Optional;
 
 @Environment(EnvType.CLIENT)
 public class ItemCableGui extends HandledScreen<ScreenHandler> {
-    private static final Identifier TEXTURE = new Identifier("randomtech", "textures/gui/cable/itemcable/itemcable_one.png");
+    private final Identifier TEXTURE;
 
     /**
      *
@@ -25,6 +29,23 @@ public class ItemCableGui extends HandledScreen<ScreenHandler> {
      */
     public ItemCableGui(ScreenHandler handler, PlayerInventory inventory, Text title) {
         super(handler, inventory, title);
+
+        ConfigScreen config = AutoConfig.getConfigHolder(ConfigScreen.class).getConfig();
+
+        Identifier theme;
+        switch (config.guiTheme) {
+            case ULTRADARK:
+                theme = new Identifier("randomtech", "textures/gui/cable/itemcable/ultradark/itemcable_one.png");
+                break;
+            case DARK:
+                theme = new Identifier("randomtech", "textures/gui/cable/itemcable/dark/itemcable_one.png");
+                break;
+            case VANILLA:
+            default:
+                theme = new Identifier("randomtech", "textures/gui/cable/itemcable/vanilla/itemcable_one.png");
+        }
+
+        TEXTURE = theme;
     }
 
     /**
