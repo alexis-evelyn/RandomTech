@@ -43,7 +43,6 @@ public class ConfigScreen implements ConfigData {
 //        protected int b = 1;
 //    }
 
-    @ConfigEntry.Gui.Tooltip(count = 2)
     @ConfigEntry.Gui.EnumHandler(option = ConfigEntry.Gui.EnumHandler.EnumDisplayOption.BUTTON)
-    public Theme guiTheme = Theme.VANILLA;
+    public Theme guiTheme = Theme.THEME_VANILLA;
 }

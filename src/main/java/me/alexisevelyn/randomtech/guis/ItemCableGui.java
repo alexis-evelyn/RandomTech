@@ -34,13 +34,13 @@ public class ItemCableGui extends HandledScreen<ScreenHandler> {
 
         Identifier theme;
         switch (config.guiTheme) {
-            case ULTRADARK:
+            case THEME_ULTRADARK:
                 theme = new Identifier("randomtech", "textures/gui/cable/itemcable/ultradark/itemcable_one.png");
                 break;
-            case DARK:
+            case THEME_DARK:
                 theme = new Identifier("randomtech", "textures/gui/cable/itemcable/dark/itemcable_one.png");
                 break;
-            case VANILLA:
+            case THEME_VANILLA:
             default:
                 theme = new Identifier("randomtech", "textures/gui/cable/itemcable/vanilla/itemcable_one.png");
         }

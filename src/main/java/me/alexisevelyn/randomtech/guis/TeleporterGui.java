@@ -55,13 +55,13 @@ public class TeleporterGui extends GuiBase<BuiltScreenHandler> {
 
         Identifier theme;
         switch (config.guiTheme) {
-            case ULTRADARK:
+            case THEME_ULTRADARK:
                 theme = new Identifier(Main.MODID, "textures/gui/reborncore/ultradark/guielements.png");
                 break;
-            case DARK:
+            case THEME_DARK:
                 theme = new Identifier(Main.MODID, "textures/gui/reborncore/dark/guielements.png");
                 break;
-            case VANILLA:
+            case THEME_VANILLA:
             default:
                 theme = new Identifier(Main.MODID, "textures/gui/reborncore/vanilla/guielements.png");
         }
