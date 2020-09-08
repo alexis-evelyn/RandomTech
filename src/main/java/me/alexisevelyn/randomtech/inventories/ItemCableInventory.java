@@ -26,7 +26,7 @@ public class ItemCableInventory implements SidedInventory {
      * Instantiates a new Item cable inventory.
      */
     public ItemCableInventory() {
-        this.inventory = DefaultedList.ofSize(getFilterSlots(null).length + getRealSlots(null).length, ItemStack.EMPTY);
+        this.inventory = DefaultedList.ofSize(this.getFilterSlots(null).length + this.getRealSlots(null).length, ItemStack.EMPTY);
     }
 
     /**

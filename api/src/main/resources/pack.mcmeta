@@ -2,12 +2,5 @@
   "pack": {
     "pack_format": 6,
     "description": "API Resource Pack"
-  },
-  "language": {
-    "ma": {
-      "name": "Mazawalza",
-      "region": "Liveville",
-      "bidirectional": false
-    }
   }
 }

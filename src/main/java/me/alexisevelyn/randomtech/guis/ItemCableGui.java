@@ -15,7 +15,7 @@ import java.util.Optional;
 
 @Environment(EnvType.CLIENT)
 public class ItemCableGui extends HandledScreen<ScreenHandler> {
-    private static final Identifier TEXTURE = new Identifier("minecraft", "textures/gui/container/dispenser.png");
+    private static final Identifier TEXTURE = new Identifier("randomtech", "textures/gui/cable/itemcable/itemcable_one.png");
 
     /**
      *
