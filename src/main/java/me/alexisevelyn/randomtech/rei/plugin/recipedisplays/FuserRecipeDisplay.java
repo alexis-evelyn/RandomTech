@@ -22,7 +22,7 @@ import java.util.Optional;
 /**
  * The type Fuser recipe display.
  */
-public class FuserRecipeDisplay implements RecipeDisplay, TransferRecipeDisplay {
+public class FuserRecipeDisplay implements RecipeDisplay {
     private final GenericFluidRecipe recipe;
 
     private EntryStack ingredient;
@@ -39,11 +39,11 @@ public class FuserRecipeDisplay implements RecipeDisplay, TransferRecipeDisplay 
         this.recipe = genericFluidRecipe;
 
         // You can't craft something without an input in the fuser
-        if (genericFluidRecipe.getRebornIngredients().size() <= 0)
+        if (this.recipe.getRebornIngredients().size() <= 0)
             return;
 
-        RebornIngredient input = genericFluidRecipe.getRebornIngredients().get(0);
-        FluidInstance fluidInstance = genericFluidRecipe.getFluidInstance();
+        RebornIngredient input = this.recipe.getRebornIngredients().get(0);
+        FluidInstance fluidInstance = this.recipe.getFluidInstance();
 
         // I require fluid output for my Fuser recipe as that's the whole point of the fuser
         if (fluidInstance.equals(FluidInstance.EMPTY))
@@ -59,13 +59,13 @@ public class FuserRecipeDisplay implements RecipeDisplay, TransferRecipeDisplay 
         this.fluid = EntryStack.create(fluidInstance.getFluid(), fluidInstance.getAmount().getRawValue());
 
         // Get recipe craft time
-        this.recipeCraftTime = genericFluidRecipe.getTime();
+        this.recipeCraftTime = this.recipe.getTime();
 
         // Byproducts are not required for the recipe, so we just return at this point if it doesn't exist
-        if (genericFluidRecipe.getOutputs().size() <= 0)
+        if (this.recipe.getOutputs().size() <= 0)
             return;
 
-        ItemStack output = genericFluidRecipe.getOutputs().get(0);
+        ItemStack output = this.recipe.getOutputs().get(0);
         this.byproduct = EntryStack.create(output);
     }
 
@@ -150,40 +150,40 @@ public class FuserRecipeDisplay implements RecipeDisplay, TransferRecipeDisplay 
         return getInputEntries();
     }
 
-    /**
-     * @return the width of the crafting grid.
-     */
-    @Override
-    public int getWidth() {
-        return 1;
-    }
+//    /**
+//     * @return the width of the crafting grid.
+//     */
+//    @Override
+//    public int getWidth() {
+//        return 1;
+//    }
+//
+//    /**
+//     * @return the height of the crafting grid.
+//     */
+//    @Override
+//    public int getHeight() {
+//        return 1;
+//    }
 
-    /**
-     * @return the height of the crafting grid.
-     */
-    @Override
-    public int getHeight() {
-        return 1;
-    }
+//    /**
+//     * Gets organised input entries.
+//     *
+//     * @param containerInfo the container info
+//     * @param container     the container
+//     * @return the organised input entries
+//     */
+//    @Override
+//    public List<List<EntryStack>> getOrganisedInputEntries(ContainerInfo<ScreenHandler> containerInfo, ScreenHandler container) {
+//        return getInputEntries();
+//    }
 
-    /**
-     * Gets organised input entries.
-     *
-     * @param containerInfo the container info
-     * @param container     the container
-     * @return the organised input entries
-     */
-    @Override
-    public List<List<EntryStack>> getOrganisedInputEntries(ContainerInfo<ScreenHandler> containerInfo, ScreenHandler container) {
-        return getInputEntries();
-    }
-
-    /**
-     * Gets optional recipe.
-     *
-     * @return the optional recipe
-     */
-    public Optional<GenericFluidRecipe> getOptionalRecipe() {
-        return Optional.ofNullable(recipe);
-    }
+//    /**
+//     * Gets optional recipe.
+//     *
+//     * @return the optional recipe
+//     */
+//    public Optional<GenericFluidRecipe> getOptionalRecipe() {
+//        return Optional.ofNullable(recipe);
+//    }
 }

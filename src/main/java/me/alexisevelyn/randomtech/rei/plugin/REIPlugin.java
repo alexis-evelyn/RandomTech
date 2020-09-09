@@ -22,7 +22,7 @@ import reborncore.common.crafting.RecipeManager;
  */
 @Environment(EnvType.CLIENT)
 public class REIPlugin implements REIPluginV0 {
-    public static final Identifier FUSER = new Identifier(Main.MODID, "fuser_category");
+    public static final Identifier FUSER = new Identifier(Main.MODID, "fuser");
 
 //    @Override
 //    public int getPriority() {
@@ -95,7 +95,7 @@ public class REIPlugin implements REIPluginV0 {
 
         // TODO: Move button to somewhere other than the input slot as REI won't let you click items in if it's blocking the slot
         // recipeHelper.registerScreenClickArea(new Rectangle(FuserGui.ingredientSlotX, FuserGui.ingredientSlotY, FuserGui.inputSlotX, FuserGui.inputSlotY), FuserGui.class, FUSER); // Adds the show recipes for Fuser tooltip
-        recipeHelper.registerAutoCraftingHandler(new FuserAutocraftingHandler());
+        // recipeHelper.registerAutoCraftingHandler(new FuserAutocraftingHandler());
     }
 
     /**
@@ -122,6 +122,8 @@ public class REIPlugin implements REIPluginV0 {
     private void registerFuser(RecipeHelper recipeHelper) {
         // Note to self, if your fluids are not showing up, check the identifier in the recipe json files.
 
-        recipeHelper.registerRecipes(FUSER, GenericFluidRecipe.class, FuserRecipeDisplay::new);
+        // TODO: Figure out why this causes REI to Crash on Attempt to View Recipe (Not View Usages As VU Works Fine)
+        // For Shedaniel. This is the line I've tracked down so far in order to disable crashes
+        // recipeHelper.registerRecipes(FUSER, GenericFluidRecipe.class, FuserRecipeDisplay::new);
     }
 }
