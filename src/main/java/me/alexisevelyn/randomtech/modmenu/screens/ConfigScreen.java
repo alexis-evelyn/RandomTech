@@ -2,19 +2,9 @@ package me.alexisevelyn.randomtech.modmenu.screens;
 
 import me.alexisevelyn.randomtech.Main;
 import me.alexisevelyn.randomtech.modmenu.Theme;
-import me.alexisevelyn.randomtech.utility.registryhelpers.main.RegistryHelper;
 import me.sargunvohra.mcmods.autoconfig1u.ConfigData;
 import me.sargunvohra.mcmods.autoconfig1u.annotation.Config;
 import me.sargunvohra.mcmods.autoconfig1u.annotation.ConfigEntry;
-import me.shedaniel.clothconfig2.impl.builders.DropdownMenuBuilder;
-import net.minecraft.item.Item;
-import net.minecraft.item.Items;
-import net.minecraft.text.LiteralText;
-import net.minecraft.util.registry.Registry;
-
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * The type Main screen.
