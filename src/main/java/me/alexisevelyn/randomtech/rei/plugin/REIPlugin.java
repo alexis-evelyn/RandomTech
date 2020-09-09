@@ -121,9 +121,6 @@ public class REIPlugin implements REIPluginV0 {
      */
     private void registerFuser(RecipeHelper recipeHelper) {
         // Note to self, if your fluids are not showing up, check the identifier in the recipe json files.
-
-        // TODO: Figure out why this causes REI to Crash on Attempt to View Recipe (Not View Usages As VU Works Fine)
-        // For Shedaniel. This is the line I've tracked down so far in order to disable crashes
-        // recipeHelper.registerRecipes(FUSER, GenericFluidRecipe.class, FuserRecipeDisplay::new);
+        recipeHelper.registerRecipes(FUSER, GenericFluidRecipe.class, FuserRecipeDisplay::new);
     }
 }

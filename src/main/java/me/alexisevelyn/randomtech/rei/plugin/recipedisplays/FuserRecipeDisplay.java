@@ -6,6 +6,8 @@ import me.shedaniel.rei.api.EntryStack;
 import me.shedaniel.rei.api.RecipeDisplay;
 import me.shedaniel.rei.api.TransferRecipeDisplay;
 import me.shedaniel.rei.server.ContainerInfo;
+import me.shedaniel.rei.utils.CollectionUtils;
+import net.minecraft.block.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.util.Identifier;
@@ -121,13 +123,16 @@ public class FuserRecipeDisplay implements RecipeDisplay {
      * @return the output entries
      */
     @Override
-    public @NotNull List<EntryStack> getOutputEntries() {
+    public @NotNull List<List<EntryStack>> getResultingEntries() {
         ArrayList<EntryStack> outputEntries = new ArrayList<>();
 
-        outputEntries.add(fluid);
-        outputEntries.add(byproduct);
+        if (fluid != null)
+            outputEntries.add(fluid);
 
-        return outputEntries;
+        if (byproduct != null)
+            outputEntries.add(byproduct);
+
+        return CollectionUtils.map(outputEntries, Collections::singletonList);
     }
 
     /**
