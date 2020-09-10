@@ -32,6 +32,8 @@ jobs:
       env:
         BINTRAY_GPG_KEY: ${{ secrets.BINTRAY_GPG_KEY }}
         BINTRAY_GPG_PASSWORD: ${{ secrets.BINTRAY_GPG_PASSWORD }}
+        SONATYPE_USERNAME: ${{ secrets.SONATYPE_USERNAME }}
+        SONATYPE_PASSWORD: ${{ secrets.SONATYPE_PASSWORD }}
       continue-on-error: false
     - name: Publish To Artifactory (For Snapshots, But Can Take Releases)
       run: ./gradlew artifactoryPublish
