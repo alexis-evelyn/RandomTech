@@ -70,5 +70,5 @@ This project is under MIT License. You can refer to [LICENSE.md][license-link] f
 [maven-central-release-api-latest-download]: <https://mvnrepository.com/artifact/me.alexisevelyn/randomtechapi/latest> "Maven Central Release API Latest Download"
 
 <!-- These are psuedo-links as I have not found a way to "auto-link" to the latest snapshot -->
-[maven-central-snapshot-randomtech-latest-download]: <https://oss.sonatype.org/#view-repositories;snapshots~browsestorage~me/alexisevelyn/randomtech> "Maven Central Snapshot RandomTech Search"
-[maven-central-snapshot-api-latest-download]: <https://oss.sonatype.org/#view-repositories;snapshots~browsestorage~me/alexisevelyn/randomtechapi> "Maven Central Snapshot API Searhc"
+[maven-central-snapshot-randomtech-latest-download]: <https://oss.sonatype.org/#nexus-search;gav~me.alexisevelyn~randomtech~~~> "Maven Central Snapshot RandomTech Search"
+[maven-central-snapshot-api-latest-download]: <https://oss.sonatype.org/#nexus-search;gav~me.alexisevelyn~randomtechapi~~~> "Maven Central Snapshot API Searhc"
