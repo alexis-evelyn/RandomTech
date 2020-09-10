@@ -54,80 +54,80 @@ publishing {
     }
 }
 
-//uploadArchives {
-//    repositories {
-//        mavenDeployer {
-//            beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
-//
-//            // For Release Staging
-//            maven {
-//                url "https://oss.sonatype.org/service/local/staging/deploy/maven2/"
-//
-//                // Environment Var For Github, Other For Me
-//                if (System.getenv('SONATYPE_USERNAME') != null) {
-//                    username = System.getenv('SONATYPE_USERNAME')
-//                } else {
-//                    username = findProperty('SONATYPE_USERNAME')
-//                }
-//
-//                // Environment Var For Github, Other For Me
-//                if (System.getenv('SONATYPE_PASSWORD') != null) {
-//                    username = System.getenv('SONATYPE_PASSWORD')
-//                } else {
-//                    username = findProperty('SONATYPE_PASSWORD')
-//                }
-//            }
-//
-//            // For Snapshot Staging
-//            maven {
-//                url "https://oss.sonatype.org/content/repositories/snapshots/"
-//
-//                // Environment Var For Github, Other For Me
-//                if (System.getenv('SONATYPE_USERNAME') != null) {
-//                    username = System.getenv('SONATYPE_USERNAME')
-//                } else {
-//                    username = findProperty('SONATYPE_USERNAME')
-//                }
-//
-//                // Environment Var For Github, Other For Me
-//                if (System.getenv('SONATYPE_PASSWORD') != null) {
-//                    username = System.getenv('SONATYPE_PASSWORD')
-//                } else {
-//                    username = findProperty('SONATYPE_PASSWORD')
-//                }
-//            }
-//
-//            pom.project {
-//                name 'API'
-//                packaging 'jar'
-//                // optionally artifactId can be defined here
-//                description 'The API designed for RandomTech, just released separately for other mod developers to use.'
-//                url 'https://github.com/alexis-evelyn/RandomTech/README.md'
-//
-//                scm {
-//                    connection 'git@github.com:alexis-evelyn/RandomTech.git'
-//                    developerConnection 'git@github.com:alexis-evelyn/RandomTech.git'
-//                    url 'https://github.com/alexis-evelyn/RandomTech/tree/master/api'
-//                }
-//
-//                licenses {
-//                    license {
-//                        name 'MIT'
-//                        url 'https://github.com/alexis-evelyn/RandomTech/blob/master/LICENSE.md'
-//                    }
-//                }
-//
-//                developers {
-//                    developer {
-//                        id 'alexis-evelyn'
-//                        name 'Alexis Evelyn'
-//                        email 'alexis.a.evelyn@gmail.com'
-//                    }
-//                }
-//            }
-//        }
-//    }
-//}
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
+
+            // For Release Staging
+            maven {
+                url "https://oss.sonatype.org/service/local/staging/deploy/maven2/"
+
+                // Environment Var For Github, Other For Me
+                if (System.getenv('SONATYPE_USERNAME') != null) {
+                    username = System.getenv('SONATYPE_USERNAME')
+                } else {
+                    username = findProperty('SONATYPE_USERNAME')
+                }
+
+                // Environment Var For Github, Other For Me
+                if (System.getenv('SONATYPE_PASSWORD') != null) {
+                    password = System.getenv('SONATYPE_PASSWORD')
+                } else {
+                    password = findProperty('SONATYPE_PASSWORD')
+                }
+            }
+
+            // For Snapshot Staging
+            maven {
+                url "https://oss.sonatype.org/content/repositories/snapshots/"
+
+                // Environment Var For Github, Other For Me
+                if (System.getenv('SONATYPE_USERNAME') != null) {
+                    username = System.getenv('SONATYPE_USERNAME')
+                } else {
+                    username = findProperty('SONATYPE_USERNAME')
+                }
+
+                // Environment Var For Github, Other For Me
+                if (System.getenv('SONATYPE_PASSWORD') != null) {
+                    password = System.getenv('SONATYPE_PASSWORD')
+                } else {
+                    password = findProperty('SONATYPE_PASSWORD')
+                }
+            }
+
+            pom.project {
+                name 'API'
+                packaging 'jar'
+                // optionally artifactId can be defined here
+                description 'The API designed for RandomTech, just released separately for other mod developers to use.'
+                url 'https://github.com/alexis-evelyn/RandomTech/README.md'
+
+                scm {
+                    connection 'git@github.com:alexis-evelyn/RandomTech.git'
+                    developerConnection 'git@github.com:alexis-evelyn/RandomTech.git'
+                    url 'https://github.com/alexis-evelyn/RandomTech/tree/master/api'
+                }
+
+                licenses {
+                    license {
+                        name 'MIT'
+                        url 'https://github.com/alexis-evelyn/RandomTech/blob/master/LICENSE.md'
+                    }
+                }
+
+                developers {
+                    developer {
+                        id 'alexis-evelyn'
+                        name 'Alexis Evelyn'
+                        email 'alexis.a.evelyn@gmail.com'
+                    }
+                }
+            }
+        }
+    }
+}
 
 
 signing {
@@ -151,7 +151,7 @@ signing {
     }
 
     useInMemoryPgpKeys(signingKeyId as String, signingKey as String, signingPassword as String)
-    sign publications["publishAPI"]
+    sign publishing.publications.publishAPI as Closure
 }
 
 bintray {

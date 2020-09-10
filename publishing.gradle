@@ -54,80 +54,80 @@ publishing {
     }
 }
 
-//uploadArchives {
-//    repositories {
-//        mavenDeployer {
-//            beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
-//
-//            // For Release Staging
-//            maven {
-//                url "https://oss.sonatype.org/service/local/staging/deploy/maven2/"
-//
-//                // Environment Var For Github, Other For Me
-//                if (System.getenv('SONATYPE_USERNAME') != null) {
-//                    username = System.getenv('SONATYPE_USERNAME')
-//                } else {
-//                    username = findProperty('SONATYPE_USERNAME')
-//                }
-//
-//                // Environment Var For Github, Other For Me
-//                if (System.getenv('SONATYPE_PASSWORD') != null) {
-//                    username = System.getenv('SONATYPE_PASSWORD')
-//                } else {
-//                    username = findProperty('SONATYPE_PASSWORD')
-//                }
-//            }
-//
-//            // For Snapshot Staging
-//            maven {
-//                url "https://oss.sonatype.org/content/repositories/snapshots/"
-//
-//                // Environment Var For Github, Other For Me
-//                if (System.getenv('SONATYPE_USERNAME') != null) {
-//                    username = System.getenv('SONATYPE_USERNAME')
-//                } else {
-//                    username = findProperty('SONATYPE_USERNAME')
-//                }
-//
-//                // Environment Var For Github, Other For Me
-//                if (System.getenv('SONATYPE_PASSWORD') != null) {
-//                    username = System.getenv('SONATYPE_PASSWORD')
-//                } else {
-//                    username = findProperty('SONATYPE_PASSWORD')
-//                }
-//            }
-//
-//            pom.project {
-//                name 'RandomTech'
-//                packaging 'jar'
-//                // optionally artifactId can be defined here
-//                description 'A tech mod to add features missing from other tech mods. Also includes an API that can be used with other mods.'
-//                url 'https://github.com/alexis-evelyn/RandomTech/README.md'
-//
-//                scm {
-//                    connection 'git@github.com:alexis-evelyn/RandomTech.git'
-//                    developerConnection 'git@github.com:alexis-evelyn/RandomTech.git'
-//                    url 'https://github.com/alexis-evelyn/RandomTech'
-//                }
-//
-//                licenses {
-//                    license {
-//                        name 'MIT'
-//                        url 'https://github.com/alexis-evelyn/RandomTech/blob/master/LICENSE.md'
-//                    }
-//                }
-//
-//                developers {
-//                    developer {
-//                        id 'alexis-evelyn'
-//                        name 'Alexis Evelyn'
-//                        email 'alexis.a.evelyn@gmail.com'
-//                    }
-//                }
-//            }
-//        }
-//    }
-//}
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
+
+            // For Release Staging
+            maven {
+                url "https://oss.sonatype.org/service/local/staging/deploy/maven2/"
+
+                // Environment Var For Github, Other For Me
+                if (System.getenv('SONATYPE_USERNAME') != null) {
+                    username = System.getenv('SONATYPE_USERNAME')
+                } else {
+                    username = findProperty('SONATYPE_USERNAME')
+                }
+
+                // Environment Var For Github, Other For Me
+                if (System.getenv('SONATYPE_PASSWORD') != null) {
+                    password = System.getenv('SONATYPE_PASSWORD')
+                } else {
+                    password = findProperty('SONATYPE_PASSWORD')
+                }
+            }
+
+            // For Snapshot Staging
+            maven {
+                url "https://oss.sonatype.org/content/repositories/snapshots/"
+
+                // Environment Var For Github, Other For Me
+                if (System.getenv('SONATYPE_USERNAME') != null) {
+                    username = System.getenv('SONATYPE_USERNAME')
+                } else {
+                    username = findProperty('SONATYPE_USERNAME')
+                }
+
+                // Environment Var For Github, Other For Me
+                if (System.getenv('SONATYPE_PASSWORD') != null) {
+                    password = System.getenv('SONATYPE_PASSWORD')
+                } else {
+                    password = findProperty('SONATYPE_PASSWORD')
+                }
+            }
+
+            pom.project {
+                name 'RandomTech'
+                packaging 'jar'
+                // optionally artifactId can be defined here
+                description 'A tech mod to add features missing from other tech mods. Also includes an API that can be used with other mods.'
+                url 'https://github.com/alexis-evelyn/RandomTech/README.md'
+
+                scm {
+                    connection 'git@github.com:alexis-evelyn/RandomTech.git'
+                    developerConnection 'git@github.com:alexis-evelyn/RandomTech.git'
+                    url 'https://github.com/alexis-evelyn/RandomTech'
+                }
+
+                licenses {
+                    license {
+                        name 'MIT'
+                        url 'https://github.com/alexis-evelyn/RandomTech/blob/master/LICENSE.md'
+                    }
+                }
+
+                developers {
+                    developer {
+                        id 'alexis-evelyn'
+                        name 'Alexis Evelyn'
+                        email 'alexis.a.evelyn@gmail.com'
+                    }
+                }
+            }
+        }
+    }
+}
 
 signing {
     def signingKeyId = findProperty("BINTRAY_GPG_KEY_ID")
@@ -150,7 +150,7 @@ signing {
     }
 
     useInMemoryPgpKeys(signingKeyId as String, signingKey as String, signingPassword as String)
-    sign publications["publishRandomTech"]
+    sign publishing.publications.publishRandomTech as Closure
 }
 
 // For Release Builds
