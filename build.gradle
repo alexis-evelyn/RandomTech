@@ -1,9 +1,10 @@
 plugins {
-	id 'fabric-loom' version '0.5-SNAPSHOT'
+	id 'fabric-loom' version '0.5-SNAPSHOT' // ./gradlew build - For Building The Mod
 	id 'com.jfrog.bintray' version '1.8.5' // ./gradlew bintrayUpload - For publishing to bintray - https://github.com/bintray/gradle-bintray-plugin
 	id 'com.jfrog.artifactory' version '4.17.2' // ./gradlew artifactoryPublish - For publishing snapshots to bintray artifactory oss - https://github.com/jfrog/build-info
-	id 'maven-publish'
-	id 'signing'
+	id 'maven-publish' // ./gradlew publish - For publishing to Sonatype
+	id 'signing' // Performed By Maven Publish - For Signing Artifacts Before Publishing to Sonatype
+	id 'io.codearte.nexus-staging' version '0.22.0' // ./gradlew closeAndReleaseRepository - For releasing uploaded releases to the public
 //	id "com.github.spotbugs" version '4.5.0'
 }
 

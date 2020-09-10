@@ -1,3 +1,24 @@
+// For Staging - Attempts to Close and Release Repositories
+// Applies to both RandomTech and API (Really anything under the me.alexisevelyn namespace
+nexusStaging {
+    packageGroup = "me.alexisevelyn" //optional if packageGroup == project.getGroup()
+    // stagingProfileId = "yourStagingProfileId" //when not defined will be got from server using "packageGroup"
+
+    // Environment Var For Github, Other For Me
+    if (System.getenv('SONATYPE_USERNAME') != null) {
+        username = System.getenv('SONATYPE_USERNAME')
+    } else {
+        username = findProperty('SONATYPE_USERNAME')
+    }
+
+    // Environment Var For Github, Other For Me
+    if (System.getenv('SONATYPE_PASSWORD') != null) {
+        password = System.getenv('SONATYPE_PASSWORD')
+    } else {
+        password = findProperty('SONATYPE_PASSWORD')
+    }
+}
+
 // configure the maven publication
 // Use bintrayUpload, not bintrayPublish
 publishing {
