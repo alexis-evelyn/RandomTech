@@ -3,6 +3,7 @@
 <!--[![Bintray Download Badge][bintray-badge]][bintray-download-link]-->
 [![Maven Central Download RandomTech Release][sonatype-release-badge-randomtech]][maven-central-release-randomtech-latest-download]
 [![Maven Central Download API Release][sonatype-release-badge-api]][maven-central-release-api-latest-download]
+<br>
 [![Maven Central Download RandomTech Snapshot][sonatype-snapshot-badge-randomtech]][maven-central-snapshot-randomtech-latest-download]
 [![Maven Central Download API Snapshot][sonatype-snapshot-badge-api]][maven-central-snapshot-api-latest-download]
 
