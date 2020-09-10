@@ -130,13 +130,29 @@ publishing {
 //}
 
 
-//signing {
-//    def signingKeyId = findProperty("BINTRAY_GPG_KEY_ID")
-//    def signingKey = findProperty("BINTRAY_GPG_KEY")
-//
-//    useInMemoryPgpKeys(signingKeyId, signingKey)
-//    sign publishing.publications.publishAPI
-//}
+signing {
+    def signingKeyId = findProperty("BINTRAY_GPG_KEY_ID")
+    def signingKey = findProperty("BINTRAY_GPG_KEY")
+    def signingPassword = findProperty("BINTRAY_GPG_PASSWORD")
+
+    // Bintray Specific Key ID
+    if (System.getenv('BINTRAY_GPG_KEY_ID') != null) {
+        signingKeyId = System.getenv('BINTRAY_GPG_KEY_ID')
+    }
+
+    // Bintray Specific Key
+    if (System.getenv('BINTRAY_GPG_KEY') != null) {
+        signingKey = System.getenv('BINTRAY_GPG_KEY')
+    }
+
+    // Bintray Specific Password
+    if (System.getenv('BINTRAY_GPG_PASSWORD') != null) {
+        signingPassword = System.getenv('BINTRAY_GPG_PASSWORD')
+    }
+
+    useInMemoryPgpKeys(signingKeyId as String, signingKey as String, signingPassword as String)
+    sign publications["publishAPI"]
+}
 
 bintray {
     // For Github Actions Building (Pull From Environment Variable) Otherwise Pull From Gradle Properties
