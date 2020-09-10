@@ -24,9 +24,12 @@ jobs:
       run: chmod +x gradlew
     - name: Build with Gradle
       run: ./gradlew build
+    - name: Publish To Bintray (For Releases Only - Will Fail on Snapshots)
+      run: ./gradlew bintrayUpload
       env:
         BINTRAY_USER: ${{ secrets.BINTRAY_USER }}
-        BINTRAY_ENCRYPTED_PASSWORD: ${{ secrets.BINTRAY_ENCRYPTED_PASSWORD }}
+        BINTRAY_KEY: ${{ secrets.BINTRAY_KEY }}
+      continue-on-error: true
     - name: Publish To Sonatype (Owner of Maven Central)
       run: ./gradlew publish
       env:
