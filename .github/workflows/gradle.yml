@@ -42,7 +42,7 @@ jobs:
       run: ./gradlew artifactoryPublish
       env:
         BINTRAY_USER: ${{ secrets.BINTRAY_USER }}
-        BINTRAY_ENCRYPTED_PASSWORD: ${{ secrets.BINTRAY_ENCRYPTED_PASSWORD }}
+        BINTRAY_ENCRYPTED_PASSWORD: ${{ secrets.BINTRAY_API_KEY }}
       continue-on-error: false
     - name: Publish Artifacts To Github Actions
       uses: actions/upload-artifact@v2
