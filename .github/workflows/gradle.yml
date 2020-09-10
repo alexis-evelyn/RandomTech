@@ -27,19 +27,18 @@ jobs:
       env:
         BINTRAY_USER: ${{ secrets.BINTRAY_USER }}
         BINTRAY_ENCRYPTED_PASSWORD: ${{ secrets.BINTRAY_ENCRYPTED_PASSWORD }}
+    - name: Publish To Sonatype (Owner of Maven Central)
+      run: ./gradlew publish
+      env:
+        BINTRAY_GPG_KEY: ${{ secrets.BINTRAY_GPG_KEY }}
+        BINTRAY_GPG_PASSWORD: ${{ secrets.BINTRAY_GPG_PASSWORD }}
+      continue-on-error: false
     - name: Publish To Artifactory (For Snapshots, But Can Take Releases)
       run: ./gradlew artifactoryPublish
       env:
         BINTRAY_USER: ${{ secrets.BINTRAY_USER }}
         BINTRAY_ENCRYPTED_PASSWORD: ${{ secrets.BINTRAY_ENCRYPTED_PASSWORD }}
       continue-on-error: true
-    - name: Publish To Sonatype (Owner of Maven Central)
-      run: ./gradlew publish
-      env:
-        BINTRAY_GPG_KEY_ID: ${{ secrets.BINTRAY_GPG_KEY_ID }}
-        BINTRAY_GPG_KEY: ${{ secrets.BINTRAY_GPG_KEY }}
-        BINTRAY_GPG_PASSWORD: ${{ secrets.BINTRAY_GPG_PASSWORD }}
-      continue-on-error: false
     - name: Publish Artifacts To Github Actions
       uses: actions/upload-artifact@v2
       with:
