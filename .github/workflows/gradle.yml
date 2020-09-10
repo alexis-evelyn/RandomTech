@@ -35,8 +35,7 @@ jobs:
         SONATYPE_PASSWORD: ${{ secrets.SONATYPE_PASSWORD }}
       continue-on-error: false
     - name: Attempt Close/Release
-      if: false
-      run: ./gradlew closeAndReleaseRepository
+      run: ls -1 build/libs | grep -q SNAPSHOT && echo `ls -1 api/build/libs | grep -q SNAPSHOT && echo Snapshots Only. Skipping this Step || ./gradlew closeAndReleaseRepository` || ./gradlew closeAndReleaseRepository
       env:
         SONATYPE_USERNAME: ${{ secrets.SONATYPE_USERNAME }}
         SONATYPE_PASSWORD: ${{ secrets.SONATYPE_PASSWORD }}
