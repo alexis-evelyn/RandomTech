@@ -12,8 +12,6 @@ on:
       - 'docs/**'
   schedule:
     - cron: '0 1 * * 6'
-    paths-ignore:
-      - 'docs/**'
 
 jobs:
   analyze:
