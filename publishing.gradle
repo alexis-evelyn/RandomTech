@@ -51,18 +51,15 @@ publishing {
     repositories {
         // uncomment to publish to the local maven
         // mavenLocal()
-    }
-}
 
-uploadArchives {
-    repositories {
-        mavenDeployer {
-            beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
+        // For Sonatype Staging
+        maven {
+            def releaseURL = "https://oss.sonatype.org/service/local/staging/deploy/maven2/"
+            def snapshotURL = "https://oss.sonatype.org/content/repositories/snapshots/"
 
-            // For Release Staging
-            maven {
-                url "https://oss.sonatype.org/service/local/staging/deploy/maven2/"
+            url = version.endsWith('-SNAPSHOT') ? snapshotURL : releaseURL
 
+            credentials {
                 // Environment Var For Github, Other For Me
                 if (System.getenv('SONATYPE_USERNAME') != null) {
                     username = System.getenv('SONATYPE_USERNAME')
@@ -75,54 +72,6 @@ uploadArchives {
                     password = System.getenv('SONATYPE_PASSWORD')
                 } else {
                     password = findProperty('SONATYPE_PASSWORD')
-                }
-            }
-
-            // For Snapshot Staging
-            maven {
-                url "https://oss.sonatype.org/content/repositories/snapshots/"
-
-                // Environment Var For Github, Other For Me
-                if (System.getenv('SONATYPE_USERNAME') != null) {
-                    username = System.getenv('SONATYPE_USERNAME')
-                } else {
-                    username = findProperty('SONATYPE_USERNAME')
-                }
-
-                // Environment Var For Github, Other For Me
-                if (System.getenv('SONATYPE_PASSWORD') != null) {
-                    password = System.getenv('SONATYPE_PASSWORD')
-                } else {
-                    password = findProperty('SONATYPE_PASSWORD')
-                }
-            }
-
-            pom.project {
-                name 'RandomTech'
-                packaging 'jar'
-                // optionally artifactId can be defined here
-                description 'A tech mod to add features missing from other tech mods. Also includes an API that can be used with other mods.'
-                url 'https://github.com/alexis-evelyn/RandomTech/README.md'
-
-                scm {
-                    connection 'git@github.com:alexis-evelyn/RandomTech.git'
-                    developerConnection 'git@github.com:alexis-evelyn/RandomTech.git'
-                    url 'https://github.com/alexis-evelyn/RandomTech'
-                }
-
-                licenses {
-                    license {
-                        name 'MIT'
-                        url 'https://github.com/alexis-evelyn/RandomTech/blob/master/LICENSE.md'
-                    }
-                }
-
-                developers {
-                    developer {
-                        id 'alexis-evelyn'
-                        name 'Alexis Evelyn'
-                        email 'alexis.a.evelyn@gmail.com'
-                    }
                 }
             }
         }
@@ -130,6 +79,8 @@ uploadArchives {
 }
 
 signing {
+    required { gradle.taskGraph.hasTask("publish") }
+
     def signingKeyId = findProperty("BINTRAY_GPG_KEY_ID")
     def signingKey = findProperty("BINTRAY_GPG_KEY")
     def signingPassword = findProperty("BINTRAY_GPG_PASSWORD")
@@ -150,7 +101,7 @@ signing {
     }
 
     useInMemoryPgpKeys(signingKeyId as String, signingKey as String, signingPassword as String)
-    sign publishing.publications.publishRandomTech as Closure
+    sign publishing.publications.publishRandomTech
 }
 
 // For Release Builds
@@ -227,19 +178,19 @@ artifactory {
             // Username
             if (System.getenv('BINTRAY_USER') != null) {
                 username = System.getenv('BINTRAY_USER')
-                logger.lifecycle "(Root) Environment Username Chosen For Artifactory Auth"
+                // logger.lifecycle "(Root) Environment Username Chosen For Artifactory Auth"
             } else {
                 username = findProperty('BINTRAY_USER')
-                logger.lifecycle "(Root) Gradle Username Chosen For Artifactory Auth"
+                // logger.lifecycle "(Root) Gradle Username Chosen For Artifactory Auth"
             }
 
             // Password
             if (System.getenv('BINTRAY_ENCRYPTED_PASSWORD') != null) {
                 password = System.getenv('BINTRAY_ENCRYPTED_PASSWORD')
-                logger.lifecycle "(Root) Environment Password Chosen For Artifactory Auth"
+                // logger.lifecycle "(Root) Environment Password Chosen For Artifactory Auth"
             } else {
                 password = findProperty('BINTRAY_ENCRYPTED_PASSWORD')
-                logger.lifecycle "(Root) Gradle Password Chosen For Artifactory Auth"
+                // logger.lifecycle "(Root) Gradle Password Chosen For Artifactory Auth"
             }
 
             maven = true
