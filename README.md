@@ -26,7 +26,7 @@ I've made a Discord for Fabric mods I (and a potential future team) develop. You
 
 ## Development
 
-To include this mod in your development environment, use `modImplementation 'me.alexisevelyn:randomtech:<latest-version>'` and include the Maven Central.
+To include this mod in your development environment, use `modImplementation 'me.alexisevelyn:randomtech:<latest-version>'` and include Maven Central.
 
 The same process applies for the API. Use `modImplementation 'me.alexisevelyn:randomtechapi:<latest-version>'` and include Maven Central.
 
