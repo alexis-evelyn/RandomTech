@@ -90,7 +90,7 @@ signing {
         signingKeyId = System.getenv('BINTRAY_GPG_KEY_ID')
     }
 
-    // Bintray Specific Key
+    // Bintray Specific Key - Follow https://stackoverflow.com/a/58000485/6828099
     if (System.getenv('BINTRAY_GPG_KEY') != null) {
         signingKey = System.getenv('BINTRAY_GPG_KEY')
     }
