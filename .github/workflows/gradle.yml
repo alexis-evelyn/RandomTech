@@ -22,7 +22,7 @@ jobs:
         java-version: 1.8
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
-    - name: Publish To Sonatype
+    - name: Build And Publish To Sonatype
       run: ./gradlew publish
       env:
         BINTRAY_GPG_KEY: ${{ secrets.BINTRAY_GPG_KEY }}
