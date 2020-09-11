@@ -2,7 +2,6 @@ plugins {
 	id 'fabric-loom'
 	id 'maven-publish'
 	id 'signing'
-	id 'com.matthewprenger.cursegradle'
 //	id "com.github.spotbugs"
 }
 
@@ -69,7 +68,7 @@ dependencies {
 	compile "org.apiguardian:apiguardian-api:${project.api_guardian_version}"
 
 	// For JavaX Annotations
-	compile "javax.annotation:javax.annotation-api:${project.javax_annotation_version}" // Cause Some Dependency Needs It
+	// compile "javax.annotation:javax.annotation-api:${project.javax_annotation_version}" // Cause Some Dependency Needs It
 
 //	// For Spotbugs Annotations
 //	compileOnly "com.github.spotbugs:spotbugs-annotations:${spotbugs.toolVersion.get()}"
