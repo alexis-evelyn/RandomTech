@@ -84,6 +84,7 @@ dependencies {
 
 	// For annotations
 	compile "org.jetbrains:annotations:${project.jetbrains_annotation_version}"
+	compile "javax.annotation:javax.annotation-api:${project.javax_annotation_version}" // Cause Some Dependency Needs It
 
 //	// For Spotbugs Annotations
 //	compileOnly "com.github.spotbugs:spotbugs-annotations:${spotbugs.toolVersion.get()}"
