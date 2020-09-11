@@ -155,6 +155,12 @@ dependencies {
 	}
 	include "de.siphalor:nbtcrafting-1.16:${project.nbt_crafting_version}"
 
+	// For Animation - Wait Until 3.0 For Block Entity Animation (https://discordapp.com/channels/730912704776110121/730913776307535922/753987515740061888)
+	modImplementation ("com.github.bernie-g:geckolib:${project.geckolib_version}") {
+		exclude(group: "net.fabricmc.fabric-api")
+	}
+	modImplementation ("com.github.bernie-g:geckolib:${project.geckolib_version}")
+
 	// PSA: Some older mods, compiled on Loom 0.2.1, might have outdated Maven POMs.
 	// You may need to force-disable transitiveness on them.
 }
