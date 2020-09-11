@@ -61,7 +61,7 @@ jobs:
         verbose: true
         issuesWoLabels: true
         prWoLabels: true
-        release-url: https://mvnrepository.com/artifact/me.alexisevelyn
+        releaseUrl: https://mvnrepository.com/artifact/me.alexisevelyn
         futureRelease: 0.0.5.7
     - name: Upload Generated Changelog For Review
       uses: actions/upload-artifact@v2
