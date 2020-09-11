@@ -7,13 +7,9 @@ assignees: 'alexis-evelyn'
 
 ---
 
-**Have you checked to make sure this feature wasn't already suggested?**
+- [ ] **Have you checked to make sure this feature wasn't already suggested?**
 
-- [ ]
-
-**Have you checked to make sure this feature wasn't already implemented in the latest version of the mod?**
-
-- [ ]
+- [ ] **Have you checked to make sure this feature wasn't already implemented in the latest version of the mod?**
 
 **Mod Name**
 Is this for the API or RandomTech? Just put `API` or `RandomTech` in this space.

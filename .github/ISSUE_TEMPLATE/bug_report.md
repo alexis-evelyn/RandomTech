@@ -7,13 +7,9 @@ assignees: 'alexis-evelyn'
 
 ---
 
-**Have you checked to make sure this bug wasn't already reporter?**
+- [ ] **Have you checked to make sure this feature wasn't already suggested?**
 
-- [ ]
-
-**Have you checked to make sure this bug wasn't already fixed in the latest version of the mod?**
-
-- [ ]
+- [ ] **Have you checked to make sure this feature wasn't already implemented in the latest version of the mod?**
 
 **Describe the bug**
 A clear and concise description of what the bug is.
