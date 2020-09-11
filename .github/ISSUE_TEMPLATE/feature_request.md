@@ -8,9 +8,11 @@ assignees: 'alexis-evelyn'
 ---
 
 **Have you checked to make sure this feature wasn't already suggested?**
+
 - [ ]
 
 **Have you checked to make sure this feature wasn't already implemented in the latest version of the mod?**
+
 - [ ]
 
 **Mod Name**

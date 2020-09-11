@@ -8,9 +8,11 @@ assignees: 'alexis-evelyn'
 ---
 
 **Have you checked to make sure this bug wasn't already reporter?**
+
 - [ ]
 
 **Have you checked to make sure this bug wasn't already fixed in the latest version of the mod?**
+
 - [ ]
 
 **Describe the bug**
@@ -36,7 +38,7 @@ If applicable, add screenshots to help explain your problem.
  - API: true/false/unsure (Is this bug report about the API)
 
 **Stacktrace**
-Use a site such as https://gist.github.com/ to upload your stacktrace and paste here. Also, make sure no personal information's stored in the stacktrace (e.g. chat unless the chat is able to be publicly released without issue). If it is stored in there. Either get a new stacktrace or edit out the personal information.
+Use a site such as https://gist.github.com/ to upload your stacktrace and paste here. Also, make sure no personal information's stored in the stacktrace (e.g. chat unless the chat is able to be publicly released without issue). If the stacktrace or log has personal information, either make a new stacktrace or edit out the personal information.
 
 **Additional context**
 Add any other context about the problem here.
