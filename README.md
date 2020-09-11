@@ -1,5 +1,7 @@
 # Alexis' Random Tech
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/28e0e43f7cbc4678a0d3f6a8a2d69742)](https://app.codacy.com/manual/alexis-evelyn/RandomTech?utm_source=github.com&utm_medium=referral&utm_content=alexis-evelyn/RandomTech&utm_campaign=Badge_Grade_Dashboard)
+
 <!--[![Bintray Download Badge][bintray-badge]][bintray-download-link]-->
 [![Maven Central Download RandomTech Release][sonatype-release-badge-randomtech]][maven-central-release-randomtech-latest-download]
 [![Maven Central Download API Release][sonatype-release-badge-api]][maven-central-release-api-latest-download]
