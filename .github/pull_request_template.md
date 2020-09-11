@@ -38,7 +38,7 @@ Please describe the tests that you ran to verify your changes. Provide instructi
 
 ## Reference Markers:
 
-1. The issue should be referenced in a way the Github can autolink it (e.g. #1). If the issue does not exist yet, create it and reference it.
+1. The issue should be referenced in a way the Github can autolink it (e.g. #1). If the issue does not exist yet, create it and reference it. This is important because the auto-changelog generate uses issues and PRs to generate the changelog.
 2. The Github Pages /docs/ does not count as code for this purpose, so it falls under here.
 3. Translation necessary changes refers to parameters in code such as TranslatableText.
 Basically, the parameters in code would not work with the translation for that locale without changes to the code.
