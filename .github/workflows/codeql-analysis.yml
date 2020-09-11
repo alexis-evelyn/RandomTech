@@ -55,7 +55,7 @@ jobs:
     - name: Autobuild
       uses: github/codeql-action/autobuild@v1
       env:
-        CURSEFORGE_API_KEY: ${{ secrets.CURSEFORGE_API_KEY }}
+        CURSEFORGE_API_KEY: ${{ secrets.CURSEFORGE_API_KEY }} # Cause for some reason, CurseGradle has to do evaluating during the build process
 
     # ℹ️ Command-line programs to run using the OS shell.
     # 📚 https://git.io/JvXDl
