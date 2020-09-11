@@ -118,3 +118,18 @@ signing {
     useInMemoryPgpKeys(signingKey as String, signingPassword as String)
     sign publishing.publications.publishRandomTech
 }
+
+curseforge {
+    // Secret API Key for CurseForge
+    if (System.getenv('CURSEFORGE_API_KEY') != null) {
+        apiKey = System.getenv('CURSEFORGE_API_KEY')
+    } else {
+        apiKey = findProperty('CURSEFORGE_API_KEY')
+    }
+
+    project {
+        id = '407461' // Can be found in the About Project box
+        changelog = file('CHANGELOG.md') // A file can also be set using: changelog = file('changelog.txt')
+        releaseType = 'alpha'
+    }
+}

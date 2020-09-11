@@ -9,11 +9,13 @@ on:
     paths-ignore:
       - 'docs/**'
       - 'README.md'
+      - 'CHANGELOG.md'
   pull_request:
     branches: [ master ]
     paths-ignore:
       - 'docs/**'
       - 'README.md'
+      - 'CHANGELOG.md'
 
 jobs:
   build:
@@ -41,3 +43,7 @@ jobs:
       env:
         SONATYPE_USERNAME: ${{ secrets.SONATYPE_USERNAME }}
         SONATYPE_PASSWORD: ${{ secrets.SONATYPE_PASSWORD }}
+    - name: Generate Changelog
+      uses: heinrichreimer/github-changelog-generator-action@v2.1.1
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
