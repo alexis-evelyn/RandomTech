@@ -233,6 +233,7 @@ apply from: 'unit-testing-only-dependencies.gradle'
 // Specifically the API Subproject
 project(':api') {
 	apply plugin: 'fabric-loom'
+	apply plugin: 'com.matthewprenger.cursegradle'
 }
 
 // Specifically for this project?

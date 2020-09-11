@@ -48,6 +48,6 @@ jobs:
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
     - name: Upload to Curseforge
-      run: ./gradlew curseforge
+      run: ls -1 build/libs | grep -q SNAPSHOT && echo `ls -1 api/build/libs | grep -q SNAPSHOT && echo Snapshots Only. Skipping this Step || ./gradlew curseforge` || ./gradlew curseforge
       env:
         CURSEFORGE_API_KEY: ${{ secrets.CURSEFORGE_API_KEY }}
