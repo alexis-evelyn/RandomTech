@@ -1,12 +1,3 @@
----
-name: Default Template
-about: Create a Pull Request with Changes To RandomTech Or API
-title: '[RandomTech or API]: PR Name or Short Description'
-labels: 'pr'
-assignees: 'alexis-evelyn'
-
----
-
 # Description
 
 Please include a summary of the change and which issue is fixed. Please also include relevant motivation and context. List any dependencies that are required for this change.
