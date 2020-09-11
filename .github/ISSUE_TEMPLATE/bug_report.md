@@ -33,7 +33,7 @@ If applicable, add screenshots to help explain your problem.
  - Mod Version [e.g. 0.0.6]
  - API: true/false/unsure (Is this bug report about the API)
 
-**Stacktrace (Only Required If A Stacktrace Exists) **
+**Stacktrace (Only Required If A Stacktrace Exists)**
 Use a site such as https://gist.github.com/ to upload your stacktrace and paste here. Also, make sure no personal information's stored in the stacktrace (e.g. chat unless the chat is able to be publicly released without issue). If the stacktrace or log has personal information, either make a new stacktrace or edit out the personal information.
 
 **Additional context**
