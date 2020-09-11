@@ -37,6 +37,7 @@ jobs:
         BINTRAY_GPG_PASSWORD: ${{ secrets.BINTRAY_GPG_PASSWORD }}
         SONATYPE_USERNAME: ${{ secrets.SONATYPE_USERNAME }}
         SONATYPE_PASSWORD: ${{ secrets.SONATYPE_PASSWORD }}
+        CURSEFORGE_API_KEY: ${{ secrets.CURSEFORGE_API_KEY }} # Cause for some reason the CurseGradle plugin evaluates here too
       continue-on-error: false
     - name: Attempt Close/Release
       run: ls -1 build/libs | grep -q SNAPSHOT && echo `ls -1 api/build/libs | grep -q SNAPSHOT && echo Snapshots Only. Skipping this Step || ./gradlew closeAndReleaseRepository` || ./gradlew closeAndReleaseRepository
