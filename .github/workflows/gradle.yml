@@ -39,6 +39,13 @@ jobs:
         SONATYPE_PASSWORD: ${{ secrets.SONATYPE_PASSWORD }}
         CURSEFORGE_API_KEY: ${{ secrets.CURSEFORGE_API_KEY }} # Cause for some reason the CurseGradle plugin evaluates here too
       continue-on-error: false
+    - name: Upload Compiled Mods to Github Actions For Review
+      uses: actions/upload-artifact@v2
+      with:
+        name: Compiled-Mods
+        path: |
+          build/libs/*
+          api/build/libs/*
     - name: Attempt Close/Release
       run: ls -1 build/libs | grep -q SNAPSHOT && echo `ls -1 api/build/libs | grep -q SNAPSHOT && echo Snapshots Only. Skipping this Step || ./gradlew closeAndReleaseRepository` || ./gradlew closeAndReleaseRepository
       env:
@@ -54,18 +61,13 @@ jobs:
         prWoLabels: true
         release-url: https://mvnrepository.com/artifact/me.alexisevelyn
         futureRelease: 0.0.5.7
+    - name: Upload Generated Changelog For Review
+      uses: actions/upload-artifact@v2
+      with:
+        name: Generated-Changelog
+        path: ${{ github.workspace }}/CHANGELOG.md
     - name: Upload to Curseforge
       run: ls -1 build/libs | grep -q SNAPSHOT && echo `ls -1 api/build/libs | grep -q SNAPSHOT && echo Snapshots Only. Skipping this Step || ./gradlew curseforge` || ./gradlew curseforge
       env:
         CURSEFORGE_API_KEY: ${{ secrets.CURSEFORGE_API_KEY }}
         GITHUB_WORKSPACE: ${{ github.workspace }}
-    - uses: actions/upload-artifact@v2
-      with:
-        name: Generated-Changelog
-        path: ${{ github.workspace }}/CHANGELOG.md
-    - uses: actions/upload-artifact@v2
-      with:
-        name: Compiled-Mods
-        path: |
-          build/libs/*
-          api/build/libs/*
