@@ -46,8 +46,14 @@ jobs:
         SONATYPE_PASSWORD: ${{ secrets.SONATYPE_PASSWORD }}
     - name: Generate Changelog
       uses: heinrichreimer/github-changelog-generator-action@v2.1.1
-      with:
+      with: # https://github.com/heinrichreimer/action-github-changelog-generator/blob/master/README.md and https://github.com/github-changelog-generator/github-changelog-generator/blob/master/README.md
         token: ${{ secrets.GITHUB_TOKEN }}
+        stripGeneratorNotice: true
+        verbose: true
+        issuesWoLabels: true
+        prWoLabels: true
+        release-url: https://mvnrepository.com/artifact/me.alexisevelyn
+        futureRelease: 0.0.5.7
     - name: Upload to Curseforge
       run: ls -1 build/libs | grep -q SNAPSHOT && echo `ls -1 api/build/libs | grep -q SNAPSHOT && echo Snapshots Only. Skipping this Step || ./gradlew curseforge` || ./gradlew curseforge
       env:
