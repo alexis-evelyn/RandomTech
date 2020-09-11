@@ -55,7 +55,7 @@ jobs:
     - uses: actions/upload-artifact@v2
       with:
         name: Generated-Changelog
-        path: ${{env.GITHUB_WORKSPACE}}/CHANGELOG.md
+        path: ${{ env.GITHUB_WORKSPACE }}/CHANGELOG.md
     - uses: actions/upload-artifact@v2
       with:
         name: Compiled-Mods
