@@ -52,10 +52,11 @@ jobs:
       run: ls -1 build/libs | grep -q SNAPSHOT && echo `ls -1 api/build/libs | grep -q SNAPSHOT && echo Snapshots Only. Skipping this Step || ./gradlew curseforge` || ./gradlew curseforge
       env:
         CURSEFORGE_API_KEY: ${{ secrets.CURSEFORGE_API_KEY }}
+        GITHUB_WORKSPACE: ${{ github.workspace }}
     - uses: actions/upload-artifact@v2
       with:
         name: Generated-Changelog
-        path: ${{ env.GITHUB_WORKSPACE }}/CHANGELOG.md
+        path: ${{ github.workspace }}/CHANGELOG.md
     - uses: actions/upload-artifact@v2
       with:
         name: Compiled-Mods
