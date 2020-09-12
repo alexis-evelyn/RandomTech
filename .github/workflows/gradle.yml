@@ -77,7 +77,7 @@ jobs:
         name: 'Automated Tag'
         email: 'automated-tag@alexisevelyn.me'
         actor: ${{ github.actor }}
-        token: ${{ secrets.SSH_AUTOTAG_CREATOR }}
+        token: ${{ secrets.TOKEN_AUTOTAG_CREATOR }}
     - name: Update Tag if Release
       # if: startsWith(env.RELEASE, 'true')
       run: |
