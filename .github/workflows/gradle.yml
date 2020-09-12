@@ -72,12 +72,12 @@ jobs:
     - name: Update Tag if Release
       uses: oleksiyrudenko/gha-git-credentials@v1
       if: true
+      run: git tag -a v${{ env.VERSION }} -m "Automated Tag For Release v${{ env.VERSION }}"
       with:
         name: 'Automated Tag'
         email: 'automated-tag@alexisevelyn.me'
         actor: ${{ github.actor }}
         token: ${{ secrets.GITHUB_TOKEN }}
-        - run: git tag -a v${{ env.VERSION }} -m "Automated Tag For Release v${{ env.VERSION }}"
     - name: Attempt Close/Release
       if: startsWith(env.RELEASE, 'true')
       run: ./gradlew closeAndReleaseRepository
