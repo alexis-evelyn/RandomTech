@@ -53,8 +53,8 @@ jobs:
         test "$RANDOMTECH_RELEASE" = "true" && echo ::set-env name=RELEASE::true
 
         # For Setting Up Independent Version Vars
-        echo ::set-env name=API_VERSION::$( ls -1 api/build/libs | cut -f3 -d- | awk -F'.jar' '{print $1}' | tail -n1 )
-        echo ::set-env name=RANDOMTECH_VERSION::$( ls -1 build/libs | cut -f3 -d- | awk -F'.jar' '{print $1}' | tail -n1 )
+        echo ::set-env name=API_VERSION::$( ls -1 api/build/libs | cut -f3,4 -d- | awk -F'.jar' '{print $1}' | tail -n1 )
+        echo ::set-env name=RANDOMTECH_VERSION::$( ls -1 build/libs | cut -f3,4 -d- | awk -F'.jar' '{print $1}' | tail -n1 )
     - name: Setup Main Version Var
       run: |
         # For Setting Up Main Version Var - Currently Assuming That RandomTech Version is Desired Version Number
