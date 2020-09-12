@@ -1,5 +1,3 @@
-# TODO: Figure out how to match based on textures since blockstate matching is not implemented yet
-
 matchBlocks=randomtech:powered_glass:power=0
 connect=block
 method=ctm_compact

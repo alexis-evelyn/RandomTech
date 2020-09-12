@@ -3,42 +3,6 @@ repositories {
 		name "CurseMaven"
 		url "https://www.cursemaven.com"
 	}
-	maven {
-		name "Spinnery"
-		url "https://dl.bintray.com/spinnery/Spinnery"
-	}
-	maven {
-		name "LibBlockAttributes - BuildCraft"
-		url "https://mod-buildcraft.com/maven"
-	}
-//	maven {
-//		name "AE2"
-//		url "https://maven.pkg.github.com/AppliedEnergistics/Applied-Energistics-2"
-//		credentials {
-//			username = GITHUB_PACKAGES_KEY
-//		}
-//	}
-	maven {
-		name "Earthcomputer - Astromine Dependency"
-		url "https://dl.bintray.com/earthcomputer/mods"
-	}
-	maven {
-		name "Wrenchable - Astromine Dependency"
-		url "https://dl.bintray.com/zundrel/wrenchable"
-	}
-	maven {
-		name "Grondag Fermion - Astromine Dependency"
-		url "https://maven.dblsaiko.net/" // https://github.com/grondag/canvas/blob/b69b0fd79e622b249e7bd5d727484427fed89c8f/build.gradle#L145
-	}
-	maven {
-		name "Cloth API"
-		url "https://dl.bintray.com/shedaniel/cloth"
-	}
-
-	// I don't like this, but apparently loom no longer has extractJars for the minecraft extension
-	// The wiki is incorrect at the time of this writing https://fabricmc.net/wiki/documentation:fabric_loom
-	// The extractJars variable was removed in https://github.com/FabricMC/fabric-loom/commit/3eff7d0fdb95c6ac53405abcf9873f6edfb44770
-	mavenLocal()
 }
 
 dependencies {
@@ -70,56 +34,19 @@ dependencies {
 	// Improves performance of lighting engine
 	// modRuntime "com.github.jellysquid3:phosphor-fabric:${project.phosphor_version}" // Skip
 
-	// Permission Granted From: https://discordapp.com/channels/507304429255393322/507982478276034570/730955439390326894 - Screenshots: https://imgur.com/a/R9xMlhX
-	// modImplementation "com.github.nuclearfarts:connected-block-textures:${project.connected_block_textures_version}"
-	// include "com.github.nuclearfarts:connected-block-textures:${project.connected_block_textures_version}"
-	modRuntime ("com.github.nuclearfarts:connected-block-textures:${project.connected_block_textures_version}") { // I decided to make it so the user has to manually install CBT as it modifies vanilla texture behavior and not just my mod's texture behavior.
+	// For Connected Textures
+	modRuntime ("com.github.nuclearfarts:connected-block-textures:${project.connected_block_textures_version}") {
 		exclude(group: "net.fabricmc.fabric-api")
 	}
 
-	// Dependencies of Astromine
-//	modRuntime "io.github.onyxstudios.Cardinal-Components-API:cardinal-components-block:${project.cardinal_components_version}"
-//	modRuntime "io.github.onyxstudios.Cardinal-Components-API:cardinal-components-chunk:${project.cardinal_components_version}"
-//	modRuntime "io.github.onyxstudios.Cardinal-Components-API:cardinal-components-entity:${project.cardinal_components_version}"
-//	modRuntime "io.github.onyxstudios.Cardinal-Components-API:cardinal-components-level:${project.cardinal_components_version}"
-//	modRuntime "io.github.onyxstudios.Cardinal-Components-API:cardinal-components-world:${project.cardinal_components_version}"
-//	modRuntime "io.github.onyxstudios.Cardinal-Components-API:cardinal-components-util:${project.cardinal_components_version}"
-//	modRuntime "com.github.vini2003:spinnery:${project.spinnery_version}"
-	// modRuntime "com.github.Draylar:LibStructure:${project.libstructure_github_version}"
-//	modRuntime "com.github.Draylar:magna:${project.magna_version}"
-//	modRuntime "com.terraformersmc:shapes:${project.shapes_version}"
-//	modRuntime "com.github.vini2003:blade:${project.blade_version}"
-//	modRuntime "alexiil.mc.lib:libblockattributes-core:${project.lba_version}"
-//	modRuntime "alexiil.mc.lib:libblockattributes-items:${project.lba_version}"
-//	modRuntime "alexiil.mc.lib:libblockattributes-fluids:${project.lba_version}"
-//	modRuntime ("me.shedaniel.cloth:config-2:${project.cloth_config_version}") {
-//		exclude(group: "net.fabricmc.fabric-api")
-//	}
-//	modRuntime "net.fabricmc:fabric-language-kotlin:${project.kotlin_version}"
-//	modRuntime "me.shedaniel.cloth.api:cloth-durability-bar-api-v1:${project.cloth_api_version}"
-//	modRuntime "me.shedaniel.cloth.api:cloth-dynamic-registry-api-v1:${project.cloth_api_version}"
-//	modRuntime "me.shedaniel.cloth.api:cloth-datagen-api-v1:${project.cloth_api_version}"
-
 	// Astromine Mod - A Tech Mod
-	// modRuntime "com.github.Chainmail-Studios:Astromine:${project.astromine_version}" // Jitpack generates mostly blank jar
-	// modRuntime "curse.maven:astromine:${project.astromine_curseforge_version}"
-
-	// Astromine And Some Local Only Dependencies - Run ./gradlew build publishToMavenLocal on the Astromine Repo at https://github.com/Chainmail-Studios/Astromine
-	// modRuntime "com.github.chainmailstudios.astromine:astromine-core:${project.astromine_maven_local_version}" // TODO: Fix remapping issue with mixins
-	// modRuntime "com.github.chainmailstudios.astromine:astromine-foundations:${project.astromine_maven_local_version}"
-	// modRuntime "com.github.chainmailstudios.astromine:astromine:${project.astromine_maven_local_version}" // TODO: Fix remapping issue with mixins
+//	modRuntime "curse.maven:astromine:${project.astromine_curseforge_version}"
 
 	// Carpet - Useful for Debugging Minecraft in General
 	modRuntime ("com.github.gnembon:fabric-carpet:${project.carpet_version}") {
 		exclude(group: "net.fabricmc.fabric-api")
 	}
 
-	// Cause Some Mod is JIJ it
-	// modRuntime ("net.fabricmc.fabric-api:fabric-object-builders-v0:${project.fabric_object_builder_version}")
-	modImplementation ("net.fabricmc.fabric-api:fabric-object-builder-api-v1:${project.fabric_object_builder_api_version}")
-
 	// Applied Energistics 2
-	// modRuntime "appeng:appliedenergistics2-fabric:${project.applied_energistics_github_packages_version}" // Requires Github Token
-//	modRuntime "curse.maven:ae2:${project.applied_energistics_curseforge_version}" // TODO: Fix - Crashes when trying to put fluid into fluid interface via bucket
-	// modRuntime "com.github.AppliedEnergistics:Applied-Energistics-2:${project.applied_energistics_github_version}" // Doesn't build due to spotlessJson failure
+	// modRuntime ("curse.maven:ae2:${project.applied_energistics_curseforge_version}")
 }

@@ -1,7 +1,7 @@
 ---
 name: Bug Report
 about: Create a report to help us improve the mod or its API
-title: '[Mod Version]: Bug Name or Short Description'
+title: '[RandomTech/API Version]: Bug Name or Short Description'
 labels: 'bug'
 assignees: 'alexis-evelyn'
 
@@ -30,8 +30,8 @@ If applicable, add screenshots to help explain your problem.
 **Desktop (please complete the following information):**
  - OS: [e.g. OSX Catalina 10.15.6]
  - Java Version: [e.g. OpenJDK 64-Bit Server VM GraalVM CE 20.1.0 (build 11.0.7+10-jvmci-20.1-b02, mixed mode, sharing)]
- - Minecraft Version [e.g. 1.16.2]
- - Mod Version [e.g. 0.0.6]
+ - Minecraft Version: [e.g. 1.16.2]
+ - Mod Version: [e.g. 0.0.6]
  - API: true/false/unsure (Is this bug report about the API)
 
 **Stacktrace (Only Required If A Stacktrace Exists)**
