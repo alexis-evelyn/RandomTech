@@ -55,9 +55,9 @@ jobs:
         echo ::set-env name=API_VERSION::$( ls -1 api/build/libs | cut -f3 -d- | awk -F'.jar' '{print $1}' | tail -n1 )
         echo ::set-env name=RANDOMTECH_VERSION::$( ls -1 build/libs | cut -f3 -d- | awk -F'.jar' '{print $1}' | tail -n1 )
     - name: Setup Main Version Var
-        run: |
-          # For Setting Up Main Version Var - Currently Assuming That RandomTech Version is Desired Version Number
-          echo ::set-env name=VERSION::$( echo $RANDOMTECH_VERSION )
+      run: |
+        # For Setting Up Main Version Var - Currently Assuming That RandomTech Version is Desired Version Number
+        echo ::set-env name=VERSION::$( echo $RANDOMTECH_VERSION )
     - name: Test Result Vars (For Debugging)
       run: |
         echo "Release: '$RELEASE' - API: '$API_RELEASE' - RandomTech: '$RANDOMTECH_RELEASE'"
