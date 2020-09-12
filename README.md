@@ -6,10 +6,9 @@
 [![Maven Central Download RandomTech Snapshot][sonatype-snapshot-badge-randomtech]][maven-central-snapshot-randomtech-latest-download]
 [![Maven Central Download API Snapshot][sonatype-snapshot-badge-api]][maven-central-snapshot-api-latest-download]
 
-<!-- Temporarily Commented Out Until Projects Approved On CurseForge -->
-<!--[![MC Version Badge][curseforge-release-mc-version-badge-randomtech]][curseforge-release-download-randomtech]-->
-<!--[![Project Page Link][curseforge-release-badge-randomtech]][curseforge-release-download-randomtech]-->
-<!--<br>-->
+[![MC Version Badge][curseforge-release-mc-version-badge-randomtech]][curseforge-release-download-randomtech]
+[![Project Page Link][curseforge-release-badge-randomtech]][curseforge-release-download-randomtech]
+<br>
 [![Github Actions Link][github-actions-badge]][github-actions-link]
 [![Codacy Link][codacy-badge]][codacy-link]
 [![Crowdin Link][crowdin-badge]][crowdin-link]
@@ -78,12 +77,12 @@ This project is under MIT License. You can refer to [LICENSE.md][license-link] f
 [maven-central-snapshot-api-latest-download]: <https://oss.sonatype.org/#nexus-search;gav~me.alexisevelyn~randomtechapi~~~> "Maven Central Snapshot API Search"
 
 <!-- Some CurseForge Available Badges -->
-[curseforge-release-badge-randomtech]: <https://cf.way2muchnoise.eu/title/randomtech_%20_Available%20On%20CurseForge.svg> "RandomTech Release Badge For CurseForge"
-[curseforge-release-badge-api]: <https://cf.way2muchnoise.eu/title/randomtech-api_%20_Available%20On%20CurseForge.svg> "API Release Badge For CurseForge"
+[curseforge-release-badge-randomtech]: <https://cf.way2muchnoise.eu/title/407461_%20_Available%20On%20CurseForge.svg> "RandomTech Release Badge For CurseForge"
+[curseforge-release-badge-api]: <https://cf.way2muchnoise.eu/title/407465_%20_Available%20On%20CurseForge.svg> "API Release Badge For CurseForge"
 
 <!-- Some CurseForge MC Version Badges -->
-[curseforge-release-mc-version-badge-randomtech]: <https://cf.way2muchnoise.eu/versions/randomtech_latest.svg> "RandomTech MC Version Badge For CurseForge"
-[curseforge-release-mc-version-badge-api]: <https://cf.way2muchnoise.eu/versions/randomtech-api_latest.svg> "API MC Version Badge For CurseForge"
+[curseforge-release-mc-version-badge-randomtech]: <https://cf.way2muchnoise.eu/versions/407461_latest.svg> "RandomTech MC Version Badge For CurseForge"
+[curseforge-release-mc-version-badge-api]: <https://cf.way2muchnoise.eu/versions/407465_latest.svg> "API MC Version Badge For CurseForge"
 
 <!-- CurseForge Project Page Links -->
 [curseforge-release-download-randomtech]: <https://www.curseforge.com/minecraft/mc-mods/randomtech> "RandomTech Project Page Link For CurseForge"
