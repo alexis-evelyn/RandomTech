@@ -47,17 +47,20 @@ jobs:
         ls -1 build/libs | grep -q SNAPSHOT && echo ::set-env name=RANDOMTECH_RELEASE::false || echo ::set-env name=RANDOMTECH_RELEASE::true
         ls -1 api/build/libs | grep -q SNAPSHOT && echo ::set-env name=API_RELEASE::false || echo ::set-env name=API_RELEASE::true
 
-        # For Setting Up Main Release Booleans
+        # For Setting Up Main Release Boolean
         test "$API_RELEASE" = "true" && echo ::set-env name=RELEASE::true || echo ::set-env name=RELEASE::false
         test "$RANDOMTECH_RELEASE" = "true" && echo ::set-env name=RELEASE::true || echo ::set-env name=RELEASE::false
 
         # For Setting Up Independent Version Vars
-        echo ::set-env name=API_VERSION::0.0.1
-        echo ::set-env name=RANDOMTECH_VERSION::0.0.2
+        echo ::set-env name=API_VERSION::${ ls -1 api/build/libs | cut -f3 -d- | awk -F'.jar' '{print $1}'| tail -n1 }
+        echo ::set-env name=RANDOMTECH_VERSION::${ ls -1 build/libs | cut -f3 -d- | awk -F'.jar' '{print $1}'| tail -n1 }
+
+        # For Setting Up Main Version Var - Currently Assuming That RandomTech Version is Desired Version Number
+        echo ::set-env name=VERSION::$RANDOMTECH_VERSION
     - name: Test Result Vars (For Debugging)
       run: |
         echo "Release: '$RELEASE' - API: '$API_RELEASE' - RandomTech: '$RANDOMTECH_RELEASE'"
-        echo "API Version: '$API_VERSION' - RandomTech Version: '$RANDOMTECH_VERSION'"
+        echo "Version: '$VERSION' - API: '$API_VERSION' - RandomTech: '$RANDOMTECH_VERSION'"
     - name: Upload Compiled Mods to Github Actions For Review
       uses: actions/upload-artifact@v2
       with:
@@ -73,7 +76,7 @@ jobs:
         default_bump: false
         custom_tag: 0.1.0
     - name: Attempt Close/Release
-      if: ${{ env.RELEASE }} == "true"
+      if: false
       run: ./gradlew closeAndReleaseRepository
       env:
         SONATYPE_USERNAME: ${{ secrets.SONATYPE_USERNAME }}
@@ -95,7 +98,7 @@ jobs:
         name: Generated-Changelog
         path: ${{ github.workspace }}/CHANGELOG.md
     - name: Upload to Curseforge
-      if: ${{ env.RELEASE }} == "true"
+      if: false
       run: ./gradlew curseforge
       env:
         CURSEFORGE_API_KEY: ${{ secrets.CURSEFORGE_API_KEY }}
