@@ -41,10 +41,17 @@ jobs:
         SONATYPE_PASSWORD: ${{ secrets.SONATYPE_PASSWORD }}
         CURSEFORGE_API_KEY: ${{ secrets.CURSEFORGE_API_KEY }} # Cause for some reason the CurseGradle plugin evaluates here too
       continue-on-error: false
-    - name: Setup Vars For Release Boolean and Version Info
+    - name: Setup Vars For Release Booleans and Version Info
       run: |
-        ls -1 build/libs | grep -q SNAPSHOT && echo ::set-env name=RANDOMTECH_RELEASE::false || echo ::set-env name=RANDOMTECH_RELEASE::true ::set-env name=RELEASE::true
-        ls -1 api/build/libs | grep -q SNAPSHOT && echo ::set-env name=API_RELEASE::false || echo ::set-env name=API_RELEASE::true ::set-env name=RELEASE::true
+        # For Setting Up Independent Release Booleans
+        ls -1 build/libs | grep -q SNAPSHOT && echo ::set-env name=RANDOMTECH_RELEASE::false || echo ::set-env name=RANDOMTECH_RELEASE::true
+        ls -1 api/build/libs | grep -q SNAPSHOT && echo ::set-env name=API_RELEASE::false || echo ::set-env name=API_RELEASE::true
+
+        # For Setting Up Main Release Booleans
+        test "$API_RELEASE" = "true" && echo ::set-env name=RELEASE::true || echo ::set-env name=RELEASE::false
+        test "$RANDOMTECH_RELEASE" = "true" && echo ::set-env name=RELEASE::true || echo ::set-env name=RELEASE::false
+
+        # For Setting Up Independent Version Vars
         echo ::set-env name=API_VERSION::0.0.1
         echo ::set-env name=RANDOMTECH_VERSION::0.0.2
     - name: Test Result Vars (For Debugging)
@@ -71,6 +78,7 @@ jobs:
       env:
         SONATYPE_USERNAME: ${{ secrets.SONATYPE_USERNAME }}
         SONATYPE_PASSWORD: ${{ secrets.SONATYPE_PASSWORD }}
+        CURSEFORGE_API_KEY: ${{ secrets.CURSEFORGE_API_KEY }} # Cause for some reason the CurseGradle plugin evaluates here too
     - name: Generate Changelog
       uses: heinrichreimer/github-changelog-generator-action@v2.1.1
       with: # https://github.com/heinrichreimer/action-github-changelog-generator/blob/master/README.md and https://github.com/github-changelog-generator/github-changelog-generator/blob/master/README.md
