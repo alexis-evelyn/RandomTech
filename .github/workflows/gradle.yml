@@ -48,8 +48,9 @@ jobs:
         ls -1 api/build/libs | grep -q SNAPSHOT && echo ::set-env name=API_RELEASE::false || echo ::set-env name=API_RELEASE::true
 
         # For Setting Up Main Release Boolean
-        test "$API_RELEASE" = "true" && echo ::set-env name=RELEASE::true || echo ::set-env name=RELEASE::false
-        test "$RANDOMTECH_RELEASE" = "true" && echo ::set-env name=RELEASE::true || echo ::set-env name=RELEASE::false
+        echo ::set-env name=RELEASE::false
+        test "$API_RELEASE" = "true" && echo ::set-env name=RELEASE::true
+        test "$RANDOMTECH_RELEASE" = "true" && echo ::set-env name=RELEASE::true
 
         # For Setting Up Independent Version Vars
         echo ::set-env name=API_VERSION::$( ls -1 api/build/libs | cut -f3 -d- | awk -F'.jar' '{print $1}' | tail -n1 )
@@ -71,14 +72,14 @@ jobs:
           api/build/libs/*
     - name: Setup Git Credentials For Tagging
       uses: oleksiyrudenko/gha-git-credentials@v1
-      #if: startsWith(env.RELEASE, 'true')
+      if: startsWith(env.RELEASE, 'true')
       with:
         name: 'Automated Tag'
         email: 'automated-tag@alexisevelyn.me'
         actor: ${{ github.actor }}
         token: ${{ secrets.GITHUB_TOKEN }}
     - name: Update Tag if Release
-      #if: startsWith(env.RELEASE, 'true')
+      if: startsWith(env.RELEASE, 'true')
       run: |
         git tag -a v${{ env.VERSION }} -m "Automated Tag For Release v${{ env.VERSION }}"
         git push
