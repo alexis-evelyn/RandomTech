@@ -48,6 +48,13 @@ jobs:
         path: |
           build/libs/*
           api/build/libs/*
+    - name: Update Tag if Release (Testing Only)
+      uses: mathieudutour/github-tag-action@v4.5
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        dry_run: true
+        default_bump: false
+        custom_tag: 0.1.0
     - name: Attempt Close/Release
       run: ls -1 build/libs | grep -q SNAPSHOT && echo `ls -1 api/build/libs | grep -q SNAPSHOT && echo Snapshots Only. Skipping this Step || ./gradlew closeAndReleaseRepository` || ./gradlew closeAndReleaseRepository
       env:
@@ -59,10 +66,10 @@ jobs:
         token: ${{ secrets.GITHUB_TOKEN }}
         stripGeneratorNotice: true
         verbose: true
-        issuesWoLabels: true
-        prWoLabels: true
         releaseUrl: https://mvnrepository.com/artifact/me.alexisevelyn
-        futureRelease: 0.0.5.7
+        futureRelease: 0.0.6
+        unreleased: true
+        issueLineLabels: ALL
     - name: Upload Generated Changelog For Review
       uses: actions/upload-artifact@v2
       with:
