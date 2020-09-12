@@ -1,6 +1,0 @@
-{
-    "parent": "randomtech:block/cobalt_dust/cobalt_dust_side",
-    "textures": {
-        "line": "randomtech:block/wires/cobalt_dust_line0"
-    }
-}
