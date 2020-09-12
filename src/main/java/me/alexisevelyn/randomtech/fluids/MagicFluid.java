@@ -15,9 +15,8 @@ import net.minecraft.state.property.Properties;
 import net.minecraft.world.WorldView;
 
 /**
- * The type Magic fluid.
+ * Magic Based on the Magical Properties of Lapis (A Purified Form, An Extract If You Want)
  */
-// TODO: Magic Based on the Magical Properties of Lapis (A Purified Form, An Extract If You Want)
 public abstract class MagicFluid extends BaseFluid {
     /**
      * Gets particle.

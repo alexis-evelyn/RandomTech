@@ -359,7 +359,6 @@ public class VirtualTile extends BlockItem {
          * @return the light level
          */
         public static ToIntFunction<BlockState> getLightLevel() {
-            // TODO: Adjust light level based on color brightness.
             return (state) -> {
                 // I'm not sure how to grab the block entity from only the blockstate.
                 // If it's even possible to track down the block entity without the world and position.

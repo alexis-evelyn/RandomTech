@@ -111,7 +111,7 @@ public class ItemCableGuiHandler extends ScreenHandler {
 //        ItemStack originalStack = playerSlot.getStack();
 //        ItemStack newStack = originalStack.copy();
 
-        // TODO: Write Code to Transfer From Player To Cable on Shift-Click
+        // Write Code to Transfer From Player To Cable on Shift-Click
         return ItemStack.EMPTY;
     }
 
@@ -124,7 +124,7 @@ public class ItemCableGuiHandler extends ScreenHandler {
         ItemStack originalStack = ourSlot.getStack();
         ItemStack newStack = originalStack.copy();
 
-        // TODO: Rewrite This to Be Good Code
+        // Rewrite This to Be Good Code
         if (!this.insertItem(originalStack, this.inventory.size(), this.slots.size(), true))
             return ItemStack.EMPTY;
         else if (!this.insertItem(originalStack, 0, this.inventory.size(), false))
@@ -147,7 +147,7 @@ public class ItemCableGuiHandler extends ScreenHandler {
     }
 
     private boolean isPlayerSlot(PlayerEntity playerEntity, int slot) {
-        // TODO: Better Detection For Player Inventory Slot
+        // Better Detection For Player Inventory Slot
         return !(isRealSlot(playerEntity, slot) || isFilterSlot(playerEntity, slot));
     }
 

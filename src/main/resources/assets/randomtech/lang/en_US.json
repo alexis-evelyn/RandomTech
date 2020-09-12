@@ -99,6 +99,7 @@
   "gamerule.disableExperimentalScreen": "Disable Experimental Screen",
   "subtitles.teleport.teleport": "Teleporter Teleporting",
   "death.attack.killCommand": "%1$s was /killed by an angry server owner ;)",
+  "death.attack.cobaltBurn": "%1$s was melted by Molten Cobalt",
   "selectWorld.backupQuestion.experimental.replaced": "Did you back up this experimental world?",
   "selectWorld.backupWarning.experimental.replaced": "This world uses experimental world features. I recommend backing up your world first. If you want to hide this message at your own risk, RandomTech allows you to disable this message with /gamerule disableExperimentalScreen true."
 }

@@ -391,8 +391,6 @@ public class ItemTransferHelper {
     }
 
     public static boolean filterDenied(@NotNull ItemStack itemStack, @NotNull ItemCableInventory itemCableInventory, @NotNull World world, @NotNull BlockPos blockPos) {
-        // TODO: Add support for checking metadata such as nbt data.
-
         return !itemCableInventory.isFilterEmpty(null) && !itemCableInventory.filterContains(itemStack, null);
     }
 

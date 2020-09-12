@@ -203,8 +203,6 @@ public class VoidChunkGenerator extends ChunkGenerator {
 
             // Populate Chunk
             SpawnHelper.populateEntities(region, biome, chunkX, chunkZ, chunkRandom);
-
-            // TODO: Mess around with spawning!!!
         }
     }
 

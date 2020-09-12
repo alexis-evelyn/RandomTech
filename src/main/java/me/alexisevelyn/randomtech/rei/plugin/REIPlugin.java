@@ -93,7 +93,7 @@ public class REIPlugin implements REIPluginV0 {
         // Register Working Station allows looking up recipes by that Workstation
         recipeHelper.registerWorkingStations(FUSER, EntryStack.create(RegistryHelper.FUSER));
 
-        // TODO: Move button to somewhere other than the input slot as REI won't let you click items in if it's blocking the slot
+        // Move button to somewhere other than the input slot as REI won't let you click items in if it's blocking the slot
         // recipeHelper.registerScreenClickArea(new Rectangle(FuserGui.ingredientSlotX, FuserGui.ingredientSlotY, FuserGui.inputSlotX, FuserGui.inputSlotY), FuserGui.class, FUSER); // Adds the show recipes for Fuser tooltip
         // recipeHelper.registerAutoCraftingHandler(new FuserAutocraftingHandler());
     }

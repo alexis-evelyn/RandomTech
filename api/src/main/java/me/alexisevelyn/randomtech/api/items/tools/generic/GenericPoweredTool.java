@@ -425,7 +425,6 @@ public abstract class GenericPoweredTool extends MiningToolItem implements Energ
      */
     @Override
     public double getDurability(ItemStack stack) {
-        // TODO: Replace this with a dynamic durability bar checker.
         return 1 - ItemUtils.getPowerForDurabilityBar(stack);
     }
 

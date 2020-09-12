@@ -46,7 +46,6 @@ public class PoweredPickaxe extends GenericPoweredPickaxe {
      */
     @Override
     public boolean postMine(ItemStack stack, World world, BlockState state, BlockPos pos, LivingEntity miner) {
-        // TODO: Decide what to do with mining tool/player when mining unbreakable block.
 //        if (state.getBlock().is(Blocks.BEDROCK) || state.getBlock().is(Blocks.END_PORTAL_FRAME)) {
 //            setEnergy(stack, 0);
 //            return true;
@@ -66,7 +65,6 @@ public class PoweredPickaxe extends GenericPoweredPickaxe {
      */
     @Override
     public boolean canBreakUnbreakableBlock(BlockState state, PlayerEntity player, BlockView world, BlockPos pos) {
-        // TODO: Add Upgrades to Pickaxe and determine if upgrade is installed to allow mining these blocks
         return state.getBlock().is(Blocks.BEDROCK) || state.getBlock().is(Blocks.END_PORTAL_FRAME);
     }
 

@@ -14,7 +14,7 @@ public class CustomDamageSource extends DamageSource {
      *
      * @param name the name
      */
-    protected CustomDamageSource(String name) {
+    public CustomDamageSource(String name) {
         super(name);
     }
 }

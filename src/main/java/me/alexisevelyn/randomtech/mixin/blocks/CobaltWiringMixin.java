@@ -20,11 +20,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @SuppressWarnings("UnusedMixin") // The mixin is used, just is loaded by Fabric and not Sponge methods
 @Mixin(RedstoneWireBlock.class)
 public abstract class CobaltWiringMixin extends Block {
-	/* TODO:
-	 * Get blocks to show up visually correctly when placed down
-	 * Fix bug where a top level piece of wire can power a lower wire of a different type.
-	 */
-
 	/**
 	 * Instantiates a new Cobalt wiring mixin.
 	 *

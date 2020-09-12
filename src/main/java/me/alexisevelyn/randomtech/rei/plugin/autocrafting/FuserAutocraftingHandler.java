@@ -15,7 +15,7 @@ public class FuserAutocraftingHandler implements AutoTransferHandler {
     // It's only partially implemented.
     @Override
     public @NotNull Result handle(@NotNull Context context) {
-        // TODO: Figure out how to determine if Fuser Gui is open and change success result to not applicable if not on fuser
+        // Figure out how to determine if Fuser Gui is open and change success result to not applicable if not on fuser
         // Look at: https://discordapp.com/channels/432055962233470986/576851123345031177/737345567788761188
 //        RecipeDisplay display = context.getRecipe();
 //
@@ -58,9 +58,9 @@ public class FuserAutocraftingHandler implements AutoTransferHandler {
      * @param isShifting   the is shifting
      */
     public void transferItemStack(ScreenHandler container, Ingredient input, ClientPlayerEntity playerEntity, boolean isShifting) {
-        // TODO: Figure out how to finalize slot transfer
-        // TODO: Copy player inventory and find applicable item to transfer
-        // TODO: Figure out how to choose between one item and whole stack
+        // Figure out how to finalize slot transfer
+        // Copy player inventory and find applicable item to transfer
+        // Figure out how to choose between one item and whole stack
 
         int inventorySlot = 0;
         final int fuserSlot = 0;

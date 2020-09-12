@@ -66,7 +66,6 @@ public class CustomEnchantmentHelper {
                 return ValidEnchant.TRUE;
         }
 
-        // TODO: Implement these tool and armor enchants when I create tool and armor that needs them.
         // Unimplemented Custom Items
         // Fishing Rod, Trident, Bow, Wearable, Crossbow, Vanishable
 

@@ -27,7 +27,6 @@ public class PostRegistryHelper {
         this.registerZoomHandler();
     }
 
-    // TODO: Replace Need for CCA
     private void registerCCACallback() {
         // Register All Powered Tools and Armor With Callback
         Registry.ITEM.stream().forEach(item -> {

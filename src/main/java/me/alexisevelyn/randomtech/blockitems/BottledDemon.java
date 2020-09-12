@@ -43,7 +43,7 @@ public class BottledDemon extends BlockItem {
     @Environment(EnvType.CLIENT)
     @Override
     public void appendTooltip(ItemStack stack, @Nullable World worldIn, List<Text> tooltip, TooltipContext flagIn) {
-        // TODO: Add info about captured cloud demon
+        // Intentionally Left Empty For Now
     }
 
     /**
