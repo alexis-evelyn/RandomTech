@@ -71,15 +71,17 @@ jobs:
           api/build/libs/*
     - name: Setup Git Credentials For Tagging
       uses: oleksiyrudenko/gha-git-credentials@v1
-      if: startsWith(env.RELEASE, 'true')
+      #if: startsWith(env.RELEASE, 'true')
       with:
         name: 'Automated Tag'
         email: 'automated-tag@alexisevelyn.me'
         actor: ${{ github.actor }}
         token: ${{ secrets.GITHUB_TOKEN }}
     - name: Update Tag if Release
-      if: startsWith(env.RELEASE, 'true')
-      run: git tag -a v${{ env.VERSION }} -m "Automated Tag For Release v${{ env.VERSION }}"
+      #if: startsWith(env.RELEASE, 'true')
+      run: |
+        git tag -a v${{ env.VERSION }} -m "Automated Tag For Release v${{ env.VERSION }}"
+        git push
     - name: Attempt Close/Release
       if: startsWith(env.RELEASE, 'true')
       run: ./gradlew closeAndReleaseRepository
