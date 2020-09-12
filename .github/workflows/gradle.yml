@@ -66,7 +66,7 @@ jobs:
         default_bump: false
         custom_tag: 0.1.0
     - name: Attempt Close/Release
-      if: ${{ $RELEASE == "true" }}
+      if: ${{ env.RELEASE }} == "true"
       run: ./gradlew closeAndReleaseRepository
       env:
         SONATYPE_USERNAME: ${{ secrets.SONATYPE_USERNAME }}
@@ -87,7 +87,7 @@ jobs:
         name: Generated-Changelog
         path: ${{ github.workspace }}/CHANGELOG.md
     - name: Upload to Curseforge
-      if: ${{ $RELEASE == "true" }}
+      if: ${{ env.RELEASE }} == "true"
       run: ./gradlew curseforge
       env:
         CURSEFORGE_API_KEY: ${{ secrets.CURSEFORGE_API_KEY }}
