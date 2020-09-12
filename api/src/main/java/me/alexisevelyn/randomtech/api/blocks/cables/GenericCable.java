@@ -392,7 +392,6 @@ public abstract class GenericCable extends ConnectingBlock implements Waterlogga
             if (!passedCables.contains(attachedNeighbor)) {
                 passedCables.add(attachedNeighbor);
 
-                // TODO (Important): Figure out how to tail this recursion
                 visitNeighbors(world, attachedNeighbor, passedCables, visitor, counter, maxCount);
             }
         }
@@ -651,7 +650,6 @@ public abstract class GenericCable extends ConnectingBlock implements Waterlogga
         if (startingPosition == null || endingPosition == null)
             return new VertexPath();
 
-        // TODO (Important): Add Edges
         addLane(nodes, edges, "Lane_0", nodes.indexOf(startingPosition), nodes.indexOf(endingPosition), 1);
         addLane(nodes, edges, "Lane_1", nodes.indexOf(endingPosition), nodes.indexOf(startingPosition), 1);
 
