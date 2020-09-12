@@ -56,7 +56,7 @@ jobs:
         echo ::set-env name=RANDOMTECH_VERSION::$( ls -1 build/libs | cut -f3 -d- | awk -F'.jar' '{print $1}' | tail -n1 )
 
         # For Setting Up Main Version Var - Currently Assuming That RandomTech Version is Desired Version Number
-        echo ::set-env name=VERSION::$RANDOMTECH_VERSION
+        echo ::set-env name=VERSION::$( echo $RANDOMTECH_VERSION )
     - name: Test Result Vars (For Debugging)
       run: |
         echo "Release: '$RELEASE' - API: '$API_RELEASE' - RandomTech: '$RANDOMTECH_RELEASE'"
@@ -76,7 +76,7 @@ jobs:
         default_bump: false
         custom_tag: 0.1.0
     - name: Attempt Close/Release
-      if: startsWith($RELEASE, "true")
+      if: startsWith(RELEASE, "true")
       run: ./gradlew closeAndReleaseRepository
       env:
         SONATYPE_USERNAME: ${{ secrets.SONATYPE_USERNAME }}
@@ -98,7 +98,7 @@ jobs:
         name: Generated-Changelog
         path: ${{ github.workspace }}/CHANGELOG.md
     - name: Upload to Curseforge
-      if: startsWith($RELEASE, "true")
+      if: startsWith(RELEASE, "true")
       run: ./gradlew curseforge
       env:
         CURSEFORGE_API_KEY: ${{ secrets.CURSEFORGE_API_KEY }}
