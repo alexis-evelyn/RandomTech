@@ -82,7 +82,7 @@ jobs:
       if: startsWith(env.RELEASE, 'true')
       run: |
         git pull --ff-only
-        git tag -a v${{ env.VERSION }} -m "Automated Tag For Release v${{ env.VERSION }}" $GITHUB_SHA
+        git tag -a v${{ env.VERSION }} -m "Automatically Generated Tag For Release v${{ env.VERSION }}" $GITHUB_SHA
         git push origin v${{ env.VERSION }}
     - name: Attempt Close/Release
       if: startsWith(env.RELEASE, 'true')
@@ -97,7 +97,7 @@ jobs:
         token: ${{ secrets.GITHUB_TOKEN }}
         stripGeneratorNotice: true
         verbose: true
-        releaseUrl: https://mvnrepository.com/artifact/me.alexisevelyn
+        releaseUrl: https://github.com/alexis-evelyn/RandomTech/tree/v${{ env.VERSION }}
         unreleased: true
         issueLineLabels: ALL
     - name: Upload Generated Changelog For Review
