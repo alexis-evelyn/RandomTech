@@ -182,20 +182,14 @@ public class TeleporterBlockEntity extends BasePowerAcceptorBlockEntity implemen
             if (pos.length != 3)
                 return;
 
-            if (playerEntity.getServer() == null) {
-                // TODO: Log fatal error
-
+            if (playerEntity.getServer() == null)
                 return;
-            }
 
             Identifier dimension = new Identifier(root.getString("dimension"));
             ServerWorld newWorld = playerEntity.getServer().getWorld(RegistryKey.of(Registry.DIMENSION, dimension));
 
-            if (newWorld == null) {
-                // TODO: Alert player world is not loaded
-
+            if (newWorld == null)
                 return;
-            }
 
            try {
                 ServerPlayerEntity serverPlayerEntity = (ServerPlayerEntity) playerEntity;

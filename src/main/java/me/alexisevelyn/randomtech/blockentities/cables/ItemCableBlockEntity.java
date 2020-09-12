@@ -103,7 +103,7 @@ public class ItemCableBlockEntity extends BlockEntity implements InventoryProvid
         if (world.isClient)
             return;
 
-        // TODO (Important): Use a boolean to determine if should extract or insert
+        // Use a boolean to determine if should extract or insert
         // Attempt to Transfer into Inventory
         attemptInsertIntoInterfaceableBlocks(world);
 
@@ -135,7 +135,7 @@ public class ItemCableBlockEntity extends BlockEntity implements InventoryProvid
      * @param world the world
      */
     private void attemptExtractFromInterfaceableBlocks(@NotNull World world) {
-        // TODO (Important): Implement Me
+        // Implement Me
     }
 
     /**
