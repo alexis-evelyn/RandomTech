@@ -152,6 +152,7 @@ curseforge {
                 embeddedLibrary 'cardinal-components' // I plan to remove this before public release
                 embeddedLibrary 'nbt-crafting'
                 embeddedLibrary 'satin-api'
+                // embeddedLibrary 'geckolib' // Not Yet Used
                 optionalDependency 'modmenu'
                 optionalDependency 'patchouli'
                 optionalDependency 'connected-block-textures'
