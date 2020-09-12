@@ -46,7 +46,6 @@ public class MiningManagerHelper {
      * @param blockPos      the block pos
      * @return the boolean
      */
-    // TODO: Check if block requires silk touch.
     public static boolean canMine(PlayerEntity playerEntity, ItemStack toolItemStack, BlockState blockState, World world, BlockPos blockPos) {
         boolean canMine = playerEntity.isUsingEffectiveTool(blockState);
         Item item = toolItemStack.getItem();
@@ -115,7 +114,6 @@ public class MiningManagerHelper {
 //        LootPoolEntryType lootPoolEntryType = Registry.LOOT_POOL_ENTRY_TYPE.get(blockLootTableID);
 //        LootPoolEntry lootPoolEntry;
 
-        // TODO: Figure out how to tell if a block needs silk touch
         return 0;
     }
 
