@@ -70,13 +70,14 @@ jobs:
           build/libs/*
           api/build/libs/*
     - name: Update Tag if Release
-      uses: mathieudutour/github-tag-action@v4.5
+      uses: oleksiyrudenko/gha-git-credentials@v1
       if: true
       with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        dry_run: true
-        default_bump: false
-        custom_tag: ${{ env.VERSION }}
+        name: 'Automated Tag'
+        email: 'automated-tag@alexisevelyn.me'
+        actor: github.actor
+        token: '${{ secrets.GITHUB_TOKEN }}'
+        - run: git tag -a v${{ env.VERSION }} -m "Automated Tag For Release v${{ env.VERSION }}"
     - name: Attempt Close/Release
       if: startsWith(env.RELEASE, 'true')
       run: ./gradlew closeAndReleaseRepository
