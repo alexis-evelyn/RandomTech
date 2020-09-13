@@ -54,7 +54,6 @@ public class FuserGuiHandler<FuserGui> implements IMachineGuiHandler {
     private GuiFactory getGuiFactory() {
         // Responsible For Allowing The Gui to Be Linked to The Block Entity
         return (syncId, playerEntity, blockEntity) -> {
-            // For some weird reason, the gui has to have its path typed out explicitly to work on a dedicated server
             FuserGui fuserGui = (FuserGui) new me.alexisevelyn.randomtech.guis.FuserGui(syncId, playerEntity, (FuserBlockEntity) blockEntity);
 
             return (HandledScreen<BuiltScreenHandler>) fuserGui;
