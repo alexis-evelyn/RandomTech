@@ -107,7 +107,53 @@ jobs:
         path: ${{ github.workspace }}/CHANGELOG.md
     - name: Upload to Curseforge
       if: startsWith(env.RELEASE, 'true')
-      run: ./gradlew curseforge
+      run: ./gradlew publishCurseforge
       env:
         CURSEFORGE_API_KEY: ${{ secrets.CURSEFORGE_API_KEY }}
         GITHUB_WORKSPACE: ${{ github.workspace }}
+    - name: Alert Discord to New API Release
+      if: startsWith(env.API_RELEASE, 'true')
+      continue-on-error: true
+      run: |
+        # For Sending API Download Webhook to Discord
+        curl \
+        -H 'Content-Type: application/json' ${{ secrets.DISCORD_RELEASES_WEBHOOK_URL }} \
+        --data-binary @- << EOF
+        {
+          "content": "API Download: [v$API_VERSION](https://www.curseforge.com/minecraft/mc-mods/randomtech-api/files/$API_FILE_ID)",
+          "avatar_url": "https://raw.githubusercontent.com/alexis-evelyn/RandomTech/master/api/src/main/resources/pack.png",
+          "embeds": [
+            {
+              "title": "API v$API_VERSION",
+              "description": "New Version Released",
+              "url": "https://www.curseforge.com/minecraft/mc-mods/randomtech-api/files/$API_FILE_ID",
+              "color": 1522491
+            }
+          ]
+        }
+        EOF
+    - name: Alert Discord to New RandomTech Release
+      if: startsWith(env.RANDOMTECH_RELEASE, 'true')
+      continue-on-error: true
+      run: |
+        # Useful Links:
+        # https://discord.com/developers/docs/resources/webhook
+        # https://discord.com/developers/docs/resources/channel#embed-object
+
+        # For Sending RandomTech Download Webhook to Discord
+        curl \
+        -H 'Content-Type: application/json' ${{ secrets.DISCORD_RELEASES_WEBHOOK_URL }} \
+        --data-binary @- << EOF
+        {
+          "content": "RandomTech Download: [v$RANDOMTECH_VERSION](https://www.curseforge.com/minecraft/mc-mods/randomtech/files/$RANDOMTECH_FILE_ID)",
+          "avatar_url": "https://raw.githubusercontent.com/alexis-evelyn/RandomTech/master/src/main/resources/pack.png",
+          "embeds": [
+            {
+              "title": "RandomTech v$RANDOMTECH_VERSION",
+              "description": "New Version Released",
+              "url": "https://www.curseforge.com/minecraft/mc-mods/randomtech/files/$RANDOMTECH_FILE_ID",
+              "color": 11540510
+            }
+          ]
+        }
+        EOF

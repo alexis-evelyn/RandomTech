@@ -170,3 +170,15 @@ curseforge {
         forgeGradleIntegration = false // defaults to true
     }
 }
+
+// Made Specifically For Github
+task("publishCurseforge", group: "upload", description: "Publish The Mods to CurseForge and Set Environment Vars For Github Actions", dependsOn: tasks.getByName("curseforge")) {
+    doLast {
+        // File ID Returned By CurseForge After Upload
+        def randomTechID = tasks.getByName("curseforge407461").property("mainArtifact").fileID
+
+        // Environment Var Setting Code - Specifically For Github Actions
+        println "(ROOT) For Github Actions Use Only:"
+        println "::set-env name=RANDOMTECH_FILE_ID::$randomTechID"
+    }
+}
