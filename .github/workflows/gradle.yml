@@ -34,26 +34,18 @@ jobs:
       uses: actions/cache@v2
       with:
         path: |
-          build/.gradle
-          api/build/.gradle
-        key: ${{ runner.os }}-gradle-setup-${{ hashFiles('**/*.gradle*') }}
-        restore-keys: ${{ runner.os }}-gradle-setup-
-    - name: Build Cache
+          .gradle
+          api/.gradle
+        key: ${{ runner.os }}-setup-cache-${{ hashFiles('**/*.gradle*') }}
+        restore-keys: ${{ runner.os }}-setup-cache-
+    - name: Gradle Build Cache
       uses: actions/cache@v2
       with:
         path: |
-          build/cache
-          api/build/cache
-        key: ${{ runner.os }}-gradle-build-cache-${{ hashFiles('**/*.java*') }}
-        restore-keys: ${{ runner.os }}-gradle-build-cache-
-    - name: Loom Cache
-      uses: actions/cache@v2
-      with:
-        path: |
-          build/loom-cache
-          api/build/loom-cache
-        key: ${{ runner.os }}-gradle-loom-cache-${{ hashFiles('**/*.gradle*') }}
-        restore-keys: ${{ runner.os }}-gradle-loom-cache-
+          build
+          api/build
+        key: ${{ runner.os }}-build-cache-${{ hashFiles('**/*.java*') }}
+        restore-keys: ${{ runner.os }}-build-cache-
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
     - name: Build And Publish To Sonatype
