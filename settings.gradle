@@ -9,5 +9,12 @@ pluginManagement {
     }
 }
 
+buildCache {
+    local {
+        // Set local build cache directory.
+        directory = "${settingsDir}/build/cache"
+    }
+}
+
 rootProject.name = 'RandomTech'
 include 'api'

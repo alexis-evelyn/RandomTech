@@ -30,10 +30,28 @@ jobs:
       uses: actions/setup-java@v1
       with:
         java-version: 1.8
+    - name: Gradle Setup Cache
+      uses: actions/cache@v2
+      with:
+        path: build/.gradle
+        key: ${{ runner.os }}-gradle-setup-${{ hashFiles('gradle.properties') }}
+        restore-keys: ${{ runner.os }}-gradle-setup-
+    - name: Build Cache
+      uses: actions/cache@v2
+      with:
+        path: build/cache
+        key: ${{ runner.os }}-gradle-build-cache-${{ hashFiles('gradle.properties') }}
+        restore-keys: ${{ runner.os }}-gradle-build-cache-
+    - name: Loom Cache
+      uses: actions/cache@v2
+      with:
+        path: build/cache
+        key: ${{ runner.os }}-gradle-loom-cache-${{ hashFiles('gradle.properties') }}
+        restore-keys: ${{ runner.os }}-gradle-loom-cache-
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
     - name: Build And Publish To Sonatype
-      run: ./gradlew publish
+      run: ./gradlew publish -g build/.gradle
       env:
         BINTRAY_GPG_KEY: ${{ secrets.BINTRAY_GPG_KEY }}
         BINTRAY_GPG_PASSWORD: ${{ secrets.BINTRAY_GPG_PASSWORD }}
@@ -86,7 +104,7 @@ jobs:
         git push origin v${{ env.VERSION }}
     - name: Attempt Close/Release
       if: startsWith(env.RELEASE, 'true')
-      run: ./gradlew closeAndReleaseRepository
+      run: ./gradlew closeAndReleaseRepository -g build/.gradle
       env:
         SONATYPE_USERNAME: ${{ secrets.SONATYPE_USERNAME }}
         SONATYPE_PASSWORD: ${{ secrets.SONATYPE_PASSWORD }}
@@ -108,13 +126,13 @@ jobs:
     - name: Upload RandomTech to Curseforge
       if: startsWith(env.RANDOMTECH_RELEASE, 'true')
       # :publishCurseforge as opposed to publishCurseforge is intentional to only run the task for root
-      run: ./gradlew :publishCurseforge
+      run: ./gradlew :publishCurseforge -g build/.gradle
       env:
         CURSEFORGE_API_KEY: ${{ secrets.CURSEFORGE_API_KEY }}
         GITHUB_WORKSPACE: ${{ github.workspace }}
     - name: Upload API to Curseforge
       if: startsWith(env.API_RELEASE, 'true')
-      run: ./gradlew :api:publishCurseforge
+      run: ./gradlew :api:publishCurseforge -g build/.gradle
       env:
         CURSEFORGE_API_KEY: ${{ secrets.CURSEFORGE_API_KEY }}
         GITHUB_WORKSPACE: ${{ github.workspace }}
