@@ -27,10 +27,8 @@ import reborncore.client.screen.builder.BuiltScreenHandler;
 
 /**
  * The type Teleporter gui handler.
- *
- * @param <G extends TeleporterGui> the type parameter
  */
-public class TeleporterGuiHandler<G extends TeleporterGui> implements IMachineGuiHandler {
+public class TeleporterGuiHandler<TeleporterGui> implements IMachineGuiHandler {
     private final ScreenHandlerType<BuiltScreenHandler> screenHandlerType;
 
     /**
@@ -52,10 +50,11 @@ public class TeleporterGuiHandler<G extends TeleporterGui> implements IMachineGu
      *
      * @return the gui factory
      */
+    @SuppressWarnings("unchecked")
     private GuiFactory getGuiFactory() {
         // Responsible For Allowing The Gui to Be Linked to The Block Entity
         return (syncId, playerEntity, blockEntity) -> {
-            TeleporterGui teleporterGui = new TeleporterGui(syncId, playerEntity, (TeleporterBlockEntity) blockEntity);
+            TeleporterGui teleporterGui = (TeleporterGui) new me.alexisevelyn.randomtech.guis.TeleporterGui(syncId, playerEntity, (TeleporterBlockEntity) blockEntity);
 
             return (HandledScreen<BuiltScreenHandler>) teleporterGui;
         };

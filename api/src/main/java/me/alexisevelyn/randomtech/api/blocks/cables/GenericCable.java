@@ -65,7 +65,7 @@ public abstract class GenericCable extends ConnectingBlock implements Waterlogga
         enumMap.put(Direction.DOWN, CABLE_CONNECTION_DOWN);
     });
 
-    private static final int maxCount = 5000; // Integer.MAX_VALUE;
+    private static final int maxCount = 10; // 5000 - Integer.MAX_VALUE;
 
     /**
      *

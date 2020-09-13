@@ -27,10 +27,8 @@ import reborncore.client.screen.builder.BuiltScreenHandler;
 
 /**
  * The type Fuser gui handler.
- *
- * @param <G extends FuserGui> the type parameter
  */
-public class FuserGuiHandler<G extends FuserGui> implements IMachineGuiHandler {
+public class FuserGuiHandler<FuserGui> implements IMachineGuiHandler {
     private final ScreenHandlerType<BuiltScreenHandler> screenHandlerType;
 
     /**
@@ -52,10 +50,12 @@ public class FuserGuiHandler<G extends FuserGui> implements IMachineGuiHandler {
      *
      * @return the gui factory
      */
+    @SuppressWarnings("unchecked")
     private GuiFactory getGuiFactory() {
         // Responsible For Allowing The Gui to Be Linked to The Block Entity
         return (syncId, playerEntity, blockEntity) -> {
-            FuserGui fuserGui = new FuserGui(syncId, playerEntity, (FuserBlockEntity) blockEntity);
+            // For some weird reason, the gui has to have its path typed out explicitly to work on a dedicated server
+            FuserGui fuserGui = (FuserGui) new me.alexisevelyn.randomtech.guis.FuserGui(syncId, playerEntity, (FuserBlockEntity) blockEntity);
 
             return (HandledScreen<BuiltScreenHandler>) fuserGui;
         };

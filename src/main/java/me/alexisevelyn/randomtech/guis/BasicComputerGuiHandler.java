@@ -27,10 +27,8 @@ import reborncore.client.screen.builder.BuiltScreenHandler;
 
 /**
  * The type Basic computer gui handler.
- *
- * @param <G extends BasicComputerGui> the type parameter
  */
-public class BasicComputerGuiHandler<G extends BasicComputerGui> implements IMachineGuiHandler {
+public class BasicComputerGuiHandler<BasicComputerGui> implements IMachineGuiHandler {
     private final ScreenHandlerType<BuiltScreenHandler> screenHandlerType;
 
     /**
@@ -50,10 +48,12 @@ public class BasicComputerGuiHandler<G extends BasicComputerGui> implements IMac
      *
      * @return the gui factory
      */
+    @SuppressWarnings("unchecked")
     private GuiFactory getGuiFactory() {
         // Responsible For Allowing The Gui to Be Linked to The Block Entity
         return (syncId, playerEntity, blockEntity) -> {
-            BasicComputerGui basicComputerGui = new BasicComputerGui(syncId, playerEntity, (BasicComputerBlockEntity) blockEntity);
+            // For some weird reason, the gui has to have its path typed out explicitly to work on a dedicated server
+            BasicComputerGui basicComputerGui = (BasicComputerGui) new me.alexisevelyn.randomtech.guis.BasicComputerGui(syncId, playerEntity, (BasicComputerBlockEntity) blockEntity);
 
             return (HandledScreen<BuiltScreenHandler>) basicComputerGui;
         };
