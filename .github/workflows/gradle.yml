@@ -47,16 +47,16 @@ jobs:
         ls -1 build/libs | grep -q SNAPSHOT && echo ::set-env name=RANDOMTECH_RELEASE::false || echo ::set-env name=RANDOMTECH_RELEASE::true
         ls -1 api/build/libs | grep -q SNAPSHOT && echo ::set-env name=API_RELEASE::false || echo ::set-env name=API_RELEASE::true
 
+        # For Setting Up Independent Version Vars
+        echo ::set-env name=API_VERSION::$( ls -1 api/build/libs | cut -f3,4 -d- | awk -F'.jar' '{print $1}' | tail -n1 )
+        echo ::set-env name=RANDOMTECH_VERSION::$( ls -1 build/libs | cut -f3,4 -d- | awk -F'.jar' '{print $1}' | tail -n1 )
+    - name: Setup Vars For Main Release Boolean and Version Info
+      run: |
         # For Setting Up Main Release Boolean
         echo ::set-env name=RELEASE::false
         test "$API_RELEASE" = "true" && echo ::set-env name=RELEASE::true
         test "$RANDOMTECH_RELEASE" = "true" && echo ::set-env name=RELEASE::true
 
-        # For Setting Up Independent Version Vars
-        echo ::set-env name=API_VERSION::$( ls -1 api/build/libs | cut -f3,4 -d- | awk -F'.jar' '{print $1}' | tail -n1 )
-        echo ::set-env name=RANDOMTECH_VERSION::$( ls -1 build/libs | cut -f3,4 -d- | awk -F'.jar' '{print $1}' | tail -n1 )
-    - name: Setup Main Version Var
-      run: |
         # For Setting Up Main Version Var - Currently Assuming That RandomTech Version is Desired Version Number
         echo ::set-env name=VERSION::$( echo $RANDOMTECH_VERSION )
     - name: Test Result Vars (For Debugging)

@@ -148,7 +148,7 @@ task("publishCurseforge", group: "upload", description: "Publish The Mods to Cur
         def apiID = tasks.getByName("curseforge407465").property("mainArtifact").fileID
 
         // Environment Var Setting Code - Specifically For Github Actions
-        println "(API) For Github Actions Use Only:"
+        println "(API) CurseForge File ID: $apiID"
         println "::set-env name=API_FILE_ID::$apiID"
     }
 }

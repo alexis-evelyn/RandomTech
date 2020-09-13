@@ -178,7 +178,7 @@ task("publishCurseforge", group: "upload", description: "Publish The Mods to Cur
         def randomTechID = tasks.getByName("curseforge407461").property("mainArtifact").fileID
 
         // Environment Var Setting Code - Specifically For Github Actions
-        println "(ROOT) For Github Actions Use Only:"
+        println "(RandomTech) CurseForge File ID: $randomTechID"
         println "::set-env name=RANDOMTECH_FILE_ID::$randomTechID"
     }
 }
