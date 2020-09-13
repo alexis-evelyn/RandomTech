@@ -106,14 +106,14 @@ jobs:
         name: Generated-Changelog
         path: ${{ github.workspace }}/CHANGELOG.md
     - name: Upload RandomTech to Curseforge
-      if: startsWith(env.RELEASE, 'true')
+      if: startsWith(env.RANDOMTECH_RELEASE, 'true')
       # :publishCurseforge as opposed to publishCurseforge is intentional to only run the task for root
       run: ./gradlew :publishCurseforge
       env:
         CURSEFORGE_API_KEY: ${{ secrets.CURSEFORGE_API_KEY }}
         GITHUB_WORKSPACE: ${{ github.workspace }}
     - name: Upload API to Curseforge
-      if: startsWith(env.RELEASE, 'true')
+      if: startsWith(env.API_RELEASE, 'true')
       run: ./gradlew :api:publishCurseforge
       env:
         CURSEFORGE_API_KEY: ${{ secrets.CURSEFORGE_API_KEY }}
