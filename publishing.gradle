@@ -145,6 +145,8 @@ curseforge {
         }
 
         mainArtifact(remapJar) {
+            displayName = project.version
+
             relations {
                 requiredDependency 'reborncore'
                 embeddedLibrary 'randomtech-api'
