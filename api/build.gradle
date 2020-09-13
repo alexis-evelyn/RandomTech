@@ -63,10 +63,10 @@ dependencies {
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
 	// For Jetbrain Annotations
-	compile "org.jetbrains:annotations:${project.jetbrains_annotation_version}"
+	implementation "org.jetbrains:annotations:${project.jetbrains_annotation_version}"
 
 	// For API Guardian Annotations
-	compile "org.apiguardian:apiguardian-api:${project.api_guardian_version}"
+	implementation "org.apiguardian:apiguardian-api:${project.api_guardian_version}"
 
 	// For JavaX Annotations
 	implementation "javax.annotation:javax.annotation-api:${project.javax_annotation_version}" // Cause Some Dependency (Fiber DSL For Kotlin) Needs It
