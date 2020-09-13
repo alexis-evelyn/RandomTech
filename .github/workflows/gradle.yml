@@ -33,19 +33,25 @@ jobs:
     - name: Gradle Setup Cache
       uses: actions/cache@v2
       with:
-        path: build/.gradle
+        path: |
+          build/.gradle
+          api/build/.gradle
         key: ${{ runner.os }}-gradle-setup-${{ hashFiles('gradle.properties') }}
         restore-keys: ${{ runner.os }}-gradle-setup-
     - name: Build Cache
       uses: actions/cache@v2
       with:
-        path: build/cache
+        path: |
+          build/cache
+          api/build/cache
         key: ${{ runner.os }}-gradle-build-cache-${{ hashFiles('gradle.properties') }}
         restore-keys: ${{ runner.os }}-gradle-build-cache-
     - name: Loom Cache
       uses: actions/cache@v2
       with:
-        path: build/cache
+        path: |
+          build/loom-cache
+          api/build/loom-cache
         key: ${{ runner.os }}-gradle-loom-cache-${{ hashFiles('gradle.properties') }}
         restore-keys: ${{ runner.os }}-gradle-loom-cache-
     - name: Grant execute permission for gradlew
