@@ -1,6 +1,5 @@
 package me.alexisevelyn.randomtech.api.items.tools.generic;
 
-import net.minecraft.item.MiningToolItem;
 import net.minecraft.item.PickaxeItem;
 import net.minecraft.item.ToolMaterial;
 import org.jetbrains.annotations.Nullable;
@@ -9,7 +8,7 @@ import team.reborn.energy.EnergyTier;
 /**
  * The type Generic powered pickaxe.
  */
-public abstract class GenericPoweredPickaxe extends MiningToolItem implements BreakableBlocksHelper {
+public abstract class GenericPoweredPickaxe extends GenericPoweredTool {
     private static final float attackDamage = 1;
 
     /**
@@ -25,8 +24,6 @@ public abstract class GenericPoweredPickaxe extends MiningToolItem implements Br
      * @param dischargedTranslationKey the discharged translation key
      */
     public GenericPoweredPickaxe(ToolMaterial material, int energyCapacity, EnergyTier tier, int cost, float poweredSpeed, float unpoweredSpeed, Settings settings, @Nullable String dischargedTranslationKey) {
-        // super(material, energyCapacity, tier, cost, poweredSpeed, unpoweredSpeed, attackDamage, PickaxeItem.EFFECTIVE_BLOCKS, settings, dischargedTranslationKey);
-
-        super(attackDamage, unpoweredSpeed, material, PickaxeItem.EFFECTIVE_BLOCKS, settings.maxCount(1).maxDamage(material.getDurability()));
+        super(material, energyCapacity, tier, cost, poweredSpeed, unpoweredSpeed, attackDamage, PickaxeItem.EFFECTIVE_BLOCKS, settings, dischargedTranslationKey);
     }
 }

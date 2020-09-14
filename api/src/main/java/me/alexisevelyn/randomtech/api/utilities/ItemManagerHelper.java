@@ -30,6 +30,10 @@ public class ItemManagerHelper {
      * @param itemList the item list
      */
     public static void initPoweredItems(Item item, DefaultedList<ItemStack> itemList) {
+        // Ensure An Energy Based Item
+        if (!(item instanceof EnergyHolder))
+            return;
+
         // Can be used to add multiple versions of items (e.g. a charged and discharged variant of each armor piece)
         ItemStack uncharged = new ItemStack(item);
         ItemStack charged = new ItemStack(item);
@@ -57,7 +61,7 @@ public class ItemManagerHelper {
          EnergyHandler energyHandler = Energy.of(newItemStack);
          double oldDurability = oldItemStack.getMaxDamage() - oldItemStack.getDamage();
 
-         if (newItemStack.getItem() instanceof EnergyHelper){
+         if (newItemStack.getItem() instanceof EnergyHelper) {
              EnergyHelper customEnergyItem = (EnergyHelper) newItemStack.getItem();
 
              return (oldDurability * customEnergyItem.getMaxEnergy(newItemStack)) / oldItemStack.getMaxDamage();

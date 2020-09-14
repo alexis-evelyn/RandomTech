@@ -43,7 +43,7 @@ import java.util.Set;
  * The type Generic powered tool.
  */
 // TODO: Fix this class!!! https://github.com/alexis-evelyn/RandomTech/issues/33
-public abstract class GenericPoweredTool extends MiningToolItem implements EnergyHelper, EnergyHolder, ItemDurabilityExtensions, ItemStackModifiers, BreakableBlocksHelper {
+public abstract class GenericPoweredTool extends MiningToolItem  { // ItemDurabilityExtensions, ItemStackModifiers, EnergyHelper, EnergyHolder, BreakableBlocksHelper
     public final int maxCharge;
     public final int cost;
     public final float poweredSpeed;
@@ -164,16 +164,17 @@ public abstract class GenericPoweredTool extends MiningToolItem implements Energ
      * @param stack         the stack
      * @param builder       the builder
      */
-    @Override
-    public void getAttributeModifiers(EquipmentSlot equipmentSlot, ItemStack stack, Multimap<EntityAttribute, EntityAttributeModifier> builder) {
-        // Modify Tool Attributes Dynamically
-
-        // The attribute modifiers are automatically added back when they aren't actively being taken away
-        if (!isUsable(stack) && equipmentSlot == EquipmentSlot.MAINHAND) {
-            builder.removeAll(EntityAttributes.GENERIC_ATTACK_DAMAGE);
-            builder.removeAll(EntityAttributes.GENERIC_ATTACK_SPEED);
-        }
-    }
+//    @Override
+//    public void getAttributeModifiers(EquipmentSlot equipmentSlot, ItemStack stack, Multimap<EntityAttribute, EntityAttributeModifier> builder) {
+//        // Modify Tool Attributes Dynamically
+//        // For some reason, this code is loaded during startup
+//
+//        // The attribute modifiers are automatically added back when they aren't actively being taken away
+//        if (!isUsable(stack) && equipmentSlot == EquipmentSlot.MAINHAND) {
+//            builder.removeAll(EntityAttributes.GENERIC_ATTACK_DAMAGE);
+//            builder.removeAll(EntityAttributes.GENERIC_ATTACK_SPEED);
+//        }
+//    }
 
     /**
      * Is not full boolean.
@@ -181,10 +182,10 @@ public abstract class GenericPoweredTool extends MiningToolItem implements Energ
      * @param stack the stack
      * @return the boolean
      */
-    @Override
-    public boolean isNotFull(ItemStack stack) {
-        return getEnergy(stack) != getMaxEnergy(stack);
-    }
+//    @Override
+//    public boolean isNotFull(ItemStack stack) {
+//        return getEnergy(stack) != getMaxEnergy(stack);
+//    }
 
     /**
      * Is usable boolean.
@@ -192,9 +193,9 @@ public abstract class GenericPoweredTool extends MiningToolItem implements Energ
      * @param stack the stack
      * @return the boolean
      */
-    @Override
+    //@Override
     public boolean isUsable(ItemStack stack) {
-        return Energy.of(stack).getEnergy() >= this.cost;
+        return true; //Energy.of(stack).getEnergy() >= this.cost;
     }
 
     /**
@@ -203,10 +204,10 @@ public abstract class GenericPoweredTool extends MiningToolItem implements Energ
      * @param stack the stack
      * @return the energy
      */
-    @Override
-    public double getEnergy(ItemStack stack) {
-        return Energy.of(stack).getEnergy();
-    }
+//    @Override
+//    public double getEnergy(ItemStack stack) {
+//        return Energy.of(stack).getEnergy();
+//    }
 
     /**
      * Sets energy.
@@ -214,46 +215,46 @@ public abstract class GenericPoweredTool extends MiningToolItem implements Energ
      * @param stack  the stack
      * @param energy the energy
      */
-    @Override
-    public void setEnergy(ItemStack stack, double energy) {
-        Energy.of(stack).set(energy);
-    }
+//    @Override
+//    public void setEnergy(ItemStack stack, double energy) {
+//        Energy.of(stack).set(energy);
+//    }
 
-    /**
-     * Inventory tick.
-     *
-     * @param stack    the stack
-     * @param world    the world
-     * @param entity   the entity
-     * @param slot     the slot
-     * @param selected the selected
-     */
-    @Override
-    public void inventoryTick(ItemStack stack, World world, Entity entity, int slot, boolean selected) {
-        super.inventoryTick(stack, world, entity, slot, selected);
-    }
+//    /**
+//     * Inventory tick.
+//     *
+//     * @param stack    the stack
+//     * @param world    the world
+//     * @param entity   the entity
+//     * @param slot     the slot
+//     * @param selected the selected
+//     */
+//    @Override
+//    public void inventoryTick(ItemStack stack, World world, Entity entity, int slot, boolean selected) {
+//        super.inventoryTick(stack, world, entity, slot, selected);
+//    }
 
-    /**
-     * Gets attack damage.
-     *
-     * @return the attack damage
-     */
-    // Used by mobs to determine if they prefer a weapon over another one.
-    // It does not actually modify the attack damage of an item (for vanilla purposes)?
-    @SuppressWarnings("EmptyMethod")
-    @Override
-    public float getAttackDamage() {
-        return super.getAttackDamage();
-    }
+//    /**
+//     * Gets attack damage.
+//     *
+//     * @return the attack damage
+//     */
+//    // Used by mobs to determine if they prefer a weapon over another one.
+//    // It does not actually modify the attack damage of an item (for vanilla purposes)?
+//    @SuppressWarnings("EmptyMethod")
+//    @Override
+//    public float getAttackDamage() {
+//        return super.getAttackDamage();
+//    }
 
-    /**
-     * Gets attack speed.
-     *
-     * @return the attack speed
-     */
-    public float getAttackSpeed() {
-        return this.unpoweredSpeed;
-    }
+//    /**
+//     * Gets attack speed.
+//     *
+//     * @return the attack speed
+//     */
+//    public float getAttackSpeed() {
+//        return this.unpoweredSpeed;
+//    }
 
     /**
      * Post hit boolean.
@@ -389,34 +390,34 @@ public abstract class GenericPoweredTool extends MiningToolItem implements Energ
      * @param itemStack the item stack
      * @return the max energy
      */
-    @Override
-    public double getMaxEnergy(ItemStack itemStack) {
-        // RebornCore uses getMaxStoredPower() for their hud.
-        // That makes it where the max energy cannot be set per ItemStack.
-        // Once I implement dynamic max energy, my code will be able to get the dynamic max energy.
-
-        return getMaxStoredPower();
-    }
+//    @Override
+//    public double getMaxEnergy(ItemStack itemStack) {
+//        // RebornCore uses getMaxStoredPower() for their hud.
+//        // That makes it where the max energy cannot be set per ItemStack.
+//        // Once I implement dynamic max energy, my code will be able to get the dynamic max energy.
+//
+//        return getMaxStoredPower();
+//    }
 
     /**
      * Gets max stored power.
      *
      * @return the max stored power
      */
-    @Override
-    public double getMaxStoredPower() {
-        return this.maxCharge;
-    }
+//    @Override
+//    public double getMaxStoredPower() {
+//        return this.maxCharge;
+//    }
 
     /**
      * Gets tier.
      *
      * @return the tier
      */
-    @Override
-    public EnergyTier getTier() {
-        return this.tier;
-    }
+//    @Override
+//    public EnergyTier getTier() {
+//        return this.tier;
+//    }
 
     /**
      * Gets durability.
@@ -424,10 +425,10 @@ public abstract class GenericPoweredTool extends MiningToolItem implements Energ
      * @param stack the stack
      * @return the durability
      */
-    @Override
-    public double getDurability(ItemStack stack) {
-        return 1 - ItemUtils.getPowerForDurabilityBar(stack);
-    }
+//    @Override
+//    public double getDurability(ItemStack stack) {
+//        return 1 - ItemUtils.getPowerForDurabilityBar(stack);
+//    }
 
     /**
      * Show durability boolean.
@@ -435,16 +436,16 @@ public abstract class GenericPoweredTool extends MiningToolItem implements Energ
      * @param stack the stack
      * @return the boolean
      */
-    @Override
-    public boolean showDurability(ItemStack stack) {
-        if (!(stack.getItem() instanceof EnergyHelper))
-            return true;
-
-        double currentEnergy = Energy.of(stack).getEnergy();
-        double maxEnergy = getMaxEnergy(stack);
-
-        return currentEnergy < maxEnergy;
-    }
+//    @Override
+//    public boolean showDurability(ItemStack stack) {
+//        if (!(stack.getItem() instanceof EnergyHelper))
+//            return true;
+//
+//        double currentEnergy = Energy.of(stack).getEnergy();
+//        double maxEnergy = getMaxEnergy(stack);
+//
+//        return currentEnergy < maxEnergy;
+//    }
 
     /**
      * Gets durability color.
@@ -452,15 +453,15 @@ public abstract class GenericPoweredTool extends MiningToolItem implements Energ
      * @param stack the stack
      * @return the durability color
      */
-    @Override
-    public int getDurabilityColor(ItemStack stack) {
-        // Red - PowerSystem.getDisplayPower().colour;
-        // Darker Red - PowerSystem.getDisplayPower().altColour;
-        // Blue - 0xFF0014A2
-        // Green - 0xFF006700
-
-        return 0xFF0014A2;
-    }
+//    @Override
+//    public int getDurabilityColor(ItemStack stack) {
+//        // Red - PowerSystem.getDisplayPower().colour;
+//        // Darker Red - PowerSystem.getDisplayPower().altColour;
+//        // Blue - 0xFF0014A2
+//        // Green - 0xFF006700
+//
+//        return 0xFF0014A2;
+//    }
 
     // I may or may not use this in the future, so I'm just marking it to not be used by 3rd parties for now.
 //    @Deprecated
@@ -493,10 +494,10 @@ public abstract class GenericPoweredTool extends MiningToolItem implements Energ
      * @param tag      the tag
      * @return the item stack
      */
-    @Override
-    public ItemStack onCraft(ItemStack oldStack, ItemStack newStack, CompoundTag tag) {
-        return ItemManagerHelper.convertStackToEnergyItemStack(oldStack, newStack, tag);
-    }
+//    @Override
+//    public ItemStack onCraft(ItemStack oldStack, ItemStack newStack, CompoundTag tag) {
+//        return ItemManagerHelper.convertStackToEnergyItemStack(oldStack, newStack, tag);
+//    }
 
     /**
      * Append tooltip.
@@ -522,10 +523,10 @@ public abstract class GenericPoweredTool extends MiningToolItem implements Energ
      * @param pos    the pos
      * @return the boolean
      */
-    @Override
-    public boolean canBreakUnbreakableBlock(BlockState state, PlayerEntity player, BlockView world, BlockPos pos) {
-        return false;
-    }
+//    @Override
+//    public boolean canBreakUnbreakableBlock(BlockState state, PlayerEntity player, BlockView world, BlockPos pos) {
+//        return false;
+//    }
 
     /**
      * Gets unbreakable block difficulty multiplier.
@@ -536,8 +537,8 @@ public abstract class GenericPoweredTool extends MiningToolItem implements Energ
      * @param pos    the pos
      * @return the unbreakable block difficulty multiplier
      */
-    @Override
-    public float getUnbreakableBlockDifficultyMultiplier(BlockState state, PlayerEntity player, BlockView world, BlockPos pos) {
-        return 1.0F;
-    }
+//    @Override
+//    public float getUnbreakableBlockDifficultyMultiplier(BlockState state, PlayerEntity player, BlockView world, BlockPos pos) {
+//        return 1.0F;
+//    }
 }

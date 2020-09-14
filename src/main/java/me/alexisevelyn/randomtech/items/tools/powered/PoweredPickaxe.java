@@ -63,10 +63,10 @@ public class PoweredPickaxe extends GenericPoweredPickaxe {
      * @param pos    the pos
      * @return the boolean
      */
-    @Override
-    public boolean canBreakUnbreakableBlock(BlockState state, PlayerEntity player, BlockView world, BlockPos pos) {
-        return state.getBlock().is(Blocks.BEDROCK) || state.getBlock().is(Blocks.END_PORTAL_FRAME);
-    }
+//    @Override
+//    public boolean canBreakUnbreakableBlock(BlockState state, PlayerEntity player, BlockView world, BlockPos pos) {
+//        return state.getBlock().is(Blocks.BEDROCK) || state.getBlock().is(Blocks.END_PORTAL_FRAME);
+//    }
 
     /**
      * Gets unbreakable block difficulty multiplier.
@@ -77,13 +77,13 @@ public class PoweredPickaxe extends GenericPoweredPickaxe {
      * @param pos    the pos
      * @return the unbreakable block difficulty multiplier
      */
-    @Override
-    public float getUnbreakableBlockDifficultyMultiplier(BlockState state, PlayerEntity player, BlockView world, BlockPos pos) {
-        if (state.getBlock().is(Blocks.BEDROCK))
-            return 15.0F;
-
-        return 1.0F;
-    }
+//    @Override
+//    public float getUnbreakableBlockDifficultyMultiplier(BlockState state, PlayerEntity player, BlockView world, BlockPos pos) {
+//        if (state.getBlock().is(Blocks.BEDROCK))
+//            return 15.0F;
+//
+//        return 1.0F;
+//    }
 
     /**
      * Is fireproof boolean.
