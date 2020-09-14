@@ -17,6 +17,7 @@ import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.*;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.ActionResult;
@@ -25,6 +26,7 @@ import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import reborncore.api.items.ItemStackModifiers;
 import reborncore.common.util.ItemDurabilityExtensions;
@@ -40,8 +42,7 @@ import java.util.Set;
 /**
  * The type Generic powered tool.
  */
-// TODO: Fix this class!!! https://github.com/alexis-evelyn/RandomTech/issues/33
-public abstract class GenericPoweredTool extends MiningToolItem implements EnergyHolder, ItemStackModifiers, ItemDurabilityExtensions, BreakableBlocksHelper { // EnergyHelper
+public abstract class GenericPoweredTool extends MiningToolItem implements EnergyHelper, ItemStackModifiers, ItemDurabilityExtensions, BreakableBlocksHelper {
     public final int maxCharge;
     public final int cost;
     public final float poweredSpeed;
@@ -180,10 +181,13 @@ public abstract class GenericPoweredTool extends MiningToolItem implements Energ
      * @param stack the stack
      * @return the boolean
      */
-//    @Override
-//    public boolean isNotFull(ItemStack stack) {
-//        return getEnergy(stack) != getMaxEnergy(stack);
-//    }
+    @Override
+    public boolean isNotFull(ItemStack stack) {
+        if (stack.getItem() instanceof EnergyHelper)
+            return ((EnergyHelper) stack.getItem()).getEnergy(stack) != ((EnergyHelper) stack.getItem()).getMaxEnergy(stack);
+
+        return false;
+    }
 
     /**
      * Is usable boolean.
@@ -191,12 +195,12 @@ public abstract class GenericPoweredTool extends MiningToolItem implements Energ
      * @param stack the stack
      * @return the boolean
      */
-//    @Override
-    public boolean isUsable(ItemStack stack) {
-        if (stack.getItem() instanceof EnergyHolder)
-            return Energy.of(stack).getEnergy() >= this.cost;
+    @Override
+    public boolean isUsable(@NotNull ItemStack stack) {
+        if (stack.getItem() instanceof EnergyHelper)
+            return ((EnergyHelper) stack.getItem()).getEnergy(stack) >= this.cost;
 
-        return false;
+        return true;
     }
 
     /**
@@ -205,10 +209,13 @@ public abstract class GenericPoweredTool extends MiningToolItem implements Energ
      * @param stack the stack
      * @return the energy
      */
-//    @Override
-//    public double getEnergy(ItemStack stack) {
-//        return Energy.of(stack).getEnergy();
-//    }
+    @Override
+    public double getEnergy(@NotNull ItemStack stack) {
+        if (stack.getItem() instanceof EnergyHolder)
+            return Energy.of(stack).getEnergy();
+
+        return -1.0;
+    }
 
     /**
      * Sets energy.
@@ -216,10 +223,11 @@ public abstract class GenericPoweredTool extends MiningToolItem implements Energ
      * @param stack  the stack
      * @param energy the energy
      */
-//    @Override
-//    public void setEnergy(ItemStack stack, double energy) {
-//        Energy.of(stack).set(energy);
-//    }
+    @Override
+    public void setEnergy(ItemStack stack, double energy) {
+        if (stack.getItem() instanceof EnergyHolder)
+            Energy.of(stack).set(energy);
+    }
 
     /**
      * Post hit boolean.
@@ -344,13 +352,16 @@ public abstract class GenericPoweredTool extends MiningToolItem implements Energ
      * @param itemStack the item stack
      * @return the max energy
      */
-//    @Override
+    @Override
     public double getMaxEnergy(ItemStack itemStack) {
         // RebornCore uses getMaxStoredPower() for their hud.
         // That makes it where the max energy cannot be set per ItemStack.
         // Once I implement dynamic max energy, my code will be able to get the dynamic max energy.
 
-        return getMaxStoredPower();
+        if (itemStack.getItem() instanceof EnergyHolder)
+            return ((EnergyHolder) itemStack.getItem()).getMaxStoredPower();
+
+        return -1.0;
     }
 
     /**
@@ -442,10 +453,10 @@ public abstract class GenericPoweredTool extends MiningToolItem implements Energ
      * @param tag      the tag
      * @return the item stack
      */
-//    @Override
-//    public ItemStack onCraft(ItemStack oldStack, ItemStack newStack, CompoundTag tag) {
-//        return ItemManagerHelper.convertStackToEnergyItemStack(oldStack, newStack, tag);
-//    }
+    @Override
+    public ItemStack onCraft(ItemStack oldStack, ItemStack newStack, CompoundTag tag) {
+        return ItemManagerHelper.convertStackToEnergyItemStack(oldStack, newStack, tag);
+    }
 
     /**
      * Append tooltip.
