@@ -4,6 +4,6 @@
     "layer0": "randomtech:item/tools/powered_sword"
   },
   "overrides": [
-    {"predicate": {"custom_model_data": 1337}, "model": "randomtech:item/discharged_sword"}
+    {"predicate": {"lost_energy": 2561.0}, "model": "randomtech:item/discharged_sword"}
   ]
 }

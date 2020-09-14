@@ -1,17 +1,20 @@
 package me.alexisevelyn.randomtech.utility.registryhelpers.main;
 
-import me.alexisevelyn.randomtech.api.Main;
 import me.alexisevelyn.randomtech.api.items.energy.EnergyHelper;
-import me.alexisevelyn.randomtech.api.utilities.cardinalcomponents.BrokenItemComponent;
 import me.alexisevelyn.randomtech.items.armor.powered.PoweredHelmet;
-import nerdhub.cardinal.components.api.event.ItemComponentCallback;
 import net.fabricmc.fabric.api.network.PacketContext;
 import net.fabricmc.fabric.api.network.ServerSidePacketRegistry;
+import net.fabricmc.fabric.api.object.builder.v1.client.model.FabricModelPredicateProviderRegistry;
+import net.minecraft.client.item.ModelPredicateProvider;
+import net.minecraft.client.world.ClientWorld;
 import net.minecraft.entity.EquipmentSlot;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.PacketByteBuf;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
+import org.jetbrains.annotations.Nullable;
 
 import java.nio.charset.StandardCharsets;
 
@@ -23,17 +26,7 @@ public class PostRegistryHelper {
      * Post register.
      */
     public void postRegister() {
-//        this.registerCCACallback();
         this.registerZoomHandler();
-    }
-
-    private void registerCCACallback() {
-        // Register All Powered Tools and Armor With Callback
-        Registry.ITEM.stream().forEach(item -> {
-            if (item instanceof EnergyHelper) {
-                ItemComponentCallback.event(item).register((stack, components) -> components.put(Main.BROKEN_ITEM_COMPONENT, new BrokenItemComponent(stack)));
-            }
-        });
     }
 
     @SuppressWarnings("PMD.SwitchStmtsShouldHaveDefault") // Cause the switch statement doesn't need a default statement

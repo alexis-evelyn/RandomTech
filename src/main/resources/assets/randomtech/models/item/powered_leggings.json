@@ -4,6 +4,6 @@
     "layer0": "randomtech:item/armor/powered_leggings"
   },
   "overrides": [
-    {"predicate": {"custom_model_data": 1337}, "model": "randomtech:item/discharged_leggings"}
+    {"predicate": {"lost_energy": 687.0}, "model": "randomtech:item/discharged_leggings"}
   ]
 }

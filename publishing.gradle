@@ -151,7 +151,6 @@ curseforge {
                 requiredDependency 'reborncore'
                 embeddedLibrary 'randomtech-api'
                 embeddedLibrary 'auto-config-updated-api'
-                embeddedLibrary 'cardinal-components' // I plan to remove this before public release
                 embeddedLibrary 'nbt-crafting'
                 embeddedLibrary 'satin-api'
                 // embeddedLibrary 'geckolib' // Not Yet Used

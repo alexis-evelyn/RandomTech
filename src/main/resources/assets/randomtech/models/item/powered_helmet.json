@@ -4,6 +4,6 @@
     "layer0": "randomtech:item/armor/powered_helmet"
   },
   "overrides": [
-    {"predicate": {"custom_model_data": 1337}, "model": "randomtech:item/discharged_helmet"}
+    {"predicate": {"lost_energy": 512.0}, "model": "randomtech:item/discharged_helmet"}
   ]
 }

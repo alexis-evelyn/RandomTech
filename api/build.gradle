@@ -97,16 +97,6 @@ dependencies {
 		exclude(group: "net.fabricmc.fabric-api")
 	}
 	include "me.sargunvohra.mcmods:autoconfig1u:${project.autoconf_version}"
-
-	// Used to allow customizing data of items and other things
-	modImplementation ("io.github.onyxstudios.Cardinal-Components-API:cardinal-components-base:${project.cardinal_components_version}") {
-		exclude(group: "net.fabricmc.fabric-api")
-	}
-	modImplementation ("io.github.onyxstudios.Cardinal-Components-API:cardinal-components-item:${project.cardinal_components_version}") {
-		exclude(group: "net.fabricmc.fabric-api")
-	}
-	include "io.github.onyxstudios.Cardinal-Components-API:cardinal-components-item:${project.cardinal_components_version}"
-	include "io.github.onyxstudios.Cardinal-Components-API:cardinal-components-base:${project.cardinal_components_version}"
 }
 
 processResources {

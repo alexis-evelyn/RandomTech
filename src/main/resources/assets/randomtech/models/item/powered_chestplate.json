@@ -4,6 +4,6 @@
     "layer0": "randomtech:item/armor/powered_chestplate"
   },
   "overrides": [
-    {"predicate": {"custom_model_data": 1337}, "model": "randomtech:item/discharged_chestplate"}
+    {"predicate": {"lost_energy": 712.0}, "model": "randomtech:item/discharged_chestplate"}
   ]
 }

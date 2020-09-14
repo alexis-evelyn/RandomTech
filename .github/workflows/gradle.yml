@@ -115,7 +115,16 @@ jobs:
         verbose: true
         releaseUrl: https://github.com/alexis-evelyn/RandomTech/tree/v${{ env.VERSION }}
         unreleased: true
+        unreleasedLabel: true
+        onlyLastTag: true
+        issues: true
+        issuesWoLabels: true
         issueLineLabels: ALL
+        pullRequests: true
+        prWoLabels: true
+        releaseBranch: master
+        author: true
+
     - name: Upload Generated Changelog For Review
       uses: actions/upload-artifact@v2
       with:

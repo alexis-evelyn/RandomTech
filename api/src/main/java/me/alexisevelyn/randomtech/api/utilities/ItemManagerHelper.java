@@ -38,11 +38,6 @@ public class ItemManagerHelper {
         ItemStack uncharged = new ItemStack(item);
         ItemStack charged = new ItemStack(item);
 
-        CompoundTag tag = uncharged.getTag();
-
-        if (tag != null)
-            tag.putInt("CustomModelData", 1337); // Sets the model to show as dead in the creative inventory and REI
-
         Energy.of(charged).set(Energy.of(charged).getMaxStored());
 
         itemList.add(uncharged);

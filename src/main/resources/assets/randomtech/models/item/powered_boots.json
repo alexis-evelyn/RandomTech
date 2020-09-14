@@ -4,6 +4,6 @@
     "layer0": "randomtech:item/armor/powered_boots"
   },
   "overrides": [
-    {"predicate": {"custom_model_data": 1337}, "model": "randomtech:item/discharged_boots"}
+    {"predicate": {"lost_energy": 592.0}, "model": "randomtech:item/discharged_boots"}
   ]
 }

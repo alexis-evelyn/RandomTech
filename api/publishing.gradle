@@ -129,7 +129,6 @@ curseforge {
             relations {
                 requiredDependency 'reborncore'
                 embeddedLibrary 'auto-config-updated-api'
-                embeddedLibrary 'cardinal-components' // I plan to remove this before public release
                 optionalDependency 'modmenu'
             }
         }
