@@ -42,6 +42,7 @@ import java.util.Set;
 /**
  * The type Generic powered tool.
  */
+// TODO: Fix this class!!! https://github.com/alexis-evelyn/RandomTech/issues/33
 public abstract class GenericPoweredTool extends MiningToolItem implements EnergyHelper, EnergyHolder, ItemDurabilityExtensions, ItemStackModifiers, BreakableBlocksHelper {
     public final int maxCharge;
     public final int cost;
