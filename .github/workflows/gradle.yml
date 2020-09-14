@@ -116,7 +116,7 @@ jobs:
         releaseUrl: https://github.com/alexis-evelyn/RandomTech/tree/v${{ env.VERSION }}
         unreleased: true
         unreleasedLabel: true
-        onlyLastTag: true
+        onlyLastTag: false
         issues: true
         issuesWoLabels: true
         issueLineLabels: ALL
