@@ -44,6 +44,8 @@ jobs:
         path: |
           build
           api/build
+          !build/libs
+          !api/build/libs
         key: ${{ runner.os }}-build-cache-${{ hashFiles('**/*.java*') }}
         restore-keys: ${{ runner.os }}-build-cache-
     - name: Grant execute permission for gradlew
