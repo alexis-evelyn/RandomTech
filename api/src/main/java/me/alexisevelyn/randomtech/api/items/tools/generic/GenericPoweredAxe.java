@@ -16,6 +16,7 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
+import team.reborn.energy.EnergyHolder;
 import team.reborn.energy.EnergyTier;
 
 /**
@@ -68,7 +69,7 @@ public abstract class GenericPoweredAxe extends GenericPoweredTool {
         BlockState blockState = world.getBlockState(blockPos);
         Block block = AxeItem.STRIPPED_BLOCKS.get(blockState.getBlock());
 
-        if (isUsable(context.getStack()) && block != null) {
+        if (context.getStack().getItem() instanceof EnergyHolder && isUsable(context.getStack()) && block != null) {
             PlayerEntity playerEntity = context.getPlayer();
             world.playSound(playerEntity, blockPos, SoundEvents.ITEM_AXE_STRIP, SoundCategory.BLOCKS, 1.0F, 1.0F);
 

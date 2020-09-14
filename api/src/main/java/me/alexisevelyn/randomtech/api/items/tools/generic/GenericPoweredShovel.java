@@ -14,6 +14,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
+import team.reborn.energy.EnergyHolder;
 import team.reborn.energy.EnergyTier;
 
 /**
@@ -51,7 +52,7 @@ public abstract class GenericPoweredShovel extends GenericPoweredTool {
         BlockState blockState = world.getBlockState(blockPos);
 
         // If Failed to be Usable, Then Fail Action
-        if (!isUsable(context.getStack()))
+        if (!(context.getStack().getItem() instanceof EnergyHolder) || !isUsable(context.getStack()))
             return super.useOnBlock(context);
 
         // Don't Perform Actions From the Bottom Side of A Block

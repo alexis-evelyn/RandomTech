@@ -16,6 +16,7 @@ import net.minecraft.item.ArmorMaterial;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.PacketByteBuf;
+import team.reborn.energy.EnergyHolder;
 import team.reborn.energy.EnergyTier;
 
 import java.nio.charset.StandardCharsets;
@@ -85,7 +86,7 @@ public class PoweredHelmet extends GenericPoweredArmor {
 
         CompoundTag rootTag = stack.getTag();
 
-        if (rootTag != null && rootTag.getInt("zoom") > 0 && isUsable(stack)) {
+        if (stack.getItem() instanceof EnergyHolder && rootTag != null && rootTag.getInt("zoom") > 0 && isUsable(stack)) {
             ItemManagerHelper.useEnergy(playerEntity, stack, cost);
         }
     }
