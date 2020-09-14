@@ -23,7 +23,7 @@ public class PostRegistryHelper {
      * Post register.
      */
     public void postRegister() {
-        this.registerCCACallback();
+//        this.registerCCACallback();
         this.registerZoomHandler();
     }
 

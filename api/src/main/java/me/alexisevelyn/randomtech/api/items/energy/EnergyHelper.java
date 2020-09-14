@@ -2,11 +2,12 @@ package me.alexisevelyn.randomtech.api.items.energy;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundTag;
+import team.reborn.energy.EnergyHolder;
 
 /**
  * The interface Energy helper.
  */
-public interface EnergyHelper {
+public interface EnergyHelper extends EnergyHolder {
     // This exists for both GenericPoweredTool and GenericPoweredArmor.
     // This makes it easier to target both classes in my mixins.
 

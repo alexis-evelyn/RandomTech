@@ -1,5 +1,6 @@
 package me.alexisevelyn.randomtech.api.utilities;
 
+import me.alexisevelyn.randomtech.api.items.tools.generic.BreakableBlocksHelper;
 import me.alexisevelyn.randomtech.api.items.tools.generic.GenericPoweredTool;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
@@ -79,11 +80,11 @@ public class MiningManagerHelper {
         if (blockState.getHardness(world, blockPos) >= 0)
             return false;
 
-        if (!(toolItemStack.getItem() instanceof GenericPoweredTool))
+        if (!(toolItemStack.getItem() instanceof BreakableBlocksHelper))
             return false;
 
-        GenericPoweredTool genericPoweredTool = (GenericPoweredTool) toolItemStack.getItem();
-        return genericPoweredTool.canBreakUnbreakableBlock(blockState, playerEntity, world, blockPos);
+        BreakableBlocksHelper tool = (BreakableBlocksHelper) toolItemStack.getItem();
+        return tool.canBreakUnbreakableBlock(blockState, playerEntity, world, blockPos);
     }
 
     /**

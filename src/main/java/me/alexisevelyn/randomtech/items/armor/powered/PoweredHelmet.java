@@ -16,6 +16,7 @@ import net.minecraft.item.ArmorMaterial;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.PacketByteBuf;
+import team.reborn.energy.EnergyHolder;
 import team.reborn.energy.EnergyTier;
 
 import java.nio.charset.StandardCharsets;

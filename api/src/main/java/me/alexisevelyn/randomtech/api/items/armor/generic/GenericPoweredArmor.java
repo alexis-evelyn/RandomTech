@@ -36,7 +36,6 @@ import reborncore.api.items.ItemStackModifiers;
 import reborncore.common.util.ItemDurabilityExtensions;
 import reborncore.common.util.ItemUtils;
 import team.reborn.energy.Energy;
-import team.reborn.energy.EnergyHolder;
 import team.reborn.energy.EnergyTier;
 
 import java.util.List;
@@ -45,7 +44,7 @@ import java.util.UUID;
 /**
  * The type Generic powered armor.
  */
-public abstract class GenericPoweredArmor extends ArmorItem implements EnergyHelper, ItemDurabilityExtensions, ItemStackModifiers, ArmorTickable, ArmorRemoveHandler, ArmorFovHandler, EnergyHolder, InvulnerabilityHandler, SecondaryTextureHandler {
+public abstract class GenericPoweredArmor extends ArmorItem implements EnergyHelper, ItemDurabilityExtensions, ItemStackModifiers, ArmorTickable, ArmorRemoveHandler, ArmorFovHandler, InvulnerabilityHandler, SecondaryTextureHandler {
     private final int maxCharge;
     private final int cost;
 
