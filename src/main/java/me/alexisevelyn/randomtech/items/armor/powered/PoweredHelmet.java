@@ -86,7 +86,7 @@ public class PoweredHelmet extends GenericPoweredArmor {
 
         CompoundTag rootTag = stack.getTag();
 
-        if (stack.getItem() instanceof EnergyHolder && rootTag != null && rootTag.getInt("zoom") > 0 && isUsable(stack)) {
+        if (rootTag != null && rootTag.getInt("zoom") > 0 && isUsable(stack)) {
             ItemManagerHelper.useEnergy(playerEntity, stack, cost);
         }
     }

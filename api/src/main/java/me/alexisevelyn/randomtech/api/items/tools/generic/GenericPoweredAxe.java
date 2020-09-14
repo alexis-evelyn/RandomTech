@@ -69,7 +69,7 @@ public abstract class GenericPoweredAxe extends GenericPoweredTool {
         BlockState blockState = world.getBlockState(blockPos);
         Block block = AxeItem.STRIPPED_BLOCKS.get(blockState.getBlock());
 
-        if (context.getStack().getItem() instanceof EnergyHolder && isUsable(context.getStack()) && block != null) {
+        if (isUsable(context.getStack()) && block != null) {
             PlayerEntity playerEntity = context.getPlayer();
             world.playSound(playerEntity, blockPos, SoundEvents.ITEM_AXE_STRIP, SoundCategory.BLOCKS, 1.0F, 1.0F);
 

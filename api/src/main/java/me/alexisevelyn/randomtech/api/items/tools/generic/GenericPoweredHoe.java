@@ -50,7 +50,7 @@ public abstract class GenericPoweredHoe extends GenericPoweredTool {
         BlockPos blockPos = context.getBlockPos();
 
         // If Failed to be Usable, Then Fail Action
-        if (!(context.getStack().getItem() instanceof EnergyHolder) || !isUsable(context.getStack()))
+        if (!isUsable(context.getStack()))
             return ActionResult.FAIL;
 
         if (context.getSide() != Direction.DOWN && world.getBlockState(blockPos.up()).isAir()) {

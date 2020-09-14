@@ -52,7 +52,7 @@ public abstract class GenericPoweredShovel extends GenericPoweredTool {
         BlockState blockState = world.getBlockState(blockPos);
 
         // If Failed to be Usable, Then Fail Action
-        if (!(context.getStack().getItem() instanceof EnergyHolder) || !isUsable(context.getStack()))
+        if (!isUsable(context.getStack()))
             return super.useOnBlock(context);
 
         // Don't Perform Actions From the Bottom Side of A Block

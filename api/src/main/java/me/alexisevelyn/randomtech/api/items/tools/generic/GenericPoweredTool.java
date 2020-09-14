@@ -41,7 +41,7 @@ import java.util.Set;
  * The type Generic powered tool.
  */
 // TODO: Fix this class!!! https://github.com/alexis-evelyn/RandomTech/issues/33
-public abstract class GenericPoweredTool extends MiningToolItem implements ItemStackModifiers, ItemDurabilityExtensions, BreakableBlocksHelper { // EnergyHelper
+public abstract class GenericPoweredTool extends MiningToolItem implements EnergyHolder, ItemStackModifiers, ItemDurabilityExtensions, BreakableBlocksHelper { // EnergyHelper
     public final int maxCharge;
     public final int cost;
     public final float poweredSpeed;
@@ -191,9 +191,12 @@ public abstract class GenericPoweredTool extends MiningToolItem implements ItemS
      * @param stack the stack
      * @return the boolean
      */
-    //@Override
+//    @Override
     public boolean isUsable(ItemStack stack) {
-        return true; //Energy.of(stack).getEnergy() >= this.cost;
+        if (stack.getItem() instanceof EnergyHolder)
+            return Energy.of(stack).getEnergy() >= this.cost;
+
+        return false;
     }
 
     /**
@@ -230,7 +233,7 @@ public abstract class GenericPoweredTool extends MiningToolItem implements ItemS
     @Override
     public boolean postHit(ItemStack stack, LivingEntity target, LivingEntity attacker) {
         Random rand = new Random();
-        if (stack.getItem() instanceof EnergyHolder && isUsable(stack) && rand.nextInt(EnchantmentHelper.getLevel(Enchantments.UNBREAKING, stack) + 1) == 0) {
+        if (isUsable(stack) && rand.nextInt(EnchantmentHelper.getLevel(Enchantments.UNBREAKING, stack) + 1) == 0) {
             ItemManagerHelper.useEnergy(attacker, stack, cost);
             return super.postHit(stack, target, attacker);
         }
@@ -253,7 +256,7 @@ public abstract class GenericPoweredTool extends MiningToolItem implements ItemS
     @Override
     public boolean postMine(ItemStack stack, World world, BlockState state, BlockPos pos, LivingEntity miner) {
         Random rand = new Random();
-        if (stack.getItem() instanceof EnergyHolder && isUsable(stack) && (state.getHardness(world, pos) != 0.0F) && rand.nextInt(EnchantmentHelper.getLevel(Enchantments.UNBREAKING, stack) + 1) == 0) {
+        if (isUsable(stack) && (state.getHardness(world, pos) != 0.0F) && rand.nextInt(EnchantmentHelper.getLevel(Enchantments.UNBREAKING, stack) + 1) == 0) {
             if (isEffectiveOn(state))
                 ItemManagerHelper.useEnergy(miner, stack, cost);
             else
@@ -355,7 +358,7 @@ public abstract class GenericPoweredTool extends MiningToolItem implements ItemS
      *
      * @return the max stored power
      */
-//    @Override
+    @Override
     public double getMaxStoredPower() {
         return this.maxCharge;
     }
@@ -365,10 +368,10 @@ public abstract class GenericPoweredTool extends MiningToolItem implements ItemS
      *
      * @return the tier
      */
-//    @Override
-//    public EnergyTier getTier() {
-//        return this.tier;
-//    }
+    @Override
+    public EnergyTier getTier() {
+        return this.tier;
+    }
 
     /**
      * Gets durability.
@@ -389,7 +392,7 @@ public abstract class GenericPoweredTool extends MiningToolItem implements ItemS
      */
     @Override
     public boolean showDurability(ItemStack stack) {
-        if (!(stack.getItem() instanceof EnergyHelper))
+        if (!(stack.getItem() instanceof EnergyHolder))
             return true;
 
         double currentEnergy = Energy.of(stack).getEnergy();
