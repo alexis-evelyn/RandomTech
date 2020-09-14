@@ -8,14 +8,14 @@ on:
       - 'README.md'
       - 'CHANGELOG.md'
       - '.github/workflows/gradle.yml'
-  pull_request:
-    # The branches below must be a subset of the branches above
-    branches: [master]
-    paths-ignore:
-      - 'docs/**'
-      - 'README.md'
-      - 'CHANGELOG.md'
-      - '.github/workflows/gradle.yml'
+#  pull_request:
+#    # The branches below must be a subset of the branches above
+#    branches: [master]
+#    paths-ignore:
+#      - 'docs/**'
+#      - 'README.md'
+#      - 'CHANGELOG.md'
+#      - '.github/workflows/gradle.yml'
   schedule:
     - cron: '0 1 * * 6'
 
