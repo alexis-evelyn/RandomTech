@@ -62,12 +62,12 @@ jobs:
     - name: Setup Vars For Release Booleans and Version Info
       run: |
         # For Setting Up Independent Release Booleans
-        ls -1 build/libs | grep -q SNAPSHOT && echo ::set-env name=RANDOMTECH_RELEASE::false || echo ::set-env name=RANDOMTECH_RELEASE::true
-        ls -1 api/build/libs | grep -q SNAPSHOT && echo ::set-env name=API_RELEASE::false || echo ::set-env name=API_RELEASE::true
+        strings gradle.properties | grep mod_version | cut -d' ' -f3 | grep -q SNAPSHOT && echo ::set-env name=RANDOMTECH_RELEASE::false || echo ::set-env name=RANDOMTECH_RELEASE::true
+        strings api/gradle.properties | grep mod_version | cut -d' ' -f3 | grep -q SNAPSHOT && echo ::set-env name=API_RELEASE::false || echo ::set-env name=API_RELEASE::true
 
         # For Setting Up Independent Version Vars
-        echo ::set-env name=API_VERSION::$( ls -1 api/build/libs | cut -f3,4 -d- | awk -F'.jar' '{print $1}' | tail -n1 )
-        echo ::set-env name=RANDOMTECH_VERSION::$( ls -1 build/libs | cut -f3,4 -d- | awk -F'.jar' '{print $1}' | tail -n1 )
+        echo ::set-env name=API_VERSION::$( strings gradle.properties | grep mod_version | cut -d' ' -f3 )
+        echo ::set-env name=RANDOMTECH_VERSION::$( strings api/gradle.properties | grep mod_version | cut -d' ' -f3 )
     - name: Setup Vars For Main Release Boolean and Version Info
       run: |
         # For Setting Up Main Release Boolean
