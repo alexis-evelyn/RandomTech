@@ -111,12 +111,13 @@ jobs:
       uses: heinrichreimer/github-changelog-generator-action@v2.1.1
       with: # https://github.com/heinrichreimer/action-github-changelog-generator/blob/master/README.md and https://github.com/github-changelog-generator/github-changelog-generator/blob/master/README.md
         token: ${{ secrets.GITHUB_TOKEN }}
-        stripGeneratorNotice: true
-        verbose: true
-        releaseUrl: https://github.com/alexis-evelyn/RandomTech/tree/v${{ env.VERSION }}
-        unreleased: true
-        issueLineLabels: ALL
-
+        stripGeneratorNotice: "true"
+        stripHeaders: "false"
+        onlyLastTag: "false"
+        verbose: "true"
+        # releaseUrl: "https://github.com/alexis-evelyn/RandomTech/tree/v${{ env.VERSION }}"
+        unreleased: "true"
+        issueLineLabels: "ALL"
     - name: Upload Generated Changelog For Review
       uses: actions/upload-artifact@v2
       with:
