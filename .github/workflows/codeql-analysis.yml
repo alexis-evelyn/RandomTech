@@ -8,14 +8,14 @@ on:
       - 'README.md'
       - 'CHANGELOG.md'
       - '.github/workflows/gradle.yml'
-#  pull_request:
-#    # The branches below must be a subset of the branches above
-#    branches: [master]
-#    paths-ignore:
-#      - 'docs/**'
-#      - 'README.md'
-#      - 'CHANGELOG.md'
-#      - '.github/workflows/gradle.yml'
+  pull_request:
+    # The branches below must be a subset of the branches above
+    branches: [master]
+    paths-ignore:
+      - 'docs/**'
+      - 'README.md'
+      - 'CHANGELOG.md'
+      - '.github/workflows/gradle.yml'
   schedule:
     - cron: '0 1 * * 6'
 
@@ -56,8 +56,8 @@ jobs:
     # If this step fails, then you should remove it and run the build manually (see below)
     - name: Autobuild
       uses: github/codeql-action/autobuild@v1
-      env:
-        CURSEFORGE_API_KEY: ${{ secrets.CURSEFORGE_API_KEY }} # Cause for some reason, CurseGradle has to do evaluating during the build process
+#      env:
+#        CURSEFORGE_API_KEY: ${{ secrets.CURSEFORGE_API_KEY }} # Cause for some reason, CurseGradle has to do evaluating during the build process
 
     # ℹ️ Command-line programs to run using the OS shell.
     # 📚 https://git.io/JvXDl

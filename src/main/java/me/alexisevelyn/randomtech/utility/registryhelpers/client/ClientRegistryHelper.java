@@ -4,6 +4,7 @@ import ladysnake.satin.api.event.ShaderEffectRenderCallback;
 import ladysnake.satin.api.managed.ManagedShaderEffect;
 import ladysnake.satin.api.managed.ShaderEffectManager;
 import me.alexisevelyn.randomtech.Main;
+import me.alexisevelyn.randomtech.blockitems.BottledDemon;
 import me.alexisevelyn.randomtech.blockitems.VirtualTile;
 import me.alexisevelyn.randomtech.blocks.cables.EnergyCable;
 import me.alexisevelyn.randomtech.blocks.cables.FluidCable;
@@ -136,6 +137,13 @@ public class ClientRegistryHelper {
 
         // For Machines
         BlockRenderLayerMap.INSTANCE.putBlock(RegistryHelper.FUSER, RenderLayer.getCutout());
+
+        // For Bottled Demon - Transparency
+        BlockRenderLayerMap.INSTANCE.putBlock(RegistryHelper.BOTTLED_DEMON_BLOCK, RenderLayer.getTranslucent());
+
+        // For Bottled Demon - Custom Colors
+        ColorProviderRegistry.BLOCK.register(BottledDemon.BottledDemonBlock::getColor, RegistryHelper.BOTTLED_DEMON_BLOCK);
+        ColorProviderRegistry.ITEM.register(BottledDemon::getColor, RegistryHelper.BOTTLED_DEMON);
     }
 
     /**
