@@ -50,7 +50,7 @@ jobs:
         restore-keys: ${{ runner.os }}-build-cache-
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
-    - name: Build Only (Meant to Be Used Locally Only For Debugging)
+    - name: Build Only (For Debugging)
       if: !startsWith(steps.debugvars.outputs.ENABLE_PUBLISHING, 'true')
       run: ./gradlew build -g build/.gradle
       env:
