@@ -51,7 +51,7 @@ jobs:
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
     - name: Build Only
-      if: !startsWith(steps.debugvars.outputs.ENABLE_PUBLISHING, 'true')
+      if: startsWith(steps.debugvars.outputs.ENABLE_PUBLISHING, 'true')
       run: ./gradlew build -g build/.gradle
     - name: Build And Publish To Sonatype
       if: startsWith(steps.debugvars.outputs.ENABLE_PUBLISHING, 'true')
