@@ -50,12 +50,12 @@ jobs:
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
     - name: Build Only (Meant to Be Used Locally Only For Debugging)
-      if: !startsWith(${{ steps.debugvars.outputs.enable_publishing }}, 'true')
+      if: !startsWith(steps.debugvars.outputs.enable_publishing, 'true')
       run: ./gradlew build -g build/.gradle
       env:
         CURSEFORGE_API_KEY: ${{ secrets.CURSEFORGE_API_KEY }} # Cause for some reason the CurseGradle plugin evaluates here too
     - name: Build And Publish To Sonatype
-      if: startsWith(${{ steps.debugvars.outputs.enable_publishing }}, 'true')
+      if: startsWith(steps.debugvars.outputs.enable_publishing, 'true')
       run: ./gradlew publish -g build/.gradle
       env:
         BINTRAY_GPG_KEY: ${{ secrets.BINTRAY_GPG_KEY }}
@@ -95,20 +95,20 @@ jobs:
           api/build/libs/*
     - name: Setup Git Credentials For Tagging
       uses: oleksiyrudenko/gha-git-credentials@v1
-      if: startsWith(env.RELEASE, 'true') && startsWith(${{ steps.debugvars.outputs.enable_publishing }}, 'true')
+      if: startsWith(env.RELEASE, 'true') && startsWith(steps.debugvars.outputs.enable_publishing, 'true')
       with:
         name: 'Automated Tag'
         email: 'automated-tag@alexisevelyn.me'
         actor: ${{ github.actor }}
         token: ${{ secrets.TOKEN_AUTOTAG_CREATOR }}
     - name: Update Tag If Release
-      if: startsWith(env.RELEASE, 'true') && startsWith(${{ steps.debugvars.outputs.enable_publishing }}, 'true')
+      if: startsWith(env.RELEASE, 'true') && startsWith(steps.debugvars.outputs.enable_publishing, 'true')
       run: |
         # Causes Incorrect Version Info (If Pushing Snapshot Before This Is Ran) - git pull --ff-only
         git tag -a v${{ env.VERSION }} -m "Automatically Generated Tag For Release v${{ env.VERSION }}" $GITHUB_SHA
         git push origin v${{ env.VERSION }}
     - name: Attempt Close/Release
-      if: startsWith(env.RELEASE, 'true') && startsWith(${{ steps.debugvars.outputs.enable_publishing }}, 'true')
+      if: startsWith(env.RELEASE, 'true') && startsWith(steps.debugvars.outputs.enable_publishing, 'true')
       run: ./gradlew closeAndReleaseRepository -g build/.gradle
       env:
         SONATYPE_USERNAME: ${{ secrets.SONATYPE_USERNAME }}
@@ -131,20 +131,20 @@ jobs:
         name: Generated-Changelog
         path: ${{ github.workspace }}/CHANGELOG.md
     - name: Upload RandomTech to Curseforge
-      if: startsWith(env.RANDOMTECH_RELEASE, 'true') && startsWith(${{ steps.debugvars.outputs.enable_publishing }}, 'true')
+      if: startsWith(env.RANDOMTECH_RELEASE, 'true') && startsWith(steps.debugvars.outputs.enable_publishing, 'true')
       # :publishCurseforge as opposed to publishCurseforge is intentional to only run the task for root
       run: ./gradlew :publishCurseforge -g build/.gradle
       env:
         CURSEFORGE_API_KEY: ${{ secrets.CURSEFORGE_API_KEY }}
         GITHUB_WORKSPACE: ${{ github.workspace }}
     - name: Upload API to Curseforge
-      if: startsWith(env.API_RELEASE, 'true') && startsWith(${{ steps.debugvars.outputs.enable_publishing }}, 'true')
+      if: startsWith(env.API_RELEASE, 'true') && startsWith(steps.debugvars.outputs.enable_publishing, 'true')
       run: ./gradlew :api:publishCurseforge -g build/.gradle
       env:
         CURSEFORGE_API_KEY: ${{ secrets.CURSEFORGE_API_KEY }}
         GITHUB_WORKSPACE: ${{ github.workspace }}
     - name: Alert Discord to New API Release
-      if: startsWith(env.API_RELEASE, 'true') && startsWith(${{ steps.debugvars.outputs.enable_publishing }}, 'true')
+      if: startsWith(env.API_RELEASE, 'true') && startsWith(steps.debugvars.outputs.enable_publishing, 'true')
       continue-on-error: true
       run: |
         # For Sending API Download Webhook to Discord
@@ -165,7 +165,7 @@ jobs:
         }
         EOF
     - name: Alert Discord to New RandomTech Release
-      if: startsWith(env.RANDOMTECH_RELEASE, 'true') && startsWith(${{ steps.debugvars.outputs.enable_publishing }}, 'true')
+      if: startsWith(env.RANDOMTECH_RELEASE, 'true') && startsWith(steps.debugvars.outputs.enable_publishing, 'true')
       continue-on-error: true
       run: |
         # Useful Links:
