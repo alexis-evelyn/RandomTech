@@ -26,7 +26,7 @@ jobs:
 
     steps:
     - name: Setup Self Runner Tools
-      if: !env.GITHUB_ACTIONS
+      if: ${{ !env.GITHUB_ACTIONS }}
       run: |
         echo What Does The Variable Look Like: "$GITHUB_ACTIONS"
         sudo apt-get install zstd
