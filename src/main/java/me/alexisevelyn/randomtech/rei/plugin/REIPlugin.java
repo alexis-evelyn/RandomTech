@@ -2,7 +2,6 @@ package me.alexisevelyn.randomtech.rei.plugin;
 
 import me.alexisevelyn.randomtech.Main;
 import me.alexisevelyn.randomtech.api.utilities.recipemanagers.GenericFluidRecipe;
-import me.alexisevelyn.randomtech.rei.plugin.autocrafting.FuserAutocraftingHandler;
 import me.alexisevelyn.randomtech.rei.plugin.recipecategories.FuserRecipeCategory;
 import me.alexisevelyn.randomtech.rei.plugin.recipedisplays.FuserRecipeDisplay;
 import me.alexisevelyn.randomtech.utility.RecipesHelper;
@@ -23,12 +22,6 @@ import reborncore.common.crafting.RecipeManager;
 @Environment(EnvType.CLIENT)
 public class REIPlugin implements REIPluginV0 {
     public static final Identifier FUSER = new Identifier(Main.MODID, "fuser");
-
-//    @Override
-//    public int getPriority() {
-//        // Smaller Number, Higher Priority
-//        return 0;
-//    }
 
     /**
      * Gets plugin identifier.

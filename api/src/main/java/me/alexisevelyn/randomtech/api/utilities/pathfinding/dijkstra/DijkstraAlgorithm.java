@@ -1,5 +1,6 @@
 package me.alexisevelyn.randomtech.api.utilities.pathfinding.dijkstra;
 
+import org.apiguardian.api.API;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -10,6 +11,7 @@ import java.util.*;
  */
 // Code pulled from https://www.vogella.com/tutorials/JavaAlgorithmsDijkstra/article.html
 // Found code from https://stackoverflow.com/questions/17480022/java-find-shortest-path-between-2-points-in-a-distance-weighted-map#comment61831401_17480244
+@API(status = API.Status.EXPERIMENTAL)
 public class DijkstraAlgorithm {
     // private final List<Vertex> nodes;
     private final List<Edge> edges;

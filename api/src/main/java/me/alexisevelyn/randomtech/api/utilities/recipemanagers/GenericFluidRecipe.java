@@ -4,65 +4,46 @@ import me.alexisevelyn.randomtech.api.blockentities.BasePowerAcceptorBlockEntity
 import me.alexisevelyn.randomtech.api.blockentities.FluidMachineBlockEntityBase;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.fluid.EmptyFluid;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.collection.DefaultedList;
+import org.apiguardian.api.API;
 import org.jetbrains.annotations.Nullable;
 import reborncore.common.crafting.RebornFluidRecipe;
+import reborncore.common.crafting.RebornRecipe;
 import reborncore.common.crafting.RebornRecipeType;
-import reborncore.common.crafting.ingredient.RebornIngredient;
 import reborncore.common.fluid.container.FluidInstance;
 import reborncore.common.util.Tank;
 
 /**
- * The type Generic fluid recipe.
+ * Fluid Recipe Type To Produce Liquids instead of RebornCore's Fluid Recipe To Consume Liquids (see {@link RebornFluidRecipe})
  */
 public class GenericFluidRecipe extends RebornFluidRecipe {
     /**
-     * Instantiates a new Generic fluid recipe.
+     * Create a Fluid Recipe For Use With RandomTech machines
      *
-     * @param type the type
-     * @param name the name
+     * For the type, the example is:
+     * <code>
+     * public static final RebornRecipeType<GenericFluidRecipe> LIQUID_FUSER = RecipeManager.newRecipeType(GenericFluidRecipe::new, new Identifier(Main.MODID, "fuser"));
+     * </code>
+     *
+     * @param type the type of recipe (used to help determine which machine processes recipe)
+     * @param name the name to be used to identify the recipe (Can be retrieved with {@link RebornRecipe#getId()})
      */
+    @API(status = API.Status.STABLE)
     public GenericFluidRecipe(RebornRecipeType<?> type, Identifier name) {
         super(type, name);
     }
 
     /**
-     * Instantiates a new Generic fluid recipe.
+     * Checks if the machine has the ability to handle crafting this recipe
      *
-     * @param type        the type
-     * @param name        the name
-     * @param ingredients the ingredients
-     * @param outputs     the outputs
-     * @param power       the power
-     * @param time        the time
-     */
-    public GenericFluidRecipe(RebornRecipeType<?> type, Identifier name, DefaultedList<RebornIngredient> ingredients, DefaultedList<ItemStack> outputs, int power, int time) {
-        super(type, name, ingredients, outputs, power, time);
-    }
-
-    /**
-     * Instantiates a new Generic fluid recipe.
+     * This checks if it's a {@link BasePowerAcceptorBlockEntity}, if the machine has enough energy (internally calling {@link #hasEnoughEnergy(BasePowerAcceptorBlockEntity)}, and if the tank {@link #getTank(BlockEntity)} can hold the amount of fluid produced by the recipe.
      *
-     * @param type          the type
-     * @param name          the name
-     * @param ingredients   the ingredients
-     * @param outputs       the outputs
-     * @param power         the power
-     * @param time          the time
-     * @param fluidInstance the fluid instance
-     */
-    public GenericFluidRecipe(RebornRecipeType<?> type, Identifier name, DefaultedList<RebornIngredient> ingredients, DefaultedList<ItemStack> outputs, int power, int time, FluidInstance fluidInstance) {
-        super(type, name, ingredients, outputs, power, time, fluidInstance);
-    }
-
-    /**
-     * Can craft boolean.
+     * {@inheritDoc}
      *
      * @param blockEntity the block entity
      * @return the boolean
      */
+    @API(status = API.Status.STABLE)
     @Override
     public boolean canCraft(BlockEntity blockEntity) {
         // Super checks if tank's current fluid level
@@ -85,21 +66,25 @@ public class GenericFluidRecipe extends RebornFluidRecipe {
     }
 
     /**
-     * Has enough energy boolean.
+     * Checks if the machine has enough energy to process the recipe
      *
-     * @param fuserBlockEntity the fuser block entity
-     * @return the boolean
+     * @param powerAcceptorBlockEntity the power accepting block entity
+     * @return true if can process the recipe at least for one turn. false if cannot.
      */
-    public boolean hasEnoughEnergy(BasePowerAcceptorBlockEntity fuserBlockEntity) {
-        return fuserBlockEntity.hasEnoughEnergy(getPower() * getTime());
+    @API(status = API.Status.STABLE)
+    public boolean hasEnoughEnergy(BasePowerAcceptorBlockEntity powerAcceptorBlockEntity) {
+        return powerAcceptorBlockEntity.hasEnoughEnergy(getPower() * getTime());
     }
 
     /**
-     * On craft boolean.
+     * Called when RebornCore performs a crafting operation.
      *
-     * @param blockEntity the block entity
-     * @return the boolean
+     * {@inheritDoc}
+     *
+     * @param blockEntity the machine's {@link BlockEntity)
+     * @return true if crafting, false if not
      */
+    @API(status = API.Status.STABLE)
     @Override
     public boolean onCraft(BlockEntity blockEntity) {
         // Super Is responsible for removing fluid.
@@ -120,15 +105,19 @@ public class GenericFluidRecipe extends RebornFluidRecipe {
             tankFluid.addAmount(recipeFluid.getAmount());
             return true;
         }
+
         return false;
     }
 
     /**
-     * Gets tank.
+     * Retrieve's tank from {@link BlockEntity}. Block entity must be an instance of {@link FluidMachineBlockEntityBase}
      *
-     * @param blockEntity the block entity
-     * @return the tank
+     * {@inheritDoc}
+     *
+     * @param blockEntity a {@link BlockEntity} that's an instance of {@link FluidMachineBlockEntityBase}
+     * @return the BlockEntity's {@link Tank} or null
      */
+    @API(status = API.Status.STABLE)
     @Nullable
     @Override
     public Tank getTank(BlockEntity blockEntity) {
@@ -136,27 +125,5 @@ public class GenericFluidRecipe extends RebornFluidRecipe {
             return ((FluidMachineBlockEntityBase) blockEntity).getTank();
 
         return null;
-    }
-
-    /**
-     * Gets group.
-     *
-     * @return the group
-     */
-    @SuppressWarnings("EmptyMethod")
-    @Override
-    public String getGroup() {
-        return super.getGroup();
-    }
-
-    /**
-     * Gets recipe kind icon.
-     *
-     * @return the recipe kind icon
-     */
-    @SuppressWarnings("EmptyMethod")
-    @Override
-    public ItemStack getRecipeKindIcon() {
-        return super.getRecipeKindIcon();
     }
 }

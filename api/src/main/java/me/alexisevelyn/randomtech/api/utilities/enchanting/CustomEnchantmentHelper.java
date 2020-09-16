@@ -6,14 +6,17 @@ import me.alexisevelyn.randomtech.api.items.tools.generic.*;
 import net.minecraft.enchantment.EnchantmentTarget;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.ItemStack;
+import org.apiguardian.api.API;
 
 /**
- * The type Custom enchantment helper.
+ * Helper class for my mixins {@link me.alexisevelyn.randomtech.api.mixin.enchanting.AnvilEnchantHelperMixin} and {@link me.alexisevelyn.randomtech.api.mixin.enchanting.TableEnchantHelperMixin}.
  */
+@API(status = API.Status.INTERNAL)
 public class CustomEnchantmentHelper {
     /**
-     * The enum Valid enchant.
+     * Enum for mixins {@link me.alexisevelyn.randomtech.api.mixin.enchanting.AnvilEnchantHelperMixin} and {@link me.alexisevelyn.randomtech.api.mixin.enchanting.TableEnchantHelperMixin} to determine how to handle enchanting an item.
      */
+    @API(status = API.Status.INTERNAL)
     public enum ValidEnchant {
         VANILLA,
         FALSE,
@@ -21,13 +24,17 @@ public class CustomEnchantmentHelper {
     }
 
     /**
-     * Is valid enchantment valid enchant.
+     * Determines if an enchantment should be modified by my mixins {@link me.alexisevelyn.randomtech.api.mixin.enchanting.AnvilEnchantHelperMixin} and {@link me.alexisevelyn.randomtech.api.mixin.enchanting.TableEnchantHelperMixin}.
      *
-     * @param itemStack the item stack
-     * @param target    the target
-     * @return the valid enchant
+     * Currently does not handle the enchants for {@link EnchantmentTarget#FISHING_ROD}, {@link EnchantmentTarget#TRIDENT}, {@link EnchantmentTarget#BOW}, {@link EnchantmentTarget#WEARABLE}, {@link EnchantmentTarget#CROSSBOW}, and {@link EnchantmentTarget#VANISHABLE}.
+     *
+     * The unhandled enchants default to {@link ValidEnchant#VANILLA}.
+     *
+     * @param itemStack the tool to enchant
+     * @param target    the target chosen by the enchantment in question
+     * @return {@link ValidEnchant#VANILLA} if Minecraft should handle the enchantment, {@link ValidEnchant#TRUE} if apply enchantment, {@link ValidEnchant#FALSE} if deny enchantment
      */
-    // I need to be able to tell whether or not to interfere with vanilla enchant mechanics, so I'm using an enum to have 3 possible outcomes instead of just 2.
+    @API(status = API.Status.INTERNAL)
     public static ValidEnchant isValidEnchantment(ItemStack itemStack, EnchantmentTarget target) {
         if (itemStack.getItem() instanceof EnergyHelper && target == EnchantmentTarget.BREAKABLE)
             // I use unbreaking to affect energy usage, so I'm allowing Unbreaking and Mending.

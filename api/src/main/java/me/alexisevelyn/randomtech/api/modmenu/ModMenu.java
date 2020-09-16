@@ -1,10 +1,14 @@
 package me.alexisevelyn.randomtech.api.modmenu;
 
 import io.github.prospector.modmenu.api.ModMenuApi;
+import org.apiguardian.api.API;
 
 /**
- * The type Mod menu.
+ * For adding mod menu config screen.
+ *
+ * Internal use only
  */
+@API(status = API.Status.INTERNAL)
 public class ModMenu implements ModMenuApi {
     // Intentionally Left Blank For Now
 

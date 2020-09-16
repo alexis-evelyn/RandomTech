@@ -24,7 +24,6 @@ public class FuserRecipeCrafter extends RecipeCrafter {
     /**
      * Update entity.
      */
-    @SuppressWarnings("EmptyMethod")
     @Override
     public void updateEntity() {
         super.updateEntity();
@@ -35,47 +34,5 @@ public class FuserRecipeCrafter extends RecipeCrafter {
         // Update Fuser on Current Progress
         ((FuserBlockEntity) blockEntity).setMaxRecipeTime(currentNeededTicks);
         ((FuserBlockEntity) blockEntity).setRemainingRecipeTime(currentTickTime);
-
-//        if (currentTickTime >= currentNeededTicks && canCraftAgain()) {
-////            System.out.println("Can Fill Tank with: " + genericFluidRecipe.getFluidInstance().getAmount());
-//            System.out.println("Attempt To Fill Tank: " + attemptAddFluidToTank(tank, genericFluidRecipe.getFluidInstance()));
-//        }
     }
-
-    /**
-     * Update current recipe.
-     */
-    @SuppressWarnings("EmptyMethod")
-    @Override
-    public void updateCurrentRecipe() {
-        super.updateCurrentRecipe();
-    }
-
-    /**
-     * Can craft again boolean.
-     *
-     * @return the boolean
-     */
-    @Override
-    public boolean canCraftAgain() {
-        return super.canCraftAgain();
-
-//        if (!super.canCraftAgain())
-//            return false;
-//
-//        // Current Recipe is always null?
-//        if (!(blockEntity instanceof FuserBlockEntity))
-//            return false;
-//
-//        tank = ((FuserBlockEntity) blockEntity).getTank();
-//
-//        if (tank == null)
-//            return false;
-//
-//        return canFillTank(tank, (GenericFluidRecipe) currentRecipe);
-    }
-
-//    public boolean canFillTank(Tank tank, GenericFluidRecipe genericFluidRecipe) {
-//        return tank.canInsertFluid(null, genericFluidRecipe.getFluidInstance().getFluid(), genericFluidRecipe.getFluidInstance().getAmount());
-//    }
 }

@@ -1,5 +1,6 @@
 package me.alexisevelyn.randomtech.api.utilities.pathfinding.dijkstra;
 
+import org.apiguardian.api.API;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -10,6 +11,7 @@ import java.util.LinkedList;
 /**
  * The type Vertex path.
  */
+@API(status = API.Status.EXPERIMENTAL)
 public class VertexPath implements Iterable<Vertex> {
     private final LinkedList<Vertex> path;
     private int currentIndex = 0; // Set to 0, so we can skip the first cable. If you need the first cable, grab it manually.

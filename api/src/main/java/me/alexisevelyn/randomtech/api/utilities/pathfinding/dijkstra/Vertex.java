@@ -1,8 +1,11 @@
 package me.alexisevelyn.randomtech.api.utilities.pathfinding.dijkstra;
 
+import org.apiguardian.api.API;
+
 /**
  * The type Vertex.
  */
+@API(status = API.Status.EXPERIMENTAL)
 public class Vertex {
     final private Object position;
     final private String name;

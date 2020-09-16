@@ -1,10 +1,13 @@
 package me.alexisevelyn.randomtech.api.utilities.pathfinding.dijkstra;
 
+import org.apiguardian.api.API;
+
 import java.util.List;
 
 /**
  * The type Graph.
  */
+@API(status = API.Status.EXPERIMENTAL)
 public class Graph {
     private final List<Vertex> vertexes;
     private final List<Edge> edges;

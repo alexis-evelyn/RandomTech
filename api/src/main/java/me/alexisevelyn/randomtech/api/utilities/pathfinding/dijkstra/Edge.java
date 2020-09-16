@@ -1,8 +1,11 @@
 package me.alexisevelyn.randomtech.api.utilities.pathfinding.dijkstra;
 
+import org.apiguardian.api.API;
+
 /**
  * The type Edge.
  */
+@API(status = API.Status.EXPERIMENTAL)
 public class Edge {
     private final String id;
     private final Vertex source;
