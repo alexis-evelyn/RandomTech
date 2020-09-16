@@ -25,9 +25,9 @@ jobs:
 
     steps:
     - name: Setup Self Runner Tools
-      if: ${{ !startsWith(env.GITHUB_ACTIONS, 'true') }}
+      if: ${{ !startsWith(GITHUB_ACTIONS, 'true') }}
       run: |
-        apt install zstd
+        sudo apt-get install zstd
     - name: Checkout Repo
       uses: actions/checkout@v2
     - name: Set up JDK 1.8
