@@ -155,6 +155,7 @@ curseforge {
 
             relations {
                 requiredDependency 'reborncore'
+                requiredDependency 'fabric-api'
                 embeddedLibrary 'randomtech-api'
                 embeddedLibrary 'auto-config-updated-api'
                 embeddedLibrary 'nbt-crafting'

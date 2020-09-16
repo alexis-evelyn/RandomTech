@@ -134,6 +134,7 @@ curseforge {
 
             relations {
                 requiredDependency 'reborncore'
+                requiredDependency 'fabric-api'
                 embeddedLibrary 'auto-config-updated-api'
                 optionalDependency 'modmenu'
             }
