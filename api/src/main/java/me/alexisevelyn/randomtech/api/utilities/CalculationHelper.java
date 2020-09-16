@@ -4,6 +4,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3i;
+import org.apiguardian.api.API;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -12,68 +13,74 @@ import org.jetbrains.annotations.Nullable;
  */
 public class CalculationHelper {
     /**
-     * Add vectors block pos.
+     * Adds two {@link Vec3i} together and returns a {@link BlockPos}
      *
      * @param firstVector  the first vector
      * @param secondVector the second vector
      * @return the block pos
      */
+    @API(status = API.Status.STABLE)
     public static BlockPos addVectors(@NotNull Vec3i firstVector, @NotNull Vec3i secondVector) {
         return new BlockPos(firstVector.getX() + secondVector.getX(), firstVector.getY() + secondVector.getY(), firstVector.getZ() + secondVector.getZ());
     }
 
     /**
-     * Subtract vectors block pos.
+     * Subtacts two {@link Vec3i} together and returns a {@link BlockPos}
      *
      * @param firstVector  the first vector
      * @param secondVector the second vector
      * @return the block pos
      */
+    @API(status = API.Status.STABLE)
     public static BlockPos subtractVectors(@NotNull Vec3i firstVector, @NotNull Vec3i secondVector) {
         return new BlockPos(firstVector.getX() - secondVector.getX(), firstVector.getY() - secondVector.getY(), firstVector.getZ() - secondVector.getZ());
     }
 
     /**
-     * Multiply vectors block pos.
+     * Multiplies two {@link Vec3i} together and returns a {@link BlockPos}
      *
      * @param firstVector  the first vector
      * @param secondVector the second vector
      * @return the block pos
      */
+    @API(status = API.Status.STABLE)
     public static BlockPos multiplyVectors(@NotNull Vec3i firstVector, @NotNull Vec3i secondVector) {
         return new BlockPos(firstVector.getX() * secondVector.getX(), firstVector.getY() * secondVector.getY(), firstVector.getZ() * secondVector.getZ());
     }
 
     /**
-     * Divide vectors block pos.
+     * Divides two {@link Vec3i} together and returns a {@link BlockPos}
      *
      * @param firstVector  the first vector
      * @param secondVector the second vector
      * @return the block pos
      */
+    @API(status = API.Status.STABLE)
     public static BlockPos divideVectors(@NotNull Vec3i firstVector, @NotNull Vec3i secondVector) {
         return new BlockPos(firstVector.getX() / secondVector.getX(), firstVector.getY() / secondVector.getY(), firstVector.getZ() / secondVector.getZ());
     }
 
     /**
-     * Distance vectors double.
+     * Returns the absolute distance between two {@link Vec3i} and returns the distance as a double
      *
      * @param firstVector  the first vector
      * @param secondVector the second vector
-     * @return the double
+     * @return the distance in blocks
      */
+    @API(status = API.Status.STABLE)
     public static double distanceVectors(@NotNull Vec3i firstVector, @NotNull Vec3i secondVector) {
         BlockPos subtractedVectors = subtractVectors(firstVector, secondVector);
         return MathHelper.abs(subtractedVectors.getX()) + MathHelper.abs(subtractedVectors.getY()) + MathHelper.abs(subtractedVectors.getZ());
     }
 
     /**
-     * Gets direction.
+     * Returns the direction the second {@link Vec3i} is from the first {@link Vec3i}
      *
      * @param firstVector The vector of the block you are checking from
      * @param secondVector The vector of the block you are checking
      * @return the direction
      */
+    @API(status = API.Status.STABLE)
     @Nullable
     public static Direction getDirection(@NotNull Vec3i firstVector, @NotNull Vec3i secondVector) {
         Vec3i result = subtractVectors(secondVector, firstVector);
@@ -99,7 +106,19 @@ public class CalculationHelper {
         return Direction.fromVector(result.getX(), result.getY(), result.getZ());
     }
 
-    // Formula Pulled From: https://stackoverflow.com/a/929107/6828099
+    /**
+     * Takes two ranges in the form input and output as well as the current input and returns the output calculated from the current input
+     *
+     * Formula Pulled From: https://stackoverflow.com/a/929107/6828099
+     *
+     * @param currentInput The current input from inside input range
+     * @param minInput The minimum point of the input range (inclusive)
+     * @param maxInput The maximum point of the input range (inclusive)
+     * @param minOutput The minimum point of the output range (inclusive)
+     * @param maxOutput The maximum point of the output range (inclusive)
+     * @return The corresponding output within the output range
+     */
+    @API(status = API.Status.STABLE)
     public static double proportionCalculator(double currentInput, double minInput, double maxInput, double minOutput, double maxOutput) {
         return (((currentInput - minInput) * maxOutput) / maxInput) + minOutput;
     }

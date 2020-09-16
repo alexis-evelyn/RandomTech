@@ -1,65 +1,80 @@
 package me.alexisevelyn.randomtech.api.utilities;
 
+import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
+import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.EntityType;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.BlockView;
+import org.apiguardian.api.API;
 
 /**
- * The type Generic block helper.
+ * Some helper methods when creating a block using {@link FabricBlockSettings}
  */
 public class GenericBlockHelper {
-    // Entity
-
     /**
-     * Always boolean.
+     * Mark some value as always true.
      *
-     * @param blockState the block state
-     * @param blockView  the block view
-     * @param blockPos   the block pos
-     * @param entityType the entity type
-     * @return the boolean
+     * Used in {@link FabricBlockSettings#allowsSpawning(AbstractBlock.TypedContextPredicate)}
+     *
+     * Internally calls {@link #always(BlockState, BlockView, BlockPos)}
+     *
+     * @param blockState the block's BlockState
+     * @param blockView  the world the block is currently in
+     * @param blockPos   the block's position in the world
+     * @param entityType the type of entity in question
+     * @return true
      */
+    @API(status = API.Status.STABLE)
     public static boolean always(BlockState blockState, BlockView blockView, BlockPos blockPos, EntityType<?> entityType) {
         return always(blockState, blockView, blockPos);
     }
 
     /**
-     * Never boolean.
+     * Mark some value as always false.
      *
-     * @param blockState the block state
-     * @param blockView  the block view
-     * @param blockPos   the block pos
-     * @param entityType the entity type
-     * @return the boolean
+     * Used in {@link FabricBlockSettings#allowsSpawning(AbstractBlock.TypedContextPredicate)}
+     *
+     * Internally calls {@link #never(BlockState, BlockView, BlockPos)}
+     *
+     * @param blockState the block's BlockState
+     * @param blockView  the world the block is currently in
+     * @param blockPos   the block's position in the world
+     * @param entityType the type of entity in question
+     * @return false
      */
+    @API(status = API.Status.STABLE)
     public static boolean never(BlockState blockState, BlockView blockView, BlockPos blockPos, EntityType<?> entityType) {
         return never(blockState, blockView, blockPos);
     }
 
-    // No Entity
-
     /**
-     * Always boolean.
+     * Mark some value as always true.
      *
-     * @param blockState the block state
-     * @param blockView  the block view
-     * @param blockPos   the block pos
-     * @return the boolean
+     * Used in {@link FabricBlockSettings#solidBlock(AbstractBlock.ContextPredicate)}, {@link FabricBlockSettings#suffocates(AbstractBlock.ContextPredicate)}, and {@link FabricBlockSettings#blockVision(AbstractBlock.ContextPredicate)}
+     *
+     * @param blockState the block's BlockState
+     * @param blockView  the world the block is currently in
+     * @param blockPos   the block's position in the world
+     * @return true
      */
+    @API(status = API.Status.STABLE)
     @SuppressWarnings("SameReturnValue")
     public static boolean always(BlockState blockState, BlockView blockView, BlockPos blockPos) {
         return true;
     }
 
     /**
-     * Never boolean.
+     * Mark some value as always false.
      *
-     * @param blockState the block state
-     * @param blockView  the block view
-     * @param blockPos   the block pos
-     * @return the boolean
+     * Used in {@link FabricBlockSettings#solidBlock(AbstractBlock.ContextPredicate)}, {@link FabricBlockSettings#suffocates(AbstractBlock.ContextPredicate)}, and {@link FabricBlockSettings#blockVision(AbstractBlock.ContextPredicate)}
+     *
+     * @param blockState the block's BlockState
+     * @param blockView  the world the block is currently in
+     * @param blockPos   the block's position in the world
+     * @return false
      */
+    @API(status = API.Status.STABLE)
     @SuppressWarnings("SameReturnValue")
     public static boolean never(BlockState blockState, BlockView blockView, BlockPos blockPos) {
         return false;
