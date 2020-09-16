@@ -24,7 +24,12 @@ jobs:
       ENABLE_PUBLISHING: ${{ secrets.ENABLE_PUBLISHING }}
 
     steps:
-    - uses: actions/checkout@v2
+    - name: Setup Self Runner Tools
+      if: ${{ !startsWith(env.GITHUB_ACTIONS, 'true') }}
+      run: |
+        apt install zstd
+    - name: Checkout Repo
+      uses: actions/checkout@v2
     - name: Set up JDK 1.8
       uses: actions/setup-java@v1
       with:
@@ -88,7 +93,7 @@ jobs:
         echo "Version: '$VERSION' - API: '$API_VERSION' - RandomTech: '$RANDOMTECH_VERSION'"
     - name: Upload Compiled Mods to Github Actions For Review
       uses: actions/upload-artifact@v2
-      if: env.GITHUB_ACTIONS
+      if: startsWith(env.GITHUB_ACTIONS, 'true')
       with:
         name: Compiled-Mods
         path: |
@@ -128,7 +133,7 @@ jobs:
         issueLineLabels: "ALL"
     - name: Upload Generated Changelog For Review
       uses: actions/upload-artifact@v2
-      if: env.GITHUB_ACTIONS
+      if: startsWith(env.GITHUB_ACTIONS, 'true')
       with:
         name: Generated-Changelog
         path: ${{ github.workspace }}/CHANGELOG.md
