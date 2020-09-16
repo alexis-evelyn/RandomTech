@@ -12,17 +12,21 @@ import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import org.apiguardian.api.API;
 
 /**
  * The type Mining manager.
  */
 public class MiningManagerHelper {
     /**
-     * Can mine boolean.
+     * Checks if the tool is able to mine the block.
      *
-     * @param context the context
-     * @return the boolean
+     * Internally calls {@link #canMine(PlayerEntity, ItemStack, BlockState, World, BlockPos)}.
+     *
+     * @param context the context (ItemUsageContext)
+     * @return true if can mine, false if cannot mine
      */
+    @API(status = API.Status.STABLE)
     public static boolean canMine(ItemUsageContext context) {
         PlayerEntity playerEntity = context.getPlayer();
         ItemStack itemStack = context.getStack();
@@ -38,15 +42,19 @@ public class MiningManagerHelper {
     }
 
     /**
-     * Can mine boolean.
+     * Checks if the tool is able to mine the block.
      *
-     * @param playerEntity  the player entity
-     * @param toolItemStack the tool item stack
-     * @param blockState    the block state
-     * @param world         the world
-     * @param blockPos      the block pos
-     * @return the boolean
+     * NOTE: Currently cannot tell if block needs to be silk touched or if it's the `correct` tool for the job.
+     * It can only determine if the block is able to be dropped at all under non-silk touch conditions.
+     *
+     * @param playerEntity  the player that wants to mine
+     * @param toolItemStack the ItemStack of the tool in question
+     * @param blockState    the queried block's BlockState
+     * @param world         the world the player is located in
+     * @param blockPos      the queried block's position in the world
+     * @return true if can mine, false if cannot mine
      */
+    @API(status = API.Status.STABLE)
     public static boolean canMine(PlayerEntity playerEntity, ItemStack toolItemStack, BlockState blockState, World world, BlockPos blockPos) {
         boolean canMine = playerEntity.isUsingEffectiveTool(blockState);
         Item item = toolItemStack.getItem();
@@ -66,16 +74,18 @@ public class MiningManagerHelper {
     }
 
     /**
-     * Check unbreakable block boolean.
+     * Checks if an unbreakable block can be broken with the tool in question.
+     *
+     * This requires the tool to implement the {@link BreakableBlocksHelper}
      *
      * @param playerEntity  the player entity
      * @param toolItemStack the tool item stack
      * @param blockState    the block state
      * @param world         the world
      * @param blockPos      the block pos
-     * @return the boolean
+     * @return false if normally breakable block or if the tool is not a tool meant for breaking unbreakable blocks. Also false if tool cannot mine particular block. true if tool can mine unbreakable block.
      */
-    // Checks if the block can be broken by the tool. Requires special override in the tool's class.
+    @API(status = API.Status.EXPERIMENTAL)
     public static boolean checkUnbreakableBlock(PlayerEntity playerEntity, ItemStack toolItemStack, BlockState blockState, World world, BlockPos blockPos) {
         if (blockState.getHardness(world, blockPos) >= 0)
             return false;
@@ -88,11 +98,14 @@ public class MiningManagerHelper {
     }
 
     /**
-     * Needs silk touch int.
+     * Returns an integer that is the level of silk touch required to mine a block.
      *
-     * @param context the context
-     * @return the int
+     * Internally calls {@link #needsSilkTouch(BlockState, World, BlockPos)}
+     *
+     * @param context the ItemUsageContext
+     * @return the level of silk touch required to mine the queried block
      */
+    @API(status = API.Status.EXPERIMENTAL)
     public static int needsSilkTouch(ItemUsageContext context) {
         World world = context.getWorld();
         BlockPos blockPos = context.getBlockPos();
@@ -102,14 +115,16 @@ public class MiningManagerHelper {
     }
 
     /**
-     * Needs silk touch int.
+     * Returns an integer that is the level of silk touch required to mine a block.
      *
-     * @param blockState the block state
-     * @param world      the world
-     * @param blockPos   the block pos
-     * @return the int
+     * Currently not implemented.
+     *
+     * @param blockState the block's BlockState
+     * @param world      the world the block is located in
+     * @param blockPos   the position in the world the block is located in
+     * @return the level of silk touch required to mine the queried block
      */
-    // This is an integer so I can return the level of silk touch needed
+    @API(status = API.Status.EXPERIMENTAL)
     public static int needsSilkTouch(BlockState blockState, World world, BlockPos blockPos) {
 //        Identifier blockLootTableID = blockState.getBlock().getLootTableId();
 //        LootPoolEntryType lootPoolEntryType = Registry.LOOT_POOL_ENTRY_TYPE.get(blockLootTableID);
@@ -119,12 +134,12 @@ public class MiningManagerHelper {
     }
 
     /**
-     * Tool has silk touch short.
+     * Returns the level of silk touch on the queried tool
      *
-     * @param itemStack the item stack
-     * @return the short
+     * @param itemStack the tool's ItemStack
+     * @return the level of silk touch on the tool
      */
-    // This is an integer so I can return the level of silk touch on the tool
+    @API(status = API.Status.EXPERIMENTAL)
     public static short toolHasSilkTouch(ItemStack itemStack) {
         // Enchantments: [{lvl: 5s, id: "minecraft:efficiency"}, {lvl: 1s, id: "minecraft:silk_touch"}]
 

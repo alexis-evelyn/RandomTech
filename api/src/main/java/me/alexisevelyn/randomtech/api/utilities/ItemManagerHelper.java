@@ -3,15 +3,19 @@ package me.alexisevelyn.randomtech.api.utilities;
 import me.alexisevelyn.randomtech.api.items.energy.EnergyHelper;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.text.LiteralText;
 import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.collection.DefaultedList;
+import net.minecraft.world.World;
+import org.apiguardian.api.API;
 import reborncore.common.powerSystem.PowerSystem;
 import team.reborn.energy.Energy;
 import team.reborn.energy.EnergyHandler;
@@ -24,11 +28,14 @@ import java.util.List;
  */
 public class ItemManagerHelper {
     /**
-     * Init powered items.
+     * Creates a charged/discharged variant of powered items
      *
-     * @param item     the item
-     * @param itemList the item list
+     * NOTE: Must be called from an override of {@link Item#appendStacks(ItemGroup, DefaultedList)}
+     *
+     * @param item     the powered item
+     * @param itemList the provided item list
      */
+    @API(status = API.Status.STABLE)
     public static void initPoweredItems(Item item, DefaultedList<ItemStack> itemList) {
         // Ensure An Energy Based Item
         if (!(item instanceof EnergyHolder))
@@ -38,6 +45,7 @@ public class ItemManagerHelper {
         ItemStack uncharged = new ItemStack(item);
         ItemStack charged = new ItemStack(item);
 
+        Energy.of(uncharged).set(0.0);
         Energy.of(charged).set(Energy.of(charged).getMaxStored());
 
         itemList.add(uncharged);
@@ -45,14 +53,14 @@ public class ItemManagerHelper {
     }
 
     /**
-     * Calculate current power for conversion double.
+     * Converts vanilla tool with durability to powered tool with equivalent power (percentage-wise)
      *
-     * @param oldItemStack the old item stack
-     * @param newItemStack the new item stack
-     * @return the double
+     * @param oldItemStack the durability based tool
+     * @param newItemStack the power based tool (either {@link EnergyHelper} or {@link EnergyHolder})
+     * @return the amount of power to set for the powered tool
      */
-    // This converts the old Item Stack's durability to energy based on the current durability, max durability, and max energy capacity.
-    protected static double calculateCurrentPowerForConversion(ItemStack oldItemStack, ItemStack newItemStack) {
+    @API(status = API.Status.INTERNAL)
+    private static double calculateCurrentPowerForConversion(ItemStack oldItemStack, ItemStack newItemStack) {
          EnergyHandler energyHandler = Energy.of(newItemStack);
          double oldDurability = oldItemStack.getMaxDamage() - oldItemStack.getDamage();
 
@@ -60,19 +68,20 @@ public class ItemManagerHelper {
              EnergyHelper customEnergyItem = (EnergyHelper) newItemStack.getItem();
 
              return (oldDurability * customEnergyItem.getMaxEnergy(newItemStack)) / oldItemStack.getMaxDamage();
-        }
+         }
 
          return (oldDurability * energyHandler.getMaxStored()) / oldItemStack.getMaxDamage();
     }
 
     /**
-     * Convert stack to energy item stack item stack.
+     * Converts vanilla tool with durability to powered tool with equivalent power (percentage-wise)
      *
-     * @param oldStack the old stack
-     * @param newStack the new stack
-     * @param tag      the tag
-     * @return the item stack
+     * @param oldStack the durability based tool
+     * @param newStack the power based tool (either {@link EnergyHelper} or {@link EnergyHolder})
+     * @param tag      the durability based tool's {@link CompoundTag}
+     * @return the powered tool's {@link ItemStack} with the energy set to the equivalent of the durability
      */
+    @API(status = API.Status.STABLE)
     public static ItemStack convertStackToEnergyItemStack(ItemStack oldStack, ItemStack newStack, CompoundTag tag) {
         // Copy over existing NBT Data such as Enchants
         if (tag != null) {
@@ -82,23 +91,22 @@ public class ItemManagerHelper {
             newStack.setTag(oldTag);
         }
 
-        if (!(oldStack.getItem() instanceof EnergyHolder))
-            // Keep Durability of Armor and Tools as Charge By Default When First Crafted
+        if (!(oldStack.getItem() instanceof EnergyHolder) && newStack.getItem() instanceof EnergyHolder)
+            // Calculate's the equivalent power level of the tool from the durability
             Energy.of(newStack).set(calculateCurrentPowerForConversion(oldStack, newStack));
-
-        // Sets item model to discharged state if crafted while dead
-//        if (Energy.of(newStack).getEnergy() == 0)
-//            setDischargedModelData(newStack, false);
 
         return newStack;
     }
 
     /**
-     * Power level tooltip.
+     * Append energy level tooltip in similar fashion to vanilla's durability tooltip
      *
-     * @param itemStack the item stack
-     * @param tooltip   the tooltip
+     * NOTE: Must be called from an override of {@link Item#appendTooltip(ItemStack, World, List, TooltipContext)}
+     *
+     * @param itemStack the item stack that the tooltip will be applied to (Item must be an instance of {@link EnergyHelper}
+     * @param tooltip   the provided tooltip
      */
+    @API(status = API.Status.STABLE)
     @Environment(EnvType.CLIENT)
     public static void powerLevelTooltip(ItemStack itemStack, List<Text> tooltip) {
         Item item = itemStack.getItem();
@@ -122,20 +130,26 @@ public class ItemManagerHelper {
     }
 
     /**
-     * Use energy.
+     * Helper method to aid in using energy of the item in question.
      *
-     * @param livingEntity the living entity
-     * @param stack        the stack
-     * @param cost         the cost
+     * Automatically handles using energy greater than the total energy left (by depleting the energy to 0)
+     * Also ensures the energy is not spent while the player is in creative mode.
+     *
+     * @param livingEntity the entity using the item in question
+     * @param stack        the ItemStack of the item in question (Item must be an instance of {@link EnergyHolder}
+     * @param cost         the amount of energy to consume
      */
-    // This method exists to allow energy to not be used if the player is in Creative mode
-    public static void useEnergy(LivingEntity livingEntity, ItemStack stack, int cost) {
+    public static void useEnergy(LivingEntity livingEntity, ItemStack stack, double cost) {
         if (livingEntity instanceof PlayerEntity) {
             PlayerEntity playerEntity = (PlayerEntity) livingEntity;
 
             if (playerEntity.isCreative())
                 return;
         }
+
+        // Check to make sure item is an energy based item
+        if (!(stack.getItem() instanceof EnergyHolder))
+            return;
 
         // If more than max amount of energy, just set to rest of energy level
         EnergyHandler currentEnergy = Energy.of(stack);

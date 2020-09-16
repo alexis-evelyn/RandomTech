@@ -1,10 +1,12 @@
 package me.alexisevelyn.randomtech.api.utilities;
 
 import net.minecraft.item.ToolMaterials;
+import org.apiguardian.api.API;
 
 /**
  * The enum Mining level.
  */
+@API(status = API.Status.INTERNAL)
 public enum MiningLevel {
     WOOD(ToolMaterials.WOOD.getMiningLevel()),
     STONE(ToolMaterials.STONE.getMiningLevel()),
@@ -21,6 +23,7 @@ public enum MiningLevel {
      *
      * @param id the id
      */
+    @API(status = API.Status.INTERNAL)
     MiningLevel(int id) {
         this.miningLevel = id;
     }
@@ -30,6 +33,7 @@ public enum MiningLevel {
      *
      * @return the value
      */
+    @API(status = API.Status.INTERNAL)
     public int getValue() {
         return miningLevel;
     }
