@@ -25,7 +25,7 @@ jobs:
       IS_GITHUB_ACTIONS: ${{ secrets.IS_GITHUB_ACTIONS }}
 
     steps:
-    - name: Setup Self Runner Tools (Currently Does Not Execute On Self Hosted Runners)
+    - name: Setup Self Runner Tools
       if: ${{ !startsWith(env.IS_GITHUB_ACTIONS, 'is_github_actions') }}
       run: |
         echo W: "$GITHUB_ACTIONS"
