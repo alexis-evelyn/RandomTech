@@ -28,7 +28,6 @@ jobs:
     - name: Setup Self-Hosted Runner Tools
       if: ${{ !startsWith(env.IS_GITHUB_ACTIONS, 'is_github_actions') }}
       run: |
-        echo W: "$GITHUB_ACTIONS"
         apt-get update
         apt-get install zstd
     - name: Checkout Repo
