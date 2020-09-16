@@ -22,12 +22,13 @@ jobs:
     runs-on: ubuntu-latest
     env:
       ENABLE_PUBLISHING: ${{ secrets.ENABLE_PUBLISHING }}
-      GITHUB_ACTIONS: $GITHUB_ACTIONS
+      IS_GITHUB_ACTIONS: ${{ secrets.IS_GITHUB_ACTIONS }}
 
     steps:
     - name: Setup Self Runner Tools (Currently Does Not Execute On Self Hosted Runners)
-      if: ${{ !env.GITHUB_ACTIONS }}
+      if: ${{ !startsWith(env.IS_GITHUB_ACTIONS, 'is_github_actions') }}
       run: |
+        echo W: "$GITHUB_ACTIONS"
         apt-get update
         apt-get install zstd
     - name: Checkout Repo
@@ -95,7 +96,7 @@ jobs:
         echo "Version: '$VERSION' - API: '$API_VERSION' - RandomTech: '$RANDOMTECH_VERSION'"
     - name: Upload Compiled Mods to Github Actions For Review
       uses: actions/upload-artifact@v2
-      if: ${{ env.GITHUB_ACTIONS }}
+      if: ${{ startsWith(env.IS_GITHUB_ACTIONS, 'is_github_actions') }}
       with:
         name: Compiled-Mods
         path: |
@@ -135,7 +136,7 @@ jobs:
         issueLineLabels: "ALL"
     - name: Upload Generated Changelog For Review
       uses: actions/upload-artifact@v2
-      if: ${{ env.GITHUB_ACTIONS }}
+      if: ${{ startsWith(env.IS_GITHUB_ACTIONS, 'is_github_actions') }}
       with:
         name: Generated-Changelog
         path: ${{ github.workspace }}/CHANGELOG.md
