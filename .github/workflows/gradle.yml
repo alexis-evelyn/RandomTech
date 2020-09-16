@@ -22,10 +22,11 @@ jobs:
     runs-on: ubuntu-latest
     env:
       ENABLE_PUBLISHING: ${{ secrets.ENABLE_PUBLISHING }}
+      GITHUB_ACTIONS: ${{ env.ENABLE_PUBLISHING }}
 
     steps:
     - name: Setup Self Runner Tools
-      if: ${{ !startsWith(GITHUB_ACTIONS, 'true') }}
+      if: ${{ !startsWith(env.GITHUB_ACTIONS, 'true') }}
       run: |
         sudo apt-get install zstd
     - name: Checkout Repo
