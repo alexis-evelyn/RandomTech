@@ -61,8 +61,6 @@ jobs:
     - name: Build Only
       if: ${{ !startsWith(env.ENABLE_PUBLISHING, 'publishing_enabled') }}
       run: ./gradlew build -g build/.gradle
-      env:
-        CURSEFORGE_API_KEY: ${{ secrets.CURSEFORGE_API_KEY }} # Cause for some reason the CurseGradle plugin evaluates here too
     - name: Build And Publish To Sonatype
       if: startsWith(env.ENABLE_PUBLISHING, 'publishing_enabled')
       run: ./gradlew publish -g build/.gradle
@@ -71,7 +69,6 @@ jobs:
         BINTRAY_GPG_PASSWORD: ${{ secrets.BINTRAY_GPG_PASSWORD }}
         SONATYPE_USERNAME: ${{ secrets.SONATYPE_USERNAME }}
         SONATYPE_PASSWORD: ${{ secrets.SONATYPE_PASSWORD }}
-        CURSEFORGE_API_KEY: ${{ secrets.CURSEFORGE_API_KEY }} # Cause for some reason the CurseGradle plugin evaluates here too
       continue-on-error: false
     - name: Setup Vars For Release Booleans and Version Info
       run: |
@@ -123,7 +120,6 @@ jobs:
       env:
         SONATYPE_USERNAME: ${{ secrets.SONATYPE_USERNAME }}
         SONATYPE_PASSWORD: ${{ secrets.SONATYPE_PASSWORD }}
-        CURSEFORGE_API_KEY: ${{ secrets.CURSEFORGE_API_KEY }} # Cause for some reason the CurseGradle plugin evaluates here too
     - name: Generate Changelog
       uses: heinrichreimer/github-changelog-generator-action@v2.1.1
       with: # https://github.com/heinrichreimer/action-github-changelog-generator/blob/master/README.md and https://github.com/github-changelog-generator/github-changelog-generator/blob/master/README.md

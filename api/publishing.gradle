@@ -103,9 +103,15 @@ signing {
 curseforge {
     // Secret API Key for CurseForge
     if (System.getenv('CURSEFORGE_API_KEY') != null) {
+        // For Github Actions
         apiKey = System.getenv('CURSEFORGE_API_KEY')
-    } else {
+    } else if (hasProperty('CURSEFORGE_API_KEY')) {
+        // For Local Development
         apiKey = findProperty('CURSEFORGE_API_KEY')
+    } else {
+        // This is to get CurseGradle to shut up about the API Key missing if you are not using a CurseGradle task
+        // Issue Report: https://github.com/matthewprenger/CurseGradle/issues/32
+        apiKey = "DUMMY"
     }
 
     // API - https://www.curseforge.com/minecraft/mc-mods/randomtech-api
