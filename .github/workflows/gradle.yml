@@ -2,6 +2,7 @@
 # For more information see: https://help.github.com/actions/language-and-framework-guides/building-and-testing-java-with-gradle
 # Useful Debugging Info: https://docs.github.com/en/actions/reference/workflow-commands-for-github-actions#setting-a-debug-message
 # Run Actions Locally: https://github.com/nektos/act
+# VirusTotal API Usage Permission - https://imgur.com/a/rH9VhGm
 
 name: Build Mod
 
