@@ -88,7 +88,7 @@ jobs:
         echo "Version: '$VERSION' - API: '$API_VERSION' - RandomTech: '$RANDOMTECH_VERSION'"
     - name: Upload Compiled Mods to Github Actions For Review
       uses: actions/upload-artifact@v2
-      if: startsWith(env.ENABLE_PUBLISHING, 'publishing_enabled')
+      if: $GITHUB_ACTIONS
       with:
         name: Compiled-Mods
         path: |
@@ -128,7 +128,7 @@ jobs:
         issueLineLabels: "ALL"
     - name: Upload Generated Changelog For Review
       uses: actions/upload-artifact@v2
-      if: startsWith(env.ENABLE_PUBLISHING, 'publishing_enabled')
+      if: $$GITHUB_ACTIONS
       with:
         name: Generated-Changelog
         path: ${{ github.workspace }}/CHANGELOG.md
