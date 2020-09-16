@@ -28,7 +28,6 @@ jobs:
     - name: Setup Self Runner Tools
       if: ${{ !env.GITHUB_ACTIONS }}
       run: |
-        echo What Does The Variable Look Like: "$GITHUB_ACTIONS"
         sudo apt-get install zstd
     - name: Checkout Repo
       uses: actions/checkout@v2
@@ -95,7 +94,7 @@ jobs:
         echo "Version: '$VERSION' - API: '$API_VERSION' - RandomTech: '$RANDOMTECH_VERSION'"
     - name: Upload Compiled Mods to Github Actions For Review
       uses: actions/upload-artifact@v2
-      if: startsWith(env.GITHUB_ACTIONS, 'true')
+      if: ${{ env.GITHUB_ACTIONS }}
       with:
         name: Compiled-Mods
         path: |
@@ -135,7 +134,7 @@ jobs:
         issueLineLabels: "ALL"
     - name: Upload Generated Changelog For Review
       uses: actions/upload-artifact@v2
-      if: startsWith(env.GITHUB_ACTIONS, 'true')
+      if: ${{ env.GITHUB_ACTIONS }}
       with:
         name: Generated-Changelog
         path: ${{ github.workspace }}/CHANGELOG.md
