@@ -39,6 +39,7 @@ jobs:
         java-version: 1.8
     - name: Gradle Setup Cache
       uses: actions/cache@v2
+      if: ${{ startsWith(env.IS_GITHUB_ACTIONS, 'is_github_actions') }}
       with:
         path: |
           .gradle
@@ -47,6 +48,7 @@ jobs:
         restore-keys: ${{ runner.os }}-setup-cache-
     - name: Gradle Build Cache
       uses: actions/cache@v2
+      if: ${{ startsWith(env.IS_GITHUB_ACTIONS, 'is_github_actions') }}
       with:
         path: |
           build
