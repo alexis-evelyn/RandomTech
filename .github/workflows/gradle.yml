@@ -22,7 +22,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       ENABLE_PUBLISHING: ${{ secrets.ENABLE_PUBLISHING }}
-      GITHUB_ACTIONS: ${{ env.ENABLE_PUBLISHING }}
+      GITHUB_ACTIONS: ${{ GITHUB_ACTIONS }}
 
     steps:
     - name: Setup Self Runner Tools
