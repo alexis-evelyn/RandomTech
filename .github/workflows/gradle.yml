@@ -28,6 +28,7 @@ jobs:
     - name: Setup Self Runner Tools
       if: ${{ !startsWith(env.GITHUB_ACTIONS, 'true') }}
       run: |
+        echo What Does The Variable Look Like: "$GITHUB_ACTIONS"
         sudo apt-get install zstd
     - name: Checkout Repo
       uses: actions/checkout@v2
