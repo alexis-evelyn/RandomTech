@@ -53,6 +53,27 @@ jobs:
       with:
         languages: ${{ matrix.language }}
 
+    - name: Gradle Setup Cache
+      uses: actions/cache@v2
+      if: ${{ startsWith(env.IS_GITHUB_ACTIONS, 'is_github_actions') }}
+      with:
+        path: |
+          ~/.gradle
+        key: ${{ runner.os }}-setup-cache-codeql-${{ hashFiles('**/*.gradle*') }}
+        restore-keys: ${{ runner.os }}-setup-cache-codeql-
+
+    - name: Gradle Build Cache
+      uses: actions/cache@v2
+      if: ${{ startsWith(env.IS_GITHUB_ACTIONS, 'is_github_actions') }}
+      with:
+        path: |
+          build
+          api/build
+          !build/libs
+          !api/build/libs
+        key: ${{ runner.os }}-build-cache-codeql-${{ hashFiles('**/*.java*') }}
+        restore-keys: ${{ runner.os }}-build-cache-codeql-
+
     # Autobuild attempts to build any compiled languages  (C/C++, C#, or Java).
     # If this step fails, then you should remove it and run the build manually (see below)
     - name: Build Mod
