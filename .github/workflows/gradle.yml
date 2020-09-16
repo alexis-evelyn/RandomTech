@@ -15,7 +15,7 @@ on:
       - '.github/workflows/codeql-analysis.yml'
 
 jobs:
-  build:
+  publish:
 
     runs-on: ubuntu-latest
     env:
