@@ -56,13 +56,17 @@ public abstract class BreakableBlocksMixin {
 	@Shadow @Final public abstract Identifier getLootTableId();
 
 	/**
-	 * Calc block breaking delta.
+	 * Vanilla method for calculating how quickly to mine a block.
+	 * <br><br>
 	 *
-	 * @param state  the state
-	 * @param player the player
-	 * @param world  the world
-	 * @param pos    the pos
-	 * @param info   the info
+	 * We override this method to handle the mining animation for dead tools as well as allowing tools to mine bedrock if they implement {@link BreakableBlocksHelper}.
+	 * <br><br>
+	 *
+	 * @param state  the block's {@link BlockState}.
+	 * @param player the player performing the mining.
+	 * @param world  the world the block is being mined in.
+	 * @param pos    the position of the block in the world.
+	 * @param info   Used to modify the return type (See {@link CallbackInfoReturnable}).
 	 */
 	@API(status = API.Status.INTERNAL)
 	@Inject(at = @At("INVOKE"), method = "calcBlockBreakingDelta(Lnet/minecraft/block/BlockState;Lnet/minecraft/entity/player/PlayerEntity;Lnet/minecraft/world/BlockView;Lnet/minecraft/util/math/BlockPos;)F", cancellable = true)
@@ -102,11 +106,15 @@ public abstract class BreakableBlocksMixin {
 	}
 
 	/**
-	 * Disable animation for dead tool boolean.
+	 * Determines if a {@link GenericPoweredTool} should have their mining animation disabled.
 	 *
-	 * @param itemStack the item stack
-	 * @return the boolean
+	 * Internally calls {@link GenericPoweredTool#isUsable(ItemStack)}.
+	 * <br><br>
+	 *
+	 * @param itemStack the {@link ItemStack} of the {@link GenericPoweredTool}.
+	 * @return true if the mining animation should be disabled. false if the mining animation should be left alone.
 	 */
+	@API(status = API.Status.INTERNAL)
 	public boolean disableAnimationForDeadTool(ItemStack itemStack) {
 		if (itemStack.getItem() instanceof GenericPoweredTool) {
 			GenericPoweredTool genericPoweredTool = (GenericPoweredTool) itemStack.getItem();
@@ -117,11 +125,13 @@ public abstract class BreakableBlocksMixin {
 	}
 
 	/**
-	 * Is denied block boolean.
+	 * Hardcoded denied block types. Includes {@link CommandBlock}, {@link StructureBlock}, {@link JigsawBlock}.
+	 * <br><br>
 	 *
-	 * @param block the block
-	 * @return the boolean
+	 * @param block the {@link Block} being mined.
+	 * @return true if should be denied mining, false if should allow mining.
 	 */
+	@API(status = API.Status.INTERNAL)
 	public boolean isDeniedBlock(Block block) {
 		// This is to remove the visual indication of denied blocks which shouldn't be broken in survival.
 		// This would've been blocked anyway later on in the code, but I'd like to remove the visual indication of mining the block
@@ -129,13 +139,17 @@ public abstract class BreakableBlocksMixin {
 	}
 
 	/**
-	 * Gets dropped stacks.
+	 * Vanilla method for retrieving the {@link ItemStack} to drop.
 	 *
-	 * @param state   the state
-	 * @param builder the builder
-	 * @param info    the info
+	 * We override this method to allow assigning drops to blocks that are marked as {@link LootTables#EMPTY}.
+	 * <br><br>
+	 *
+	 * @param state   the block's {@link BlockState}.
+	 * @param builder Used to get the context of the drop. For example, {@link LootContext.Builder#getLuck()}.
+	 * @param info    Used to modify the return type (See {@link CallbackInfoReturnable}).
 	 */
     // Modifies Block Drops
+	@API(status = API.Status.INTERNAL)
 	@Inject(at = @At("INVOKE"), method = "getDroppedStacks(Lnet/minecraft/block/BlockState;Lnet/minecraft/loot/context/LootContext$Builder;)Ljava/util/List;", cancellable = true)
 	public void getDroppedStacks(BlockState state, LootContext.Builder builder, CallbackInfoReturnable<List<ItemStack>> info) {
 		Identifier identifier = this.getLootTableId();
@@ -169,14 +183,22 @@ public abstract class BreakableBlocksMixin {
 //	}
 
 	/**
-	 * Is unbreakable block boolean.
+	 * Determines if the block in question is an unbreakable block.
 	 *
-	 * @param blockState the block state
-	 * @param world      the world
-	 * @return the boolean
+	 * Internally retrieves the block's hardness from {@link BlockState#getHardness(BlockView, BlockPos)}.
+	 * <br><br>
+	 *
+	 * The current method of retrieving the block's hardness is a hack as the BlockPos is unknown and therefore made up.
+	 * The made up position is {@code BlockPos(0, -1, 0)}. This only works because {@link BlockState#getHardness(BlockView, BlockPos)} does not actually check the {@link BlockPos}.
+	 * <br><br>
+	 *
+	 * @param blockState the block's {@link BlockState}.
+	 * @param world      the world the block resides in.
+	 * @return true if the block is unbreakable, false if it's not unbreakable.
 	 */
+	@API(status = API.Status.INTERNAL)
 	public boolean isUnbreakableBlock(BlockState blockState, World world) {
 		// This is a hack. The only reason it works is because getHardness doesn't actually check the world or blockpos.
-		return blockState.getHardness(world, new BlockPos(0, 0, 0)) == -1.0;
+		return blockState.getHardness(world, new BlockPos(0, -1, 0)) < 0.0;
 	}
 }
