@@ -11,6 +11,7 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
+import org.apiguardian.api.API;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -24,18 +25,33 @@ import java.util.List;
 // This mixin is a 2 in 1. It handles making unbreakable blocks breakable and allows fixing the mining animation for dead tools to not occur.
 
 /**
- * The type Breakable blocks mixin.
+ * Used to make it possible to break otherwise unbreakable blocks such as {@link EndPortalFrameBlock}.
+ * <br><br>
+ * Also functions to visually make dead tools (see {@link GenericPoweredTool}) no longer able to mine blocks that can normally be mined.
  */
+@API(status = API.Status.INTERNAL)
 @SuppressWarnings("UnusedMixin") // The mixin is used, just is loaded by Fabric and not Sponge methods
 @Mixin(AbstractBlock.class)
 public abstract class BreakableBlocksMixin {
 	@Shadow @Final protected AbstractBlock.Settings settings;
 
 	/**
-	 * Gets loot table id.
+	 * Retrieves the id associated with the loot table.
 	 *
-	 * @return the loot table id
+	 * For example, {@code randomtech:blocks/fuser} for {@code randomtech:fuser}, or {@code minecraft:chests/end_city_treasure} for End City Treasure Loot.
+	 *
+	 * This mixin specifically looks for {@code minecraft:empty} which can be referenced by {@link LootTables#EMPTY}.
+	 * <br><br>
+	 *
+	 * This mixin looks for empty loot tables as <a href="https://twitter.com/jeb_">Jeb_</a> explicitly removed the ability for bedrock to drop to prevent exploits from being able to drop bedrock. This occured in <a href="https://www.mojang.com/2016/01/minecraft-snapshot-16w02a/">1.9 Snapshot MC-93119</a>.
+	 * Datapacks didn't exist at the time (added in <a href="https://www.minecraft.net/en-us/article/minecraft-snapshot-17w43a">1.13 Snapshot 17w43a</a>) to just set the loot to {@code minecraft:air} or to not drop via json. So, bedrock not dropping was hardcoded into the game.
+	 *
+	 * <br><br>
+	 * Jeb Explicitly Commented On Removing Bedrock From Dropping At <a href="https://bugs.mojang.com/browse/MC-93119?focusedCommentId=277622&page=com.atlassian.jira.plugin.system.issuetabpanels%3Acomment-tabpanel#comment-277622">This Jira Comment</a>.
+	 *
+	 * @return the loot table's identifier
 	 */
+	@API(status = API.Status.INTERNAL)
 	@Shadow @Final public abstract Identifier getLootTableId();
 
 	/**
@@ -47,6 +63,7 @@ public abstract class BreakableBlocksMixin {
 	 * @param pos    the pos
 	 * @param info   the info
 	 */
+	@API(status = API.Status.INTERNAL)
 	@Inject(at = @At("INVOKE"), method = "calcBlockBreakingDelta(Lnet/minecraft/block/BlockState;Lnet/minecraft/entity/player/PlayerEntity;Lnet/minecraft/world/BlockView;Lnet/minecraft/util/math/BlockPos;)F", cancellable = true)
 	public void calcBlockBreakingDelta(BlockState state, PlayerEntity player, BlockView world, BlockPos pos, CallbackInfoReturnable<Float> info) {
 		float blockHardness = state.getHardness(world, pos);
