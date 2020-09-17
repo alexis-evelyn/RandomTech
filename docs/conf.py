@@ -42,8 +42,9 @@ copyright = str(now.year) + ", " + str(author)
 # The full version, including alpha/beta/rc tags
 release = "API: " + apiVersion + " - " + "RandomTech: " + randomTechVersion
 
-# print(copyright)
-# print(release)
+# Debug Info
+print("Copyright Info: " + copyright)
+print("Version: " + release)
 
 # -- General configuration ---------------------------------------------------
 
