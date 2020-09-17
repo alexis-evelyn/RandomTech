@@ -4,7 +4,7 @@
 # Run Actions Locally: https://github.com/nektos/act
 # VirusTotal API Usage Permission - https://imgur.com/a/rH9VhGm
 
-name: Build Mod
+name: Build Mods
 
 on:
   push:

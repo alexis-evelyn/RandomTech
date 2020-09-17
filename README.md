@@ -63,7 +63,7 @@ This project is under MIT License. You can refer to [LICENSE.md][license-link] f
 [crowdin-badge]: <https://badges.crowdin.net/randomtech/localized.svg> "Crowdin Badge"
 [crowdin-link]: <https://crwd.in/randomtech> "Crowdin Link"
 
-[github-actions-badge]: <https://github.com/alexis-evelyn/RandomTech/workflows/Build%20Mod/badge.svg> "Github Actions Badge"
+[github-actions-badge]: <https://github.com/alexis-evelyn/RandomTech/workflows/Build%20Mods/badge.svg> "Github Actions Badge"
 [github-actions-link]: <https://github.com/alexis-evelyn/RandomTech/actions> "Github Actions Link"
 
 [randomtech-javadocs-badge]: <https://javadoc.io/badge2/me.alexisevelyn/randomtech/RandomTech%20Javadocs.svg> "RandomTech Javadocs Badge"
