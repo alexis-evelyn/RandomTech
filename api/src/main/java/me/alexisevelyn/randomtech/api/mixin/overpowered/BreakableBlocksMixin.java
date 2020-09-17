@@ -48,6 +48,7 @@ public abstract class BreakableBlocksMixin {
 	 *
 	 * <br><br>
 	 * Jeb Explicitly Commented On Removing Bedrock From Dropping At <a href="https://bugs.mojang.com/browse/MC-93119?focusedCommentId=277622&page=com.atlassian.jira.plugin.system.issuetabpanels%3Acomment-tabpanel#comment-277622">This Jira Comment</a>.
+	 * <br><br>
 	 *
 	 * @return the loot table's identifier
 	 */
