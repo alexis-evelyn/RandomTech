@@ -14,16 +14,36 @@
 # import sys
 # sys.path.insert(0, os.path.abspath('.'))
 
+import datetime
+now = datetime.datetime.now()
+
+randomTechProperties = open('../gradle.properties')
+apiProperties = open('../api/gradle.properties')
+
+randomTechVersion = "Unset"
+apiVersion = "Unset"
+
+for line in randomTechProperties:
+    if "mod_version" in line:
+        randomTechVersion = line.split(" ")[2].split("\n")[0]
+        break
+
+for line in apiProperties:
+    if "mod_version" in line:
+        apiVersion = line.split(" ")[2].split("\n")[0]
+        break
 
 # -- Project information -----------------------------------------------------
 
 project = 'RandomTech'
-copyright = '2020, Alexis Evelyn'
 author = 'Alexis Evelyn'
+copyright = str(now.year) + ", " + str(author)
 
 # The full version, including alpha/beta/rc tags
-release = 'SNAPSHOT'
+release = "API: " + apiVersion + " - " + "RandomTech: " + randomTechVersion
 
+# print(copyright)
+# print(release)
 
 # -- General configuration ---------------------------------------------------
 
