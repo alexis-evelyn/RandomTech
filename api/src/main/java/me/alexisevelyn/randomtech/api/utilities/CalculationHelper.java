@@ -9,7 +9,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 /**
- * The type Calculation helper.
+ * Helper class to help with calculations that would be used often and are tedious to remember/write.
  */
 public class CalculationHelper {
     /**
