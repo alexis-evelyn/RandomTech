@@ -8,6 +8,7 @@
 
 [![Discord Link][discord-badge]][discord-invite-link-badge]
 [![Project Page Link][curseforge-release-badge-randomtech]][curseforge-release-download-randomtech]
+[![Documentation Status][read-the-docs-badge]][read-the-docs-link]
 <br>
 [![Github Actions Link][github-actions-badge]][github-actions-link]
 [![Codacy Link][codacy-badge]][codacy-link]
@@ -71,6 +72,9 @@ This project is under MIT License. You can refer to [LICENSE.md][license-link] f
 
 [randomtech-javadocs-link]: <https://javadoc.io/doc/me.alexisevelyn/randomtech> "RandomTech Javadocs Link"
 [api-javadocs-link]: <https://javadoc.io/doc/me.alexisevelyn/randomtechapi> "API Javadocs Link"
+
+[read-the-docs-badge]: <https://readthedocs.org/projects/randomtech/badge/?version=latest> "Read The Docs Badge"
+[read-the-docs-link]: <https://randomtech.alexisevelyn.me/en/latest/?badge=latest> "Read The Docs Link"
 
 [license-link]: <LICENSE.md> "License Markdown File"
 
