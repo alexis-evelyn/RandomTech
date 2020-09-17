@@ -22,8 +22,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import java.util.ArrayList;
 import java.util.List;
 
-// This mixin is a 2 in 1. It handles making unbreakable blocks breakable and allows fixing the mining animation for dead tools to not occur.
-
 /**
  * Used to make it possible to break otherwise unbreakable blocks such as {@link EndPortalFrameBlock}.
  * <br><br>
@@ -33,8 +31,6 @@ import java.util.List;
 @SuppressWarnings("UnusedMixin") // The mixin is used, just is loaded by Fabric and not Sponge methods
 @Mixin(AbstractBlock.class)
 public abstract class BreakableBlocksMixin {
-	@Shadow @Final protected AbstractBlock.Settings settings;
-
 	/**
 	 * Retrieves the id associated with the loot table.
 	 *
@@ -198,7 +194,6 @@ public abstract class BreakableBlocksMixin {
 	 */
 	@API(status = API.Status.INTERNAL)
 	public boolean isUnbreakableBlock(BlockState blockState, World world) {
-		// This is a hack. The only reason it works is because getHardness doesn't actually check the world or blockpos.
 		return blockState.getHardness(world, new BlockPos(0, -1, 0)) < 0.0;
 	}
 }

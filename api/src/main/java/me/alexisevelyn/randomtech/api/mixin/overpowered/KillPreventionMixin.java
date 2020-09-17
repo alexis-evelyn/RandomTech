@@ -8,6 +8,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.collection.DefaultedList;
+import org.apiguardian.api.API;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -16,30 +17,34 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 /**
- * The type Kill prevention mixin.
+ * Allows /kill Invulnerability and general damage cancelling for {@link net.minecraft.item.Wearable} items that implement {@link InvulnerabilityHandler}.
  */
+@API(status = API.Status.INTERNAL)
 @SuppressWarnings("UnusedMixin") // The mixin is used, just is loaded by Fabric and not Sponge methods
 @Mixin(LivingEntity.class)
 public abstract class KillPreventionMixin {
-	// For /kill invulnerability for api
-    // Also, for general damage prevention
-
     /**
-     * Damage boolean.
+     * Vanilla method to determine if damage is allowed or cancelled.
+     * <br><br>
      *
-     * @param source the source
-     * @param amount the amount
-     * @return the boolean
+     * @param source the source of damage. Can take any class that extends {@link DamageSource}. For example, {@link CustomDamageSource}.
+     * @param amount the amount of damage to inflict on this entity.
+     * @return true if damage is allowed. false if damage is cancelled.
      */
+    @API(status = API.Status.INTERNAL)
     @Shadow public abstract boolean damage(DamageSource source, float amount);
 
     /**
-     * General damage.
+     * Handles general damage to players and other living entities.
      *
-     * @param damageSource the damage source
-     * @param amount       the amount
-     * @param info         the info
+     * Internally calls {@link #handlePlayerDamage(PlayerEntity, DamageSource, float, CallbackInfo)} for handling player damage and calls {@link #handleOtherLivingEntityDamage(LivingEntity, DamageSource, float, CallbackInfo)} for other living entities.
+     * <br><br>
+     *
+     * @param damageSource the source of damage.
+     * @param amount       the amount of damage to inflict on this entity.
+     * @param info         Used to modify the return type (See {@link CallbackInfoReturnable}).
      */
+    @API(status = API.Status.INTERNAL)
     @SuppressWarnings("PMD.UnusedPrivateMethod")
     @Inject(at = @At("HEAD"), method = "damage(Lnet/minecraft/entity/damage/DamageSource;F)Z", cancellable = true)
 	private void generalDamage(DamageSource damageSource, float amount, CallbackInfoReturnable<Boolean> info) {
@@ -60,10 +65,16 @@ public abstract class KillPreventionMixin {
 	}
 
     /**
-     * Kill command.
+     * Handles damage from the kill command.
      *
-     * @param info the info
+     * We change the kill command to a custom damage source (see {@link CustomDamageSource#KILL_COMMAND}), so {@link #generalDamage(DamageSource, float, CallbackInfoReturnable)} does not handle the kill command later on.
+     *
+     * Internally calls {@link #handlePlayerKillCommand(PlayerEntity, CallbackInfo)} for player kills and calls {@link #handleOtherLivingEntityKillCommand(LivingEntity, CallbackInfo)} for other living entities.
+     * <br><br>
+     *
+     * @param info Used to modify the return type (See {@link CallbackInfoReturnable}).
      */
+    @API(status = API.Status.INTERNAL)
     @SuppressWarnings("PMD.UnusedPrivateMethod")
     @Inject(at = @At("INVOKE"), method = "kill()V", cancellable = true)
 	private void killCommand(CallbackInfo info) {
@@ -88,14 +99,17 @@ public abstract class KillPreventionMixin {
     }
 
     /**
-     * Handle player damage.
+     * Handles whether or not to damage the player.
      *
-     * @param playerEntity the player entity
-     * @param damageSource the damage source
-     * @param amount       the amount
-     * @param info         the info
+     * Loops through the the armor the player is wearing and internally calls {@link InvulnerabilityHandler#denyGeneralDamage(ItemStack, DamageSource, float, LivingEntity)} for any armor that implements {@link InvulnerabilityHandler}.
+     * <br><br>
+     *
+     * @param playerEntity the player.
+     * @param damageSource the source of damage.
+     * @param amount       the amount of damage to inflict on the player.
+     * @param info         Used to modify the return type (See {@link CallbackInfoReturnable}).
      */
-    // Generic Damage to Players
+    @API(status = API.Status.INTERNAL)
     private void handlePlayerDamage(PlayerEntity playerEntity, DamageSource damageSource, float amount, CallbackInfo info) {
         PlayerInventory inventory = playerEntity.inventory;
         DefaultedList<ItemStack> armorItems = inventory.armor;
@@ -112,14 +126,17 @@ public abstract class KillPreventionMixin {
     }
 
     /**
-     * Handle other living entity damage.
+     * Handles whether or not to damage living entities (other than players).
+     *
+     * Loops through the the armor the living entity is wearing and internally calls {@link InvulnerabilityHandler#denyGeneralDamage(ItemStack, DamageSource, float, LivingEntity)} for any armor that implements {@link InvulnerabilityHandler}.
+     * <br><br>
      *
      * @param livingEntity the living entity
-     * @param damageSource the damage source
-     * @param amount       the amount
-     * @param info         the info
+     * @param damageSource the source of damage
+     * @param amount       the amount of damage to inflict on the entity
+     * @param info         Used to modify the return type (See {@link CallbackInfoReturnable}).
      */
-    // Generic Damage to Other Living Entities
+    @API(status = API.Status.INTERNAL)
     private void handleOtherLivingEntityDamage(LivingEntity livingEntity, DamageSource damageSource, float amount, CallbackInfo info) {
         Iterable<ItemStack> armorItems = livingEntity.getArmorItems();
 
@@ -135,12 +152,15 @@ public abstract class KillPreventionMixin {
     }
 
     /**
-     * Handle player kill command.
+     * Handles whether or not to kill the player.
      *
-     * @param playerEntity the player entity
-     * @param info         the info
+     * Loops through the the armor the player is wearing and internally calls {@link InvulnerabilityHandler#denyKillCommand(ItemStack, LivingEntity)} for any armor that implements {@link InvulnerabilityHandler}.
+     * <br><br>
+     *
+     * @param playerEntity the player.
+     * @param info         Used to modify the return type (See {@link CallbackInfoReturnable}).
      */
-    // Kill Command Specifically for Player
+    @API(status = API.Status.INTERNAL)
     private void handlePlayerKillCommand(PlayerEntity playerEntity, CallbackInfo info) {
         PlayerInventory inventory = playerEntity.inventory;
         DefaultedList<ItemStack> armorItems = inventory.armor;
@@ -157,12 +177,15 @@ public abstract class KillPreventionMixin {
     }
 
     /**
-     * Handle other living entity kill command.
+     * Handles whether or not to kill the living entity (other than the player).
      *
-     * @param livingEntity the living entity
-     * @param info         the info
+     * Loops through the the armor the living entity is wearing and internally calls {@link InvulnerabilityHandler#denyKillCommand(ItemStack, LivingEntity)} for any armor that implements {@link InvulnerabilityHandler}.
+     * <br><br>
+     *
+     * @param livingEntity the living entity.
+     * @param info         Used to modify the return type (See {@link CallbackInfoReturnable}).
      */
-    // Kill Command Specifically for Other Living Entities
+    @API(status = API.Status.INTERNAL)
     private void handleOtherLivingEntityKillCommand(LivingEntity livingEntity, CallbackInfo info) {
         Iterable<ItemStack> armorItems = livingEntity.getArmorItems();
 
