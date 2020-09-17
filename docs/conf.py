@@ -1,3 +1,3 @@
-master_doc = 'docs/index'
+master_doc = 'index'
 
 extensions = ['javasphinx']
