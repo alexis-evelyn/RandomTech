@@ -1,7 +1,7 @@
 package me.alexisevelyn.randomtech.blocks.metals;
 
 import me.alexisevelyn.randomtech.api.utilities.GenericBlockHelper;
-import me.alexisevelyn.randomtech.api.utilities.MiningLevel;
+import me.alexisevelyn.randomtech.utility.MiningLevel;
 import me.alexisevelyn.randomtech.utility.MaterialsHelper;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.fabricmc.fabric.api.tool.attribute.v1.FabricToolTags;

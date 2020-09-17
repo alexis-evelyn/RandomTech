@@ -20,17 +20,18 @@ public interface GuiFactory extends ScreenRegistry.Factory<BuiltScreenHandler, H
     /**
      * Override to create a handled screen.
      *
-     * Meant to be passed into {@link ScreenRegistry#register(ScreenHandlerType, ScreenRegistry.Factory)}
+     * Meant to be passed into {@link ScreenRegistry#register(ScreenHandlerType, ScreenRegistry.Factory)}.
+     * <br><br>
      *
      * Example:
-     * <code>
+     * <pre><code>
      * // Register GuiFactory with Fabric
      * if (FabricLoader.getInstance().getEnvironmentType() == EnvType.CLIENT)
      *      ScreenRegistry.register(screenHandlerType, getGuiFactory());
-     * </code>
+     * </code></pre>
      *
      * Also:
-     * <code>
+     * <pre><code>
      * @SuppressWarnings("unchecked")
      * private GuiFactory getGuiFactory() {
      *      // Responsible For Allowing The Gui to Be Linked to The Block Entity
@@ -40,7 +41,7 @@ public interface GuiFactory extends ScreenRegistry.Factory<BuiltScreenHandler, H
      *          return (HandledScreen<BuiltScreenHandler>) basicComputerGui;
      *      };
      * }
-     * </code>
+     * </code></pre>
      *
      * @param syncId       the current screen's syncID (for syncing which screenhandler is open)
      * @param playerEntity the player
@@ -51,9 +52,10 @@ public interface GuiFactory extends ScreenRegistry.Factory<BuiltScreenHandler, H
     HandledScreen<BuiltScreenHandler> create(int syncId, PlayerEntity playerEntity, BlockEntity blockEntity);
 
     /**
-     * Override to create a handled screen
+     * Override to create a handled screen.
      *
      * Unused by me, so good luck!
+     * <br><br>
      *
      * @param builtScreenHandler the built screen handler (used to retrieve syncID and block entity)
      * @param playerInventory    the player inventory (used to retrieve player)

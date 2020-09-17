@@ -9,15 +9,15 @@ import net.minecraft.world.BlockView;
 import org.apiguardian.api.API;
 
 /**
- * Some helper methods when creating a block using {@link FabricBlockSettings}
+ * Some helper methods when creating a block using {@link FabricBlockSettings}.
  */
 public class GenericBlockHelper {
     /**
      * Mark some value as always true.
      *
-     * Used in {@link FabricBlockSettings#allowsSpawning(AbstractBlock.TypedContextPredicate)}
+     * Used in {@link FabricBlockSettings#allowsSpawning(AbstractBlock.TypedContextPredicate)}.
      *
-     * Internally calls {@link #always(BlockState, BlockView, BlockPos)}
+     * Internally calls {@link #always(BlockState, BlockView, BlockPos)}.
      *
      * @param blockState the block's BlockState
      * @param blockView  the world the block is currently in
@@ -33,9 +33,9 @@ public class GenericBlockHelper {
     /**
      * Mark some value as always false.
      *
-     * Used in {@link FabricBlockSettings#allowsSpawning(AbstractBlock.TypedContextPredicate)}
+     * Used in {@link FabricBlockSettings#allowsSpawning(AbstractBlock.TypedContextPredicate)}.
      *
-     * Internally calls {@link #never(BlockState, BlockView, BlockPos)}
+     * Internally calls {@link #never(BlockState, BlockView, BlockPos)}.
      *
      * @param blockState the block's BlockState
      * @param blockView  the world the block is currently in
@@ -51,7 +51,7 @@ public class GenericBlockHelper {
     /**
      * Mark some value as always true.
      *
-     * Used in {@link FabricBlockSettings#solidBlock(AbstractBlock.ContextPredicate)}, {@link FabricBlockSettings#suffocates(AbstractBlock.ContextPredicate)}, and {@link FabricBlockSettings#blockVision(AbstractBlock.ContextPredicate)}
+     * Used in {@link FabricBlockSettings#solidBlock(AbstractBlock.ContextPredicate)}, {@link FabricBlockSettings#suffocates(AbstractBlock.ContextPredicate)}, and {@link FabricBlockSettings#blockVision(AbstractBlock.ContextPredicate)}.
      *
      * @param blockState the block's BlockState
      * @param blockView  the world the block is currently in
@@ -67,7 +67,7 @@ public class GenericBlockHelper {
     /**
      * Mark some value as always false.
      *
-     * Used in {@link FabricBlockSettings#solidBlock(AbstractBlock.ContextPredicate)}, {@link FabricBlockSettings#suffocates(AbstractBlock.ContextPredicate)}, and {@link FabricBlockSettings#blockVision(AbstractBlock.ContextPredicate)}
+     * Used in {@link FabricBlockSettings#solidBlock(AbstractBlock.ContextPredicate)}, {@link FabricBlockSettings#suffocates(AbstractBlock.ContextPredicate)}, and {@link FabricBlockSettings#blockVision(AbstractBlock.ContextPredicate)}.
      *
      * @param blockState the block's BlockState
      * @param blockView  the world the block is currently in

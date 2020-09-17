@@ -1,6 +1,6 @@
 package me.alexisevelyn.randomtech.toolmaterials.poweredtools;
 
-import me.alexisevelyn.randomtech.api.utilities.MiningLevel;
+import me.alexisevelyn.randomtech.utility.MiningLevel;
 import net.minecraft.item.ToolMaterial;
 import net.minecraft.recipe.Ingredient;
 import org.jetbrains.annotations.Nullable;

@@ -383,9 +383,8 @@ public abstract class GenericPoweredArmor extends ArmorItem implements EnergyHel
     @Override
     public void appendStacks(ItemGroup group, DefaultedList<ItemStack> itemList) {
         // Can be used to add multiple versions of items (e.g. a charged and discharged variant of each armor piece)
-        if (!isIn(group)) {
+        if (!isIn(group))
             return;
-        }
 
         ItemManagerHelper.initPoweredItems(this, itemList);
     }

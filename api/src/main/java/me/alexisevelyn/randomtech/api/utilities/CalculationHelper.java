@@ -13,7 +13,8 @@ import org.jetbrains.annotations.Nullable;
  */
 public class CalculationHelper {
     /**
-     * Adds two {@link Vec3i} together and returns a {@link BlockPos}
+     * Adds two {@link Vec3i} together and returns a {@link BlockPos}.
+     * <br><br>
      *
      * @param firstVector  the first vector
      * @param secondVector the second vector
@@ -25,7 +26,8 @@ public class CalculationHelper {
     }
 
     /**
-     * Subtacts two {@link Vec3i} together and returns a {@link BlockPos}
+     * Subtracts two {@link Vec3i} together and returns a {@link BlockPos}.
+     * <br><br>
      *
      * @param firstVector  the first vector
      * @param secondVector the second vector
@@ -37,7 +39,8 @@ public class CalculationHelper {
     }
 
     /**
-     * Multiplies two {@link Vec3i} together and returns a {@link BlockPos}
+     * Multiplies two {@link Vec3i} together and returns a {@link BlockPos}.
+     * <br><br>
      *
      * @param firstVector  the first vector
      * @param secondVector the second vector
@@ -49,7 +52,8 @@ public class CalculationHelper {
     }
 
     /**
-     * Divides two {@link Vec3i} together and returns a {@link BlockPos}
+     * Divides two {@link Vec3i} together and returns a {@link BlockPos}.
+     * <br><br>
      *
      * @param firstVector  the first vector
      * @param secondVector the second vector
@@ -61,7 +65,8 @@ public class CalculationHelper {
     }
 
     /**
-     * Returns the absolute distance between two {@link Vec3i} and returns the distance as a double
+     * Returns the absolute distance between two {@link Vec3i} and returns the distance as a double.
+     * <br><br>
      *
      * @param firstVector  the first vector
      * @param secondVector the second vector
@@ -74,7 +79,8 @@ public class CalculationHelper {
     }
 
     /**
-     * Returns the direction the second {@link Vec3i} is from the first {@link Vec3i}
+     * Returns the direction the second {@link Vec3i} is from the first {@link Vec3i}.
+     * <br><br>
      *
      * @param firstVector The vector of the block you are checking from
      * @param secondVector The vector of the block you are checking
@@ -108,8 +114,10 @@ public class CalculationHelper {
 
     /**
      * Takes two ranges in the form input and output as well as the current input and returns the output calculated from the current input
+     * <br><br>
      *
-     * Formula Pulled From: https://stackoverflow.com/a/929107/6828099
+     * Formula Pulled From: <a href="https://stackoverflow.com/a/929107/6828099">https://stackoverflow.com/a/929107/6828099</a>
+     * <br><br>
      *
      * @param currentInput The current input from inside input range
      * @param minInput The minimum point of the input range (inclusive)

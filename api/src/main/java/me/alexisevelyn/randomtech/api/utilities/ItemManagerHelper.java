@@ -24,13 +24,23 @@ import team.reborn.energy.EnergyHolder;
 import java.util.List;
 
 /**
- * The type Item manager.
+ * Helper class to manage powered tools and items.
  */
 public class ItemManagerHelper {
     /**
-     * Creates a charged/discharged variant of powered items
+     * Creates a charged/discharged variant of powered items.
      *
-     * NOTE: Must be called from an override of {@link Item#appendStacks(ItemGroup, DefaultedList)}
+     * <br><br>
+     * NOTE: Must be called from an override of {@link Item#appendStacks(ItemGroup, DefaultedList)}.
+     * <br><br>
+     *
+     * Example:
+     * <pre><code>
+     * if (!isIn(group))
+     *      return;
+     *
+     * ItemManagerHelper.initPoweredItems(this, itemList);
+     * </code></pre>
      *
      * @param item     the powered item
      * @param itemList the provided item list
@@ -53,7 +63,8 @@ public class ItemManagerHelper {
     }
 
     /**
-     * Converts vanilla tool with durability to powered tool with equivalent power (percentage-wise)
+     * Converts vanilla tool with durability to powered tool with equivalent power (percentage-wise).
+     * <br><br>
      *
      * @param oldItemStack the durability based tool
      * @param newItemStack the power based tool (either {@link EnergyHelper} or {@link EnergyHolder})
@@ -74,7 +85,8 @@ public class ItemManagerHelper {
     }
 
     /**
-     * Converts vanilla tool with durability to powered tool with equivalent power (percentage-wise)
+     * Converts vanilla tool with durability to powered tool with equivalent power (percentage-wise).
+     * <br><br>
      *
      * @param oldStack the durability based tool
      * @param newStack the power based tool (either {@link EnergyHelper} or {@link EnergyHolder})
@@ -100,10 +112,18 @@ public class ItemManagerHelper {
 
     /**
      * Append energy level tooltip in similar fashion to vanilla's durability tooltip
+     * <br><br>
      *
      * NOTE: Must be called from an override of {@link Item#appendTooltip(ItemStack, World, List, TooltipContext)}
+     * <br><br>
      *
-     * @param itemStack the item stack that the tooltip will be applied to (Item must be an instance of {@link EnergyHelper}
+     * Example:
+     * <pre><code>
+     * if (flagIn.isAdvanced())
+     *      ItemManagerHelper.powerLevelTooltip(stack, tooltip);
+     * </code></pre>
+     *
+     * @param itemStack the item stack that the tooltip will be applied to (Item must be an instance of {@link EnergyHelper}).
      * @param tooltip   the provided tooltip
      */
     @API(status = API.Status.STABLE)
@@ -131,9 +151,11 @@ public class ItemManagerHelper {
 
     /**
      * Helper method to aid in using energy of the item in question.
+     * <br><br>
      *
-     * Automatically handles using energy greater than the total energy left (by depleting the energy to 0)
+     * Automatically handles using energy greater than the total energy left (by depleting the energy to 0).
      * Also ensures the energy is not spent while the player is in creative mode.
+     * <br><br>
      *
      * @param livingEntity the entity using the item in question
      * @param stack        the ItemStack of the item in question (Item must be an instance of {@link EnergyHolder}

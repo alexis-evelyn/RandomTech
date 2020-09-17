@@ -1,7 +1,7 @@
 package me.alexisevelyn.randomtech.blocks.ores;
 
 import me.alexisevelyn.randomtech.api.utilities.GenericBlockHelper;
-import me.alexisevelyn.randomtech.api.utilities.MiningLevel;
+import me.alexisevelyn.randomtech.utility.MiningLevel;
 import me.alexisevelyn.randomtech.utility.MaterialsHelper;
 import me.alexisevelyn.randomtech.utility.registryhelpers.main.RegistryHelper;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;

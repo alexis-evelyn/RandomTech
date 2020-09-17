@@ -438,9 +438,8 @@ public abstract class GenericPoweredTool extends MiningToolItem implements Energ
     @Override
     public void appendStacks(ItemGroup group, DefaultedList<ItemStack> itemList) {
         // Can be used to add multiple versions of items (e.g. a charged and discharged variant of each tool)
-        if (!isIn(group)) {
+        if (!isIn(group))
             return;
-        }
 
         ItemManagerHelper.initPoweredItems(this, itemList);
     }

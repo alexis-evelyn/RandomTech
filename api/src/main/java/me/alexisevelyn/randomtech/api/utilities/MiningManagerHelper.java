@@ -15,13 +15,14 @@ import net.minecraft.world.World;
 import org.apiguardian.api.API;
 
 /**
- * The type Mining manager.
+ * Helper class to help determine if a tool can mine a specific block in question.
  */
 public class MiningManagerHelper {
     /**
      * Checks if the tool is able to mine the block.
      *
      * Internally calls {@link #canMine(PlayerEntity, ItemStack, BlockState, World, BlockPos)}.
+     * <br><br>
      *
      * @param context the context (ItemUsageContext)
      * @return true if can mine, false if cannot mine
@@ -44,8 +45,10 @@ public class MiningManagerHelper {
     /**
      * Checks if the tool is able to mine the block.
      *
+     * <br><br>
      * NOTE: Currently cannot tell if block needs to be silk touched or if it's the `correct` tool for the job.
      * It can only determine if the block is able to be dropped at all under non-silk touch conditions.
+     *<br><br>
      *
      * @param playerEntity  the player that wants to mine
      * @param toolItemStack the ItemStack of the tool in question
@@ -76,7 +79,8 @@ public class MiningManagerHelper {
     /**
      * Checks if an unbreakable block can be broken with the tool in question.
      *
-     * This requires the tool to implement the {@link BreakableBlocksHelper}
+     * This requires the tool to implement the interface {@link BreakableBlocksHelper}.
+     * <br><br>
      *
      * @param playerEntity  the player entity
      * @param toolItemStack the tool item stack
@@ -100,7 +104,8 @@ public class MiningManagerHelper {
     /**
      * Returns an integer that is the level of silk touch required to mine a block.
      *
-     * Internally calls {@link #needsSilkTouch(BlockState, World, BlockPos)}
+     * Internally calls {@link #needsSilkTouch(BlockState, World, BlockPos)}.
+     * <br><br>
      *
      * @param context the ItemUsageContext
      * @return the level of silk touch required to mine the queried block
@@ -118,6 +123,7 @@ public class MiningManagerHelper {
      * Returns an integer that is the level of silk touch required to mine a block.
      *
      * Currently not implemented.
+     * <br><br>
      *
      * @param blockState the block's BlockState
      * @param world      the world the block is located in
@@ -135,6 +141,7 @@ public class MiningManagerHelper {
 
     /**
      * Returns the level of silk touch on the queried tool
+     * <br><br>
      *
      * @param itemStack the tool's ItemStack
      * @return the level of silk touch on the tool

@@ -7,15 +7,17 @@ import reborncore.client.screen.BuiltScreenHandlerProvider;
 import reborncore.client.screen.builder.BuiltScreenHandler;
 
 /**
- * The type Screen handler factory.
+ * Helper class to create a {@link BuiltScreenHandler} for RebornCore
  */
 public class ScreenHandlerFactory {
     /**
-     * Gets screen handler factory.
+     * Creates a {@link BuiltScreenHandler} for RebornCore
      *
-     * Used to aid in producing screenhandlers for Fabric's ScreenHandlerRegistry.
+     * Used to aid in producing screenhandlers for Fabric's {@link ScreenHandlerRegistry}.
      *
+     * <br><br>
      * Example:
+     * <br>
      * <code>
      * ScreenHandlerRegistry.ExtendedClientHandlerFactory<BuiltScreenHandler> screenHandlerFactory = new ScreenHandlerFactory().getScreenHandlerFactory();
      * screenHandlerType = ScreenHandlerRegistry.registerExtended(new Identifier(Main.MODID, "basic_computer_gui_handler"), screenHandlerFactory);
@@ -28,11 +30,8 @@ public class ScreenHandlerFactory {
         return (syncID, playerInventory, packetByteBuf) -> {
             final BlockEntity blockEntity = playerInventory.player.world.getBlockEntity(packetByteBuf.readBlockPos());
 
-            if (blockEntity == null) {
+            if (blockEntity == null)
                 return null;
-            }
-
-            //screenHandler.setType(screenHandlerType);
 
             return ((BuiltScreenHandlerProvider) blockEntity).createScreenHandler(syncID, playerInventory.player);
         };
