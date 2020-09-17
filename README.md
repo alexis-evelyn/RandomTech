@@ -6,13 +6,19 @@
 [![Maven Central Download RandomTech Snapshot][sonatype-snapshot-badge-randomtech]][maven-central-snapshot-randomtech-latest-download]
 [![Maven Central Download API Snapshot][sonatype-snapshot-badge-api]][maven-central-snapshot-api-latest-download]
 
-[![MC Version Badge][curseforge-release-mc-version-badge-randomtech]][curseforge-release-download-randomtech]
+[![Discord Link][discord-badge]][discord-invite-link-badge]
 [![Project Page Link][curseforge-release-badge-randomtech]][curseforge-release-download-randomtech]
 <br>
 [![Github Actions Link][github-actions-badge]][github-actions-link]
 [![Codacy Link][codacy-badge]][codacy-link]
 [![Crowdin Link][crowdin-badge]][crowdin-link]
-[![Discord Link][discord-badge]][discord-invite-link-badge]
+[![API Javadocs][api-javadocs-badge]][api-javadocs-link]
+
+<!-- Public Usage of RandomTech In Development is NOT Supported, The Javadocs Are Available For Use Anyway -->
+<!--[![RandomTech Javadocs][randomtech-javadocs-badge]][randomtech-javadocs-link]-->
+
+<!-- Just Displays Major Latest MC Version Supported -->
+<!--[![MC Version Badge][curseforge-release-mc-version-badge-randomtech]][curseforge-release-download-randomtech]-->
 
 ## Setup
 
@@ -59,6 +65,12 @@ This project is under MIT License. You can refer to [LICENSE.md][license-link] f
 
 [github-actions-badge]: <https://github.com/alexis-evelyn/RandomTech/workflows/Build%20Mod/badge.svg> "Github Actions Badge"
 [github-actions-link]: <https://github.com/alexis-evelyn/RandomTech/actions> "Github Actions Link"
+
+[randomtech-javadocs-badge]: <https://javadoc.io/badge2/me.alexisevelyn/randomtech/RandomTech%20Javadocs.svg> "RandomTech Javadocs Badge"
+[api-javadocs-badge]: <https://javadoc.io/badge2/me.alexisevelyn/randomtechapi/API%20Javadocs.svg> "API Javadocs Badge"
+
+[randomtech-javadocs-link]: <https://javadoc.io/doc/me.alexisevelyn/randomtech> "RandomTech Javadocs Link"
+[api-javadocs-link]: <https://javadoc.io/doc/me.alexisevelyn/randomtechapi> "API Javadocs Link"
 
 [license-link]: <LICENSE.md> "License Markdown File"
 
