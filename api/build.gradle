@@ -71,9 +71,6 @@ dependencies {
 	// For JavaX Annotations
 	implementation "javax.annotation:javax.annotation-api:${project.javax_annotation_version}" // Cause Some Dependency (Fiber DSL For Kotlin) Needs It
 
-	// For Loom - https://github.com/FabricMC/fabric-loom/issues/280
-	implementation "org.eclipse.platform:org.eclipse.equinox.registry:${project.eclipse_extension_registry_support_version}"
-
 //	// For Spotbugs Annotations
 //	compileOnly "com.github.spotbugs:spotbugs-annotations:${spotbugs.toolVersion.get()}"
 //
