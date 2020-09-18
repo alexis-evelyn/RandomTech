@@ -169,7 +169,7 @@ jobs:
           "embeds": [
             {
               "title": "API v$API_VERSION",
-              "description": "For For $API_MC_VERSION",
+              "description": "For $API_MC_VERSION",
               "url": "https://www.curseforge.com/minecraft/mc-mods/randomtech-api/files/$API_FILE_ID",
               "color": 1522491
             }
