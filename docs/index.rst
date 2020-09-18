@@ -21,4 +21,6 @@ Indices and tables
 
 .. note::
 
-   Temporary Placeholder!!!
+   Temporary Placeholder!!! If you want access to the API's Javadocs, please refer to Javadocs_.
+
+.. _Javadocs: https://javadoc.io/doc/me.alexisevelyn/randomtechapi
