@@ -79,6 +79,10 @@ jobs:
         # For Setting Up Independent Version Vars
         echo ::set-env name=RANDOMTECH_VERSION::$( strings gradle.properties | grep mod_version | cut -d' ' -f3 )
         echo ::set-env name=API_VERSION::$( strings api/gradle.properties | grep mod_version | cut -d' ' -f3 )
+
+        # For Setting Up MC Version Vars
+        echo ::set-env name=RANDOMTECH_MC_VERSION::$( strings gradle.properties | grep minecraft_version | cut -d' ' -f3 )
+        echo ::set-env name=API_MC_VERSION::$( strings api/gradle.properties | grep minecraft_version | cut -d' ' -f3 )
     - name: Setup Vars For Main Release Boolean and Version Info
       run: |
         # For Setting Up Main Release Boolean
@@ -92,6 +96,7 @@ jobs:
       run: |
         echo "Release: '$RELEASE' - API: '$API_RELEASE' - RandomTech: '$RANDOMTECH_RELEASE'"
         echo "Version: '$VERSION' - API: '$API_VERSION' - RandomTech: '$RANDOMTECH_VERSION'"
+        echo "API MC Version: '$API_MC_VERSION' - RandomTech MC Version: '$RANDOMTECH_MC_VERSION'"
     - name: Upload Compiled Mods to Github Actions For Review
       uses: actions/upload-artifact@v2
       if: ${{ startsWith(env.IS_GITHUB_ACTIONS, 'is_github_actions') }}
@@ -164,7 +169,7 @@ jobs:
           "embeds": [
             {
               "title": "API v$API_VERSION",
-              "description": "New Version Released",
+              "description": "For For $API_MC_VERSION",
               "url": "https://www.curseforge.com/minecraft/mc-mods/randomtech-api/files/$API_FILE_ID",
               "color": 1522491
             }
@@ -189,7 +194,7 @@ jobs:
           "embeds": [
             {
               "title": "RandomTech v$RANDOMTECH_VERSION",
-              "description": "New Version Released",
+              "description": "For $RANDOMTECH_MC_VERSION",
               "url": "https://www.curseforge.com/minecraft/mc-mods/randomtech/files/$RANDOMTECH_FILE_ID",
               "color": 11540510
             }
