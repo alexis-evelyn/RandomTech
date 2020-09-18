@@ -108,9 +108,9 @@ html_theme = 'groundwork'
 
 # Theme Options For Groundwork (This Variable Can Be Used For Any Theme After Modification)
 html_theme_options = {
-    "sidebar_width": '240px',
+    "sidebar_width": '220px',
     "stickysidebar": True,
-    "stickysidebarscrollable": True,
+    "stickysidebarscrollable": False,
     "contribute": True,
     "github_fork": "alexis-evelyn/RandomTech",
     "github_user": "alexis-evelyn",

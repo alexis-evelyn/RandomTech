@@ -31,3 +31,6 @@ run/
 # OSX - Remove .DS_Store with `find . -name ".DS_Store" -delete`
 
 .DS_Store
+
+# Python Virtual Environment
+venv/
