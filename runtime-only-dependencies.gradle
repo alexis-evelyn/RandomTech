@@ -8,10 +8,10 @@ repositories {
 dependencies {
 	// Used to speed Minecraft up in dev environment. Breaks compatibility with old worlds
 	// Temporarily disable this to upgrade worlds between versions after finishing upgrading mods used in that world.
-	modRuntime ("com.github.SuperCoder7979:databreaker:${project.databreaker_version}") {
-		exclude module: "fabric-loader"
-		exclude(group: "net.fabricmc.fabric-api")
-	}
+//	modRuntime ("com.github.SuperCoder7979:databreaker:${project.databreaker_version}") {
+//		exclude module: "fabric-loader"
+//		exclude(group: "net.fabricmc.fabric-api")
+//	}
 
 	// Note: The Tags Being Broken Only Occur in a Dev Environment and Is A Fabric Bug: https://github.com/FabricMC/fabric/issues/66 - Example is #minecraft:planks
 	// Tech Reborn (For Development Testing)
@@ -35,9 +35,9 @@ dependencies {
 	// modRuntime "com.github.jellysquid3:phosphor-fabric:${project.phosphor_version}" // Skip
 
 	// For Connected Textures
-	modRuntime ("com.github.nuclearfarts:connected-block-textures:${project.connected_block_textures_version}") {
-		exclude(group: "net.fabricmc.fabric-api")
-	}
+//	modRuntime ("com.github.nuclearfarts:connected-block-textures:${project.connected_block_textures_version}") {
+//		exclude(group: "net.fabricmc.fabric-api")
+//	}
 
 	// Astromine Mod - A Tech Mod
 //	modRuntime "curse.maven:astromine:${project.astromine_curseforge_version}"

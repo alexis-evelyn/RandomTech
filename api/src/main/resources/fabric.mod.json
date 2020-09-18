@@ -54,6 +54,8 @@
   "custom": {
     "modmenu:api": true,
     "modmenu:clientsideOnly": false,
-    "modmenu:parent": "randomtech"
+    "modmenu:parent": "randomtech",
+    "modsoftheworld:logo": "randomtechapi:icon.png",
+    "modsoftheworld:splashes": "randomtechapi:splashes.txt"
   }
 }
