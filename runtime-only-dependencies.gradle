@@ -26,13 +26,22 @@ dependencies {
 
 	// Improves Performance of FPS and Rendering Engine
 	// Currently breaks fluid rendering - See https://github.com/jellysquid3/sodium-fabric/issues/5
-	// modRuntime "com.github.jellysquid3:sodium-fabric:${project.sodium_version}" // Skip
+	// Mixin Apply Fails on 1.16.3
+//	modRuntime ("com.github.jellysquid3:sodium-fabric:${project.sodium_version}") {
+//		exclude(group: "net.fabricmc.fabric-api")
+//	}
 
 	// General Purpose Performance Improvement
-	// modRuntime "com.github.jellysquid3:lithium-fabric:${project.lithium_version}" // Skip - Fix - VoronoiBiomeAccessType.method_22399
+	// Remap Issue - java.lang.NoSuchMethodError: 'double net.minecraft.world.biome.source.VoronoiBiomeAccessType.method_22399(long, int, int, int, double, double, double)'
+	// Remap Translates To This in 1.16.3 - net/minecraft/world/biome/source/VoronoiBiomeAccessType.calcSquaredDistance(JIIIDDD)D
+//	modRuntime ("com.github.jellysquid3:lithium-fabric:${project.lithium_version}") {
+//		exclude(group: "net.fabricmc.fabric-api")
+//	}
 
 	// Improves performance of lighting engine
-	// modRuntime "com.github.jellysquid3:phosphor-fabric:${project.phosphor_version}" // Skip
+	modRuntime ("com.github.jellysquid3:phosphor-fabric:${project.phosphor_version}") {
+		exclude(group: "net.fabricmc.fabric-api")
+	}
 
 	// For Connected Textures
 //	modRuntime ("com.github.nuclearfarts:connected-block-textures:${project.connected_block_textures_version}") {
@@ -40,12 +49,9 @@ dependencies {
 //	}
 
 	// Connected Textures - 1.16.3 PR Request - Github
-	modRuntime ("com.github.telans:connected-block-textures:${project.connected_block_textures_github_version}") {
-		exclude(group: "net.fabricmc.fabric-api")
-	}
-
-	// Astromine Mod - A Tech Mod
-//	modRuntime "curse.maven:astromine:${project.astromine_curseforge_version}"
+//	modRuntime ("com.github.telans:connected-block-textures:${project.connected_block_textures_github_version}") {
+//		exclude(group: "net.fabricmc.fabric-api")
+//	}
 
 	// Carpet - Useful for Debugging Minecraft in General
 	modRuntime ("com.github.gnembon:fabric-carpet:${project.carpet_version}") {
@@ -55,3 +61,6 @@ dependencies {
 	// Applied Energistics 2
 	// modRuntime ("curse.maven:ae2:${project.applied_energistics_curseforge_version}")
 }
+
+// Separating Astromine Only Dependencies From Other Dependencies
+apply from: 'astromine-and-dependencies.gradle'

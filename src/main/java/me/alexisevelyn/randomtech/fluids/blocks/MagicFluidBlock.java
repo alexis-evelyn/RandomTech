@@ -22,9 +22,7 @@ public class MagicFluidBlock extends BaseFluidBlock {
      * @param fluid the fluid
      */
     public MagicFluidBlock(FlowableFluid fluid) {
-        super(fluid, FabricBlockSettings
-                .copy(Blocks.WATER)
-                .lightLevel(getLightLevel()));
+        super(fluid, FabricBlockSettings.copyOf(Blocks.WATER).lightLevel(getLightLevel()));
     }
 
     /**

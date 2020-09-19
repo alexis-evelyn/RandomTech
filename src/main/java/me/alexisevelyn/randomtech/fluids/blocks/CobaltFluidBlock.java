@@ -25,9 +25,7 @@ public class CobaltFluidBlock extends BaseFluidBlock {
      * @param fluid the fluid
      */
     public CobaltFluidBlock(FlowableFluid fluid) {
-        super(fluid, FabricBlockSettings
-                .copy(Blocks.LAVA)
-                .lightLevel(getLightLevel()));
+        super(fluid, FabricBlockSettings.copyOf(Blocks.LAVA).lightLevel(getLightLevel()));
     }
 
     /**

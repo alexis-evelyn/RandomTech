@@ -22,9 +22,7 @@ public class RedstoneFluidBlock extends BaseFluidBlock {
      * @param fluid the fluid
      */
     public RedstoneFluidBlock(FlowableFluid fluid) {
-        super(fluid, FabricBlockSettings
-                .copy(Blocks.WATER)
-                .lightLevel(getLightLevel()));
+        super(fluid, FabricBlockSettings.copyOf(Blocks.WATER).lightLevel(getLightLevel()));
     }
 
     /**

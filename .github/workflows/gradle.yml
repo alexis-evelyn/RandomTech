@@ -32,10 +32,10 @@ jobs:
         apt-get install zstd
     - name: Checkout Repo
       uses: actions/checkout@v2
-    - name: Set up JDK 1.8
+    - name: Set up JDK 1.11
       uses: actions/setup-java@v1
       with:
-        java-version: 1.8
+        java-version: 1.11
     - name: Gradle Setup Cache
       uses: actions/cache@v2
       if: ${{ startsWith(env.IS_GITHUB_ACTIONS, 'is_github_actions') }}

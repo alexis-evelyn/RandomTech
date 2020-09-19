@@ -22,9 +22,7 @@ public class HoneyFluidBlock extends BaseFluidBlock {
      * @param fluid the fluid
      */
     public HoneyFluidBlock(FlowableFluid fluid) {
-        super(fluid, FabricBlockSettings
-                .copy(Blocks.LAVA)
-                .lightLevel(getZeroLightLevel()));
+        super(fluid, FabricBlockSettings.copyOf(Blocks.LAVA).lightLevel(getLightLevel()));
     }
 
     /**
