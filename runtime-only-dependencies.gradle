@@ -39,6 +39,11 @@ dependencies {
 //		exclude(group: "net.fabricmc.fabric-api")
 //	}
 
+	// Connected Textures - 1.16.3 PR Request - Github
+	modRuntime ("com.github.telans:connected-block-textures:${project.connected_block_textures_github_version}") {
+		exclude(group: "net.fabricmc.fabric-api")
+	}
+
 	// Astromine Mod - A Tech Mod
 //	modRuntime "curse.maven:astromine:${project.astromine_curseforge_version}"
 
