@@ -49,9 +49,9 @@ dependencies {
 //	}
 
 	// Connected Textures - 1.16.3 PR Request - Github
-//	modRuntime ("com.github.telans:connected-block-textures:${project.connected_block_textures_github_version}") {
-//		exclude(group: "net.fabricmc.fabric-api")
-//	}
+	modRuntime ("com.github.telans:connected-block-textures:${project.connected_block_textures_github_version}") {
+		exclude(group: "net.fabricmc.fabric-api")
+	}
 
 	// Carpet - Useful for Debugging Minecraft in General
 	modRuntime ("com.github.gnembon:fabric-carpet:${project.carpet_version}") {
