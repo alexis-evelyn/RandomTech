@@ -3,7 +3,7 @@
 repositories {
     maven {
         name "Cotton Artifactory Maven"
-        url "http://server.bbkr.space/artifactory/libs-release" // Temporarily disabled https as cert expired yesterday (September 19, 2020).
+        url "https://server.bbkr.space/artifactory/libs-release"
     }
     maven {
         name = "Ladysnake Libs - Cardinal Components"
