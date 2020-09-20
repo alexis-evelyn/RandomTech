@@ -59,7 +59,10 @@ dependencies {
 	}
 
 	// Applied Energistics 2
-	// modRuntime ("curse.maven:ae2:${project.applied_energistics_curseforge_version}")
+	// For some reason, AE2 doesn't load at all.
+//	modRuntime ("curse.maven:ae2:${project.applied_energistics_curseforge_version}") {
+//		exclude(group: "net.fabricmc.fabric-api")
+//	}
 }
 
 // Separating Astromine Only Dependencies From Other Dependencies
