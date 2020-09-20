@@ -55,7 +55,7 @@
     "modmenu:api": true,
     "modmenu:clientsideOnly": false,
     "modmenu:parent": "randomtech",
-    "modsoftheworld:logo": "api:icon.png",
+    "modsoftheworld:logo": "api:api-modsofworld.png",
     "modsoftheworld:splashes": "api:splashes.txt"
   }
 }

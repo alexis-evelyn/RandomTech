@@ -69,7 +69,7 @@
     },
     "modmenu:api": false,
     "modmenu:clientsideOnly": false,
-    "modsoftheworld:logo": "randomtech:icon.png",
+    "modsoftheworld:logo": "randomtech:randomtech-modsofworld.png",
     "modsoftheworld:splashes": "randomtech:splashes.txt"
   }
 }
