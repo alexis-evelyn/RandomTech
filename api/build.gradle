@@ -150,7 +150,11 @@ gradle.taskGraph.afterTask { Task task, TaskState state ->
 }
 
 // Apply Publishing Gradle File
-apply from: 'publishing.gradle'
+if (System.getenv('IS_CI_BUILD') != null) {
+	apply from: 'publishing.gradle'
+}
 
 // Separating Unit Testing Only Dependencies From Other Dependencies
-apply from: 'dependencies/unit-testing-only-dependencies.gradle'
+if (System.getenv('IS_CI_BUILD') != null) {
+	apply from: 'dependencies/unit-testing-only-dependencies.gradle'
+}

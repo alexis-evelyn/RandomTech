@@ -84,6 +84,8 @@ jobs:
 
     - name: Build Mod
       run: ./gradlew build
+      env:
+        IS_CI_BUILD: ${{ secrets.IS_CI_BUILD }}
 
     # ℹ️ Command-line programs to run using the OS shell.
     # 📚 https://git.io/JvXDl

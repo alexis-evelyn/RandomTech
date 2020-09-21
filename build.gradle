@@ -216,14 +216,35 @@ gradle.taskGraph.afterTask { Task task, TaskState state ->
 	}
 }
 
+//gradle.taskGraph.whenReady {taskGraph ->
+//	println "Found task graph: " + taskGraph
+//	println "Found " + taskGraph.allTasks.size() + " tasks."
+//	taskGraph.allTasks.forEach { task ->
+//		println()
+//		println("----- " + task + " -----")
+//		println("depends on tasks: " + task.dependsOn)
+//		println("inputs: ")
+//		task.inputs.getFiles().getFiles().collect { f -> println(" - " + f)}
+//		println("outputs: ")
+//		task.outputs.getFiles().getFiles().collect { f -> println(" + " + f)}
+//	}
+//}
+
 // Apply Publishing Gradle File
-apply from: 'publishing.gradle'
+if (System.getenv('IS_CI_BUILD') != null) {
+	apply from: 'publishing.gradle'
+}
 
 // Separating Runtime Only Dependencies From Other Dependencies
-apply from: 'dependencies/runtime-only-dependencies.gradle'
+// IS_CI_BUILD is for avoiding downloading unnecessary dependencies during CI building
+if (System.getenv('IS_CI_BUILD') == null) {
+	apply from: 'dependencies/runtime-only-dependencies.gradle'
+}
 
 // Separating Unit Testing Only Dependencies From Other Dependencies
-apply from: 'dependencies/unit-testing-only-dependencies.gradle'
+if (System.getenv('IS_CI_BUILD') != null) {
+	apply from: 'dependencies/unit-testing-only-dependencies.gradle'
+}
 
 // For all projects. This includes subprojects and our project.
 //allprojects {
