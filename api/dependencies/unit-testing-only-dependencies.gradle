@@ -1,0 +1,11 @@
+// Unit Testing Properties File
+Properties unit = new Properties()
+unit.load(file("dependencies/unit-testing.properties").newReader())
+
+dependencies {
+    // JUnit
+    testImplementation group: 'junit', name: 'junit', version: "${unit.junit_version}"
+
+    // Mockito
+    testImplementation group: 'org.mockito', name: 'mockito-all', version: "${unit.mockito_version}"
+}
