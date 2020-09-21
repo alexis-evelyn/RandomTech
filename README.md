@@ -1,5 +1,4 @@
 # Alexis' Random Tech
-
 [![Maven Central Download RandomTech Release][sonatype-release-badge-randomtech]][maven-central-release-randomtech-latest-download]
 [![Maven Central Download API Release][sonatype-release-badge-api]][maven-central-release-api-latest-download]
 <br>
@@ -103,3 +102,7 @@ This project is under MIT License. You can refer to [LICENSE.md][license-link] f
 <!-- CurseForge Project Page Links -->
 [curseforge-release-download-randomtech]: <https://www.curseforge.com/minecraft/mc-mods/randomtech> "RandomTech Project Page Link For CurseForge"
 [curseforge-release-download-api]: <https://www.curseforge.com/minecraft/mc-mods/randomtech-api> "API Project Page Link For CurseForge"
+
+<!-- RandomTech Logos -->
+[randomtech-icon]: <src/main/resources/assets/randomtech/icon.png> "RandomTech Icon"
+[randomtech-logo]: <src/main/resources/assets/randomtech/randomtech-modsofworld.png> "RandomTech Logo"
