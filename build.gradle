@@ -220,10 +220,10 @@ gradle.taskGraph.afterTask { Task task, TaskState state ->
 apply from: 'publishing.gradle'
 
 // Separating Runtime Only Dependencies From Other Dependencies
-apply from: 'runtime-only-dependencies.gradle'
+apply from: 'dependencies/runtime-only-dependencies.gradle'
 
 // Separating Unit Testing Only Dependencies From Other Dependencies
-apply from: 'unit-testing-only-dependencies.gradle'
+apply from: 'dependencies/unit-testing-only-dependencies.gradle'
 
 // For all projects. This includes subprojects and our project.
 //allprojects {

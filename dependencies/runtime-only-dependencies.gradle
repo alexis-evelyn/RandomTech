@@ -1,3 +1,7 @@
+// Runtime Only Properties
+Properties runtime = new Properties()
+runtime.load(file("dependencies/runtime-only.properties").newReader())
+
 repositories {
 	maven {
 		name "CurseMaven"
@@ -8,62 +12,62 @@ repositories {
 dependencies {
 	// Used to speed Minecraft up in dev environment. Breaks compatibility with old worlds
 	// Temporarily disable this to upgrade worlds between versions after finishing upgrading mods used in that world.
-//	modRuntime ("com.github.SuperCoder7979:databreaker:${project.databreaker_version}") {
+//	modRuntime ("com.github.SuperCoder7979:databreaker:${runtime.databreaker_version}") {
 //		exclude module: "fabric-loader"
 //		exclude(group: "net.fabricmc.fabric-api")
 //	}
 
 	// Note: The Tags Being Broken Only Occur in a Dev Environment and Is A Fabric Bug: https://github.com/FabricMC/fabric/issues/66 - Example is #minecraft:planks
 	// Tech Reborn (For Development Testing)
-	modRuntime ("TechReborn:TechReborn-${project.tech_reborn_version}") {
+	modRuntime ("TechReborn:TechReborn-${runtime.tech_reborn_version}") {
 		exclude(group: "net.fabricmc.fabric-api")
 	}
 
 	// AppleSkin
-	modRuntime ("com.github.squeek502:AppleSkin:${project.appleskin_version}") {
+	modRuntime ("com.github.squeek502:AppleSkin:${runtime.appleskin_version}") {
 		exclude(group: "net.fabricmc.fabric-api")
 	}
 
 	// Improves Performance of FPS and Rendering Engine
 	// Currently breaks fluid rendering - See https://github.com/jellysquid3/sodium-fabric/issues/5
 	// Mixin Apply Fails on 1.16.3
-//	modRuntime ("com.github.jellysquid3:sodium-fabric:${project.sodium_version}") {
+//	modRuntime ("com.github.jellysquid3:sodium-fabric:${runtime.sodium_version}") {
 //		exclude(group: "net.fabricmc.fabric-api")
 //	}
 
 	// General Purpose Performance Improvement
 	// Remap Issue - java.lang.NoSuchMethodError: 'double net.minecraft.world.biome.source.VoronoiBiomeAccessType.method_22399(long, int, int, int, double, double, double)'
 	// Remap Translates To This in 1.16.3 - net/minecraft/world/biome/source/VoronoiBiomeAccessType.calcSquaredDistance(JIIIDDD)D
-//	modRuntime ("com.github.jellysquid3:lithium-fabric:${project.lithium_version}") {
+//	modRuntime ("com.github.jellysquid3:lithium-fabric:${runtime.lithium_version}") {
 //		exclude(group: "net.fabricmc.fabric-api")
 //	}
 
 	// Improves performance of lighting engine
-	modRuntime ("com.github.jellysquid3:phosphor-fabric:${project.phosphor_version}") {
+	modRuntime ("com.github.jellysquid3:phosphor-fabric:${runtime.phosphor_version}") {
 		exclude(group: "net.fabricmc.fabric-api")
 	}
 
 	// For Connected Textures
-//	modRuntime ("com.github.nuclearfarts:connected-block-textures:${project.connected_block_textures_version}") {
+//	modRuntime ("com.github.nuclearfarts:connected-block-textures:${runtime.connected_block_textures_version}") {
 //		exclude(group: "net.fabricmc.fabric-api")
 //	}
 
 	// Connected Textures - 1.16.3 PR Request - Github
-	modRuntime ("com.github.telans:connected-block-textures:${project.connected_block_textures_github_version}") {
+	modRuntime ("com.github.telans:connected-block-textures:${runtime.connected_block_textures_github_version}") {
 		exclude(group: "net.fabricmc.fabric-api")
 	}
 
 	// Carpet - Useful for Debugging Minecraft in General
-	modRuntime ("com.github.gnembon:fabric-carpet:${project.carpet_version}") {
+	modRuntime ("com.github.gnembon:fabric-carpet:${runtime.carpet_version}") {
 		exclude(group: "net.fabricmc.fabric-api")
 	}
 
 	// Applied Energistics 2
 	// For some reason, AE2 doesn't load at all.
-//	modRuntime ("curse.maven:ae2:${project.applied_energistics_curseforge_version}") {
-//		exclude(group: "net.fabricmc.fabric-api")
-//	}
+	modRuntime ("curse.maven:ae2:${runtime.applied_energistics_curseforge_version}") {
+		exclude(group: "net.fabricmc.fabric-api")
+	}
 }
 
 // Separating Astromine Only Dependencies From Other Dependencies
-apply from: 'astromine-and-dependencies.gradle'
+apply from: 'dependencies/astromine-and-dependencies.gradle'

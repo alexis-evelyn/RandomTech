@@ -1,5 +1,9 @@
 // For those wondering why this is, Loom does not extract and remap embedded jars anymore. That was removed in commit https://github.com/FabricMC/fabric-loom/commit/3eff7d0fdb95c6ac53405abcf9873f6edfb44770
 
+// Astromine Only Properties
+Properties astromine = new Properties()
+astromine.load(file("dependencies/astromine.properties").newReader())
+
 repositories {
     maven {
         name "Cotton Artifactory Maven"
@@ -49,90 +53,90 @@ repositories {
 
 dependencies {
     // Astromine Mod - A Tech Mod
-//    modRuntime "curse.maven:astromine:${project.astromine_curseforge_version}"
+//    modRuntime "curse.maven:astromine:${astromine.astromine_curseforge_version}"
 
     // Blade - "A Kotlin-based, DSL-built GUI library for Minecraft."
-    modRuntime "com.github.vini2003:blade:${project.blade_github_version}"
+    modRuntime "com.github.vini2003:blade:${astromine.blade_github_version}"
 
     // Astromine Discoveries - A Tech Mod
-    modRuntime "curse.maven:astrominediscoveries:${project.astromine_discoveries_curseforge_version}"
+    modRuntime "curse.maven:astrominediscoveries:${astromine.astromine_discoveries_curseforge_version}"
 
     // Cloth Dynamic Registry - "Events for listening to dynamic registries and api to add features and structures to biomes."
-    modRuntime "me.shedaniel.cloth.api:cloth-dynamic-registry-api-v1:${project.cloth_dynamic_registry_version}"
+    modRuntime "me.shedaniel.cloth.api:cloth-dynamic-registry-api-v1:${astromine.cloth_dynamic_registry_version}"
 
     // Maybe Data - Conditional Recipe Loader Mod
-    modRuntime "com.github.Draylar:maybe-data:${project.maybe_data_github_version}"
+    modRuntime "com.github.Draylar:maybe-data:${astromine.maybe_data_github_version}"
 
     // Astromine Transportations - A Tech Mod
-    modRuntime "curse.maven:astrominetransportations:${project.astromine_transportations_curseforge_version}"
+    modRuntime "curse.maven:astrominetransportations:${astromine.astromine_transportations_curseforge_version}"
 
     // Astromine Foundations - A Tech Mod
-    modRuntime "curse.maven:astrominefoundations:${project.astromine_foundations_curseforge_version}"
+    modRuntime "curse.maven:astrominefoundations:${astromine.astromine_foundations_curseforge_version}"
 
     // Magna - Hammer and Excavator Mod
-    modRuntime "com.github.Draylar:magna:${project.magna_github_version}"
+    modRuntime "com.github.Draylar:magna:${astromine.magna_github_version}"
 
     // Astromine Technologies - A Tech Mod
-    modRuntime "curse.maven:astrominetechnologies:${project.astromine_technologies_curseforge_version}"
+    modRuntime "curse.maven:astrominetechnologies:${astromine.astromine_technologies_curseforge_version}"
 
     // LibCapableData - "LibCD, adds various hooks to make data packs more usable."
-    modRuntime "io.github.cottonmc:LibCD:${project.libcapabledata_version}"
+    modRuntime "io.github.cottonmc:LibCD:${astromine.libcapabledata_version}"
 
     // Cloth Datagen API - "API for easier datagens"
-    modRuntime "me.shedaniel.cloth.api:cloth-datagen-api-v1:${project.cloth_datagen_api_version}"
+    modRuntime "me.shedaniel.cloth.api:cloth-datagen-api-v1:${astromine.cloth_datagen_api_version}"
 
     // Astromine Core - A Tech Mod
-    modRuntime "curse.maven:astrominecore:${project.astromine_core_curseforge_version}"
+    modRuntime "curse.maven:astrominecore:${astromine.astromine_core_curseforge_version}"
 
     // Cardinal Components API (Full Inclusion - No Remap)
-    // modRuntime "io.github.onyxstudios:Cardinal-Components-API:${project.cca_github_version}"
+    // modRuntime "io.github.onyxstudios:Cardinal-Components-API:${astromine.cca_github_version}"
 
     // Cardinal Components Level
-    modRuntime "io.github.onyxstudios.Cardinal-Components-API:cardinal-components-level:${project.cca_github_version}"
+    modRuntime "io.github.onyxstudios.Cardinal-Components-API:cardinal-components-level:${astromine.cca_github_version}"
 
     // Wrenchable - Allows mods to easily create wrenches
-    modRuntime "curse.maven:wrenchable:${project.wrenchable_curseforge_version}"
+    modRuntime "curse.maven:wrenchable:${astromine.wrenchable_curseforge_version}"
 
     // Cardinal Components Entity
-    modRuntime "io.github.onyxstudios.Cardinal-Components-API:cardinal-components-entity:${project.cca_github_version}"
+    modRuntime "io.github.onyxstudios.Cardinal-Components-API:cardinal-components-entity:${astromine.cca_github_version}"
 
     // Cardinal Components World
-    modRuntime "io.github.onyxstudios.Cardinal-Components-API:cardinal-components-world:${project.cca_github_version}"
+    modRuntime "io.github.onyxstudios.Cardinal-Components-API:cardinal-components-world:${astromine.cca_github_version}"
 
     // Cardinal Components Chunk
-    modRuntime "io.github.onyxstudios.Cardinal-Components-API:cardinal-components-chunk:${project.cca_github_version}"
+    modRuntime "io.github.onyxstudios.Cardinal-Components-API:cardinal-components-chunk:${astromine.cca_github_version}"
 
     // Cardinal Components Block
-    modRuntime "io.github.onyxstudios.Cardinal-Components-API:cardinal-components-block:${project.cca_github_version}"
+    modRuntime "io.github.onyxstudios.Cardinal-Components-API:cardinal-components-block:${astromine.cca_github_version}"
 
     // Cardinal Components Base
-    modRuntime "io.github.onyxstudios.Cardinal-Components-API:cardinal-components-base:${project.cca_github_version}"
+    modRuntime "io.github.onyxstudios.Cardinal-Components-API:cardinal-components-base:${astromine.cca_github_version}"
 
     // Fermion Base Mod - Alt Key Modifier
-    modRuntime ("grondag:fermion-${project.fermion_base_version}.+") {
+    modRuntime ("grondag:fermion-${astromine.fermion_base_version}.+") {
         transitive = false
     }
 
     // Fermion Modkeys - Alt Key Modifier
-    modRuntime ("grondag:fermion-modkeys-${project.fermion_modkeys_version}.+") {
+    modRuntime ("grondag:fermion-modkeys-${astromine.fermion_modkeys_version}.+") {
         transitive = false
     }
 
     // Cardinal Components Item
-    modRuntime "io.github.onyxstudios.Cardinal-Components-API:cardinal-components-item:${project.cca_github_version}"
+    modRuntime "io.github.onyxstudios.Cardinal-Components-API:cardinal-components-item:${astromine.cca_github_version}"
 
     // LibStructure
-    modRuntime "net.earthcomputer:libstructure:${project.libstructure_version}"
+    modRuntime "net.earthcomputer:libstructure:${astromine.libstructure_version}"
 
     // LibBlockAttributes Core
-    modRuntime "alexiil.mc.lib:libblockattributes-core:${project.libblockattributes_version}"
+    modRuntime "alexiil.mc.lib:libblockattributes-core:${astromine.libblockattributes_version}"
 
     // LibBlockAttributes Fluids
-    modRuntime "alexiil.mc.lib:libblockattributes-fluids:${project.libblockattributes_version}"
+    modRuntime "alexiil.mc.lib:libblockattributes-fluids:${astromine.libblockattributes_version}"
 
 //    // Cardinal Components Scoreboard
-//    modRuntime "io.github.onyxstudios.Cardinal-Components-API:cardinal-components-scoreboard:${project.cca_github_version}"
+//    modRuntime "io.github.onyxstudios.Cardinal-Components-API:cardinal-components-scoreboard:${astromine.cca_github_version}"
 //
 //    // Cardinal Components Util
-//    modRuntime "io.github.onyxstudios.Cardinal-Components-API:cardinal-components-util:${project.cca_github_version}"
+//    modRuntime "io.github.onyxstudios.Cardinal-Components-API:cardinal-components-util:${astromine.cca_github_version}"
 }
