@@ -134,6 +134,18 @@ dependencies {
     // LibBlockAttributes Fluids
     modRuntime "alexiil.mc.lib:libblockattributes-fluids:${astromine.libblockattributes_version}"
 
+    // Kotlin Runtime Lib - For Blade
+    runtime "org.jetbrains.kotlin:kotlin-stdlib:${astromine.kotlin_lib_version}"
+
+    // Shapes
+    modRuntime "com.terraformersmc:shapes:${astromine.shapes_version}"
+
+    // Cloth Durability Bar API
+    modRuntime "me.shedaniel.cloth.api:cloth-durability-bar-api-v1:${astromine.cloth_durability_bar_api_version}"
+
+    // Joml
+    runtime "org.joml:joml:${astromine.joml_version}"
+
 //    // Cardinal Components Scoreboard
 //    modRuntime "io.github.onyxstudios.Cardinal-Components-API:cardinal-components-scoreboard:${astromine.cca_github_version}"
 //
