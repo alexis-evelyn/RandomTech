@@ -111,7 +111,7 @@ public class ClientRegistryHelper {
         BlockRenderLayerMap.INSTANCE.putBlock(RegistryHelper.POWERED_GLASS, RenderLayer.getTranslucent());
 
         // Cobalt Wiring
-        BlockRenderLayerMap.INSTANCE.putBlock(RegistryHelper.COBALT_WIRE, RenderLayer.getTranslucent());
+        BlockRenderLayerMap.INSTANCE.putBlock(RegistryHelper.COBALT_WIRE, RenderLayer.getCutoutMipped());
 
         // For Color Shading Like Vanilla Redstone
         ColorProviderRegistry.BLOCK.register(CobaltWire::getWireColor, RegistryHelper.COBALT_WIRE);
