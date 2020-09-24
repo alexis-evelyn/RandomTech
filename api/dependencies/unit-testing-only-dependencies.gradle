@@ -15,3 +15,6 @@ test {
 
     maxHeapSize = '1G'
 }
+
+// Tells Gradle to Wait for the tests before publishing
+publish.dependsOn ':api:test'
