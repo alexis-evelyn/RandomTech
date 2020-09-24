@@ -34,3 +34,8 @@ run/
 
 # Python Virtual Environment
 venv/
+
+# Document Generation Paths - For Sphinx to Markdown Conversion During Builds
+# This is so I can test document generation locally without having to worry about remembering to delete the docs before commit.
+/src/main/resources/assets/randomtech/docs/*
+/api/src/main/resources/assets/api/docs/*
