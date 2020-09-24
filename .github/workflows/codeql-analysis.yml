@@ -23,6 +23,8 @@ jobs:
   codeql:
     name: Analyze
     runs-on: ubuntu-latest
+    env:
+      IS_GITHUB_ACTIONS: ${{ secrets.IS_GITHUB_ACTIONS }}
 
     strategy:
       fail-fast: false
