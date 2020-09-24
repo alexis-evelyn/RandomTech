@@ -37,10 +37,6 @@ configurations {
 }
 
 repositories {
-	maven {
-		name "Patchouli"
-		url "https://maven.blamejared.com/"
-	}
 	ivy {
 		name "Github Repos"
 		url "https://jitpack.io/"
@@ -118,18 +114,13 @@ dependencies {
 	include "me.sargunvohra.mcmods:autoconfig1u:${project.autoconf_version}"
 
 	// Hywla
-	// modImplementation "curse.maven:hywla:${project.hywla_curseforge_version}" // Same fix as on Patchouli. the fix was that loom currently cannot handle depending on artifacts with the same ID but different classifier (regular patchouli jar vs :api)
+	// modImplementation "curse.maven:hywla:${project.hywla_curseforge_version}" // The fix was that loom currently cannot handle depending on artifacts with the same ID but different classifier (regular hwyla jar vs :api)
 	modImplementation ("mcp.mobius.waila:Hwyla:${project.hywla_version}") {
 		exclude(group: "net.fabricmc.fabric-api")
 	}
 
 	// Roughly Enough Items
 	modImplementation ("me.shedaniel:RoughlyEnoughItems:${project.rei_version}") {
-		exclude(group: "net.fabricmc.fabric-api")
-	}
-
-	// Patchouli API
-	modImplementation ("vazkii.patchouli:Patchouli:${project.patchouli_version}") { // Note: https://discordapp.com/channels/507304429255393322/507982478276034570/745174055383990372
 		exclude(group: "net.fabricmc.fabric-api")
 	}
 

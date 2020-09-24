@@ -58,7 +58,6 @@
   },
   "suggests": {
     "hywla": "*",
-    "patchouli": "*",
     "techreborn": "*"
   },
 

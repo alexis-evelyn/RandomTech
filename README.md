@@ -24,7 +24,7 @@
 
 Not too many tech mods exist for 1.16, so I'm adding one. As I believe tech mods should work together, I'm using RebornCore as my dependency and therefore will make my machines compatible with any mods that use RebornCore (including TechReborn).
 
-To use this mod you need RebornCore. You'll want to install Patchouli, so you can access my mod's manual. Also, this mod uses ConnectedBlockTextures for connected textures, but that is an optional dependency that you can download separately if you want to use it.
+To use this mod you need RebornCore. Also, this mod uses ConnectedBlockTextures for connected textures, but that is an optional dependency that you can download separately if you want to use it.
 
 ## Discord
 
