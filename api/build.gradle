@@ -155,6 +155,6 @@ if (System.getenv('IS_CI_BUILD') != null) {
 }
 
 // Separating Unit Testing Only Dependencies From Other Dependencies
-if (System.getenv('IS_CI_BUILD') != null) {
+//if (System.getenv('IS_CI_BUILD') != null) {
 	apply from: 'dependencies/unit-testing-only-dependencies.gradle'
-}
+//}

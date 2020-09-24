@@ -9,3 +9,9 @@ dependencies {
     // Mockito
     testImplementation group: 'org.mockito', name: 'mockito-all', version: "${unit.mockito_version}"
 }
+
+test {
+    useJUnit()
+
+    maxHeapSize = '1G'
+}

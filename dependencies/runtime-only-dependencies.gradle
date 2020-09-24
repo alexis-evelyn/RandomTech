@@ -58,15 +58,20 @@ dependencies {
 	}
 
 	// Carpet - Useful for Debugging Minecraft in General
-	modRuntime ("com.github.gnembon:fabric-carpet:${runtime.carpet_version}") {
-		exclude(group: "net.fabricmc.fabric-api")
-	}
+//	modRuntime ("com.github.gnembon:fabric-carpet:${runtime.carpet_version}") {
+//		exclude(group: "net.fabricmc.fabric-api")
+//	}
+
+	// Carpet - CurseForge Version
+//	modRuntime ("curse.maven:fabric-carpet:${runtime.carpet_curseforge_version}") {
+//		exclude(group: "net.fabricmc.fabric-api")
+//	}
 
 	// Applied Energistics 2
 	// For some reason, AE2 doesn't load at all.
-	modRuntime ("curse.maven:ae2:${runtime.applied_energistics_curseforge_version}") {
-		exclude(group: "net.fabricmc.fabric-api")
-	}
+//	modRuntime ("curse.maven:ae2:${runtime.applied_energistics_curseforge_version}") {
+//		exclude(group: "net.fabricmc.fabric-api")
+//	}
 }
 
 // Separating Astromine Only Dependencies From Other Dependencies
