@@ -149,6 +149,9 @@ dependencies {
 	}
 	include ("com.github.bernie-g:geckolib:${project.geckolib_version}")
 
+	// For Java Based Python
+	runtime ("org.python:jython-standalone:${project.jython_version}")
+
 	// PSA: Some older mods, compiled on Loom 0.2.1, might have outdated Maven POMs.
 	// You may need to force-disable transitiveness on them.
 }
