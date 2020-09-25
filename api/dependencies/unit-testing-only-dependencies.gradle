@@ -3,15 +3,18 @@ Properties unit = new Properties()
 unit.load(file("dependencies/unit-testing.properties").newReader())
 
 dependencies {
-    // JUnit
-    testImplementation group: 'junit', name: 'junit', version: "${unit.junit_version}"
+    // JUnit API
+    testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: "${unit.junit_version}"
+
+    // JUnit Engine
+    testRuntime group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: "${unit.junit_version}"
 
     // Mockito
     testImplementation group: 'org.mockito', name: 'mockito-all', version: "${unit.mockito_version}"
 }
 
 test {
-    useJUnit()
+    useJUnitPlatform() // For JUnit 5 - JUnit 4 was just useJUnit()
 
     maxHeapSize = '1G'
 }
