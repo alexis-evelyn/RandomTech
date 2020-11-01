@@ -67,8 +67,8 @@ jobs:
       if: startsWith(env.ENABLE_PUBLISHING, 'publishing_enabled')
       run: ./gradlew publish -g build/.gradle
       env:
-        BINTRAY_GPG_KEY: ${{ secrets.BINTRAY_GPG_KEY }}
-        BINTRAY_GPG_PASSWORD: ${{ secrets.BINTRAY_GPG_PASSWORD }}
+        SONATYPE_GPG_KEY: ${{ secrets.SONATYPE_GPG_KEY }}
+        SONATYPE_GPG_PASSWORD: ${{ secrets.SONATYPE_GPG_PASSWORD }}
         SONATYPE_USERNAME: ${{ secrets.SONATYPE_USERNAME }}
         SONATYPE_PASSWORD: ${{ secrets.SONATYPE_PASSWORD }}
         IS_CI_BUILD: ${{ secrets.IS_CI_BUILD }}

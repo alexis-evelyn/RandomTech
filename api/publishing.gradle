@@ -81,17 +81,17 @@ publishing {
 signing {
     required { gradle.taskGraph.hasTask("publish") }
 
-    def signingKey = findProperty("BINTRAY_GPG_KEY")
-    def signingPassword = findProperty("BINTRAY_GPG_PASSWORD")
+    def signingKey = findProperty("SONATYPE_GPG_KEY")
+    def signingPassword = findProperty("SONATYPE_GPG_PASSWORD")
 
     // Bintray Specific Key - Follow https://stackoverflow.com/a/58000485/6828099
-    if (System.getenv('BINTRAY_GPG_KEY') != null) {
-        signingKey = System.getenv('BINTRAY_GPG_KEY')
+    if (System.getenv('SONATYPE_GPG_KEY') != null) {
+        signingKey = System.getenv('SONATYPE_GPG_KEY')
     }
 
     // Bintray Specific Password
-    if (System.getenv('BINTRAY_GPG_PASSWORD') != null) {
-        signingPassword = System.getenv('BINTRAY_GPG_PASSWORD')
+    if (System.getenv('SONATYPE_GPG_PASSWORD') != null) {
+        signingPassword = System.getenv('SONATYPE_GPG_PASSWORD')
     }
 
     useInMemoryPgpKeys(signingKey as String, signingPassword as String)
